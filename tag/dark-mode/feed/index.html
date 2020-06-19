@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>dark mode &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/dark-mode/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 24 Apr 2020 14:58:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>SVG, Favicons, and All the Fun Things We Can Do With Them</title>
+		<link>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/</link>
+					<comments>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/#comments</comments>
+		
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2020 14:58:29 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306644</guid>
+
+					<description><![CDATA[<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+<p>Here’s the code for how to add favicons &#8230; <a href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/" class="read-more">Read article <span class="screen-reader-text"> &#8220;SVG, Favicons, and All the Fun Things We Can Do With Them&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+
+
+
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+
+
+
+<span id="more-306644"></span>
+
+
+
+<p>Here’s the code for how to add favicons to your site:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg">
+&lt;link rel="alternate icon" href="/favicon.ico">
+&lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"></code></pre>
+
+
+
+<p>If a browser doesn’t support a SVG favicon, it will ignore the first link element declaration and continue on to the second. This ensures that all browsers that support favicons can enjoy the experience.&nbsp;</p>
+
+
+
+<p>You may also notice the alternate attribute value for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel">our <code>rel</code> declaration</a> in the second line. This programmatically communicates to the browser that the favicon with a file format that uses <code>.ico</code> is specifically used as an alternate presentation.</p>
+
+
+
+<p>Following the favicons is a line of code that loads another SVG image, one called <code>safari-pinned-tab.svg</code>. This is to support <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html">Safari’s pinned tab functionality</a>, which existed before other browsers had SVG favicon support. There’s additional files you can add here to enhance your site for different apps and services, but more on that in a bit.</p>
+
+
+
+<p>Here’s more detail on the current level of SVG favicon support:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”link-icon-svg”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">80</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">41</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">80</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5</span></td></tr></table></div></div>
+
+
+
+<h3>Why SVG?</h3>
+
+
+
+<p>You may be questioning why this is needed. The <code>.ico</code> file format has been around forever and can support images up to 256×256 pixels in size. Here are three answers for you.</p>
+
+
+
+<h4>Ease of authoring</h4>
+
+
+
+<p>It’s a pain to make <code>.ico</code> files. The file is a <a href="https://en.m.wikipedia.org/wiki/ICO_(file_format)">proprietary format</a> used by Microsoft, meaning you’ll need <a href="https://www.kodlian.com/apps/icon-slate">specialized tools</a> to make them. <a href="https://www.w3.org/TR/SVG2/">SVG is an open standard</a>, meaning you can use them without any further tooling or platform lock-in.</p>
+
+
+
+<h4>Future-proofing</h4>
+
+
+
+<p>Retina? 5k? 6k? When we use a resolution-agnostic SVG file for a favicon, we guarantee that our favicons look crisp on future devices, regardless of <a href="https://www.apple.com/pro-display-xdr/">how large their displays get</a>.&nbsp;</p>
+
+
+
+<h4>Performance</h4>
+
+
+
+<p>SVGs are usually very small files, especially when compared to their raster image counterparts — even more-so if you <a href="https://css-tricks.com/tools-for-optimizing-svg/">optimize them beforehand</a>. By only using a 16×16 pixel favicon as a fallback for browsers that don’t support SVG, we provide a combination that enjoys a high degree of support with a smaller file size to boot.&nbsp;</p>
+
+
+
+<p>This might seem a bit extreme, but when it comes to web performance, every byte counts!</p>
+
+
+
+<h3>Tricks</h3>
+
+
+
+<p>Another cool thing about SVG is we can <a href="https://css-tricks.com/svg-properties-and-css/">embed CSS directly in it</a>. This means we can do fun things like dynamically adjust them with JavaScript, provided the SVG is declared inline and not embedded using an <code>img</code> element.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line=""><code markup="tt">&lt;svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  &lt;style>
+    path { fill: #272019; }
+  &lt;/style>
+  &lt;!-- etc. -->
+&lt;/svg></code></pre>
+
+
+
+<p>Since SVG favicons are embedded using the <code>link</code> element, they can’t really be modified using JavaScript. We can, however, use things like emoji and media queries.</p>
+
+
+
+<h4>Emoji</h4>
+
+
+
+<p><a href="https://twitter.com/leaverou/">Lea Verou</a> had a genius idea about using emoji inside of <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text">SVG’s <code>text</code> element</a> to make a quick favicon with a transparent background that holds up at small sizes.</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/LeaVerou/status/1241619866475474946
+</div></figure>
+
+
+
+<p>In response, <a href="https://css-tricks.com/emojis-as-favicons/">Chris Coyier whipped up a neat little demo</a> that lets you play around with the concept.</p>
+
+
+
+<h4>Dark Mode support</h4>
+
+
+
+<p>Both <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">Thomas Steiner</a> and <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=294179#c72">Mathias Bynens</a> independently stumbled across the idea that you can use the <code>prefers-color-scheme</code> media query to provide support for dark mode. This work is built off of <a href="https://jakearchibald.com/2016/svg-media-queries/">Jake Archibald’s exploration of SVG and media queries</a>.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line="4-6"><code markup="tt">&lt;svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  &lt;style>
+    path { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #ffffff; }
+    }
+  &lt;/style>
+  &lt;path d="M111.904 52.937a1.95 1.95 0 00-1.555-1.314l-30.835-4.502-13.786-28.136c-.653-1.313-2.803-1.313-3.456 0L48.486 47.121l-30.835 4.502a1.95 1.95 0 00-1.555 1.314 1.952 1.952 0 00.48 1.99l22.33 21.894-5.28 30.918c-.115.715.173 1.45.768 1.894a1.904 1.904 0 002.016.135L64 95.178l27.59 14.59c.269.155.576.232.883.232a1.98 1.98 0 001.133-.367 1.974 1.974 0 00.768-1.894l-5.28-30.918 22.33-21.893c.518-.522.71-1.276.48-1.99z" fill-rule="nonzero"/>
+&lt;/svg></code></pre>
+
+
+
+<p>For supporting browsers, this code means our star-shaped SVG favicon will change its fill color from black to white when <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">dark mode</a> is activated. Pretty neat!</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov"></video></figure>
+
+
+
+<h4>Other media queries</h4>
+
+
+
+<p>Dark mode support got me thinking: if SVGs can support <code>prefers-color-scheme</code>, what other things can we do with them? While the support for <a href="https://www.w3.org/TR/mediaqueries-5/">Level 5 Media Queries</a> may not be there yet, here’s some ideas to consider:</p>
+
+
+
+<ul><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#light-level"><code>light-level</code></a> to desaturate favicon colors in a low-light environment.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#inverted"><code>inverted-colors</code></a> to “flip” inverted colors to preserve branding, or to ensure a photorealistic favicon looks as intended.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion"><code>prefers-reduced-motion</code></a> to remove <a href="https://css-tricks.com/the-making-of-an-animated-favicon/">favicon animation</a>. Ideally, we&#8217;d <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/">avoid animating favicons in the first place</a>, as they can be a trigger for ADHD and other related disabilities.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#forced-colors"><code>forced-colors</code></a> and/or a <a href="https://css-tricks.com/accessible-svgs-high-contrast-mode/">Windows High Contrast Mode media query</a> to make sure the favicon holds up visually in a high contrast color context. Remember to <a href="https://www.gwhitworth.com/blog/2017/04/how-to-use-ms-high-contrast/">use color keywords</a> to keep the favicon’s colors dynamic!</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?fit=1024%2C427&amp;ssl=1" alt="Mockup of four SVG favicon treatments. The first treatment is a pink star with a tab title of, “SVG Favicon.” The second treatment is a hot pink star with a tab title of, “Light Level SVG Favicon.” The third treatment is a light pink star with a tab title of, “Inverted Colors SVG Favicon.” The fourth treatment is a black pink star with a tab title of, “High Contrast Mode SVG Favicon.” The tabs are screen captures from Microsoft Edge, with the browser chrome updating to match each specialized mode." class="wp-image-306647" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?w=1608&amp;ssl=1 1608w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=300%2C125&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1024%2C427&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=768%2C320&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1536%2C640&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1000%2C417&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>A mockup of how these media query-based adjustments could work.</figcaption></figure>
+
+
+
+<h3>Keep it crisp</h3>
+
+
+
+<p>Another important aspect of good favicon design is making sure they look good in the small browser tab area. The secret to this is making the paths of the vector image <a href="https://icons8.com/articles/make-pixel-perfect-icons/">line up to the pixel grid</a>, the guide a computer uses to turn SVG math into the bitmap we see on a screen.&nbsp;</p>
+
+
+
+<p>Here’s a simplified example using a square shape:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?ssl=1" alt="A crisp orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306649" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?w=895&amp;ssl=1 895w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=300%2C257&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>When the vector points of the square align to the pixel grid of the artboard, the antialiasing effect a computer uses to smooth out the shapes isn&#8217;t needed. When the vector points aren’t aligned, we get a “smearing” effect:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?ssl=1" alt="A blurred orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306650" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?w=895&amp;ssl=1 895w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=300%2C257&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>A vector point’s position can be adjusted on the pixel grid by using a vector editing program such as <a href="https://www.figma.com/">Figma</a>, <a href="https://www.sketch.com/">Sketch</a>, <a href="https://inkscape.org/">Inkscape</a>, or <a href="https://www.adobe.com/products/illustrator.html">Illustrator</a>. These programs export SVGs as well. To adjust a vector point’s location, select each node with a precision selection tool and drag it into position.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov"></video></figure>
+
+
+
+<p>Some more complicated icons may need to be simplified, in order to look good at such a small size. If you’re looking for a good primer on this, <a href="https://www.viget.com/articles/responsive-logos-part-1-tips-for-adapting-logos-for-small-screens/">Jeremy Frank wrote a really good two-part article over at Vidget</a>.</p>
+
+
+
+<h3>Go the extra mile</h3>
+
+
+
+<p>In addition to favicons, there are a bunch of different (and unfortunately proprietary) ways to use icons to enhance its experience. These include things like the aforementioned pinned tab icon for Safari<a href="#fn:1">¹</a>, <a href="https://medium.com/slack-developer-blog/everything-you-ever-wanted-to-know-about-unfurling-but-were-afraid-to-ask-or-how-to-make-your-e64b4bb9254">chat app unfurls</a>, a <a href="https://webdesign.tutsplus.com/tutorials/how-to-add-windows-tiles-to-your-website--cms-23099">pinned Windows start menu tile</a>, social media previews, and homescreen launchers.</p>
+
+
+
+<p>If you’re looking for a great place to get started with these kinds of enhancements, I really like <a href="https://realfavicongenerator.net/">realfavicongenerator.net</a>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?ssl=1" alt="Icon output from realfavicongenerator.net arranged in a grid using CSS-Trick’s logo. There are two rows of five icons: android-chrome-192x192.png, android-chrome-384x384.png, apple-touch-icon.png, favicon-16x16.png, favicon-32x32.png, mstile-150x150.png, safari-pinned-tab.svg, favicon.ico, browserconfig.xml, and site.webmanifest." class="wp-image-306652" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?w=715&amp;ssl=1 715w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>It’s a lot, but it guarantees robust support.</figcaption></figure>
+
+
+
+<p>A funny thing about the history of the favicon: Internet Explorer was the first browser to support them and <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">they were snuck in at the 11th hour</a> by a developer named Bharat Shyam:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>As the story goes, late one night, Shyam was working on his new favicon feature. He called over junior project manager Ray Sun to take a look.</p><p>Shyam commented, “This is good, right? Check it in?”, requesting permission to check the code into the Internet Explorer codebase so it could be released in the next version. Sun didn’t think too much of it, the feature was cool and would clearly give IE an edge. So he told Shyam to go ahead and add it. And just like that, the favicon made its way into Internet Explorer 5, which would go on to become one of the largest browser releases the web has ever seen.</p><p>The next day, Sun was reprimanded by his manager for letting the feature get by so quickly. As it turns out, Shyam had specifically waited until later in the day, knowing that a less experienced Program Manager would give him a pass. But by then, the code had been merged in. Incidentally, you’d be surprised just how many relatively major browser features have snuck their way into releases like this.</p><cite>From <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">How We Got the Favicon</a> by <a href="https://twitter.com/jay_hoffmann">Jay Hoffmann</a></cite></blockquote>
+
+
+
+<p>I’m happy to see the platform throw a little love at favicons. They’ve long been one of my favorite little design details, and I’m excited that they’re becoming more reactive to user’s needs. If you have a moment, why not sneak a SVG favicon into your project the same way Bharat Shyam did way back in 1999.&nbsp;</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<p><a href="#fn1">¹</a> I haven’t been able to determine if Safari is going to implement SVG favicon support, but I hope they do. Has anyone heard anything?</p>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov" length="889060" type="video/quicktime" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov" length="6707087" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306644</post-id>	</item>
+		<item>
+		<title>A Dark Mode Toggle with React and ThemeProvider</title>
+		<link>https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/</link>
+					<comments>https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/#comments</comments>
+		
+		<dc:creator><![CDATA[Maks Akymenko]]></dc:creator>
+		<pubDate>Wed, 25 Sep 2019 14:10:14 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[prefers-color-scheme]]></category>
+		<category><![CDATA[react hooks]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=296088</guid>
+
+					<description><![CDATA[<p>I like when websites have a dark mode option. <a href="https://css-tricks.com/dark-modes-with-css/">Dark mode</a> makes web pages easier for me to read and helps my eyes feel more relaxed. Many websites, including YouTube and Twitter, have implemented it already, and we’re starting to see it trickle onto many other sites as well.</p>
+<p>In this tutorial, we’re going to build a toggle that allows users to switch between light and dark modes, using a <code><a href="https://www.styled-components.com/docs/advanced">&#60;ThemeProvider</a></code> wrapper from the <a href="https://www.styled-components.com">styled-components</a> library. We’ll create a <code>useDarkMode</code>&#8230; <a href="https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A Dark Mode Toggle with React and ThemeProvider&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/">A Dark Mode Toggle with React and ThemeProvider</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I like when websites have a dark mode option. <a href="https://css-tricks.com/dark-modes-with-css/">Dark mode</a> makes web pages easier for me to read and helps my eyes feel more relaxed. Many websites, including YouTube and Twitter, have implemented it already, and we’re starting to see it trickle onto many other sites as well.</p>
+<p>In this tutorial, we’re going to build a toggle that allows users to switch between light and dark modes, using a <code><a href="https://www.styled-components.com/docs/advanced">&lt;ThemeProvider</a></code> wrapper from the <a href="https://www.styled-components.com">styled-components</a> library. We’ll create a <code>useDarkMode</code> custom hook, which supports the <code><a href="https://www.chromestatus.com/feature/5109758977638400">prefers-color-scheme</a></code> media query to set the mode according to the user’s <abbr title="Operating System">OS</abbr> color scheme settings.</p>
+<p>If that sounds hard, I promise it’s not! Let’s dig in and make it happen.</p>
+<p><span id="more-296088"></span></p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="maximakymenko" data-slug-hash="mdbpeXm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Day/night mode switch toggle with React and ThemeProvider">
+  <span>See the Pen <a href="https://codepen.io/maximakymenko/pen/mdbpeXm/"><br />
+  Day/night mode switch toggle with React and ThemeProvider</a> by Maks Akymenko (<a href="https://codepen.io/maximakymenko">@maximakymenko</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Let’s set things up</h3>
+<p>We’ll use  <a href="https://create-react-app.dev/docs/getting-started">create-react-app</a> to initiate a new project:</p>
+<pre rel="Terminal"><code class="language-markdown">npx create-react-app my-app
+cd my-app
+yarn start</code></pre>
+<p>Next, open a separate terminal window and install styled-components:</p>
+<pre rel="Terminal"><code class="language-markdown">yarn add styled-components</code></pre>
+<p>Next thing to do is create two files. The first is <code>global.js</code>, which will contain our base styling, and the second is <code>theme.js</code>, which will include variables for our dark and light themes:</p>
+<pre rel="JavaScript"><code class="language-javascript">// theme.js
+export const lightTheme = {
+  body: '#E2E2E2',
+  text: '#363537',
+  toggleBorder: '#FFF',
+  gradient: 'linear-gradient(#39598A, #79D7ED)',
+}
+
+export const darkTheme = {
+  body: '#363537',
+  text: '#FAFAFA',
+  toggleBorder: '#6B8096',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+}</code></pre>
+<p>Feel free to customize variables any way you want, because this code is used just for demonstration purposes. </p>
+<pre rel="JavaScript"><code class="language-javascript">// global.js
+// Source: https://github.com/maximakymenko/react-day-night-toggle-app/blob/master/src/global.js#L23-L41
+
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyles = createGlobalStyle`
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
+
+  body {
+    align-items: center;
+    background: ${({ theme }) =&gt; theme.body};
+    color: ${({ theme }) =&gt; theme.text};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: all 0.25s linear;
+  }</code></pre>
+<p>Go to the App.js file. We’re going to delete everything in there and add the layout for our app. Here’s what I did:</p>
+<pre rel="JavaScript"><code class="language-javascript">import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './theme';
+import { GlobalStyles } from './global';
+
+function App() {
+  return (
+    &lt;ThemeProvider theme={lightTheme}&gt;
+      &lt;&gt;
+        &lt;GlobalStyles /&gt;
+        &lt;button&gt;Toggle theme&lt;/button&gt;
+        &lt;h1&gt;It's a light theme!&lt;/h1&gt;
+        &lt;footer&gt;
+        &lt;/footer&gt;
+      &lt;/&gt;
+    &lt;/ThemeProvider&gt;
+  );
+}
+
+export default App;</code></pre>
+<p>This imports our light and dark themes. The <code>ThemeProvider</code> component also gets imported and is passed the light theme (<code>lightTheme</code>) styles inside. We also import <code>GlobalStyles</code> to tighten everything up in one place.</p>
+<p>Here’s roughly what we have so far:</p>
+<figure id="post-296089" class="align-left media-296089"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/darktoggle-01.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Now, the toggling functionality</h3>
+<p>There is no magic switching between themes yet, so let’s implement toggling functionality. We are only going to need a couple lines of code to make it work.</p>
+<p>First, import the <code>useState</code> hook from <code>react</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+import React, { useState } from 'react';</code></pre>
+<p>Next, use the hook to create a local state which will keep track of the current theme and add a function to switch between themes on click: </p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+const [theme, setTheme] = useState('light');
+
+// The function that toggles between themes
+const toggleTheme = () =&gt; {
+  // if the theme is not light, then set it to dark
+  if (theme === 'light') {
+    setTheme('dark');
+  // otherwise, it should be light
+  } else {
+    setTheme('light');
+  }
+}</code></pre>
+<p>After that, all that’s left is to pass this function to our button element and conditionally change the theme. Take a look: </p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './theme';
+import { GlobalStyles } from './global';
+
+// The function that toggles between themes
+function App() {
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () =&gt; {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+  
+  // Return the layout based on the current theme
+  return (
+    &lt;ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}&gt;
+      &lt;&gt;
+        &lt;GlobalStyles /&gt;
+        // Pass the toggle functionality to the button
+        &lt;button onClick={toggleTheme}&gt;Toggle theme&lt;/button&gt;
+        &lt;h1&gt;It's a light theme!&lt;/h1&gt;
+        &lt;footer&gt;
+        &lt;/footer&gt;
+      &lt;/&gt;
+    &lt;/ThemeProvider&gt;
+  );
+}
+
+export default App;</code></pre>
+<figure id="post-296090" class="align-left media-296090"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/darktoggle-02.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>How does it work?</h3>
+<pre rel="JavaScript"><code class="language-javascript">// global.js
+background: ${({ theme }) =&gt; theme.body};
+color: ${({ theme }) =&gt; theme.text};
+transition: all 0.25s linear;</code></pre>
+<p>Earlier in our <code>GlobalStyles</code>, we assigned <code>background</code> and <code>color</code> properties to values from the <code>theme</code> object, so now, every time we switch the toggle, values change depending on the <code>darkTheme</code> and <code>lightTheme</code> objects that we are passing to <code>ThemeProvider</code>. The <code>transition</code> property allows us to make this change a little more smoothly than working with keyframe animations.</p>
+<h3>Now we need the toggle component</h3>
+<p>We’re generally done here because you now know how to create toggling functionality. However, we can always do better, so let’s improve the app by creating a custom <code>Toggle</code> component and make our switch functionality reusable. That’s one of the key benefits to making this in React, right?</p>
+<p>We’ll keep everything inside one file for simplicity’s sake,, so let’s create a new one called <code>Toggle.js</code> and add the following: </p>
+<pre rel="JavaScript"><code class="language-javascript">// Toggle.js
+import React from 'react'
+import { func, string } from 'prop-types';
+import styled from 'styled-components';
+// Import a couple of SVG files we'll use in the design: https://www.flaticon.com
+import { ReactComponent as MoonIcon } from 'icons/moon.svg';
+import { ReactComponent as SunIcon } from 'icons/sun.svg';
+
+const Toggle = ({ theme, toggleTheme }) =&gt; {
+  const isLight = theme === 'light';
+  return (
+    &lt;button onClick={toggleTheme} &gt;
+      &lt;SunIcon /&gt;
+      &lt;MoonIcon /&gt;
+    &lt;/button&gt;
+  );
+};
+
+Toggle.propTypes = {
+  theme: string.isRequired,
+  toggleTheme: func.isRequired,
+}
+
+export default Toggle;</code></pre>
+<p class="explanation">You can download icons from <a href="https://www.flaticon.com/free-icon/moon_2033921#term=moon&#038;page=1&#038;position=53">here</a> and <a href="https://www.flaticon.com/free-icon/sun_1164954#term=sun&#038;page=1&#038;position=39">here</a>. Also, if we want to use icons as components, remember about <a href="https://create-react-app.dev/docs/adding-images-fonts-and-files">importing them as React components</a>.</p>
+<p>We passed two props inside: the <code>theme</code> will provide the current theme (light or dark) and <code>toggleTheme</code> function will be used to switch between them. Below we created an <code>isLight</code> variable, which will return a boolean value depending on our current theme. We’ll pass it later to our styled component.</p>
+<p>We’ve also imported a <code>styled</code> function from styled-components, so let’s use it. Feel free to add this on top your file after the imports or create a dedicated file for that (e.g. Toggle.styled.js) like I have below. Again, this is purely for presentation purposes, so you can style your component as you see fit.</p>
+<pre rel="JavaScript"><code class="language-javascript">// Toggle.styled.js
+const ToggleContainer = styled.button`
+  background: ${({ theme }) =&gt; theme.gradient};
+  border: 2px solid ${({ theme }) =&gt; theme.toggleBorder};
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.5rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0.5rem;
+  position: relative;
+  width: 8rem;
+  height: 4rem;
+
+  svg {
+    height: auto;
+    width: 2.5rem;
+    transition: all 0.3s linear;
+    
+    // sun icon
+    &amp;:first-child {
+      transform: ${({ lightTheme }) =&gt; lightTheme ? 'translateY(0)' : 'translateY(100px)'};
+    }
+    
+    // moon icon
+    &amp;:nth-child(2) {
+      transform: ${({ lightTheme }) =&gt; lightTheme ? 'translateY(-100px)' : 'translateY(0)'};
+    }
+  }
+`;</code></pre>
+<p>Importing icons as components allows us to directly change the styles of the SVG icons. We’re checking if the <code>lightTheme</code> is an active one, and if so, we move the appropriate icon out of the visible area — sort of like the moon going away when it’s daytime and vice versa.</p>
+<p>Don’t forget to replace the button with the <code>ToggleContainer</code> component in Toggle.js, regardless of whether you’re styling in separate file or directly in Toggle.js. Be sure to pass the <code>isLight</code> variable to it to specify the current theme. I called the prop <code>lightTheme</code> so it would clearly reflect its purpose.</p>
+<p>The last thing to do is import our component inside App.js and pass required props to it. Also, to add a bit more interactivity, I’ve passed condition to toggle between &#8220;light&#8221; and “dark&#8221; in the heading when the theme changes:</p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+&lt;Toggle theme={theme} toggleTheme={toggleTheme} /&gt;
+&lt;h1&gt;It's a {theme === 'light' ? 'light theme' : 'dark theme'}!&lt;/h1&gt;</code></pre>
+<p>Don’t forget to credit the <a href="http://flaticon.com">flaticon.com</a> authors for the providing the icons.</p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+&lt;span&gt;Credits:&lt;/span&gt;
+&lt;small&gt;&lt;b&gt;Sun&lt;/b&gt; icon made by &lt;a href="https://www.flaticon.com/authors/smalllikeart"&gt;smalllikeart&lt;/a&gt; from &lt;a href="https://www.flaticon.com"&gt;www.flaticon.com&lt;/a&gt;&lt;/small&gt;
+&lt;small&gt;&lt;b&gt;Moon&lt;/b&gt; icon made by &lt;a href="https://www.freepik.com/home"&gt;Freepik&lt;/a&gt; from &lt;a href="https://www.flaticon.com"&gt;www.flaticon.com&lt;/a&gt;&lt;/small&gt;</code></pre>
+<p>Now that’s better: </p>
+<figure id="post-296093" class="align-left media-296093"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/darktoggle-03.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>The useDarkMode hook</h3>
+<p>While building an application, we should keep in mind that the app must be scalable, meaning, reusable, so we can use in it many places, or even different projects.</p>
+<p>That is why it would be great if we move our toggle functionality to a separate place — so, why not to create a dedicated account hook for that?</p>
+<p>Let’s create a new file called useDarkMode.js in the project <code>src</code>  directory and move our logic into this file with some tweaks:</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+import { useEffect, useState } from 'react';
+
+export const useDarkMode = () =&gt; {
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () =&gt; {
+    if (theme === 'light') {
+      window.localStorage.setItem('theme', 'dark')
+      setTheme('dark')
+    } else {
+      window.localStorage.setItem('theme', 'light')
+      setTheme('light')
+    }
+  };
+
+  useEffect(() =&gt; {
+    const localTheme = window.localStorage.getItem('theme');
+    localTheme &amp;&amp; setTheme(localTheme);
+  }, []);
+
+  return [theme, toggleTheme]
+};</code></pre>
+<p>We’ve added a couple of things here. We want our theme to persist between sessions in the browser, so if someone has chosen a dark theme, that’s what they’ll get on the next visit to the app. That’s a huge <abbr>UX</abbr> improvement. For this reasons we use <code>localStorage</code>.</p>
+<p>We’ve also implemented the <code><a href="https://css-tricks.com/intro-to-react-hooks/#article-header-id-1">useEffect</a></code> hook to check on component mounting. If the user has previously selected a theme, we will pass it to our <code>setTheme</code> function. In the end, we will return our <code>theme</code>, which contains the chosen <code>theme</code> and <code>toggleTheme</code> function to switch between modes.</p>
+<p>Now, let’s implement the <code>useDarkMode</code> hook. Go into App.js, import the newly created hook, destructure our <code>theme</code> and <code>toggleTheme</code> properties from the hook, and, put them where they belong:</p>
+<pre rel="JavaScript" data-line="4,10,17"><code class="language-javascript">// App.js
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from './useDarkMode';
+import { lightTheme, darkTheme } from './theme';
+import { GlobalStyles } from './global';
+import Toggle from './components/Toggle';
+
+function App() {
+  const [theme, toggleTheme] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  return (
+    &lt;ThemeProvider theme={themeMode}&gt;
+      &lt;&gt;
+        &lt;GlobalStyles /&gt;
+        &lt;Toggle theme={theme} toggleTheme={toggleTheme} /&gt;
+        &lt;h1&gt;It's a {theme === 'light' ? 'light theme' : 'dark theme'}!&lt;/h1&gt;
+        &lt;footer&gt;
+          <span>Credits:</span>
+          &lt;small&gt;<b>Sun</b> icon made by <a href="https://www.flaticon.com/authors/smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com">www.flaticon.com</a>&lt;/small&gt;
+          &lt;small&gt;<b>Moon</b> icon made by <a href="https://www.freepik.com/home">Freepik</a> from <a href="https://www.flaticon.com">www.flaticon.com</a>&lt;/small&gt;
+        &lt;/footer&gt;
+      &lt;/&gt;
+    &lt;/ThemeProvider&gt;
+  );
+}
+
+export default App;</code></pre>
+<p>This <em>almost</em> works almost perfectly, but there is one small thing we can do to make our experience better. Switch to dark theme and reload the page. Do you see that the sun icon loads before the moon icon for a brief moment?</p>
+<p>That happens because our <code>useState</code> hook initiates the <code>light</code> theme initially. After that, <code>useEffect</code> runs, checks <code>localStorage</code> and only then sets the <code>theme</code> to <code>dark</code>.</p>
+<p>So far, I found two solutions. The first is to check if there is a value in <code>localStorage</code> in our <code>useState</code>: </p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+const [theme, setTheme] = useState(window.localStorage.getItem('theme') || 'light');</code></pre>
+<p>However, I am not sure if it’s a good practice to do checks like that inside <code>useState</code>, so let me show you a second solution, that I’m using.</p>
+<p>This one will be a bit more complicated. We will create another state and call it <code>componentMounted</code>. Then, inside the <code>useEffect</code> hook, where we check our <code>localTheme</code>, we’ll add an <code>else</code> statement, and if there is no <code>theme</code>  in <code>localStorage</code>, we’ll add it. After that, we’ll set <code>setComponentMounted</code> to <code>true</code>. In the end, we add <code>componentMounted</code> to our return statement. </p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+import { useEffect, useState } from 'react';
+
+export const useDarkMode = () =&gt; {
+  const [theme, setTheme] = useState('light');
+  const [componentMounted, setComponentMounted] = useState(false);
+  const toggleTheme = () =&gt; {
+    if (theme === 'light') {
+      window.localStorage.setItem('theme', 'dark');
+      setTheme('dark');
+    } else {
+      window.localStorage.setItem('theme', 'light');
+      setTheme('light');
+    }
+  };
+
+  useEffect(() =&gt; {
+    const localTheme = window.localStorage.getItem('theme');
+    if (localTheme) {
+      setTheme(localTheme);
+    } else {
+      setTheme('light')
+      window.localStorage.setItem('theme', 'light')
+    }
+    setComponentMounted(true);
+  }, []);
+  
+  return [theme, toggleTheme, componentMounted]
+};</code></pre>
+<p>You might have noticed that we’ve got some pieces of code that are repeated. We always try to follow the <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> principle while writing the code, and right here we’ve got a chance to use it. We can create a separate function that will set our state and pass <code>theme</code> to the <code>localStorage</code>. I believe, that the best name for it will be <code>setTheme</code>, but we’ve already used it, so let’s call it <code>setMode</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+const setMode = mode =&gt; {
+  window.localStorage.setItem('theme', mode)
+  setTheme(mode)
+};</code></pre>
+<p>With this function in place, we can refactor our useDarkMode.js a little:</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+import { useEffect, useState } from 'react';
+export const useDarkMode = () =&gt; {
+  const [theme, setTheme] = useState('light');
+  const [componentMounted, setComponentMounted] = useState(false);
+
+  const setMode = mode =&gt; {
+    window.localStorage.setItem('theme', mode)
+    setTheme(mode)
+  };
+
+  const toggleTheme = () =&gt; {
+    if (theme === 'light') {
+      setMode('dark');
+    } else {
+      setMode('light');
+    }
+  };
+
+  useEffect(() =&gt; {
+    const localTheme = window.localStorage.getItem('theme');
+    if (localTheme) {
+      setTheme(localTheme);
+    } else {
+      setMode('light');
+    }
+    setComponentMounted(true);
+  }, []);
+
+  return [theme, toggleTheme, componentMounted]
+};</code></pre>
+<p>We’ve only changed code a little, but it looks so much better and is easier to read and understand! </p>
+<h3>Did the component mount?</h3>
+<p>Getting back to <code>componentMounted</code> property. We will use it to check if our component has mounted because this is what happens in <code>useEffect</code> hook. </p>
+<p>If it hasn’t happened yet, we will render an empty div:</p>
+<pre rel="JavaScript"><code class="language-javascript">// App.js
+if (!componentMounted) {
+  return &lt;div /&gt;
+};</code></pre>
+<p>Here is how complete code for the App.js: </p>
+<pre rel="JavaScript" data-line="14,15,16"><code class="language-javascript">// App.js
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from './useDarkMode';
+import { lightTheme, darkTheme } from './theme';
+import { GlobalStyles } from './global';
+import Toggle from './components/Toggle';
+
+function App() {
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
+
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  if (!componentMounted) {
+    return &lt;div /&gt;
+  };
+
+  return (
+    &lt;ThemeProvider theme={themeMode}&gt;
+      &lt;&gt;
+        &lt;GlobalStyles /&gt;
+        &lt;Toggle theme={theme} toggleTheme={toggleTheme} /&gt;
+        &lt;h1&gt;It's a {theme === 'light' ? 'light theme' : 'dark theme'}!&lt;/h1&gt;
+        &lt;footer&gt;
+          &lt;span&gt;Credits:&lt;/span&gt;
+          &lt;small&gt;&lt;b&gt;Sun&lt;/b&gt; icon made by &lt;a href="https://www.flaticon.com/authors/smalllikeart"&gt;smalllikeart&lt;/a&gt; from &lt;a href="https://www.flaticon.com"&gt;www.flaticon.com&lt;/a&gt;&lt;/small&gt;
+          &lt;small&gt;&lt;b&gt;Moon&lt;/b&gt; icon made by &lt;a href="https://www.freepik.com/home"&gt;Freepik&lt;/a&gt; from &lt;a href="https://www.flaticon.com"&gt;www.flaticon.com&lt;/a&gt;&lt;/small&gt;
+        &lt;/footer&gt;
+      &lt;/&gt;
+    &lt;/ThemeProvider&gt;
+  );
+}
+
+export default App;</code></pre>
+<h3>Using the user’s preferred color scheme</h3>
+<p>This part is not required, but it will let you achieve even better user experience. This media feature is used to detect if the user has requested the page to use a light or dark color theme based on the settings in their <abbr>OS</abbr>. For example, if a user’s default color scheme on a phone or laptop is set to dark, your website will change its color scheme accordingly to it. It’s worth noting that this media query is still a work in progress and is included in the <a href="https://drafts.csswg.org/mediaqueries-5/#descdef-media-prefers-color-scheme">Media Queries Level 5 specification</a>, which is in Editor’s Draft.</p>
+<p><div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=prefers-color-scheme">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">76</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">67</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">79</span></td><td class="y yep" title="Safari - "><span class="caniuse-agents-version version">12.1</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">13.0-13.1</span></td></tr></table></div></div></p>
+<p>The implementation is pretty straightforward. Because we’re working with a media query, we need to check if the browser supports it in the <code>useEffect</code> hook and set appropriate theme. To do that, we’ll use <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia">window.matchMedia</a></code> to check if it exists and whether dark mode is supported. We also need to remember about the <code>localTheme</code> because, if it’s available, we don’t want to overwrite it with the dark value unless, of course, the value is set to light.</p>
+<p>If all checks are passed, we will set the dark theme.</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+useEffect(() =&gt; {
+if (
+  window.matchMedia &amp;&amp;
+  window.matchMedia('(prefers-color-scheme: dark)').matches &amp;&amp; 
+  !localTheme
+) {
+  setTheme('dark')
+  }
+})</code></pre>
+<p>As mentioned before, we need to remember about the existence of <code>localTheme</code> — that’s why we need to implement our previous logic where we’ve checked for it.</p>
+<p>Here’s what we had from before:</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+useEffect(() =&gt; {
+const localTheme = window.localStorage.getItem('theme');
+  if (localTheme) {
+    setTheme(localTheme);
+  } else {
+    setMode('light');
+  }
+})</code></pre>
+<p>Let’s mix it up. I’ve replaced the if and else statements with ternary operators to make things a little more readable as well: </p>
+<pre rel="JavaScript" data-line="5"><code class="language-javascript">// useDarkMode.js
+useEffect(() =&gt; {
+const localTheme = window.localStorage.getItem('theme');
+window.matchMedia &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches &amp;&amp; !localTheme ?
+  setMode('dark') :
+  localTheme ?
+    setTheme(localTheme) :
+    setMode('light');})
+})</code></pre>
+<p>Here’s the userDarkMode.js file with the complete code:</p>
+<pre rel="JavaScript"><code class="language-javascript">// useDarkMode.js
+import { useEffect, useState } from 'react';
+
+export const useDarkMode = () =&gt; {
+  const [theme, setTheme] = useState('light');
+  const [componentMounted, setComponentMounted] = useState(false);
+  const setMode = mode =&gt; {
+    window.localStorage.setItem('theme', mode)
+    setTheme(mode)
+  };
+
+  const toggleTheme = () =&gt; {
+    if (theme === 'light') {
+      setMode('dark')
+    } else {
+      setMode('light')
+    }
+  };
+
+  useEffect(() =&gt; {
+    const localTheme = window.localStorage.getItem('theme');
+    window.matchMedia &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches &amp;&amp; !localTheme ?
+      setMode('dark') :
+      localTheme ?
+        setTheme(localTheme) :
+        setMode('light');
+    setComponentMounted(true);
+  }, []);
+
+  return [theme, toggleTheme, componentMounted]
+};</code></pre>
+<p>Give it a try! It changes the mode, persists the theme in <code>localStorage</code>, and also sets the default theme accordingly to the <abbr>OS</abbr> color scheme if it’s available. </p>
+<figure id="post-296094" class="align-left media-296094"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/darktoggle-04.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<hr>
+<p>Congratulations, my friend! Great job! If you have any questions about implementation, feel free to <a href="https://twitter.com/maks_akymenko">send me a message</a>! </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/">A Dark Mode Toggle with React and ThemeProvider</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-dark-mode-toggle-with-react-and-themeprovider/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">296088</post-id>	</item>
+		<item>
+		<title>A Quick Look at the First Public Working Draft for Color Adjust Module 1</title>
+		<link>https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/</link>
+					<comments>https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/#comments</comments>
+		
+		<dc:creator><![CDATA[Geoff Graham]]></dc:creator>
+		<pubDate>Wed, 29 May 2019 18:04:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[color-adjust]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[prefers-color-scheme]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=288292</guid>
+
+					<description><![CDATA[<p>We&#8217;ve been talking a lot about Dark Mode around here ever since <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">Apple released it as a system setting</a> in MacOS 10.14 and subsequently as part of Safari. It&#8217;s interesting because of both what it opens up as as far as design opportunities as well as tailoring user experience based on actual user preferences.</p>
+<p>This week, we got an <a href="https://drafts.csswg.org/css-color-adjust-1/">Editor&#8217;s Draft for the Color Adjust Module Level 1 specification</a> and the <a href="https://www.w3.org/TR/css-color-adjust-1/">First Public Working Draft</a> of it. All of this &#8230; <a href="https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A Quick Look at the First Public Working Draft for Color Adjust Module 1&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/">A Quick Look at the First Public Working Draft for Color Adjust Module 1</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>We&#8217;ve been talking a lot about Dark Mode around here ever since <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">Apple released it as a system setting</a> in MacOS 10.14 and subsequently as part of Safari. It&#8217;s interesting because of both what it opens up as as far as design opportunities as well as tailoring user experience based on actual user preferences.</p>
+<p>This week, we got an <a href="https://drafts.csswg.org/css-color-adjust-1/">Editor&#8217;s Draft for the Color Adjust Module Level 1 specification</a> and the <a href="https://www.w3.org/TR/css-color-adjust-1/">First Public Working Draft</a> of it. All of this is a work-in-progress, but the progression of it has been interesting to track. The spec introduces three new CSS properties that help inform how much control the user agent should have when determining the visual appearance of a rendered page based on user preferences.</p>
+<p><span id="more-288292"></span></p>
+<p><code>color-scheme</code> is the first property defined in the spec and perhaps the centerpiece of it. It accepts <code>light</code> and <code>dark</code> values which &mdash; as you may have guessed &mdash; correspond to Light Mode and Dark Mode preferences for operating systems that support them. And, for what it&#8217;s worth, we could be dealing with labels other than &#8220;Light&#8221; and &#8220;Dark&#8221; (e.g. &#8220;Day&#8221; and &#8220;Night&#8221;) but what we&#8217;re dealing with boils down to a light color scheme versus a dark one.</p>
+<figure id="post-288297" class="align-left media-288297"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/05/light-dark-mode.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Source: <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">developer.apple.com</a></figcaption></figure>
+<p>This single property carries some important implications. For one, the idea is that it allows us to set styles based on a user&#8217;s system preferences which gives us fine-grained control over that experience.</p>
+<p>Another possible implication is that declaring the property at all enables the user agent to take some responsibility for determining an element&#8217;s colors, where declaring <code>light</code> or <code>dark</code> informs the user agent that an element is &#8220;aware&#8221; of color schemes and should be styled according to a preference setting matching the value. On the other hand, we can give the browser full control to determine what color scheme to use based on the user&#8217;s system preferences by using the <code>auto</code> value. That tells the browser that an element is &#8220;unaware&#8221; of color schemes and that the browser can determine how to proceed using the user preferences and a systems&#8217;s default styling as a guide.</p>
+<p class="explanation">It&#8217;s worth noting at this point that we may also have a <code>prefers-color-scheme</code> media feature (currently in the Editor&#8217;s Draft for the <a href="https://drafts.csswg.org/mediaqueries-5/#descdef-media-prefers-color-scheme">Media Queries Level 5 specification</a>) that also serves to let us detect a user&#8217;s preference and help gives us greater control of the user experience based on system preferences. Robin has a <a href="https://css-tricks.com/dark-modes-with-css/">nice overview of it</a>. The Color Adjust Module Level 1 Working Draft also <a href="https://www.w3.org/TR/css-color-adjust-1/#color-scheme-meta">makes mention</a> of possibly using a color scheme value in a <code>&lt;meta&gt;</code> element to indicate color scheme support.</p>
+<p>There&#8217;s more to the property, of course, including an <code>only</code> keyword, chaining values to indicate an order of preference, and even an open-ended custom ident keyword. So definitely dig in there because there&#8217;s a lot to take in.</p>
+<p>Pretty interesting, right? Hopefully you&#8217;re starting to see how this draft could open up new possibilities and even impacts how we make design decisions. And that&#8217;s only the start because there are two more properties!</p>
+<ul>
+<li><a href="https://www.w3.org/TR/css-color-adjust-1/#propdef-forced-color-adjust"><code>forced-color-adjust</code></a>: This is used when we want to support color schemes but override the user agent&#8217;s default stylesheet with our own CSS. This includes a note about possibly merging this into <code>color-adjust</code>.</li>
+<li><a href="https://www.w3.org/TR/css-color-adjust-1/#propdef-color-adjust"><code>color-adjust</code></a>: Unlike forcing CSS overrides onto the user agent, this property provides a hint to browsers that they can change color values based on the both the user&#8217;s preferences and other factors, such as screen quality, bandwidth, or whatever is &#8220;deem[ed] necessary and prudent for the output device.&#8221; <a href="https://css-tricks.com/the-possibilities-of-the-color-adjust-property/">Eric Bailey wrote up the possibilities this property could open up</a> as far as use cases, enhanced accessibility, and general implementations.</li>
+</ul>
+<p>The current draft is sure to expand but, hey, this is where we get to be aware of the awesome work that W3C authors are doing, gain context for the challenges they face, and even <a href="https://github.com/w3c/csswg-drafts/labels/css-color-adjust-1">contribute to the work</a>. (See Rachel Andrew&#8217;s <a href="https://rachelandrew.co.uk/archives/2019/05/07/getting-involved-with-the-web-platform/">advice on making contributions</a>.)</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/">A Quick Look at the First Public Working Draft for Color Adjust Module 1</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-quick-look-at-the-first-public-working-draft-for-color-adjust-module-1/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">288292</post-id>	</item>
+		<item>
+		<title>Night Mode with Mix Blend Mode: Difference</title>
+		<link>https://dev.wgao19.cc/2019-05-04__sun-moon-blending-mode/</link>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Mon, 27 May 2019 15:53:18 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=288325</guid>
+
+					<description><![CDATA[<p>Dark mode designs are all the rage right now but here’s an interesting take: Wei Gao has built a night mode on <a href="https://dev.wgao19.cc/2019-05-04__sun-moon-blending-mode/">her own site</a> that uses <code>mix-blend-mode: difference</code> to create an effect that looks like this:</p>
+<p>Wei explains how she implemented this technique and the edge cases she encountered along the way. I especially love what she had to say about <code>mix-blend-mode</code> functions here:</p>
+<blockquote>
+<p>I remember first playing around with them in Photoshop years ago. Now that browsers are </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/night-mode-with-mix-blend-mode-difference/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Night Mode with Mix Blend Mode: Difference&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/night-mode-with-mix-blend-mode-difference/">Night Mode with Mix Blend Mode: Difference</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Dark mode designs are all the rage right now but here’s an interesting take: Wei Gao has built a night mode on <a href="https://dev.wgao19.cc/2019-05-04__sun-moon-blending-mode/">her own site</a> that uses <code>mix-blend-mode: difference</code> to create an effect that looks like this:</p>
+<figure><video src="https://css-tricks.com/wp-content/uploads/2019/05/May-24-2019-08-58-04.mp4" autoplay="true" autostart="true" loop="true" controls></video></figure>
+<p>Wei explains how she implemented this technique and the edge cases she encountered along the way. I especially love what she had to say about <code>mix-blend-mode</code> functions here:</p>
+<blockquote><p>I remember first playing around with them in Photoshop years ago. Now that browsers are becoming more powerful and we are seeing complex graphical features native to browser rendering. This doesn’t mean we should implement a full photoshop in browsers and nor should we limit our imaginations to just that. Browsers and web pages have their own contexts and goals, as well as a different set of limits. Maybe we should welcome them like new habitants and discover use cases native to this territory.</p></blockquote>
+<p>Indeed! Although Wei&#8217;s technique is pretty unique and awesome on its own, this all ties back into the thing that kicked off the whole trend: the <code>prefers-color-scheme</code> media feature <a href="https://css-tricks.com/dark-modes-with-css/">that was released in Safari as part of the MacOS 10.4 release</a> that gave us a dark mode preference setting. This is a developing space, so we&#8217;re certain to see more innovations and approaches ahead.</p>
+<p><a href="https://dev.wgao19.cc/2019-05-04__sun-moon-blending-mode/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/night-mode-with-mix-blend-mode-difference/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/night-mode-with-mix-blend-mode-difference/">Night Mode with Mix Blend Mode: Difference</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/05/May-24-2019-08-58-04.mp4" length="980337" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">288325</post-id>	</item>
+		<item>
+		<title>Dark Mode in CSS</title>
+		<link>https://css-tricks.com/dark-modes-with-css/</link>
+					<comments>https://css-tricks.com/dark-modes-with-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Wed, 14 Nov 2018 15:00:57 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[macOS]]></category>
+		<category><![CDATA[media queries]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=278513</guid>
+
+					<description><![CDATA[<p>With the introduction of <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">dark mode in macOS</a>, Safari Technology Preview 68 has released a new feature called <code>prefers-color-scheme</code> which lets us detect whether the user has dark mode enabled with a media query. Safari Technology Preview 71 also has <code>supported-color-schemes</code>, which&#8230; well, I couldn&#8217;t exactly tell you what that does.</p>
+<p>The media query is like this:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+
+}</code></pre>
+<p>It may not be supported everywhere just yet, but it&#8217;s a great progressive enhancement, it&#8217;s implemented &#8230; <a href="https://css-tricks.com/dark-modes-with-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Dark Mode in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-modes-with-css/">Dark Mode in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>With the introduction of <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">dark mode in macOS</a>, Safari Technology Preview 68 has released a new feature called <code>prefers-color-scheme</code> which lets us detect whether the user has dark mode enabled with a media query. Safari Technology Preview 71 also has <code>supported-color-schemes</code>, which&#8230; well, I couldn&#8217;t exactly tell you what that does.</p>
+<p>The media query is like this:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+
+}</code></pre>
+<p>It may not be supported everywhere just yet, but it&#8217;s a great progressive enhancement, it&#8217;s implemented in a good/smart/standards-compliant way, so it&#8217;s safe to start using. Just like <a href="https://css-tricks.com/introduction-reduced-motion-media-query/">prefers-reduced-motion</a>!</p>
+<p><span id="more-278513"></span></p>
+<h3>It&#8217;s not just setting dark backgrounds with light text&#8230;</h3>
+<p>Recently Mark Otto described <a href="http://markdotto.com/2018/11/05/css-dark-mode/">how we can start using prefers-color-scheme</a> today in order to create themes that dynamically adjust to the new user setting. And the neat thing about this post is that Mark sort of frames it as an accessibility issue and shows how he uses it on his own website to adjust images so that they’re not too bright for the user:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+  img {
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
+  }
+}</code></pre>
+<p>In the code above, Mark detects whether the user has dark mode enabled with the media query and then makes the images darker so that they match a dark background. </p>
+<h3>CSS Custom Properties may be useful</h3>
+<p>This reminds me of an excellent post by Marcin Wichary where he <a href="https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a">explores a similar technique</a> and goes one step further by adding all sorts of filters to make sure they have a much higher contrast.</p>
+<pre rel="CSS"><code class="language-css">html {
+  --text-color-normal: #0a244d;
+  --text-color-light: #8cabd9;
+}
+
+html[data-theme='dark'] {
+  --text-color-normal: hsl(210, 10%, 62%);
+  --text-color-light: hsl(210, 15%, 35%);
+  --text-color-richer: hsl(210, 50%, 72%);
+  --text-color-highlight: hsl(25, 70%, 45%);
+}</code></pre>
+<figure id="post-280586" class="align-none media-280586"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/11/1_I19P12klUjdEG4q21uKg1A.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>It doesn&#8217;t mean you have to give up your brand</h3>
+<p>Andy Clarke also wrote up some thoughts about how to take this fancy new CSS feature and how we might <a href="https://stuffandnonsense.co.uk/blog/redesigning-your-product-and-website-for-dark-mode">apply a dark theme across our website</a>. He describes how to pick colors so our light/dark themes are consistent in terms of branding and how we might want to use a lighter font-weight for darker backgrounds. He writes:</p>
+<blockquote>
+<p>Designing for dark mode shouldn’t stop with choosing darker colours. You should also consider altering typography styles to maintain readability for people who use dark mode. Light text against dark backgrounds appears higher in contrast than when the same colours are used in reverse, so to make your dark mode designs easier to read you’ll need to add more white/dark space to your text.</p>
+<p>If your fonts offer a lighter weight, using that for your dark mode design will open up the letterforms and make them appear further apart&#8230;</p>
+</blockquote>
+<figure id="post-280584" class="align-none media-280584"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/11/2018-11-02-1.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>What was that? It sure sounded like the joyous applause of typography nerds and designers everywhere!</p>
+<h3>It&#8217;s about inclusive design</h3>
+<p><a href="https://charlesrt.uk/blog/the-dark-web-rises/">Charles Reynolds-Talbot writes</a> about his friend Molly, who has trouble with high-contrast white backgrounds with black text:</p>
+<blockquote><p>Assuming a style switcher is the solution to this problem, it’s nothing new. It’s just something that isn’t trendy anymore. But this shouldn’t be about fashion, this is about inclusive design for all. Solving this problem for Molly will actually solve problems for other people too. A dark mode will be better for people who suffer from migraines, have a hangover or are just browsing the web in bed at night with the light off. Designing for the few, makes things better for the many.</p></blockquote>
+<figure id="post-280587" class="align-none media-280587"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/11/Screen-Shot-2018-12-28-at-9.14.54-AM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Dark mode by default</h3>
+<p>Remember you can reverse it and go dark by default but change to a light theme if a user specifically wants it:</p>
+<pre rel="CSS"><code class="language-css">body {
+  background-color: black;
+  color: white;
+}
+@media screen and (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: black;
+  }
+}</code></pre>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-modes-with-css/">Dark Mode in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/dark-modes-with-css/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">278513</post-id>	</item>
+	</channel>
+</rss>

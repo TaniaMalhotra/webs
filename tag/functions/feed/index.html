@@ -1,0 +1,1911 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>functions &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/functions/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Wed, 27 May 2020 13:42:26 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>A Complete Guide to CSS Functions</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/</link>
+					<comments>https://css-tricks.com/complete-guide-to-css-functions/#comments</comments>
+		
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Mon, 04 May 2020 15:14:37 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[functions]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668</guid>
+
+					<description><![CDATA[<p>Like any other programming language, CSS has functions. They can be inserted where you’d place a value, or in some cases, accompanying another value declaration.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/complete-guide-to-css-functions/">A Complete Guide to CSS Functions</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<h3>Introduction</h3>
+
+
+
+<p>Like <a href="http://my-codeworks.com/blog/2015/css3-proven-to-be-turing-complete">any other programming language</a>, CSS has functions. They can be inserted where you’d place a value, or in some cases, accompanying another value declaration. Some CSS functions even let you nest other functions within them!</p>
+
+
+
+<details><summary>More</summary>
+
+
+
+<p>In programming, functions are a named portion of code that performs a specific task. An example of this could be a function written in JavaScript called <code>sayWoof():</code></p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function sayWoof() {
+  console.log("Woof!");
+}</code></pre>
+
+
+
+<p>We can use this function later in our code, after we have defined our desired behavior. For this example, any time you type <code>sayWoof()</code> in your website or web app&#8217;s JavaScript it will print “Woof!” into the browser’s console.</p>
+
+
+
+<p>Functions can also use arguments, which are slots for things like numbers or bits of text that you can feed into the function’s logic to have it modify them. It works like this in JavaScript:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function countDogs(amount) {
+  console.log("There are " + amount + " dogs!");
+}</code></pre>
+
+
+
+<p>Here, we have a function called <code>countDogs()</code> that has an argument called <code>amount</code>. When a number is provided for amount, it will take that number and add it to a pre-specified sentence. This lets us create sentences that tell us how many dogs we’ve counted.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">countDogs(3); // There are 3 dogs!
+countDogs(276); // There are 276 dogs!
+countDogs("many"); // There are many dogs!</code></pre>
+
+
+
+<p>Some programming languages come with baked-in functions to help prevent you from having to reinvent the wheel for every new project. Typically, these functions are built to help make working with the main strengths and features of the language easier.&nbsp;</p>
+
+
+
+<p>Take libraries, for example. Libraries are collections of opinionated code made to help make development faster and easier, effectively just curated function collections&nbsp;—&nbsp;think <a href="http://fitvidsjs.com">FitVids.js</a> for creating flexible video elements.</p>
+
+
+
+</details>
+
+
+
+<h3><strong>Basics of CSS Functions</strong></h3>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?fit=1024%2C333&amp;ssl=1" alt="Anatomy of a CSS declaration. Inside of a selector class called .selector there is a declaration of background-image: url(‘parchment.jpg’); Arrows label the property (background-image), the function (url), and the argument (parchment.jpg)." class="wp-image-307669" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?w=2123&amp;ssl=1 2123w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=300%2C98&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=1024%2C333&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=768%2C250&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=1536%2C500&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=2048%2C667&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/LV2OI0TM.png?resize=1000%2C325&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Unlike other programming languages, we cannot create our own functions in CSS, per se. That kind of logic is reserved for <a href="https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048">CSS selectors</a>, which allow you to create <a href="https://alistapart.com/article/quantity-queries-for-css">powerful conditional styling rules</a>.&nbsp;</p>
+
+
+
+<p>As opposed to other programming languages — where the output of a function typically invisibly affects other logic down the line — the output of CSS functions are visual in nature. This output is used to control both layout and presentation of content. For example:&nbsp;</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.has-orange-glow {
+  filter: drop-shadow(0.25rem 0 0.75rem #ef9035);
+}</code></pre>
+
+
+
+<p>The <a href="https://paper.dropbox.com/doc/The-functions-of-CSS--AaYBhHD90yG9woSppCLf~j7XAg-ml1WvA6P7hSbkzeOM1Yhm%23:h2=drop-shadow()">CSS filter function <code>drop-shadow()</code></a> uses the arguments we provide it to create an orange outer glow effect on whatever it is applied to.</p>
+
+
+
+<p>In the following demo, I have a JavaScript function named <code>toggleOrangeGlow</code> that toggles the application of the class <code>.has-orange-glow</code> on the CSS-Tricks logo. Combining this with a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition">CSS transition</a>, we’re able to create a cool glowing effect:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wOrzeG" src="//codepen.io/anon/embed/wOrzeG?height=350&amp;theme-id=1&amp;slug-hash=wOrzeG&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wOrzeG" title="CodePen Embed wOrzeG" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>You may be familiar with some CSS functions, but the language has a surprisingly expansive list!&nbsp;</p>
+
+
+
+<p class="explanation">Much like any other technology on the web, different CSS functions have different levels of browser support. Make sure you <a href="https://caniuse.com/">research and test</a> to ensure your experience works for everyone, and <a href="https://css-tricks.com/how-supports-works/">use things like <code>@supports</code></a> to provide quality alternate experiences.</p>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Common CSS Functions</h3>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>url()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  background: url(/images/image.jpg);
+}</code></pre>
+
+
+
+<details><summary>Using <code>url()</code></summary>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_GLjOKX" src="//codepen.io/anon/embed/GLjOKX?height=450&amp;theme-id=1&amp;slug-hash=GLjOKX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed GLjOKX" title="CodePen Embed GLjOKX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p><code>url()</code> allows you to link to other resources to load them. This can include images, fonts, and even other stylesheets. For performance reasons, it’s good practice to limit the things you load via <code>url()</code>, as each declaration is an additional HTTP request.</p>
+</div></div>
+
+
+
+</details>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>attr()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* &lt;div data-example="foo"> */
+div {
+  content: attr(data-example);
+}</code></pre>
+
+
+
+<details><summary>Using <code>attr()</code></summary>
+
+
+
+<p>This function allows us to reach into HTML, snag an attribute’s content, and feed it to the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content">content property</a>. You’ll commonly see <code>attr()</code> used in <a href="https://uxdesign.cc/i-totally-forgot-about-print-style-sheets-f1e6604cfd6">print stylesheets</a>, where it is used to show the URL of a link after its text. Another great application of this function is using it to <a href="https://bitsofco.de/styling-broken-images/">show the alt description of an image</a> if it fails to load.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wZWmpK" src="//codepen.io/anon/embed/wZWmpK?height=600&amp;theme-id=1&amp;slug-hash=wZWmpK&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wZWmpK" title="CodePen Embed wZWmpK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+</details>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>calc()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  width: calc(100vw - 80px);
+}</code></pre>
+
+
+
+<details><summary>Using <code>calc()</code></summary>
+
+
+
+<p>If there’s one function you should spend some time experimenting with, it’s <code>calc()</code>. <a href="https://css-tricks.com/a-complete-guide-to-calc-in-css/">We have a complete guide just on <code>calc()</code></a>.</p>
+
+
+
+<p>This function takes two arguments and calculates a result from the operator (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) you supply it, provided those arguments are numbers with or without an accompanying <a href="https://css-tricks.com/the-lengths-of-css/">unit</a>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jRMawb" src="//codepen.io/anon/embed/jRMawb?height=600&amp;theme-id=1&amp;slug-hash=jRMawb&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jRMawb" title="CodePen Embed jRMawb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Unlike CSS preprocessors such as <a href="https://sass-lang.com/">Sass</a>, <code>calc()</code> can mix units, meaning you can do things like subtract <code>6rem</code> from <code>100%</code>. <code>calc()</code> is also updated on the fly, so if that <code>100%</code> represents a width, it’ll still work if that width changes. <code>calc()</code> can also <a href="https://css-tricks.com/making-custom-properties-css-variables-dynamic/">accept CSS Custom Properties as arguments</a>, allowing you an <a href="https://css-tricks.com/creating-color-themes-with-custom-properties-hsl-and-a-little-calc/">incredible degree of flexibility</a>.&nbsp;</p>
+
+
+
+</details>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>lang()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">p:lang(en) {
+  quotes: "\201C" "\201D" "\2018" "\2019" "\201C" "\201D" "\2018" "\2019";
+}</code></pre>
+
+
+
+<details><summary>Using <code>lang()</code></summary>
+
+
+
+<p><a href="https://webdesign.tutsplus.com/tutorials/use-the-lang-attribute-for-better-accessibility--cms-31961">Including a <code>lang</code> attribute</a> in your HTML is a really important thing to do. When present in your HTML, you’re able to use the <code>lang()</code> function to target the presence of the attribute’s value and conditionally apply styling based on it.&nbsp;</p>
+
+
+
+<p>One common use for this selector is to <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:lang%23Example">set language-specific quotes</a>, which is great for things like internationalization.&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XQNEYM" src="//codepen.io/anon/embed/XQNEYM?height=600&amp;theme-id=1&amp;slug-hash=XQNEYM&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XQNEYM" title="CodePen Embed XQNEYM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Clever designers and developers might also use it as a hook for styling translated versions of their sites, where cultural and/or language considerations mean there’s <a href="https://randomwire.com/why-japanese-web-design-is-so-different/">different perceptions about things like negative space</a>.</p>
+
+
+
+</details>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:not()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">h3:not(:first-child) {
+  margin-top: 0;
+}</code></pre>
+
+
+
+<details><summary>Using <code>:not()</code></summary>
+
+
+
+<p>This pseudo-class selector will select anything that <em>isn’t</em> what you specify. For example, you could target anything that isn’t an image with <code>body:not(img)</code>. While this example is dangerously powerful, scoping <code>:not()</code> to more focused selectors such as <a href="https://css-tricks.com/bem-101/">BEM’s block class</a> can give you a great deal of versatility.&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rEmvEx" src="//codepen.io/anon/embed/rEmvEx?height=600&amp;theme-id=1&amp;slug-hash=rEmvEx&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rEmvEx" title="CodePen Embed rEmvEx" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Currently, <code>:not()</code> supports only one selector for its argument, but support for multiple comma-separated arguments (e.g. <code>div:not(.this, .that)</code>) <a href="https://www.w3.org/TR/selectors/%23changes-level-3">is being worked on</a>!</p>
+
+
+
+</details>
+</div></div>
+
+
+
+<p></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list">
+<h3>CSS Custom Properties</h3>
+
+
+
+<p>There is only one function specific to <a href="https://css-tricks.com/guides/css-custom-properties/">CSS custom properties</a>, but it makes the whole thing tick! </p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<p>The<code>var()</code> function is used to reference a custom property declared earlier in the document.&nbsp;</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">html {
+  --color: orange;
+}
+
+p {
+  color: var(--color);
+}</code></pre>
+
+
+
+<p>It is incredibly powerful when combined with <code>calc()</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">html {
+  --scale: 1.2;
+  --size: 0.8rem;
+}
+
+.size-2 {
+  font-size: calc(var(--size) * var(--scale));
+}
+.size-2 {
+  font-size: calc(var(--size) * var(--scale) * var(--scale));
+}</code></pre>
+
+
+
+<details><summary>More about using <code>var()</code></summary>
+
+
+
+<p>Another example of this is declaring a custom property called <code>--ratio: 1.618</code>; in the root of the document, then invoking it later in our CSS to control line-height, like <code>line-height: var(--ratio);</code>. </p>
+
+
+
+<p>Here, <code>var()</code> is a set of instructions that tells the browser, “Go find the argument called <code>--ratio</code> declared earlier in the document, take its value, and apply it here.”&nbsp;</p>
+
+
+
+<p>Remember! <code>calc()</code> lets us dynamically adjust things on the fly, including the argument you supply via <code>var()</code>. </p>
+
+
+
+<p>This allows us to create things like <a href="https://alistapart.com/article/more-meaningful-typography">modular scale systems</a> directly in CSS with just a few lines of code. If you change the value of <code>--ratio</code>, the whole modular scale system will update to match.</p>
+
+
+
+<p>In the following CodePen demo, I’ve done exactly just that. Change the value of <code>--scale</code> in the Pen’s CSS to a different number to see what I mean:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NJwYoV" src="//codepen.io/anon/embed/NJwYoV?height=500&amp;theme-id=1&amp;slug-hash=NJwYoV&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NJwYoV" title="CodePen Embed NJwYoV" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>It’s also worth mentioning that JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty"><code>setProperty</code></a> method can update custom properties in real time. This allows us to quickly and efficiently make dynamic changes to things that previously might have required a lot of complicated code to achieve.&nbsp;</p>
+
+
+
+</details>
+</div></div>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Color Functions</h3>
+
+
+
+<p>Another common place you see CSS functions is when working with color.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>rgb()</code> and <code>rgba()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  color: rgb(255, 0, 0);
+  color: rgba(255, 0, 0, 0.5);
+  color: rgb(255 0 0 / 0.5);
+}</code></pre>
+
+
+
+<details><summary>Using <code>rgb()</code></summary>
+
+
+
+<p>These functions allow you to use numbers to describe the red (<code>r</code>), green (<code>g</code>), blue (<code>b</code>), and alpha (<code>a</code>) levels of a color. For example, a red color with a <a href="https://en.m.wikipedia.org/wiki/Web_colors%23Hex_triplet">hex value</a> of <code>#fb1010</code> could also be described as <code>rgba(251, 16, 16, 1)</code>. The red value, <code>251</code>, is far higher than the green and blue values (<code>16</code> and <code>16</code>), as the color is mostly comprised of red information.&nbsp;</p>
+
+
+
+<p>The alpha value of 1 means that it is fully opaque, and won’t show anything behind what the color is applied to. If we change the alpha value to be 0.5, the color will be 50% transparent. If you use an <code>rgb()</code> function instead of <code>rgba()</code>, you don’t have to supply an alpha value. This used to mean you couldn&#8217;t supply an alpha value, but that function will take one now whether you use the old comma-syntax or the new slash-syntax.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_QXOXWz" src="//codepen.io/anon/embed/QXOXWz?height=500&amp;theme-id=1&amp;slug-hash=QXOXWz&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed QXOXWz" title="CodePen Embed QXOXWz" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+</details>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>hsl()</code> and <code>hsla()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  background: hsl(100, 100%, 50%);
+  background: hsla(100, 100%, 50%, 0.5);
+  background: hsl(100 100% 50% / 0.5);
+}</code></pre>
+
+
+
+<details><summary>More about using <code>hsl()</code></summary>
+
+
+
+<p>Similar to <code>rgb()</code> and <code>rgba()</code>, <code>hsl()</code> and <code>hsla()</code> are functions that allow you to describe color. Instead of using red, green, and blue, they use hue (<code>h</code>), saturation (<code>s</code>), and lightness (<code>l</code>).&nbsp;</p>
+
+
+
+<p>I prefer using <code>hsla()</code> over <code>rgba()</code> because its model of describing color <a href="https://css-tricks.com/hsl-hsla-is-great-for-programmatic-color-control/">works really well with systematized color systems</a>. Each of the color level values for these functions can be CSS Custom Properties, allowing you to <a href="https://css-tricks.com/do-css-custom-properties-beat-sass-loops/">create powerful, dynamic code</a>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ydvqXw" src="//codepen.io/anon/embed/ydvqXw?height=600&amp;theme-id=1&amp;slug-hash=ydvqXw&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ydvqXw" title="CodePen Embed ydvqXw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+</details>
+</div></div>
+
+
+
+<h4>New Color Functions</h4>
+
+
+
+<p>In the upcoming <a href="https://www.w3.org/TR/css-color-4/">CSS Color Module Level 4</a> spec, we can ignore the <code>a</code> portion of <code>rgba()</code> and <code>hsla()</code>, as well as the commas. Now, spaces are used to separate the <code>rgb</code> and <code>hsl</code> arguments, with an optional <code>/</code> to indicate an alpha level.</p>
+
+
+
+<p>We&#8217;ll also start seeing new functions like <code>lab()</code> and <code>lch()</code> that will use this new format</p>
+</div>
+</div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<p></p>
+</div></div>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list">
+<h3>Pseudo Class Selector Functions</h3>
+
+
+
+<p>These selectors use specialized argument notation that specifies <a href="http://www.topdesignagencies.com/nth-test/">patterns of what to select</a>. This allows you to do things like select every other element, every fifth element, every third element after the seventh element, etc.</p>
+
+
+
+<p>Pseudo class selectors are incredibly versatile, yet often overlooked and under-appreciated. Many times, <a href="http://quantityqueries.com/">a thoughtful application</a> of a few of these selectors can do the work of one or more node packages.&nbsp;</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:nth-child()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el:nth-child(3n) {
+  background-color: #eee;
+}</code></pre>
+
+
+
+<p><code>nth-child()</code> allows you to target one or more of the elements present in a group of elements that are on the same level in the Document Object Model (DOM) tree.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?fit=1024%2C649&amp;ssl=1" alt="" class="wp-image-307691" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?w=3361&amp;ssl=1 3361w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=300%2C190&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=1024%2C649&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=768%2C487&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=1536%2C973&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=2048%2C1298&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?resize=1000%2C634&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ySQYQNHD.png?w=3000&amp;ssl=1 3000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>In the right hands, <code>:nth-child()</code> is incredibly powerful. You can even <a href="https://codepen.io/cobra_winfrey/pen/yrVOwm">solve fizzbuzz with it</a>! If you&#8217;re looking for a good way to get started, Chris has <a href="https://css-tricks.com/useful-nth-child-recipies/">a collection useful pseudo selector recipes</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:nth-last-child()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el:nth-last-child(2) {
+  opacity: 0.75;
+}
+.el:last-child {
+  opacity: 0.5;
+}</code></pre>
+
+
+
+<p>This pseudo class selector targets elements in a group of one or more elements that are on the same level in the DOM. It starts counting from the last element in the group and works backwards through the list of available DOM nodes.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ydXNwV" src="//codepen.io/anon/embed/ydXNwV?height=600&amp;theme-id=1&amp;slug-hash=ydXNwV&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ydXNwV" title="CodePen Embed ydXNwV" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:nth-of-type()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">h2:nth-of-type(odd) {
+  text-indent: 3rem;
+}</code></pre>
+
+
+
+<p><code>:nth-of-type()</code> matches a specified collection of elements of a given type. For example, a declaration of <code>img:nth-of-type(5)</code> would target the fifth image on a page.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ydPYRJ" src="//codepen.io/anon/embed/ydPYRJ?height=600&amp;theme-id=1&amp;slug-hash=ydPYRJ&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ydPYRJ" title="CodePen Embed ydPYRJ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:nth-last-of-type()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">section:nth-last-of-type(3) {
+  background-color: darkorchid;
+}</code></pre>
+
+
+
+<p>This pseudo class selector can target an element in a group of elements of a similar type. Much like <code>:nth-last-child()</code>, it starts counting from the last element in the group. Unlike <code>:nth-last-child</code>, it will skip elements that don’t apply as it works backwards.&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_KjyLMo" src="//codepen.io/anon/embed/preview/KjyLMo?height=600&amp;theme-id=1&amp;slug-hash=KjyLMo&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed KjyLMo" title="CodePen Embed KjyLMo" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<p></p>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Animation Functions</h3>
+
+
+
+<p>Animation is an important part of adding that certain <em>je ne sais quoi</em> to your website or web app. Just remember to put your users’ needs first and <a href="https://css-tricks.com/introduction-reduced-motion-media-query/">honor their</a> <a href="https://css-tricks.com/introduction-reduced-motion-media-query/">animation preferences</a>.</p>
+
+
+
+<p>Creating animations also requires controlling the state of things over time, so functions are a natural fit for making that happen.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>cubic-bezier()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  transition-timing-function: 
+    cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}</code></pre>
+
+
+
+<p>Instead of keyword values like <code>ease</code>, <code>ease-in-out</code>, or <code>linear</code>, you can use <code>cubic-bezier()</code> to create a custom timing function for your animation. While you can <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">read about the math that powers cubic beziers</a>, I think it&#8217;s much more fun to <a href="http://cubic-bezier.com/">play around with making one</a> instead.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?fit=1024%2C522&amp;ssl=1" alt="A custom cubic bezier curve created on cubic-bezier.com. There are also options to preview and compare your curve with CSS’s ease, linear, ease-in, ease-out, and ease-in-out transitions." class="wp-image-307694" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?w=2156&amp;ssl=1 2156w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=1024%2C522&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=1536%2C783&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=2048%2C1044&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/K3gtTbgO.png?resize=1000%2C510&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a rel="noreferrer noopener" target="_blank" href="https://twitter.com/LeaVerou">Lea Verou</a>’s&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://cubic-bezier.com/">cubic-bezier.com</a>.</figcaption></figure>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>path()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.clip-me {
+  clip-path: path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z');
+}
+.move-me {
+  offset-path: path("M56.06,227 ...");
+}</code></pre>
+
+
+
+<p>This function is paired with <a href="https://css-tricks.com/almanac/properties/o/offset-path/">the <code>offset-path</code> property</a> (or <a href="https://css-tricks.com/an-initial-implementation-of-clip-path-path/">eventually</a>, the <code>clip-path</code> property). It allows you to “draw” a SVG path that other elements can be animated to follow.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jjmKxW" src="//codepen.io/anon/embed/preview/jjmKxW?height=650&amp;theme-id=1&amp;slug-hash=jjmKxW&amp;default-tab=result" height="650" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jjmKxW" title="CodePen Embed jjmKxW" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Both <a href="https://css-irl.info/fun-with-css-motion-path/">Michelle Barker</a> and <a href="https://danielcwilson.com/blog/2020/01/motion-path-quirks/">Dan Wilson</a> have published excellent articles that go into more detail about this approach to animation.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>steps()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  animation: 2s infinite alternate steps(10);
+}</code></pre>
+
+
+
+<p>This relatively new function allows you to set the easing timing across an animation, which allows for a greater degree of control over what part of the animation occurs when. Dan Wilson has <a href="https://danielcwilson.com/blog/2019/02/step-and-jump/">another excellent writeup</a> of how it fits into the existing animation easing landscape.&nbsp;</p>
+</div></div>
+
+
+
+<p></p>
+
+
+
+<p></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list">
+<h3>Sizing &amp; Scaling Functions</h3>
+
+
+
+<p>One common thing we do with animation is <a href="https://en.m.wikipedia.org/wiki/Squash_and_stretch">stretch and squash stuff</a>. The following functions allow you to do exactly that. There is a catch, however: These CSS functions are a special subset, in that they can only work with <a href="https://css-tricks.com/almanac/properties/t/transform/">the <code>transform</code> property</a>.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>scaleX()</code>, <code>scaleY()</code>, <code>scaleZ()</code>, <code>scale3d()</code>, and <code>scale()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.double {
+  transform: scale(2);
+}</code></pre>
+
+
+
+<p>Scaling functions let you increase or decrease the size of something along one or more axes. If you use <code>scale3d()</code> you can even do this in three dimensions!</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>translateX()</code>, <code>translateY()</code>, <code>translateZ()</code>, <code>translate3d()</code>, and <code>translate()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>Translate functions let you reposition an element along one or more axes. Much like scale functions, you can also extend this manipulation into three dimensions.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>perspective()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cube {
+  transform: perspective(50em) rotateY(50deg)
+}</code></pre>
+
+
+
+<p><a href="https://css-tricks.com/almanac/properties/p/perspective/">This function</a> lets you adjust the appearance of an object to make it look like it is projecting up and out from its background.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>rotateX()</code>, <code>rotateY()</code>, <code>rotateZ()</code>, <code>rotate3d()</code>, and <code>rotate()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.avatar {
+  transform: rotate(25deg);
+}</code></pre>
+
+
+
+<p>Rotate functions let you swivel an element along one or more axes, much like grasping a ball and turning it around in your hand.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>skewX()</code>, <code>skewY()</code>, and <code>skew()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.header {
+  transform: skew(25deg, 15deg);
+}</code></pre>
+
+
+
+<p>Skew functions are a little different from scaling and rotation functions in that they apply a distortion effect relative to a single point. The amount of distortion is proportionate to the angle and distance declared, meaning that the further the effect continues in a direction the more pronounced it will be.&nbsp;</p>
+
+
+
+<p><a href="https://twitter.com/alterebro">Jorge Moreno</a> also did us all a favor and made a great tool called <a href="https://css-transform.moro.es/">CSS Transform Functions Visualizer</a>. It allows you to adjust sizing and scaling in real time to better understand how all these functions work together:</p>
+
+
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="CSS Transform Functions Visualizer" width="500" height="281" src="https://www.youtube.com/embed/ogEcFKkzorA?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div></figure>
+</div></div>
+
+
+
+<p>As responsible web professionals, we should be mindful of our users and the fact that they may not be using new or powerful hardware to view our content. Large and complicated animations may slow down the experience, or even cause the browser to crash in extreme scenarios.</p>
+
+
+
+<p>To prevent this, we can use techniques like <a href="https://css-tricks.com/almanac/properties/w/will-change/"><code>will-change</code></a> to <a href="https://dev.opera.com/articles/css-will-change-property/">prepare the browser for what’s in store</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/update-frequency">the <code>update</code> media feature</a> to remove animation on devices that do not support a fast refresh rate.&nbsp;</p>
+
+
+
+<p></p>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Filter Functions</h3>
+
+
+
+<p>CSS filter functions are another special subset of CSS functions, in that they can only work with <a href="https://css-tricks.com/almanac/properties/f/filter/">the <code>filter</code> property</a>. Filters are special effects applied to an element, <a href="https://www.cssfilters.co/">mimicking functionality of graphics editing programs</a> such as Photoshop.</p>
+
+
+
+<p>You can do some really wild things with CSS filter functions, stuff like <a href="https://una.im/CSSgram/">recreating the effects you can apply to your posts on Instagram</a>! </p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>brightness()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.avatar:hover {
+  filter: brightness(150%);
+}</code></pre>
+
+
+
+<p>This function adjusts how, um, bright something appears. Setting it to a low level will make it appear as if it has had a shadow cast over it. Setting it to a high level will blow it out, like an over-exposed photo.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RzQYRB" src="//codepen.io/anon/embed/RzQYRB?height=450&amp;theme-id=1&amp;slug-hash=RzQYRB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RzQYRB" title="CodePen Embed RzQYRB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>blur()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.ghost {
+  filter: blur(50%);
+}</code></pre>
+
+
+
+<p>If you’re familiar with Photoshop’s <a href="https://en.m.wikipedia.org/wiki/Gaussian_blur">Gaussian Blur</a> filter, you know how <code>blur()</code> works. The more of this you apply, the more indistinct the thing you apply it to will look.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_KjqaEZ" src="//codepen.io/anon/embed/KjqaEZ?height=450&amp;theme-id=1&amp;slug-hash=KjqaEZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed KjqaEZ" title="CodePen Embed KjqaEZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>contrast()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.wow {
+  filter: contrast(200%);
+}</code></pre>
+
+
+
+<p><code>contrast()</code> will adjust the degree of difference between the lightest and darkest parts of what is applied to.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ewKxeB" src="//codepen.io/anon/embed/ewKxeB?height=450&amp;theme-id=1&amp;slug-hash=ewKxeB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ewKxeB" title="CodePen Embed ewKxeB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>grayscale()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.no-color {
+  filter: grayscale(100%);
+}</code></pre>
+
+
+
+<p><code>grayscale()</code> removes the color information from what it is applied to. Remember that this isn’t an all-or-nothing affair! You can apply a partial grayscale effect to make something look weathered or washed out.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_vqWOKX" src="//codepen.io/anon/embed/vqWOKX?height=450&amp;theme-id=1&amp;slug-hash=vqWOKX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed vqWOKX" title="CodePen Embed vqWOKX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>An interesting application of <code>grayscale()</code> could be <a href="https://medium.com/dev-channel/re-colorization-for-dark-mode-19e2e17b584b">lightly applying it to images when dark mode is enabled</a>, to slightly diminish the overall vibrancy of color in a situation where the user may want less eye strain.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>invert()</code></h4>
+
+
+
+<p>While <code>invert()</code> can be used to make something look like a photo negative, my favorite technique is to use it in a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/inverted-colors">inverted colors media query</a> to invert inverted images and video:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (inverted-colors: inverted) {
+  img,
+  video {
+    filter: invert(100%);
+  }
+}</code></pre>
+
+
+
+<p>This ensures that image and video content looks the way it should, regardless of a user’s expressed browsing mode preferences.&nbsp;</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>opacity()</code></strong></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.filter-visibility {
+  filter: opacity(0);
+}</code></pre>
+
+
+
+<p>This function controls how much of the background is visible through the element (and child elements) the function is applied to.&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NZgwrx" src="//codepen.io/anon/embed/NZgwrx?height=450&amp;theme-id=1&amp;slug-hash=NZgwrx&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NZgwrx" title="CodePen Embed NZgwrx" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>An element that has 0% opacity will be completely transparent, although it will still be present in the DOM. If you need to remove an object completely, use other techniques such as <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden">the hidden attribute</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>saturate()</code></strong></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.full-color {
+  filter: saturate(100%);
+}</code></pre>
+
+
+
+<p>Applying this filter can enhance, or decrease the intensity of the color of what it is applied to. Enhancing an image’s saturation is a common technique photographers use to fix underexposed photos.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pXZZgN" src="//codepen.io/anon/embed/pXZZgN?height=450&amp;theme-id=1&amp;slug-hash=pXZZgN&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pXZZgN" title="CodePen Embed pXZZgN" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>sepia()</code></strong></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.is-old-timey {
+  filter: sepia(1);
+}</code></pre>
+
+
+
+<p>There are fancier ways to describe this, but realistically it’s a function that makes something look like it’s an old-timey photograph.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YorzgM" src="//codepen.io/anon/embed/YorzgM?height=450&amp;theme-id=1&amp;slug-hash=YorzgM&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YorzgM" title="CodePen Embed YorzgM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>drop-shadow()</code></strong></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.fit-shape-shadow {
+  filter: drop-shadow(3rem 0 0.5rem #e486da);
+}</code></pre>
+
+
+
+<p>A drop shadow is a visual effect applied to an object that makes it appear like it is hovering off of the page. There’s a bit of a trick here, in that CSS also allows you to apply drop shadow effects to <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow">text</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow">elements</a>. It’s also distinct from the box-shadow property is that<a href="https://css-tricks.com/breaking-css-box-shadow-vs-drop-shadow/"> it applies drop shadows to the shape of an element</a> rather than the actual box of an element.</p>
+
+
+
+<p>Skilled designers and developers can take advantage of this to create complicated visual effects.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gNGpMX" src="//codepen.io/anon/embed/gNGpMX?height=450&amp;theme-id=1&amp;slug-hash=gNGpMX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gNGpMX" title="CodePen Embed gNGpMX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>hue-rotate()</code></strong></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.change-color {
+  filter: hue-rotate(180deg);
+}</code></pre>
+
+
+
+<p>When a class with a declaration containing hue-rotate() is applied to an element, each pixel used to draw that element will have it’s hue valued shifted by the amount you specify. <code>hue-rotate()</code>&#8216;s effect is applied to each and every pixel it is applied to, so all colors will update relative to their hue value’s starting point. </p>
+
+
+
+<p>This can create a really psychedelic effect when applied to things that contain a lot of color information, such as photos.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bZoWXm" src="//codepen.io/anon/embed/bZoWXm?height=450&amp;theme-id=1&amp;slug-hash=bZoWXm&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bZoWXm" title="CodePen Embed bZoWXm" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong>SVG filters&nbsp;</strong></h4>
+
+
+
+<p><code>filter()</code> also lets us import SVGs filters to use to create <a href="https://tympanus.net/codrops/2019/03/12/image-distortion-effects-with-svg-filters/">specialized visual effects</a>. The topic is too complicated to really do it justice in this article — if you’re looking for a good starting point, I recommend “<a href="https://www.smashingmagazine.com/2015/05/why-the-svg-filter-is-awesome/">The Art Of SVG Filters And Why It Is Awesome&#8221;</a> by <a href="https://twitter.com/dirkweber">Dirk Weber</a>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/odIiClhp.jpeg?ssl=1" alt="The word “West!” rendered in a Wild West-style font, with layered teal drop shadows giving it a 3D effect. Behind it is a purple starburst pattern. Screenshot." class="wp-image-307700" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/odIiClhp.jpeg?w=500&amp;ssl=1 500w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/odIiClhp.jpeg?resize=300%2C180&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>This effect was created by skillful application of SVG filter effects.</figcaption></figure>
+</div></div>
+
+
+
+<p></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list">
+<h3>Gradient Functions</h3>
+
+
+
+<p>Gradients are created when you transition one color to one or more other colors. They are workhorses of modern user interfaces — skilled designers and developers use them to lend an air of polish and sophistication to their work.</p>
+
+
+
+<p>Gradient functions allow you to specify a whole range of properties, including:</p>
+
+
+
+<ul><li>Color values,</li><li>The position on the gradient area where that color comes in,</li><li>What angle the gradient is positioned at.</li></ul>
+
+
+
+<p>And yes, you guessed it: the colors we use in a gradient can be described using CSS color functions!</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>linear-gradient()</code> and <code>repeating-linear-gradient()</code></h4>
+
+
+
+<p>Linear gradients apply the color transformation in a straight line, from one point to another — this line can be set at an angle as well. In cases where there’s more area than gradient, using <code>repeating-linear-gradient()</code> will, er, repeat the gradient you described until all the available area has been filled.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dBjqMo" src="//codepen.io/anon/embed/dBjqMo?height=450&amp;theme-id=1&amp;slug-hash=dBjqMo&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dBjqMo" title="CodePen Embed dBjqMo" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>radial-gradient()</code> and <code>repeating-radial-gradient()</code></h4>
+
+
+
+<p>Radial gradients are a lot like linear gradients, only instead of a straight line, color transformations radiate outward from a center point. They’re oftentimes used to create a semitransparent screen to help separate a modal from the background it is placed over.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_orPLrR" src="//codepen.io/anon/embed/orPLrR?height=450&amp;theme-id=1&amp;slug-hash=orPLrR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed orPLrR" title="CodePen Embed orPLrR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>conic-gradient()</code> and <code>repeating-conical-gradient</code></h4>
+
+
+
+<p>Conic gradients are different from radial gradients in that the color <a href="https://css-tricks.com/snippets/css/css-conic-gradient/">rotates around a circle</a>. Because of this, we can do neat things like <a href="https://css-tricks.com/using-conic-gradients-css-variables-create-doughnut-chart-output-range-input/">create donut charts</a>. Unfortunately, <a href="https://caniuse.com/%23feat=css-conic-gradients&amp;search=conic-gradient">support for conic gradients continues to be poor</a>, so use them with caution.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?fit=1024%2C679&amp;ssl=1" alt="A teal and red donut chart set to 36%. To the right of the chart is a range slider, also set to 36%. Screenshot." class="wp-image-307701" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?w=1100&amp;ssl=1 1100w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?resize=300%2C199&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?resize=1024%2C679&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?resize=768%2C509&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ywUGlAXd.png?resize=1000%2C663&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>An adjustable conic gradient donut chart made by&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://twitter.com/anatudor">Ana Tudor</a></figcaption></figure>
+</div></div>
+
+
+
+<p></p>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Grid Functions</h3>
+
+
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids">CSS Grid</a> is a relatively new feature of the language. It allows us to efficiently create adaptive, robust layouts for multiple screen sizes.&nbsp;</p>
+
+
+
+<p>It’s worth acknowledging our roots. Before Grid, layout in CSS was largely a series of codified hacks to work with a language originally designed to format academic documents. Grid’s introduction is further acknowledgement that the language’s intent has changed.&nbsp;</p>
+
+
+
+<p>Modern CSS is an efficient, fault-tolerant language for controlling presentation and layout across a wide range of device form factors. Equipped with Grid and <a href="https://css-tricks.com/quick-whats-the-difference-between-flexbox-and-grid/">other properties like flexbox</a>, we’re able to create layouts that would have been impossible to create in earlier iterations of CSS.&nbsp;</p>
+
+
+
+<p>Grid introduces the following CSS functions to help you use it.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>fit-content()</code></h4>
+
+
+
+<p>This function “clamps” the size of grid rows or columns, letting you specify a maximum size a grid track can expand to. <code>fit-content()</code> accepts a range of values, but most notable among them are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width%23Values"><code>min-content</code> and <code>max-content</code></a>. These values allow you to tie your layout to the content it contains. Impressive stuff!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wLxEyy" src="//codepen.io/anon/embed/preview/wLxEyy?height=450&amp;theme-id=1&amp;slug-hash=wLxEyy&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wLxEyy" title="CodePen Embed wLxEyy" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>minmax()</code></h4>
+
+
+
+<p><code>minmax()</code> allows you to <a href="https://www.hongkiat.com/blog/css-grid-layout-minmax/">set the minimum and maximum desired heights and widths</a> of your grid rows and columns. This function can also use <code>min-content</code> and <code>max-content</code>, giving us a great deal of power and flexibility.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_qzMXvO" src="//codepen.io/anon/embed/qzMXvO?height=450&amp;theme-id=1&amp;slug-hash=qzMXvO&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed qzMXvO" title="CodePen Embed qzMXvO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>repeat()</code></h4>
+
+
+
+<p>You can loop through patterns of grid column and rows using <code>repeat()</code>. This is great for two scenarios:&nbsp;</p>
+
+
+
+<ol><li>When you <strong>do</strong> know how many rows or columns you need, but typing them out would be laborious. A good example of this would be constructing the grid for a calendar.</li><li>When you <strong>don’t</strong> know how many rows or columns you need. Here, you can specify a template that the browser will honor as it <a href="https://hiddedevries.nl/en/blog/2019-02-23-content-based-grid-tracks-and-embracing-flexibility">propagates content into your layout</a>.</li></ol>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ydxrRx" src="//codepen.io/anon/embed/ydxrRx?height=450&amp;theme-id=1&amp;slug-hash=ydxrRx&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ydxrRx" title="CodePen Embed ydxrRx" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<p></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list">
+<h3>Shape Functions</h3>
+
+
+
+<p>Like <code>filter()</code> and <code>transform()</code>, shape CSS functions only work with one property: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path"><code>clip-path</code></a>. This property is used to mask portions of something, allowing you to create <a href="https://css-tricks.com/tag/clip-path/">all sorts of cool effects</a>.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>circle()</code></h4>
+
+
+
+<p>This function creates a circular shape for your mask, allowing you to specify its radius and position.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZdqLNX" src="//codepen.io/anon/embed/ZdqLNX?height=450&amp;theme-id=1&amp;slug-hash=ZdqLNX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZdqLNX" title="CodePen Embed ZdqLNX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>ellipse()</code></h4>
+
+
+
+<p>Like <code>circle()</code>, <code>ellipse()</code> will draw a rounded shape, only instead of a perfect circle, <code>ellipse()</code> lets you construct an oblong mask.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_b03bf30abe0d7f4064809dd5d3bc09a7" src="//codepen.io/anon/embed/preview/b03bf30abe0d7f4064809dd5d3bc09a7?height=450&amp;theme-id=1&amp;slug-hash=b03bf30abe0d7f4064809dd5d3bc09a7&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed b03bf30abe0d7f4064809dd5d3bc09a7" title="CodePen Embed b03bf30abe0d7f4064809dd5d3bc09a7" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>polygon()</code></strong></h4>
+
+
+
+<p>With <code>polygon()</code>, you are able to specify an arbitrary number of points, allowing you to draw complicated shapes. <code>polygon()</code> also takes <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule">an optional <code>fill-rule</code> argument</a>, which specifies which part of the shape is the inside part.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_EBOROa" src="//codepen.io/anon/embed/EBOROa?height=450&amp;theme-id=1&amp;slug-hash=EBOROa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed EBOROa" title="CodePen Embed EBOROa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>inset()</code></strong></h4>
+
+
+
+<p>This function will mask out a rectangle inside of the element you apply it to.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bXaNyj" src="//codepen.io/anon/embed/preview/bXaNyj?height=450&amp;theme-id=1&amp;slug-hash=bXaNyj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bXaNyj" title="CodePen Embed bXaNyj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<p></p>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list">
+<h3>Miscellaneous Functions</h3>
+
+
+
+<p>These are the un-categorizable CSS functions, things that don’t fit neatly elsewhere.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>element()</code></h4>
+
+
+
+<p>Ever pointed a camera at its own video feed? That’s sort of what <code>element()</code> does. It allows you to specify the ID of another element to create an &#8220;image&#8221; of what that element looks like. You can then apply other CSS to that image, including stuff like CSS filters!</p>
+
+
+
+<p>It might take a bit to wrap your head around the concept — and it has <a href="https://caniuse.com/%23feat=css-element-function">some support concerns</a> — but <code>element()</code> is a potentially very powerful in the right hands. </p>
+
+
+
+<p><a href="https://twitter.com/rpsthecoder">Preethi Sam</a>&#8216;s <a href="https://css-tricks.com/using-the-little-known-css-element-function-to-create-a-minimap-navigator/">&#8220;Using the Little-Known CSS element() Function to Create a Minimap Navigator&#8221;</a> demonstrates how to use it to create a code minimap and is an excellent read. </p>
+
+
+
+<p>Here, she&#8217;s created a minimap for reading through a longform article:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_Jwpxaj" src="//codepen.io/anon/embed/preview/Jwpxaj?height=450&amp;theme-id=1&amp;slug-hash=Jwpxaj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed Jwpxaj" title="CodePen Embed Jwpxaj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>image-set()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.responsive-background {
+  background-image: 
+    image-set("image.png" 1x,
+              "image-2x.png" 2x,
+              "image-print.png" 600dpi
+    );
+}</code></pre>
+
+
+
+<p>This function allows you to specify a list of images for the browser to select for a background image, based on what it knows about the capabilities of its display and its connection speed. It is analogous to what you would do with <a href="https://css-tricks.com/responsive-images-css/">the <code>srcset</code> property</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>::slotted()</code></h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">::slotted(.marker) {
+  background: lightyellow;
+}</code></pre>
+
+
+
+<p>This is a pseudo-element selector used to target elements that have been placed into a slot inside a HTML template. <code>::slotted()</code> is intended to be used when working with <a href="https://css-tricks.com/an-introduction-to-web-components/">Web Components</a>, which are custom, developer-defined HTML elements.</p>
+</div></div>
+
+
+
+<p></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column css-functions-list css-functions-list-not-ready">
+<h3>Not Ready for Prime Time</h3>
+
+
+
+<p>Like any other living programming language, CSS includes features and functionality that are actively being worked on.&nbsp;</p>
+
+
+
+<p>These functions can sometimes be previewed using browsers that have access to the bleeding edge. <a href="https://www.mozilla.org/en-US/firefox/channel/desktop/">Firefox Nightly</a> and <a href="https://www.google.com/chrome/canary/">Chrome Canary</a> are two such browsers. Other features and functionality are so new that they only exist in <a href="https://github.com/w3c/csswg-drafts/issues">what is being actively discussed by the W3C</a>.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>annotation()</code></h4>
+
+
+
+<p>This function enables Alternate Annotation Forms, characters reserved for marking up things like notation and annotation. These characters typically will be outlined with a circle, square, or diamond shape. </p>
+
+
+
+<p>Not many typefaces contain Alternate Annotation Forms, so it’s good to check to see if the typeface you’re using includes them before trying to get <code>annotation()</code> to work. <a href="https://wakamaifondue.com/">Tools such as Wakamai Fondue</a> can help with that.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/REvvaZxK.png?ssl=1" alt="he numbers 1 and 2 enclosed in hollow and solid-filled circles. Following them are the letters B and R enclosed in hollow and solid-filled squares. Screenshot.Stylistic Alternates." class="wp-image-307704" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/REvvaZxK.png?w=1005&amp;ssl=1 1005w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/REvvaZxK.png?resize=300%2C82&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/REvvaZxK.png?resize=768%2C211&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/REvvaZxK.png?resize=1000%2C275&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Examples of annotation glyphs from&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://twitter.com/HarrellofDurham">Jonathan Harrell</a>’s post,&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://jonathan-harrell.com/better-typography-with-font-variants/">&#8220;Better Typography with Font Variants&#8221;</a></figcaption></figure>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>counter()</code> and <code>counters()</code></h4>
+
+
+
+<p>When you create an ordered list in HTML, the browser will automatically generate numbers for you and place them before your list item content. These pieces of browser-generated list content are called counters.&nbsp;</p>
+
+
+
+<p>By using a combination of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">the <code>::marker</code> pseudo-element selector</a>, the content property, and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/counter">the <code>counter()</code> function</a>, we can control the content and presentation of the counters on an ordered list. For browsers that don’t support <code>counter()</code> or <code>counters()</code> yet, you still get a decent experience due to the browser automatically falling back to its generated content:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_QXZdgb" src="//codepen.io/anon/embed/QXZdgb?height=450&amp;theme-id=1&amp;slug-hash=QXZdgb&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed QXZdgb" title="CodePen Embed QXZdgb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>For situations where you have nested ordered lists, the <code>counters()</code> function allows a child ordered list to access its parent. This allows us to control their content and presentation. If you want to learn more about the power of <code>::marker</code>, <code>counter(), and counters()</code>, you can read <a href="https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/">“CSS Lists, Markers, And Counters”</a> by <a href="https://twitter.com/rachelandrew">Rachel Andrew</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>cross-fade()</code></h4>
+
+
+
+<p>This function will allow you to blend one background image into one or more other background images. Its proposed syntax is similar to gradient functions, where you can specify the stops where images start and end.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>dir()</code></h4>
+
+
+
+<p>This function allows you to flip the orientation of a language’s reading order. For English, that means a left-to-right (<code>ltr</code>) reading order gets turned into right-to-left (<code>rtl</code>). <a href="https://caniuse.com/%23feat=css-dir-pseudo">Only Firefox currently has support for <code>dir()</code></a>, but you can achieve the same effect in Chromium-based browsers by using an attribute selector such as <code>[dir="rtl"]</code>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_EJgEXv" src="//codepen.io/anon/embed/preview/EJgEXv?height=450&amp;theme-id=1&amp;slug-hash=EJgEXv&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed EJgEXv" title="CodePen Embed EJgEXv" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>env()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">body {
+  padding: 
+    env(safe-area-inset-top) 
+    env(safe-area-inset-right) 
+    env(safe-area-inset-bottom) 
+    env(safe-area-inset-left);
+}</code></pre>
+
+
+
+<p><code>env()</code>, short for environment, allows you to <a href="https://bitsofco.de/css-environment-variables/">create conditional logic</a> that is triggered if the device’s <a href="https://en.m.wikipedia.org/wiki/User_agent">User Agent</a> matches up. It was popularized by <a href="https://css-tricks.com/the-notch-and-css/">the iPhone X as a method to work with its notch</a>.&nbsp;</p>
+
+
+
+<p>That being said, device sniffing is a fallacious affair — you shouldn’t consider <code>env()</code> a way to cheat it. Instead, use it as intended: to make sure your design works for devices that impose unique hardware constraints on the viewport.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>has()</code></h4>
+
+
+
+<p><code>has()</code> is a relational pseudo-class that will target an element that contains another element, provided there is at least one match in the HTML source. An example of this is be <code>a:has(&gt; img)</code>, which tells the browser to target any link that contains an image.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?fit=1024%2C390&amp;ssl=1" alt="A diagram showing how the CSS selector a:has(&gt; img) targets only links that contain images in a collection of links that contain either images or paragraphs." class="wp-image-307707" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?w=3635&amp;ssl=1 3635w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=300%2C114&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=1024%2C390&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=768%2C293&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=1536%2C586&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=2048%2C781&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?resize=1000%2C381&amp;ssl=1 1000w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/l75sROCU.png?w=3000&amp;ssl=1 3000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Interestingly, <code>has()</code> is currently being proposed as CSS you can only write in JavaScript. If I were to wager a guess as to why this is, it is to scope the selector for performance reasons. With this approach <code>has()</code> is triggered only after the browser has been told to process conditional logic, and therefore query the state of things.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>image()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.help::before {
+  content: image("try.webp", "try.svg", "try.gif");
+}</code></pre>
+
+
+
+<p>This function will let you insert either a static image (referenced with <code>url()</code>, or draw one dynamically via gradients and <code>element()</code>.&nbsp;</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4>Trigonometry functions</h4>
+
+
+
+<p>These functions will allow us to perform more <a href="https://www.zdnet.com/article/css-to-get-support-for-trigonometry-functions/">advanced mathematical operations</a>:&nbsp;</p>
+
+
+
+<ul><li>Sine: <code>sin()</code></li><li>Cosine: <code>cos()</code></li><li>Tangent: <code>tan()</code></li><li><code>Arccosine: acos()</code></li><li>Arcsine: <code>asin()</code></li><li>Arctangent: <code>atan()</code></li><li>Arctangent: <code>atan2()</code></li><li>Square root: <code>sqrt()</code></li><li><code>The square root of the sum of squares of its arguments: hypot()</code></li><li>Power: <code>pow()</code></li></ul>
+
+
+
+<p>I’m especially excited to see what people who are more clever than I am will do with these functions, especially for things like animation!</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>clamp()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.page-wrap {
+  width: clamp(320px, 80%, 1200px);
+}
+body {
+  font-size: clamp(12px, 1rem + 2vw, 18px);
+}</code></pre>
+
+
+
+<p>When providing minimum, maximum, and preferred values as arguments, <code>clamp()</code> will honor the preferred value so long as it does not exceed the minimum and maximum boundaries.&nbsp;</p>
+
+
+
+<p><code>clamp()</code> will allow us to author things like components whose size will scale along with the size of the viewport, but won’t shrink or grow past a specific size. This will be especially useful for creating <a href="https://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/">CSS locks</a>, where you can ensure a responsive type size will not get so small that it can’t be read.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:host()</code> and <code>:host-context()</code></h4>
+
+
+
+<p>To be honest, I’m a little hazy on the specifics of the jargon and mechanics that power the Shadow DOM. Here’s <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host()">how the MDN describes <code>host()</code></a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>The <code>:host()</code> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS </a><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">pseudo-class</a> function selects the shadow host of the <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">shadow DOM</a> containing the CSS it is used inside (so you can select a custom element from inside its shadow DOM) — but only if the selector given as the function&#8217;s parameter matches the shadow host.</p></blockquote>
+
+
+
+<p>And here’s <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:host-context()">what they have to say about <code>:host-context()</code></a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>The <code>:host-context()</code> CSS pseudo-class function selects the shadow host of the shadow DOM containing the CSS it is used inside (so you can select a custom element from inside its shadow DOM) — but only if the selector given as the function&#8217;s parameter matches the shadow host&#8217;s ancestor(s) in the place it sits inside the DOM hierarchy.</p></blockquote>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><strong><code>:is()</code> and <code>:where()</code></strong></h4>
+
+
+
+<p><a href="https://css-tricks.com/almanac/selectors/i/is/"><code>:is()</code></a> has had a bit of an identity crisis. Previously referred to as both <a href="https://github.com/w3c/csswg-drafts/issues/3258"><code>matches()</code></a> and vendor prefixed as <code>:-webkit-any</code>/<code>:-moz-any</code>, it now enjoys a standardized, agreed-upon name. It is a pseudo class selector that accepts a range of selectors as its argument.&nbsp;</p>
+
+
+
+<p>This allows an author to group and target a wide range of selectors in an efficient way. <code>:where()</code> is much like <code>:is()</code>, only it has a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">specificity</a> of zero, while the specificity of <code>:is()</code> is set to the highest specificity in the provided selector list.&nbsp;</p>
+
+
+
+<p><code>:is()</code> and <code>:where()</code> will allow us a good deal of flexibility about how we select things to style, especially for situations where you may not have as much control over the web site or web app’s stylesheet (e.g. third-party integrations, ads, etc).</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/argyleink/status/1192562385489260544
+</div></figure>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>max()</code> and <code>min()</code></h4>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.minimum-of-these {
+  width: max(500px, 50%);
+}
+.maximum-of-these {
+  width: min(320px, 90%);
+}</code></pre>
+
+
+
+<p>These functions allow you to select either the maximum or minimum value from a range of values you provide. Much like <code>clamp()</code>, these functions allow us to make things responsive up until a certain point.&nbsp;</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>:nth-col()</code> and <code>:nth-last-col()</code></h4>
+
+
+
+<p>These pseudo-classes will allow you to select one or a specified series columns in a CSS grid to apply styling to them. A good mental model for how these functions will work is how CSS pseudo class selectors operate. Unlike pseudo class selectors, <code>:nth-col()</code> and <code>:nth-last-col()</code> should be able to target <a href="https://drafts.csswg.org/css-grid/%23implicit-grids">implicit grid columns</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>symbols()</code></h4>
+
+
+
+<p>This function allows you to specify a list of different kinds of characters to use for list bullets. Much like <code>annotation()</code>, you’ll want to make sure the typeface you use contains a glyph you want to use as a symbol before trying to get <code>symbols()</code> to work.</p>
+</div></div>
+</div>
+
+
+
+<div class="wp-block-column css-functions-list css-functions-list-deprecated">
+<h3>Deprecated Functions</h3>
+
+
+
+<p>Sometimes things just don’t work out the way you think they will. While deprecated CSS functions may still render in the browser for legacy support reasons, it isn’t recommended you use them going forward.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>matrix()</code> and <code>matrix3d()</code></h4>
+
+
+
+<p>These functions were turned into more discrete <a href="https://paper.dropbox.com/doc/The-functions-of-CSS--AaYBhHD90yG9woSppCLf~j7XAg-ml1WvA6P7hSbkzeOM1Yhm%23:uid=009958966160135303539075&amp;h2=Sizing-and-scaling">sizing and scaling functions</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>rect()</code></h4>
+
+
+
+<p>This function was part of the deprecated <code>clip</code> property. Use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path">the <code>clip-path</code> property</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path%23Values">its values</a> instead.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>target-counter()</code>, <code>target-counters()</code>, and <code>target-text()</code></h4>
+
+
+
+<p>These functions were intended to help work with fragment URLs for paged (printed) media. You can read more about them on the W3C’s <a href="https://www.w3.org/TR/css-gcpm-3/">CSS Generated Content for Paged Media Module</a> documentation</p>
+</div></div>
+
+
+
+<h4>Typography</h4>
+
+
+
+<p><a href="https://ia.net/topics/the-web-is-all-about-typography-period">The web is typography</a>, so it makes sense to give your type the care and attention it deserves. While CSS provides some functions specifically designed to unlock the potential of your website or webapp’s chosen typefaces, it is advised to <strong>not</strong> use the following functions to access these advanced features.&nbsp;</p>
+
+
+
+<p>Instead, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings">use lower-level syntax via font-feature-settings</a>. You can figure out if the font you’re using supports these features by using a &nbsp;<a href="https://wakamaifondue.com/">tool such as Wakamai Fondue</a>.</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>character-variant()</code>, <code>styleset()</code>, and <code>stylistic()</code></h4>
+
+
+
+<p>Many typefaces made by professional foundries include alternate treatments for certain letters, or combinations of letters. One example use case is providing different variations of commonly-used letters for typefaces designed to look like handwriting, to help make it appear more natural-looking.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?fit=1024%2C228&amp;ssl=1" alt="Two examples of the sentence, “Easy Sunday morning &amp; my fox. The first sentence does not have Stylistic Alternates enabled. The second sentence does, with the alternate characters (a, “un”, “m, “rn” g, &amp;, m, f, and x) highlighted in green. Screenshot." class="wp-image-307712" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?w=2208&amp;ssl=1 2208w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=300%2C67&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=1024%2C228&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=768%2C171&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=1536%2C342&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=2048%2C456&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/cvNTsEkr.png?resize=1000%2C223&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Stylistic Alternates example by&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://twitter.com/tunghsiao">Tunghsiao Liu</a>’s<a rel="noreferrer noopener" target="_blank" href="https://sparanoid.com/lab/opentype-features/">&nbsp;“OpenType Features in CSS”</a></figcaption></figure>
+
+
+
+<p>Utilizing these functions activates these special alternate characters, provided they are present in the font’s <a href="https://en.m.wikipedia.org/wiki/World_glyph_set">glyph set</a>.&nbsp;</p>
+
+
+
+<p>Unfortunately, it is not a standardized offering. Different typefaces will have different ranges of support, based on what the typographer chose to include. It would be wise to check to see if the font you’re using supports these special features before writing any code.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>format()</code></h4>
+
+
+
+<p>When you are <a href="https://css-tricks.com/snippets/css/using-font-face/">importing a font</a> via the <code>url()</code> function, the <code>format()</code> function is an optional hint that lets you manually specify the font’s file format. If this hint is provided, the browser won’t download the font if it does not recognize the specified file format.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@font-face {
+  font-family: 'MyWebFont';
+  src: url('mywebfont.woff2') format('woff2'), /* Cutting edge browsers */
+       url('mywebfont.woff') format('woff'), /* Most modern Browsers */
+       url('mywebfont.ttf') format('truetype'); /* Older Safari, Android, iOS */
+}</code></pre>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>leader()</code></h4>
+
+
+
+<p>You know when you’re reading a menu at a restaurant and there’s a series of periods that help you figure out what price is attached to what menu item? Those are leaders.&nbsp;</p>
+
+
+
+<p>The W3C had plans for them with its <a href="https://www.w3.org/TR/css-gcpm-3/%23leaders">CSS Generated Content for Paged Media Module</a>, but it unfortunately seems like <code>leader()</code> never quite managed to take off. Fortunately, the W3C also provides an example of how to accomplish this effect <a href="https://www.w3.org/Style/Examples/007/leaders.en.html">using a clever application of the <code>content</code> property</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>local()</code></h4>
+
+
+
+<p><code>local()</code> allows you to specify a font installed locally, meaning it is present on the device. Local fonts either ship with the device, or can be manually installed.&nbsp;</p>
+
+
+
+<p>Betting on someone installing a font so things look the way you want them to is very risky! Because of this, it is recommended you don’t specify a local font that needs to be manually installed. Your site won’t look the way it is intended to, even moreso if you don’t <a href="https://css-tricks.com/css-basics-fallback-font-stacks-robust-web-typography/">specify a fallback font</a>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@font-face {
+  font-family: 'FeltTipPen';
+  src: local('Felt Tip Pen Web'), /* Full font name */
+       local('FeltTipPen-Regular'); /* Postscript name */
+}</code></pre>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>ornaments()</code></h4>
+
+
+
+<p>Special <a href="https://en.m.wikipedia.org/wiki/Dingbat">dingbat characters</a> can be enabled using this function. Be careful, as not all dingbat characters are properly coded in a way that will work well if a user does something like change the font, or use a <a href="https://css-tricks.com/reader-mode-the-button-to-beat/">specialized browsing mode</a>.</p>
+</div></div>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h4><code>swash()</code></h4>
+
+
+
+<p>Swashes are alternate visual treatments for letters that give them an extra-fancy flourish. They’re commonly found in italic and cursive-style typefaces.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?fit=1024%2C368&amp;ssl=1" alt="An example of a swash being applied to a script-style typeface. There’s two versions of the phrase, “Fred And Ginger”. The first version doesn’t have swashes activated. The second example does. In the second example, the letter F, and, and the letter G are highlighted to demonstrate them being activated. Screenshot." class="wp-image-307713" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?w=1871&amp;ssl=1 1871w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?resize=300%2C108&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?resize=1024%2C368&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?resize=768%2C276&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?resize=1536%2C552&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/FC2d_nLh.png?resize=1000%2C359&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Swash example by&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://twitter.com/tunghsiao">Tunghsiao Liu</a>’s&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://sparanoid.com/lab/opentype-features/">“OpenType Features in CSS”</a></figcaption></figure>
+</div></div>
+</div>
+</div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Why so many?</h3>
+
+
+
+<p>CSS is maligned as frequently as it is misunderstood. The guiding thought to understanding why all these functions are made available to us is knowing that CSS isn’t prescriptive — not every website has to look like a Microsoft Word document.&nbsp;</p>
+
+
+
+<p>The technologies that power the web are designed in such a way that someone with enough interest can build whatever they want. It’s a powerful, revolutionary concept, a large part of why the web became so ubiquitous.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/complete-guide-to-css-functions/">A Complete Guide to CSS Functions</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/complete-guide-to-css-functions/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">307668</post-id>	</item>
+		<item>
+		<title>My New Favorite ES6 Toy: Destructured Objects as Parameters</title>
+		<link>https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/</link>
+					<comments>https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Tue, 06 Sep 2016 14:24:45 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[Intermediate]]></category>
+		<category><![CDATA[destructuring]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[functions]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=244951</guid>
+
+					<description><![CDATA[<p>Like a lot of other developers, I’m working through my continued education learning what I can about ES6. One of the ways I’m doing this is to attend workshops by smart people. I went to Kyle Simpson’s ES6: The Good Parts course and found myself particularly interested in the practical applications of a piece of ES6 I had previously not noticed: Destructured Objects as Parameters.</p>
+</p>
+<p>Some background</p>
+<p>As an application grows our function parameters can become bloated. This is a &#8230; <a href="https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/" class="read-more">Read article <span class="screen-reader-text"> &#8220;My New Favorite ES6 Toy: Destructured Objects as Parameters&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/">My New Favorite ES6 Toy: Destructured Objects as Parameters</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Like a lot of other developers, I’m working through my continued education learning what I can about ES6. One of the ways I’m doing this is to attend workshops by smart people. I went to Kyle Simpson’s ES6: The Good Parts course and found myself particularly interested in the practical applications of a piece of ES6 I had previously not noticed: Destructured Objects as Parameters.</p>
+<p><span id="more-244951"></span></p>
+<h3>Some background</h3>
+<p>As an application grows our function parameters can become bloated. This is a problem for a number of reasons:</p>
+<ul>
+<li>We have to remember the specific ordering of these parameters when we call the function.  If that’s more than three, it takes some context-shifting to compare.</li>
+<li>We don’t have defaults out of the box</li>
+<li>To properly self-document, we rely on naming very heavily. Naming arguments in code reviews are so fun!</li>
+</ul>
+<h3>How do we solve this with ES6?</h3>
+<p>Thinking very broadly about passing objects as parameters instead might seem at first to be pretty straightforward, and maybe even slightly more convoluted as people aren’t used to reading parameters and thinking of them this way. But look at all the issues from above that this solves:</p>
+<ul>
+<li>You no longer have to remember the specific ordering</li>
+<li>We can easily have optional parameters</li>
+<li>We can have defaults, which is also nice because it’s self-documenting</li>
+<li>We can have fallbacks for failure conditions, or decide not to if we want to show an error</li>
+</ul>
+<p>Destructuring can help us easily extract and manipulate data from arrays or objects into distinct variables and make our parameters more meaningful. This helps us communicate our intentions to readers in the future and helps with maintenance.</p>
+<h3>What is destructuring?</h3>
+<p>Destructured objects as parameters combines a few things into one. Let’s start with the concept of destructuring as a whole before showing this particular application. There are a lot of uses and applications for destructuring, perhaps most commonly applied when you have a large JSON object or API and you want to extract meaningful variables from them. Destructuring is possible in ES5, but due to a combination of a lot of features in ES6, destructuring is a lot more legible and valuable.</p>
+<p>We’re only going to be speaking about destructuring objects (not arrays), but it&#8217;s important to note that both are possible. We’ll start with a very basic and slim comparison of object destructuring in ES5 vs ES6:</p>
+<p>Here is how we destructure an object in ES5:</p>
+<pre rel="JavaScript"><code class="language-javascript">var o = {a: 1, b: 2, c: 3};
+  
+var chico = o.a,
+    harpo = o.b,
+    groucho = o.c;
+
+console.log(chico, harpo, groucho);
+// 1 2 3</code></pre>
+<p>And now, its ES6 counterpart:</p>
+<pre rel="JavaScript"><code class="language-javascript">const o = {chico: 1, harpo: 2, groucho: 3};
+
+const { chico, harpo, groucho } = o;
+
+console.log(chico, harpo, groucho);
+// 1 2 3</code></pre>
+<p>This has some really useful practical applications. We can create top-level variables from objects, a few properties at a time, and even extract them when they are nested a few deep.</p>
+<pre rel="JavaScript"><code class="language-javascript">const o = {
+  chico: 1, 
+  harpo: 2, 
+  groucho: 3,
+  othermarx : {
+    zeppo: 4,
+    isthatamarxbrother: {
+      gummo: 5,
+      polly: 6
+    }
+  }
+};
+
+const { gummo, polly } = o.othermarx.isthatamarxbrother;
+
+console.log(gummo, polly);</code></pre>
+<p>We can even rename them in the process, by doing something like <code>const { gummo, polly:cousin } = o.othermarx.isthatamarxbrother;</code></p>
+<p>This article will not go over all of destructuring so that we can focus on one practical application. If you’re interested in learning more about it, how it applies to arrays in ES6, and some other nice uses, here are some good resources:</p>
+<ul>
+<li><a href="https://gist.github.com/mikaelbr/9900818">Github gist by Mikael Brevik</a></li>
+<li><a href="http://exploringjs.com/es6/ch_destructuring.html">Exploring JS</a></li>
+</ul>
+<h3>How do we use this in a function?</h3>
+<p>Let’s start with a really bare-bones example of a function with some parameters. Let&#8217;s say we need to have a manifest with a lot of standard shipment data. This data stays the same, for the most part, but has some deviation from day to day. Defaults make a lot of sense here, but we would have to write out something like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">function shipmentES5Defaults(params) {
+  params = params === undefined ? {} : params;
+  var items = params.items === undefined ? 'bananas' : params.items;
+  var number = params.number === undefined ? 5: params.number;
+  var pkg = params.pkg === undefined ? 'crates' : params.pkg;
+  console.log("We have a shipment of " + items + " in " + number + " " + pkg + ".");
+}
+
+shipmentES5Defaults();
+// We have a shipment of bananas in 5 crates.
+
+shipmentES5Defaults({
+  items: 'cherries',
+  pkg: 'bags'
+});
+// We have a shipment of cherries in 5 bags.</code></pre>
+<p>This is nice, because we have our defaults and don&#8217;t return an undefined if something isn&#8217;t specified. </p>
+<p>But in ES6, we can use the destructured object we just covered as our parameters, allowing us a quick and easy way to provide defaults. Aside from being useful, it&#8217;s a bit self-documenting as well. This is pretty helpful and a really nice way to write our functions with legibility in mind. Not to mention that the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">ES6 template literal</a> makes the string really easy to both read and write.</p>
+<pre rel="JavaScript"><code class="language-javascript">function shipmentES6({ items = 'bananas', number = 5, package = 'boxes' } = {}) {
+  console.log(`We have a shipment of ${items} in ${number} ${package}.`);
+};
+
+shipmentES6({ package: 'crates' });
+// -&gt; We have a shipment of bananas in 5 crates.
+shipmentES6({ items: 'tomatoes', number: 18 });
+// -&gt; We have a shipment of tomatoes in 18 boxes.
+shipmentES6();
+// -&gt; We have a shipment of bananas in 5 boxes.</code></pre>
+<p>Aside from all of these benefits, if you and your coworkers or collaborators get used to writing in this style, then if you don&#8217;t pass a default, you are also communicating that there are no defaults and you&#8217;d rather it error out. </p>
+<p>Stay tuned for our next post, where we&#8217;ll use this way of writing parameters to construct a SVG chart with no external libraries.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/">My New Favorite ES6 Toy: Destructured Objects as Parameters</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/new-favorite-es6-toy-destructured-objects-parameters/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">244951</post-id>	</item>
+	</channel>
+</rss>

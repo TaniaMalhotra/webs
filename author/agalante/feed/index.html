@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Andrés Galante &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/agalante/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 23 Apr 2020 14:56:34 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Accessible Font Sizing, Explained</title>
+		<link>https://css-tricks.com/accessible-font-sizing-explained/</link>
+					<comments>https://css-tricks.com/accessible-font-sizing-explained/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Thu, 23 Apr 2020 14:56:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[user agent stylesheets]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306222</guid>
+
+					<description><![CDATA[<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+<p>The answer: &#8230; <a href="https://css-tricks.com/accessible-font-sizing-explained/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessible Font Sizing, Explained&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+
+
+
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+
+
+
+<p>The answer: it’s not up to us. It Depends&#x2122;. We’ll get into some specific a bit later but, for now, let’s explore the WCAG requirements for fonts.</p>
+
+
+
+<span id="more-306222"></span>
+
+
+
+<h3>Sizing, contrast, and 300 alphabets</h3>
+
+
+
+<p>First, <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-scale.html">resizing text</a>. &nbsp;We want to provide users with low vision a way to choose how fonts are displayed. Not in a crazy way. More like the ability to increase the size by 200% while maintaining readability and avoiding content collisions and overlaps.</p>
+
+
+
+<p>Secondly, there’s <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">contrast</a>. This is why I said “it depends” on what makes an accessible font size. Text has to follow a <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23contrast-ratiodef">contrast ratio</a> of at least 4.5:1, with the exception of a large-scale text that should have a contrast ratio of at least 3:1. You can use tools like <a href="https://webaim.org/resources/contrastchecker/" class="ek-link">WebAIM’s Contrast Checker</a> to ensure your text meets the guidelines. <a href="https://css-tricks.com/understanding-web-accessibility-color-contrast-guidelines-and-ratios/">Stacy Arrelano’s deep dive on color contrast</a> provides an excellent explanation of how contrast ratios are calculated.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://css-tricks.com/wp-content/uploads/2020/04/Frame-1-1.svg" alt="A contrast ratio of 2.39 to 1 would not pass any of the WCAG checks, a ratio of 4.65 to 1 would pass only the AA check for normal text sizes and a 10.09 to 1 contrast ratio would pass both AA and AAA WCAG checks." class="wp-image-306367"/><figcaption>Example of three color contrast measurements and their WCAG test results according to WebAIM&#8217;s contrast checker.</figcaption></figure>
+
+
+
+<p>There are around 300 alphabets in the world. Some characters are simple and readable in smaller sizes, others are incredibly complex and would lose vital details at the same size. That’s why specs cannot define a font size that meets the specification for contrast ratios.</p>
+
+
+
+<p>And when we talk about “text” and “large text” sizes, we’re referring to what <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23larger-scaledef">the spec</a> calls “the minimum large print size used for those languages and the next larger standard large print size.” To meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html%23uc-levels-head">AAA criteria</a> using Roman text, for example, “large” is 18 points. Since we live in a world with different screen densities, specs measure sizes in points, not pixels, and in some displays, 18pt is equal to 24px. For other fonts, like CJK (Chinese, Japanese, Korean) or Arabic languages, the actual size in pixel would be different. Here&#8217;s the word &#8220;Hello&#8221; compared next to three other languages:</p>
+
+
+
+<p class="hello-examples"><span>Hello</span> <span>สวัสดี</span> <span>مرحبا</span> <span>你好</span></p>
+
+
+
+<p>In short, WCAG specifies <em>contrast</em> instead of <em>size</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&#038;ssl=1" alt="" class="wp-image-306256" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=300%2C89&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=768%2C228&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1000%2C297&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?w=1086&amp;ssl=1 1086w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>The WCAG recommended font size for large text has greater contrast than something half the size. Notice how a larger font size lets in more of the background that sits behind the text.</figcaption></figure>
+
+
+
+<p>Here is the good news: a browser’s default styles are accessible and we can leverage them to build an accessible font size strategy. Let’s see how.</p>
+
+
+
+<h3>Think about proportions, not size</h3>
+
+
+
+<p>The browser first loads its default styles (also known as the “User Agent stylesheet”), then those cascade to the author’s styles (the ones we define), and they both cascade and get overwritten by the user&#8217;s styles.</p>
+
+
+
+<p>As <a href="https://twitter.com/Adysandu">Adrian Sandu</a> mentions in his <a href="https://www.sitepoint.com/understanding-and-using-rem-units-in-css/">article about rem CSS units</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] there is an <a href="https://medium.com/@vamptvo/pixels-vs-ems-users-do-change-font-size-5cfb20831773">empirical study run by the people behind the Internet Archive</a> showing that there is a significant amount of users who change their default font size in the browser settings.</p></blockquote>
+
+
+
+<p>We don’t fully control the <code>font-family</code> property, either. The content might be translated, the custom font family might fail to load, or it might even be changed. For example, <a href="https://gumroad.com/l/OpenDyslexic">OpenDyslexic</a> is a typeface created to increase readability for readers with dyslexia. In some situations, we may even <a href="https://dev.to/devteam/new-feature-display-configuration-sans-serif-fontsnight-mode-beta-23o0">explicitly allow switching between a limited set of fonts</a>.&nbsp;</p>
+
+
+
+<p>Therefore, when defining fonts, we have to avoid hindering the ability of a user or a device to change our styles and let go of assumptions: <strong>we just don’t know where our content is going to land </strong>and we can’t be sure about the exact size, language, or font that’s used to display content.</p>
+
+
+
+<p>But there is one thing that we can control: <strong>proportions</strong>.</p>
+
+
+
+<p>By using CSS relative units, we can set our content to be proportional to whatever the environment tells it to be. <a href="https://www.w3.org/TR/WCAG20-TECHS/C14.html">WCAG recommends using em units to define font size</a>. There are several publications discussing the benefits of using ems and rems and it’s beyond the scope of this article. What I’d say here is to use rems and ems for <em>everything</em>, even for other properties besides font-size (with the exception of borders, where I use pixels).</p>
+
+
+
+<h3>Avoid setting a base font-size</h3>
+
+
+
+<p>My recommendation is to avoid setting <code>font-size</code> on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> elements in favor of letting the browser’s default size serve as a baseline from where we can cascade our own styles. Since this default is accessible, the content will also be accessible. The <a href="https://www.w3.org/TR/2020/WD-WCAG22-20200227/">WACAG 2.2 working draft</a> states that:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>When using text without specifying the font size, the smallest font size used on major browsers for unspecified text would be a reasonable size to assume for the font.</p></blockquote>
+
+
+
+<p>Of course, there is an exception to the rule. When using an intricate, thin, or super short x-height font, for example, you might consider bumping up the font size base to get the correct contrast. Remember that the spec defines contrast, not size:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Fonts with extraordinarily thin strokes or unusual features and characteristics that reduce the familiarity of their letter forms are harder to read, especially at lower contrast levels.</p></blockquote>
+
+
+
+<p>In the same manner, a user might change the base font size to fit their needs. A person with low vision would want to choose a larger size, while someone with an excellent vision can go smaller to gain real estate on their screens.</p>
+
+
+
+<p>It’s all about proportions: we define how much larger or smaller parts of the content should be by leveraging the default base to set the main text size.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  /* Do not set a font-size on a :root, body nor html level */
+  /* Let your main text size be decided by the browser or the user settings */ 
+}
+.small {
+  font-size: .8rem;
+}
+.large {
+  font-size: 2rem;
+}</code></pre>
+
+
+
+<h4>What about headings?</h4>
+
+
+
+<p>Since headings create a document outline that helps screenreaders navigate a document, we aren’t defining type selectors for heading sizes. <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html">Heading order is a WCAG criteria</a>: the heading elements should be organized in descending order without skipping a level, meaning that an <code>h4</code> should come right after an <code>h3</code>.</p>
+
+
+
+<p>Sometimes resetting the font sizing of all headings to <code>1rem</code> is a good strategy to make the separation of the visual treatment from the meaning mandatory.</p>
+
+
+
+<h3>How can we work with pixels?</h3>
+
+
+
+<p>Both <code>rem</code> or <code>em</code> sizing is relative to something else. For example, <code>rem</code> &nbsp;calculates size relative to the <code>&lt;html&gt;</code> &nbsp;element, where <code>em</code> is calculated by the sizing of its own element. It can be confusing, particularly since many of us came up working exclusively in pixels.</p>
+
+
+
+<p>So, how can we still think in pixels but implement relative units?</p>
+
+
+
+<p>More often than not, a typographical hierarchy is designed in pixels. Since we know about user agent stylesheets and that all major browsers have a default font size of <code>16px</code>, we can set that size for the main text and calculate the rest proportionately with <code>rem</code> units.</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Browser Name</th><th>Base Font Size</th></tr></thead><tbody><tr><td>Chrome v80.0</td><td>16px</td></tr><tr><td>FireFox v74.0</td><td>16px</td></tr><tr><td>Safari v13.0.4</td><td>16px</td></tr><tr><td>Edge v80.0 (Chromium based)</td><td>16px</td></tr><tr><td>Android (Samsung, Chrome, Firefox)</td><td>16px</td></tr><tr><td>Safari iOS</td><td>16px</td></tr><tr><td>Kindle Touch</td><td>26px (renders as 16px since it’s a high density screen)</td></tr></tbody></table></figure>
+
+
+
+<p>Now let&#8217;s explore three methods for using relative sizing in CSS by converting those pixels to rem units.</p>
+
+
+
+<h4>Method 1: The 62.5% rule</h4>
+
+
+
+<p>In order to seamlessly convert pixels to rem, we can set the root sizing to <code>62.5%</code>. That means <code>1rem</code> equals <code>10px</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+  --font-size--small: 1.4rem; /* 14px */
+  --font-size--default: 1.6rem; /* 16px */
+  --font-size--large: 2.4rem; /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 2: Using the <code>calc()</code> function</h4>
+
+
+
+<p>We can also calculate sizes with CSS <code>calc()</code> by dividing the pixel value by the font base we assume most browsers have:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --font-size--small: calc((14/16) * 1rem); /* 14px */
+  --font-size--default: calc((16/16) * 1rem); /* 16px */
+  --font-size--large: calc((24/16) * 1rem); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 3: Using a “pixel-to-rem” function</h4>
+
+
+
+<p>Similar to <code>calc()</code> , we can leverage a preprocessor to create a “pixel-to-rem” function. There are implementations of this in many flavors, including <a href="https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/">this Sass mixin</a> and<a href="https://polished.js.org/docs/%23rem"> styled-components polish</a>.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">:root {
+  --font-size--small: prem(14); /* 14px */
+  --font-size--default: prem(16); /* 16px */
+  --font-size--large: prem(24); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<p>It’s even possible to create a &#8220;pixel-to-rem&#8221; function with vanilla CSS:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Is it possible to create a &quot;Pixel to rem&quot; function without using a preprocessor? Yes!<br><br>✨See it in action!<a href="https://t.co/kPfIMxO0vw">https://t.co/kPfIMxO0vw</a><br><br>cc/ <a href="https://twitter.com/srambach?ref_src=twsrc%5Etfw">@srambach</a> <a href="https://twitter.com/matthewcarleton?ref_src=twsrc%5Etfw">@matthewcarleton</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/DontDoIt?src=hash&amp;ref_src=twsrc%5Etfw">#DontDoIt</a> <a href="https://t.co/PKxE7QCWuO">pic.twitter.com/PKxE7QCWuO</a></p>&mdash; Andres Galante (@andresgalante) <a href="https://twitter.com/andresgalante/status/1234903369774440448?ref_src=twsrc%5Etfw">March 3, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<h3>Embrace a diverse web!</h3>
+
+
+
+<p>The bottom line is this: we don’t have control over how content is consumed. Users have personal browser settings, the ability to zoom in and out, and various other ways to customize their reading experience. But we do have best CSS best practices we can use to maintain a good user experience alongside those preferences:</p>
+
+
+
+<ul><li>Work with proportions instead of explicit sizes.</li><li>Rely on default browser font sizes instead of setting it on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>.</li><li>Use <code>rem</code> units to help scale content with a user’s personal preferences.</li><li>Avoid making assumptions and let the environment decide how your content is being consumed.</li></ul>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p class="has-small-font-size">Special thanks to <a href="https://twitter.com/FranCorreaSosa" class="ek-link">Franco Correa</a> for all the help writing this post.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/accessible-font-sizing-explained/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306222</post-id>	</item>
+		<item>
+		<title>Theming With Variables: Globals and Locals</title>
+		<link>https://css-tricks.com/theming-with-variables-globals-and-locals/</link>
+					<comments>https://css-tricks.com/theming-with-variables-globals-and-locals/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Fri, 16 Mar 2018 14:04:46 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[bem]]></category>
+		<category><![CDATA[css variables]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=268217</guid>
+
+					<description><![CDATA[<p>Setting CSS variables to theme a design system can be tricky: if they are too scoped, the system will lose consistency. If they are too global, you lose granularity.</p>
+<p>Maybe we can fix both issues. I’d like to try to boil design system variables down to two types: <strong>Global</strong> and <strong>Component</strong> variables. Global variables will give us consistency across components. Component variables will give us granularity and isolation. Let me show you how to do it by taking a fairly simple component as an example.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/theming-with-variables-globals-and-locals/">Theming With Variables: Globals and Locals</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="explanation"><a href="https://twitter.com/cliffpyles">Cliff Pyles</a> contributed to this post.</p>
+<p>Setting CSS variables to theme a design system can be tricky: if they are too scoped, the system will lose consistency. If they are too global, you lose granularity.</p>
+<p>Maybe we can fix both issues. I’d like to try to boil design system variables down to two types: <strong>Global</strong> and <strong>Component</strong> variables. Global variables will give us consistency across components. Component variables will give us granularity and isolation. Let me show you how to do it by taking a fairly simple component as an example.</p>
+<p><span id="more-268217"></span></p>
+<p>Heads up, I’ll be using <a href="https://css-tricks.com/difference-between-types-of-css-variables/">CSS variables</a> for this article but the concept applies to preprocessor variables as well.</p>
+<h3>Global-scoped variables</h3>
+<p>System-wide variables are general concepts defined to keep consistency across your components. </p>
+<p>Starting with an <code>.alert</code> component as an example, let’s say we want to keep consistency for all of our spaces on margins and paddings. We can first define global spacers:</p>
+<pre rel="CSS""><code>:root {
+  --spacer-sm: .5rem;
+  --spacer-md: 1rem;
+  --spacer-lg: 2rem;
+}</code></pre>
+<p>And then use on our components:</p>
+<pre rel="CSS""><code>/* Defines the btn component */
+.btn {
+  padding: var(--spacer-sm) var(--spacer-md);
+}
+
+/* Defines the alert component */
+.alert {
+  padding: var(--spacer-sm) var(--spacer-md);
+}</code></pre>
+<p>The main benefits of this approach are:</p>
+<ul>
+<li>It generates a single source of truth for spacers, and a single point for the author using our system to customize it.</li>
+<li>It achieves consistency since every component follows the same spacing.</li>
+<li>It produces a common point of reference for designers and developers to work from. As long as the designers follow the same spacing restrictions, the translation to code is seamless.</li>
+</ul>
+<p>But it also presents a few problems:</p>
+<ul>
+<li>The system loses modularity by generating a dependency tree. Since components depend on global variables, they are no longer isolated.</li>
+<li>It doesn’t allow authors to customize a single component without overwriting the CSS. For example, to change the padding of the alert without generating a system wide shift, they’d have to overwrite the alert component:</li>
+</ul>
+<pre rel="CSS""><code>.alert {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}</code></pre>
+<p>Chris Coyier explains the idea of theming with global variables using custom elements in <a href="https://css-tricks.com/css-custom-properties-theming/">this article</a>. </p>
+<h3>Component-scoped variables</h3>
+<p>As Robin Rendle explain in <a href="https://css-tricks.com/using-custom-properties-modify-components/">his article</a>, component variables are scoped to each module. If we generate the alert with these variables, we’d get:</p>
+<pre rel="CSS""><code>.alert {
+  --alert-color: #222;
+  
+  color: var(--alert-color);
+  border-color: var(--alert-color);
+}</code></pre>
+<p>The main advantages are:</p>
+<ul>
+<li>It creates a modular system with isolated components.</li>
+<li>Authors get granular control over components without overwriting them. They’d just redefine the value of the variable.</li>
+</ul>
+<p>There is no way to keep consistency across components or to make a system wide change following this method.</p>
+<p>Let’s see how we can get the best of both worlds!</p>
+<h3>The two-tier theming system</h3>
+<p>The solution is a two-layer theming system where global variables always inform component variables. Each one of those layers follow a set of very specific rules.</p>
+<h4>First tier: Global variables</h4>
+<p>The main reason to have global variables is to maintain consistency, and they adhere to these rules:</p>
+<ul>
+<li>They are prefixed with the word <code>global</code> and follow the formula <code>--global--concept--modifier--state--PropertyCamelCase</code>
+<ul>
+<li>a <code>concept</code> is something like a <code>spacer</code> or <code>main-title</code></li>
+<li>a <code>state</code> is something like  <code>hover</code>, or <code>expanded</code></li>
+<li>a <code>modifier</code> is something like <code>sm</code>, or <code>lg</code></li>
+<li>and a <code>PropertyCamelCase</code> is something like <code>BackgroundColor</code> or <code>FontSize</code></li>
+</ul>
+</li>
+<li>They are concepts, never tied to an element or component
+<ul>
+<li>this is wrong: <code>--global-h1-font-size</code></li>
+<li>this is right: <code>--global--main-title--FontSize</code></li>
+</ul>
+</li>
+</ul>
+<p>For example, a global variable setup would look like:</p>
+<pre rel="CSS""><code>:root {
+  /* --global--concept--size */
+  --global--spacer--sm: .5rem;
+  --global--spacer--md: 1rem;
+  --global--spacer--lg: 2rem;
+
+  /* --global--concept--PropertyCamelCase */
+  --global--main-title--FontSize: 2rem;
+  --global--secondary-title--FontSize: 1.8rem;
+  --global--body--FontSize: 1rem;
+
+  /* --global--state--PropertyCamelCase */
+  --global--hover--BackgroundColor: #ccc;
+}</code></pre>
+<h4>Second tier: Component variables</h4>
+<p>The second layer is scoped to theme-able component properties and follow these rules:</p>
+<ul>
+<li>Assuming we are writing <a href="http://getbem.com/">BEM</a>, they follow this formula: <code>--block__element--modifier--state--PropertyCamelCase</code>
+<ul>
+<li>The <code>block__element--modifier</code> the selector name is something like <code>alert__actions</code> or <code>alert--primary</code></li>
+<li>a <code>state</code> is something like <code>hover</code> or <code>active</code></li>
+<li>and if you are not writing BEM class names the same principles apply, just replace the <code>block__element--modifier</code> with your <code>classname</code></li>
+</ul>
+</li>
+<li>The value of component scoped variables is <strong>always</strong> defined by a global variable</li>
+<li>A component variable always has a default value as a fallback in case the component doesn’t have the dependency on the global variables</li>
+</ul>
+<p>For example:</p>
+<pre rel="CSS""><code>.alert {
+  /* Component scoped variables are always defined by global variables */
+  --alert--Padding: var(--global--spacer--md);
+  --alert--primary--BackgroundColor: var(--global--primary-color);
+  --alert__title--FontSize: var(--global--secondary-title--FontSize);
+
+  /* --block--PropertyCamelCase */
+  padding: var(--alert--Padding, 1rem); /* Sets the fallback to 1rem. */
+}
+
+/* --block--state--PropertyCamelCase */
+.alert--primary {
+  background-color: var(--alert--primary--BackgroundColor, #ccc);
+}
+
+/* --block__element--PropertyCamelCase */
+.alert__title {
+  font-size: var(--alert__title--FontSize, 1.8rem);
+}</code></pre>
+<p>You’ll notice that we are defining locally-scoped variables with global variables. This is key for the system to work since it allows authors to theme the system as a whole. For example, if they want to change the primary color across all components they just need to redefine <code>--global--primary-color</code>.</p>
+<p>On the other hand each component variable has a default value so a component can stand on its own, it doesn’t depend on anything and authors can use it in isolation.</p>
+<p>This setup allows for consistency across components, it generates a common language between designers and developers since we can set the same global variables in Sketch as bumpers for designers, and it gives granular control to authors.</p>
+<h3>Why does this system work?</h3>
+<p>In an ideal world, we as creators of a design system, expect &#8220;authors&#8221; or users of our system to implement it without modifications, but of course, the world is not ideal and that never happens.</p>
+<p>If we allow authors to easily theme the system without having to overwrite CSS, we’ll not only make their lives easier but also reduce the risk of breaking modules. At the end of the day, a maintainable system is a good system.</p>
+<p>The two-tier theming system generates modular and isolated components where authors have the possibility to customize them at a global and at a component level.  For example:</p>
+<pre rel="CSS""><code>:root {
+  /* Changes the secondary title size across the system */
+  --global--secondary-title--FontSize: 2rem;
+}
+
+.alert {
+  /* Changes the padding on the alert only */
+  --alert--Padding: 3rem;
+}</code></pre>
+<h3>What values should became variables?</h3>
+<p>CSS variables open windows to the code. The more we allow authors in, the more vulnerable the system is to implementation issues.</p>
+<p>To keep consistency, set global variables for everything except layout values; you wouldn’t want authors to break the layout. And as a general rule, I’d recommend allowing access to components for everything you are willing to give support.</p>
+<p>For the next version of <a href="https://github.com/patternfly/patternfly-next">PatternFly</a>, an open source design system I work on, we’ll allow customization for almost everything that’s not layout related: colors, spacer, typography treatment, shadows, etc.</p>
+<h3>Putting everything together</h3>
+<p>To show this concept in action I’ve created a <a href="https://codepen.io/andresgalante/project/editor/DKPzvL">CodePen project</a>:</p>
+<p><iframe width="100%" height="600" src="https://8f1ff60250214902a377714fe6aa4d89.codepen.website/button/button.html"></iframe></p>
+<p>Global variables are nestled in <code>_global-variables.scss</code>. They are the base to keep consistency across the system and will allow the author to make global changes.</p>
+<p>There are two components: <code>alert</code> and <code>button</code>. They are isolated and modular entities with scoped variables that allow authors to fine tune components.</p>
+<p>Remember that authors will use our system as a dependency in their project. By letting them modify the look and feel of the system through CSS variables, we are creating a solid code base that’s easier to maintain for the creators of the system and better to implement, modify, and upgrade to authors using the system.</p>
+<p>For example, if an author wants to:</p>
+<ul>
+<li>change the <code>primary</code> color to pink across the system;</li>
+<li>change the <code>danger</code> color to orange just on the buttons;</li>
+<li>and change the padding left to <code>2.3rem</code>  only on the alert&#8230;</li>
+</ul>
+<p>&#8230;then this is how it’s done:</p>
+<pre rel="CSS""><code>:root {
+  // Changes the primary color on both the alert and the button
+  --global--primary--Color: hotpink;
+}
+
+.button {
+  // Changes the danger color on the button only without affecting the alert
+  --button--danger--BackgroundColor: orange;
+  --button--danger--hover--BorderColor: darkgoldenrod;
+}
+
+.alert {
+  // Changes the padding left on the alert only without affecting the button
+  --alert--PaddingLeft: 2.3rem;
+}</code></pre>
+<p>The design system code base is intact and it’s just a better dependency to have.</p>
+<p>I am aware that this is just one way to do it and I am sure there are other ways to successfully set up variables on a system. Please let me know what you think on the comments or <a href="https://twitter.com/andresgalante">send me a tweet</a>. I’d love to hear about what you are doing and learn from it.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/theming-with-variables-globals-and-locals/">Theming With Variables: Globals and Locals</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/theming-with-variables-globals-and-locals/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">268217</post-id>	</item>
+		<item>
+		<title>5 things CSS developers wish they knew before they started</title>
+		<link>https://css-tricks.com/5-things-css-developers-wish-knew-started/</link>
+					<comments>https://css-tricks.com/5-things-css-developers-wish-knew-started/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Mon, 25 Sep 2017 12:54:51 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=260250</guid>
+
+					<description><![CDATA[<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">You can learn anything, but you can&#39;t learn everything &#x1f643;</p>
+<p>So accept that, and focus on what matters to you</p>
+<p>&#8212; Una Kravets &#x1f469;&#x1f3fb;‍&#x1f4bb; (@Una) <a href="https://twitter.com/Una/status/903658446263865345">September 1, 2017</a></p>
+</blockquote>
+<p><a href="https://twitter.com/Una">Una Kravets</a> is absolutely right. In modern CSS development, there are so many things to learn. For someone starting out today, it&#8217;s hard to know where to start.</p>
+<p>Here is a list of things I wish I had known if I were to start all over again.</p>
+</p>
+<p>1. Don&#8217;t underestimate CSS</p>
+<p>It &#8230; <a href="https://css-tricks.com/5-things-css-developers-wish-knew-started/" class="read-more">Read article <span class="screen-reader-text"> &#8220;5 things CSS developers wish they knew before they started&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/5-things-css-developers-wish-knew-started/">5 things CSS developers wish they knew before they started</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">You can learn anything, but you can&#39;t learn everything &#x1f643;</p>
+<p>So accept that, and focus on what matters to you</p>
+<p>&mdash; Una Kravets &#x1f469;&#x1f3fb;‍&#x1f4bb; (@Una) <a href="https://twitter.com/Una/status/903658446263865345">September 1, 2017</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p><a href="https://twitter.com/Una">Una Kravets</a> is absolutely right. In modern CSS development, there are so many things to learn. For someone starting out today, it&#8217;s hard to know where to start.</p>
+<p>Here is a list of things I wish I had known if I were to start all over again.</p>
+<p><span id="more-260250"></span></p>
+<h3>1. Don&#8217;t underestimate CSS</h3>
+<p>It looks easy. After all, it&#8217;s just a set of rules that selects an element and modifies it based on a set of properties and values.</p>
+<p>CSS is that, but also so much more!</p>
+<p>A successful CSS project requires the most impeccable architecture. Poorly written CSS is brittle and quickly becomes difficult to maintain. It&#8217;s critical you learn how to organize your code in order to create maintainable structures with a long lifespan.</p>
+<p>But even an excellent code base has to deal with the insane amount of devices, screen sizes, capabilities, and user preferences. Not to mention accessibility, internationalization, and browser support!</p>
+<p><strong>CSS is like a bear cub: cute and inoffensive but as he grows, he&#8217;ll eat you alive.</strong></p>
+<ul>
+<li>Learn to read code before writing and delivering code.</li>
+<li>It&#8217;s your responsibility to stay up to date with best practice. <a href="https://developer.mozilla.org/en-US/">MDN</a>, <a href="https://www.w3.org/">W3C</a>, <a href="https://alistapart.com/">A List Apart</a>, and <a href="https://css-tricks.com/">CSS-Tricks</a> are your source of truth.</li>
+<li>The web has no shape; each device is different. Embrace diversity and understand the environment we live in.</li>
+</ul>
+<h3>2. Share and participate</h3>
+<p>Sharing is so important! How I wish someone had told me that when I started. It took me ten years to understand the value of sharing; when I did, it completely changed how I viewed my work and how I collaborate with others.</p>
+<p>You&#8217;ll be a better developer if you surround yourself with good developers, so get involved in open source projects. The CSS community is full of kind and generous developers. The sooner the better.</p>
+<p>Share everything you learn. The path is as important as the end result; even the tiniest things can make a difference to others.</p>
+<ul>
+<li>Learn Git. <a href="http://andresgalante.com/design/2015/08/31/adopt-a-deisgner.html">Git is the language of open source</a> and you definitely want to be part of it.</li>
+<li>Get involved in an open source project.</li>
+<li>Share! Write a blog, documentation, or tweets; speak at meetups and conferences.</li>
+<li>Find an accountability partner, someone that will push you to share consistently.</li>
+</ul>
+<h3>3. Pick the right tools</h3>
+<p>Your code editor should be an extension of your mind.</p>
+<p>It doesn&#8217;t matter if you use <a href="https://atom.io/">Atom</a>, <a href="https://code.visualstudio.com/">VSCode</a> or old school <a href="https://vim.sourceforge.io/">Vim</a>; the better you shape your tool to your thought process, the better developer you&#8217;ll become. You&#8217;ll not only gain speed but also have an uninterrupted thought line that results in fluid ideas.</p>
+<p>The terminal is your friend.</p>
+<p>There is a lot more about being a CSS developer than actually writing CSS. Building your code, compiling, linting, formatting, and browser live refresh are only a small part of what you&#8217;ll have to deal with on a daily basis.</p>
+<ul>
+<li>Research which IDE is best for you. There are high performance text editors like <a href="https://vim.sourceforge.io/">Vim</a> or easier to use options like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">VSCode</a>.</li>
+<li>Pick up your way around the terminal and learn CLI as soon as possible. The short book &#8220;<a href="https://abookapart.com/products/working-the-command-line">Working the command line</a>&#8221; is a great starting point.</li>
+</ul>
+<h3>4. Get to know the browser</h3>
+<p>The browser is not only your canvas, but also a powerful inspector to debug your code, test performance, and learn from others.</p>
+<p>Learning how the browser renders your code is an eye-opening experience that will take your coding skills to the next level.</p>
+<p>Every browser is different; get to know those differences and embrace them. Love them for what they are. (Yes, even IE.)</p>
+<ul>
+<li>Spend time looking around the inspector.</li>
+<li>You&#8217;ll not be able to own every single device; get a <a href="https://www.browserstack.com/start#os=Windows&#038;os_version=7&#038;browser=IE&#038;browser_version=10.0&#038;zoom_to_fit=true&#038;full_screen=true&#038;resolution=responsive-mode&#038;url=http%3A%2F%2Flocalhost%3A9001%2Fdocs%2F4.0%2Fexamples%2Fjumbotron%2F&#038;speed=1&#038;host_ports=google.com%2C80%2C0">BrowserStack</a> or <a href="https://crossbrowsertesting.com/">CrossBrowserTesting</a> account, it&#8217;s worth it.</li>
+<li>Install every browser you can and learn how each one of them renders your code.</li>
+</ul>
+<h3>5. Learn to write maintainable CSS</h3>
+<p>It&#8217;ll probably take you years, but if there is just one single skill a CSS developer should have, it is to write maintainable structures.</p>
+<p>This means knowing exactly how the cascade, the box model, and specificity works. Master CSS architecture models, learn their pros and cons and how to implement them.</p>
+<p>Remember that a modular architecture leads to independent modules, good performance, accessible structures, and responsive components (AKA: CSS happiness).</p>
+<ul>
+<li>Learn about CSS architectures, keep up with the trends, and <strong>have an opinion!</strong></li>
+<li>Follow people that are paving the CSS roads like <a href="https://twitter.com/csswizardry">Harry Roberts</a>, <a href="https://twitter.com/Una">Una Kravets</a>, <a href="https://twitter.com/brad_frost">Brad Frost</a>, <a href="https://twitter.com/benfrain">Ben Frain</a>, <a href="https://twitter.com/SaraSoueidan">Sara Soueidan</a>, <a href="https://twitter.com/chriscoyier">Chris Coyier</a>, <a href="https://twitter.com/meyerweb">Eric Meyer</a>, <a href="https://twitter.com/jensimmons">Jen Simmons</a>, <a href="https://twitter.com/rachelandrew">Rachel Andrew</a>, and many many others.</li>
+</ul>
+<h3>The future looks bright</h3>
+<p>Modern CSS is amazing. Its future is even better. I love CSS and enjoy every second I spend coding.</p>
+<p>If you need help, you can reach out <a href="https://twitter.com/andresgalante">to me</a> or probably any of the CSS developers mentioned in this article. You might be surprised by how kind and generous the CSS community can be. </p>
+<p>What do you think about my advice? What other advice would you give? Let me know what you think in the comments.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/5-things-css-developers-wish-knew-started/">5 things CSS developers wish they knew before they started</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/5-things-css-developers-wish-knew-started/feed/</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">260250</post-id>	</item>
+		<item>
+		<title>Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</title>
+		<link>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/</link>
+					<comments>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Fri, 05 May 2017 11:59:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[mobile]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=254168</guid>
+
+					<description><![CDATA[<p>A month ago I <a href="https://css-tricks.com/touch-devices-not-judged-size/">explored the importance of relying on Interaction Media Features</a> to identify the user&#8217;s ability to hover over elements or to detect the accuracy of their pointing device, meaning a fine pointer like a mouse or a coarse one like a finger.</p>
+<p>But it goes beyond the input devices or the ability to hover; the screen refresh rate, the color of the screen, or the orientation. Making assumptions about these factors based on the width of the &#8230; <a href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/">Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>A month ago I <a href="https://css-tricks.com/touch-devices-not-judged-size/">explored the importance of relying on Interaction Media Features</a> to identify the user&#8217;s ability to hover over elements or to detect the accuracy of their pointing device, meaning a fine pointer like a mouse or a coarse one like a finger.</p>
+<p>But it goes beyond the input devices or the ability to hover; the screen refresh rate, the color of the screen, or the orientation. Making assumptions about these factors based on the width of the viewport is not reliable and can lead to a broken interface.</p>
+<p>I&#8217;ll take you on a journey through the land of <a href="https://www.w3.org/TR/mediaqueries-4/#color-gamut">Media Query Level 4</a> and explore the opportunities that the <a href="https://www.w3.org/Style/CSS/members.en.php3">W3C CSS WG</a> has drafted to help us deal with all the device fruit salad madness.</p>
+<p><span id="more-254168"></span></p>
+<h3>Media queries</h3>
+<p>Media queries, in a nutshell, inform us about the context in which our content is being displayed, allowing us to scope and optimize our styles. Meaning, we can display the same content in different ways depending on the context.</p>
+<p>The <a href="https://www.w3.org/TR/mediaqueries-4/">Media Queries Level 4 spec</a> answers two questions:</p>
+<ul>
+<li>What is the device viewport size and resolution?</li>
+<li>What is the device capable of doing?</li>
+</ul>
+<p>We can detect the device type where the document is being displayed using the media type keywords <code>all</code>, <code>print</code>, <code>screen</code> or <code>speech</code> or you can get more granular using Media Features.</p>
+<h3>Media Features</h3>
+<p>Each Media Feature tests a single, specific feature of the device. There are five types:</p>
+<ul>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-dimensions">Screen Dimensions Media Features</a> detect the viewport size and orientation.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-display-quality">Display Quality Media Features</a> identify the resolution and update speed.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-colors">Color Media Features</a> spot the amount of colors a device is capable to displaying.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-interaction">Interaction Media Features</a> find if a device is able to hover and the quality of its input device.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-scripting">Scripting Media Features</a> recognize if scripting languages, for example javascript, are supported.</li>
+</ul>
+<p>We can use these features on their own or combine them using the keyword <code>and</code> or a comma to mean &#8220;or&#8221;. It&#8217;s also possible to negate them with the keyword <code>not</code>. </p>
+<p>For example:</p>
+<pre rel="CSS"><code class="language-css">@media screen and ((min-width: 50em) and (orientation: landscape)), print and (not(color)) {
+  ...
+}</code></pre>
+<p>Scopes the styles to landscape orientated screens that are less than or equal to <code>50em</code> wide, or monochrome print outputs.</p>
+<p>The best way to understand something is by actually doing it. Let&#8217;s delve into the corner cases of a navigation bar to test these concepts.</p>
+<h3>The Unnecessarily Complicated Navbar</h3>
+<p>One of the best pieces of advice that Brad Frost gave us on &#8220;<a href="http://bradfrost.com/blog/post/7-habits-of-highly-effective-media-queries/">7 Habits of Highly Effective Media Queries</a>&#8221; is not to go overboard.</p>
+<blockquote><p>The more complex we make our interfaces the more we have to think in order to properly maintain them. <cite>&#8211; <a href="http://bradfrost.com/">Brad Frost</a></cite></p></blockquote>
+<p>And that&#8217;s exactly what I&#8217;m about to do. Let&#8217;s go overboard!</p>
+<p>Be aware that the following demo was designed as an example to understand what each Media Feature does: if you want to use it (and maintain it), do it at your own risk (and <a href="https://twitter.com/andresgalante">let me know</a>!).</p>
+<p>With that in mind, let&#8217;s start with the less capable smaller experience, also know as &#8220;The mobile, small, portrait, slow, interlace, monochrome, coarse, non-hover first&#8221; approach.</p>
+<h3>The HTML structure</h3>
+<p>To test the media query features, I started with a very simple structure. On one side: a <code>header</code> with an <code>h1</code> for a brand name and a <code>nav</code> with an unordered list. On the other side: a <code>main</code> area with a placeholder title and text.</p>
+<p data-height="353" style="height: 353px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="GmgdZM" data-default-tab="html,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 1: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/GmgdZM/">Part 1: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h3>Default your CSS for less capable devices and smaller viewport</h3>
+<p>As I mentioned before, we are thinking of the less capable smaller devices first. Even though we are not scoping styles yet, I am considering an experience that is:</p>
+<ul>
+<li><code>max-width: 45em</code> small viewport, less than or equal to 45em wide</li>
+<li><code>orientation: portrait</code> portrait viewport, height is larger than width</li>
+<li><code>update: slow</code>  the output device is not able to render or display changes quickly enough for them to be perceived as a smooth animation.</li>
+<li><code>monochrome</code> all monochrome devices</li>
+<li><code>pointer: coarse</code> the primary input mechanism has limited accuracy, like a finger</li>
+<li><code>hover: none</code> indicates that the primary pointing system can&#8217;t hover</li>
+</ul>
+<p>Let&#8217;s take care of positioning. For portrait, small, touchscreen devices, I want to pin the menu at the bottom of the viewport so users have comfortable access to the menu with their thumbs.</p>
+<pre rel="CSS"><code class="language-css">nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}</code></pre>
+<p>Since we are targeting touchscreen devices, it is important to increase the touch target. On <a href="https://www.smashingmagazine.com/inclusive-design-patterns/">Inclusive Design Patterns</a>, <a href="https://twitter.com/heydonworks">Heydon Pickering</a> mentions that it&#8217;s still unclear what the magical size of a touch area is, different vendors recommend different sizes. </p>
+<p>Pickering mentions Anthony Thomas&#8217;s <a href="http://uxmovement.com/mobile/finger-friendly-design-ideal-mobile-touch-target-sizes/">article about finger-friendly experiences</a> and Patrick H Lauke research for <a href="https://www.w3.org/WAI/GL/mobile-a11y-tf/wiki/Summary_of_Research_on_Touch/Pointer_Target_Size">The W3C Mobile Accessibility Taskforce into touch / pointer target size</a>, and the main takeaway is, &#8220;&#8230;to make each link larger than the diameter of an adult finger pad&#8221;.</p>
+<p>That&#8217;s why I&#8217;ve increased the height of the menu items to <code>4em</code>. Since this is not scoped, it&#8217;ll be applied to any viewport size, so both large touchscreen devices like an iPad Pro and tiny smartphones alike will have comfortable touch targets.</p>
+<pre rel="CSS"><code class="language-css">li a {
+  min-height: 4em;
+}</code></pre>
+<p>To help readability on monochromatic or slow devices, like a Kindle, I haven&#8217;t removed the underlines from links or added animations. I&#8217;ll do that later on.</p>
+<p data-height="431" style="height: 431px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="jmExNv" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 2: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/jmExNv/">Part 2: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254356" class="align-none media-254356"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/04/portrait-phones.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Small landscape viewports, vertical large displays, or mouse pointers</h3>
+<p>For landscape viewports <code>orientation: landscape</code>, large portrait viewports like vertical monitors or tablets <code>min-width: 45em</code>, or small portrait devices with fine pointers like a stylus <code>pointer: fine</code>, users will no longer be using their thumbs on a handheld device; that&#8217;s why I unpinned the menu and put it at the top right of the header.</p>
+<pre rel="CSS"><code class="language-css">@media (orientation: landscape), (pointer: fine), (min-width: 45em) {
+  main {
+    padding-bottom: 1em;
+    padding-top: 1em;
+  }
+  h1, nav {
+    position: static;
+  }
+}</code></pre>
+<p>Since the menu and the brand name are already flexed and stretched, then they&#8217;ll accommodate themselves nicely.</p>
+<p>For users that have a fine pointer like a mouse or a stylus, we want to decrease the hit target to gain the real estate on the main area:</p>
+<pre rel="CSS"><code class="language-css">@media (pointer: fine) {
+  h1, li a {
+    min-height: 2.5em;
+  }
+}</code></pre>
+<p data-height="431" style="height: 431px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="eWmKeW" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 3: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/eWmKeW/">Part 3: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254352" class="align-none media-254352"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5446.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Vertical nav for large landscape viewports</h3>
+<p>Vertical navigations are great for large landscape viewports <code>(orientation: landscape) and (min-width: 45em)</code>, like a tablet or a computer display. To do that I&#8217;ll flex the container:</p>
+<pre rel="CSS"><code class="language-css">@media (orientation: landscape) and (min-width: 45em) {
+  .container {
+    display: flex;
+  }
+  ...
+}</code></pre>
+<p>Notice that hit targets have nothing to do with the size of the viewport or style of navigation. If the user is on a large touchscreen device with a vertical tab, they&#8217;ll see larger targets regardless of the size of the width of the screen.</p>
+<p data-height="434" style="height: 434px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="eWmjGL" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 4: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/eWmjGL/">Part 4: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254353" class="align-none media-254353"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5479.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Animations, decorations and edge cases</h3>
+<p>Animations are a great way to <a href="https://material.io/guidelines/motion/material-motion.html#">enhance interactions</a> and help users achieve their goals quickly and easily. But some devices are incapable of producing smooth animations &#8211; like e-readers. That&#8217;s why I am limiting animations to devices that are capable of generating a good experience <code>(update: fast), (scan: progressive), (hover: hover)</code>.</p>
+<pre rel="CSS"><code class="language-css">@media (update: fast), (scan: progressive), (hover: hover) {
+  li a {
+    transition: all 0.3s ease-in-out;
+  }
+}</code></pre>
+<p>I am also removing the text decoration on color devices:</p>
+<pre rel="CSS"><code class="language-css">@media (color) {
+  li a { text-decoration: none; }
+}</code></pre>
+<p>Removing underlines (via <code>text-decoration</code>) is tricky territory. Our accessibility consultant Marcy Sutton put it well:</p>
+<blockquote><p>Some users really benefit from link underlines, especially in body copy. But since these particular links are part of the navigation with a distinct design treatment, the link color just needs <a href="https://www.w3.org/TR/WCAG20-TECHS/F73.html">adequate contrast</a> from the background color for users with low vision or color blindness.</p></blockquote>
+<figure id="post-254537" class="align-none media-254537"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/05/contrast.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>We made sure the colors had enough <a href="http://webaim.org/resources/contrastchecker/">color contrast</a> to pass WCAG AAA.</figcaption></figure>
+<p>I&#8217;m also increasing the border width to 2px to avoid &#8220;<a href="https://en.wikipedia.org/wiki/Interlaced_video#Interline_twitter">twitter</a>&#8221; (real term!) on interlace devices like plasma TVs:</p>
+<pre rel="CSS"><code class="language-css">@media (scan: interlace) {
+  li a, li:first-child a {
+    border-width: 2px;
+  }
+}</code></pre>
+<p>And here is the final result:</p>
+<p data-height="419" style="height: 419px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="RVbpvd" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 5: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/RVbpvd/">Part 5: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h3>Test it out</h3>
+<p>Testing all this may not be that easy!. This example relies on flexbox, and some browsers have limited support for other modern CSS features. A Kindle, for example, won&#8217;t read <code>@media</code>, <code>@support</code>, or flexbox properties.</p>
+<p>I&#8217;ve added float fallbacks here:</p>
+<p data-height="371" style="height: 371px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="vmgrKb" data-default-tab="result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 6: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/vmgrKb/">Part 6: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254354" class="align-none media-254354"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5476.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>You can open the <a href="https://rawgit.com/andresgalante/test/master/test.html">full page example</a> in different devices, landscape, or portrait and test it out!</p>
+<h3>How soon will we realistically be able to use all these features?</h3>
+<p>Now! That is, if you are ok offering different experiences on different browsers.</p>
+<p>Today, Firefox doesn&#8217;t support Interaction Media Queries. A Firefox user with a fine pointer mechanism, like a mouse, will see large hit areas reducing the main area real estate.</p>
+<p>Browser support for <a href="http://caniuse.com/#feat=css-mediaqueries">most of these features</a> is already available and support for <a href="https://css-tricks.com/touch-devices-not-judged-size/#article-header-id-5">Interaction Media Features, support isn&#8217;t bad</a>! I am sure that we will see it <a href="http://caniuse.com/#feat=css-media-interaction">supported across the board</a> soon.</p>
+<p>Remember to test as much as you can and don&#8217;t assume that any of this will just work, especially in less capable or older devices.</p>
+<h3>There is more!</h3>
+<p>I&#8217;ve covered some of the Media Features along the example, but I left others behind. For example the <a href="https://www.w3.org/TR/mediaqueries-4/#resolution">Resolution Media Feature</a> that describes the resolution of the output device.</p>
+<p>My goal is to make you think beyond your almighty MacBook or iPhone with a retina display. The web is so much more and it&#8217;s everywhere. We have the tools to create the most amazing, flexible, inclusive, and adaptable experiences; let&#8217;s use them.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/">Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">254168</post-id>	</item>
+		<item>
+		<title>Touch Devices Should Not Be Judged By Their Size</title>
+		<link>https://css-tricks.com/touch-devices-not-judged-size/</link>
+					<comments>https://css-tricks.com/touch-devices-not-judged-size/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Mon, 27 Feb 2017 11:47:13 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[touch]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=251891</guid>
+
+					<description><![CDATA[<p>Front-end developers and web designers live in an insane multi-device reality.</p>
+<p>A few months ago, <a href="https://twitter.com/RedHatUXD">the Red Hat UXD team</a> discussed how to design enterprise applications for mobile environments. <a href="https://github.com/srambach">Sarah</a> and <a href="https://github.com/jgiardino">Jenn</a>, my talented colleagues, pointed out that touch devices should not be judged by their size alone.</p>
+</p>
+<blockquote>
+<p>Assumptions are beguiling. If only we could agree on certain boundaries, then wouldn&#8217;t web design be so much easier to control?&#8221; &#8211; <a href="https://adactio.com/">Jeremy Keith</a>, <a href="https://resilientwebdesign.com">Resilient Web Design</a></p>
+</blockquote>
+<p>Today, there is &#8230; <a href="https://css-tricks.com/touch-devices-not-judged-size/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Touch Devices Should Not Be Judged By Their Size&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/touch-devices-not-judged-size/">Touch Devices Should Not Be Judged By Their Size</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Front-end developers and web designers live in an insane multi-device reality.</p>
+<p>A few months ago, <a href="https://twitter.com/RedHatUXD">the Red Hat UXD team</a> discussed how to design enterprise applications for mobile environments. <a href="https://github.com/srambach">Sarah</a> and <a href="https://github.com/jgiardino">Jenn</a>, my talented colleagues, pointed out that touch devices should not be judged by their size alone.</p>
+<p><span id="more-251891"></span></p>
+<blockquote><p>Assumptions are beguiling. If only we could agree on certain boundaries, then wouldn&#8217;t web design be so much easier to control?&#8221; &#8211; <a href="https://adactio.com/">Jeremy Keith</a>, <a href="https://resilientwebdesign.com">Resilient Web Design</a></p></blockquote>
+<p>Today, there is a new layer of complexity to the already complicated world of interaction design and front-end development.</p>
+<p>The hardware industry has created massive touchscreen TVs, really large tablets (like the iPad Pro), and even huge touch desktop PCs (like the new, jaw-dropping Surface Studio). This means we can no longer assume that a small viewport is a touch screen and a large viewport isn&#8217;t. Sometimes large screens are touch, requiring the user to use their finger, and small screens have a stylus. </p>
+<p>Responsive viewport media queries are great but they&#8217;re not enough. </p>
+<p>We can detect a touch screen with JS tools like <a href="https://modernizr.com/">Modernizr</a>, but CSS has a hidden gem that is smarter and more flexible.</p>
+<h3>Interaction Media Features</h3>
+<p>Thanks to the <a href="https://www.w3.org/Style/CSS/members.en.php3">W3C CSS Working Group</a> and the CSS community, we have a cleaner solution.</p>
+<p>On the <a href="https://drafts.csswg.org/mediaqueries/">Media Queries Level 4 Working Draft</a>, there is a spec for <a href="https://drafts.csswg.org/mediaqueries/#mf-interaction">Interaction Media Features</a> that includes three definitions: </p>
+<ul>
+<li><a href="https://drafts.csswg.org/mediaqueries/#pointer">Pointing Device Quality</a></li>
+<li><a href="https://drafts.csswg.org/mediaqueries/#hover">Hover Capability</a></li>
+<li><a href="https://drafts.csswg.org/mediaqueries/#any-input">Rare Interaction Capabilities</a></li>
+</ul>
+<p>These provide the capability to query a document based on the presence and accuracy of the user&#8217;s pointing device and whether it has the ability to hover over elements.</p>
+<p>Let&#8217;s take a closer look at each one:</p>
+<h3>Pointing Device Quality: The pointer Feature</h3>
+<blockquote><p>The pointer media feature is used to query about the presence and accuracy of a pointing device such as a mouse. If a device has multiple input mechanisms, the pointer media feature must reflect the characteristics of the &#8220;primary&#8221; input mechanism, as determined by the user agent.&#8221; &#8211; <a href="https://drafts.csswg.org/mediaqueries/#pointer">W3C</a></p></blockquote>
+<p>The key word here is &#8220;accuracy&#8221; of the pointing device.</p>
+<ul>
+<li>A mouse or a drawing stylus is very accurate and defines the value of <code>fine</code>.</li>
+<li>A finger or a Kinect peripheral isn&#8217;t, and takes the value of <code>coarse</code>.</li>
+</ul>
+<p>Therefore, we can adapt our UI elements to the user&#8217;s pointer capabilities. This is useful for making hit areas larger, if the user&#8217;s main input mechanism is a finger.</p>
+<pre rel="CSS"><code class="language-css">/* The primary input mechanism of the device includes a pointing device of limited accuracy. */
+@media (pointer: coarse) { ... }
+
+/* The primary input mechanism of the device includes an accurate pointing device. */
+@media (pointer: fine) { ... }
+
+/* The primary input mechanism of the device does not include a pointing device. */
+@media (pointer: none) { ... }</code></pre>
+<p>An example use case for this query is to size the click area of a checkbox or radio.</p>
+<h3>Hover Capability: The hover Feature</h3>
+<blockquote><p>The hover media feature is used to query the user&#8217;s ability to hover over elements on the page. If a device has multiple input mechanisms, the hover media feature must reflect the characteristics of the &#8220;primary&#8221; input mechanism, as determined by the user agent.&#8221; &#8211; <a href="https://drafts.csswg.org/mediaqueries/#hover">W3C</a></p></blockquote>
+<p>It&#8217;s important to notice that it only evaluates the primary input mechanism. If the primary input mechanism is not able to hover, but the secondary input can, then the query will resolve to <code>none</code>:</p>
+<blockquote><p>For example, a touchscreen where a long press is treated as hovering would match hover: none.&#8221; &#8211; <a href="https://drafts.csswg.org/mediaqueries/#hover">W3C</a></p></blockquote>
+<ul>
+<li>A touch screen device, where the primary pointer system is the finger and can&#8217;t hover, will take the value of <code>none</code>.</li>
+<li>A device where the primary input is a mouse and can easily hover parts of the page takes the value of <code>hover</code>.</li>
+</ul>
+<pre rel="CSS"><code class="language-css">/* Primary input mechanism system can 
+   hover over elements with ease */
+@media (hover: hover) { ... }
+
+/* Primary input mechanism cannot hover 
+   at all or cannot conveniently hover 
+   (e.g., many mobile devices emulate hovering
+   when the user performs an inconvenient long tap), 
+   or there is no primary pointing input mechanism */
+@media (hover: none) { ... }</code></pre>
+<p>A good use of this query is a drop-down menu.</p>
+<h3>Rare Interaction Capabilities: The any-pointer and any-hover Features</h3>
+<p>On devices that are both touch and have a mouse or a stylus, like the Microsoft Surface, the <code>hover</code> and <code>pointer</code> media query will evaluate the primary input mechanism only. </p>
+<p>As <a href="https://twitter.com/WebReflection">Andrea Giammarc</a> pointed out, his Dell XPS 13&#8243; touch takes the value of <code>fine</code>, even though it does have a touch screen because the primary input mechanism is a mouse.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr"><a href="https://twitter.com/Real_CSS_Tricks">@Real_CSS_Tricks</a> FYI I have a touch screen and that method fails like a charm in Chrome. &#x1f615;</p>
+<p>&mdash; Andrea Giammarchi (@WebReflection) <a href="https://twitter.com/WebReflection/status/828246042231595008">February 5, 2017</a></p></blockquote>
+<p><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>If we want a device like that to take the value of <code>coarse</code> or <code>hover</code>, we can use the Rare Interaction Capabilities.</p>
+<blockquote><p>The any-pointer and any-hover media features are identical to the pointer and hover media features, but they correspond to the union of capabilities of all the pointing devices available to the user. More than one of their values can match, if different pointing devices have different characteristics. They must only match none if all of the pointing devices would match none for the corresponding query, or there are no pointing devices at all.&#8221; &#8211; <a href="https://drafts.csswg.org/mediaqueries/#any-input">W3C</a></p></blockquote>
+<pre rel="CSS"><code class="language-css">/* One or more available input mechanism(s) 
+   can hover over elements with ease */
+@media (any-hover: hover) { ... }
+
+/* One or more available input mechanism(s) can hover, 
+   but not easily (e.g., many mobile devices emulate 
+   hovering when the user performs a long tap) */
+@media (any-hover: on-demand) { ... }
+
+/* One or more available input mechanism(s) cannot 
+   hover (or there are no pointing input mechanisms) */
+@media (any-hover: none) { ... }
+
+
+/* At least one input mechanism of the device 
+   includes a pointing device of limited accuracy. */
+@media (any-pointer: coarse) { ... }
+
+/* At least one input mechanism of the device 
+   includes an accurate pointing device. */
+@media (any-pointer: fine) { ... }
+
+/* The device does not include any pointing device. */
+@media (any-pointer: none) { ... }</code></pre>
+<h3>Device Examples</h3>
+<p>Typical examples of devices matching combinations of pointer and hover:</p>
+<table>
+<tr>
+<td></td>
+<th><code>pointer: coarse</code></th>
+<th><code>pointer: fine</code></th>
+</tr>
+<tr>
+<th><code>hover: none</code></th>
+<td>smartphones, touch screens</td>
+<td>stylus-based screens (Cintiq, Wacom, etc)</td>
+</tr>
+<tr>
+<th><code>hover: hover</code></th>
+<td>Nintendo Wii controller, Kinect</td>
+<td>mouse, touch pad</td>
+</tr>
+</table>
+<p><a href="https://www.w3.org/TR/mediaqueries-4/#mf-interaction">W3C</a></p>
+<p><a href="https://dev.opera.com/authors/patrick-lauke/">Patrick H. Lauke</a> has written <a href="https://dev.opera.com/articles/media-features/">a great guide</a> about  how each device type evaluates interaction media queries. </p>
+<p>This is really cool, right? I hear you shouting: what about browser support?</p>
+<h3>Browser Support Isn&#8217;t Bad at All!</h3>
+<p>Even though this is a working draft, it has <a href="http://caniuse.com/#feat=css-media-interaction">pretty good support</a>.</p>
+<p><a href="http://codepen.io/andresgalante/pen/bBEJKg?editors=0100">My simple test</a> proved successful on Chrome, Chrome for Android, Safari, Edge, Opera, Samsung browser, and Android Browser, but it didn&#8217;t work on FireFox, Opera Mini or IE.</p>
+<p data-height="350" style="height: 350px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="bBEJKg" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Touch screen test" class="codepen">See the Pen <a href="http://codepen.io/andresgalante/pen/bBEJKg/">Touch screen test</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p>FireFox and IE <a href="https://www.netmarketshare.com/browser-market-share.aspx?qprid=0&#038;qpcustomd=1">represent only a bit more than 2% mobile/tablet browser market share</a>. I couldn&#8217;t find information about touch TVs or other touch screen devices that are not mobile or tablets.</p>
+<p>I think we are ready to use this feature, and as FireFox adds support for it and <a href="https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support">IE dies</a> once and for all, we will have full support.</p>
+<h3>The &#8220;Cards Selection&#8221; Use Case</h3>
+<p>A month ago, we worked on implementing a <a href="http://www.patternfly.org/pattern-library/content-views/card-view/#/api">multi-select cards component</a> for the new version of <a href="https://www.patternfly.org/">PatternFly</a>, an open source design system to which I contribute. It was a perfect case to use the hover and pointer media query.</p>
+<p>To select a card, when the user hovers over it, a checkbox is displayed. If the user is not able to hover over elements, then we show the checkbox at all times.</p>
+<p>To improve this interaction, we increased the hit area of the checkbox if the primary input mechanism is coarse.</p>
+<p data-height="385" style="height: 385px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="vgbLyq" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Multi select cards" class="codepen">See the Pen <a href="http://codepen.io/andresgalante/pen/vgbLyq/">Multi select cards</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p>Firefox and IE will display default checkboxes at all times.</p>
+<h3>Size Isn&#8217;t Everything</h3>
+<p>Devices should be judged by their capabilities since, in the end, it is those capabilities that define them.</p>
+<p>This is an underused feature, and it opens the door to exciting new challenges. I can&#8217;t wait to see what we, as a community, can do with it.</p>
+<h3>References</h3>
+<p>All the descriptions commented on the code are from <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">Mozilla Developer Network</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/touch-devices-not-judged-size/">Touch Devices Should Not Be Judged By Their Size</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/touch-devices-not-judged-size/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">251891</post-id>	</item>
+	</channel>
+</rss>

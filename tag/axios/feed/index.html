@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>axios &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/axios/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 19 Jun 2020 10:22:21 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Stay DRY Using axios for API Requests</title>
+		<link>https://css-tricks.com/stay-dry-using-axios-for-api-requests/</link>
+					<comments>https://css-tricks.com/stay-dry-using-axios-for-api-requests/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Thu, 18 Jun 2020 15:02:25 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[axios]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312657</guid>
+
+					<description><![CDATA[<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like &#8230; <a href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Stay DRY Using axios for API Requests&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+
+
+
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like this, it is important to stay organized. One classic concept is DRY (short for Don’t Repeat Yourself), which is the process of abstracting code to prevent repeating it over and over. This is ideal because it often allows us to write something once, use it in multiple places, and update in a single place rather than each instance.</p>
+
+
+
+<p>We might also reach for libraries to help us. For Ajax, <a href="https://github.com/axios/axios">axios</a> is a popular choice. You might already be familiar with it, and even use it for things like independent POST and GET requests while developing.&nbsp;</p>
+
+
+
+<h3>Installation and the basics</h3>
+
+
+
+<p>It can be installed using npm (or yarn):</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm install axios</code></pre>
+
+
+
+<p>An independent POST request using Axios looks like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">axios.post('https://axios-app.firebaseio.com/users.json', formData)
+  .then(res => console.log(res))
+  .catch(error => console.log(error))</code></pre>
+
+
+
+<p>Native JavaScript has multiple ways of doing JavaScript too. Notably, <a href="https://css-tricks.com/using-fetch/"><code>fetch()</code></a>. So why use a library at all? Well, for one, error handling in fetch is pretty wonky. You’ll have a better time with axios right out of the gate with that. If you’d like to see a comparison, we have <a href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/">an article that covers both</a> and <a href="https://css-tricks.com/importance-javascript-abstractions-working-remote-data/">an article that talks about the value of abstraction</a> with stuff like this.</p>
+
+
+
+<p>Another reason to reach for axios? It gives us more opportunities for DRYness, so let’s look into that.&nbsp;</p>
+
+
+
+<h3>Global config</h3>
+
+
+
+<p>We can set up a global configuration (e.g. in our <code>main.js</code> file) that handles all application requests using <strong>a standard configuration</strong> that is set through a default object that ships with axios.&nbsp;</p>
+
+
+
+<p>This object contains:</p>
+
+
+
+<ul><li><strong><code>baseURL:</code></strong> A relative URL that acts as a prefix to all requests, and each request can append the URL</li><li><strong><code>headers</code>:</strong> Custom headers that can be set based on the requests</li><li><strong><code>timeout:</code></strong> The point at which the request is aborted, usually measured in milliseconds. The default value is <code>0</code>, meaning it’s not applicable.</li><li><strong><code>withCredentials</code>:</strong> Indicates whether or not cross-site Access-Control requests should be made using credentials. The default is <code>false</code>.</li><li><strong><code>responseType</code>:</strong> Indicates the type of data that the server will return, with options including <code>json</code> (default), <code>arraybuffe</code>r, <code>document</code>, <code>text</code>, and <code>stream</code>.</li><li><strong><code>responseEncoding</code>:</strong>&nbsp;Indicates encoding to use for decoding responses. The default value is <code>utf8</code>.</li><li><strong><code>xsrfCookieName</code>:</strong> The name of the cookie to use as a value for XSRF token, the default value is <code>XSRF-TOKEN</code>.</li><li><strong><code>xsrfHeaderName</code>:</strong> The name of the HTTP header that carries the XSRF token value. The default value is <code>X-XSRF-TOKEN</code>.</li><li><strong><code>maxContentLength</code>: </strong>Defines the max size of the HTTP response content in bytes allowed</li><li><strong><code>maxBodyLength</code>:</strong> Defines the max size of the HTTP request content in bytes allowed</li></ul>
+
+
+
+<p>Most of time, you’ll only be using <code>baseURL</code>,&nbsp;<code>header</code>,&nbsp;and maybe <code>timeout</code>. The rest of them are less frequently needed as they have smart defaults, but it’s nice to know there are there in case you need to fix up requests.</p>
+
+
+
+<p>This is the DRYness at work. For each request, we don’t have to repeat the <code>baseURL</code> of our API or repeat important headers that we might need on every request.&nbsp;</p>
+
+
+
+<p>Here’s an example where our API has a base, but it also has multiple different endpoints. First, we set up some defaults:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/ main.js
+import axios from 'axios';
+ 
+axios.defaults.baseURL = 'https://axios-app.firebaseio.com' // the prefix of the URL
+axios.defaults.headers.get['Accept'] = 'application/json'   // default header for all get request
+axios.defaults.headers.post['Accept'] = 'application/json'  // default header for all POST request
+ 
+Then, in a component, we can use axios more succinctly, not needing to set those headers, but still having an opportunity to customize the final URL endpoint:
+ 
+// form.js component
+import axios from 'axios';
+ 
+export default {
+  methods : {
+    onSubmit () {
+      // The URL is now https://axios-app.firebaseio.com/users.json
+      axios.post('/users.json', formData)
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<p class="explanation"><strong>Note:</strong> This example is in Vue, but the concept extends to any JavaScript situation.</p>
+
+
+
+<h3>Custom instance</h3>
+
+
+
+<p>Setting up a “custom instance” is similar to a global config, but scoped to specified components. So, it’s still a DRY technique, but with hierarchy.&nbsp;</p>
+
+
+
+<p>We’ll set up our custom instance in a new file (let’s call it&nbsp;<code>authAxios.js</code>) and import it into the “concern” components.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// authAxios.js
+import axios from 'axios'
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com'
+})
+customInstance.defaults.headers.post['Accept'] = 'application/json'
+ 
+// Or like this...
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com',
+  headers: {'Accept': 'application.json'}
+})</code></pre>
+
+
+
+<p>And then we import this file into the form components:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// form.js component
+ 
+// import from our custom instance
+import axios from './authAxios'
+ 
+export default {
+  methods : {
+    onSubmit () {
+      axios.post('/users.json', formData)
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<h3>Interceptors</h3>
+
+
+
+<p>Interceptors helps with cases where the global config or custom instance might be too generic, in the sense that if you set up an header within their objects, it applies to the header of every request within the affected components. Interceptors have the ability to change any object properties on the fly. For instance, we can send a different header (even if we have set one up in the object) based on any condition&nbsp;we choose within the interceptor.</p>
+
+
+
+<p>Interceptors can be in the <code>main.js</code> file or a custom instance file. Requests are intercepted after they’ve been sent out and allow us to change how the response is handled.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') { 
+    config.timeout = 4000 
+  } else { 
+    return config
+  }
+  console.log (config)
+    return config;
+  }, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage') }
+  else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});</code></pre>
+
+
+
+<p>Interceptors, as the name implies, intercept both requests and responses to act differently based on whatever conditions are provided. For instance, in the request interceptor above, we inserted a conditional timeout only if the requests have a particular <code>baseURL</code>. For the response, we can intercept it and modify what we get back, like change the route or have an alert box, depending on the status code. We can even provide multiple conditions based on different error codes.</p>
+
+
+
+<p>Interceptors will prove useful as your project becomes larger and you start to have lots of routes and nested routes all communicating to servers based on different triggers. Beyond the conditions I set above, there are many other situations that can warrant the use of interceptors, based on your project.</p>
+
+
+
+<p>Interestingly, we can eject an interceptor to prevent it from having any effect at all. We’ll have to assign the interceptor to a variable and eject it using the appropriately named <code>eject</code> method.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const reqInterceptor = axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') {
+    config.timeout = 4000
+  } else {
+    return config
+  }
+  console.log (config)
+  return config;
+}, function (error) {    
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+const resInterceptor = axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage')
+  } else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});
+ 
+axios.interceptors.request.eject(reqInterceptor);
+axios.interceptors.request.eject(resInterceptor);</code></pre>
+
+
+
+<p>Although it’s less commonly used, it’s possible to put and interceptor into a conditional statement or remove one based on some event.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Hopefully this gives you a good idea about the way axios works as well as how it can be used to keep API requests DRY in an application. While we scratched the surface by calling out common use cases and configurations, axis has so many other advantages you can explore in the <a href="https://github.com/axios/axios">documentation</a>, including the ability to cancel requests and protect against cross-site request forgery , among other awesome possibilities.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/stay-dry-using-axios-for-api-requests/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312657</post-id>	</item>
+		<item>
+		<title>Using data in React with the Fetch API and axios</title>
+		<link>https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/</link>
+					<comments>https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/#comments</comments>
+		
+		<dc:creator><![CDATA[Kingsley Silas]]></dc:creator>
+		<pubDate>Fri, 03 Aug 2018 14:15:04 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[api]]></category>
+		<category><![CDATA[axios]]></category>
+		<category><![CDATA[fetch]]></category>
+		<category><![CDATA[react]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=274506</guid>
+
+					<description><![CDATA[<p>If you are new to React, and perhaps have only played with building to-do and counter apps, you may not yet have run across a need to pull in data for your app. There will likely come a time when you’ll need to do this, as React apps are most <a href="https://css-tricks.com/project-need-react/">well suited</a> for situations where you’re handling both data and state.</p>
+<p>The first set of data you may need to handle might be hard-coded into your React application, like we &#8230; <a href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using data in React with the Fetch API and axios&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/">Using data in React with the Fetch API and axios</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>If you are new to React, and perhaps have only played with building to-do and counter apps, you may not yet have run across a need to pull in data for your app. There will likely come a time when you’ll need to do this, as React apps are most <a href="https://css-tricks.com/project-need-react/">well suited</a> for situations where you’re handling both data and state.</p>
+<p>The first set of data you may need to handle might be hard-coded into your React application, like we did for this demo from our <a href="https://css-tricks.com/handling-errors-with-error-boundary/">Error Boundary tutorial</a>:</p>
+<p><span id="more-274506"></span></p>
+<p data-height="375" style="height: 375px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="vjQMNV" data-default-tab="result" data-user="kinsomicrote" data-pen-title="error boundary 0" class="codepen">See the Pen <a href="https://codepen.io/kinsomicrote/pen/vjQMNV/">error boundary 0</a> by Kingsley Silas Chijioke (<a href="https://codepen.io/kinsomicrote">@kinsomicrote</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>What if you want to handle data from an API? That&#8217;s the purpose of this tutorial. Specifically, we&#8217;ll make use of the <a href="https://css-tricks.com/using-fetch/">Fetch API</a> and <a href="https://github.com/axios/axios">axios</a> as examples for how to request and use data.</p>
+<h3>The Fetch API</h3>
+<p>The Fetch API provides an interface for fetching resources. We&#8217;ll use it to fetch data from a third-party API and see how to use it when fetching data from an API built in-house.</p>
+<h4>Using Fetch with a third-party API</h4>
+<p data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="dKBqBK" data-default-tab="result" data-user="kinsomicrote" data-pen-title="React Fetch API Pen 1" class="codepen">See the Pen <a href="https://codepen.io/kinsomicrote/pen/dKBqBK/">React Fetch API Pen 1</a> by Kingsley Silas Chijioke (<a href="https://codepen.io/kinsomicrote">@kinsomicrote</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>We will be fetching random users from <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a>, a fake online REST API for testing. Let&#8217;s start by creating our component and declaring some default state.</p>
+<pre rel="JavaScript"><code class="language-javascript">class App extends React.Component {
+  state = {
+    isLoading: true,
+    users: [],
+    error: null
+  }
+
+  render() {
+    &lt;React.Fragment&gt;
+    &lt;/React.Fragment&gt;
+  }
+}</code></pre>
+<p>There is bound to be a delay when data is being requested by the network. It could be a few seconds or maybe a few milliseconds. Either way, during this delay, it’s good practice to let users know that something is happening while the request is processing.</p>
+<p>To do that we&#8217;ll make use of <code>isLoading</code> to either display the loading message <em>or</em> the requested data. The data will be displayed when <code>isLoading</code> is <code>false</code>, else a loading message will be shown on the screen. So the <code>render()</code> method will look like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">render() {
+  const { isLoading, users, error } = this.state;
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h1&gt;Random User&lt;/h1&gt;
+      // Display a message if we encounter an error
+      {error ? &lt;p&gt;{error.message}&lt;/p&gt; : null}
+      // Here's our data check
+      {!isLoading ? (
+        users.map(user =&gt; {
+          const { username, name, email } = user;
+          return (
+            &lt;div key={username}&gt;
+              &lt;p&gt;Name: {name}&lt;/p&gt;
+              &lt;p&gt;Email Address: {email}&lt;/p&gt;
+              &lt;hr /&gt;
+            &lt;/div&gt;
+          );
+        })
+      // If there is a delay in data, let's let the user know it's loading
+      ) : (
+        &lt;h3&gt;Loading...&lt;/h3&gt;
+      )}
+    &lt;/React.Fragment&gt;
+  );
+}</code></pre>
+<p>The code is basically doing this:</p>
+<ol>
+<li>De-structures <code>isLoading</code>, <code>users</code> and <code>error</code> from the application state so we don&#8217;t have to keep typing <code>this.state</code>.</li>
+<li>Prints a message if the application encounters an error establishing a connection</li>
+<li>Checks to see if data is loading</li>
+<li>If loading is not happening, then we must have the data, so we display it</li>
+<li>If loading is happening, then we must still be working on it and display &#8220;Loading&#8230;&#8221; while the app is working</li>
+</ol>
+<p>For Steps 3-5 to work, we need to make the request to fetch data from an API. This is where the JSONplaceholder API will come in handy for our example.</p>
+<pre rel="JavaScript"><code class="language-javascript">fetchUsers() {
+  // Where we're fetching data from
+  fetch(`https://jsonplaceholder.typicode.com/users`)
+    // We get the API response and receive data in JSON format...
+    .then(response =&gt; response.json())
+    // ...then we update the users state
+    .then(data =&gt;
+      this.setState({
+        users: data,
+        isLoading: false,
+      })
+    )
+    // Catch any errors we hit and update the app
+    .catch(error =&gt; this.setState({ error, isLoading: false }));
+}</code></pre>
+<p>We create a method called <code>fetchUser()</code> and use it to do exactly what you might think: request user data from the API endpoint and fetch it for our app. Fetch is a promise-based API which returns a response object. So, we make use of the <code>json()</code> method to get the response object which is stored in data and used to update the state of users in our application. We also need to change the state of <code>isLoading</code> to <code>false</code> so that our application knows that loading has completed and all is clear to render the data.</p>
+<p>The fact that Fetch is promise-based means we can also catch errors using the <code>.catch()</code> method. Any error encountered is used a value to update our error&#8217;s state. Handy!</p>
+<p>The first time the application renders, the data won&#8217;t have been received &mdash; it can take seconds. We want to trigger the method to fetch the users when the application state can be accessed for an update and the application re-rendered. React&#8217;s <code>componentDidMount()</code> is the best place for this, so we&#8217;ll place the <code>fetchUsers()</code> method in it.</p>
+<pre rel="JavaScript"><code class="language-javascript">componentDidMount() {
+  this.fetchUsers();
+}</code></pre>
+<h4>Using Fetch With Self-Owned API</h4>
+<p>So far, we’ve looked at how to put someone else’s data to use in an application. But what if we’re working with our own data in our own API? That’s what we’re going to cover right now.</p>
+<p data-height="440" style="height: 440px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="XYLxWg" data-default-tab="result" data-user="kinsomicrote" data-pen-title="React Fetch API Pen 2" class="codepen">See the Pen <a href="https://codepen.io/kinsomicrote/pen/XYLxWg/">React Fetch API Pen 2</a> by Kingsley Silas Chijioke (<a href="https://codepen.io/kinsomicrote">@kinsomicrote</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>I built an API which is available on <a href="https://github.com/kinsomicrote/react-fetch-api">GitHub</a>. The JSON response you get has been placed on AWS &mdash; that’s what we will use for this tutorial.</p>
+<p>As we did before, let&#8217;s create our component and set up some default state.</p>
+<pre rel="JavaScript"><code class="language-javascript">class App extends React.Component {
+  state = {
+    isLoading: true,
+    posts: [],
+    error: null
+  }
+
+  render() {
+    &lt;React.Fragment&gt;
+    &lt;/React.Fragment&gt;
+  }
+}</code></pre>
+<p>Our method for looping through the data will be different from the one we used before but only because of the data’s structure, which is going to be different. You can see the difference between our data structure <a href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json">here</a> and the one we obtained from <a href="https://jsonplaceholder.typicode.com/users">JSONPlaceholder</a>.</p>
+<p>Here is how the <code>render()</code> method will look like for our API:</p>
+<pre rel="JavaScript"><code class="language-javascript">render() {
+  const { isLoading, posts, error } = this.state;
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h1&gt;React Fetch - Blog&lt;/h1&gt;
+      &lt;hr /&gt;
+      {!isLoading ? Object.keys(posts).map(key =&gt; &lt;Post key={key} body={posts[key]} /&gt;) : &lt;h3&gt;Loading...&lt;/h3&gt;}
+    &lt;/React.Fragment&gt;
+  );
+}</code></pre>
+<p>Let&#8217;s break down the logic</p>
+<pre rel="JavaScript"><code class="language-javascript">{
+  !isLoading ? 
+  Object.keys(posts).map(key =&gt; &lt;Post key={key} body={posts[key]} /&gt;) 
+  : &lt;h3&gt;Loading...&lt;/h3&gt;
+}</code></pre>
+<p>When <code>isLoading</code> is not <code>true</code>, we return an array, map through it and pass the information to the Post component as props. Otherwise, we display a &#8220;Loading&#8230;&#8221; message while the application is at work. Very similar to before.</p>
+<p>The method to fetch posts will look like the one used in the first part.</p>
+<pre rel="JavaScript"><code class="language-javascript">fetchPosts() {
+  // The API where we're fetching data from
+  fetch(`https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json`)
+    // We get a response and receive the data in JSON format...
+    .then(response =&gt; response.json())
+    // ...then we update the state of our application
+    .then(
+      data =&gt;
+        this.setState({
+          posts: data,
+          isLoading: false,
+        })
+    )
+    // If we catch errors instead of a response, let's update the app
+    .catch(error =&gt; this.setState({ error, isLoading: false }));
+}</code></pre>
+<p>Now we can call the <code>fetchPosts</code> method inside a  <code>componentDidMount()</code> method</p>
+<pre rel="JavaScript"><code class="language-javascript">componentDidMount() {
+  this.fetchPosts();
+}</code></pre>
+<p>In the Post component, we map through the props we received and render the title and content for each post:</p>
+<pre rel="JavaScript"><code class="language-javascript">const Post = ({ body }) =&gt; {
+  return (
+    &lt;div&gt;
+      {body.map(post =&gt; {
+        const { _id, title, content } = post;
+        return (
+          &lt;div key={_id}&gt;
+            &lt;h2&gt;{title}&lt;/h2&gt;
+            &lt;p&gt;{content}&lt;/p&gt;
+            &lt;hr /&gt;
+          &lt;/div&gt;
+        );
+      })}
+    &lt;/div&gt;
+  );
+};</code></pre>
+<p>There we have it! Now we know how to use the Fetch API to request data from different sources and put it to use in an application. High fives. &#x270b;</p>
+<h3>axios</h3>
+<p>OK, so we’ve spent a good amount of time looking at the Fetch API and now we’re going to turn our attention to axios.</p>
+<p>Like the Fetch API, axios is a way we can make a request for data to use in our application. Where axios shines is how it allows you to send an asynchronous request to REST endpoints. This comes in handy when working with the REST API in a React project, say a <a href="">headless WordPress CMS</a>.</p>
+<p class="explanation">There’s ongoing debate about whether Fetch is better than axios and vice versa. We’re not going to dive into that here because, well, you can pick the right tool for the right job. If you’re curious about the points from each side, you can read <a href="https://medium.com/@sahilkkrazy/fetch-vs-axios-http-request-c9afa43f804e">here</a> and <a href="https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5">here</a>.</p>
+<h4>Using axios with a third-party API</h4>
+<p data-height="400" style="height: 400px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="OwVzmN" data-default-tab="result" data-user="kinsomicrote" data-pen-title="React Axios 1 Pen" class="codepen">See the Pen <a href="https://codepen.io/kinsomicrote/pen/OwVzmN/">React Axios 1 Pen</a> by Kingsley Silas Chijioke (<a href="https://codepen.io/kinsomicrote">@kinsomicrote</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>Like we did with the Fetch API, let&#8217;s start by requesting data from an API. For this one, we’ll fetch random users from the <a href="https://randomuser.me/">Random User API</a>.</p>
+<p>First, we create the App component like we’ve done it each time before:</p>
+<pre rel="JavaScript"><code class="language-javascript">class App extends React.Component {
+  state = {
+    users: [],
+    isLoading: true,
+    errors: null
+  };
+
+  render() {
+    return (
+      &lt;React.Fragment&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+}</code></pre>
+<p>The idea is still the same: check to see if loading is in process and either render the data we get back or let the user know things are still loading.</p>
+<p>To make the request to the API, we&#8217;ll need to create a function. We’ll call the function <code>getUsers()</code>. Inside it, we&#8217;ll make the request to the API using axios. Let&#8217;s see how that looks like before explaining further.</p>
+<pre rel="JavaScript"><code class="language-javascript">getUsers() {
+  // We're using axios instead of Fetch
+  axios
+    // The API we're requesting data from
+    .get("https://randomuser.me/api/?results=5")
+    // Once we get a response, we'll map the API endpoints to our props
+    .then(response =&gt;
+      response.data.results.map(user =&gt; ({
+        name: `${user.name.first} ${user.name.last}`,
+        username: `${user.login.username}`,
+        email: `${user.email}`,
+        image: `${user.picture.thumbnail}`
+      }))
+    )
+    // Let's make sure to change the loading state to display the data
+    .then(users =&gt; {
+      this.setState({
+        users,
+        isLoading: false
+      });
+    })
+    // We can still use the `.catch()` method since axios is promise-based
+    .catch(error =&gt; this.setState({ error, isLoading: false }));
+}</code></pre>
+<p>Quite different from the Fetch examples, right? The basic structure is actually pretty similar, but now we’re in the business of mapping data between endpoints.</p>
+<p>The GET request is passed from the API URL as a parameter. The response we get from the API contains an object called <code>data</code> and that contains other objects. The information we want is available in <code>data.results</code>, which is an array of objects containing the data of individual users.</p>
+<p>Here we go again with calling our method inside of the <code>componentDidMount()</code> method:</p>
+<pre rel="JavaScript"><code class="language-javascript">componentDidMount() {
+  this.getUsers();
+}</code></pre>
+<p>Alternatively, you can do this instead and basically combine these first two steps:</p>
+<pre rel="JavaScript"><code class="language-javascript">componentDidMount() {
+  axios
+    .get("https://randomuser.me/api/?results=5")
+    .then(response =&gt;
+      response.data.results.map(user =&gt; ({
+        name: `${user.name.first} ${user.name.last}`,
+        username: `${user.login.username}`,
+        email: `${user.email}`,
+        image: `${user.picture.thumbnail}`
+      }))
+    )
+    .then(users =&gt; {
+      this.setState({
+        users,
+        isLoading: false
+      });
+    })
+    .catch(error =&gt; this.setState({ error, isLoading: false }));
+}</code></pre>
+<p>If you are coding locally from your machine, you can temporarily edit the <code>getUsers()</code> function to look like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">getUsers() {
+  axios
+    .get("https://randomuser.me/api/?results=5")
+    .then(response =&gt; console.log(response))
+    .catch(error =&gt; this.setState({ error, isLoading: false }));
+}</code></pre>
+<p>Your console should get something similar to this:</p>
+<figure id="post-274515" class="align-left media-274515"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/07/react-fetch-1a.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We map through the results array to obtain the information we need for each user. The array of users is then used to set a new value for our <code>users</code> state. With that done, we can then change the value of <code>isLoading</code>.</p>
+<p>By default, <code>isLoading</code> is set to <code>true</code>. When the state of <code>users</code> is updated, we want to change the value of <code>isLoading</code> to <code>false</code> since this is the cue our app is looking for to make the switch from &#8220;Loading&#8230;&#8221; to rendered data. </p>
+<pre rel="JavaScript"><code class="language-javascript">render() {
+  const { isLoading, users } = this.state;
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h2&gt;Random User&lt;/h2&gt;
+      &lt;div&gt;
+        {!isLoading ? (
+          users.map(user =&gt; {
+            const { username, name, email, image } = user;
+            return (
+              &lt;div key={username}&gt;
+                &lt;p&gt;{name}&lt;/p&gt;
+                &lt;div&gt;
+                  &lt;img src={image} alt={name} /&gt;
+                &lt;/div&gt;
+                &lt;p&gt;{email}&lt;/p&gt;
+                &lt;hr /&gt;
+              &lt;/div&gt;
+            );
+          })
+        ) : (
+          &lt;p&gt;Loading...&lt;/p&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/React.Fragment&gt;
+  );
+}</code></pre>
+<p>If you log the <code>users</code> state to the console, you will see that it is an array of objects:</p>
+<figure id="post-274517" class="align-left media-274517"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/07/react-fetch-2a.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>The empty array shows the value before the data was obtained. The returned data contains only the <code>name</code>, <code>username</code>, <code>email address</code> and <code>image</code> of individual users because those are the endpoints we mapped out. There is a lot more data available from the API, of course, but we’d have to add those to our <code>getUsers</code> method.</p>
+<h4>Using axios with your own API</h4>
+<p data-height="390" style="height: 390px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="xJGpLm" data-default-tab="result" data-user="kinsomicrote" data-pen-title="React Axios 2 Pen" class="codepen">See the Pen <a href="https://codepen.io/kinsomicrote/pen/xJGpLm/">React Axios 2 Pen</a> by Kingsley Silas Chijioke (<a href="https://codepen.io/kinsomicrote">@kinsomicrote</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>You have seen how to use axios with a third-party API but we can look at what it’s like to request data from our own API, just like we did with the Fetch API. In fact, let’s use same <a href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json">JSON</a> file we used for Fetch so we can see the difference between the two approaches.</p>
+<p>Here is everything put together:</p>
+<pre rel="JavaScript"><code class="language-javascript">class App extends React.Component {
+  // State will apply to the posts object which is set to loading by default
+  state = {
+    posts: [],
+    isLoading: true,
+    errors: null
+  };
+  // Now we're going to make a request for data using axios
+  getPosts() {
+    axios
+      // This is where the data is hosted
+      .get("https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json")
+      // Once we get a response and store data, let's change the loading state
+      .then(response =&gt; {
+        this.setState({
+          posts: response.data.posts,
+          isLoading: false
+        });
+      })
+      // If we catch any errors connecting, let's update accordingly
+      .catch(error =&gt; this.setState({ error, isLoading: false }));
+  }
+  // Let's our app know we're ready to render the data
+  componentDidMount() {
+    this.getPosts();
+  }
+  // Putting that data to use
+  render() {
+    const { isLoading, posts } = this.state;
+    return (
+      &lt;React.Fragment&gt;
+        &lt;h2&gt;Random Post&lt;/h2&gt;
+        &lt;div&gt;
+          {!isLoading ? (
+            posts.map(post =&gt; {
+              const { _id, title, content } = post;
+              return (
+                &lt;div key={_id}&gt;
+                  &lt;h2&gt;{title}&lt;/h2&gt;
+                  &lt;p&gt;{content}&lt;/p&gt;
+                  &lt;hr /&gt;
+                &lt;/div&gt;
+              );
+            })
+          ) : (
+            &lt;p&gt;Loading...&lt;/p&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+}</code></pre>
+<p>The main difference between this method and using axios to fetch from a third-party is how the data is formatted. We’re getting straight-up JSON this way rather than mapping endpoints.</p>
+<p>The posts data we get from the API is used to update the value of the component&#8217;s <code>posts</code> state. With this, we can map through the array of posts in <code>render()</code>. We then obtain the <code>id</code>, <code>title</code> and <code>content</code> of each post using ES6 de-structuring, which is then rendered to the user.</p>
+<p>Like we did before, what is displayed depends on the value of <code>isLoading</code>. When we set a new state for <code>posts</code> using the data obtained from the API, we had to set a new state for <code>isLoading</code>, too. Then we can finally let the user know data is loading or render the data we’ve received.</p>
+<h4>async and await</h4>
+<p>Another thing the promise-based nate of axios allows us to do is take advantage of is <code>async</code> and <code>await</code> . Using this, the <code>getPosts()</code> function will look like this.</p>
+<pre rel="JavaScript"><code class="language-javascript">async getPosts() {
+  const response = await axios.get("https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json");
+  try {
+    this.setState({
+      posts: response.data.posts,
+      isLoading: false
+    });
+  } catch (error) {
+    this.setState({ error, isLoading: false });
+  }
+}</code></pre>
+<h4>Base instance</h4>
+<p>With axios, it’s possible to create a base instance where we drop in the URL for our API like so:</p>
+<pre rel="JavaScript"><code class="language-javascript">const api = axios.create({
+  baseURL: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/posts.json"
+});</code></pre>
+<p>&#8230;then make use of it like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">async getPosts() {
+  const response = await api.get();
+  try {
+    this.setState({
+      posts: response.data.posts,
+      isLoading: false
+    });
+  } catch (error) {
+    this.setState({ error, isLoading: false });
+  }
+}</code></pre>
+<p>Simply a nice way of abstracting the API URL.  </p>
+<h3>Now, data all the things!</h3>
+<p>As you build React applications, you will run into lots of scenarios where you want to handle data from an API. Hopefully you know feel armed and ready to roll with data from a variety of sources with options for how to request it.</p>
+<p>Want to play with more data? Sarah recently wrote up the steps for <a href="https://css-tricks.com/create-your-own-serverless-api/">creating your own serverless API</a> from a list of public APIs.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/">Using data in React with the Fetch API and axios</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">274506</post-id>	</item>
+		<item>
+		<title>Need to do Dependency-Free Ajax?</title>
+		<link>https://css-tricks.com/need-dependency-free-ajax/</link>
+					<comments>https://css-tricks.com/need-dependency-free-ajax/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 14 Mar 2017 15:13:05 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[axios]]></category>
+		<category><![CDATA[fetch]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=252760</guid>
+
+					<description><![CDATA[<p>One of the big reasons to use jQuery, for a long time, was how easy it made Ajax. It has a super clean, flexible, and cross-browser compatible API for all the Ajax methods. jQuery is still mega popular, but it&#8217;s becoming more and more common to ditch it, especially as older browser share drops and new browsers have a lot of powerful stuff we used to learn on jQuery for. Even just <code>querySelectorAll</code> is often cited as a reason to &#8230; <a href="https://css-tricks.com/need-dependency-free-ajax/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Need to do Dependency-Free Ajax?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/need-dependency-free-ajax/">Need to do Dependency-Free Ajax?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>One of the big reasons to use jQuery, for a long time, was how easy it made Ajax. It has a super clean, flexible, and cross-browser compatible API for all the Ajax methods. jQuery is still mega popular, but it&#8217;s becoming more and more common to ditch it, especially as older browser share drops and new browsers have a lot of powerful stuff we used to learn on jQuery for. Even just <code>querySelectorAll</code> is often cited as a reason to lose the jQuery dependency.</p>
+<p>How&#8217;s Ajax doing?</p>
+<p><span id="more-252760"></span></p>
+<p>Let&#8217;s say we needed to do a GET request to get some HTML from a URL endpoint. We aren&#8217;t going to do any error handling to keep this brief.</p>
+<p>jQuery would have been like this:</p>
+<pre rel="jQuery"><code class="language-javascript">$.ajax({
+  type: "GET",
+  url: "/url/endpoint/",
+}).done(function(data) {
+  // We got the `data`!
+});</code></pre>
+<p>If we wanted to ditch the jQuery and go with browser-native Ajax, we could do it like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">var httpRequest = new XMLHttpRequest();
+httpRequest.onreadystatechange = ajaxDone;
+httpRequest.open('GET', '/url/endpoint/');
+httpRequest.send();
+
+function ajaxDone() {
+  if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    if (httpRequest.status === 200) {
+      // We got the `httpRequest.responseText`! 
+    }
+  }
+}</code></pre>
+<p>The browser support for this is kinda complicated. The basics work as far back as IE 7, but IE 10 is when it really got solid. If you wanna get more robust, but still skip any dependencies, you can even use a <code>window.ActiveXObject</code> fallback and get down to IE 6.</p>
+<p>Long story short, it&#8217;s certainly possible to do Ajax without any dependencies and get pretty deep browser support. Remember jQuery is just JavaScript, so you can always just do whatever it does under the hood.</p>
+<p>But there is another thing jQuery has been doing for quite a while with it&#8217;s Ajax: it&#8217;s <code>Promise</code> based. One of the many cool things about Promises, especially when combined with a &#8220;asynchronous&#8221; even like Ajax, is that it allows you to <a href="https://css-tricks.com/multiple-simultaneous-ajax-requests-one-callback-jquery/">run multiple requests in parallel</a>, which is aces for performance. </p>
+<p>The native Ajax stuff I just posted isn&#8217;t Promise-based.</p>
+<p>If you want a strong and convenient Promise-based Ajax API, with fairly decent cross-browser support (down to IE 8), you could consider <a href="https://www.npmjs.com/package/axios">Axios</a>. Yes, it&#8217;s a dependency just like jQuery, it&#8217;s just hyper-focused on Ajax, 11.8 KB before GZip, and doesn&#8217;t have any dependencies of its own.</p>
+<p>With Axios, the code would look like:</p>
+<pre rel="JavaScript"><code class="language-javascript">axios({
+  method: 'GET',
+  url: '/url/endpoint/'
+}).then(function(response) {
+  // We got the `response.data`!
+});</code></pre>
+<p>Notice the then statement, which means we&#8217;re back in the <code>Promise</code> land. Tiny side note, apparently the requests don&#8217;t look identical to jQuery <a href="https://twitter.com/AmeliasBrain/status/841423456835063808">on the server side</a>.</p>
+<p>Browsers aren&#8217;t done with us yet though! There is a fairly new Fetch API that does Promise-based Ajax with a nice and clean syntax:</p>
+<pre rel="JavaScript"><code class="language-javascript">fetch('/url/endpoint/')
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(text) {
+    // We got the `text`!
+  });</code></pre>
+<p>The browser support for this is getting pretty good too! It&#8217;s shipping in all stable desktop browsers, including Edge. The danger zone is no IE support at all and only iOS 10.1+.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/need-dependency-free-ajax/">Need to do Dependency-Free Ajax?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/need-dependency-free-ajax/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">252760</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>user agent stylesheets &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/user-agent-stylesheets/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 23 Apr 2020 14:56:34 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Accessible Font Sizing, Explained</title>
+		<link>https://css-tricks.com/accessible-font-sizing-explained/</link>
+					<comments>https://css-tricks.com/accessible-font-sizing-explained/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Thu, 23 Apr 2020 14:56:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[user agent stylesheets]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306222</guid>
+
+					<description><![CDATA[<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+<p>The answer: &#8230; <a href="https://css-tricks.com/accessible-font-sizing-explained/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessible Font Sizing, Explained&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+
+
+
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+
+
+
+<p>The answer: it’s not up to us. It Depends&#x2122;. We’ll get into some specific a bit later but, for now, let’s explore the WCAG requirements for fonts.</p>
+
+
+
+<span id="more-306222"></span>
+
+
+
+<h3>Sizing, contrast, and 300 alphabets</h3>
+
+
+
+<p>First, <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-scale.html">resizing text</a>. &nbsp;We want to provide users with low vision a way to choose how fonts are displayed. Not in a crazy way. More like the ability to increase the size by 200% while maintaining readability and avoiding content collisions and overlaps.</p>
+
+
+
+<p>Secondly, there’s <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">contrast</a>. This is why I said “it depends” on what makes an accessible font size. Text has to follow a <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23contrast-ratiodef">contrast ratio</a> of at least 4.5:1, with the exception of a large-scale text that should have a contrast ratio of at least 3:1. You can use tools like <a href="https://webaim.org/resources/contrastchecker/" class="ek-link">WebAIM’s Contrast Checker</a> to ensure your text meets the guidelines. <a href="https://css-tricks.com/understanding-web-accessibility-color-contrast-guidelines-and-ratios/">Stacy Arrelano’s deep dive on color contrast</a> provides an excellent explanation of how contrast ratios are calculated.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://css-tricks.com/wp-content/uploads/2020/04/Frame-1-1.svg" alt="A contrast ratio of 2.39 to 1 would not pass any of the WCAG checks, a ratio of 4.65 to 1 would pass only the AA check for normal text sizes and a 10.09 to 1 contrast ratio would pass both AA and AAA WCAG checks." class="wp-image-306367"/><figcaption>Example of three color contrast measurements and their WCAG test results according to WebAIM&#8217;s contrast checker.</figcaption></figure>
+
+
+
+<p>There are around 300 alphabets in the world. Some characters are simple and readable in smaller sizes, others are incredibly complex and would lose vital details at the same size. That’s why specs cannot define a font size that meets the specification for contrast ratios.</p>
+
+
+
+<p>And when we talk about “text” and “large text” sizes, we’re referring to what <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23larger-scaledef">the spec</a> calls “the minimum large print size used for those languages and the next larger standard large print size.” To meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html%23uc-levels-head">AAA criteria</a> using Roman text, for example, “large” is 18 points. Since we live in a world with different screen densities, specs measure sizes in points, not pixels, and in some displays, 18pt is equal to 24px. For other fonts, like CJK (Chinese, Japanese, Korean) or Arabic languages, the actual size in pixel would be different. Here&#8217;s the word &#8220;Hello&#8221; compared next to three other languages:</p>
+
+
+
+<p class="hello-examples"><span>Hello</span> <span>สวัสดี</span> <span>مرحبا</span> <span>你好</span></p>
+
+
+
+<p>In short, WCAG specifies <em>contrast</em> instead of <em>size</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&#038;ssl=1" alt="" class="wp-image-306256" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=300%2C89&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=768%2C228&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1000%2C297&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?w=1086&amp;ssl=1 1086w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>The WCAG recommended font size for large text has greater contrast than something half the size. Notice how a larger font size lets in more of the background that sits behind the text.</figcaption></figure>
+
+
+
+<p>Here is the good news: a browser’s default styles are accessible and we can leverage them to build an accessible font size strategy. Let’s see how.</p>
+
+
+
+<h3>Think about proportions, not size</h3>
+
+
+
+<p>The browser first loads its default styles (also known as the “User Agent stylesheet”), then those cascade to the author’s styles (the ones we define), and they both cascade and get overwritten by the user&#8217;s styles.</p>
+
+
+
+<p>As <a href="https://twitter.com/Adysandu">Adrian Sandu</a> mentions in his <a href="https://www.sitepoint.com/understanding-and-using-rem-units-in-css/">article about rem CSS units</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] there is an <a href="https://medium.com/@vamptvo/pixels-vs-ems-users-do-change-font-size-5cfb20831773">empirical study run by the people behind the Internet Archive</a> showing that there is a significant amount of users who change their default font size in the browser settings.</p></blockquote>
+
+
+
+<p>We don’t fully control the <code>font-family</code> property, either. The content might be translated, the custom font family might fail to load, or it might even be changed. For example, <a href="https://gumroad.com/l/OpenDyslexic">OpenDyslexic</a> is a typeface created to increase readability for readers with dyslexia. In some situations, we may even <a href="https://dev.to/devteam/new-feature-display-configuration-sans-serif-fontsnight-mode-beta-23o0">explicitly allow switching between a limited set of fonts</a>.&nbsp;</p>
+
+
+
+<p>Therefore, when defining fonts, we have to avoid hindering the ability of a user or a device to change our styles and let go of assumptions: <strong>we just don’t know where our content is going to land </strong>and we can’t be sure about the exact size, language, or font that’s used to display content.</p>
+
+
+
+<p>But there is one thing that we can control: <strong>proportions</strong>.</p>
+
+
+
+<p>By using CSS relative units, we can set our content to be proportional to whatever the environment tells it to be. <a href="https://www.w3.org/TR/WCAG20-TECHS/C14.html">WCAG recommends using em units to define font size</a>. There are several publications discussing the benefits of using ems and rems and it’s beyond the scope of this article. What I’d say here is to use rems and ems for <em>everything</em>, even for other properties besides font-size (with the exception of borders, where I use pixels).</p>
+
+
+
+<h3>Avoid setting a base font-size</h3>
+
+
+
+<p>My recommendation is to avoid setting <code>font-size</code> on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> elements in favor of letting the browser’s default size serve as a baseline from where we can cascade our own styles. Since this default is accessible, the content will also be accessible. The <a href="https://www.w3.org/TR/2020/WD-WCAG22-20200227/">WACAG 2.2 working draft</a> states that:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>When using text without specifying the font size, the smallest font size used on major browsers for unspecified text would be a reasonable size to assume for the font.</p></blockquote>
+
+
+
+<p>Of course, there is an exception to the rule. When using an intricate, thin, or super short x-height font, for example, you might consider bumping up the font size base to get the correct contrast. Remember that the spec defines contrast, not size:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Fonts with extraordinarily thin strokes or unusual features and characteristics that reduce the familiarity of their letter forms are harder to read, especially at lower contrast levels.</p></blockquote>
+
+
+
+<p>In the same manner, a user might change the base font size to fit their needs. A person with low vision would want to choose a larger size, while someone with an excellent vision can go smaller to gain real estate on their screens.</p>
+
+
+
+<p>It’s all about proportions: we define how much larger or smaller parts of the content should be by leveraging the default base to set the main text size.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  /* Do not set a font-size on a :root, body nor html level */
+  /* Let your main text size be decided by the browser or the user settings */ 
+}
+.small {
+  font-size: .8rem;
+}
+.large {
+  font-size: 2rem;
+}</code></pre>
+
+
+
+<h4>What about headings?</h4>
+
+
+
+<p>Since headings create a document outline that helps screenreaders navigate a document, we aren’t defining type selectors for heading sizes. <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html">Heading order is a WCAG criteria</a>: the heading elements should be organized in descending order without skipping a level, meaning that an <code>h4</code> should come right after an <code>h3</code>.</p>
+
+
+
+<p>Sometimes resetting the font sizing of all headings to <code>1rem</code> is a good strategy to make the separation of the visual treatment from the meaning mandatory.</p>
+
+
+
+<h3>How can we work with pixels?</h3>
+
+
+
+<p>Both <code>rem</code> or <code>em</code> sizing is relative to something else. For example, <code>rem</code> &nbsp;calculates size relative to the <code>&lt;html&gt;</code> &nbsp;element, where <code>em</code> is calculated by the sizing of its own element. It can be confusing, particularly since many of us came up working exclusively in pixels.</p>
+
+
+
+<p>So, how can we still think in pixels but implement relative units?</p>
+
+
+
+<p>More often than not, a typographical hierarchy is designed in pixels. Since we know about user agent stylesheets and that all major browsers have a default font size of <code>16px</code>, we can set that size for the main text and calculate the rest proportionately with <code>rem</code> units.</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Browser Name</th><th>Base Font Size</th></tr></thead><tbody><tr><td>Chrome v80.0</td><td>16px</td></tr><tr><td>FireFox v74.0</td><td>16px</td></tr><tr><td>Safari v13.0.4</td><td>16px</td></tr><tr><td>Edge v80.0 (Chromium based)</td><td>16px</td></tr><tr><td>Android (Samsung, Chrome, Firefox)</td><td>16px</td></tr><tr><td>Safari iOS</td><td>16px</td></tr><tr><td>Kindle Touch</td><td>26px (renders as 16px since it’s a high density screen)</td></tr></tbody></table></figure>
+
+
+
+<p>Now let&#8217;s explore three methods for using relative sizing in CSS by converting those pixels to rem units.</p>
+
+
+
+<h4>Method 1: The 62.5% rule</h4>
+
+
+
+<p>In order to seamlessly convert pixels to rem, we can set the root sizing to <code>62.5%</code>. That means <code>1rem</code> equals <code>10px</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+  --font-size--small: 1.4rem; /* 14px */
+  --font-size--default: 1.6rem; /* 16px */
+  --font-size--large: 2.4rem; /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 2: Using the <code>calc()</code> function</h4>
+
+
+
+<p>We can also calculate sizes with CSS <code>calc()</code> by dividing the pixel value by the font base we assume most browsers have:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --font-size--small: calc((14/16) * 1rem); /* 14px */
+  --font-size--default: calc((16/16) * 1rem); /* 16px */
+  --font-size--large: calc((24/16) * 1rem); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 3: Using a “pixel-to-rem” function</h4>
+
+
+
+<p>Similar to <code>calc()</code> , we can leverage a preprocessor to create a “pixel-to-rem” function. There are implementations of this in many flavors, including <a href="https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/">this Sass mixin</a> and<a href="https://polished.js.org/docs/%23rem"> styled-components polish</a>.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">:root {
+  --font-size--small: prem(14); /* 14px */
+  --font-size--default: prem(16); /* 16px */
+  --font-size--large: prem(24); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<p>It’s even possible to create a &#8220;pixel-to-rem&#8221; function with vanilla CSS:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Is it possible to create a &quot;Pixel to rem&quot; function without using a preprocessor? Yes!<br><br>✨See it in action!<a href="https://t.co/kPfIMxO0vw">https://t.co/kPfIMxO0vw</a><br><br>cc/ <a href="https://twitter.com/srambach?ref_src=twsrc%5Etfw">@srambach</a> <a href="https://twitter.com/matthewcarleton?ref_src=twsrc%5Etfw">@matthewcarleton</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/DontDoIt?src=hash&amp;ref_src=twsrc%5Etfw">#DontDoIt</a> <a href="https://t.co/PKxE7QCWuO">pic.twitter.com/PKxE7QCWuO</a></p>&mdash; Andres Galante (@andresgalante) <a href="https://twitter.com/andresgalante/status/1234903369774440448?ref_src=twsrc%5Etfw">March 3, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<h3>Embrace a diverse web!</h3>
+
+
+
+<p>The bottom line is this: we don’t have control over how content is consumed. Users have personal browser settings, the ability to zoom in and out, and various other ways to customize their reading experience. But we do have best CSS best practices we can use to maintain a good user experience alongside those preferences:</p>
+
+
+
+<ul><li>Work with proportions instead of explicit sizes.</li><li>Rely on default browser font sizes instead of setting it on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>.</li><li>Use <code>rem</code> units to help scale content with a user’s personal preferences.</li><li>Avoid making assumptions and let the environment decide how your content is being consumed.</li></ul>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p class="has-small-font-size">Special thanks to <a href="https://twitter.com/FranCorreaSosa" class="ek-link">Franco Correa</a> for all the help writing this post.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/accessible-font-sizing-explained/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306222</post-id>	</item>
+		<item>
+		<title>CSS Remedy</title>
+		<link>https://github.com/mozdevs/cssremedy</link>
+					<comments>https://css-tricks.com/css-remedy/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 04 Mar 2019 15:16:48 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[normalize]]></category>
+		<category><![CDATA[reset]]></category>
+		<category><![CDATA[user agent stylesheets]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=283559</guid>
+
+					<description><![CDATA[<p>There is a 15-year history of CSS resets. In fact, a &#8220;reset&#8221; isn&#8217;t really the right word. Tantek Çelik&#8217;s <a href="http://tantek.com/log/2004/undohtml.css">take</a> in 2004 was called &#8220;undohtml.css&#8221; and it wasn&#8217;t until a few years later when Eric Meyer called his version a <a href="https://meyerweb.com/eric/tools/css/reset/">reset</a>, that the word became <a href="https://perishablepress.com/a-killer-collection-of-global-css-reset-styles/">the default term</a>. When <a href="https://necolas.github.io/normalize.css/">Normalize</a> came around, it called itself a reset <em>alternative</em>, which felt right, because it wasn&#8217;t trying to obliterate all styles, but instead bring the base styles that browsers &#8230; <a href="https://css-tricks.com/css-remedy/" class="read-more">Read article <span class="screen-reader-text"> &#8220;CSS Remedy&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-remedy/">CSS Remedy</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>There is a 15-year history of CSS resets. In fact, a &#8220;reset&#8221; isn&#8217;t really the right word. Tantek Çelik&#8217;s <a href="http://tantek.com/log/2004/undohtml.css">take</a> in 2004 was called &#8220;undohtml.css&#8221; and it wasn&#8217;t until a few years later when Eric Meyer called his version a <a href="https://meyerweb.com/eric/tools/css/reset/">reset</a>, that the word became <a href="https://perishablepress.com/a-killer-collection-of-global-css-reset-styles/">the default term</a>. When <a href="https://necolas.github.io/normalize.css/">Normalize</a> came around, it called itself a reset <em>alternative</em>, which felt right, because it wasn&#8217;t trying to obliterate all styles, but instead bring the base styles that browsers provide in their User Agent Stylesheet in line with each other.</p>
+<p>We&#8217;ve taken a romp through this history before in <a href="https://css-tricks.com/reboot-resets-reasoning/">Reboot, Resets, and Reasoning</a>. Every single take on this &mdash; let&#8217;s call them <em>&#8220;base&#8221;</em> stylesheets &mdash; has a bit of a different angle. How much does it try to preserve the <abbr title="User Agent">UA</abbr> defaults? How opinionated does it get? How far back does it consider for browser support?</p>
+<p>Along comes <a href="https://github.com/mozdevs/cssremedy">CSS Remedy</a> (they say it&#8217;s not ready for usage), with yet another different spin: </p>
+<blockquote><p>Sets CSS properties or values to what they would be if the CSSWG were creating the CSS today, from scratch, and didn&#8217;t have to worry about backwards compatibility.</p></blockquote>
+<p><span id="more-283559"></span></p>
+<p>Fascinating to think about. </p>
+<p>CSS Remedy re-draws the line for what is opinionated and what isn&#8217;t. I&#8217;d say that something like <code>* { box-sizing: border-box; }</code> is a fairly strong opinion for a base stylesheet to have. No <abbr title="User Agent">UA</abbr> stylesheet does this, so it&#8217;s applying a blanket rule everywhere just because it&#8217;s desirable. <a href="https://css-tricks.com/international-box-sizing-awareness-day/">It&#8217;s definitely desirable!</a> It&#8217;s just opinionated.</p>
+<p>But not having <code>border-box</code> be the default is considered <a href="https://wiki.csswg.org/ideas/mistakes">a CSS mistake</a>. So if CSS Remedy is what a UA stylesheet <em>would</em> be if we were starting from scratch, <code>border-box</code> isn&#8217;t opinionated; it&#8217;s the new default. </p>
+<p>Sadly, we probably can never have a fresh <abbr title="User Agent">UA</abbr> stylesheet in browsers, because the danger of breaking sites is so high. If Firefox shipped some new modernized <abbr title="User Agent">UA</abbr> stylesheet that was tastefully done and appears to be nice, but only until you browse around the billion websites that weren&#8217;t built to handle the new CSS being applied to them, them people would blame Firefox &mdash; and not incorrectly. Gracefully handling legacy code is a massive strength of the web and something that holds us back. It&#8217;s more the former than the latter, though. </p>
+<p>It&#8217;s been fun watching Jen think through and gather thoughts on stuff like this though:</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">img {<br />    display: inline;<br />    vertical-align: baseline; }</p>
+<p>is a dumb default for web development.</p>
+<p>Which would be better?</p>
+<p>img {<br />    display: inline;<br />    vertical-align: bottom; }<br />(removes mysterious gap)</p>
+<p>or</p>
+<p>img { <br />    display: block; }<br />(blockifies)<a href="https://t.co/UyBtRO6SAv">https://t.co/UyBtRO6SAv</a></p>
+<p>&mdash; Jen Simmons (@jensimmons) <a href="https://twitter.com/jensimmons/status/1094731679040712707?ref_src=twsrc%5Etfw">February 10, 2019</a></p></blockquote>
+<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>I agree! That little space below images has confounded an absolute ton of people. It&#8217;s easy enough to fix, but it being the fault of <code>vertical-align</code> is a bit silly and a great candidate for fixing in what would be a new <abbr title="User Agent">UA</abbr> stylesheet.</p>
+<p>I tossed the in-progress version into the comparison tool:</p>
+<p class="codepen" data-height="630" style="height: 630px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="chriscoyier" data-slug-hash="JpLzjd" style="height: 630px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="HTML Kitchen-sink">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/JpLzjd/"><br />
+  HTML Kitchen-sink</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p><a href="https://github.com/mozdevs/cssremedy" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/css-remedy/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-remedy/">CSS Remedy</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/css-remedy/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">283559</post-id>	</item>
+	</channel>
+</rss>

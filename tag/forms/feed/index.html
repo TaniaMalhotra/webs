@@ -1,0 +1,2705 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>forms &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/forms/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 12 Jun 2020 14:43:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Striking a Balance Between Native and Custom Select Elements</title>
+		<link>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/</link>
+					<comments>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2020 14:43:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[select]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312544</guid>
+
+					<description><![CDATA[<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&#60;select&#62;</code> element. We’re going to literally use a <code>&#60;select&#62;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as &#8230; <a href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Striking a Balance Between Native and Custom Select Elements&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&lt;select&gt;</code> element. We’re going to literally use a <code>&lt;select&gt;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as a select element.</p>
+
+
+
+<p>That’s what I mean by “hybrid” selects: they are both a native <code>&lt;select&gt;</code> and a styled alternate select in one design pattern.</p>
+
+
+
+<span id="more-312544"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?fit=1024%2C509&amp;ssl=1" alt="" class="wp-image-312546" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?w=1784&amp;ssl=1 1784w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=300%2C149&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1024%2C509&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=768%2C382&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1536%2C764&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1000%2C497&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Custom selects (left) are often used in place of native selects (right) for aesthetics and design consistency.</figcaption></figure>
+
+
+
+<h3>Select, dropdown, navigation, menu… the name matters</h3>
+
+
+
+<p>While doing the research for this article, I thought about many names that get tossed around when talking about selects, the most common of which are “dropdown” and “menu.” There are two types of naming mistakes we could make: giving the <em>same</em> name to different things, or giving <em>different</em> names to the same thing. A select can suffer from both mistakes.</p>
+
+
+
+<p>Before we move ahead, let me try to add clarity around using “dropdown” as a term. Here’s how I define the meaning of dropdown:</p>
+
+
+
+<blockquote class="wp-block-quote"><p><strong>Dropdown: </strong>An interactive component that consists of a button that shows and hides a list of items, typically on mouse hover, click or tap. The list is not visible by default until the interaction starts. The list usually displays a block of content (i.e. options) on top of other content.</p></blockquote>
+
+
+
+<p>A lot of interfaces can look <em>like</em> a dropdown. But simply calling an element a “dropdown&#8221; is like using “fish” to describe an animal. What type of fish it is? A clownfish is not the same as a shark. The same goes for dropdowns.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?fit=1024%2C640&amp;ssl=1" alt="" class="wp-image-312549" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?w=1920&amp;ssl=1 1920w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=300%2C188&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1024%2C640&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=768%2C480&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1536%2C960&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1000%2C625&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Like there are different types of fish in the sea, there are different types of components that we might be talking about when we toss the word “dropdown” around:</p>
+
+
+
+<ul><li><strong>Menu: </strong>A list of commands or actions that the user can perform within the page content.</li><li><strong>Navigation:</strong> A list of links used for navigating through a website.</li><li><strong>Select: </strong>A form control (<code>&lt;select&gt;</code>) that displays a list of options for the user to select within a form.</li></ul>
+
+
+
+<p>Deciding what type of dropdown we’re talking about can be a foggy task. Here are some examples from around the web that match how I would classify those three different types. This is based on my research and sometimes, when I can’t find a proper answer, <em>intuition</em> based on my experience.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?fit=1024%2C638&amp;ssl=1" alt="" class="wp-image-312552" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?w=1864&amp;ssl=1 1864w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=300%2C187&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1024%2C638&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=768%2C479&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1536%2C958&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1000%2C623&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Dropdown-land: Five scenarios where different dropdowns are used across the internet. Read the table below for a detailed description.</figcaption></figure>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Diagram Label</th><th>Scenario</th><th>Dropdown Type</th></tr></thead><tbody><tr><td>1</td><td>The dropdown expects a selected option to be submitted within a form context (e.g. Select Age)</td><td>Select</td></tr><tr><td>2</td><td>The dropdown does not need an active option (e.g. A list of actions: copy, paste and cut)</td><td>Menu</td></tr><tr><td>3</td><td>The selected option influences the content. (e.g. sorting list)</td><td>Menu or Select (more about it later)</td></tr><tr><td>4</td><td>The dropdown contains links to other pages. (e.g. A “meganav” with websites links)</td><td><a href="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/disclosure-navigation.html">Disclosure Navigation</a></td></tr><tr><td>5</td><td>The dropdown has content that is not a list. (e.g. a date picker)</td><td>Something else that should not be called dropdown</td></tr></tbody></table></figure>
+
+
+
+<p>Not everyone perceives and interacts with the internet in the same way. Naming user interfaces and defining design patterns is a fundamental process, though one with a lot of room for personal interpretation. All of that variation is what drives the population of dropdown<em>-land.&nbsp;</em></p>
+
+
+
+<p>There is a dropdown type that is clearly a <strong>menu. </strong>Its usage is a hot topic in conversations about accessibility. I won’t talk much about it here, but let me just reinforce that the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu"><code>&lt;menu&gt;</code></a> element is deprecated and no longer recommended. And here’s a detailed explanation about <a href="https://inclusive-components.design/menus-menu-buttons/">inclusive menus and menus buttons</a>, including why <a href="https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html">ARIA menu role should not be used for site navigation</a>.</p>
+
+
+
+<p>We haven’t even touched on other elements that fall into a rather gray area that makes classifying dropdowns even murkier because of a lack of practical uses cases from the WCAG community.</p>
+
+
+
+<p>Uff… that was a lot. Let’s forget about this dropdown-land mess and focus exclusively on the dropdown type that is clearly a <code>&lt;select&gt;</code> element.</p>
+
+
+
+<h3>Let’s talk about <code>&lt;select&gt;</code></h3>
+
+
+
+<p>Styling form controls is an interesting journey. As MDN puts it, there’s <a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms#Why_is_styling_form_widgets_challenging"><em>the good, the bad, and the ugly</em></a>. Good is stuff like <code>&lt;form&gt;</code> which is just a block-level element to style. Bad is stuff like checkboxes, which <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">can be done but is somewhat cumbersome</a>. <code>&lt;select&gt;</code> is definitely in ugly terrain.</p>
+
+
+
+<p>A lot of articles have been written about it and, even in 2020, <a href="https://css-tricks.com/making-a-better-custom-select-element/">it’s still a challenge to create custom selects</a> and <a href="https://www.24a11y.com/2019/select-your-poison-part-2/">some users still prefer the simple native ones</a>.&nbsp;</p>
+
+
+
+<p>Among developers, the <code>&lt;select&gt;</code> is the <a href="https://www.gwhitworth.com/blog/2019/07/form-controls-components/">most frustrating form control by far</a>, mainly because of <a href="https://www.gwhitworth.com/blog/2019/10/can-we-please-style-select/">its lack of styling support</a>. The UX struggle behind it is so big that we <a href="https://medium.com/@kollinz/dropdown-alternatives-for-better-mobile-forms-53e40d641b53">look for other alternatives</a>. Well, I guess the first rule of <code>&lt;select&gt;</code> is <a href="https://www.w3.org/TR/using-aria/%23firstrule">similar to ARIA</a>: <strong>avoid using it if you can.</strong></p>
+
+
+
+<p>I could finish the article right here with <em>“Don’t use <code>&lt;select&gt;</code>, period.&#8221;</em> But let’s face reality: a select is still our best solution in a number of circumstances. That might include scenarios where&nbsp;we’re working with a list that contains a lot of options, layouts that are tight on space, or simply a lack of time or budget to design and implement a great custom interactive component from scratch.</p>
+
+
+
+<h3>Custom <code>&lt;select&gt;</code> requirements</h3>
+
+
+
+<p>When we make the decision to create a custom select — even if it’s just a “simple” one — these are the requirements we generally have to work with:</p>
+
+
+
+<ul><li>There is a button that contains the current selected option.</li><li>Clicking the box toggles the visibility of the options list (also called listbox).</li><li>Clicking an option in the listbox updates the selected value. The button text changes and the listbox is closed.</li><li>Clicking outside the component closes the listbox.</li><li>The trigger contains a small triangle icon pointing downward to indicate there are options.</li></ul>
+
+
+
+<p>Something like this:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dyYqmya" src="//codepen.io/anon/embed/dyYqmya?height=575&amp;theme-id=1&amp;slug-hash=dyYqmya&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dyYqmya" title="CodePen Embed dyYqmya" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Some of you may be thinking this works and is good to go. But wait… does it work for <em>everyone</em>? &nbsp;Not everyone uses a mouse (or touch screen). Plus, a native <code>&lt;select&gt;</code> element comes with more features we get for free and aren&#8217;t included in those requirements, such as:</p>
+
+
+
+<ul><li>The checked option is perceivable for all users regardless of their visual abilities.</li><li>The component can interact with a keyboard in a predictable way across all browsers (e.g. using arrow keys to navigate, <code>Enter</code> to select, <code>Esc</code> to cancel, etc.).</li><li>Assistive technologies (e.g. screen readers) announce the element clearly to users, including its role, name and state.</li><li>The listbox position is adjusted. (i.e. does not get cut off of the screen).</li><li>The element respects the user’s operating system preferences (e.g high contrast, color scheme, motion, etc.).</li></ul>
+
+
+
+<p>This is where the majority of the custom selects fail in some way. Take a look at some of the major UI components libraries. I won’t mention any because the web is ephemeral, but go give it a try. You’ll likely notice that the select component in one framework behaves differently from another.&nbsp;</p>
+
+
+
+<p>Here are additional characteristics to watch for:</p>
+
+
+
+<ul><li>Is a listbox option immediately activated on focus when navigating with a keyboard?</li><li>Can you use <code>Enter</code> and/or <code>Space</code> to select an option?</li><li>Does the <code>Tab</code> key jump go to the next option in the listbox, or jump to the next form control?</li><li>What happens when you reach the last option in the listbox using arrow keys? Does it simply stay at the last item, does it go back to the first option, or worst of all, does focus move to the next form control?&nbsp;</li><li>Is it possible to jump directly to the last item in the listbox using the <code>Page Down</code> key?</li><li>Is it possible to scroll through the listbox items if there are more than what is currently in view?</li></ul>
+
+
+
+<p>This is a small sample of the features included in a native <code>&lt;select&gt;</code> element. </p>
+
+
+
+<blockquote class="wp-block-quote"><p>Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect.</p></blockquote>
+
+
+
+<p>But it gets worse. Even the native <code>&lt;select&gt;</code> <a href="https://www.24a11y.com/2019/select-your-poison/">behaves differently</a> across browsers and screen readers. Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect. That’s a dangerous decision and it’s in those details where the devil lives.</p>
+
+
+
+<h3>Building a “hybrid” select</h3>
+
+
+
+<p>When we build a simple custom select, we are making a trade-off without noticing it. Specifically, <strong>we sacrifice functionality to aesthetics. </strong>It should be the other way around.</p>
+
+
+
+<p>What if we instead deliver a native select by default and replace it with a more aesthetically pleasing one if possible? That’s where the “hybrid” select idea comes into action. It’s “hybrid” because it consists of two selects, showing the appropriate one at the right moment:</p>
+
+
+
+<ul><li>A native select, visible and accessible by default</li><li>A custom select, hidden until it’s safe to be interacted with a mouse</li></ul>
+
+
+
+<p>Let’s start with markup. First, we’ll add a native <code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> items <em>before</em> the custom selector for this to work. (I’ll explain why in just a bit.)</p>
+
+
+
+<p>Any form control must have a <a href="https://www.w3.org/WAI/tutorials/forms/labels/">descriptive label</a>. We could use <code>&lt;label&gt;</code>, but that would focus the native select when the label is clicked. To prevent that behavior, we’ll use a <code>&lt;span&gt;</code> and connect it to the select using <code>aria-labelledby</code>.</p>
+
+
+
+<p>Finally, we need to tell Assistive Technologies to ignore the custom select, using <code>aria-hidden="true"</code>. That way, only the native select is announced by them, no matter what.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line="3,4,5,6"><code markup="tt">&lt;span class="selectLabel" id="jobLabel">Main job role&lt;/span>
+&lt;div class="selectWrapper">
+  &lt;select class="selectNative js-selectNative" aria-labelledby="jobLabel">
+    &lt;!-- options -->
+    &lt;option>&lt;/option>
+  &lt;/select>
+  &lt;div class="selectCustom js-selectCustom" aria-hidden="true">
+     &lt;!-- The beautiful custom select -->
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>This takes us to styling, where we not only make things look pretty, but where we handle the switch from one select to the other. We need just a few new declarations to make all the magic happen.</p>
+
+
+
+<p>First, both native and custom selects must have the same width and height. This ensures people don’t see major differences in the layout when a switch happens.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectNative,
+.selectCustom {
+  position: relative;
+  width: 22rem;
+  height: 4rem;
+}</code></pre>
+
+
+
+<p>There are two selects, but only one can dictate the space that holds them. The other needs to be absolutely positioned to take it out of the document flow. Let’s do that to the custom select because it’s the “replacement” that’s used only if it can be. We’ll hide it by default so it can’t be reached by anyone just yet.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectCustom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}</code></pre>
+
+
+
+<p>Here comes the &#8220;funny” part. We need to detect if someone is using a device where hover is part of the primary input, like a computer with a mouse. While we typically think of media queries for responsive breakpoints or checking feature support, we can use it to detect hover support too using <code>@media query (hover :hover)</code>, which is supported by all major browsers. So, let&#8217;s use it to show the custom select only on devices that have hover:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectCustom {
+    display: block;
+  }
+}</code></pre>
+
+
+
+<p>Great, but what about people who use a keyboard to navigate even in devices that have hover? What we’ll do is hide the custom select when the native select is in focus. We can reach for an <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">adjacent Sibling combinatioron</a> (<code>+</code>). When the native select is in focus, hide the custom select next to it in the DOM order. (This is why the native select should be placed before the custom one.)</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+}</code></pre>
+
+
+
+<p>That’s it! The trick to switch between both selects is done! There are other CSS ways to do it, of course, but this works nicely.</p>
+
+
+
+<p>Last, we need a sprinkle of JavaScript. Let’s add some event listeners:</p>
+
+
+
+<ul><li>One for click events that trigger the custom select to open and reveal the options</li><li>One to sync both selects values. When one select value is changed, the other select value updates as well</li><li>One for basic keyboard navigation controls, like navigation with <code>Up</code> and <code>Down</code> keys, selecting options with the <code>Enter</code> or <code>Space</code> keys, and closing the select with <code>Esc</code></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzyOYRr" src="//codepen.io/anon/embed/YzyOYRr?height=575&amp;theme-id=1&amp;slug-hash=YzyOYRr&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzyOYRr" title="CodePen Embed YzyOYRr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Usability testing</h3>
+
+
+
+<p>I conducted a very small usability test where I asked a few people with disabilities to try the hybrid select component. The following devices and tools were tested using the latest versions of Chrome (81), Firefox (76) and Safari (13):</p>
+
+
+
+<ul><li>Desktop device using mouse only</li><li>Desktop device using keyboard only</li><li>VoiceOver on MacOS using keyboard</li><li>NVDA on Windows using keyboard</li><li>VoiceOver on iPhone and iPad using Safari</li></ul>
+
+
+
+<p>All these tests worked as expected, but I believe <strong>this could have even more usability tests with more diverse people and tools</strong>. If you have access to other devices or tools — such as JAWS, Dragon, etc. — please tell me how the test goes.</p>
+
+
+
+<p>An issue was found during testing. Specifically, the issue was with the VoiceOver setting “Mouse pointers: Moves Voice Over cursor.” If the user opens the select with a mouse, the custom select will be opened (instead of the native) and the user won’t experience the native select.</p>
+
+
+
+<p>What I most like about this approach is how it uses the best of both worlds without compromising the core functionality:</p>
+
+
+
+<ul><li>Users on mobile and tablets get the native select, which generally offers a better user experience than a custom select, including performance benefits.</li><li>Keyboard users get to interact with the native select the way they would expect.</li><li>Assistive Technologies can interact with the native select like normal.</li><li>Mouse users get to interact with the enhanced custom select.</li></ul>
+
+
+
+<p>This approach<strong> provides essential native functionality for everyone </strong>without the extra huge code effort to implement all the native features.</p>
+
+
+
+<p>Don’t get me wrong. This technique is not a one-size-fits-all solution. It may work for simple selects but probably won’t work for cases that involve complex interactions. In those cases, we’d need to use ARIA and JavaScript to complement the gaps and create a <a href="https://24ways.org/2019/making-a-better-custom-select-element/">truly accessible custom select</a>.</p>
+
+
+
+<h3>A note about selects that look like menus</h3>
+
+
+
+<p>Let’s take a look back at the third Dropdown-land scenario. If you recall, it’s &nbsp;a dropdown that always has a checked option (e.g. sorting some content). I classified it in the gray area, as either a menu or a select.&nbsp;</p>
+
+
+
+<p>Here’s my line of thought: Years ago, this type of dropdown was implemented mostly using a native <code>&lt;select&gt;</code>. Nowadays, it is common to see it implemented from scratch with custom styles (accessible or not). What we end up with is a select element that looks like a menu.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?ssl=1" alt="Three similar dropdowns that always have a selected option." class="wp-image-312555" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?w=718&amp;ssl=1 718w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p><strong>A <code>&lt;select&gt;</code> &nbsp;is a type of menu.</strong> Both have similar semantics and behavior, especially in a scenario that involves a list of options where one is always checked. &nbsp;Now, let me mention the <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">WCAG 3.2.2 On Input (Level A)</a> criterion:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Changing the setting of any user interface component should not automatically cause a change of context unless the user has been advised of the behavior before using the component.</p></blockquote>
+
+
+
+<p>Let’s put this in practice. Imagine a sortable list of students. Visually, it may be obvious that sorting is immediate, but that’s not necessarily true for everyone. So, when using <code>&lt;select&gt;</code>, we risk failing the WCAG guideline because the page content changed, and ignificantly re-arranging the content of a page is considered a <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html%23dfn-changes-of-context">change of context</a>.</p>
+
+
+
+<p>To ensure the criterion success, we must warn the user about the action before they interact with the element, or include a <code>&lt;button&gt;</code> immediately after the select to confirm the change.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label for="sortStudents">
+  Sort students
+  &lt;!-- Warn the user about the change when a confirmation button is not present. -->
+  &lt;span class="visually-hidden">(Immediate effect upon selection)&lt;/span>
+&lt;/label>
+&lt;select id="sortStudents"> ... &lt;/select></code></pre>
+
+
+
+<p>That said, using a <code>&lt;select&gt;</code> or building a custom menu are both good approaches when it comes to simple menus that change the page content. Just remember that your decision will dictate the amount of work required to make the component fully accessible. This is a scenario where the hybrid select approach could be used.</p>
+
+
+
+<h3>Final words</h3>
+
+
+
+<p>This whole idea started as an innocent CSS trick but, after all of this research, I was reminded once more that creating unique experiences without compromising accessibility is not an easy task.</p>
+
+
+
+<p>Building truly accessible select components (or any kind of dropdown) is harder than it looks. WCAG provides excellent guidance and best practices, but without specific examples and diverse practical uses cases, the guidelines are mostly aspirational. That’s not to mention the fact that ARIA support is tepid and that native <code>&lt;select&gt;</code> elements look and behave differently across browsers.</p>
+
+
+
+<p>The “hybrid” select is just another attempt to create a good looking select while getting as many native features as possible. Don’t look at this <s>technique</s> experiment as an excuse to downplay accessibility, but rather as an attempt to serve both worlds. If you have the resources, time and the needed skills, <em>please do it right</em> and make sure to test it with different users before shipping your component to the world.</p>
+
+
+
+<p>P.S. Remember to <a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">use a proper name</a> when making a “dropdown” component. &#x1f609;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312544</post-id>	</item>
+		<item>
+		<title>Unprefixed `appearance `</title>
+		<link>https://css-tricks.com/unprefixed-appearance/</link>
+					<comments>https://css-tricks.com/unprefixed-appearance/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 18 May 2020 20:56:56 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[appearance]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[standards]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311089</guid>
+
+					<description><![CDATA[<p>It&#8217;s interesting how third-parties are sometimes super involved in pushing browser things forward. One big <a href="https://alistapart.com/article/the-story-of-css-grid-from-its-creators/">story</a> there was how Bloomberg hired <a href="https://www.igalia.com/">Igalia</a> to implement <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS grid</a> across the browsers.</p>
+<p>Here&#8217;s another story of <a href="https://bocoup.com/">Bocoup</a> doing that, this time for <a href="https://css-tricks.com/almanac/properties/a/appearance/">the <code>appearance</code> property</a>. The story is told in a Twitter thread, but the thread is broken somehow (looks like a deleted Tweet), so your best bet is to <a href="https://twitter.com/bocoup/status/1260698135342592001">go to this one</a>, then scroll up and down to see &#8230; <a href="https://css-tricks.com/unprefixed-appearance/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Unprefixed `appearance `&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/unprefixed-appearance/">Unprefixed `appearance `</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>It&#8217;s interesting how third-parties are sometimes super involved in pushing browser things forward. One big <a href="https://alistapart.com/article/the-story-of-css-grid-from-its-creators/">story</a> there was how Bloomberg hired <a href="https://www.igalia.com/">Igalia</a> to implement <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS grid</a> across the browsers.</p>
+
+
+
+<p>Here&#8217;s another story of <a href="https://bocoup.com/">Bocoup</a> doing that, this time for <a href="https://css-tricks.com/almanac/properties/a/appearance/">the <code>appearance</code> property</a>. The story is told in a Twitter thread, but the thread is broken somehow (looks like a deleted Tweet), so your best bet is to <a href="https://twitter.com/bocoup/status/1260698135342592001">go to this one</a>, then scroll up and down to see the whole thing. Gosh, I hope they blog it. </p>
+
+
+
+<span id="more-311089"></span>
+
+
+
+<p>It took literally <em>years</em> of work:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>2 years ago, <a href="https://twitter.com/firefox">@firefox</a> asked us to work on a project to fix problems within the CSS appearance property. The issue came when we found out that each browser has its own implementation of how the appearance property should work on forms.</p></blockquote>
+
+
+
+<p>They had to do tons of research, write tests, and ultimately overhaul <a href="https://drafts.csswg.org/css-ui-4/#appearance-switching">HTML</a> and CSS specs. Then they needed to prove that, with those changes, browsers could un-prefix the property without breaking websites — the first attempt at this broke websites and was reverted. Then they actually get all three major browsers to do it. (<a href="https://groups.google.com/a/chromium.org/forum/#!msg/blink-dev/C5afPWCPXp8/5-uxJaSBAQAJ">Landed</a> in Chrome, Firefox is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1620467">on it</a>, Safari has <a href="https://bugs.webkit.org/show_bug.cgi?id=143842">an open bug</a>, and there is public desire to coordinate a release.)</p>
+
+
+
+<p>Really goes to show just how long and grueling this work can be because it&#8217;s so crucial to get it right. If you&#8217;re into this stuff, listen to <a href="https://shoptalkshow.com/407/">ShopTalk 407 with Brian Kardell</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/unprefixed-appearance/">Unprefixed `appearance `</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/unprefixed-appearance/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311089</post-id>	</item>
+		<item>
+		<title>Using Formik to Handle Forms in React</title>
+		<link>https://css-tricks.com/using-formik-to-handle-forms-in-react/</link>
+					<comments>https://css-tricks.com/using-formik-to-handle-forms-in-react/#respond</comments>
+		
+		<dc:creator><![CDATA[Adebiyi Adedotun]]></dc:creator>
+		<pubDate>Tue, 28 Apr 2020 14:46:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[formik]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[react]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306672</guid>
+
+					<description><![CDATA[<p>There is no doubt that web forms play an integral role in our web site or applications. By default, they provide a useful set of elements and features — from legends and fieldsets to native validation and states — but they only get us so far when we start to consider the peculiarities of using them. For example, how can we manipulate the state of a form? How about different forms of validation? Even hooking a form up to post &#8230; <a href="https://css-tricks.com/using-formik-to-handle-forms-in-react/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using Formik to Handle Forms in React&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-formik-to-handle-forms-in-react/">Using Formik to Handle Forms in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>There is no doubt that web forms play an integral role in our web site or applications. By default, they provide a useful set of elements and features — from legends and fieldsets to native validation and states — but they only get us so far when we start to consider the peculiarities of using them. For example, how can we manipulate the state of a form? How about different forms of validation? Even hooking a form up to post submissions is a daunting effort at times.</p>
+
+
+
+<p>Component-driven front-end libraries, like React, can ease the task of wiring web forms but can also get verbose and redundant. That’s why I want to introduce you to Formik, a small library that solves the three most annoying parts of writing forms in React:</p>
+
+
+
+<ol><li>State manipulation</li><li>Form validation (and error messages)</li><li>Form submission </li></ol>
+
+
+
+<p>We’re going to build a form together in this post. We’ll start with a React component then integrate Formik while demonstrating the way it handles state, validation, and submissions.</p>
+
+
+
+<span id="more-306672"></span>
+
+
+
+<h3>Creating a form as a React component</h3>
+
+
+
+<p>Components live and breathe through their <strong>state</strong> and <strong>prop</strong><em>. </em>What HTML form elements have in common with React components is that they naturally keep some internal state. Their values are also automatically stored in their <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue">value</a> attribute.</p>
+
+
+
+<p>Allowing form elements to manage their own state in React makes them <a href="https://reactjs.org/docs/uncontrolled-components.html"><em>uncontrolle</em>d</a> components. That’s just a fancy way of saying the DOM handles the state instead of React. And while that works, it is often easier to use <a href="https://reactjs.org/docs/forms.html%23controlled-components"><em>controlled</em></a> components, where React handles the state and serves as the single source of truth rather than the DOM.</p>
+
+
+
+<p>The markup for a straightforward HTML form might look something like this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;form>
+  &lt;div className="formRow">
+    &lt;label htmlFor="email">Email address&lt;/label>
+    &lt;input type="email" name="email" className="email" />
+  &lt;/div>
+  &lt;div className="formRow">
+    &lt;label htmlFor="password">Password&lt;/label>
+    &lt;input type="password" name="password" className="password" />
+  &lt;/div>
+  &lt;button type="submit">Submit&lt;/button>
+&lt;/form></code></pre>
+
+
+
+<p>We can convert that into a controlled React component like so:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function HTMLForm() {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+ 
+  return (
+    &lt;form>
+      &lt;div className="formRow">
+        &lt;label htmlFor="email">Email address&lt;/label>
+        &lt;input
+          type="email"
+          name="email"
+          className="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      &lt;/div>
+      &lt;div className="formRow">
+        &lt;label htmlFor="password">Password&lt;/label>
+        &lt;input
+          type="password"
+          name="password"
+          className="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      &lt;/div>
+      &lt;button type="submit">Submit&lt;/button>
+    &lt;/form>
+  );
+}</code></pre>
+
+
+
+<p>This is a bit verbose but it comes with some benefits:</p>
+
+
+
+<ol><li>We get a single source of truth for form values in the state.</li><li>We can validate the form when and how we want.</li><li>We get performance perks by loading what we need and when we need it.</li></ol>
+
+
+
+<h3>OK, so why Formik again?</h3>
+
+
+
+<p>As it is with anything JavaScript, there’s already a bevy of form management libraries out there, like <a href="https://react-hook-form.com">React Hook Form</a> and <a href="https://redux-form.com/8.3.0/">Redux Form</a>, that we can use. But there are several things that make Formik stand out from the pack:</p>
+
+
+
+<ol><li><strong>It’s declarative:</strong> Formik eliminates redundancy through abstraction and taking responsibility for state, validation and submissions.</li><li><strong>It offers an Escape Hatch:</strong> Abstraction is good, but forms are peculiar to certain patterns. Formik abstracts for you but also let’s you control it should you need to.</li><li><strong>It co-locates form states:</strong> Formik keeps everything that has to do with your form within your form components.</li><li><strong>It’s adaptable: </strong>Formik doesn’t enforce any rules on you. You can use as less or as much Formik as you need.</li><li><strong>Easy to use: </strong>Formik <em>just</em> works.</li></ol>
+
+
+
+<p>Sound good? Let’s implement Formik into our form component.</p>
+
+
+
+<h2><strong>Going Formik</strong></h2>
+
+
+
+<p>We will be building a basic login form to get our beaks wet with the fundamentals. We’ll be touching on three different ways to work with Formik:</p>
+
+
+
+<ol><li>Using the <code>useFormik</code> <a href="https://reactjs.org/docs/hooks-intro.html">hook</a></li><li>Using <code>Formik</code> with <a href="https://reactjs.org/docs/context.html">React context</a></li><li>Using <code>withFormik</code> as a <a href="https://css-tricks.com/what-are-higher-order-components-in-react/">higher-order component</a></li></ol>
+
+
+
+<p>I’ve created a demo with the packages we need, Formik and Yup.</p>
+
+
+
+<iframe src="https://codesandbox.io/embed/better-forms-in-react-with-formik-eq7q0?fontsize=14&amp;hidenavigation=1&amp;theme=dark" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="Better Forms in React with Formik" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin">
+</iframe>
+
+
+
+<h3>Method 1: Using the useFormik hook</h3>
+
+
+
+<p>As it is right now, our form does nothing tangible. To start using Formik, we need to import the <code>useFormik</code> hook. When we use the hook, it returns all of the Formik functions and variables that help us manage the form. If we were to log the returned values to the console, we get this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?fit=976%2C1024&amp;ssl=1" alt="Showing console output of the various hooks and objects that are logged by Formik." class="wp-image-306674" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?w=1174&amp;ssl=1 1174w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?resize=286%2C300&amp;ssl=1 286w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?resize=976%2C1024&amp;ssl=1 976w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?resize=768%2C806&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/v7P4xHW6.png?resize=1000%2C1049&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>We’ll call <code>useFormik</code> and pass it <code>initialValues</code> to start. Then, an <code>onSubmit</code> handler fires when a form submission happens. Here’s how that looks:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// This is a React component
+function BaseFormik() {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    onSubmit(values) {
+      // This will run when the form is submitted
+    }
+  });
+  
+ // If you're curious, you can run this Effect
+ //  useEffect(() => {
+ //   console.log({formik});
+ // }, [])
+ 
+  return (
+    // Your actual form
+  )
+}</code></pre>
+
+
+
+<p>Then we’ll bind Formik to our form elements:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// This is a React component
+function BaseFormik() {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    onSubmit(values) {
+      // This will run when the form is submitted
+    }
+  });
+  
+ // If you're curious, you can run this Effect
+ //  useEffect(() => {
+ //   console.log({formik});
+ // }, [])
+ 
+  return (
+  // We bind "onSubmit" to "formik.handleSubmit"
+  &lt;form className="baseForm" onSubmit={formik.handleSubmit} noValidate>
+    &lt;input
+      type="email"
+      name="email"
+      id="email"
+      className="email formField"
+      value={formik.values.email} // We also bind our email value
+      onChange={formik.handleChange} // And, we bind our "onChange" event.
+    />
+  &lt;/form>
+  )
+}</code></pre>
+
+
+
+<p>This is how the binding works:</p>
+
+
+
+<ol><li>It handles form submission with <code>onSubmit={formik.handleSubmit}</code>.</li><li>It handles the state of inputs with <code>value={formik.values.email}</code> and <code>onChange={formik.handleChange}</code>.</li></ol>
+
+
+
+<p>If you take a closer look, we didn’t have to set up our state, nor handle the <code>onChange</code> or <code>onSubmit</code> events as we’d typically do with React.</p>
+
+
+
+<p>However as you might have noticed, our form contains some redundancy. We had to drill down formik and manually bind the form input’s <code>value</code> and <code>onChange</code> event. That means we should de-structure the returned value and immediately bind the necessary props to a dependent field, like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="24"><code markup="tt">// This is a React component
+function BaseFormik() {
+  const {getFieldProps, handleSubmit} = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    onSubmit(values) {
+      // This will run when the form is submitted
+    }
+  });
+  
+ // If you're curious, you can run this Effect
+ //  useEffect(() => {
+ //   console.log({formik});
+ // }, [])
+ 
+  return (
+  &lt;form className="baseForm" onSubmit={handleSubmit} noValidate>
+    &lt;input
+      type="email"
+      id="email"
+      className="email formField"
+      {...getFieldProps("email")} // We pass the name of the dependent field
+    />
+  &lt;/form>
+  )
+}</code></pre>
+
+
+
+<p>Let’s take things even further with the included <code>&lt;Formik/&gt;</code> &nbsp;component.</p>
+
+
+
+<h3>Method 2: Using Formik with React context</h3>
+
+
+
+<p>The <code>&lt;Formik/&gt;</code> component exposes various other components that adds more abstraction and sensible defaults. For example, components like <code>&lt;Form/</code>&gt;, <code>&lt;Field/&gt;</code>, and <code>&lt;ErrorMessage/&gt;</code> are ready to go right out of the box.</p>
+
+
+
+<p class="explanation">Keep in mind, you don’t have to use these components when working with <code>&lt;Formik/&gt;</code> but they do require <code>&lt;Formik/&gt;</code> (or <code>withFormik</code>) when using them.</p>
+
+
+
+<p>Using&nbsp;<code>&lt;Formik/&gt;</code>&nbsp;requires an overhaul because it uses the&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://reactjs.org/docs/render-props.html">render props pattern</a>&nbsp;as opposed to hooks with&nbsp;<code>useFormik</code>. The render props pattern isn’t something new in React. It is a pattern that enables code re-usability between components — something hooks solve better. Nevertheless, <code>&lt;Formik/&gt;</code>&nbsp;has a bagful of custom components that make working with forms much easier.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import { Formik } from "formik";
+ 
+function FormikRenderProps() {
+  const initialValues = {
+    email: "",
+    password: ""
+  };
+  function onSubmit(values) {
+    // Do stuff here...
+    alert(JSON.stringify(values, null, 2));
+  }
+  return (
+      &lt;Formik {...{ initialValues, onSubmit }}>
+        {({ getFieldProps, handleSubmit }) => (
+            &lt;form className="baseForm" onSubmit={handleSubmit} noValidate>
+              &lt;input
+                type="email"
+                id="email"
+                className="email formField"
+                {...getFieldProps("email")}
+              />
+            &lt;/form>
+        )}
+      &lt;/Formik>
+  );
+}</code></pre>
+
+
+
+<p>Notice that <code>initialValues</code> and <code>onSubmit</code> have been completely detached from <code>useFormik</code>. This means we are able to pass the props that <code>&lt;Formik/&gt;</code> needs, specifically <code>initialValues</code> and <code>useFormik</code>.</p>
+
+
+
+<p><code>&lt;Formik/&gt;</code> returns a value that’s been de-structured into <code>getFieldProps</code> and <code>handleSubmit</code>. Everything else basically remains the same as the first method using <code>useFormik</code>.</p>
+
+
+
+<p class="explanation"><a href="https://css-tricks.com/an-overview-of-render-props-in-react/">Here’s a refresher on React render props</a> if you’re feeling a little rusty.</p>
+
+
+
+<p>We haven’t actually put any <code>&lt;Formik/&gt;</code> components to use just yet. I’ve done this intentionally to demonstrate Formik’s adaptability. We certainly do want to use those components for our form fields, so let’s rewrite the component so it uses the <code>&lt;Form/&gt;</code> component.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import { Formik, Field, Form } from "formik";
+ 
+function FormikRenderProps() {
+  const initialValues = {
+    email: "",
+    password: ""
+  };
+  function onSubmit(values) {
+    // Do stuff here...
+    alert(JSON.stringify(values, null, 2));
+  }
+  return (
+      &lt;Formik {...{ initialValues, onSubmit }}>
+        {() => (
+            &lt;Form className="baseForm" noValidate>
+              &lt;Field
+                type="email"
+                id="email"
+                className="email formField"
+                name="email"
+              />
+            &lt;/Form>
+        )}
+      &lt;/Formik>
+  );
+}</code></pre>
+
+
+
+<p>We replaced <code>&lt;form/&gt;</code> with <code>&lt;Form/&gt;</code> and removed the <code>onSubmit</code> handler since Formik handles that for us. Remember, it takes on all the responsibilities for handling forms.</p>
+
+
+
+<p>We also replaced <code>&lt;input/&gt;</code> with <code>&lt;Field/&gt;</code> and removed the bindings. Again, Formik handles that.</p>
+
+
+
+<p>There’s also no need to bother with the returned value from <code>&lt;Formik/&gt;</code> anymore. You guessed it, Formik handles that as well.</p>
+
+
+
+<p>Formik handles everything for us. We can now focus more on the business logic of our forms rather than things that can essentially be abstracted.</p>
+
+
+
+<p>We’re pretty much set to go and guess what? We’ve haven&#8217;t been concerned with state managements or form submissions!</p>
+
+
+
+<p>“What about validation?&#8221; you may ask. We haven’t touched on that because it’s a whole new level on its own. Let’s touch on that before jumping to the last method.</p>
+
+
+
+<h4>Form validation with Formik</h4>
+
+
+
+<p>If you’ve ever worked with forms (and I bet you have), then you’re aware that validation isn’t something to neglect.</p>
+
+
+
+<p>We want to take control of <em>when</em> and <em>how</em> to validate so new opportunities open up to create better user experiences. Gmail, for example, will not let you input a password unless the email address input is validated and authenticated. We could also do something where we validate on the spot and display messaging without additional interactions or page refreshes.</p>
+
+
+
+<p>Here are three ways that Formik is able to handle validation:</p>
+
+
+
+<ol><li>At the form level</li><li>At the field level</li><li>With manual triggers</li></ol>
+
+
+
+<p>Validation at the form level means validating the form as a whole. Since we have immediate access to form values, we can validate the entire form at once by either:</p>
+
+
+
+<ul><li>using <code>validate</code>, or</li><li>using a third-party library with <code><a href="https://jaredpalmer.com/formik/docs/guides/validation%23validationschema">validationSchema</a></code>.</li></ul>
+
+
+
+<p>Both <code>validate</code> and <code>validationSchema</code> are functions that return an <code>errors</code> object with key/value pairings that those of <code>initialValues</code>. We can pass those to &nbsp;<code>useFormik</code>, <code>&lt;Formik/&gt;</code> or <code>withFormik</code>.&nbsp;</p>
+
+
+
+<p class="explanation">While <code>validate</code> is used for custom validations, <code>validationSchema</code> is used with a third-party library like Yup.&nbsp;</p>
+
+
+
+<p>Here’s an example using <code>validate</code>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Pass the `onSubmit` function that gets called when the form is submitted.
+const formik = useFormik({
+  initialValues: {
+    email: "",
+    password: ""
+  },
+  // We've added a validate function
+  validate() {
+    const errors = {};
+    // Add the touched to avoid the validator validating all fields at once
+    if (formik.touched.email &amp;&amp; !formik.values.email) {
+      errors.email = "Required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formik.values.email)
+    ) {
+      errors.email = "Invalid email address";
+    }
+    if (formik.touched.password &amp;&amp; !formik.values.password) {
+      errors.password = "Required";
+    } else if (formik.values.password.length &lt;= 8) {
+      errors.password = "Must be more than 8 characters";
+    }
+    return errors;
+  },
+  onSubmit(values) {
+    // Do stuff here...
+  }
+});
+// ...</code></pre>
+
+
+
+<p>And here we go with an example using <code>validationSchema</code> instead:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const formik = useFormik({
+  initialValues: {
+    email: "",
+    password: ""
+  },
+  // We used Yup here.
+  validationSchema: Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Required"),
+    password: Yup.string()
+      .min(8, "Must be more than 8 characters")
+      .required("Required")
+  }),
+  onSubmit(values) {
+    // Do stuff here...
+  }
+});</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?fit=1024%2C809&amp;ssl=1" alt="" class="wp-image-307816" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?w=1732&amp;ssl=1 1732w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?resize=300%2C237&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?resize=1024%2C809&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?resize=768%2C607&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?resize=1536%2C1213&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-28-at-1.21.31-PM.png?resize=1000%2C790&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p class="explanation">Validating at the <a href="https://jaredpalmer.com/formik/docs/guides/validation%23field-level-validation">field level</a> or using <a href="https://jaredpalmer.com/formik/docs/guides/validation%23manually-triggering-validation">manual triggers</a> are fairly simple to understand. Albeit, you’ll likely use form level validation most of the time. It’s also worth checking out the <a href="https://jaredpalmer.com/formik/docs/guides/validation">docs</a> to see other use cases.</p>
+
+
+
+<h3>Method 3: Using withFormik as a higher-order component</h3>
+
+
+
+<p><code>withFormik</code> is a higher-order component and be used that way if that’s your thing. Write the form, then expose it through Formik.</p>
+
+
+
+<h3>A couple of practical examples</h3>
+
+
+
+<p>So far, we’ve become acquainted with Formik, covered the benefits of using it for creating forms in React, and covered a few methods to implement it as a React component while demonstrating various ways we can use it for validation. What we haven’t done is looked at examples of those key concepts.</p>
+
+
+
+<p>So, let’s look at a couple of practical applications: displaying error messages and generating a username based on what&#8217;s entered in the email input.</p>
+
+
+
+<h4>Displaying error messages</h4>
+
+
+
+<p>We’ve built our form and validated it. And we’ve caught some errors that can be found in our <code>errors</code> object. But it’s no use if we aren’t actually displaying those errors.</p>
+
+
+
+<p>Formik makes this a pretty trivial task. All we need to do is check the <code>errors</code> object returned by any of the methods we’ve looked at — <code>&lt;Formik/&gt;</code>, <code>useFormik</code> or <code>withFormik</code> — and display them:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="4"><code markup="tt">&lt;label className="formFieldLabel" htmlFor="email">
+  Email address
+  &lt;span className="errorMessage">
+    {touched["email"] &amp;&amp; errors["email"]}
+  &lt;/span>
+&lt;/label>
+&lt;div className="formFieldWrapInner">
+  &lt;input
+    type="email"
+    id="email"
+    className="email formField"
+    {...getFieldProps("email")}
+  />
+&lt;/div></code></pre>
+
+
+
+<p>If there’s an error during validation, <code>{touched["email"] &amp;&amp; errors["email"]}</code> will display it to the user.</p>
+
+
+
+<p>We could do the same with <code>&lt;ErrorMessage/&gt;</code>. With this, we only need to tell it the name of the dependent field to watch:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">&lt;ErrorMessage name="email">
+  {errMsg => &lt;span className="errorMessage">{errMsg}&lt;/span>}
+&lt;/ErrorMessage></code></pre>
+
+
+
+<h4>Generating a username from an email address</h4>
+
+
+
+<p>Imagine a form that automatically generates a username for your users based on their email address. In other words, whatever the user types into the email input gets pulled out, stripped of <code>@</code> and everything after it, and leaves us with a username with what’s left.</p>
+
+
+
+<p>For example: <code>jane@doe.com</code> produces <code>@jane</code>.</p>
+
+
+
+<p>Formik exposes helpers that can “intercept” its functionality and lets us perform some effects.In the case of auto-generating a username, one way will be through Formik’s <code>setValues</code>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">onSubmit(values) {
+  // We added a `username` value for the user which is everything before @ in their email address.
+  setValues({
+    ...values,
+    username: `@${values.email.split("@")[0]}`
+  });
+}</code></pre>
+
+
+
+<p>Type in an email address and password, then submit the form to see your new username!</p>
+
+
+
+<iframe src="https://codesandbox.io/embed/better-forms-in-react-with-formik-eq7q0?fontsize=14&amp;hidenavigation=1&amp;initialpath=%2Fhatch-escape&amp;module=%2Fsrc%2FBaseFormikSetValues.js&amp;theme=dark" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="Better Forms in React with Formik" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+
+
+<h3>Wrapping up</h3>
+
+
+
+<p>Wow, we covered a lot of ground in a short amount of space. While this is merely the tip of the iceberg as far as covering all the needs of a form and what Formik is capable of doing, I hope this gives you a new tool to reach for the next time you find yourself tackling forms in a React application.</p>
+
+
+
+<p>If you’re ready to take Formik to the next level, I’d suggest <a href="https://jaredpalmer.com/formik/docs/resources">looking through their resources</a> as a starting point. There are so many goodies in there and it’s a good archive of what Formik can do as well as more tutorials that get into deeper use cases.</p>
+
+
+
+<p>Good luck with your forms!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-formik-to-handle-forms-in-react/">Using Formik to Handle Forms in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-formik-to-handle-forms-in-react/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306672</post-id>	</item>
+		<item>
+		<title>Better Form Inputs for Better Mobile User Experiences</title>
+		<link>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/</link>
+					<comments>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2020 15:08:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306387</guid>
+
+					<description><![CDATA[<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&#160;</p>
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can &#8230; <a href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Better Form Inputs for Better Mobile User Experiences&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&nbsp;</p>
+
+
+
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can ensure that the data entry process is as seamless as possible for our users. Let’s take a look at some examples and best practices we can use to create better user experiences on mobile devices.</p>
+
+
+
+<span id="more-306387"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?fit=1024%2C842&amp;ssl=1" alt="" class="wp-image-306391" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?w=2408&amp;ssl=1 2408w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1024%2C842&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=768%2C631&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1536%2C1263&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=2048%2C1684&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1000%2C822&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://better-mobile-inputs.netlify.com/" class="ek-link">Use this demo</a> to experiment on your own, if you’d like.</figcaption></figure>
+
+
+
+<h3>Using the correct input type</h3>
+
+
+
+<p>This is the easiest thing to get right. Input types, like <code>email</code>, <code>tel</code>, and <code>url</code>, are well-supported across browsers. While the benefit of using a type, like <code>tel</code> over the more generic <code>text</code>, might be hard to see on desktop browsers, it’s immediately apparent on mobile. </p>
+
+
+
+<p>Choosing the appropriate type changes the keyboard that pops up on Android and iOS devices when a user focuses the field. For very little effort, just by using the right type, we will show custom keyboards for <a href="https://better-mobile-inputs.netlify.com/?type=email" class="ek-link">email</a>, <a href="https://better-mobile-inputs.netlify.com/?type=tel" class="ek-link">telephone numbers</a>, <a href="https://better-mobile-inputs.netlify.com/?type=url" class="ek-link">URLs</a>, and even <a href="https://better-mobile-inputs.netlify.com/?type=search" class="ek-link">search inputs</a>.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306392" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Text input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306393" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Email input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306394" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>URL input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306395" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Search input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One thing to note is that both <code>input type="email"</code> and <code>input type="url"</code> come with validation functionality, and modern browsers will show an error tooltip if their values do not match the expected formats when the user submits the form. If you&#8217;d rather turn this functionality off, you <a href="https://codepen.io/aholachek/pen/poJMXpj" class="ek-link">can simply add the <code>novalidate</code> attribute to the containing <code>form</code></a>.</p>
+
+
+
+<h3>A quick detour into date types</h3>
+
+
+
+<p>HTML inputs comprise far more than specialized text inputs — you also have radio buttons, checkboxes, and so on. For the purposes of this discussion, though, I’m mostly talking about the more <strong>text-based inputs</strong>.&nbsp;</p>
+
+
+
+<p>There is a type of input that sits in the liminal space between the more free-form text inputs and input widgets like radio buttons: <strong><code>date</code></strong>. The <code>date</code> input type comes in a variety of flavors that are well-supported on mobile, including <a href="https://better-mobile-inputs.netlify.com/?type=date" class="ek-link"><code>date</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=time" class="ek-link"><code>time</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=datetime-local" class="ek-link"><code>datetime-local</code></a>, and <a href="https://better-mobile-inputs.netlify.com/?type=month" class="ek-link"><code>month</code></a>. These pop up custom widgets in iOS and Android when they are focused. Instead of triggering a specialized keyboard, they show a select-like interface in iOS, and various different types of widgets on Android (where the <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=date" class="ek-link"><code>date</code></a> and <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=time" class="ek-link"><code>time</code></a> selectors are particularly slick).&nbsp;</p>
+
+
+
+<p>I was excited to start using native defaults on mobile, until I looked around and realized that most major apps and mobile websites use custom date pickers rather than native date input types.&nbsp;There could be a couple reasons for this. First, I find the native iOS date selector to be less intuitive than a calendar-type widget. Second, even the beautifully-designed Android implementation is fairly limited compared to custom components — there’s no easy way to input a date range rather than a single date, for instance.&nbsp;</p>
+
+
+
+<p>Still, the date input types are worth checking out if the custom datepicker you’re using doesn’t perform well on mobile. If you’d like to try out the native input widgets on iOS and Android while making sure that desktop users see a custom widget instead of the default dropdown, this snippet of CSS <a href="https://codepen.io/aholachek/pen/RwPXjWJ?editors=1100" class="ek-link">will hide the calendar dropdown</a> for desktop browsers that implement it:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">::-webkit-calendar-picker-indicator {
+  display: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?fit=1024%2C521&amp;ssl=1" alt="" class="wp-image-306396" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?w=1315&amp;ssl=1 1315w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1024%2C521&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1000%2C509&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Date input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?fit=1024%2C486&amp;ssl=1" alt="" class="wp-image-306397" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?w=1411&amp;ssl=1 1411w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=300%2C142&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1024%2C486&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=768%2C364&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1000%2C474&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Time input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One final thing to note is that <code>date</code> types cannot be overridden by the <code>inputmode</code> attribute, which we&#8217;ll discuss next.</p>
+
+
+
+<h3>Why should I care about inputmode?</h3>
+
+
+
+<p>The <code>inputmode</code> attribute allows you to override the mobile keyboard specified by the input’s type and directly declare the type of keyboard shown to the user. When I first learned about this attribute, I wasn’t impressed — why not just use the correct <code>type</code> in the first place? But while <code>inputmode</code> is often unnecessary, there are a few places where the attribute can be extremely helpful. The most notable use case that I’ve found for <code>inputmode</code> is building a better number input.</p>
+
+
+
+<p>While some HTML5 input types, like <code>url</code> and <code>email</code>, are straightforward, <code>input type="number"</code> is a different matter. It has some <a href="https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/">accessibility concerns </a>as well as a somewhat awkward UI. For example, desktop browsers, like Chrome, show tiny increment arrows that are easy to trigger accidentally by scrolling.</p>
+
+
+
+<p>So here’s a pattern to memorize and use going forwards. For most numeric inputs, instead of using this:&nbsp;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="number" /></code></pre>
+
+
+
+<p>…you actually want to use this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<p>Why not <code>inputmode="numeric"</code> instead of <code>inputmode="decimal"</code> ?&nbsp;</p>
+
+
+
+<p>The <code>numeric</code> and <code>decimal</code> attribute values produce identical keyboards on Android. On iOS, however, <code>numeric</code> displays a keyboard that shows both numbers and punctuation, while <code>decimal</code> shows a focused grid of numbers that almost looks exactly like the <code>tel</code> input type, only without extraneous telephone-number focused options. That’s why it’s my preference for most types of number inputs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?fit=1024%2C424&amp;ssl=1" alt="" class="wp-image-306398" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?w=1615&amp;ssl=1 1615w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=300%2C124&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1024%2C424&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=768%2C318&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1536%2C636&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1000%2C414&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>iOS&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?fit=1024%2C315&amp;ssl=1" alt="" class="wp-image-306399" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?w=1615&amp;ssl=1 1615w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=300%2C92&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1024%2C315&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=768%2C236&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1536%2C473&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1000%2C308&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Android&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<p class="explanation">Christian Oliff has written&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">an excellent article</a>&nbsp;dedicated solely to the&nbsp;inputmode&nbsp;attribute.</p>
+
+
+
+<h3>Don’t forget autocomplete</h3>
+
+
+
+<p>Even more important than showing the correct mobile keyboard is showing helpful autocomplete suggestions. That can go a long way towards creating a faster and less frustrating user experience on mobile.</p>
+
+
+
+<p>While browsers have heuristics for showing autocomplete fields, you cannot rely on them, and should still be sure to add the correct <code>autocomplete</code> attribute. For instance, in iOS Safari, I found that an <code>input type="tel"</code> would only show autocomplete options if I <a href="https://better-mobile-inputs.netlify.com/?autocomplete=tel&amp;type=tel" class="ek-link">explicitly added a <code>autocomplete="tel"</code> attribute</a>.</p>
+
+
+
+<p>You may think that you are familiar with the basic <code>autocomplete</code> options, such as those that help the user fill in credit card numbers or address form fields, but I’d urge you to <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html%23inappropriate-for-the-control" class="ek-link">review them</a> to make sure that you are aware of all of the options. The spec lists over 50 values! Did you know that <code>autocomplete="one-time-code"</code> can make a phone verification user flow super smooth?</p>
+
+
+
+<figure class="wp-block-video"><video controls muted src="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" playsinline></video></figure>
+
+
+
+<h3>Speaking of autocomplete…</h3>
+
+
+
+<p>I’d like to mention one final element that allows you to create your own custom autocomplete functionality: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" class="ek-link"><code>datalist</code></a>. While it creates a serviceable — if somewhat basic — autocomplete experience on desktop Chrome and Safari, it shines on iOS by surfacing suggestions in a convenient row right above the keyboard, where the system autocomplete functionality usually lives. Further, it allows the user to toggle between text and select-style inputs.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4"></video></figure>
+
+
+
+<p>On Android, on the other hand, <code>datalist</code> creates a more typical autocomplete dropdown, with the area above the keyboard reserved for the system&#8217;s own typeahead functionality. One possible advantage to this style is that the dropdown list is easily scrollable, creating immediate access to all possible options as soon as the field is focused. (In iOS, in order to view more than the top three matches, the user would have to trigger the select picker by pressing the down arrow icon.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?fit=576%2C1024&amp;ssl=1" width="320" alt="" class="wp-image-306402" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?w=1080&amp;ssl=1 1080w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=169%2C300&amp;ssl=1 169w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=576%2C1024&amp;ssl=1 576w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=768%2C1365&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=864%2C1536&amp;ssl=1 864w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=1000%2C1778&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>You can use this demo to play around with&nbsp;<code>datalist</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqoxaZ" src="//codepen.io/anon/embed/NWqoxaZ?height=450&amp;theme-id=1&amp;slug-hash=NWqoxaZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqoxaZ" title="CodePen Embed NWqoxaZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>And you can explore all the autocomplete options, as well as input&nbsp;<code>type</code>&nbsp;and&nbsp;<code>inputmode</code>&nbsp;values, <a class="ek-link ek-link" href="https://better-mobile-inputs.netlify.com/">using&nbsp;this tool I made</a> to help you quickly preview various input configurations on mobile.</p>
+
+
+
+<h3>In summary</h3>
+
+
+
+<p>When I&#8217;m building a form, I&#8217;m often tempted to focus on perfecting the desktop experience while treating the mobile web as an afterthought. But while it does take a little extra work to ensure forms work well on mobile, it doesn&#8217;t have to be too difficult. Hopefully, this article has shown that with a few easy steps, you can make forms much more convenient for your users on mobile devices.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" length="703199" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4" length="1903465" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306387</post-id>	</item>
+		<item>
+		<title>Auto-Growing Inputs &#038; Textareas</title>
+		<link>https://css-tricks.com/auto-growing-inputs-textareas/</link>
+					<comments>https://css-tricks.com/auto-growing-inputs-textareas/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 25 Mar 2020 15:09:28 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputs]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305192</guid>
+
+					<description><![CDATA[<p>By default, <code>&#60;input&#62;</code> and <code>&#60;textarea&#62;</code> elements don&#8217;t change size based on the content they contain. In fact, there isn&#8217;t any simple HTML or CSS way to make them do that. Kinda funny, as that seems like a reasonable use-case. But of course, there are ways, my friend. <em>There are always ways</em>. </p>
+<p>I was thinking about this after Remy Sharp <a href="https://remysharp.com/2020/03/06/auto-growing-inputs">blogged about it</a> recently in the context of inline <code>&#60;input&#62;</code> elements. </p>
+<p>Non-input elements expand naturally</p>
+<p>It&#8217;s weird to me that &#8230; <a href="https://css-tricks.com/auto-growing-inputs-textareas/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Auto-Growing Inputs &#038; Textareas&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/auto-growing-inputs-textareas/">Auto-Growing Inputs &#038; Textareas</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>By default, <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code> elements don&#8217;t change size based on the content they contain. In fact, there isn&#8217;t any simple HTML or CSS way to make them do that. Kinda funny, as that seems like a reasonable use-case. But of course, there are ways, my friend. <em>There are always ways</em>. </p>
+
+
+
+<span id="more-305192"></span>
+
+
+
+<p>I was thinking about this after Remy Sharp <a href="https://remysharp.com/2020/03/06/auto-growing-inputs">blogged about it</a> recently in the context of inline <code>&lt;input&gt;</code> elements. </p>
+
+
+
+<h3>Non-input elements expand naturally</h3>
+
+
+
+<p>It&#8217;s weird to me that there is no way to force an input element to mimic this behavior, but alas.</p>
+
+
+
+<p>We can make any element editable and input-like with the <code>contenteditable</code> attribute:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;span 
+  class="input" 
+  role="textbox" 
+  contenteditable>
+    99
+&lt;/span></code></pre>
+
+
+
+<p>That <code>&lt;span&gt;</code> will naturally grow to be the width it needs to be for the content it contains. If it was a <code>&lt;div&gt;</code> or any other element that is block-level, it would also expand vertically as needed. </p>
+
+
+
+<h3>But are non-input elements accessible?</h3>
+
+
+
+<p>I&#8217;m not entirely sure. Notice I put <code>role="textbox"</code> on the element. That&#8217;s just a best-guess based on <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/textbox_role">some docs</a>. </p>
+
+
+
+<p>Even if that&#8217;s helpful&#8230;</p>
+
+
+
+<ol><li>What about the fact that forms can be submitted with the Enter key? </li><li>What about the idea that form data is often serialized and sent along, while the code that&#8217;s doing it probably isn&#8217;t looking for a span?</li><li>Does it <em>actually</em> read the same as an input in a screen reader?</li><li>What other things<a href="#fn:1">¹</a> do inputs naturally do that I&#8217;m not thinking of?</li></ol>
+
+
+
+<p>As attracted as I am to the idea that we can get auto-resizing for free from the browser by using non-input elements, I&#8217;m also a little worried about (my) unknown usability and accessibility risk.</p>
+
+
+
+<h3>Resizing actual input elements</h3>
+
+
+
+<p>So let&#8217;s say we stick with <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code>. Can we make them resize-able even though it&#8217;s not particularly natural? </p>
+
+
+
+<p>One idea I had is to wrap the input in a relative inline parent and absolutely position it inside. Then, with JavaScript, we could sync the input value with a hidden span inside that wrapper, pushing the width wider as needed.</p>
+
+
+
+<p>For textareas, one classic technique is to count the number of line-breaks, use that to set the height, then multiply it by the line-height. That works great for preformatted text, like code, but not at all for long-form paragraph-like content. </p>
+
+
+
+<p>Here are all these ideas combined.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XWbqpzP" src="//codepen.io/anon/embed/XWbqpzP?height=850&amp;theme-id=1&amp;slug-hash=XWbqpzP&amp;default-tab=result" height="850" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XWbqpzP" title="CodePen Embed XWbqpzP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Other ideas</h3>
+
+
+
+<p><a href="https://codepen.io/shshaw">Shaw</a> has a little JavaScript one-liner that is <em>very clever</em>. The JavaScript sets a <code>data-*</code> attribute on the element equal to the value of the input. The input is set within a CSS grid, where that grid is a pseudo-element that uses that <code>data-*</code> attribute as its content. That content is what stretches the grid to the appropriate size based on the input value. </p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_c72208b279d750f1ab46b6a45bbd04d7" src="//codepen.io/anon/embed/c72208b279d750f1ab46b6a45bbd04d7?height=350&amp;theme-id=1&amp;slug-hash=c72208b279d750f1ab46b6a45bbd04d7&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed c72208b279d750f1ab46b6a45bbd04d7" title="CodePen Embed c72208b279d750f1ab46b6a45bbd04d7" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Your ideas</h3>
+
+
+
+<p>I absolutely know that you fellow web nerds have solved this six ways to Sunday. Let&#8217;s see &#8217;em in the comments.</p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li><a href="https://ericwbailey.design">Eric Bailey</a> hit me up with a few thoughts off the top of his head: (1) There&#8217;s no accessible name. (2) It probably won&#8217;t work with voice control. (3) It will get ignored in High Contrast Mode. </li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/auto-growing-inputs-textareas/">Auto-Growing Inputs &#038; Textareas</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/auto-growing-inputs-textareas/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305192</post-id>	</item>
+		<item>
+		<title>Custom Styling Form Inputs With Modern CSS Features</title>
+		<link>https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/</link>
+					<comments>https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/#comments</comments>
+		
+		<dc:creator><![CDATA[Aaron Iker]]></dc:creator>
+		<pubDate>Fri, 07 Feb 2020 15:27:52 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[@supports]]></category>
+		<category><![CDATA[checkboxes]]></category>
+		<category><![CDATA[custom properties]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[radio buttons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=302330</guid>
+
+					<description><![CDATA[<p>It’s entirely possible to build custom checkboxes, radio buttons, and toggle switches these days, while staying semantic and accessible. We don’t even need a single line of JavaScript or extra HTML elements! It’s actually gotten easier lately than it has been in the past. Let’s take a look.</p>
+<p>Here’s where we’ll end up:</p>
+<p>CodePen Embed Fallback</p>
+<p><strong>Things sure have gotten easier than they were!</strong></p>
+<p>The reason is that we can finally style the <code>::before</code> and <code>::after</code> pseudo-elements on the <code>&#60;input&#62;</code>&#8230; <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Custom Styling Form Inputs With Modern CSS Features&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">Custom Styling Form Inputs With Modern CSS Features</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>It’s entirely possible to build custom checkboxes, radio buttons, and toggle switches these days, while staying semantic and accessible. We don’t even need a single line of JavaScript or extra HTML elements! It’s actually gotten easier lately than it has been in the past. Let’s take a look.</p>
+
+
+
+<span id="more-302330"></span>
+
+
+
+<p>Here’s where we’ll end up:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEYoxEY" src="//codepen.io/anon/embed/ZEYoxEY?height=600&amp;theme-id=1&amp;slug-hash=ZEYoxEY&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEYoxEY" title="CodePen Embed ZEYoxEY" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><strong>Things sure have gotten easier than they were!</strong></h3>
+
+
+
+<p>The reason is that we can finally style the <code>::before</code> and <code>::after</code> pseudo-elements on the <code>&lt;input&gt;</code> tag itself. This means we can keep and style an <code>&lt;input&gt;</code> and won’t need any extra elements. Before, we had to rely on the likes of an extra <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>, to pull off a custom design.</p>
+
+
+
+<h3>Let’s look at the HTML</h3>
+
+
+
+<p>Nothing special here. We can style our inputs with just this HTML:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;!-- Checkbox -->
+&lt;input type="checkbox">
+
+&lt;!-- Radio -->
+&lt;input type="radio">
+
+&lt;!-- Switch -->
+&lt;input type="checkbox" class="switch"></code></pre>
+
+
+
+<p>That’s it for the HTML part, but of course it’s recommended to have&nbsp;name and id attributes, plus a matching <code>&lt;label&gt;</code> element:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;!-- Checkbox -->
+&lt;input type="checkbox" name="c1" id="c1">
+&lt;label for="c1">Checkbox&lt;/label>
+
+&lt;!-- Radio -->
+&lt;input type="radio" name="r1" id="r1">
+&lt;label for="r1">Radio&lt;/label>
+
+&lt;!-- Switch -->
+&lt;input type="checkbox" class="switch" name="s1" id="s1">
+&lt;label for="s1">Switch&lt;/label></code></pre>
+
+
+
+<h3>Getting into the styling&nbsp;</h3>
+
+
+
+<p>First of all, we check for the support of <code>appearance: none;</code>, including it’s prefixed companions. The <code><a href="https://css-tricks.com/almanac/properties/a/appearance/">appearance</a></code> property is key because it is designed to remove a browser’s default styling from an element. If the property isn’t supported, the styles won’t apply and default input styles will be shown. That’s perfectly fine and a good example of progressive enhancement at play.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  input[type='checkbox'],
+  input[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}</code></pre>
+
+
+
+<p>As it stands today, appearance &nbsp;is a working draft, but here’s what support looks like:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=css-appearance">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">83*</span></td><td class="a yep-nope yep-nope-partial" title="Firefox - "><span class="caniuse-agents-version version">79*</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">83*</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP*</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="a yep-nope yep-nope-partial" title="Android Chrome - "><span class="caniuse-agents-version version">81*</span></td><td class="a yep-nope yep-nope-partial" title="Android Firefox - "><span class="caniuse-agents-version version">68*</span></td><td class="a yep-nope yep-nope-partial" title="Android - "><span class="caniuse-agents-version version">81*</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5*</span></td></tr></table></div></div>
+
+
+
+<p>Like links, we’ve gotta consider different interactive states with form elements. We’ll consider these when styling our elements:</p>
+
+
+
+<ul><li><code>:checked</code></li><li><code>:hover</code></li><li><code>:focus</code></li><li><code>:disabled</code></li></ul>
+
+
+
+<p>For example, here’s how we can style our toggle input, create the knob, and account for the <code>:checked</code> state:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* The toggle container */
+.switch {
+  width: 38px;
+  border-radius: 11px;
+}
+
+/* The toggle knob */
+.switch::after {
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--ab, var(--border));
+  transform: translateX(var(--x, 0));
+}
+
+/* Change color and position when checked */
+.switch:checked {
+  --ab: var(--active-inner);
+  --x: 17px;
+}
+
+/* Drop the opacity of the toggle knob when the input is disabled */
+.switch:disabled:not(:checked)::after {
+  opacity: .6;
+}</code></pre>
+
+
+
+<p>We are using the <code>&lt;input&gt;</code> element like a container. The knob inside of the input is created with the <code>::after</code> pseudo-element. Again, no more need for extra markup!</p>
+
+
+
+<p>If you crack open the styles in the demo, you’ll see that we’re defining some CSS custom properties because that’s become such a <a href="https://css-tricks.com/7-uses-for-css-custom-properties/">nice way to manage reusable values</a> in a stylesheet:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  input[type='checkbox'],
+  input[type='radio'] {
+    --active: #275EFE;
+    --active-inner: #fff;
+    --focus: 2px rgba(39, 94, 254, .25);
+    --border: #BBC1E1;
+    --border-hover: #275EFE;
+    --background: #fff;
+    --disabled: #F6F8FF;
+    --disabled-inner: #E1E6F9;
+  }
+}</code></pre>
+
+
+
+<p>But there’s another reason we’re using custom properties — they work well for updating values based on the state of the element! We won’t go into full detail here, but here’s an example how we can use custom properties for different states.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Default */
+input[type='checkbox'],
+input[type='radio'] {
+  --active: #275EFE;
+  --border: #BBC1E1;
+  border: 1px solid var(--bc, var(--border));
+}
+
+/* Override defaults */
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+  --b: var(--active);
+  --bc: var(--active);
+}
+  
+/* Apply another border color on hover if not checked &amp; not disabled */
+input[type='checkbox']:not(:checked):not(:disabled):hover,
+input[type='radio']:not(:checked):not(:disabled):hover {
+  --bc: var(--border-hover);
+}</code></pre>
+
+
+
+<p>For accessibility, we ought to add a <a href="https://css-tricks.com/focusing-on-focus-styles/">custom focus style</a>. We are removing the default outline because it can’t be rounded like the rest of the things we’re styling. But a border-radius along with a box-shadow can make for a rounded style that works just like an outline.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input[type='checkbox'],
+input[type='radio'] {
+  --focus: 2px rgba(39, 94, 254, .25);
+  outline: none;
+  transition: box-shadow .2s;
+}
+
+input[type='checkbox']:focus,
+input[type='radio']:focus {
+  box-shadow: 0 0 0 var(--focus);
+}</code></pre>
+
+
+
+<p>It’s also possible to align and style the <code>&lt;label&gt;</code> element which directly follows the <code>&lt;input&gt;</code> element in the HTML:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="checkbox" name="c1" id="c1">
+&lt;label for="c1">Checkbox&lt;/label></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input[type='checkbox'] + label,
+input[type='radio'] + label {
+  display: inline-block;
+  vertical-align: top;
+  /* Additional styling */
+}
+
+input[type='checkbox']:disabled + label,
+input[type='radio']:disabled + label {
+    cursor: not-allowed;
+}</code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Here’s that demo again:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEYoxEY" src="//codepen.io/anon/embed/ZEYoxEY?height=600&amp;theme-id=1&amp;slug-hash=ZEYoxEY&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEYoxEY" title="CodePen Embed ZEYoxEY" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Hopefully, you’re seeing how nice it is to create custom form styles these days. It requires less markup, thanks to pseudo-elements that are directly on form inputs. It requires less fancy style switching, thanks to custom properties. And it has pretty darn good browser support, thanks to <code>@supports</code>.</p>
+
+
+
+<p>All in all, this is a much more pleasant developer experience than we’ve had to deal with in the past!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">Custom Styling Form Inputs With Modern CSS Features</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">302330</post-id>	</item>
+		<item>
+		<title>Wufoo Cracks the Code for Forms So You Don&#8217;t Have To</title>
+		<link>https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/</link>
+					<comments>https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/#comments</comments>
+		
+		<dc:creator><![CDATA[Geoff Graham]]></dc:creator>
+		<pubDate>Tue, 08 Oct 2019 14:17:49 +0000</pubDate>
+				<category><![CDATA[Sponsored]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[wufoo]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=296956</guid>
+
+					<description><![CDATA[<p>There was a <a href="https://css-tricks.com/multi-million-dollar-html/">lot of buzz about forms</a> last week when Jason Grisby pointed to a missing <code>pattern</code> attribute on Chipotle&#8217;s order form that could have been used to help-through millions of dollars in orders. Adrian Roselli followed that up with the common mistake of forgetting <code>for</code> and <code>id</code> attributes on form inputs and the potential cost of it.</p>
+<p>Forms are hard. And that&#8217;s without thinking about more complex features, like building conditional logic into questions, getting into validation, triggering &#8230; <a href="https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Wufoo Cracks the Code for Forms So You Don&#8217;t Have To&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/">Wufoo Cracks the Code for Forms So You Don&#8217;t Have To</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>There was a <a href="https://css-tricks.com/multi-million-dollar-html/">lot of buzz about forms</a> last week when Jason Grisby pointed to a missing <code>pattern</code> attribute on Chipotle&#8217;s order form that could have been used to help-through millions of dollars in orders. Adrian Roselli followed that up with the common mistake of forgetting <code>for</code> and <code>id</code> attributes on form inputs and the potential cost of it.</p>
+<p>Forms are hard. And that&#8217;s without thinking about more complex features, like building conditional logic into questions, getting into validation, triggering emails on submission, handling inputs on different devices, storing submissions, or integrating with other services, among many, many other things. Forms aren&#8217;t just hard, they are downright complicated.</p>
+<p><strong>That&#8217;s why I&#8217;m glad there&#8217;s a company like Wufoo that has all of that sorted out.</strong> There&#8217;s been many a time where I convince myself I can build a form myself only to abandon the idea for an embedded Wufoo form instead.</p>
+<p><span id="more-296956"></span></p>
+<p>Why Wufoo? First off, it&#8217;s been around forever. They focus on forms and forms alone, so I&#8217;m confident they know exactly what they&#8217;re doing. I get all the semantic markup I want based on their tried and tested product and adding it to my (or any other) site is as easy as dropping in a snippet.</p>
+<p>Plus, Wufoo <a href="https://www.wufoo.com/blog/what-wufoo-was-up-to-this-year-plus-a-peek-at-our-2019-plans/">continues to innovate</a>! They&#8217;re releasing new <a href="https://www.wufoo.com/features/">features</a> all the time. Just this past month, they <a href="https://www.wufoo.com/blog/introducing-an-all-new-zapier-integration-experience/">shipped a new Zapier integration</a> that opens up a ton of possibilities, like sending submissions to a Google spreadsheet, firing off submission notifications in Slack, creating Trello cards from submissions, <a href="https://www.wufoo.com/partners/">and more</a>. And again, that&#8217;s on top of an already stacked featured set that offers everything from multi-page forms and showing and hiding fields conditionally to collecting payments and allowing file uploads over a secure encrypted connection.</p>
+<figure id="post-296958" class="align-left media-296958"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/10/wufoo-integrations.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>You can see where we use Wufoo here on CSS-Tricks to <a href="https://css-tricks.com/contact/">power the contact form</a>. What&#8217;s cool about that simple form is we can direct email notifications to specific inboxes based on the contact selection. It even integrates with Mailchimp, so we can offer an option to sign up for <a href="https://css-tricks.com/newsletters/">our newsletter</a> directly in the contact form.</p>
+<figure id="post-296957" class="align-left media-296957"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/10/forms-contact.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We also decided to use Wufoo to improve the way we accept guest posts (and you should definitely <a href="https://css-tricks.com/guest-posting/">submit an idea</a>). We used to lean on plain ol&#8217; email and the contact form, but using Wufoo has allowed us to level up so we can collect more details about a post submission upfront and tailor the form based on the type of submission it is.</p>
+<figure id="post-296959" class="align-left media-296959"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/10/wufoo-conditional.gif?w=600&#038;ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>I&#8217;d say Wufoo is great for any type of form. It handles anything you throw at it, easily integrates into any site, and helps prevent costly mistakes that are apparently worth gobs of cash for some companies.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/">Wufoo Cracks the Code for Forms So You Don&#8217;t Have To</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/wufoo-cracks-the-code-for-forms-so-you-dont-have-to/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">296956</post-id>	</item>
+		<item>
+		<title>Paperform</title>
+		<link>https://css-tricks.com/paperform/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 26 Sep 2019 14:15:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[Sponsored]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[paperform]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=294922</guid>
+
+					<description><![CDATA[<p><em>Buy</em> or <em>build</em> is a classic debate in technology. Building things yourself might <em>feel</em> less expensive because there is no line item on your credit card bill, but has cost in the form of time. Buying things, believe it or not, is <em>usually</em> less expensive when it comes to technology that isn&#8217;t your core focus. Build your core technology, buy everything else.</p>
+<p>That&#8217;s what I think of with a tool like <a href="https://synd.co/33RyYRA">Paperform</a>. A powerful form builder like Paperform costs &#8230; <a href="https://css-tricks.com/paperform/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Paperform&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/paperform/">Paperform</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><em>Buy</em> or <em>build</em> is a classic debate in technology. Building things yourself might <em>feel</em> less expensive because there is no line item on your credit card bill, but has cost in the form of time. Buying things, believe it or not, is <em>usually</em> less expensive when it comes to technology that isn&#8217;t your core focus. Build your core technology, buy everything else.</p>
+<p>That&#8217;s what I think of with a tool like <a href="https://synd.co/33RyYRA">Paperform</a>. A powerful form builder like Paperform costs me a few bucks, but saves me countless hours in building something that might become extremely complex and a massive distraction from my more important goals.</p>
+<p><span id="more-294922"></span></p>
+<h3>Paperform is a form builder, but disguised within a page builder</h3>
+<p>Imagine you&#8217;re building a registration form for a conference. (That&#8217;s a perfect fit for Paperform, by the way, as Paperform has payment features that can even handle the money part.) The page that explains the conference and the registration form for the conference can be, and maybe should be, the same thing. </p>
+<p>The Paperform designer makes it quite intuitive to build out a page of content.</p>
+<figure id="post-295375" class="align-none media-295375"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/paperform-builder.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>It is equally intuitive to sprinkle questions into the page as you are writing and design it, making it an interactive form.</p>
+<figure id="post-295389" class="align-none media-295389"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/paperform-form.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h4>Block editing</h4>
+<p>As a little aside, I dig how the editor is block-based. That&#8217;s a trend I can get behind lately, with some of my favorite apps like Notion really embracing it and huge projects like Gutenberg in WordPress. </p>
+<figure id="post-295390" class="align-none media-295390"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/paper-blocks.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>This feels lighter than both of those, a little bit more like the Dropbox Paper editor. <em>Building a form is just like editing a document</em> is a principle they have and I think they are right on. It really is just like working in a document with perhaps a bit more configuration possibilities when you get into the details.</p>
+<h3>You&#8217;ve got a lot of power at the question level</h3>
+<p>With a form builder, you really want that power. You don&#8217;t want to get knee-deep into building a form only to find out you can&#8217;t do the thing you need to with the functionality and flow of the form. Here&#8217;s a bunch of yes&#8217;s:</p>
+<ul>
+<li>Can you make a field be required? <strong>Yes.</strong></li>
+<li>Can you apply conditional logic to hide/show fields? <strong>Yes.</strong></li>
+<li>Can you apply put default and placeholder text? <strong>Yes.</strong></li>
+<li>Can you set minimum and maximums? <strong>Yes.</strong></li>
+<li>Can you control the layout? <strong>Yes.</strong></li>
+<li>Can you control the design? <strong>Yes.</strong></li>
+<li>Can you programmatically prefill fields? <strong>Yes.</strong></li>
+<li>Can you have hidden fields? <strong>Yes.</strong></li>
+<li>Can you have complex fields like address and signatures? <strong>Yes.</strong></li>
+</ul>
+<p>Features like <em>logic</em> on questions, I happen to know, are particularly tricky to nail the UX on, and Paperform does a great job with it. You control the logic from option built naturally into the form builder where you would expect to find it. </p>
+<figure id="post-295599" class="align-none media-295599"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/logic.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Based on a &#8220;yes&#8221; answer to a yes/no question, I reveal an extra address field. Even the address field has powerful features, like limiting the countries you use.</figcaption></figure>
+<h3>Theming is very natural</h3>
+<p>Controlling color and typography are right up front and very obvious. Color pickers for all the major typographic elements, and the entire kitchen sink of Google Fonts for you to pick from.</p>
+<figure id="post-295600" class="align-none media-295600"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/Screen-Shot-2019-09-09-at-2.21.26-PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>I really like that at no point does it feel like you are leaving &#8220;the place where you&#8217;re building the form&#8221;. You can easily flip around between building the content and design and theme and logic and all that while it&#8217;s saving your work as you go.</p>
+<p>All the most common stuff has UI controls for you, and other big features are easy to find, like uploading background images and controlling buttons. Then if you really need to exert 100% control, their highest plan allows you to inject your own CSS into the form.</p>
+<h3>&#8220;After Submission&#8221;</h3>
+<p>What an obvious thing to call it! I love that. This is where you configure everything that happens with the form data after you&#8217;ve captured it. But instead of calling it something dry and obtuse like &#8220;Form Data Configuration Options&#8221; or something, it&#8217;s named after what you are thinking: <em>&#8220;What happens after the form is submitted? That&#8217;s what I&#8217;m trying to control.&#8221;</em></p>
+<p>There are three things that I tend to think about after form submission:</p>
+<ol>
+<li>Where is the confirmation email going to go?</li>
+<li>What does the success message say to the user?</li>
+<li>What integrations can I use?</li>
+</ol>
+<p>A nice touch? By default, the form is <strong>set up to email you all submissions</strong>. Do nothing, and you get that. That&#8217;s probably what you want 90% of the time anyway. But if you want to get in there and manipulate that email with custom destinations, subject lines, and even entirely reformatted content, you&#8217;ve got it.</p>
+<p>In the same fashion, you can create custom PDFs from the submitted data, which is a pretty unique feature and I imagine quite important for some folks.</p>
+<figure id="post-295601" class="align-none media-295601"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/Custom-Email.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Customizing that success message, which I find to be appropriate pretty much 100% of the time, is just a matter of changing two fields. </p>
+<figure id="post-295602" class="align-none media-295602"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/09/success-page.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Integrations-wise, for me, the big ones I find myself using are:</p>
+<ol>
+<li>Make a Trello card from this.</li>
+<li>Put the person on a MailChimp list.</li>
+<li>Send a Slack notification.</li>
+</ol>
+<p>They&#8217;ve got all those, plus webhooks (hit this arbitrary URL with the data after submission) and Zapier, which covers just about every use case under the sun.</p>
+<p>Of course, when you&#8217;re done building your form, you get a URL you can send people to. For me, the vast majority of the time, what I want to do is embed the form right onto another site, and they have all the options you could want for that as well.</p>
+<h3>New feature: Calculations</h3>
+<p>Just a few days ago, they added the ability to essentially do math with form data. There are some fairly straightforward use-cases, like <a href="https://paperform.co/templates/calculations-pricing-template">calculating the price of a product based on questions on the form</a>. But the feature was built to be rather open-ended in what you can do with it. Imagine using a calculation as part of <a href="https://paperform.co/templates/viral-social-quiz-dragon-template">a Buzzfeed style quiz that tells you what kind of dragon you are</a>, or <a href="https://paperform.co/templates/prevent-submissions-template">disabling submission of the form until a calculation can be made</a> that is satisfactory, or the notification from the form goes to a different person based on the calculation.</p>
+<h3>I can&#8217;t cover everything</h3>
+<p>Paperform is too big for one blog post. I barely mentioned payments, which is a massive feature they handle very well. I&#8217;d just end by saying it&#8217;s a very impressive product and if you&#8217;re picking a form builder, picking one as feature-rich as Paperform isn&#8217;t likely to be one you&#8217;ll regret.</p>
+<p><a href="https://synd.co/33RyYRA" class="button">Go Try Paperform</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/paperform/">Paperform</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">294922</post-id>	</item>
+		<item>
+		<title>A Comparison of Static Form Providers</title>
+		<link>https://css-tricks.com/a-comparison-of-static-form-providers/</link>
+					<comments>https://css-tricks.com/a-comparison-of-static-form-providers/#comments</comments>
+		
+		<dc:creator><![CDATA[Silvestar Bistrović]]></dc:creator>
+		<pubDate>Wed, 18 Sep 2019 14:17:21 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[static sites]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=295689</guid>
+
+					<description><![CDATA[<p>Let’s attempt to coin a term here: &#8220;Static Form Provider.&#8221; You bring your HTML <code>&#60;form&#62;</code>, but don’t worry about the back-end processing that makes it work. <a href="https://serverless.css-tricks.com/services/forms">There are a lot of these services out there!</a>  </p>
+<p>Static Form Providers do all tasks like validating, storing, sending notifications, and integrating with other APIs. It’s lovely when you can delegate big responsibilities like this. The cost? Typically a monthly or annual subscription, except for a few providers and limited plans. The cost &#8230; <a href="https://css-tricks.com/a-comparison-of-static-form-providers/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A Comparison of Static Form Providers&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-comparison-of-static-form-providers/">A Comparison of Static Form Providers</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Let’s attempt to coin a term here: &#8220;Static Form Provider.&#8221; You bring your HTML <code>&lt;form&gt;</code>, but don’t worry about the back-end processing that makes it work. <a href="https://serverless.css-tricks.com/services/forms">There are a lot of these services out there!</a>  </p>
+<p>Static Form Providers do all tasks like validating, storing, sending notifications, and integrating with other APIs. It’s lovely when you can delegate big responsibilities like this. The cost? Typically a monthly or annual subscription, except for a few providers and limited plans. The cost is usually less than fancier &#8220;<a href="https://css-tricks.com/options-for-web-forms/">form builders</a>&#8221; that help you build the form itself <em>and</em> process it.</p>
+<p><span id="more-295689"></span></p>
+<p>In this article, we are going to review some of the most popular <a href="https://serverless.css-tricks.com/services/forms/">static form providers</a>:</p>
+<ul>
+<li><a href="https://kwes.io/">Kwes</a></li>
+<li><a href="https://usebasin.com/">Basin</a></li>
+<li><a href="https://fieldgoal.io/">FieldGoal</a></li>
+<li><a href="https://formcarry.com/">Formcarry</a></li>
+<li><a href="https://formkeep.com/">FormKeep</a></li>
+<li><a href="https://formspree.io/">Formspree</a></li>
+<li><a href="https://formsubmit.co/">FormSubmit</a></li>
+<li><a href="https://formx.stream/">formX</a></li>
+<li><a href="https://getform.io/">Getform</a></li>
+<li><a href="https://www.netlify.com/products/forms/">Netlify Forms</a></li>
+</ul>
+<p>Before moving forward, just a note that the information for these comparisons came from visiting the site for each product and learning about the included features. Once I got all the information, I sent an email to each provider to confirm the list of features. Some of them confirmed, some didn&#8217;t. Special thanks to Kwes, FormKeep, Formspree, FormSubmit, formX, and Netlify Forms teams for confirming.</p>
+<h3>Form building components and validation</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Custom Components</th>
+<th>Front-End Validation</th>
+<th>Back-End Validation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+<td>Unable to confirm</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+<td>&#x274c;</td>
+</tr>
+</tbody>
+</table>
+<p>Components for building a form are HTML input elements, like text inputs, textareas, checkboxes, and radio buttons. When using a static form, most providers require adding custom HTML attributes. By providing the custom URL in the form <code>action</code> attribute, the form gets submitted on the provider’s side where it gets stored. </p>
+<p>If you are looking for a form builder, FormKeep has a form designer feature. That means you embed custom HTML and JavaScript files in the page, and you get a styled form. Otherwise, you have to style the form by yourself.</p>
+<p>If you need custom components, like a date picker or card inputs, Kwes and FormKeep are the only providers with this feature. If you want to validate input fields in the browser, you might use third-party libraries or writing your code which means adding additional JavaScript code to the site. Kwes is the only provider that supports front-end validation based on the rules you set in each input component. To enable this feature, you should include additional JavaScript file, which you might do nevertheless. Other static form providers rely only on HTML5 validation.</p>
+<p>Kwes is the only provider with back-end validation, too. The rules you set in the front end are passed to the back end side. In case when front-end validation fails, you are safe, the backend validation would work. Other providers don&#8217;t have this feature; they rely only on spam protection.</p>
+<h3>Spam protection</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Spam Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>
+        Artificial intelligence<br />
+        Automatic Honeypot<br />
+        Blacklists<br />
+        Proprietary technology
+      </td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>
+        Akismet<br />
+        CleanTalk<br />
+        reCAPTCHA<br />
+        Honeypot
+      </td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Provided, but unable to confirm what powers it</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>
+        Akismet<br />
+        reCAPTCHA
+      </td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>Provided, but unable to confirm what powers it</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>
+        Akismet<br />
+        Profanity Filter<br />
+        Authorized Domains<br />
+        Custom reCAPTCHA<br />
+        Custom Honeypot<br />
+        Custom Spam Filtering
+      </td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>
+        reCaptcha<br />
+        Honeypot
+      </td>
+</tr>
+<tr>
+<td>formX</td>
+<td>reCAPTCHA<br />Honeypot</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>
+        Akismet<br />
+        reCAPTCHA
+      </td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>
+          Akismet<br />
+          reCAPTCHA<br />
+          Honeypot
+      </td>
+</tr>
+</tbody>
+</table>
+<p class="explanation">Kwes advertises a 99.6% spam block success rate with no setup required.</p>
+<p>Once your form is ready for submissions, you might find it hard to deal with spam. That’s why spam protection is essential, especially if you want to keep your sanity and serenity. All providers provide spam protection in this way or another. Some rely on <a href="https://www.google.com/recaptcha/intro/v3.html">Google reCAPTCHA</a> or <a href="https://akismet.com/">Akismet</a>, some on Honeypot techniques, and some use artificial intelligence to get the job done. It is worth noting that adding an additional step to your form, like adding reCAPTCHA might affect the conversion rates on form submissions.</p>
+<h3>Email notifications</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Confirmations</th>
+<th>Notifications</th>
+<th>Email Routing Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+<td>Unable to confirm</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>Email confirmations are essential if you want to provide a fast response to your users. With a contact form, for example, you want to get an email for every new submission. That way, you&#8217;re able to respond to the submission quickly and efficiently.</p>
+<p>All providers, except FieldGoal, have confirmation, notification, and email routing logic features. You could set up an email form element which would be used to send an email automatically to the user with confirmation about the submission. </p>
+<p>Some providers have other sorts of notifications besides email, like push notifications or Slack messages, which might be handy.</p>
+<h3>White labeling</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>White Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>When communicating via email notifications with your clients, you might want to use your brand and style. It creates better awareness and that way you familiarize your clients with your product. All providers offer this feature, with the exception of FieldGoal, which I was unable to confirm (although it might be under paid plans).</p>
+<h3>Custom redirects</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Custom Redirects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>Once you have captured a response from your user, you may want to let the user continue using your site. Also, you might want to communicate to the user that the submission was received. This feature is called &#8220;custom redirect,&#8221; and every provider has this feature (with another exception for FieldGoal because I was unable to confirm). Note that this feature might not be available in a free plan and require a paid or upgraded account.</p>
+<h3>Upload storage</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Upload Storage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>200MB per file<br />20GB storage</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>100MB per submission</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Amazon S3</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>5MB per file<br />5GB storage</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>2.5G storage
+      </td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>10MB per file<br />10GB storage</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>Included, but unconfirmed storage amounts</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>25MB per submission<br />25GB storage</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>1GB storage</td>
+</tr>
+</tbody>
+</table>
+<p>Not every static form provider provides file storage. For example, formX doesn&#8217;t provide it at all. In most cases, this feature is available under paid plans. You might want to invest additional time to find out which provider offers the best service for you. Be sure to look specifically at single file size <em>and</em> form submission size limitations.</p>
+<h3>Data export</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Data Export</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>Data export is important feature if you want to use it for analysis or for import to third-party software. Most providers offer <abbr>CSV</abbr> and JSON exports, which are the most commonly used ones.</p>
+<h3><abbr>API</abbr> access</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th><abbr>API</abbr> Access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>On demand</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>If you want to control your data submissions by building a custom application or script, you might benefit from having API access. Most providers have this feature, except Getform. formX offers it, but only on demand.</p>
+<h3>Webhooks/Zapier</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Webhooks</th>
+<th>Zapier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x2705;</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x2705;</td>
+<td>&#x2705;</td>
+</tr>
+</tbody>
+</table>
+<p>When building a custom application or a script is out of budget, you might want to use webhooks to integrate data submissions with third-party software. Zapier is one of the most commonly used services for this, and only FormSubmit doesn&#8217;t support it (though it does support webhooks).</p>
+<h3>Analytics</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th><abbr>Analytics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Unable to confirm</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>formX</td>
+<td>&#x2705;</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>&#x274c;</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>&#x274c;</td>
+</tr>
+</tbody>
+</table>
+<p>Analytics for static forms is a neat feature that could offer beneficial insight into how your form is performing. It may help you understand how your users interact with it, and you may spot ways to improve the form submission experience as a result. This feature is the least supported of all other features. Only Basin, FormKeep, and formX provide it.</p>
+<h3>Plan comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Plan 1</th>
+<th>Plan 2</th>
+<th>Plan 3</th>
+<th>Plan 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kwes</td>
+<td>Free Tier <br />$0/mo. <br />Build spam-protected, and validated forms quicker than ever. </p>
+<p>1 Website <br />Unlimited Forms <br />30 Spam Blocks</td>
+<td>Bronze Tier<br /> $9/mo. <br />Unlimited spam blocks, more form tools, and submissions.<br />1 Website <br />Unlimited Forms <br />Unlimited Spam Blocks</td>
+<td>Silver Tier<br />$29/mo. <br />Build more powerful forms with integrations and webhooks.<br />3 Websites <br />Unlimited Forms <br />Unlimited Spam Blocks <br />4 Users</td>
+<td>Gold Tier<br />$79/mo. <br />Enjoy more team members and everything with increased limits. <br />10 Websites <br />Unlimited Forms <br />Unlimited Spam Blocks <br />11 Users</td>
+</tr>
+<tr>
+<td>Basin</td>
+<td>Standard Tier<br />$4.17/mo. (billed annually)</td>
+<td>Premium Tier<br />$12.50/mo. (billed annually)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>FieldGoal</td>
+<td>Single Tier<br />1 form<br />$5/mo.</td>
+<td>Freelancer Tier<br />5 forms<br />$15/mo.</td>
+<td>Studio Tier<br />15 forms<br />$39/mo.</td>
+<td>Agency Tier<br />50 forms<br />$79/mo.</td>
+</tr>
+<tr>
+<td>FormCarry</td>
+<td>Baby Tier<br />Free</td>
+<td>Basic Tier<br />$15/mo.</td>
+<td>Growth Tier<br />$40/mo.</td>
+<td></td>
+</tr>
+<tr>
+<td>FormKeep</td>
+<td>Starter Tier<br />$4.99/mo.</td>
+<td>Starter Pack<br />$7.50 per form per month</td>
+<td>Freelancer Tier<br />$5.90 per form per month</td>
+<td>Agency Tier<br />$3.30 per form per month</td>
+</tr>
+<tr>
+<td>Formspree</td>
+<td>Free Tier<br />$0/mo.</td>
+<td>Gold Tier<br />$10/mo.</td>
+<td>Platform Tier<br />$40/mo.</td>
+<td></td>
+</tr>
+<tr>
+<td>FormSubmit</td>
+<td>Unlimited</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>formX</td>
+<td>Free Tier<br />$0/mo.<br />100 submissions max.</td>
+<td>Starter Tier<br />$4.99/mo.</td>
+<td><abbr>SMB</abbr>s &#038; Freelancers<br />$49.99/mo.</td>
+<td>Business &#038; Agencies<br />$99.99/mo.</td>
+</tr>
+<tr>
+<td>Getform</td>
+<td>Free Tier<br />$0/mo.</td>
+<td>Basic Tier<br />Perfect for small businesses<br />$7.5/mo.<br />$90 per year</td>
+<td>Agency Tier<br />$24/mo.<br />$290 annually</td>
+<td>Enterprise Tier<br />$57.5/mo.<br />$690 annually</td>
+</tr>
+<tr>
+<td>Netlify Forms</td>
+<td>Level 0<br />$0<br />100 submissions/mo.<br />10MB uploads/mo.</td>
+<td>Level 1<br />$19/mo. per site<br />1,000 submissions/mo.<br />1GB uploads/mo.</td>
+<td>Level 2<br />Custom pricing and limits</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Static form providers have different plans, from entirely free plans and trials, to enterprise plans for every business need. Depending on a plan, you might have different features enabled. For example, FormSubmit is the only provider that offers all of its features for free, though it doesn&#8217;t support every feature we&#8217;ve covered here. You will want to invest some time to learn about which features are most important for you and your product or business. Then go ahead and decide on which provider is most suitable for your needs.</p>
+<h3>Wrapping up</h3>
+<p>Having a form of any kind is a must-have for a large number of sites. When you use a static site generator, you might discover that static form providers make adding forms to a site almost trivial. By following a few rules for enabling static forms, you could benefit from essential features like spam protection and email notifications.</p>
+<p>I have been using Kwes for a while now and I can honestly tell you it is a great product that fulfills all of my needs. It has smart spam protection, an easy-to-use dashboard, and impressive validation, both on the front end and back end.</p>
+<p>Before choosing your static form providers, be sure to put down all requirements to the paper, and then find your perfect provider.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-comparison-of-static-form-providers/">A Comparison of Static Form Providers</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-comparison-of-static-form-providers/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">295689</post-id>	</item>
+		<item>
+		<title>Using Netlify Forms and Netlify Functions to Build an Email Sign-Up Widget</title>
+		<link>https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/</link>
+					<comments>https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/#comments</comments>
+		
+		<dc:creator><![CDATA[Matthew Ström]]></dc:creator>
+		<pubDate>Fri, 02 Aug 2019 14:13:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[netlify]]></category>
+		<category><![CDATA[netlify functions]]></category>
+		<category><![CDATA[serverless]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=293530</guid>
+
+					<description><![CDATA[<p>Building and maintaining your own website is a great idea. Not only do you <a href="http://www.alwaysownyourplatform.com/">own your platform</a>, but you get to experiment with web technologies along the way. Recently, I dug into a concept called serverless functions, starting with <a href="https://matthewstrom.com">my own website</a>. I’d like to share the results and what I learned along the way, so you can get your hands dirty, too!</p>
+</p>
+<p>But first, a 1-minute intro to serverless functions</p>
+<p>A serverless function (sometimes called a lambda &#8230; <a href="https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using Netlify Forms and Netlify Functions to Build an Email Sign-Up Widget&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/">Using Netlify Forms and Netlify Functions to Build an Email Sign-Up Widget</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Building and maintaining your own website is a great idea. Not only do you <a href="http://www.alwaysownyourplatform.com/">own your platform</a>, but you get to experiment with web technologies along the way. Recently, I dug into a concept called serverless functions, starting with <a href="https://matthewstrom.com">my own website</a>. I’d like to share the results and what I learned along the way, so you can get your hands dirty, too!</p>
+<p><span id="more-293530"></span></p>
+<h3>But first, a 1-minute intro to serverless functions</h3>
+<p>A serverless function (sometimes called a lambda function or cloud function) is a piece of code that you can write, host, and run independently of your website, app, or any other code. Despite the name, serverless functions do, indeed, <a href="https://css-tricks.com/psa-yes-serverless-still-involves-servers/">run on a server</a>; but it’s a server you don’t have to build or maintain. Serverless functions are exciting because they take a lot of the legwork out of making powerful, scalable, apps.</p>
+<p>There’s lots of great information on serverless functions out there, and a great place to start is CSS Trick’s own guide: <a href="https://serverless.css-tricks.com/">The Power of Serverless Front-End Developers</a>.</p>
+<h3>The Challenge: Build a Mailing List Sign Up Form</h3>
+<p>I started my journey with a challenge: I wanted to have an email list sign-up form on my site. The rules are as follows:</p>
+<ul>
+<li><strong>It should work without JavaScript.</strong> I’d like to see how much I can get by with just CSS and HTML. Progressive enhancements are OK.</li>
+<li><strong>It shouldn’t require external dependencies.</strong> This is a learning project, so I want to write 100% of the code if possible.</li>
+<li><strong>It should use serverless functions.</strong> Instead of sending data to my email list service client-side, let’s do it server(less)-side!</li>
+</ul>
+<h3>Meet the team: 11ty, Netlify, and Buttondown</h3>
+<p>My website is built using a static site framework called <a href="https://www.11ty.io/">11ty</a>. 11ty allows me to write templates and components in HTML, so that’s how we’ll build our email form. (Chris recently wrote a great article about <a href="https://css-tricks.com/a-site-for-front-end-development-conferences-built-with-11ty-on-netlify/">his experience with 11ty</a> if you’re interested in learning more.)</p>
+<p>The website is then deployed using a service called <a href="https://www.netlify.com">Netlify</a>) and it is the key player on our team here: the point guard, the quarterback, the captain. That’s because Netlify has three features that work together to produce serverless excellence:</p>
+<ul>
+<li><strong>Netlify can deploy automatically from a GitHub repo.</strong> This means I can write my code, create a pull request, and instantly see if my code works. While there are <a href="https://github.com/netlify/netlify-lambda">tools</a> to test serverless functions locally, Netlify makes it super easy to test live.</li>
+<li><strong><a href="https://www.netlify.com/docs/form-handling/">Netlify Forms</a> handles any form submissions my site gets.</strong> This is one part of the serverless equation: instead of writing code to collect submissions, I’ll configure the HTML with a few simple attributes and let Netlify handle the rest.</li>
+<li><strong><a href="https://www.netlify.com/docs/functions/">Netlify Functions</a> allows me to take action with the data from my forms.</strong> I’ll write some code to send emails off to my email list provider, and tell Netlify when to run that code.</li>
+</ul>
+<p>Finally, I’ll manage my email list with a service called <a href="https://buttondown.email/">Buttondown</a>. It’s a no-frills email newsletter provider, with an easy-to-use <abbr>API</abbr>.</p>
+<p><strong>Bonus:</strong> for personal sites like mine, 11ty, Netlify, and Buttondown are <em>free</em>. You can’t beat that.</p>
+<h3>The form</h3>
+<p>The HTML for my email subscription form is very minimal, with a few extras for Netlify Forms to work.</p>
+<pre rel="HTML" data-line="1,5"><code class="language-html">&lt;form class="email-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field"&gt;
+  &lt;div hidden aria-hidden="true"&gt;
+    &lt;label&gt;
+      Don’t fill this out if you're human: 
+      &lt;input name="bot-field" /&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;label for="email"&gt;Your email address&lt;/label&gt;
+  &lt;div&gt;
+    &lt;input type="email" name="email" placeholder="Email"  id="email" required /&gt;
+    &lt;button type="submit"&gt;Subscribe&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+<p>First, I set the <code>data-netlify</code> attribute to <code>true</code>  to tell Netlify to handle this form.</p>
+<p>The first input in the form is named <code>bot-field</code>. This tricks robots into revealing themselves: I tell Netlify to watch for any suspicious submissions by setting the <code>netlify-honeypot</code> attribute to <code>bot-field</code>. I then hide the field from humans using the html <code>hidden</code> and <code>aria-hidden</code> values — users with and without assistive technology won’t be able to fill out the fake input. </p>
+<p>If the form gets submitted with anything in the <code>bot-field</code> input, Netlify knows it’s coming from a robot, and ignores the input. In addition to this layer of protection, <a href="https://www.netlify.com/blog/2019/02/12/improved-netlify-forms-spam-filtering-using-akismet/">Netlify automatically filters suspicious submissions with Askimet</a>. I don’t have to worry about spam!</p>
+<p>The next input in the form is named <code>email</code>. This is where the email address goes! I’ve specified the input-type as <code>email</code>, and indicated that is <code>required</code>; this means that the browser will do all my validation for me, and won’t let users submit anything other than a valid email address.</p>
+<figure id="post-293536" class="align-left media-293536"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_613560B523E5E3911DCFA4B38611F0A756CD3731C14B53475B6B1507E2729C59_1561916471636_ScreenShot2019-06-30at1.40.55PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Progressive enhancement with JavaScript</h3>
+<p>One neat feature of Netlify Forms is the ability to automatically redirect users to a “thank you” page when they submit a form. But ideally, I’d like to keep my users <em>on</em> the page. I wrote a short function to submit the form without a redirect.</p>
+<pre rel="JavaScript"><code class="language-javascript">const processForm = form =&gt; {
+  const data = new FormData(form)
+  data.append('form-name', 'newsletter');
+  fetch('/', {
+    method: 'POST',
+    body: data,
+  })
+  .then(() =&gt; {
+    form.innerHTML = `&lt;div class="form--success"&gt;Almost there! Check your inbox for a confirmation e-mail.&lt;/div&gt;`;
+  })
+  .catch(error =&gt; {
+    form.innerHTML = `&lt;div class="form--error"&gt;Error: ${error}&lt;/div&gt;`;
+  })
+}</code></pre>
+<p>When I provide the content of my email form to this function via the <code>form</code> value, it submits the form using <a href="https://css-tricks.com/using-fetch/">JavaScript’s built-in Fetch <abbr>API</abbr></a>. If the function was successful, it shows a pleasant message to the user. If the function hits a snag, it’ll tell my users that something went wrong.</p>
+<p>This function is called whenever a user clicks the “submit” button on the form:</p>
+<pre rel="JavaScript"><code class="language-javascript">const emailForm = document.querySelector('.email-form')
+if (emailForm) {
+  emailForm.addEventListener('submit', e =&gt; {
+    e.preventDefault();
+    processForm(emailForm);
+  })
+}</code></pre>
+<p>This listener <em>progressively enhances</em> the default behavior of the form. This means that if the user has JavaScript disabled, the form still works!</p>
+<figure id="post-293537" class="align-left media-293537"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_613560B523E5E3911DCFA4B38611F0A756CD3731C14B53475B6B1507E2729C59_1561916506714_ScreenShot2019-06-30at1.41.28PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>The serverless function</h3>
+<p>Now that we have a working email submission form, it’s time to do some automation with a serverless function.</p>
+<p>The way Netlify functions work is as follows:</p>
+<ol>
+<li>Write the function in a JavaScript file in your project.</li>
+<li>Tell Netlify where to look for your function via the netlify.toml file in your project.</li>
+<li>Add any environment variables you’ll need via Netlify’s admin interface. An environment variable is something like an <abbr>API</abbr> key that you need to keep secret.</li>
+</ol>
+<p>That’s it! The next time you deploy your site, the function will be ready to go.</p>
+<p>The function for my site is going to be in the functions folder, so I have the following in my <code>netlify.toml</code> file:</p>
+<pre rel="netlify.toml"><code class="language-javascript">[build]
+  base = "."
+  functions = "./functions"</code></pre>
+<p>Then, I’ll add a file in the functions folder called submission-created.js. It’s important to name the file <strong>submission-created</strong> so that Netlify knows to run it every time a new form submission occurs. A full list of events you can script against can be found in <a href="https://www.netlify.com/docs/functions/#event-triggered-functions">Netlify’s documentation</a>. If you’ve correctly named and configured your function, you should see it on Netlify’s Functions dashboard:</p>
+<figure id="post-293538" class="align-left media-293538"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_55E70B0E3D247D672B41F6428A80F84E8B9977F72AC998C2D1246ECD0FA71C10_1563369528937_ScreenShot2019-07-17at9.18.15AM.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Netlify’s Functions dashboard shows I’ve correctly configured my submission-created function</figcaption></figure>
+<p>The content in submission-created.js looks like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">require('dotenv').config()
+const fetch = require('node-fetch')
+const { EMAIL_TOKEN } = process.env
+exports.handler = async event =&gt; {
+  const email = JSON.parse(event.body).payload.email
+  console.log(`Recieved a submission: ${email}`)
+  return fetch('https://api.buttondown.email/v1/subscribers', {
+    method: 'POST',
+    headers: {
+      Authorization: `Token ${EMAIL_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  })
+    .then(response =&gt; response.json())
+    .then(data =&gt; {
+      console.log(`Submitted to Buttondown:\n ${data}`)
+    })
+    .catch(error =&gt; ({ statusCode: 422, body: String(error) }))
+}</code></pre>
+<p>Let’s look at this line-by-line.</p>
+<p>Line 1 includes a library called <code>dotenv</code>. This will help me use <strong>environment variables.</strong> Environment variables are useful to hold information that I don’t want to make public, like an <abbr>API</abbr> key. If I’m running my project locally, I set my environment variables with a  <code>.env</code> file in the repo, and make sure it’s listed my <code>.gitignore</code> file. In order to deploy on Netlify, I also set up environment variables in Netlify’s web interface.</p>
+<figure id="post-293539" class="align-left media-293539"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_613560B523E5E3911DCFA4B38611F0A756CD3731C14B53475B6B1507E2729C59_1561915534785_ScreenShot2019-06-30at1.21.37PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>On line 2, I add a small library called <code>node-fetch</code>. This allows me to use Javascript’s Fetch <abbr>API</abbr> in node, which is how we’ll send data to Buttondown. Netlify automatically includes this dependency, as long as it’s listed in my project’s <code>package.json</code> file.</p>
+<p>On line 3, I import my <abbr>API</abbr> key from the environment variables object, <code>process.env</code>.</p>
+<p>Line 4 is where the function is defined. The <code>exports.handler</code> value is where Netlify expects to find our function, so we define it there. The only input we’ll need is the <code>event</code> value, which will contain all of the data from the form submission.</p>
+<p>After retrieving the email address from the <code>event</code> value using <code>JSON.parse</code>, I’m ready to send it off to Buttondown. Here’s where I use the <code>node-fetch</code> library I imported earlier: I send a POST request to <code>https://api.buttondown.email/v1/subscribers</code>, including my <abbr>API</abbr> key in the header. <a href="https://api.buttondown.email/v1/schema">Buttondown’s <abbr>API</abbr></a> doesn’t have many features, so it doesn’t take long to read through the documentation if you’d like to learn more.</p>
+<p>The body of my POST request consists of the email address we retrieved.</p>
+<p>Then (using the neat <code>.then()</code> syntax), I collect the response from Buttondown’s server. I do this so I can diagnose any issues that are happening with the process — Netlify makes it easy to check your function’s logs, so use <code>console.log</code> often!</p>
+<figure id="post-293540" class="align-left media-293540"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_613560B523E5E3911DCFA4B38611F0A756CD3731C14B53475B6B1507E2729C59_1561916418982_ScreenShot2019-06-30at1.38.00PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Deploying the function</h3>
+<p>Now that I’ve written my function, configured my netlify.toml file, and added my environment variables, everything is ready to go. Deploying is painless: just set up Netlify’s GitHub integration, and your function will be deployed when your project is pushed.</p>
+<p>Netlify projects can also be tested locally using <a href="https://www.netlify.com/products/dev">Netlify Dev</a>. Depending on the complexity of your code, it can be faster to develop locally: just run <code>npm i netlify -g</code>, then <code>netlify dev</code>. Netlify Dev will use the netlify.toml file to configure and run the project locally, including any serverless functions. Neat, right? One caveat: Netlify Dev currently can’t trigger serverless functions on form submissions, so you’ll have to test that using <a href="https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/">preview builds</a>.</p>
+<h3>An idea for the future</h3>
+<p>Buttondown’s <abbr>API</abbr> has a few possible responses when I submit a new email. For instance, if a user submits an email that’s already subscribed to the list, I’d love to be able to tell them as soon as they submit the form.</p>
+<h3>Conclusion</h3>
+<p>All in all, I only had to write about 50 lines of code to have a functional email newsletter sign-up form available on my website. I wrote it all in HTML, CSS, and JavaScript, without having to fret with the server side of the equation. The form handles spam, and my readers get a nice experience whether they have JavaScript enabled or not.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/">Using Netlify Forms and Netlify Functions to Build an Email Sign-Up Widget</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-netlify-forms-and-netlify-functions-to-build-an-email-sign-up-widget/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">293530</post-id>	</item>
+	</channel>
+</rss>

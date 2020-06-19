@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Alex Holachek &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/alexholachek/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 27 Apr 2020 15:51:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Better Form Inputs for Better Mobile User Experiences</title>
+		<link>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/</link>
+					<comments>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2020 15:08:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306387</guid>
+
+					<description><![CDATA[<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&#160;</p>
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can &#8230; <a href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Better Form Inputs for Better Mobile User Experiences&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&nbsp;</p>
+
+
+
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can ensure that the data entry process is as seamless as possible for our users. Let’s take a look at some examples and best practices we can use to create better user experiences on mobile devices.</p>
+
+
+
+<span id="more-306387"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?fit=1024%2C842&amp;ssl=1" alt="" class="wp-image-306391" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?w=2408&amp;ssl=1 2408w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1024%2C842&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=768%2C631&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1536%2C1263&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=2048%2C1684&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1000%2C822&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://better-mobile-inputs.netlify.com/" class="ek-link">Use this demo</a> to experiment on your own, if you’d like.</figcaption></figure>
+
+
+
+<h3>Using the correct input type</h3>
+
+
+
+<p>This is the easiest thing to get right. Input types, like <code>email</code>, <code>tel</code>, and <code>url</code>, are well-supported across browsers. While the benefit of using a type, like <code>tel</code> over the more generic <code>text</code>, might be hard to see on desktop browsers, it’s immediately apparent on mobile. </p>
+
+
+
+<p>Choosing the appropriate type changes the keyboard that pops up on Android and iOS devices when a user focuses the field. For very little effort, just by using the right type, we will show custom keyboards for <a href="https://better-mobile-inputs.netlify.com/?type=email" class="ek-link">email</a>, <a href="https://better-mobile-inputs.netlify.com/?type=tel" class="ek-link">telephone numbers</a>, <a href="https://better-mobile-inputs.netlify.com/?type=url" class="ek-link">URLs</a>, and even <a href="https://better-mobile-inputs.netlify.com/?type=search" class="ek-link">search inputs</a>.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306392" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Text input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306393" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Email input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306394" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>URL input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306395" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Search input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One thing to note is that both <code>input type="email"</code> and <code>input type="url"</code> come with validation functionality, and modern browsers will show an error tooltip if their values do not match the expected formats when the user submits the form. If you&#8217;d rather turn this functionality off, you <a href="https://codepen.io/aholachek/pen/poJMXpj" class="ek-link">can simply add the <code>novalidate</code> attribute to the containing <code>form</code></a>.</p>
+
+
+
+<h3>A quick detour into date types</h3>
+
+
+
+<p>HTML inputs comprise far more than specialized text inputs — you also have radio buttons, checkboxes, and so on. For the purposes of this discussion, though, I’m mostly talking about the more <strong>text-based inputs</strong>.&nbsp;</p>
+
+
+
+<p>There is a type of input that sits in the liminal space between the more free-form text inputs and input widgets like radio buttons: <strong><code>date</code></strong>. The <code>date</code> input type comes in a variety of flavors that are well-supported on mobile, including <a href="https://better-mobile-inputs.netlify.com/?type=date" class="ek-link"><code>date</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=time" class="ek-link"><code>time</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=datetime-local" class="ek-link"><code>datetime-local</code></a>, and <a href="https://better-mobile-inputs.netlify.com/?type=month" class="ek-link"><code>month</code></a>. These pop up custom widgets in iOS and Android when they are focused. Instead of triggering a specialized keyboard, they show a select-like interface in iOS, and various different types of widgets on Android (where the <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=date" class="ek-link"><code>date</code></a> and <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=time" class="ek-link"><code>time</code></a> selectors are particularly slick).&nbsp;</p>
+
+
+
+<p>I was excited to start using native defaults on mobile, until I looked around and realized that most major apps and mobile websites use custom date pickers rather than native date input types.&nbsp;There could be a couple reasons for this. First, I find the native iOS date selector to be less intuitive than a calendar-type widget. Second, even the beautifully-designed Android implementation is fairly limited compared to custom components — there’s no easy way to input a date range rather than a single date, for instance.&nbsp;</p>
+
+
+
+<p>Still, the date input types are worth checking out if the custom datepicker you’re using doesn’t perform well on mobile. If you’d like to try out the native input widgets on iOS and Android while making sure that desktop users see a custom widget instead of the default dropdown, this snippet of CSS <a href="https://codepen.io/aholachek/pen/RwPXjWJ?editors=1100" class="ek-link">will hide the calendar dropdown</a> for desktop browsers that implement it:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">::-webkit-calendar-picker-indicator {
+  display: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?fit=1024%2C521&amp;ssl=1" alt="" class="wp-image-306396" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?w=1315&amp;ssl=1 1315w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1024%2C521&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1000%2C509&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Date input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?fit=1024%2C486&amp;ssl=1" alt="" class="wp-image-306397" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?w=1411&amp;ssl=1 1411w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=300%2C142&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1024%2C486&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=768%2C364&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1000%2C474&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Time input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One final thing to note is that <code>date</code> types cannot be overridden by the <code>inputmode</code> attribute, which we&#8217;ll discuss next.</p>
+
+
+
+<h3>Why should I care about inputmode?</h3>
+
+
+
+<p>The <code>inputmode</code> attribute allows you to override the mobile keyboard specified by the input’s type and directly declare the type of keyboard shown to the user. When I first learned about this attribute, I wasn’t impressed — why not just use the correct <code>type</code> in the first place? But while <code>inputmode</code> is often unnecessary, there are a few places where the attribute can be extremely helpful. The most notable use case that I’ve found for <code>inputmode</code> is building a better number input.</p>
+
+
+
+<p>While some HTML5 input types, like <code>url</code> and <code>email</code>, are straightforward, <code>input type="number"</code> is a different matter. It has some <a href="https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/">accessibility concerns </a>as well as a somewhat awkward UI. For example, desktop browsers, like Chrome, show tiny increment arrows that are easy to trigger accidentally by scrolling.</p>
+
+
+
+<p>So here’s a pattern to memorize and use going forwards. For most numeric inputs, instead of using this:&nbsp;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="number" /></code></pre>
+
+
+
+<p>…you actually want to use this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<p>Why not <code>inputmode="numeric"</code> instead of <code>inputmode="decimal"</code> ?&nbsp;</p>
+
+
+
+<p>The <code>numeric</code> and <code>decimal</code> attribute values produce identical keyboards on Android. On iOS, however, <code>numeric</code> displays a keyboard that shows both numbers and punctuation, while <code>decimal</code> shows a focused grid of numbers that almost looks exactly like the <code>tel</code> input type, only without extraneous telephone-number focused options. That’s why it’s my preference for most types of number inputs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?fit=1024%2C424&amp;ssl=1" alt="" class="wp-image-306398" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?w=1615&amp;ssl=1 1615w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=300%2C124&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1024%2C424&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=768%2C318&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1536%2C636&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1000%2C414&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>iOS&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?fit=1024%2C315&amp;ssl=1" alt="" class="wp-image-306399" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?w=1615&amp;ssl=1 1615w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=300%2C92&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1024%2C315&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=768%2C236&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1536%2C473&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1000%2C308&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Android&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<p class="explanation">Christian Oliff has written&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">an excellent article</a>&nbsp;dedicated solely to the&nbsp;inputmode&nbsp;attribute.</p>
+
+
+
+<h3>Don’t forget autocomplete</h3>
+
+
+
+<p>Even more important than showing the correct mobile keyboard is showing helpful autocomplete suggestions. That can go a long way towards creating a faster and less frustrating user experience on mobile.</p>
+
+
+
+<p>While browsers have heuristics for showing autocomplete fields, you cannot rely on them, and should still be sure to add the correct <code>autocomplete</code> attribute. For instance, in iOS Safari, I found that an <code>input type="tel"</code> would only show autocomplete options if I <a href="https://better-mobile-inputs.netlify.com/?autocomplete=tel&amp;type=tel" class="ek-link">explicitly added a <code>autocomplete="tel"</code> attribute</a>.</p>
+
+
+
+<p>You may think that you are familiar with the basic <code>autocomplete</code> options, such as those that help the user fill in credit card numbers or address form fields, but I’d urge you to <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html%23inappropriate-for-the-control" class="ek-link">review them</a> to make sure that you are aware of all of the options. The spec lists over 50 values! Did you know that <code>autocomplete="one-time-code"</code> can make a phone verification user flow super smooth?</p>
+
+
+
+<figure class="wp-block-video"><video controls muted src="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" playsinline></video></figure>
+
+
+
+<h3>Speaking of autocomplete…</h3>
+
+
+
+<p>I’d like to mention one final element that allows you to create your own custom autocomplete functionality: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" class="ek-link"><code>datalist</code></a>. While it creates a serviceable — if somewhat basic — autocomplete experience on desktop Chrome and Safari, it shines on iOS by surfacing suggestions in a convenient row right above the keyboard, where the system autocomplete functionality usually lives. Further, it allows the user to toggle between text and select-style inputs.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4"></video></figure>
+
+
+
+<p>On Android, on the other hand, <code>datalist</code> creates a more typical autocomplete dropdown, with the area above the keyboard reserved for the system&#8217;s own typeahead functionality. One possible advantage to this style is that the dropdown list is easily scrollable, creating immediate access to all possible options as soon as the field is focused. (In iOS, in order to view more than the top three matches, the user would have to trigger the select picker by pressing the down arrow icon.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?fit=576%2C1024&amp;ssl=1" width="320" alt="" class="wp-image-306402" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?w=1080&amp;ssl=1 1080w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=169%2C300&amp;ssl=1 169w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=576%2C1024&amp;ssl=1 576w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=768%2C1365&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=864%2C1536&amp;ssl=1 864w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=1000%2C1778&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>You can use this demo to play around with&nbsp;<code>datalist</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqoxaZ" src="//codepen.io/anon/embed/NWqoxaZ?height=450&amp;theme-id=1&amp;slug-hash=NWqoxaZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqoxaZ" title="CodePen Embed NWqoxaZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>And you can explore all the autocomplete options, as well as input&nbsp;<code>type</code>&nbsp;and&nbsp;<code>inputmode</code>&nbsp;values, <a class="ek-link ek-link" href="https://better-mobile-inputs.netlify.com/">using&nbsp;this tool I made</a> to help you quickly preview various input configurations on mobile.</p>
+
+
+
+<h3>In summary</h3>
+
+
+
+<p>When I&#8217;m building a form, I&#8217;m often tempted to focus on perfecting the desktop experience while treating the mobile web as an afterthought. But while it does take a little extra work to ensure forms work well on mobile, it doesn&#8217;t have to be too difficult. Hopefully, this article has shown that with a few easy steps, you can make forms much more convenient for your users on mobile devices.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" length="703199" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4" length="1903465" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306387</post-id>	</item>
+		<item>
+		<title>Building a Complex UI Animation in React, Simply</title>
+		<link>https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/</link>
+					<comments>https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Thu, 12 Jul 2018 13:45:47 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[navigation]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[stripe]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=272368</guid>
+
+					<description><![CDATA[<p>Let’s use <a href="https://reactjs.org/">React</a>, <a href="https://www.styled-components.com/">styled-components</a>, and <a href=" https://github.com/aholachek/react-flip-toolkit">react-flip-toolkit</a> to make our own version of the animated navigation menu on the Stripe homepage. It&#8217;s an impressive menu with some slick animation effects and the combination of these three tools can make it relatively easy to recreate.</p>
+</p>
+<p class="explanation">This is an intermediate-level walkthrough that assumes familiarity with React and basic animation concepts. Our <a href="https://css-tricks.com/guides/react/">React guide</a> is a good place to start.</p>
+<p>Here&#8217;s what we&#8217;re aiming to make:</p>
+<p data-height="750" style="height: 750px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="PaYXEZ" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/PaYXEZ/">React Stripe Menu</a>&#8230; <a href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Building a Complex UI Animation in React, Simply&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/">Building a Complex UI Animation in React, Simply</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Let’s use <a href="https://reactjs.org/">React</a>, <a href="https://www.styled-components.com/">styled-components</a>, and <a href=" https://github.com/aholachek/react-flip-toolkit">react-flip-toolkit</a> to make our own version of the animated navigation menu on the Stripe homepage. It&#8217;s an impressive menu with some slick animation effects and the combination of these three tools can make it relatively easy to recreate.</p>
+<p><span id="more-272368"></span></p>
+<p class="explanation">This is an intermediate-level walkthrough that assumes familiarity with React and basic animation concepts. Our <A href="https://css-tricks.com/guides/react/">React guide</a> is a good place to start.</p>
+<p>Here&#8217;s what we&#8217;re aiming to make:</p>
+<p data-height="750" style="height: 750px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="PaYXEZ" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/PaYXEZ/">React Stripe Menu</a> by Alex (<a href="https://codepen.io/aholachek">@aholachek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p><a class="button" href="https://github.com/aholachek/react-stripe-menu">View Repo</a></p>
+<hr>
+<h3>Breaking down the animation</h3>
+<p>First, let&#8217;s break down the animation into different parts so we can more easily reproduce it. You might want to check out the finished product in slow motion (use the toggles) so you can catch all the details.</p>
+<ol>
+<li>The white dropdown container updates both its size and position.</li>
+<li>The gray background in the bottom half of the dropdown container transitions its height.</li>
+<li>As the dropdown container moves, the previous contents fade out and slightly to the opposite direction, as if the dropdown is leaving them behind, while the new contents slide into view.</li>
+</ol>
+<p>There are a few useful guiding rules to keep in mind as we embark on reproducing this animation in React. Where possible, let’s keep things simple by having the browser manage layout. We’ll do this by keeping elements in the regular <abbr title="Document Object Model">DOM</abbr> flow instead of using absolute positioning and manual calculation. Rather than having a single dropdown component that we have to relocate every time a user&#8217;s mouse position changes, we’ll render a single dropdown in the appropriate navbar section.</p>
+<p class="explanation">We’ll use the <a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">FLIP technique</a> to create the illusion that the three separate dropdown components are actually a single, moving component.</p>
+<h3>Scaffolding out the UI with styled-components</h3>
+<p>To start with, we&#8217;ll build an unanimated navbar component that simply takes a configuration object of titles and dropdown components and renders a navbar menu. The component will show and hide the relevant dropdown on mouseover. </p>
+<p>We’ll build the <abbr title="User Interface">UI</abbr> components using <a href="https://www.styled-components.com/">styled-components</a>. Not only are they a convenient way to build a modular UI, but they have <a href="https://www.styled-components.com/docs/basics#animations">a great API for adding configurable CSS keyframe animations</a>. It turns out CSS animations and React play really nicely together, so we’ll be using CSS keyframes to add many of the animations later on.</p>
+<p>With the components assembled without any animations, we’ve created something that looks like this:</p>
+<p data-height="620" style="height: 620px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="OELrzN" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu Before Animation" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/OELrzN/">React Stripe Menu Before Animation</a> by Alex (<a href="https://codepen.io/aholachek">@aholachek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>Notice that the gray background at the bottom of the menu is missing. It’s the only element that we’re going to have to take out of the regular DOM flow and absolutely position, so we’ll ignore it for now.</p>
+<h3>Animating our dropdown with the FLIP technique</h3>
+<p>We’re going to be using the <a href=" https://github.com/aholachek/react-flip-toolkit">react-flip-toolkit</a> library to help us animate the dropdown’s size and position. This is a library I put together to make advanced and complex transitions easier and configurable.</p>
+<p>It provides us with two components: a top-level <code>&lt;Flipper/&gt;</code> component, and a <code>&lt;Flipped/&gt;</code> component to wrap any children we want to animate.</p>
+<p>First, let&#8217;s set up the <code>Flipper</code> wrapper component in the render function of <a href="https://github.com/aholachek/react-stripe-menu/blob/master/src/AnimatedNavbar.js#L82">AnimatedNavbar</a>:</p>
+<pre rel="JavaScript" data-line="3,9"><code class="language-javascript">// currentIndex is the index of the hovered dropdown
+&lt;Flipper flipKey={currentIndex}&gt;
+  &lt;Navbar&gt;
+    {navbarConfig.map((n, index) =&gt; {
+      // render navbar items here
+    })}
+  &lt;/Navbar&gt;
+&lt;/Flipper&gt;  </code></pre>
+<p>Next, in our <a href="https://github.com/aholachek/react-stripe-menu/blob/master/src/DropdownContainer/index.js#L66">DropdownContainer</a> component, we&#8217;ll wrap elements that need to be animated in their own <code>Flipped</code> components, making sure to give them each a unique <code>flipdId</code> prop:</p>
+<pre rel="JavaScript" data-line="3,5,6,10"><code class="language-javascript">&lt;DropdownRoot&gt;
+  &lt;Flipped flipId="dropdown-caret"&gt;
+    &lt;Caret /&gt;
+  &lt;/Flipped&gt;
+  &lt;Flipped flipId="dropdown"&gt;
+    &lt;DropdownBackground&gt;
+      {children}    
+    &lt;/DropdownBackground&gt;
+  &lt;/Flipped&gt;
+&lt;/DropdownRoot&gt;</code></pre>
+<p>We&#8217;re animating the <code>&lt;Caret/&gt;</code> component and the <code>&lt;DropdownBackground/&gt;</code> component separately so that the <code>overflow:hidden</code> style on the <code>&lt;DropdownBackground/&gt;</code> component doesn&#8217;t interfere with the rendering of the <code>&lt;Caret/&gt;</code> component.</p>
+<p>Now we’ve got a  working FLIP animation, but there’s still one problem: the contents of the dropdown appear weirdly stretched over the course of the animation:</p>
+<p data-height="750" style="height: 750px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="MXgZxG" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu -- Error #1: no scale adjustment" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/MXgZxG/">React Stripe Menu &#8212; Error #1: no scale adjustment</a> by Alex (<a href="https://codepen.io/aholachek">@aholachek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>This unwanted effect occurs because scale transforms apply to children. If you apply a <code>scaleY(2)</code> to a div with some text inside, you will be scaling up the text and distorting it as well.</p>
+<p>We can solve this problem by wrapping the children in a <code>Flipped</code> component with an <code>inverseFlipId</code> that references the parent component&#8217;s <code>flipId</code> (in this case <code>"dropdown"</code>) to request that parent transforms be cancelled out for children. Because we still want translate transforms to affect the children, we also pass the <code>scale</code> prop to limit the cancellation to just scale changes.</p>
+<pre rel="JavaScript" data-line="8"><code class="language-javascript">&lt;DropdownRoot&gt;
+  &lt;Flipped flipId="dropdown-caret"&gt;
+    &lt;Caret /&gt;
+  &lt;/Flipped&gt;
+  &lt;Flipped flipId="dropdown"&gt;
+    &lt;DropdownBackground&gt;
+      &lt;Flipped inverseFlipId="dropdown" scale&gt;
+        {children}
+      &lt;/Flipped&gt;
+    &lt;/DropdownBackground&gt;
+  &lt;/Flipped&gt;
+&lt;/DropdownRoot&gt;</code></pre>
+<p>Whew. All that work and we’ve created something that looks like this:</p>
+<p data-height="750" style="height: 750px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="NzPpwG" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu -- Simple FLIP" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/NzPpwG/">React Stripe Menu &#8212; Simple FLIP</a> by Alex (<a href="https://codepen.io/aholachek">@aholachek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>It’s all in the details</h3>
+<p>It’s getting closer, but we still have to attend to the small details the make the animation look great: the subtle rotation animation when the dropdown appears and disappears, the cross-fade of previous and current dropdown children, and that silky-smooth gray background height animation.</p>
+<h4>Configurable CSS keyframe animations with styled components</h4>
+<p>Styled-components, which we&#8217;ve been using to build up the UI for this demo, offer a super convenient way to create <a href="https://www.styled-components.com/docs/basics#animations">configurable keyframe animations.</a> We&#8217;ll use this functionality for both the dropdown enter animation and the cross-fade of the contents. We can pass in some basic information about the desired animation &mdash; whether the contents are animating in or out, and the direction the user&#8217;s mouse has moved &mdash; and automatically get the appropriate animation applied. Here, for example, is the code for the crossfade animation in the <code>&lt;FadeContents&gt;</code> component: </p>
+<pre rel="JavaScript"><code class="language-javascript">const getFadeContainerKeyFrame = ({ animatingOut, direction }) =&gt; {
+  if (!direction) return;
+  return keyframes`
+  from {
+    transform: translateX(${
+      animatingOut ? 0 : direction === "left" ? 20 : -20
+    }px);
+  }
+  to {
+    transform: translateX(${
+      !animatingOut ? 0 : direction === "left" ? -20 : 20
+    }px);
+    opacity: ${animatingOut ? 0 : 1};
+  }
+`;
+};
+
+const FadeContainer = styled.div`
+  animation-name: ${getFadeContainerKeyFrame};
+  animation-duration: ${props =&gt; props.duration * 0.5}ms;
+  animation-fill-mode: forwards;
+  position: ${props =&gt; (props.animatingOut ? "absolute" : "relative")};
+  opacity: ${props =&gt; (props.direction &amp;&amp; !props.animatingOut ? 0 : 1)};
+  animation-timing-function: linear;
+  top: 0;
+  left: 0;
+`;</code></pre>
+<p>Each time the user hovers a new item, we&#8217;ll provide not only the current dropdown, but the previous dropdown as children to the <code>DropdownContainer</code> component, along with information about which direction the user&#8217;s mouse has moved. The <code>DropdownContainer</code> component will then wrap both its children in a new component, <code>FadeContents</code>, that will use the keyframe animation code above to add the appropriate transition.</p>
+<p>Here&#8217;s a link to the <a href="https://github.com/aholachek/react-stripe-menu/blob/master/src/DropdownContainer/FadeContents.js">full code for the <code>FadeContents</code> component.</a> </p>
+<p><a href="https://github.com/aholachek/react-stripe-menu/blob/master/src/DropdownContainer/Components.js#L3">The dropdown&#8217;s enter/exit animation</a> will function very similarly.</p>
+<h4>The final touch: A fluid background animation</h4>
+<p>Finally, let’s add the gray background animation. To keep this animation crisp, we need to diverge from our previous strategy of keeping normal DOM nesting and letting the browser handle layout, and perform some manual positioning calculations instead. We&#8217;ll also need to interact directly with the DOM. In short, it&#8217;s going to get a little messy.</p>
+<p>Here&#8217;s a visual representation of our basic approach:</p>
+<p data-height="700" style="height: 700px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="qKRWBe" data-default-tab="result" data-user="aholachek" data-embed-version="2" data-pen-title="React Stripe Menu -- Animated Background" class="codepen">See the Pen <a href="https://codepen.io/aholachek/pen/qKRWBe/">React Stripe Menu &#8212; Animated Background</a> by Alex (<a href="https://codepen.io/aholachek">@aholachek</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p><script async src="https://static.codepen.io/assets/embed/ei.js"></script></p>
+<p>We’ll absolutely position a gray div at the top of the <code>DropdownContainer</code>. In the <code>componentDidMount</code> lifecycle function of <code>DropdownContainer</code>, we’ll update the <code>translateY</code> transform of the gray background. If the dropdown container component only has a single child (which means the user has only hovered a single dropdown so far), we’ll set the gray div’s <code>translateY</code> to the height of the first dropdown section. If there are two children, including a previous dropdown, we’ll instead set the initial <code>translateY</code> to the height of the previous dropdown’s first section, and then animate the <code>translateY</code> to the height of the current dropdown’s first section. Here&#8217;s the function the gets called in <code>componentDidMount</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">const updateAltBackground = ({
+  altBackground,
+  prevDropdown,
+  currentDropdown
+}) =&gt; {
+  const prevHeight = getFirstDropdownSectionHeight(prevDropdown)
+  const currentHeight = getFirstDropdownSectionHeight(currentDropdown)
+  
+  // we'll use this function when we want a change 
+  // to happen immediately, without CSS transitions
+  const immediateSetTranslateY = (el, translateY) =&gt; {
+    el.style.transform = `translateY(${translateY}px)`
+    el.style.transition = "transform 0s"
+    requestAnimationFrame(() =&gt; (el.style.transitionDuration = ""))
+  }
+
+  if (prevHeight) {
+    // transition the grey ("alt") background from its previous height
+    // to its current height
+    immediateSetTranslateY(altBackground, prevHeight)
+    requestAnimationFrame(() =&gt; {
+      altBackground.style.transform = `translateY(${currentHeight}px)`
+    })
+  } else {
+    // immediately set the background to the appropriate height
+    // since we don't have a stored value
+    immediateSetTranslateY(altBackground, currentHeight)
+  }
+}</code></pre>
+<p>This approach requires <code>DropdownContainer</code> to use a <code>ref</code> and reach inside its children to take DOM measurements in the <code>getFirstDropdownSectionHeight</code> function, which feels sloppy. If you have any ideas for alternative implementations, please let me know in the comments!</p>
+<h3>Wrapping up</h3>
+<p>Hopefully this article has helped clarify some techniques you can use the next time you build an animation in React. There are normally multiple ways of achieving any effect, but often it makes sense to start with the simplest possible implementation &mdash; basic  components with some CSS transitions or keyframe animations &mdash; and scale up the complexity from there when necessary. In our case, that meant including an additional library, react-flip-toolkit, so we didn&#8217;t have to worry about manually transitioning the position of the dropdown component across the screen. To fully recreate the animation, we did have to write a fair amount of code. But by breaking down this animation into separate parts and tackling them one-by-one, we managed to replicate a pretty cool UI effect in React.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/">Building a Complex UI Animation in React, Simply</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">272368</post-id>	</item>
+	</channel>
+</rss>

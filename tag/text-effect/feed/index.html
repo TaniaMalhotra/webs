@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>text effect &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/text-effect/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 23 Apr 2020 22:10:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Creating Playful Effects With CSS Text Shadows</title>
+		<link>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/</link>
+					<comments>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Fossheim]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2020 13:58:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[text effect]]></category>
+		<category><![CDATA[text-shadow]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306182</guid>
+
+					<description><![CDATA[<p>Let’s have a look at how we can use the CSS text-shadow property to create truly 3D-looking text. You might think of text-shadow as being able to apply blurred, gradient-looking color behind text, and you would be right! But just like box-shadow, you can control how blurred the shadow is, including taking it all the way down to no blur at all. That, combined with comma-separating shadows and stacking them, is the CSS trickery we’ll be doing here.</p>
+<p>By the &#8230; <a href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating Playful Effects With CSS Text Shadows&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/">Creating Playful Effects With CSS Text Shadows</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Let’s have a look at how we can use the CSS text-shadow property to create truly 3D-looking text. You might think of text-shadow as being able to apply blurred, gradient-looking color behind text, and you would be right! But just like box-shadow, you can control how blurred the shadow is, including taking it all the way down to no blur at all. That, combined with comma-separating shadows and stacking them, is the CSS trickery we’ll be doing here.</p>
+
+
+
+<span id="more-306182"></span>
+
+
+
+<p>By the end, we’ll have something that looks like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?fit=1024%2C636&amp;ssl=1" alt="" class="wp-image-306183" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?w=1456&amp;ssl=1 1456w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=300%2C186&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=1024%2C636&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=768%2C477&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=1000%2C621&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Quick refresher on text-shadow</h3>
+
+
+
+<p>The syntax is like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  text-shadow: [x-offset] [y-offset] [blur] [color];
+}</code></pre>
+
+
+
+<ul><li><code>x-offset</code>: Position on the x-axis. A positive value moves the shadow to the right, a negative value moves the shadow to the left. <em>(required)</em></li><li><code>y-offset</code>: Position on the y-axis. A positive value moves the shadow to the bottom, a negative value moves the shadow to the top. <em>(required)</em></li><li><code>blur</code>: How much blur the shadow should have. The higher the value, the softer the shadow. The default value is 0px (no blur). <em>(optional)</em></li><li><code>color</code>: The color of the shadow. <em>(required)</em></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOyBQP" src="//codepen.io/anon/embed/rNOyBQP?height=425&amp;theme-id=1&amp;slug-hash=rNOyBQP&amp;default-tab=result" height="425" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOyBQP" title="CodePen Embed rNOyBQP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>The first shadow</h3>
+
+
+
+<p>Let&#8217;s start creating our effect by adding just <strong>one</strong> shadow. The shadow will be pushed 6px to the right and 6px to the bottom:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="8"><code markup="tt">:root {
+  --text: #5362F6; /* Blue */
+  --shadow: #E485F8; /* Pink */
+}
+ 
+.playful {
+  color: var(--text);
+  text-shadow: 6px 6px var(--shadow);
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?fit=1024%2C601&amp;ssl=1" alt="" class="wp-image-306184" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?w=1424&amp;ssl=1 1424w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=300%2C176&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=1024%2C601&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=768%2C451&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=1000%2C587&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Creating depth with more shadows</h3>
+
+
+
+<p>All we have is a flat shadow at this point — there&#8217;s not much 3D to it yet. We can create the depth and connect the shadow to the actual text by adding more <code>text-shadow</code> instances to the same element. All it takes is comma-separating them. Let&#8217;s start with adding one more in the middle:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="4"><code markup="tt">.playful {
+  color: var(--text);
+  text-shadow: 6px 6px var(--shadow),
+               3px 3px var(--shadow);
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?fit=1024%2C540&amp;ssl=1" alt="" class="wp-image-306185" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?w=1440&amp;ssl=1 1440w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=300%2C158&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=1024%2C540&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=768%2C405&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=1000%2C528&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>This is already getting somewhere, but we&#8217;ll need to add a few more shadows for it to look good. The more steps we add, the more detailed the the end result will be. In this example, we&#8217;ll start from 6px 6px and gradually build down in 0.25px increments until we&#8217;ve reached 0.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful {
+  color: var(--text);
+  text-shadow: 
+    6px 6px        var(--shadow), 
+    5.75px 5.75px  var(--shadow), 
+    5.5px 5.5px    var(--shadow), 
+    5.25px 5.25px  var(--shadow),
+    5px 5px        var(--shadow), 
+    4.75px 4.75px  var(--shadow), 
+    4.5px 4.5px    var(--shadow), 
+    4.25px 4.25px  var(--shadow),
+    4px 4px        var(--shadow),
+    3.75px 3.75px  var(--shadow),
+    3.5px 3.5px    var(--shadow),
+    3.25px 3.25px  var(--shadow),
+    3px 3px        var(--shadow),
+    2.75px 2.75px  var(--shadow),
+    2.5px 2.5px    var(--shadow),
+    2.25px 2.25px  var(--shadow),
+    2px 2px        var(--shadow),
+    1.75px 1.75px  var(--shadow),
+    1.5px 1.5px    var(--shadow),
+    1.25px 1.25px  var(--shadow),
+    1px 1px        var(--shadow),
+    0.75px 0.75px  var(--shadow),
+    0.5px 0.5px    var(--shadow),
+    0.25px 0.25px  var(--shadow);
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_MWwPGgb" src="//codepen.io/anon/embed/MWwPGgb?height=450&amp;theme-id=1&amp;slug-hash=MWwPGgb&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed MWwPGgb" title="CodePen Embed MWwPGgb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Simplifying the code with Sass</h3>
+
+
+
+<p>The result may look good, but the code right now is quite hard to read and edit. If we want to make the shadow larger, we&#8217;d have to do a lot of copying and pasting to achieve it. For example, increasing the shadow size to 10px would mean adding 16 more shadows manually.</p>
+
+
+
+<p>And that&#8217;s where SCSS comes in the picture. We can use functions to automate generating all of the shadows.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">@function textShadow($precision, $size, $color){
+  $value: null; 
+  $offset: 0;
+  $length: $size * (1 / $precision) - 1;
+ 
+  @for $i from 0 through $length {
+    $offset: $offset + $precision;
+    $shadow: $offset + px $offset + px $color;
+    $value: append($value, $shadow, comma);
+  }
+ 
+  @return $value;
+}
+ 
+.playful {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+}</code></pre>
+
+
+
+<p>The function <code>textShadow</code> takes three different arguments: the precision, size and color of the shadow. It then creates a loop where the offset gets increased by <code>$precision</code> (in this case, it’s 0.25px) until it reaches the total size (in this case 6px) of the shadow.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_poJxVob" src="//codepen.io/anon/embed/poJxVob?height=450&amp;theme-id=1&amp;slug-hash=poJxVob&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed poJxVob" title="CodePen Embed poJxVob" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This way we can easily increase the size or precision of the shadow. For example, to create a shadow that&#8217;s 10px large and increases with 0.1px, we would only have to change this in our code:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">text-shadow: textShadow(0.1, 10, #E485F8);</code></pre>
+
+
+
+<h3>Alternating colors</h3>
+
+
+
+<p>We want to spice things up a bit by going for alternating colors. We will split up the text in individual letters wrapped in spans (this can be done manually, or automated with <a href="https://fossheim.io/writing/posts/react-text-splitting/">React</a> or <a href="https://css-irl.info/how-to-accessibly-split-text/">JavaScript</a>). The output will look like this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;p class="playful" aria-label="Wash your hands!">
+  &lt;span aria-hidden="true">W&lt;/span>&lt;span aria-hidden="true">a&lt;/span>&lt;span aria-hidden="true">s&lt;/span>&lt;span aria-hidden="true">h&lt;/span> ...
+&lt;/p></code></pre>
+
+
+
+<p>Then we can use the <code>:nth-child()</code> selector on the spans to change the color of their text and shadow.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span:nth-child(2n) {
+  color: #ED625C;
+  text-shadow: textShadow(0.25, 6, #F2A063);
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_poJxVbN" src="//codepen.io/anon/embed/poJxVbN?height=450&amp;theme-id=1&amp;slug-hash=poJxVbN&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed poJxVbN" title="CodePen Embed poJxVbN" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If we had done this in vanilla CSS, then here&#8217;s what we&#8217;d end up with:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful span {
+  color: var(--text);
+  text-shadow: 
+    6px 6px var(--shadow),
+    5.75px 5.75px var(--shadow),
+    5.5px 5.5px var(--shadow),
+    5.25px 5.25px var(--shadow),
+    5px 5px var(--shadow),
+    4.75px 4.75px var(--shadow),
+    4.5px 4.5px var(--shadow),
+    4.25px 4.25px var(--shadow),
+    4px 4px var(--shadow),
+    3.75px 3.75px var(--shadow),
+    3.5px 3.5px var(--shadow),
+    3.25px 3.25px var(--shadow),
+    3px 3px var(--shadow),
+    2.75px 2.75px var(--shadow),
+    2.5px 2.5px var(--shadow),
+    2.25px 2.25px var(--shadow),
+    2px 2px var(--shadow),
+    1.75px 1.75px var(--shadow),
+    1.5px 1.5px var(--shadow),
+    1.25px 1.25px var(--shadow),
+    1px 1px var(--shadow),
+    0.75px 0.75px var(--shadow),
+    0.5px 0.5px var(--shadow),
+    0.25px 0.25px var(--shadow);
+}
+ 
+.playful span:nth-child(2n) {
+  --text: #ED625C;
+  --shadow: #F2A063;
+}</code></pre>
+
+
+
+<p>We can repeat the same a couple of times with other colors and indexes until we achieve a pattern we like:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzXJLXR" src="//codepen.io/anon/embed/YzXJLXR?height=450&amp;theme-id=1&amp;slug-hash=YzXJLXR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzXJLXR" title="CodePen Embed YzXJLXR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Bonus points: Adding animation</h3>
+
+
+
+<p>Using the same principles, we can bring the text to life even more by adding animations. First, we&#8217;ll add a repeating animation that makes each span move up and down:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful span {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+  position: relative;
+  animation: scatter 1.75s infinite;
+}</code></pre>
+
+
+
+<p>We can optimize this a little further by using the <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/"><code>prefers-reduced-motion</code></a> media query. That way, folks who don’t want the animation won’t get it.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+  position: relative;
+  animation: scatter 1.75s infinite;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  animation: none;
+}</code></pre>
+
+
+
+<p>Then, in each <code>nth-child(n)</code> we&#8217;ll add a different animation delay.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span:nth-child(2n) {
+  color: #ED625C;
+  text-shadow: textShadow(0.25, 6, #F2A063);
+  animation-delay: 0.3s;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ExjdLRp" src="//codepen.io/anon/embed/ExjdLRp?height=450&amp;theme-id=1&amp;slug-hash=ExjdLRp&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ExjdLRp" title="CodePen Embed ExjdLRp" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/">Creating Playful Effects With CSS Text Shadows</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306182</post-id>	</item>
+		<item>
+		<title>Fitting Text to a Container</title>
+		<link>https://css-tricks.com/fitting-text-to-a-container/</link>
+					<comments>https://css-tricks.com/fitting-text-to-a-container/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 29 Jun 2018 14:44:29 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[fluid type]]></category>
+		<category><![CDATA[text effect]]></category>
+		<category><![CDATA[text-justify]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=272448</guid>
+
+					<description><![CDATA[<p>There are a number of ways to go about putting some text in a container and having it size itself to fill that container. There are different technologies we can use and different considerations to think about. Let us count the ways.</p>
+</p>
+<p>Magic Number it with viewport units</p>
+<p>If you set type with <code>vw</code> (viewport width) units, you can find an exact number where the text pretty closely fits the container and doesn&#8217;t break as you resize. I&#8217;d call this &#8230; <a href="https://css-tricks.com/fitting-text-to-a-container/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Fitting Text to a Container&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/fitting-text-to-a-container/">Fitting Text to a Container</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>There are a number of ways to go about putting some text in a container and having it size itself to fill that container. There are different technologies we can use and different considerations to think about. Let us count the ways.</p>
+<p><span id="more-272448"></span></p>
+<h3>Magic Number it with viewport units</h3>
+<p>If you set type with <code>vw</code> (viewport width) units, you can find an exact number where the text pretty closely fits the container and doesn&#8217;t break as you resize. I&#8217;d call this <a href="https://css-tricks.com/magic-numbers-in-css/">a magic number</a>. </p>
+<p>In this case, <code>font-size: 25.5vw;</code> works down to a 320px viewport, but still will break much lower than that. </p>
+<p data-height="367" style="height: 367px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="gKoVBg" data-default-tab="css,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with Viewport Units" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/gKoVBg/">Fitted Text with Viewport Units</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>This is kind of a less exotic version of <a href="https://css-tricks.com/snippets/css/fluid-typography/">fluid typography</a>, which involves more of a sprinkling of viewport units and min/max sizes.</p>
+<h3>FitText</h3>
+<p>Dave Rupert&#8217;s <a href="http://fittextjs.com/">FitText</a> is up for the job. You still need a bit of a magic number to get the sizing just right for any particular job:</p>
+<p data-height="364" style="height: 364px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="XYVvOG" data-default-tab="js,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with FitText" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/XYVvOG/">Fitted Text with FitText</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>FitText without jQuery</h3>
+<p>If you aren&#8217;t using jQuery, there are options. Listed from the repo:</p>
+<ul>
+<li><a href="https://github.com/adactio/FitText.js">non-jQuery FitText</a> from @adactio</li>
+<li><a href="https://github.com/patrickmarabeas/AngularJS-FitText.js">Angular.js FitText.js</a> from @patrickmarabeas</li>
+<li><a href="https://github.com/ampproject/amphtml/tree/master/extensions/amp-fit-text">AMP-HTML FitText</a></li>
+<li><a href="https://github.com/peacechen/FitText-UMD">FitText UMD</a> by @peacechen</li>
+</ul>
+<p>Example of the first:</p>
+<p data-height="363" style="height: 363px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="PaEMMj" data-default-tab="js,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with FitText (no jQuery)" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/PaEMMj/">Fitted Text with FitText (no jQuery)</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>textFit</h3>
+<p>Swap the words in FitText around and you got yourself <a href="https://github.com/STRML/textFit">textFit</a>! It&#8217;s another JavaScript library that adjusts font sizes to fit text into a container. Big caveat here though: <strong>textFit is designed for two-dimensions. So you need a <code>width</code> and <code>height</code> on the element for it to do it&#8217;s thing.</strong> </p>
+<p data-height="416" style="height: 416px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="GGQKJE" data-default-tab="js,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with textFit" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/GGQKJE/">Fitted Text with textFit</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>fitty</h3>
+<p><a href="https://github.com/rikschennink/fitty">fitty</a> is more like FitText in that it resizes type to maximize just horizontally, but actually seems to require no magic numbers. </p>
+<p data-height="345" style="height: 345px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="mKXbwB" data-default-tab="js,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with fitty" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/mKXbwB/">Fitted Text with fitty</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>TextFill</h3>
+<p><a href="http://jquery-textfill.github.io/">TextFill</a> is jQuery-based and requires a width, height, and a configured maximum font size to work. Here&#8217;s the basic demo we&#8217;ve been working from:</p>
+<p data-height="409" style="height: 409px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="QxQwwd" data-default-tab="css,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with TextFill" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/QxQwwd/">Fitted Text with TextFill</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>FlowType</h3>
+<p><a href="http://simplefocus.com/flowtype/">FlowType</a> is kind of designed to work on a whole document of text, resizing it all fluidly at once, with minimum and maxium viewport sizes. But you can scope it however you want. You also apply a magic number to get things how you want them.</p>
+<p data-height="370" style="height: 370px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="aKqzBQ" data-default-tab="js,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with FlowType" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/aKqzBQ/">Fitted Text with FlowType</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>Just use SVG</h3>
+<p>With <code>width: 100%</code> and a <code>viewBox</code>, SVG will be a fullsize box that resizes with an aspect ratio. Pretty neat trick! To set the type, you&#8217;ll need some magic numbers to get that <code>viewBox</code> just right and push the text into the right spot &mdash; but it&#8217;s doable with zero dependencies, just like the viewport units demo.</p>
+<p data-height="287" style="height: 287px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="zaRxdm" data-default-tab="html,result" data-user="chriscoyier" data-embed-version="2" data-pen-title="Fitted Text with SVG" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/zaRxdm/">Fitted Text with SVG</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/fitting-text-to-a-container/">Fitting Text to a Container</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/fitting-text-to-a-container/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">272448</post-id>	</item>
+		<item>
+		<title>Responsive Knockout Text With Looping Video</title>
+		<link>https://css-tricks.com/responsive-knockout-text-with-looping-video/</link>
+					<comments>https://css-tricks.com/responsive-knockout-text-with-looping-video/#comments</comments>
+		
+		<dc:creator><![CDATA[Giulio Mainardi]]></dc:creator>
+		<pubDate>Thu, 03 May 2018 14:06:10 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[text effect]]></category>
+		<category><![CDATA[video]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=270378</guid>
+
+					<description><![CDATA[<p>Here’s an idea! Let’s make an an HTML <code>&#60;video&#62;</code> play <em>inside</em> the shape of some letters. Like <a href="https://css-tricks.com/css-techniques-and-effects-for-knockout-text/">&#8220;Knockout Text&#8221;</a> except instead of an image behind, it’s video.  A live demo will explain more clearly:</p>
+<p data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="PRgvRQ" data-default-tab="result" data-user="mgiulio" data-embed-version="2" data-pen-title="basic pen" class="codepen">See the Pen <a href="https://codepen.io/mgiulio/pen/PRgvRQ/">basic pen</a> by Giulio Mainardi (<a href="https://codepen.io/mgiulio">@mgiulio</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>A key objective here is to develop this responsively. The idea is to not only scale the video in size to fit the parent container (as video generally does), but scale the &#8230; <a href="https://css-tricks.com/responsive-knockout-text-with-looping-video/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Responsive Knockout Text With Looping Video&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/responsive-knockout-text-with-looping-video/">Responsive Knockout Text With Looping Video</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here’s an idea! Let’s make an an HTML <code>&lt;video&gt;</code> play <em>inside</em> the shape of some letters. Like <a href="https://css-tricks.com/css-techniques-and-effects-for-knockout-text/">&#8220;Knockout Text&#8221;</a> except instead of an image behind, it’s video. <span id="more-270378"></span> A live demo will explain more clearly:</p>
+<p data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="PRgvRQ" data-default-tab="result" data-user="mgiulio" data-embed-version="2" data-pen-title="basic pen" class="codepen">See the Pen <a href="https://codepen.io/mgiulio/pen/PRgvRQ/">basic pen</a> by Giulio Mainardi (<a href="https://codepen.io/mgiulio">@mgiulio</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>A key objective here is to develop this responsively. The idea is to not only scale the video in size to fit the parent container (as video generally does), but scale the text as well, maintaining the size relationship between the type and underlying video.</p>
+<p>We’re going to get there by using the CSS <a href="https://css-tricks.com/almanac/properties/c/clip/"><code>clip-path</code></a> property to clip the video against an <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">SVG path</a> defined within a <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/clipPath"><code>&lt;clipPath&gt;</code></a> element. </p>
+<p>First we’ll cover the core concept. Then we’ll add some eye candy by adding a few more features and demonstrate them with a couple additional demos.</p>
+<h3>Setting Up the Video in HTML</h3>
+<p>Let’s start with the video markup. Inside the <code>&lt;video&gt;</code> tag we specify the URLs for the <a href="https://en.wikipedia.org/wiki/WebM">WebM</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats">MP4</a> versions of the video, to support a broad range of browsers:</p>
+<pre rel="HTML"><code class="language-html">&lt;video&gt;
+  &lt;source src="/video/mt-baker.webm" type="video/webm"&gt;
+  &lt;source src="/video/mt-baker.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+<p>Then we add some attributes to customize the video playing behavior:</p>
+<pre rel="HTML" data-line="2"><code class="language-html">&lt;video loop autoplay muted playsinline&gt;
+  &lt;source src="/video/mt-baker.webm" type="video/webm"&gt;
+  &lt;source src="/video/mt-baker.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+<ul>
+<li>The <code>loop</code> attribute makes the video plays forever</li>
+<li>The <code>autoplay</code> and <code>muted</code> attributes are used to allow the automatic video playback at page load on all devices and ensure it play without audio</li>
+<li>The <code>playsinline</code> attribute tries to disable the full-screen expansion of the video when it is played on some mobile devices</li>
+</ul>
+<p>Then a container is wrapped around the <code>&lt;video&gt;</code> element. This will come in handy when we&#8217;ll spice up the basic demo with some visual effects.</p>
+<p>Here’s the complete markup:</p>
+<pre rel="HTML" data-line="2,7"><code class="language-html">&lt;div class="video-container"&gt;
+  &lt;video loop autoplay muted playsinline&gt;
+    &lt;source src="/video/mt-baker.webm" type="video/webm"&gt;
+    &lt;source src="/video/mt-baker.mp4" type="video/mp4"&gt;
+  &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+<h3>The Basic CSS to Position and Scale the Video</h3>
+<p>Here, the main task to fulfill is to make the video responsive. It must scale up and down, spanning the width of its parent container and keeping its intrinsic aspect ratio:</p>
+<pre rel="CSS"><code class="language-css">.video-container video {
+  display: block;
+  width: 100%;
+}</code></pre>
+<p>After formatting the video as a block-level element with <code>display: block</code>, assigning a 100% value to its width makes it as large as its container. And that&#8217;s all we need, because the initial <code>auto</code> value of the <code>height</code> property and the video intrinsic aspect ratio <a href="https://www.w3.org/TR/2011/REC-CSS2-20110607/visudet.html#inline-replaced-height">make it uniformly scale</a>, without distortion.</p>
+<p>In the original demo, I repeated the video several times in the container to test this responsive behavior. Here’s the CSS I’m using to test the responsiveness of each video at different widths:</p>
+<pre rel="CSS"><code class="language-css">.video-container {
+  margin: 40px auto;
+  outline: 1px solid #dadada;
+  &amp;:nth-of-type(1) { width: 25%; } /* first video instance, and so on */
+  &amp;:nth-of-type(2) { width: 50%; }
+  &amp;:nth-of-type(3) { width: 75%; }
+  &amp;:nth-of-type(4) { width: 100%; }
+}</code></pre>
+<figure id="post-270384" class="align-none media-270384"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/04/knockout-video-1.jpg?ssl=1" alt="Four screenshots of the same video of a snowcapped mountain at different sizes to demonstrate different widths." data-recalc-dims="1" /></figure>
+<p>The <code>outline</code> set on the containers will help us visualize the location and size of the videos when they are clipped. Speaking of which&#8230;</p>
+<h3>Clipping the Video in CSS</h3>
+<p>Thanks to the <code>clip-path</code> CSS property, we can define a region of an element to be displayed instead of the entire thing — and do it with a single line:</p>
+<pre rel="CSS"><code class="language-css">video {
+  clip-path: url(#clip-00);
+}</code></pre>
+<p>With the <code>url()</code> function, we specify the id of the SVG <code>clipPath</code> element where the clipping text is defined.</p>
+<p>Note that although the visible geometry of the video is altered by the clipping, the video element is still a rectangular box for the browser, so the page layout is the same as if the clipping was not used. This is part of the beauty of clipping and, if you’re new to the concept, then definitely check out <a href="https://css-tricks.com/masking-vs-clipping-use/">Sarah’s explanation of it</a>.</p>
+<p>Now the trick is actually creating that clip path!</p>
+<h3>Creating the SVG `clipPath` element</h3>
+<p>I am going to create the text design, do the editing, then export the work in <a href="https://inkscape.org/en/">Inkscape</a>. Similar steps could be put together with other vector editors. Feel free to report your experiences in the comments.</p>
+<p>The first step is to keep note of the video aspect ratio, which is its <code>width:height</code> ratio.</p>
+<p>Next, create a document with the same size as the video or just with the same aspect ratio. So, for example, if you’re video is <code>1000px</code>  wide and <code>500px</code> tall, then you could use that as the document size or anything with a 2:1 ratio. This will act as a placeholder for the video, so make sure the document borders are visible. Also, remove the default layer created by the program, as this will simplify the code generated by SVG, avoiding the creation of unnecessary group elements.</p>
+<figure id="post-270385" class="align-none media-270385"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/04/knockout-video-2.jpg?ssl=1" alt="A screenshot of a blank canvas in the Inkscape editor." data-recalc-dims="1" /></figure>
+<p>Select the text tool, pick a nice bold and thick font, enter the text and stretch it to cover the document rectangle as you please.</p>
+<figure id="post-270386" class="align-none media-270386"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/04/knockout-video-3.jpg?ssl=1" alt="A screenshot of the word Text in all caps printed on the Inkscape canvas." data-recalc-dims="1" /></figure>
+<p>Now, if we take a look at the code generated by Inkscape we see something like this:</p>
+<pre rel="HTML"><code class="language-html">&lt;text
+  xml:space="preserve"
+  style="font-style:normal;font-weight:normal;font-size:1147.68029785px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  x="23.404421"
+  y="939.04187"
+  id="text3336"
+  sodipodi:linespacing="125%"
+  transform="scale(0.8988993,1.1124717)"
+&gt;
+  &lt;tspan
+    sodipodi:role="line"
+    id="tspan3338"
+    x="23.404421"
+    y="939.04187"
+    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed'"
+  &gt;
+    TEXT
+  &lt;/tspan&gt;
+&lt;/text&gt;</code></pre>
+<p>That&#8217;s a bit unwieldy, so let&#8217;s convert the SVG <code>&lt;text&gt;</code> element into a path:</p>
+<pre rel="HTML"><code class="language-html">&lt;g
+  transform="scale(0.8988993,1.1124717)"
+  style="font-style:normal;font-weight:normal;font-size:1147.68029785px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  id="text3336"
+&gt;
+  &lt;path 
+    d="m 545.68862,31.769213 0,181.566607 -140.09769,0 0,725.70605 -235.92452,0 0,-725.70605 -139.5373,0 0,-181.566607 515.55951,0 z"
+    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed'"
+    id="path3348" /&gt;
+  &lt;path
+    d="m 599.48616,31.769213 393.39432,0 0,181.566607 -157.46981,0 0,172.03997 147.38277,0 0,172.60036 -147.38277,0 0,199.49911 173.16073,0 0,181.56661 -409.08524,0 0,-907.272657 z"
+    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed'"
+    id="path3350" /&gt;
+&lt;path
+  d="M 1554.9524,31.769213 1472.575,433.009 l 124.4067,506.03287 -218.5524,0 q -39.2273,-135.61457 -71.73,-330.07016 -8.9662,85.73978 -24.6572,182.127 l -22.4156,147.94316 -229.7602,0 85.1794,-506.03287 -85.1794,-401.239787 228.079,0 q 6.1643,37.546181 24.6572,124.967137 14.5702,66.68651 24.0968,122.16519 l 50.4352,-247.132327 197.8179,0 z"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed'"
+  id="path3352" /&gt;
+&lt;path
+  d="m 2105.8165,31.769213 0,181.566607 -140.0976,0 0,725.70605 -235.9246,0 0,-725.70605 -139.5373,0 0,-181.566607 515.5595,0 z"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed'"
+  id="path3354" /&gt;
+&lt;/g&gt;</code></pre>
+<p>Now, we have a group containing a path element for each letter of the text. Un-grouping it leaves this set of paths at the root level. This step, besides removing the unneeded group, modifies the coordinates of the path elements to account for the transform that was applied to the removed parent group. So, after this step, there are no transform attributes in the SVG:</p>
+<pre rel="HTML"><code class="language-html">&lt;path
+  inkscape:connector-curvature="0"
+  id="path3348"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:medium;line-height:125%;font-family:Impact;-inkscape-font-specification:'Impact Condensed';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  d="m 490.51912,35.34235 0,201.98771 -125.93372,0 0,807.32744 -212.07238,0 0,-807.32744 -125.429984,0 0,-201.98771 463.436084,0 z" /&gt;
+&lt;path
+  inkscape:connector-curvature="0"
+  id="path3350"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:medium;line-height:125%;font-family:Impact;-inkscape-font-specification:'Impact Condensed';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  d="m 538.87769,35.34235 353.62188,0 0,201.98771 -141.5495,0 0,191.3896 132.48227,0 0,192.01302 -132.48227,0 0,221.93711 155.65406,0 0,201.98771 -367.72644,0 0,-1009.31515 z" /&gt;
+&lt;path
+  inkscape:connector-curvature="0"
+  id="path3352"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:medium;line-height:125%;font-family:Impact;-inkscape-font-specification:'Impact Condensed';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  d="m 1397.7456,35.34235 -74.049,446.36791 111.8291,562.94724 -196.4566,0 q -35.2614,-150.86737 -64.478,-367.19371 -8.0597,95.38308 -22.1644,202.61114 l -20.1493,164.58257 -206.5313,0 76.5677,-562.94724 -76.5677,-446.36791 205.02,0 q 5.5411,41.769064 22.1644,139.0224 13.0971,74.18686 21.6606,135.90532 l 45.3362,-274.92772 177.8183,0 z" /&gt;
+&lt;path
+  inkscape:connector-curvature="0"
+  id="path3354"
+  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:medium;line-height:125%;font-family:Impact;-inkscape-font-specification:'Impact Condensed';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+  d="m 1892.917,35.34235 0,201.98771 -125.9337,0 0,807.32744 -212.0724,0 0,-807.32744 -125.43,0 0,-201.98771 463.4361,0 z" /&gt;</code></pre>
+<p>Those ugly style attributes are still there, but it doesn&#8217;t matter because we are not going to use them.</p>
+<p>We have finished with Inkscape, so we can save the SVG document and open it in our favorite code editor.</p>
+<p class="explanation">Saving SVG files from an illustration application is an art form in and of itself. Here are some common <a href="https://css-tricks.com/snippets/svg/abobe-illustrator-export-options/">tips and common settings for Adobe Illustrator</a> and a <a href="https://css-tricks.com/one-illustration-three-svg-outputs/">comparison of SVG exports</a> from Illustrator, Sketch and Figma.</p>
+<p>In the HTML page where the video is played, insert an inline SVG element. This will host the clip path:</p>
+<pre rel="HTML"><code class="language-html">&lt;svg class="clipping-paths"&gt;
+  &lt;defs&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;</code></pre>
+<p>We don&#8217;t want this container element to affect the page layout, so:</p>
+<pre rel="CSS"><code class="language-css">.clipping-paths {
+  width: 0;
+  height: 0;
+  position: absolute;
+}</code></pre>
+<p>Add a new <code>clipPath</code> element to the container SVG, with a proper id to identify it in the <code>clip-path</code> property, as seen before:</p>
+<pre rel="HTML"><code class="language-html">&lt;svg class="clipping-paths"&gt;
+  &lt;defs&gt;
+    &lt;clipPath id="clip-00"&gt;&lt;/clipPath&gt;
+    &lt;clipPath id="clip-01"&gt;&lt;/clipPath&gt;
+     ...
+  &lt;/defs&gt;
+&lt;/svg&gt;</code></pre>
+<p>As showed in the above snippet, multiple clipping paths can be added, if needed.</p>
+<p>Now, we must assign the <code>objectBoundingBox</code> value to the <code>clipPath</code>&#8216;s attribute <code>clipPathUnits</code>:</p>
+<pre rel="HTML"><code class="language-html">&lt;clipPath id="clip-00" clipPathUnits="objectBoundingBox"&gt;&lt;/clipPath&gt;</code></pre>
+<p>This is one of the essential things to do to have a responsive cutout. We tell the browser which coordinate system to use for the numerical values listed in the <code>d</code> attributes of the paths that will be appended to the <code>clipPath</code> element.</p>
+<p>The default value for the <code>clipPathUnits</code> attribute is <code>userSpaceOnUse</code>. <a href="https://www.w3.org/TR/SVG/masking.html#EstablishingANewClippingPath">According to the spec</a>, this means that:</p>
+<blockquote><p>&#8230;the contents of the <code>clipPath</code> element represent values in the current user coordinate system in place at the time when the (clipPath)element is referenced (i.e., the user coordinate system for the element referencing the <code>clipPath</code> element via the clip-path property).</p></blockquote>
+<p>Instead, by using the other available value for <code>clipPathUnits</code>, <code>objectBoundingBox</code>, the coordinate values and the lengths specified in the <code>clipPath</code> content are considered as fractional values in the [0,1] range, relative to the bounding box of the clipped element. For instance, if a graphical primitive in the <code>clipPath</code> referred to the coordinates (0,0), (1,0), (1,1), (0,1) and (0.5,0.5), these points would represent respectively, the top left, top right, bottom right, bottom left corners, and the center of the video, no matter the actual size of the video on screen. It is this behavior that allows the text cutout to scale in the same way as the underlying video.</p>
+<p>After having removed any transforms from the SVG file in Inkscape, all the numerical values of the path elements are now in the document range. To map them into the [0,1] interval required for <code>objectBoundingBox</code>, it is sufficient to divide such numerical values by the document size. The x coordinates are divided by the document width and the y coordinates by the document height.</p>
+<p>To accomplish this division, a scaling with the SVG <code>transform</code> attribute can be employed:</p>
+<pre rel="HTML"><code class="language-html">&lt;clipPath id="clip-00" clipPathUnits="objectBoundingBox" transform="scale(0.0005208333333333333, 0.000925925925925926)"&gt;</code></pre>
+<p>The horizontal scaling must be the reciprocal of the document width, while the vertical scaling must be the reciprocal of the document height. So, in our case, given that the document has the same exact size as the video, that is, <code>1920 X 1080</code>, we get the two factors <code>1 / 1920 = 0.0005208333333333333</code> and <code>1 / 1080 = 0.000925925925925926</code>.</p>
+<p>The last step in this workflow is to copy the <code>&lt;path&gt;</code> elements from the file generated by Inkscape inside the <code>clipPath</code> element, getting something like this:</p>
+<pre rel="HTML" data-line="2"><code class="language-html">&lt;clipPath id="clip-00" clipPathUnits="objectBoundingBox" transform="scale(0.0005208333333333333, 0.000925925925925926)"&gt;
+  &lt;path d="m 341.4087,58.040727 0,951.927273 -112.60986,0 -66.8335,-432.74767 0,432.74767 -107.42188,0 0,-951.927273 107.42188,0 72.02149,428.631863 0,-428.631863 107.42187,0 z" /&gt;
+  ...
+  &lt;path d="m 1642.6782,58.040727 214.2334,0 0,190.503053 -85.7544,0 0,180.50751 80.2613,0 0,181.09549 -80.2613,0 0,209.31816 94.2994,0 0,190.50306 -222.7784,0 0,-951.927273 z" /&gt;
+&lt;/clipPath&gt;</code></pre>
+<p>To reiterate, we have copied just the <code>d</code> attribute of the paths, discarding all the other stuff generated by Inkscape.</p>
+<h3>Putting it All Together</h3>
+<p>And there we have it, gluing together the above snippets with some more code(see the pen source for details), we get the first basic demo:</p>
+<p><iframe id="cp_embed_PRgvRQ" src="https://codepen.io/mgiulio/embed/preview/PRgvRQ?height=300&amp;slug-hash=PRgvRQ&amp;default-tabs=html,result&amp;host=https://codepen.io" title="Responsive Knockout Text With Looping Video: basic pen" scrolling="no" frameborder="0" height="300" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></p>
+<h3>Other Examples</h3>
+<p>We can reuse the above workflow to create some more cutouts, like in the second demo here:</p>
+<p><iframe id="cp_embed_geJoVw" src="https://codepen.io/mgiulio/embed/preview/geJoVw?height=300&amp;slug-hash=geJoVw&amp;default-tabs=html,result&amp;host=https://codepen.io" title="Responsive Knockout Text With Looping Video:  more cutouts" scrolling="no" frameborder="0" height="300" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></p>
+<p>The last example is worthy of attention because it is the <em>negative</em> of the text used in the first demo; that is, the internal and external regions delimited by the paths were swapped. So, the white text we see is a hole through which the background color of the page body is visible. This negative cutout was derived from the original with a <a href="http://tavmjong.free.fr/INKSCAPE/MANUAL/html/Paths-Combining.html">difference path operation</a> in Inkscape.</p>
+<h3>Adding Background Colors</h3>
+<p>Building on top of the basic demo, we can add a color to the text cutout by assigning a <code>background-color</code> to the video container, because this wrapper element is visible everywhere the video is clipped out:</p>
+<pre rel="CSS"><code class="language-css">.video-container {
+  // ...
+  &amp;:nth-of-type(1) { background: #c6c7c5; }
+  &amp;:nth-of-type(2) { background: #dcf3ff; }
+  &amp;:nth-of-type(3) { background: #a2d2df; }
+  &amp;:nth-of-type(4) { background: #406e8d; }
+  &amp;:nth-of-type(5) { background: linear-gradient(180deg, #bdc3c2, #2d5d89); }
+}</code></pre>
+<p>The result can be seen in the third demo:</p>
+<p><iframe id="cp_embed_vRwdNG" src="https://codepen.io/mgiulio/embed/preview/vRwdNG?height=300&amp;slug-hash=vRwdNG&amp;default-tabs=html,result&amp;host=https://codepen.io" title="Responsive Knockout Text With Looping Video:  background colors" scrolling="no" frameborder="0" height="300" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></p>
+<h3>Adding Tint</h3>
+<p>How about tinting the video? We can do that with a pseudo element and <a href="https://css-tricks.com/almanac/properties/m/mix-blend-mode/">CSS Blend Modes</a>:</p>
+<pre rel="CSS"><code class="language-css">.video-container {
+  /* ... */ 
+  position: relative;
+}
+
+.video-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: url(#clip-00);
+}
+        
+.video-container:nth-of-type(1) {
+  background: #406e8d;
+}
+
+.video-container:nth-of-type(1)::after {
+  background-color: #3f51b5;
+  mix-blend-mode: screen;
+}</code></pre>
+<p><iframe id="cp_embed_MVdQKq" src="https://codepen.io/mgiulio/embed/preview/MVdQKq?height=300&amp;slug-hash=MVdQKq&amp;default-tabs=html,result&amp;host=https://codepen.io" title="Responsive Knockout Text With Looping Video: tinting" scrolling="no" frameborder="0" height="300" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></p>
+<p>The <code>::after</code> pseudo element of the video wrapper is absolutely positioned on top of the video, covering it entirely, and then it is clipped with the same path used for the video. In this way, it is possible to use different colors for the background and the tint.</p>
+<p>Finally, after having assigned the desired tint color to the pseudo element, with the <code>mix-blend-mode</code> property we can pick one of the available blending modes to obtain the wanted effect.</p>
+<h3>Browser Support</h3>
+<p>At the time of writing, almost all the latest versions of desktop and mobile browsers support the CSS <code>clip-path</code> property. The prefixed version, <code>-webkit-clip-path</code>, has to be used on WebKit-based user agents such as Safari and Samsung Internet.</p>
+<p><div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=css-clip-path">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="a yep-nope yep-nope-partial" title="Chrome - "><span class="caniuse-agents-version version">86</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">54</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="a yep-nope yep-nope-partial" title="Edge - "><span class="caniuse-agents-version version">83</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP*</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="a yep-nope yep-nope-partial" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="a yep-nope yep-nope-partial" title="Android - "><span class="caniuse-agents-version version">81</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5*</span></td></tr></table></div></div></p>
+<p>Unfortunately, an exception is given by the Microsoft browsers. There is definitely no support on Internet Explorer, and on Edge the feature is <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/masks/">under development</a>. Please vote it up on the <a href="https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer/suggestions/6519995-support-clip-path-property#{toggle_previous_statuses">Microsoft Developer Feedback page</a>!</p>
+<p>Of course, for the last demo, a browser supporting CSS Blend Modes is required. In this case, the support is wider, being this feature is even implemented by Edge.</p>
+<p><div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=canvas-blending">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">30</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">20</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">13</span></td><td class="y yep" title="Safari - "><span class="caniuse-agents-version version">6.1</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">4.4</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">7.0-7.1</span></td></tr></table></div></div></p>
+<h3>References and Credits</h3>
+<p><a href="http://meyerweb.com/">Eric Meyer</a> writes about the <a href="http://meyerweb.com/eric/thoughts/2017/02/24/scaling-svg-clipping-paths-for-css-use/">scaling of the SVG clipping path for an HTML element</a>, using the <code>objectBoundingBox</code> value for the <code>clipPathUnits</code> attribute, and the scaling transform. That was a huge inspiration for this post.</p>
+<p>Thanks to <a href="http://www.coverr.co/#coverrs">Coverr</a> for the video that was used in these demos.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/responsive-knockout-text-with-looping-video/">Responsive Knockout Text With Looping Video</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/responsive-knockout-text-with-looping-video/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">270378</post-id>	</item>
+		<item>
+		<title>Text Effects with CSS (and a little contenteditable trick)</title>
+		<link>https://css-tricks.com/text-effects-css-little-contenteditable-trick/</link>
+					<comments>https://css-tricks.com/text-effects-css-little-contenteditable-trick/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 21 Mar 2017 12:46:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[text effect]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=252961</guid>
+
+					<description><![CDATA[<p><a href="https://twitter.com/Mandy_Kerr">Mandy Michael</a> has been <a href="http://codepen.io/collection/DamKJW/">creating some incredible text effects</a> with just the power of CSS. She uses every trick in the book: gradients, transforms, pseudo elements, shadows, and clipping paths to name a few. They are all <em>real</em> web text too. Custom fonts typically, but no images, canvas, or SVG or anything like that. </p>
+</p>
+<p>Take a look at this beautiful effect:</p>
+<p data-height="404" style="height: 404px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="BWyYYP" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="CSS only 3D paper fold text effect" class="codepen">See the Pen <a href="https://codepen.io/mandymichael/pen/BWyYYP/">CSS only 3D paper fold text effect</a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.&#8230; <a href="https://css-tricks.com/text-effects-css-little-contenteditable-trick/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Text Effects with CSS (and a little contenteditable trick)&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/text-effects-css-little-contenteditable-trick/">Text Effects with CSS (and a little contenteditable trick)</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://twitter.com/Mandy_Kerr">Mandy Michael</a> has been <a href="http://codepen.io/collection/DamKJW/">creating some incredible text effects</a> with just the power of CSS. She uses every trick in the book: gradients, transforms, pseudo elements, shadows, and clipping paths to name a few. They are all <em>real</em> web text too. Custom fonts typically, but no images, canvas, or SVG or anything like that. </p>
+<p><span id="more-252961"></span></p>
+<p>Take a look at this beautiful effect:</p>
+<p data-height="404" style="height: 404px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="BWyYYP" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="CSS only 3D paper fold text effect" class="codepen">See the Pen <a href="https://codepen.io/mandymichael/pen/BWyYYP/">CSS only 3D paper fold text effect</a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p>The fact that it is real text makes it accessible, searchable, and of course, selectable:</p>
+<figure id="post-252979" class="align-none media-252979"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/03/selectable.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Demos are an awesome place to use the <code>contenteditable</code> attribute, which turns any text element into sort of like a <code>textarea</code> or <code>input</code>, in that then anyone can click right into it and change the text. </p>
+<pre rel="HTML"><code class="language-markup">&lt;h1 contenteditable&gt;Cool Title&lt;/h1&gt;</code></pre>
+<p>But because many of Mandy&#8217;s demos use pseudo elements with text that needs to match the text in the element itself, the text can get out-of-sync:</p>
+<figure id="post-252980" class="align-none media-252980"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/03/out-of-sync.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Never fear! It&#8217;s just a few lines of JavaScript to keep those bits of text in sync:</p>
+<pre rel="JavaScript"><code class="language-javascript">var h1 = document.querySelector("h1");
+
+h1.addEventListener("input", function() {
+  this.setAttribute("data-heading", this.innerText);
+});</code></pre>
+<p>The input event is real handy, as it covers any change in an element&#8217;s value, even <code>contenteditable</code> elements. It has decent browser support, just no IE (Edge is fine). If you really needed this for IE, you could still get it done combining events like <code>keyup</code>, <code>paste</code>, and <code>blur</code> and stuff. But you probably don&#8217;t need to for a little thing like this.</p>
+<p>Now we&#8217;re all good:</p>
+<figure id="post-252981" class="align-none media-252981"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/03/hi.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>But before we go, let&#8217;s bask in more of Mandy&#8217;s creations:</p>
+<p data-height="338" style="height: 338px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="vxmKpz" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="Lines and layered css text effects " class="codepen">See the Pen <a href="https://codepen.io/mandymichael/pen/vxmKpz/">Lines and layered css text effects </a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="WpjMpJ" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="Stripy Rainbow Text Effect" class="codepen">See the Pen <a href="http://codepen.io/mandymichael/pen/WpjMpJ/">Stripy Rainbow Text Effect</a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="560" style="height: 560px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="VprZaq" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="Single element, multi coloured 3d text effect" class="codepen">See the Pen <a href="https://codepen.io/mandymichael/pen/VprZaq/">Single element, multi coloured 3d text effect</a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p data-height="333" style="height: 333px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="pRXQZO" data-default-tab="result" data-user="mandymichael" data-embed-version="2" data-pen-title="Split fractured text" class="codepen">See the Pen <a href="http://codepen.io/mandymichael/pen/pRXQZO/">Split fractured text</a> by Mandy Michael (<a href="http://codepen.io/mandymichael">@mandymichael</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/text-effects-css-little-contenteditable-trick/">Text Effects with CSS (and a little contenteditable trick)</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/text-effects-css-little-contenteditable-trick/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">252961</post-id>	</item>
+		<item>
+		<title>SVG Filters on Text</title>
+		<link>https://css-tricks.com/svg-filters-on-text/</link>
+					<comments>https://css-tricks.com/svg-filters-on-text/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Scott]]></dc:creator>
+		<pubDate>Fri, 09 Aug 2013 18:42:38 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[filter]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg filters]]></category>
+		<category><![CDATA[text effect]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=146140</guid>
+
+					<description><![CDATA[<p><em class="explanation">The following is a guest post by <a href="http://chrisscott.me">Chris Scott</a>. Chris was messing around with SVG filters and how they can be applied to text. I thought this was quite interesting because SVG filters are quite a bit different than CSS filters. Arguably more powerful, as there are more of them and you can do things like bevel/emboss or stroke which you can&#8217;t in CSS filters. Chris goes into detail here on how it&#8217;s done including a tool to make </em>&#8230; <a href="https://css-tricks.com/svg-filters-on-text/" class="read-more">Read article <span class="screen-reader-text"> &#8220;SVG Filters on Text&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-filters-on-text/">SVG Filters on Text</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><em class="explanation">The following is a guest post by <a href="http://chrisscott.me">Chris Scott</a>. Chris was messing around with SVG filters and how they can be applied to text. I thought this was quite interesting because SVG filters are quite a bit different than CSS filters. Arguably more powerful, as there are more of them and you can do things like bevel/emboss or stroke which you can&#8217;t in CSS filters. Chris goes into detail here on how it&#8217;s done including a tool to make it even easier.</em></p>
+<p>There has been a general trend in Web development, for some years now, away from using images in designs. Only a few years ago software companies would favour using an image of a rounded corner as the best &#8220;cross-browser&#8221; solution; the CSS attribute <code>border-radius</code> has made that technique seem very antiquated today. Titles are another example of this trend, where in the past one may have generated a fancy banner title in Photoshop and used an image to show it on the page. These days we have web fonts at our disposal and CSS3 to help us achieve shadows and other effects. These solutions load much faster, scale better and are more accessible and semantically correct. But there is even more we can do!</p>
+<p><span id="more-146140"></span></p>
+<h3>SVG Filters</h3>
+<p><a href="https://css-tricks.com/using-svg/">SVG</a> with Filter Effects have a lot of potential for complex text styling. Take a look at this example:</p>
+<p data-height="134" style="height: 134px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="cLdjG" data-user="chrismichaelscott" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/chriscoyier/pen/cLdjG'>SVG Filters on Text</a> by chrismichaelscott (<a href='http://codepen.io/chrismichaelscott'>@chrismichaelscott</a>) on <a href='http://codepen.io'>CodePen</a></p>
+<p>That line is created using SVG Filter Effects. It&#8217;s just text. You can select it with your cursor. Search engines can index it. It will scale in size without losing quality. To boot, it takes very little time to download. You can achieve a whole lot more, too, the scope for creativity with Filter Effects is huge. The example was created with a library called Raphael.js and an extension I wrote for it. This article talks about the rationale for developing the extension and shows &#8211; in brief &#8211; how it can be used.</p>
+<p><a href="http://w3techs.com/technologies/details/im-svg/all/all" alt="SVG usage stats">Apparently</a>, only 0.1% of Web pages use SVG graphics. If that statistic is anything to go by, there&#8217;s a good chance that you are probably not using SVG on a regular basis. Why is SVG used so unpopular? It&#8217;s only a guess, but the reason I didn&#8217;t get into SVG (until I absolutely had to) was its learning curve: SVG is an XML vocabulary and is, I think, extremely technical (matrix multiplication for colour shifts, anyone?). The way I got into SVG was through <a href="http://raphaeljs.com" alt="Raphael">Raphael.js</a>, a JavaScript Library for creating vector drawings. Because it&#8217;s a JavaScript library it felt fairly familiar, all of the complexity was abstracted away. Before long I was creating complex graphics like a pro.</p>
+<h3>Filter Effects for Raphael</h3>
+<p>Raphael has a shortcoming though: no support for Filter Effects. I remember one of my customers specifically requesting a drop shadow for <i>bubbles</i> in a data visualization which was interactive and animated. The request stumped me for a while as I bumped into this limit of Raphael. For that project, I wrote a very specific extension to Raphael for handling drop shadows. But the same complexity that had initially put me off SVG was back and worse than ever. Make no mistake, Filter Effects are very, very technical.</p>
+<p>So, after that project, I set about building a more full-featured library to make Filter Effects as easy to apply as Raphael makes drawing shapes. </p>
+<p>Introducing <a href="http://chrismichaelscott.github.io/fraphael/" alt="Filter Effects for Raphael">Filter Effects for Raphael</a>!</p>
+<p>Here&#8217;s how to use it:</p>
+<p>First, the HTML. This bit is dead simple, just a <code>div</code> with an <code>id</code>:</p>
+<pre rel="HTML"><code class="language-markup">&lt;div id="title-container"&gt;&lt;/div&gt;</code></pre>
+<p>Everything else is done in JavaScript.</p>
+<p>To start an SVG drawing with Raphael you create a &#8220;paper&#8221; by referencing the <code>id</code> of the container element:</p>
+<pre rel="Raphael / JS"><code class="language-javascript">var paper = Raphael("title-container");</code></pre>
+<p>Now to do some drawing. This example creates some text and sets some of the style attributes:</p>
+<pre rel="Raphael / JS"><code class="language-javascript">// The first two arguments are the origin of the text
+var title = paper.text(0, 30, "Filters are ice cold");
+title.attr({
+"fill": "MintCream",
+"font-family": "Butcherman",
+"font-size": "54px",
+"text-anchor": "start"
+});</code></pre>
+<p>Now for some effects! The simplest things you can do are shadows, blurring, lighting, embossing and colour shifting. Those require very little coding. Let&#8217;s try the emboss effect. Add to the JavaScript:</p>
+<pre rel="Raphael / JS"><code class="language-javascript">title.emboss();</code></pre>
+<p>You can chain effects, so applying a shadow afterwards is straightforward:</p>
+<pre rel="Raphael / JS"><code class="language-javascript">title.emboss().shadow();</code></pre>
+<p>Pretty cool, huh? You can take this much further if you want, by creating your own filters. The SVG spec lists (lower level) filter effects which can be combined to create all kinds of filters (convulsion matrices, in particular, can be used for a vast number of operations).</p>
+<p>This demo has the full code and some other examples of different effects that can be achieved:</p>
+<p data-height="440" style="height: 440px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="uGnAl" data-default-tab="result" data-user="chriscoyier" data-embed-version="2" data-pen-title="SVG Filters on Text" class="codepen">See the Pen <a href="https://codepen.io/chriscoyier/pen/uGnAl/">SVG Filters on Text</a> by Chris Coyier  (<a href="http://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h3>Shortcomings</h3>
+<p>What are the downsides to SVG? Well &#8211; aside from the pros and cons of vector over raster (like <code>canvas</code>) &#8211; there are a couple I can think of:</p>
+<ul>
+<li><strong>Browser support</strong> &#8211; You may not be surprised to learn that the graphical trickery discussed here is not supported in older versions of IE, 10 only. SVG itself will render in IE9, just without the effects. Firefox, Chrome and Opera have supported Filter Effects for <a href="http://caniuse.com/svg-filters" alt="can I use Filter Effects?">ages</a></dd>
+<li><strong>Semantics</strong> &#8211; Some may have reservations about the semantic validity of using SVG in documents, certainly the <code>svg</code> tag doesn&#8217;t give any clue as to it&#8217;s content; you can use a sensible parent, though</li>
+</ul>
+<h3>Wrapping Up</h3>
+<p>Hopefully, this piece has given you a good idea of what filter effects can do and how Filter Effects for Raphael can do them. Check out the project page on <a href="http://chrismichaelscott.github.io/fraphael/" alt="Filter Effects for Raphael">Github</a> for more details. Thanks for reading!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-filters-on-text/">SVG Filters on Text</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/svg-filters-on-text/feed/</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">146140</post-id>	</item>
+	</channel>
+</rss>

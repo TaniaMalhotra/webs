@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Chris Geelhoed &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/chrisgeelhoed/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 07 Apr 2020 14:51:53 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>How to Re-Create a Nifty Netflix Animation in CSS</title>
+		<link>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/</link>
+					<comments>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Geelhoed]]></dc:creator>
+		<pubDate>Tue, 07 Apr 2020 14:51:52 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[transform]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305681</guid>
+
+					<description><![CDATA[<p>The design for Netflix&#8217;s browse page has remained pretty similar for a few years now. One mainstay component is the preview slider that allows users to scroll through content and hover on items to see a preview.</p>
+<p>One unique characteristic of the UI is its hover behavior. When a show preview expands on hover, the cards next to it are pushed outward so that they don’t overlap.&#160;</p>
+<p>Like this:</p>
+<p>It’s like Bill Murray and Brad Pitt are fighting for the&#8230; <a href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Re-Create a Nifty Netflix Animation in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/">How to Re-Create a Nifty Netflix Animation in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The design for Netflix&#8217;s browse page has remained pretty similar for a few years now. One mainstay component is the preview slider that allows users to scroll through content and hover on items to see a preview.</p>
+
+
+
+<p>One unique characteristic of the UI is its hover behavior. When a show preview expands on hover, the cards next to it are pushed outward so that they don’t overlap.&nbsp;</p>
+
+
+
+<span id="more-305681"></span>
+
+
+
+<p>Like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/Oi8Y_TWA.gif?ssl=1" alt="" class="wp-image-305682" data-recalc-dims="1"/><figcaption>It’s like Bill Murray and Brad Pitt are fighting for the spotlight.</figcaption></figure>
+
+
+
+<p>We can do this in CSS! No JavaScript. No dependencies. Plain CSS. But before getting into any code, here’s exactly what we want to do:</p>
+
+
+
+<ol><li>The card that is hovered over should expand while keeping its aspect ratio.</li><li>When a card is hovered, the other cards should not change size and move outwards so that they don&#8217;t overlap one another.</li><li>All the cards should remain vertically centered with one another.</li></ol>
+
+
+
+<p>Sound good? Now let’s get into the code.</p>
+
+
+
+<h3>HTML and flexible elements</h3>
+
+
+
+<p>Let’s set up a row of images that represents Netflix’s video previews. That includes:</p>
+
+
+
+<ul><li>A &nbsp;<code>.container</code>&nbsp;parent element with several <code>.item</code> elements inside</li><li>Each <code>.item</code> element consisting of an image wrapped in an anchor tag</li><li>Turning <code>.container</code> into a flex container that aligns the items in a row</li><li>Setting the flex behavior for the <code>.item</code> class so they take up equal space in the row</li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYNMawe" src="//codepen.io/anon/embed/eYNMawe?height=350&amp;theme-id=1&amp;slug-hash=eYNMawe&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYNMawe" title="CodePen Embed eYNMawe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Expanding an item on hover</h3>
+
+
+
+<p>Our next step is getting an item to expand when it is hovered. We could do this by animating the element’s <code>width</code>, but that would affect the flow of the document and cause the hovered item’s siblings to shrink – plus, animating the <code>width</code> property is known to be <a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance">poor for performance</a> in some cases.</p>
+
+
+
+<p>To avoid squeezing the sibling of the hovered item, we are going to animate the <code>transform</code> property — specifically, its <code>scale()</code> function — instead. This won’t affect document flow the same way <code>width</code> does.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_LYVdooX" src="//codepen.io/anon/embed/LYVdooX?height=350&amp;theme-id=1&amp;slug-hash=LYVdooX&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed LYVdooX" title="CodePen Embed LYVdooX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Moving siblings outward</h3>
+
+
+
+<p>Getting the siblings of a hovered item to move away from the hovered item is the tricky part of this whole thing. One CSS feature we have at our disposal is the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator">general sibling combinator</a>. This lets us select all of the sibling items that are positioned <em>after</em> the hovered item.</p>
+
+
+
+<p>We’ll turn to the <code>transform</code>&nbsp;property’s <code>translateX()</code>&nbsp;function to move things around. Again, animating <code>transform</code> is much nicer than other properties that impact document flow, like margins and padding.</p>
+
+
+
+<p>Since we’ve set an item to scale up 150% on hover, the translation should be set to 25%. That’s half of the additional space that is being occupied by the hovered item.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.item:hover ~ .item {
+  transform: translateX(25%);
+}</code></pre>
+
+
+
+<p>That handles moving things to the right, but how can we translate the items on the <em>left</em>? Since the general sibling combinator only applies to siblings positioned <em>after</em> a given selector (no going “backwards”), we’ll need another approach.</p>
+
+
+
+<p>One way is to add an additional hover rule on the parent container itself. Here is the plan:</p>
+
+
+
+<ul><li>When hovering the parent container, shift all the items inside that container to the left.</li><li>Use the general sibling combinator to make the items positioned after the hovered item move to the right.</li><li>Get super specific so a hovered item isn’t translated like the rest of the items.</li></ul>
+
+
+
+<p>We’re making a big assumption that your document uses a left-to-right writing mode. If you want to use this effect in a right-to-left context, you will need to set all items inside the hovered outer container to move <em>right</em> and use the general sibling combinator to move all selected items <em>left</em>.</p>
+
+
+
+<h3>Demo time!</h3>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RwPjBag" src="//codepen.io/anon/embed/RwPjBag?height=350&amp;theme-id=1&amp;slug-hash=RwPjBag&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RwPjBag" title="CodePen Embed RwPjBag" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>One little thing to note: this final version is using <code>:focus</code> and <code>:focus-within</code> pseudo-classes to support keyboard navigation. The Netflix example isn’t using it, but I think that’s a nice touch for accessibility.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>There we have it! Yes, we could have used JavaScript event listeners instead of CSS hover rules., and that could possibly be better for maintainability and readability. But it’s sometimes fun to see just how far CSS can take us!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/">How to Re-Create a Nifty Netflix Animation in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305681</post-id>	</item>
+		<item>
+		<title>PHP is A-OK for Templating</title>
+		<link>https://css-tricks.com/php-is-a-ok-for-templating/</link>
+					<comments>https://css-tricks.com/php-is-a-ok-for-templating/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Geelhoed]]></dc:creator>
+		<pubDate>Tue, 04 Feb 2020 16:10:51 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[templating]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=302597</guid>
+
+					<description><![CDATA[<p>PHP templating often gets a bad rap for facilitating subpar code — but that doesn&#8217;t have to be the case. Let’s look at how PHP projects can enforce a basic Model, View, Controller (MVC) structure without depending on a purpose-built templating engine.</p>
+<p>But first, a very brief PHP history lesson</p>
+<p>The history of PHP as a tool for HTML templating is full of twists and turns. </p>
+<p>One of the first programming languages used for HTML templating was C, but it &#8230; <a href="https://css-tricks.com/php-is-a-ok-for-templating/" class="read-more">Read article <span class="screen-reader-text"> &#8220;PHP is A-OK for Templating&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/php-is-a-ok-for-templating/">PHP is A-OK for Templating</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>PHP templating often gets a bad rap for facilitating subpar code — but that doesn&#8217;t have to be the case. Let’s look at how PHP projects can enforce a basic Model, View, Controller (MVC) structure without depending on a purpose-built templating engine.</p>
+
+
+
+<span id="more-302597"></span>
+
+
+
+<h3>But first, a very brief PHP history lesson</h3>
+
+
+
+<p>The history of PHP as a tool for HTML templating is full of twists and turns. </p>
+
+
+
+<p>One of the first programming languages used for HTML templating was C, but it was quickly found to be tedious to use and generally ill-suited for the task.</p>
+
+
+
+<p>Rasmus Lerdorf created PHP with this in mind. He wasn’t opposed to using C to handle back-end business logic but wanted a better way to generate dynamic HTML for the front end. PHP was originally designed as a templating language, but adopted more features over time and eventually became a full programming language in its own right.</p>
+
+
+
+<p>PHP’s unique ability to switch between programming mode and HTML mode was found to be quite convenient, but also made it tempting for programmers to write unmaintainable code — code that mixed business logic and templating logic. A PHP file could begin with some HTML templating and then suddenly dive into an advanced SQL query without warning. This structure is confusing to read and makes reusing HTML templates difficult.</p>
+
+
+
+<p>As time passed, the web development community found more and more value enforcing a strict MVC structure for PHP projects. Templating engines were created as a way to effectively separate views from their controllers.</p>
+
+
+
+<p>To accomplish this task, templating engines typically have the following characteristics:</p>
+
+
+
+<ol><li><strong>The engine is purposely underpowered for business logic.</strong> If a developer wants to perform a database query, for example, they need to make that query in the controller and then pass the result to the template. Making a query in the middle of the template’s HTML is not an option.</li><li><strong>The engine takes care of common security risks behind the scenes. </strong>Even if a developer fails to validate user input and passes it directly into the template, the template will often escape any dangerous HTML automatically.</li></ol>
+
+
+
+<p>Templating engines are now a mainstay feature in many web technology stacks. They make for more maintainable, more secure codebases, so this comes as no surprise.</p>
+
+
+
+<p>It is possible, however, to <strong>handle HTML templating with plain PHP</strong> as well. You may want to do this for a number of reasons. Maybe you are working on a legacy project and don’t want to bring in any additional dependencies, or maybe you are working on a very small project and prefer to keep things as lightweight as possible. Or maybe the decision isn’t up to you at all.</p>
+
+
+
+<h3>Use cases for PHP templating</h3>
+
+
+
+<p>One place that I often implement plain PHP templating is WordPress, which doesn’t enforce a rigid MVC structure by default. I feel that bringing in a full templating engine is a bit heavy-handed, but I still want to separate my business logic from my templates and want my views to be reusable.</p>
+
+
+
+<p>Whatever your reason, using plain PHP to define your HTML templates is sometimes the preferred choice. This post explores how this can be done in a reasonably professional way. The approach represents a practical middle ground between the spaghetti-coded style that PHP templating has become notorious for and the no-logic-allowed approach available with formal templating engines.</p>
+
+
+
+<p>Let’s dive into an example of how a basic templating system can be put into practice. Again, we’re using WordPress as an example, but this could be swapped to a plain PHP environment or many other environments. And you don’t need to be familiar with WordPress to follow along.</p>
+
+
+
+<p>The goal is to break our views into components and create a distinct separation between the business logic and HTML templates. Specifically, we are going to create a view that displays a grid of cards. Each card is going to display the title, excerpt, and author of a recent post.</p>
+
+
+
+<h3>Step 1: Fetching data to render</h3>
+
+
+
+<p>The first step to take is fetching the data that we want to display in our view. This could involve executing a SQL query or using the ORM or helper functions of your framework/CMS to access your database indirectly. It could also involve making an HTTP request to an external API or collecting user input from a form or query string.</p>
+
+
+
+<p>In this example, we’re going to use the WordPress <code>get_posts</code> helper function to fetch some posts to display on our homepage.</p>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;?php // index.php
+$wp_posts = get_posts([
+  'numberposts' => 3
+]);</code></pre>
+
+
+
+<p>We now have access to the data we want to display in the cards grid, but we need to do some additional work before we can pass it to our view.</p>
+
+
+
+<h3>Step 2: Preparing data for templating</h3>
+
+
+
+<p>The <code>get_posts</code> function returns an array of <code>WP_Post</code> objects. Each object contains the post title, excerpt, and author information that we need, but we don’t want to couple our view to the <code>WP_Post</code> object type because we might want to show other kinds of data on our cards somewhere else in the project.</p>
+
+
+
+<p>Instead, it makes sense to proactively convert each post object to a neutral data type, like an associative array:</p>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;?php // index.php
+$wp_posts = get_posts([
+  'numberposts' => 3
+]);
+
+$cards = array_map(function ($wp_post) {
+  return [
+    'heading' => $wp_post->post_title,
+    'body' => $wp_post->post_excerpt,
+    'footing' => get_author_name($wp_post->post_author)
+  ];
+}, $wp_posts);</code></pre>
+
+
+
+<p>In this case, each <code>WP_Post</code> object is converted into an associative array by using the <code>array_map</code> function. Notice that the keys for each value are not <code>title</code>, <code>excerpt</code>, and <code>author</code> but are given more general names instead: <code>heading</code>, <code>body</code>, and <code>footing</code>. We do this because the cards grid component is meant to support any kind of data, not just posts. It could just as easily be used to show a grid of testimonials that have a quote and a customer’s name, for example.</p>
+
+
+
+<p>With the data properly prepared, it can now be passed into our <code>render_view</code> function:</p>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;?php // index.php
+// Data fetching and formatting same as before
+
+render_view('cards_grid', [
+  'cards' => $cards
+]);</code></pre>
+
+
+
+<p>Of course, the <code>render_view</code> function does not exist yet. Let’s define it.</p>
+
+
+
+<h3>Step 3: Creating a render function</h3>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">// Defined in functions.php, or somewhere else that will make it globally available.
+// If you are worried about possible collisions within the global namespace,
+// you can define this function as a static method of a namespaced class
+function render_view($view, $data)
+{
+  extract($data);
+  require('views/' . $view . '.php');
+}</code></pre>
+
+
+
+<p>This function accepts the name of the rendered view and an associative array representing any data to be displayed. The extract function takes each item in the associative array and creates a variable for it. In this example, we now have a variable named <code>$cards</code> that contains the items we prepared in<code> index.php</code>.</p>
+
+
+
+<p>Since the view is executed in its own function, it gets its own scope. This is nice because it allows us to use simple variable names without fear of collisions.</p>
+
+
+
+<p>The second line of our function prints the view matching the name passed. In this case, it looks for the view in <code>views/cards_grid.php</code>. Let’s go ahead and create that file.</p>
+
+
+
+<h3>Step 4: Creating templates</h3>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;?php /* views/cards_grid.php */ ?>
+&lt;section>
+  &lt;ul>
+    &lt;?php foreach ($cards as $card) : ?>
+    &lt;li>
+      &lt;?php render_view('card', $card) ?>
+    &lt;/li>
+    &lt;?php endforeach; ?>    
+  &lt;/ul>
+&lt;/section></code></pre>
+
+
+
+<p>This template uses the <code>$cards</code> variable that was just extracted and renders it as an unordered list. For each card in the array, the template renders a subview: the singular card view.</p>
+
+
+
+<p>Having a template for a single card is useful because it gives us the flexibility to render a single card directly or use it in another view somewhere else in the project.</p>
+
+
+
+<p>Let’s define the basic card view:</p>
+
+
+
+<pre rel="PHP" class="language-javascript" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;?php /* views/card.php */ ?>
+&lt;div class="card">
+  &lt;?php if (!empty($heading)) : ?>
+    &lt;h4>&lt;?= htmlspecialchars($heading) ?>&lt;/h4>      
+  &lt;?php endif;
+  if (!empty($body)) : ?>
+    &lt;p>&lt;?= htmlspecialchars($body) ?>&lt;/p>      
+  &lt;?php endif;
+  if (!empty($footing)) : ?>      
+    &lt;span>&lt;?= htmlspecialchars($footing) ?>&lt;/span>
+  &lt;?php endif; ?>
+&lt;/div></code></pre>
+
+
+
+<p>Since the <code>$card</code> that was passed into the render function contained keys for a <code>heading</code>, <code>body</code>, and <code>footing</code>, variables of those same names are now available in the template.</p>
+
+
+
+<p>In this example, we can be reasonably sure that our data is free of <a href="https://owasp.org/www-community/attacks/xss">XSS hazards</a>, but it’s possible that this view could be used with user input at some later time, so passing each value through <code>htmlspecialchars</code> is prudent. If a script tag exists in our data it will be safely escaped.</p>
+
+
+
+<p>It’s also often helpful to check that each variable contains a non-empty value before rendering it. This allows for variables to be omitted without leaving empty HTML tags in our markup.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>PHP templating engines are great but it is sometimes appropriate to use PHP for what it was originally designed for: <strong>generating dynamic HTML.</strong></p>
+
+
+
+<p>Templating in PHP doesn’t have to result in unmaintainable spaghetti code. With a little bit of foresight we can achieve a basic MVC system that keeps views and controllers separate from each other, and this can be done with surprisingly little code.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/php-is-a-ok-for-templating/">PHP is A-OK for Templating</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/php-is-a-ok-for-templating/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">302597</post-id>	</item>
+		<item>
+		<title>Some CSS Grid Strategies for Matching Design Mockups</title>
+		<link>https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/</link>
+					<comments>https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Geelhoed]]></dc:creator>
+		<pubDate>Thu, 14 Nov 2019 19:17:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[grid]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298375</guid>
+
+					<description><![CDATA[<p>The world of web development has always had a  <a href="https://css-tricks.com/telling-the-story-of-graphic-design/">gap between the design-to-development handoff</a>. Ambitious designers want the final result of their effort to look unique and beautiful (and true to their initial vision), whereas many developers find more value in an outcome that is consistent, dependable, and rock solid (and easy to code). This dynamic can result in sustained tension between the two sides with both parties looking to steer things their own way.</p>
+<p>While this situation is &#8230; <a href="https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Some CSS Grid Strategies for Matching Design Mockups&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/">Some CSS Grid Strategies for Matching Design Mockups</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>The world of web development has always had a  <a href="https://css-tricks.com/telling-the-story-of-graphic-design/">gap between the design-to-development handoff</a>. Ambitious designers want the final result of their effort to look unique and beautiful (and true to their initial vision), whereas many developers find more value in an outcome that is consistent, dependable, and rock solid (and easy to code). This dynamic can result in sustained tension between the two sides with both parties looking to steer things their own way.</p>
+<p>While this situation is unavoidable to some extent, new front-end technology can play a role in bringing the two sides closer together. One such technology is CSS grid. This post explores how it can be used to write CSS styles that match design layouts to a high degree of fidelity (without the headache!).</p>
+<p><span id="more-298375"></span></p>
+<p>A common way that designers give instructions to front-end developers is with design mockups (by mockups, we’re talking about deliverables that are built in Sketch, XD, Illustrator, Photoshop etc). All designers work differently to some degree (as do developers), but many like to base the structure of their layouts on some kind of grid system. A consistent grid system is invaluable for communicating how a webpage should be coded and how it should respond when the size of the user’s screen differs from the mockup. As a developer, I really appreciate designers who take the trouble to adopt a well thought-out grid system.</p>
+<p>A 12-column layout is particularly popular, but other patterns are common as well. Software like Sketch and XD makes creating pages that follow a preset column layout pretty easy — you can toggle an overlay on and off with the click of a button.</p>
+<figure id="post-298380" class="align-left media-298380"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/11/grid-layouts-illustration.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>A grid layout designed in Sketch (left) and Adobe XD (right)</figcaption></figure>
+<p>Once a grid system is implemented, most design elements should be positioned squarely within it. This approach ensures that shapes line up evenly and makes for a more appealing appearance. In addition to being visually attractive, a predictable grid gives developers a distinct target to shoot for when writing styles.</p>
+<p>Unfortunately, this basic pattern can be deceptively difficult to code accurately. Frameworks like Bootstrap are often used to create grid layouts, but they come with downsides like added page weight and a lack of fine-grained control. CSS grid offers a better solution for the front-end perfectionist. Let&#8217;s look at an example.</p>
+<figure id="post-298381" class="align-left media-298381"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/11/grid-layouts-comp.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>A 14-column grid layout</figcaption></figure>
+<p>The design above is a good application for grid. There is a 14-column pattern with multiple elements positioned within it. While the boxes all have different widths and offsets, they all adhere to the same grid. This layout can be made with flexbox — and even floats — but that would likely involve some very specific math to get a pixel-perfect result across all breakpoints. And let’s face it: many front-end developers don’t have the patience for that. Let’s look at three CSS grid layout strategies for doing this kind of work more easily.</p>
+<h3>Strategy 1: A basic grid</h3>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="RadDog25" data-slug-hash="MWWgNKy" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Basic Grid Placement">
+  <span>See the Pen <a href="https://codepen.io/RadDog25/pen/MWWgNKy"><br />
+  Basic Grid Placement</a> by chris geel (<a href="https://codepen.io/RadDog25">@RadDog25</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>The most intuitive way to write an evenly spaced 12-column layout would probably be some variation of this. Here, an outer container is used to control the outside gutter spacing with left and right padding, and an inner row element is used to restrain content to a maximum width. The row receives some grid-specific styling:</p>
+<pre rel="CSS"><code class="language-css">display: grid;
+grid-template-columns: repeat(12, 1fr);
+grid-gap: 20px;</code></pre>
+<p>This rule defines the grid to consist of 12 columns, each having a width of <a href="https://css-tricks.com/introduction-fr-css-unit/">one fractional unit</a> (<code>fr</code>). A gap of 20px between columns is also specified. With the column template set, the start and end of any child column can be set quite easily using the <code>grid-column</code> property. For example, setting <code>grid-column: 3/8</code> positions that element to begin at column three and span five columns across to column eight.</p>
+<p>We can already see a lot of value in what CSS grid provides in this one example, but this approach has some limitations. One problem is <a href="https://css-tricks.com/css-grid-in-ie-faking-an-auto-placement-grid-with-gaps/">Internet Explorer, which doesn’t have support for the <code>grid-gap</code> property</a>. Another problem is that this 12-column approach does not provide the ability to start columns at the end of gaps or end columns at the start of gaps. For that, another system is needed.</p>
+<h3>Strategy 2: A more flexible grid</h3>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="RadDog25" data-slug-hash="ZEEzgeB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="More Flexible Grid Placement">
+  <span>See the Pen <a href="https://codepen.io/RadDog25/pen/ZEEzgeB"><br />
+  More Flexible Grid Placement</a> by chris geel (<a href="https://codepen.io/RadDog25">@RadDog25</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Although <code>grid-gap</code> may be a no go for <abbr>IE</abbr>, the appearance of gaps can be recreated by including the spaces as part of the grid template itself. The <code>repeat</code> function available to <code>grid-template-columns</code> accepts not just a single column width as an argument, but repeating patterns of arbitrary length. To this end, a pattern of column-then-gap can be repeated 11 times, and then the final column can be inserted to complete the 12-column / 11 interior gap layout desired:</p>
+<pre rel="CSS"><code class="language-css">grid-template-columns: repeat(11, 1fr 20px) 1fr;</code></pre>
+<p>This gets around the <abbr>IE</abbr> issue and also allows for columns to be started and ended on both columns or gaps. While being a nice improvement over the previous method, it still has some room to grow. For example, what if a column was to be positioned with one side spanning to the outer edge of the screen, and the other fit within the grid system? Here’s an example:</p>
+<figure id="post-298382" class="align-left media-298382"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/11/grid-layouts-comp-2.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>A grid Layout with an that&#8217;s item flush to the outer edge</figcaption></figure>
+<p>In this layout, the card (our left column) begins and ends within the grid. The main image (our right column) begins within the grid as well, but extends beyond the grid to the edge of the screen. Writing CSS for this can be a challenge. One approach might be to position the image absolutely and pin it to the right edge, but this comes with the downside of taking it out of the document flow (which might be a problem if the image is taller than the card). Another idea would be to use floats or flexbox to maintain document flow, but this would entail some tricky one-off calculation to get the widths and spacing just right. Let’s look at a better way.</p>
+<h3>Strategy 3: An even more flexible grid</h3>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="RadDog25" data-slug-hash="PoYMNqp" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Right Edge Aligned image with grid">
+  <span>See the Pen <a href="https://codepen.io/RadDog25/pen/PoYMNqp"><br />
+  Right Edge Aligned image with grid</a> by chris geel (<a href="https://codepen.io/RadDog25">@RadDog25</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>This technique builds on the idea introduced in the last revision. Now, instead of having the grid exist within other elements that define the gutter sizes and row widths, we’re integrating those spaces with the grid’s pattern. Since the gutters, columns, and gaps are all incorporated into the template, child elements can be positioned easily and precisely on the grid by using the <code>grid-column</code> property.</p>
+<pre rel="SCSS"><code class="language-scss">$row-width: 1140px;
+$gutter: 30px;
+$gap: 20px;
+$break: $row-width + 2 * $gutter;
+$col-width-post-break: ($row-width - 11 * $gap) / 12;
+  
+.container {
+  display: grid;
+  grid-template-columns: $gutter repeat(11, calc((100% - 2 * #{$gutter} - 11 * #{$gap})/12) #{$gap}) calc((100% - 2 * #{$gutter} - 11 * #{$gap})/12) $gutter;
+  @media screen and (min-width: #{$break}) {
+    grid-template-columns: calc(0.5 * (100% - #{$row-width})) repeat(11, #{$col-width- post-break} #{$gap}) #{$col-width-post-break} calc(0.5 * (100% - #{$row-width}));
+  }
+}</code></pre>
+<p>Yes, some math is required to get this just right. It’s important to have the template set differently before and after the maximum width of the row has been realized. I elected to use SCSS for this because defining variables can make the calculation a lot more manageable (not to mention more readable for other developers). What started as a 12-part pattern grew to a 23-part pattern with the integration of the 11 interior gaps, and is now 25 pieces accounting for the left and right gutters.</p>
+<p>One cool thing about this approach is that it can be used as the basis for any layout that adheres to the grid once the pattern is set, including traditionally awkward layouts that involve columns spanning to outside edges. Moreover, it serves as a straightforward way to precisely implement designs that are likely to be handed down in quality mockups. That is something that should make both developers and designers happy!</p>
+<h3>There are a couple of caveats&#8230;</h3>
+<p>While these techniques can be used to crack traditionally awkward styling problems, they are not silver bullets. Instead, they should be thought of as alternative tools to be used for the right application.</p>
+<p>One situation in which the second and third layout patterns are not appropriate are layouts that require auto placement. Another would be production environments that need to support browsers that don’t play nice with CSS grid.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/">Some CSS Grid Strategies for Matching Design Mockups</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/some-css-grid-strategies-for-matching-design-mockups/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298375</post-id>	</item>
+	</channel>
+</rss>

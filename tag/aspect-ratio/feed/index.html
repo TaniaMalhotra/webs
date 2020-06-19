@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>aspect ratio &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/aspect-ratio/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 01 Jun 2020 12:50:44 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>A First Look at `aspect-ratio`</title>
+		<link>https://css-tricks.com/a-first-look-at-aspect-ratio/</link>
+					<comments>https://css-tricks.com/a-first-look-at-aspect-ratio/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 28 May 2020 22:01:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311235</guid>
+
+					<description><![CDATA[<p>Oh hey! A brand new property that affects how a box is sized! That&#8217;s a big deal. <a href="https://css-tricks.com/aspect-ratio-boxes/">There are lots of ways already</a> to make an aspect-ratio sized box (and I&#8217;d say <a href="https://css-tricks.com/aspect-ratio-boxes/#article-header-id-7">this custom properties based solution</a> is the best), but none of them are particularly intuitive and certainly not as straightforward as declaring a single property. </p>
+<p>So, with the impending arrival of <code>aspect-ratio</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio">MDN</a>, and not to be confused with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/aspect-ratio">the media query version</a>), I thought &#8230; <a href="https://css-tricks.com/a-first-look-at-aspect-ratio/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A First Look at `aspect-ratio`&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-first-look-at-aspect-ratio/">A First Look at `aspect-ratio`</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Oh hey! A brand new property that affects how a box is sized! That&#8217;s a big deal. <a href="https://css-tricks.com/aspect-ratio-boxes/">There are lots of ways already</a> to make an aspect-ratio sized box (and I&#8217;d say <a href="https://css-tricks.com/aspect-ratio-boxes/#article-header-id-7">this custom properties based solution</a> is the best), but none of them are particularly intuitive and certainly not as straightforward as declaring a single property. </p>
+
+
+
+<p>So, with the impending arrival of <code>aspect-ratio</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio">MDN</a>, and not to be confused with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/aspect-ratio">the media query version</a>), I thought I&#8217;d take a look at how it works and try to wrap my mind around it. </p>
+
+
+
+<span id="more-311235"></span>
+
+
+
+<p><a href="https://twitter.com/Una/status/1260980901934137345">Shout out to Una</a> where I first saw this and boy howdy did it strike interest in folks. Here&#8217;s me playing around a little.</p>
+
+
+
+<h3>Just dropping <code>aspect-ratio</code> on an element alone will calculate a height based on the <code>auto</code> width. </h3>
+
+
+
+<p>Without setting a width, an element will still have a natural auto <code>width</code>. So the height can be calculated from the aspect ratio and the rendered width.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  aspect-ratio: 16 / 9;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?fit=909%2C1024&amp;ssl=1" alt="" class="wp-image-311964" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?w=1906&amp;ssl=1 1906w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=266%2C300&amp;ssl=1 266w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=909%2C1024&amp;ssl=1 909w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=768%2C866&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=1363%2C1536&amp;ssl=1 1363w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=1817%2C2048&amp;ssl=1 1817w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.23.02-AM.png?resize=1000%2C1127&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://codepen.io/chriscoyier/pen/rNOqdJd">Demo</a></figcaption></figure>
+
+
+
+<h3>If the content breaks out of the aspect ratio, the element will still expand.</h3>
+
+
+
+<p>The aspect ratio becomes ignored in that situation, which is actually nice. That&#8217;s why <a href="https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6">the pseudo-element tactic</a> for aspect ratios was popular, because it didn&#8217;t put us in dangerous data loss or awkward overlap territory when content got too much.</p>
+
+
+
+<p>But if you <em>want</em> to constrain the height to the aspect ratio, you can by adding a <code>min-height: 0;</code>:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?fit=909%2C1024&amp;ssl=1" alt="" class="wp-image-311968" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?w=1906&amp;ssl=1 1906w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=266%2C300&amp;ssl=1 266w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=909%2C1024&amp;ssl=1 909w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=768%2C866&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=1363%2C1536&amp;ssl=1 1363w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=1817%2C2048&amp;ssl=1 1817w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.29.28-AM.png?resize=1000%2C1127&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://codepen.io/chriscoyier/pen/YzyoodW">Demo</a></figcaption></figure>
+
+
+
+<h3>If the element has <em>either</em> a height or width, the <em>other</em> is calculated from the aspect ratio.</h3>
+
+
+
+<p>So <code>aspect-ratio</code> is basically a way of setting the other direction when you only have one<a href="https://codepen.io/chriscoyier/pen/rNOqdJd?editors=1100">.</a></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?fit=1024%2C1021&amp;ssl=1" alt="" class="wp-image-311970" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?w=2128&amp;ssl=1 2128w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=300%2C300&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=1024%2C1021&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=150%2C150&amp;ssl=1 150w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=768%2C766&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=1536%2C1532&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=2048%2C2042&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=1000%2C997&amp;ssl=1 1000w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-29-at-6.35.15-AM.png?resize=100%2C100&amp;ssl=1 100w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://codepen.io/chriscoyier/pen/mdeZZZm">Demo</a></figcaption></figure>
+
+
+
+<h3>If the element has <em>both</em> a height and width, <code>aspect-ratio</code> is ignored.</h3>
+
+
+
+<p>The combination of an explicit height and width is &#8220;stronger&#8221; than the aspect ratio. </p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-311721" width="454" height="256" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?w=1318&amp;ssl=1 1318w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?resize=300%2C169&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?resize=1024%2C576&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?resize=768%2C432&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-25-at-12.24.35-PM.png?resize=1000%2C563&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Factoring in <code>min-*</code> and <code>max-*</code></h3>
+
+
+
+<p>There is always a little tension between <code>width</code>, <code>min-width</code>, and <code>max-width</code> (or the height versions). One of them always &#8220;wins.&#8221; It&#8217;s generally pretty intuitive. </p>
+
+
+
+<p>If you set <code>width: 100px;</code> and <code>min-width: 200px;</code> then <code>min-width</code> will win. So, <code>min-width</code> is either ignored because you&#8217;re already over it, or wins. Same deal with <code>max-width</code>: if you set <code>width: 100px;</code> and <code>max-width: 50px;</code> then <code>max-width</code> will win. So, <code>max-width</code> is either ignored because you&#8217;re already under it, or wins.</p>
+
+
+
+<p>It looks like that general intuitiveness carries on here: the <code>min-*</code> and <code>max-*</code> properties will either win or are irrelevant. <strong>And if they win, they break the <code>aspect-ratio</code>. </strong></p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  aspect-ratio: 1 / 4;
+  height: 500px;
+
+  /* Ignored, because width is calculated to be 125px */
+  /* min-width: 100px; */
+
+  /* Wins, making the aspect ratio 1 / 2 */
+  /* min-width: 250px; */
+}
+</code></pre>
+
+
+
+<h3>With value functions</h3>
+
+
+
+<p>Aspect ratios are always most useful in fluid situations, or anytime you essentially don&#8217;t know one of the dimensions ahead of time. But even when you don&#8217;t know, you&#8217;re often putting constraints on things. Say 50% wide is cool, but you only want it to shrink as far as 200px. You might do width:<code> max(50%, 200px);</code>. Or constrain on both sides with <code>clamp(200px, 50%, 400px);</code>.</p>
+
+
+
+<p>This seems to work intuitively:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  aspect-ratio: 4 / 3;
+  width: clamp(200px, 50%, 400px);
+}</code></pre>
+
+
+
+<p>But say you run into that minimum 200px, and then apply a <code>min-width</code> of 300px? The <code>min-width</code> wins. It&#8217;s still intuitive, but it gets brain-bending because of how many properties, functions, and values can be involved. </p>
+
+
+
+<h3>Maybe it&#8217;s helpful to think of <code>aspect-ratio</code> as the <em>weakest</em> way to size an element?</h3>
+
+
+
+<p>It will never beat any other sizing information out, but it will always do its sizing if there is no other information available for that dimension.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-first-look-at-aspect-ratio/">A First Look at `aspect-ratio`</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-first-look-at-aspect-ratio/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311235</post-id>	</item>
+		<item>
+		<title>A Grid of Logos in Squares</title>
+		<link>https://css-tricks.com/a-grid-of-logos-in-squares/</link>
+					<comments>https://css-tricks.com/a-grid-of-logos-in-squares/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 21:22:15 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[grid]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306022</guid>
+
+					<description><![CDATA[<p>Let&#8217;s build a literal grid of squares, and we&#8217;ll put the logos of some magazines centered inside each square. I imagine plenty of you have had to build a logo grid before. You can probably already picture it: an area of a site that lists the donors, sponsors, or that is showing off all the big fancy companies that use some product. Putting the logos into squares is a decent way of handling it, as it forces some clean structure &#8230; <a href="https://css-tricks.com/a-grid-of-logos-in-squares/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A Grid of Logos in Squares&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-grid-of-logos-in-squares/">A Grid of Logos in Squares</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Let&#8217;s build a literal grid of squares, and we&#8217;ll put the logos of some magazines centered inside each square. I imagine plenty of you have had to build a logo grid before. You can probably already picture it: an area of a site that lists the donors, sponsors, or that is showing off all the big fancy companies that use some product. Putting the logos into squares is a decent way of handling it, as it forces some clean structure amongst logos that are all different sizes, aspect ratios, and visual weights, which can get finicky and look sloppy.</p>
+
+
+
+<p>By &#8220;grid&#8221; I mean CSS grid. Setting up a grid of (flexible) squares is a little trick of its own. Then we&#8217;ll plop those logos in there in a way that keeps them sized and centered. At the end, we&#8217;ll look at one little oddity.</p>
+
+
+
+<span id="more-306022"></span>
+
+
+
+<h3>1) Grid markup</h3>
+
+
+
+<p>Have you ever tried this in an editor that supports Emmet?</p>
+
+
+
+<pre rel="" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">.grid>div*5>img</code></pre>
+
+
+
+<p>Then press <strong>tab</strong>. It will expand out into:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="grid">
+  &lt;div>&lt;img src="" alt="">&lt;/div>
+  &lt;div>&lt;img src="" alt="">&lt;/div>
+  &lt;div>&lt;img src="" alt="">&lt;/div>
+  &lt;div>&lt;img src="" alt="">&lt;/div>
+  &lt;div>&lt;img src="" alt="">&lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>Just a little trick for working quickly.</p>
+
+
+
+<h3>2) CSS Grid basics</h3>
+
+
+
+<p>We&#8217;ll use the infamous flexible columns technique:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}</code></pre>
+
+
+
+<p>That will give us not only flexible columns, but a flexible <em>number</em> of columns. Remember, we don&#8217;t really care how many columns there are — we&#8217;re just building a grid of logos to display. </p>
+
+
+
+<p>If we give each of those grid item divs a background and a forced height, we&#8217;d see something like: </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?fit=1024%2C330&amp;ssl=1" alt="" class="wp-image-306023" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?w=1590&amp;ssl=1 1590w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?resize=300%2C97&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?resize=1024%2C330&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?resize=768%2C247&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?resize=1536%2C495&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-5.44.42-AM.png?resize=1000%2C322&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>This screenshot is at a parent width of about 800px. The three columns seen here will increase and decrease to fill the space, thanks to that grid magic.</figcaption></figure>
+
+
+
+<h3>2) Making real squares</h3>
+
+
+
+<p>Rather than force the grid items to any particular height, let&#8217;s use an aspect-ratio trick. We&#8217;ll plop an empty pseudo-element in there with <code>padding-bottom: 100%;</code> meaning it will force the height to be at least as tall as it is wide.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid > div {
+  background: black;
+  padding: 1rem;
+}
+
+.grid > div::before {
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+}</code></pre>
+
+
+
+<p>If we temporarily hide the images, you&#8217;ll see the grid of rectangles has become a grid of perfect squares:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?fit=1024%2C688&amp;ssl=1" alt="" class="wp-image-306024" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?w=1584&amp;ssl=1 1584w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?resize=300%2C202&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?resize=1024%2C688&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?resize=768%2C516&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?resize=1536%2C1032&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/squares.png?resize=1000%2C672&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>3) Overlapping the Images</h3>
+
+
+
+<p>But <em>with</em> the images in there, they grow a little oblong because the image sits in the pseudo-element.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?fit=1024%2C756&amp;ssl=1" alt="" class="wp-image-306025" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?w=1584&amp;ssl=1 1584w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?resize=300%2C222&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?resize=1024%2C756&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?resize=768%2C567&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?resize=1536%2C1135&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/oblong.png?resize=1000%2C739&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>We&#8217;ll need a way to sit them on top of one another. Usually, with aspect-ratio techniques, we reach for absolute positioning to place the in-child container to cover the now aspect-ratioed shape. But since we&#8217;re using grid already anyway, let&#8217;s use grid again to place the items into the same space:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid > div {
+  /* ... */
+  display: grid;
+}
+.grid > div::before,
+.grid > div > img {
+  grid-area: 1 / 1 / 2 / 2;
+}</code></pre>
+
+
+
+<p>That says to make the grid items of the main grid also into grid containers, with no explicit rows and columns, then to place both the pseudo-element and image onto the first row and column of that grid. This will force them to overlap them, making a nice grid of squares again.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?fit=1024%2C704&amp;ssl=1" alt="" class="wp-image-306026" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?w=1592&amp;ssl=1 1592w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?resize=300%2C206&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?resize=1024%2C704&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?resize=768%2C528&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?resize=1536%2C1056&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/square-img.png?resize=1000%2C687&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>4) Placing the images</h3>
+
+
+
+<p>Let&#8217;s plop a proper <code>src</code> in there for each image. If we make sure the images fill the space (and limit themselves) with <code>width: 100%</code>, we&#8217;ll see them along the top of the grid items:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?fit=1024%2C692&amp;ssl=1" alt="" class="wp-image-306027" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?w=1584&amp;ssl=1 1584w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?resize=300%2C203&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?resize=1024%2C692&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?resize=768%2C519&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?resize=1536%2C1038&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/along-top.png?resize=1000%2C676&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Not terrible, but we would prefer to see them centered. Here&#8217;s one trick to do that. First, we&#8217;ll also make their <code>height: 100%</code>, which distorts them:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?fit=1024%2C687&amp;ssl=1" alt="" class="wp-image-306028" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?w=1560&amp;ssl=1 1560w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?resize=300%2C201&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?resize=1024%2C687&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?resize=768%2C515&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?resize=1536%2C1030&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/distort.png?resize=1000%2C671&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Then fix that up with <code>object-fit</code>!</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}</code></pre>
+
+
+
+<p>There we go:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?fit=1024%2C694&amp;ssl=1" alt="" class="wp-image-306029" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?w=1568&amp;ssl=1 1568w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?resize=300%2C203&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?resize=1024%2C694&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?resize=768%2C520&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?resize=1536%2C1040&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/Screen-Shot-2020-03-31-at-6.01.41-AM.png?resize=1000%2C677&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>That will work responsively:</p>
+
+
+
+<iframe src="https://player.cloudinary.com/embed/?cloud_name=css-tricks&amp;public_id=resp-logos_xq4ha0&amp;fluid=true&amp;controls=true&amp;show_jump_controls=false&amp;floating_when_not_visible=false&amp;hide_context_menu=false&amp;source_types%5B0%5D=mp4" width="1000" height="600" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
+
+
+
+<h3>5) Quirky dragging size</h3>
+
+
+
+<p>This (probably) isn&#8217;t a massive deal, but notice how the logos look when you drag them off (like a user might if they are trying to save one):</p>
+
+
+
+<iframe src="https://player.cloudinary.com/embed/?cloud_name=css-tricks&amp;public_id=drag-size_ovyrfd&amp;fluid=true&amp;controls=true&amp;show_jump_controls=false&amp;floating_when_not_visible=false&amp;hide_context_menu=false&amp;source_types%5B0%5D=mp4" width="1000" height="600" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
+
+
+
+<p>The images look like they have <code>width: 100%; height: 100%;</code> without the <code>object-fit: contain;</code>. </p>
+
+
+
+<p>Here&#8217;s the working demo so far, with that quirk:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jOPdMNJ" src="//codepen.io/anon/embed/jOPdMNJ?height=550&amp;theme-id=1&amp;slug-hash=jOPdMNJ&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jOPdMNJ" title="CodePen Embed jOPdMNJ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>6) Use absolute positioning instead</h3>
+
+
+
+<p>If that dragging quirk is a big deal, we can always just absolutely position the images inside the grid children instead.</p>
+
+
+
+<p>Here&#8217;s one way, assuming the grid child div is <code>position: relative;</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid > div > img {
+  position: absolute;
+  max-width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}</code></pre>
+
+
+
+<p>And here&#8217;s another:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.grid > div > img {
+  position: absolute;
+  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>Either of those fix that dragging quirk. Here&#8217;s a demo:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_QWbojdO" src="//codepen.io/anon/embed/QWbojdO?height=550&amp;theme-id=1&amp;slug-hash=QWbojdO&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed QWbojdO" title="CodePen Embed QWbojdO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Video</h3>
+
+
+
+<p>If you&#8217;d like to watch a video walkthrough of all this, <a href="https://css-tricks.com/video-screencasts/179-a-grid-of-squares/" class="ek-link">here ya go!</a> </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-grid-of-logos-in-squares/">A Grid of Logos in Squares</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-grid-of-logos-in-squares/feed/</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306022</post-id>	</item>
+		<item>
+		<title>#179: A Grid of Squares</title>
+		<link>https://css-tricks.com/video-screencasts/179-a-grid-of-squares/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 06 Apr 2020 21:22:10 +0000</pubDate>
+				<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[grid]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?page_id=306112</guid>
+
+					<description><![CDATA[<p>Using CSS grid to make a grid, is, well, the whole point. But what if you want all those grid items to maintain an aspect ratio, like a 1:1 square? It&#8217;s possible, but it involves a little trickery. In this video, we&#8217;ll look at doing that because we want to put a logo, centered, in each square.</p>
+<p>One of the final demos:</p>
+<p>CodePen Embed Fallback&#8230; <a href="https://css-tricks.com/video-screencasts/179-a-grid-of-squares/" class="read-more">Read article <span class="screen-reader-text"> &#8220;#179: A Grid of Squares&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/video-screencasts/179-a-grid-of-squares/">#179: A Grid of Squares</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Using CSS grid to make a grid, is, well, the whole point. But what if you want all those grid items to maintain an aspect ratio, like a 1:1 square? It&#8217;s possible, but it involves a little trickery. In this video, we&#8217;ll look at doing that because we want to put a logo, centered, in each square.</p>
+
+
+
+<p>One of the final demos:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jOPdMNJ" src="//codepen.io/anon/embed/jOPdMNJ?height=550&amp;theme-id=1&amp;slug-hash=jOPdMNJ&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jOPdMNJ" title="CodePen Embed jOPdMNJ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/video-screencasts/179-a-grid-of-squares/">#179: A Grid of Squares</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306112</post-id>	</item>
+		<item>
+		<title>Fluid Width Video</title>
+		<link>https://css-tricks.com/fluid-width-video/</link>
+					<comments>https://css-tricks.com/fluid-width-video/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 11 Mar 2020 14:10:16 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[responsive]]></category>
+		<category><![CDATA[video]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=304927</guid>
+
+					<description><![CDATA[<p>IN A WORLD of responsive and fluid layouts on the web, ONE MEDIA TYPE stands in the way of perfect harmony: video. There are lots of ways in which video can be displayed on your site. You might be self-hosting the video and presenting it via the HTML5 <code>&#60;video</code> tag. You might be using YouTube, Vimeo, or some other video provider that provides <code>&#60;iframe</code> code to display videos. Let&#8217;s cover how to make them all fluid width while maintaining an &#8230; <a href="https://css-tricks.com/fluid-width-video/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Fluid Width Video&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/fluid-width-video/">Fluid Width Video</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>IN A WORLD of responsive and fluid layouts on the web, ONE MEDIA TYPE stands in the way of perfect harmony: video. There are lots of ways in which video can be displayed on your site. You might be self-hosting the video and presenting it via the HTML5 <code>&lt;video></code> tag. You might be using YouTube, Vimeo, or some other video provider that provides <code>&lt;iframe></code> code to display videos. Let&#8217;s cover how to make them all fluid width while maintaining an appropriate height based on their aspect ratio.</p>
+
+
+
+<span id="more-304927"></span>
+
+
+
+<p>In each of these video-embedding scenarios, it is very common for a static <code>width</code> and <code>height</code> to be declared.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;video width="400" height="300" controls ... >&lt;/video>
+
+&lt;iframe width="400" height="300" ... >&lt;/iframe>
+
+&lt;!-- maybe even super old school -->
+&lt;object width="400" height="300" ... />
+&lt;embed width="400" height="300" ... /></code></pre>
+
+
+
+<p>Guess what? Declaring static widths isn&#8217;t a good idea in fluid width environments. What if the parent container for that video shrinks narrower than the declared <code>400px</code>? It will bust out and probably look ridiculous and embarrassing.</p>
+
+
+
+<figure class="wp-block-image"><img src="https://i1.wp.com/css-tricks.com/NetMag/FluidWidthVideo/images/breakout.png?ssl=1" alt="breakout" data-recalc-dims="1"/><figcaption>Simple and contrived, but still ridiculous and embarassing.</figcaption></figure>
+
+
+
+<p>So can&#8217;t we just do this?</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;video width="100%" ... >&lt;/video></code></pre>
+
+
+
+<p>Well, yep, you can! If you are using standard HTML5 video, that will make the video fit the width of the container. It&#8217;s important that you remove the <code>height</code> declaration when you do this so that the aspect ratio of the video is maintained as it grows and shrinks, lest you get awkward &#8220;bars&#8221; to fill the empty space (unlike images, the actual video maintains it&#8217;s aspect ratio regardless of the size of the element). </p>
+
+
+
+<p>You can get there via CSS (and not worry about what&#8217;s declared in the HTML) like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">video {
+  /* override other styles to make responsive */
+  width: 100%    !important;
+  height: auto   !important;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJVQPqe" src="//codepen.io/anon/embed/OJVQPqe?height=650&amp;theme-id=1&amp;slug-hash=OJVQPqe&amp;default-tab=result" height="650" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJVQPqe" title="CodePen Embed OJVQPqe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><code>&lt;iframe&gt;</code> Video (YouTube, Vimeo, etc.)</h3>
+
+
+
+<p>Our little trick from above isn&#8217;t going to help us when dealing with video that is delivered via <code>&lt;iframe&gt;</code>. Forcing the width to 100% is effective, but when we set <code>height: auto</code>, we end up with a static height of 150px<sup><a href="#fn:1">1</a></sup>, which is far too squat for most video and makes for more R&amp;E (Ridiculous and Embarrassing).</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_BaNYNLN" src="//codepen.io/anon/embed/BaNYNLN?height=390&amp;theme-id=1&amp;slug-hash=BaNYNLN&amp;default-tab=result" height="390" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed BaNYNLN" title="CodePen Embed BaNYNLN" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Fortunately, there are a couple of possible solutions here. One of them was pioneered by Thierry Koblentz and presented on A List Apart in 2009:&nbsp;<a href="http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/">Creating Intrinsic Ratios for Video</a>. With this technique, you wrap the video in another element which has an intrinsic aspect ratio, then absolute position the video within that. That gives us fluid width with a reasonable height we can count on.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="videoWrapper">
+  &lt;!-- Copy &amp; Pasted from YouTube -->
+  &lt;iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&amp;hd=1" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;/div></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_abOqOBK" src="//codepen.io/anon/embed/abOqOBK?height=460&amp;theme-id=1&amp;slug-hash=abOqOBK&amp;default-tab=result" height="460" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed abOqOBK" title="CodePen Embed abOqOBK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There is a clever adaptation of this that allows you to adjust the aspect ratio right from the HTML, like:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="videoWrapper" style="--aspect-ratio: 3 / 4;">
+  &lt;iframe ...></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.videoWrapper {
+  ...
+  /* falls back to 16/9, but otherwise uses ratio from HTML */
+  padding-bottom: calc(var(--aspect-ratio, .5625) * 100%); 
+}</code></pre>
+
+
+
+<p>Some old school video embedding uses <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code> tags, so if you&#8217;re trying to be comprehensive, update that wrapper selector to:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.videoWrapper iframe,
+.videoWrapper embed,
+.videoWrapper object { }</code></pre>
+
+
+
+<h3>But, but&#8230; aspect ratios, legacy content, non-tech users, etc.</h3>
+
+
+
+<p>The above technique is awesome, but it has several possible limitations:</p>
+
+
+
+<ol><li>It requires a wrapper element, so just straight up copy-and-pasting code from YouTube is out. Users will need to be a bit savvier.</li><li>If you have legacy content and are redesigning to be fluid, all old videos need HTML adjustments.</li><li>All videos need to be the same aspect ratio. Otherwise, they&#8217;ll be forced into a different aspect ratio and you&#8217;ll get the &#8220;bars&#8221;. Or, you&#8217;ll need a toolbox of class names you can apply to adjust it which is an additional complication.</li></ol>
+
+
+
+<p>If either of these limitations applies to you, you might consider a JavaScript solution. </p>
+
+
+
+<p>Imagine this: when the page loads all videos are looked at and their aspect ratio is saved. Once right away, and whenever the window is resized, all the videos are resized to fill the available width and maintain their aspect ratio. Using the&nbsp;<a href="https://jquery.com/">jQuery</a>&nbsp;JavaScript Library, that looks like this:</p>
+
+
+
+<pre rel="jQuery" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Find all YouTube videos
+// Expand that selector for Vimeo and whatever else
+var $allVideos = $("iframe[src^='//www.youtube.com']"),
+
+  // The element that is fluid width
+  $fluidEl = $("body");
+
+// Figure out and save aspect ratio for each video
+$allVideos.each(function() {
+
+  $(this)
+    .data('aspectRatio', this.height / this.width)
+
+    // and remove the hard coded width/height
+    .removeAttr('height')
+    .removeAttr('width');
+
+});
+
+// When the window is resized
+$(window).resize(function() {
+
+  var newWidth = $fluidEl.width();
+
+  // Resize all videos according to their own aspect ratio
+  $allVideos.each(function() {
+
+    var $el = $(this);
+    $el
+      .width(newWidth)
+      .height(newWidth * $el.data('aspectRatio'));
+
+  });
+
+// Kick off one resize to fix all videos on page load
+}).resize();</code></pre>
+
+
+
+<h3>That&#8217;s sorta what became FitVids.js</h3>
+
+
+
+<p>Except rather than deal with all that resizing business, <a href="https://github.com/davatron5000/FitVids.js">FitVids.js</a> loops over all the videos and adds the aspect-ratio enabling HTML wrapper and CSS necessary. That&#8217;s <em>way more efficient</em> than needing to bind to a window resize handler! </p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_LYVQVzq" src="//codepen.io/anon/embed/LYVQVzq?height=450&amp;theme-id=1&amp;slug-hash=LYVQVzq&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed LYVQVzq" title="CodePen Embed LYVQVzq" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Plain JavaScript instead</h3>
+
+
+
+<p>jQuery is rather out of favor these days. Fortunately, Dave has a Vanilla version (that is BYO CSS):</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzXeXjK" src="//codepen.io/anon/embed/YzXeXjK?height=550&amp;theme-id=1&amp;slug-hash=YzXeXjK&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzXeXjK" title="CodePen Embed YzXeXjK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Literally all browsers will render iframe, canvas, embed, and object tags as 300px × 150px if not otherwise declared. Even if this isn&#8217;t present in the UA stylesheet.</li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/fluid-width-video/">Fluid Width Video</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/fluid-width-video/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">304927</post-id>	</item>
+		<item>
+		<title>Do This to Improve Image Loading on Your Website</title>
+		<link>https://www.youtube.com/watch?v=4-d_SoCHeWE&#038;feature=youtu.be</link>
+					<comments>https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/#comments</comments>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2020 00:47:12 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[images]]></category>
+		<category><![CDATA[performance]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303706</guid>
+
+					<description><![CDATA[<p>In the video embedded below, Jen Simmons explains how to improve image loading by using width and height attributes. The issue is that there’s a lot of jank when an image is first loaded because an <code>img</code> will naturally have a height of <code>0</code> before the image asset has been successfully downloaded by the browser. Then it needs to repaint the page after that which pushes all the content around. I’ve definitely seen this problem <em>a lot</em> on big news &#8230; <a href="https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Do This to Improve Image Loading on Your Website&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/">Do This to Improve Image Loading on Your Website</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>In the video embedded below, Jen Simmons explains how to improve image loading by using width and height attributes. The issue is that there’s a lot of jank when an image is first loaded because an <code>img</code> will naturally have a height of <code>0</code> before the image asset has been successfully downloaded by the browser. Then it needs to repaint the page after that which pushes all the content around. I’ve definitely seen this problem <em>a lot</em> on big news websites.  </p>
+
+
+
+<p>Anyway, Jen is recommending that we should add <code>height</code> and <code>width</code> attributes to images like so:</p>
+
+
+
+<pre rel="HTML" class="language-markup" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;img src="dog.png" height="400" width="1000" alt="A cool dog" /></code></pre>
+
+
+
+<p>This is because Firefox &amp; Chrome will now take those values into consideration and remove all the jank before the image has loaded, <em>even when you override those values in CSS with a fluid width and thus unknown height</em>. That means content will always stay in the same position, even if the image hasn’t loaded yet. In the past, I’ve worked on a bunch of projects where I’ve placed images lower down the page simply because I want to prevent this sort of jank. I reckon this fixes that problem quite nicely.</p>
+
+
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="Do This to Improve Image Loading on Your Website" width="500" height="281" src="https://www.youtube.com/embed/4-d_SoCHeWE?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div></figure>
+<p><a href="https://www.youtube.com/watch?v=4-d_SoCHeWE&feature=youtu.be" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/">Do This to Improve Image Loading on Your Website</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/do-this-to-improve-image-loading-on-your-website/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303706</post-id>	</item>
+		<item>
+		<title>Centering a div That Maintains Aspect-Ratio When There&#8217;s Body Margin</title>
+		<link>https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/</link>
+					<comments>https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2020 22:33:22 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[centering]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303699</guid>
+
+					<description><![CDATA[<p>Andrew Welch had <a href="https://twitter.com/nystudio107/status/1227213129261756416?s=20">a little CSS challenge</a> the other day to make an ordinary div:</p>
+<blockquote class="wp-block-quote">
+<p>• centered vertically + horizontally<br />• scales to fit the viewport w/ a margin around it<br />• maintains an arbitrary aspect ratio<br />• No JS</p>
+</blockquote>
+<p>There&#8217;s a video in that tweet if it helps you visualize the challenge. I saw <a href="https://paulbakaus.com/2020/01/13/object-fit-contain-with-aspect-ratio-for-a/">Paul Bakaus blogging about this</a> the other day, too, so it&#8217;s a thing that comes up! </p>
+<p>Mark Huot got fancy applying aspect ratios directly with &#8230; <a href="https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Centering a div That Maintains Aspect-Ratio When There&#8217;s Body Margin&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/">Centering a div That Maintains Aspect-Ratio When There&#8217;s Body Margin</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Andrew Welch had <a href="https://twitter.com/nystudio107/status/1227213129261756416?s=20">a little CSS challenge</a> the other day to make an ordinary div:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>• centered vertically + horizontally<br>• scales to fit the viewport w/ a margin around it<br>• maintains an arbitrary aspect ratio<br>• No JS</p></blockquote>
+
+
+
+<p>There&#8217;s a video in that tweet if it helps you visualize the challenge. I saw <a href="https://paulbakaus.com/2020/01/13/object-fit-contain-with-aspect-ratio-for-a/">Paul Bakaus blogging about this</a> the other day, too, so it&#8217;s a thing that comes up! </p>
+
+
+
+<span id="more-303699"></span>
+
+
+
+<p>Mark Huot got fancy applying aspect ratios directly with <code>width</code>/<code>height</code> and creating the margins from subtracting from those dimensions:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqqQNg" src="//codepen.io/anon/embed/NWqqQNg?height=500&amp;theme-id=1&amp;slug-hash=NWqqQNg&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqqQNg" title="CodePen Embed NWqqQNg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p><a href="https://codepen.io/wattenberger">Amelia Wattenberger</a>&#8216;s idea is to set both <code>height</code>/<code>width</code> and <code>max-height</code>/<code>max-width</code> with viewport units, and center it with the classic <code>translate</code> trick:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_vYOOPXv" src="//codepen.io/anon/embed/vYOOPXv?height=450&amp;theme-id=1&amp;slug-hash=vYOOPXv&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed vYOOPXv" title="CodePen Embed vYOOPXv" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p><a href="https://codepen.io/meyerweb">Eric A. Meyer</a> did the <a href="https://codepen.io/meyerweb/pen/abOOgNV">same</a>, only centered with flexbox instead. </p>
+
+
+
+<p><a href="https://codepen.io/hartless">Brian Hart</a> used <code>vmin</code> units for the aspect ratio sizing and centered it with flexbox:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNVVRrJ" src="//codepen.io/anon/embed/rNVVRrJ?height=500&amp;theme-id=1&amp;slug-hash=rNVVRrJ&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNVVRrJ" title="CodePen Embed rNVVRrJ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p><a href="https://codepen.io/benface">Benoît Rouleau</a> did the <a href="https://codepen.io/benface/pen/eYNNqvP">same</a> but used <code>calc()</code> for the margins in a different unit.</p>
+
+
+
+<p>Andrew really likes Jonathan Melville&#8217;s approach. Most of it is in Tailwind classes so it&#8217;s a smidge hard for me to understand as I&#8217;m not used to looking at code like that yet.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_WNvvBgq" src="//codepen.io/anon/embed/WNvvBgq?height=500&amp;theme-id=1&amp;slug-hash=WNvvBgq&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed WNvvBgq" title="CodePen Embed WNvvBgq" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Andrew said he ultimately <a href="https://rgb.catering/center.html">went with</a> the <code>vmin</code> thing — although I see he&#8217;s using <code>calc()</code> to subtract <code>vmin</code> units from each other which isn&#8217;t really necessary unless, I guess, you wanna see the math. </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/">Centering a div That Maintains Aspect-Ratio When There&#8217;s Body Margin</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/centering-a-div-that-maintains-aspect-ratio-when-theres-body-margin/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303699</post-id>	</item>
+		<item>
+		<title>Oh Hey, Padding Percentage is Based on the Parent Element&#8217;s Width</title>
+		<link>https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/</link>
+					<comments>https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 13 Nov 2019 22:05:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[padding]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298541</guid>
+
+					<description><![CDATA[<p>I learned something about percentage-based (%) <code>padding</code> today that I had totally wrong in my head! I always thought that percentage padding was based on the element itself. So if an element is 1,000 pixels wide with <code>padding-top: 50%</code>, that padding is 500 pixels. It&#8217;s weird having top padding based on width, but that&#8217;s how it works &#8212; but only <em>sorta</em>. The 50% is based on the <em>parent element&#8217;s</em> width, not itself. That&#8217;s the part that confused me. &#8230; <a href="https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Oh Hey, Padding Percentage is Based on the Parent Element&#8217;s Width&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/">Oh Hey, Padding Percentage is Based on the Parent Element&#8217;s Width</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I learned something about percentage-based (%) <code>padding</code> today that I had totally wrong in my head! I always thought that percentage padding was based on the element itself. So if an element is 1,000 pixels wide with <code>padding-top: 50%</code>, that padding is 500 pixels. It&#8217;s weird having top padding based on width, but that&#8217;s how it works &mdash; but only <em>sorta</em>. The 50% is based on the <em>parent element&#8217;s</em> width, not itself. That&#8217;s the part that confused me. </p>
+<p><span id="more-298541"></span></p>
+<p>The only time I&#8217;ve ever messed with percentage padding is to do the <a href="https://css-tricks.com/aspect-ratio-boxes/">aspect ratio boxes</a> trick. The element is of fluid width, but you want to maintain an aspect ratio, hence the percentage padding trick. In that scenario, <strong>the width of the element is the width of the parent</strong>, so my incorrect mental model just never mattered. </p>
+<p>It doesn&#8217;t take much to prove it:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="LYYRKBO" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="% padding is based on parent, not itself">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/LYYRKBO"><br />
+  % padding is based on parent, not itself</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Thanks to Cameron Clark for the email about this:</p>
+<blockquote><p>The difference is moot when you have a block element that expands to fill the width of its parent completely, as in every example used in this article. But when you set any width on the element other than 100%, this misunderstanding will lead to baffling results.</p></blockquote>
+<p>They pointed to <a href="https://medium.com/coding-blocks/css-padding-a-magic-wand-2b8a66b84ebe">this article</a> by Aayush Arora who claims that only 1% of developers knew this.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/">Oh Hey, Padding Percentage is Based on the Parent Element&#8217;s Width</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/oh-hey-padding-percentage-is-based-on-the-parent-elements-width/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298541</post-id>	</item>
+		<item>
+		<title>Responsive Iframes</title>
+		<link>https://css-tricks.com/responsive-iframes/</link>
+					<comments>https://css-tricks.com/responsive-iframes/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 25 Jul 2019 19:00:14 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[iframes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=293158</guid>
+
+					<description><![CDATA[<p>Say you wanted to put the CSS-Tricks website in an <code>&#60;iframe&#62;</code>. You&#8217;d do that like this:</p>
+<pre rel="HTML"><code class="language-markup">&#60;iframe src="https://css-tricks.com"&#62;&#60;/iframe&#62;</code></pre>
+<p>Without any other styling, you&#8217;d get a rectangle that is 300&#215;150 pixels in size. That&#8217;s not even in the User Agent stylesheet, it&#8217;s just some magical thing about iframes (and objects). That&#8217;s almost certainly not what you want, so you&#8217;ll often see width and height attributes right on the iframe itself (YouTube does this).</p>
+<pre rel="HTML" data-line="2,3"><code class="language-markup">&#60;iframe 
+  width="560"
+  height="315"
+  src="https://css-tricks.com"&#62;&#60;/iframe&#62;</code></pre>
+<p>Those attributes are &#8230; <a href="https://css-tricks.com/responsive-iframes/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Responsive Iframes&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/responsive-iframes/">Responsive Iframes</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Say you wanted to put the CSS-Tricks website in an <code>&lt;iframe&gt;</code>. You&#8217;d do that like this:</p>
+<pre rel="HTML"><code class="language-markup">&lt;iframe src="https://css-tricks.com"&gt;&lt;/iframe&gt;</code></pre>
+<p>Without any other styling, you&#8217;d get a rectangle that is 300&#215;150 pixels in size. That&#8217;s not even in the User Agent stylesheet, it&#8217;s just some magical thing about iframes (and objects). That&#8217;s almost certainly not what you want, so you&#8217;ll often see width and height attributes right on the iframe itself (YouTube does this).</p>
+<pre rel="HTML" data-line="2,3"><code class="language-markup">&lt;iframe 
+  width="560"
+  height="315"
+  src="https://css-tricks.com"&gt;&lt;/iframe&gt;</code></pre>
+<p>Those attributes are good to have. It&#8217;s a start toward reserving some space for the iframe that is a lot closer to how it&#8217;s going to end up. Remember, <a href="https://css-tricks.com/the-fight-against-layout-jank/">layout jank is bad</a>. But we&#8217;ve got more work to do since those are fixed numbers, rather than a responsive-friendly setup.</p>
+<p><span id="more-293158"></span></p>
+<p>The best trick for responsive iframes, for now, is making an <a href="https://css-tricks.com/aspect-ratio-boxes/">aspect ratio box</a>. First you need a parent element with relative positioning. The iframe is the child element inside it, which you apply absolute positioning to in order to fill the area. The tricky part is that the parent element becomes the perfect height by creating a pseudo-element to push it to that height based on the aspect ratio. The whole point of it is that pushing the element to the correct size is a nicer system than forcing a certain height. In the scenario where the content inside is taller than what the aspect ratio accounts for, it can still grow rather than overflow.</p>
+<p>I&#8217;ll just put a complete demo right here (that works for images too):</p>
+<p class="codepen" data-height="501" style="height: 501px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="RXPjWp" style="height: 501px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Responsive Iframe">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/RXPjWp/"><br />
+  Responsive Iframe</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Every time we&#8217;re dealing with aspect ratios, it makes me think of a future with better handling for it. There is <a href="https://googlechrome.github.io/samples/intrinsic-size/">the experimental <code>intrinsicsize</code> attribute</a> that I could imagine being quite nice for iframes in addition to images. Plus there is the hopefully-will-exist-soon <code>aspect-ratio</code> in CSS and <a href="https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/">the idea that it could default to use the <code>width</code> and <code>height</code> attributes</a> on the element, which I hope would extend to iframes.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/responsive-iframes/">Responsive Iframes</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/responsive-iframes/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">293158</post-id>	</item>
+		<item>
+		<title>The Fight Against Layout Jank</title>
+		<link>https://css-tricks.com/the-fight-against-layout-jank/</link>
+					<comments>https://css-tricks.com/the-fight-against-layout-jank/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 10 Jul 2019 23:06:04 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[overflow-anchor]]></category>
+		<category><![CDATA[rendering]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=292630</guid>
+
+					<description><![CDATA[<p>A web page isn&#8217;t locked in stone just because it has rendered visually. Media assets, like images, can come in and cause the layout to shift based on their size, which typically isn&#8217;t known in fluid layouts until they do render. Or fonts can load and reflow layout. Or <abbr title="XMLHttpRequest">XHR</abbr>s can bring in more content to be placed onto the page. We&#8217;re always doing what we can to prevent the layout from shifting around &#8212; that&#8217;s what I mean &#8230; <a href="https://css-tricks.com/the-fight-against-layout-jank/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Fight Against Layout Jank&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-fight-against-layout-jank/">The Fight Against Layout Jank</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>A web page isn&#8217;t locked in stone just because it has rendered visually. Media assets, like images, can come in and cause the layout to shift based on their size, which typically isn&#8217;t known in fluid layouts until they do render. Or fonts can load and reflow layout. Or <abbr title="XMLHttpRequest">XHR</abbr>s can bring in more content to be placed onto the page. We&#8217;re always doing what we can to prevent the layout from shifting around &mdash; that&#8217;s what I mean by layout jank. It&#8217;s awkward and nobody likes it. At best, it causes you to lose your place while reading; at worst, it can mean clicking on something you <em>really</em> didn&#8217;t mean to.</p>
+<p><span id="more-292630"></span></p>
+<figure id="post-292655" class="align-left media-292655"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/content-reflow.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>While I was trying to wrap my head around the new <a href="https://web.dev/layout-instability-api">Layout Instability <abbr>API</abbr></a> and chatting it out with friends, Eric Portis said something characteristically smart. Basically, layout jank <em>is</em> a problem and it&#8217;s being fought on multiple fronts:</p>
+<ul>
+<li><strong>Fight the problem at the content/authoring level:</strong> We now have <a href="https://github.com/WICG/intrinsicsize-attribute"><code>intrinsicsize</code> as an HTML attribute</a> and <a href="https://www.smashingmagazine.com/2019/03/aspect-ratio-unit-css/"><code>aspect-ratio</code> as a CSS property</a>. Both are designed for this fight, although they don&#8217;t really have great browser support yet, requiring <a href="https://css-tricks.com/aspect-ratio-boxes/"><abbr>DIY</abbr> aspect ratio boxes</a> intead. Plus, <a href="https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/">ideas like this</a> change to <abbr title="User Agent">UA</abbr> stylesheets to widen the effectiveness of <em>aspect-ratio</em>.</li>
+<li><strong>Fight the problem at the browser behavior level:</strong> <a href="https://blog.chromium.org/2017/04/scroll-anchoring-for-web-developers.html">Scroll anchoring</a> is designed to do this as well. The fact that it&#8217;s now enabled by default is a big deal. It&#8217;s also still possible to control it with CSS if you need to, via <a href="https://css-tricks.com/almanac/properties/o/overflow-anchor/"><code>overflow-anchor</code></a>.</li>
+<li><strong>Measure the problem and the causes:</strong> The <a href="https://web.dev/layout-instability-api">Layout Instability <abbr>API</abbr></a> is designed for this, presumably to enable tooling that monitors it.</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-fight-against-layout-jank/">The Fight Against Layout Jank</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-fight-against-layout-jank/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">292630</post-id>	</item>
+		<item>
+		<title>What if we got aspect-ratio sized images by doing almost nothing?</title>
+		<link>https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/</link>
+					<comments>https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 06 Jun 2019 22:00:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[aspect ratio]]></category>
+		<category><![CDATA[images]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=289000</guid>
+
+					<description><![CDATA[<p>Say you have an image you&#8217;re using in an <code>&#60;img&#62;</code> that is 800&#215;600 pixels. Will it actually display as 800px wide on your site? It&#8217;s <em>very likely</em> that it will not. We tend to put images into flexible container elements, and the image inside is set to <code>width: 100%;</code>. So perhaps that image ends up as 721px wide, or 381px wide, or whatever. What <em>doesn&#8217;t</em> change is that image&#8217;s aspect ratio, lest you squish it awkwardly (ignoring the special &#8230; <a href="https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/" class="read-more">Read article <span class="screen-reader-text"> &#8220;What if we got aspect-ratio sized images by doing almost nothing?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/">What if we got aspect-ratio sized images by doing almost nothing?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Say you have an image you&#8217;re using in an <code>&lt;img&gt;</code> that is 800&#215;600 pixels. Will it actually display as 800px wide on your site? It&#8217;s <em>very likely</em> that it will not. We tend to put images into flexible container elements, and the image inside is set to <code>width: 100%;</code>. So perhaps that image ends up as 721px wide, or 381px wide, or whatever. What <em>doesn&#8217;t</em> change is that image&#8217;s aspect ratio, lest you squish it awkwardly (ignoring the special use-case <a href="https://css-tricks.com/almanac/properties/o/object-fit/"><code>object-fit</code></a> scenario). </p>
+<p>The main point is that we don&#8217;t know how much vertical space an image is going to occupy until that image loads. This is the cause of jank! Terrible jank! It&#8217;s everywhere and it&#8217;s awful. </p>
+<p class="explanation"><strong>Update!</strong> This actually happened. So all you have to do is put the correct natural width and height attributes on images and they will load without jank, even if CSS makes the image fluid with. So do it like: <code>&lt;img src="image.jpg" width="800" height="600"&gt;</code></p>
+<p>There are ways to create <a href="https://css-tricks.com/aspect-ratio-boxes/">aspect-ratio sized boxes</a> in HTML/CSS today. None of the options are particularly elegant because they rely on the &#8220;hack&#8221; of setting a zero height and pushing the boxes height with padding. Wouldn&#8217;t it be nicer to have a platform feature to help us here? The first crack at fixing this problem that I know about is an <code>intrinsicsize</code> attribute. Eric Portis wrote about how this works wonderfully in <a href="https://24ways.org/2018/jank-free-image-loads/">Jank-Free Image Loads</a>.</p>
+<p><span id="more-289000"></span></p>
+<p>We&#8217;d get this:</p>
+<pre rel="HTML"><code class="language-markup">&lt;img src="image.jpg" intrinsicsize="800x600" /&gt;</code></pre>
+<p>This is currently <a href="https://www.chromestatus.com/feature/4704436815396864">behind a flag</a> in Chrome 71+, and it really does help solve this problem.</p>
+<p>But&#8230;</p>
+<p>The <code>intrinsicsize</code> property is brand new. It will only help on sites where the developers know about it and take the care to implement it. And it&#8217;s tricky! Images tend to be sized arbitrarily, and the <code>intrinsicsize</code> attribute will need to be custom on every image to be accurate and do its job. That is, if it makes it out of standards at all. </p>
+<p>There is another possibility! Eric also talked about the <code>aspect-ratio</code> property in CSS as a potential solution. It&#8217;s also still <a href="https://drafts.csswg.org/css-sizing-4/#ratios">just a draft spec</a>. You might say, but how is this helpful? It needs to be just as bespoke as <code>intrinsicsize</code> does, meaning you&#8217;d have to do it as inline styles to be helpful. Maybe that&#8217;s not so bad if it solves a big problem, but inline styles are such a pain to override and it seems like the HTML attribute approach is more inline with the spirit of images. Think of how <code>srcset</code> is a hint to browsers for what images are available to download, allowing the browser to pick the best one for the scenario. Telling the browser about the <code>aspect-ratio</code> upfront is similarly useful. </p>
+<p>I heard from Jen Simmons about an absolutely fantastic way to handle this: <strong>put a default aspect ratio into the <abbr>UA</abbr> stylesheet based on the elements existing <code>width</code> and <code>height</code> attributes.</strong> Like this:</p>
+<pre rel="CSS"><code class="language-css">img, video {
+  aspect-ratio: attr(width) / attr(height);
+}</code></pre>
+<p><em>Let that soak in.</em></p>
+<p>Now if you already have:</p>
+<pre rel="HTML"><code class="language-markup">&lt;img src="image.jpg" width="800" height="600" /&gt;</code></pre>
+<p>It automatically has the correct aspect ratio as the page loads. That&#8217;s awesome. </p>
+<ol>
+<li>It&#8217;s easy to understand.</li>
+<li>A ton of the internet already has these attributes sitting on their images.</li>
+<li>New developers will have no trouble understanding this, and old developers will be grateful there is little (if any) work to do here.</li>
+</ol>
+<p>I like the idea of the CSS feature. But I like 100 times more the idea of putting it into the <abbr>UA</abbr? stylesheet so that the entire web benefits. I'm sure that changing a <abbr>UA</abbr> stylesheet is no small thing to consider &mdash; and I&#8217;m not qualified to understand all the implications of that &mdash; but it feels like a very awesome thing at first consideration.</p>
+<p>Jen <a href="https://github.com/WICG/intrinsicsize-attribute/issues/16">has a ticket open for people to voice their thoughts</a> and links to the bug ticket where Firefox is going to test this out to see how it goes.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/">What if we got aspect-ratio sized images by doing almost nothing?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/what-if-we-got-aspect-ratio-sized-images-by-doing-almost-nothing/feed/</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">289000</post-id>	</item>
+	</channel>
+</rss>

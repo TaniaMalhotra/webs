@@ -1,0 +1,1963 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>css animation &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/css-animation/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 07 Apr 2020 14:51:53 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>How to Re-Create a Nifty Netflix Animation in CSS</title>
+		<link>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/</link>
+					<comments>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Geelhoed]]></dc:creator>
+		<pubDate>Tue, 07 Apr 2020 14:51:52 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[transform]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305681</guid>
+
+					<description><![CDATA[<p>The design for Netflix&#8217;s browse page has remained pretty similar for a few years now. One mainstay component is the preview slider that allows users to scroll through content and hover on items to see a preview.</p>
+<p>One unique characteristic of the UI is its hover behavior. When a show preview expands on hover, the cards next to it are pushed outward so that they don’t overlap.&#160;</p>
+<p>Like this:</p>
+<p>It’s like Bill Murray and Brad Pitt are fighting for the&#8230; <a href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Re-Create a Nifty Netflix Animation in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/">How to Re-Create a Nifty Netflix Animation in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The design for Netflix&#8217;s browse page has remained pretty similar for a few years now. One mainstay component is the preview slider that allows users to scroll through content and hover on items to see a preview.</p>
+
+
+
+<p>One unique characteristic of the UI is its hover behavior. When a show preview expands on hover, the cards next to it are pushed outward so that they don’t overlap.&nbsp;</p>
+
+
+
+<span id="more-305681"></span>
+
+
+
+<p>Like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/Oi8Y_TWA.gif?ssl=1" alt="" class="wp-image-305682" data-recalc-dims="1"/><figcaption>It’s like Bill Murray and Brad Pitt are fighting for the spotlight.</figcaption></figure>
+
+
+
+<p>We can do this in CSS! No JavaScript. No dependencies. Plain CSS. But before getting into any code, here’s exactly what we want to do:</p>
+
+
+
+<ol><li>The card that is hovered over should expand while keeping its aspect ratio.</li><li>When a card is hovered, the other cards should not change size and move outwards so that they don&#8217;t overlap one another.</li><li>All the cards should remain vertically centered with one another.</li></ol>
+
+
+
+<p>Sound good? Now let’s get into the code.</p>
+
+
+
+<h3>HTML and flexible elements</h3>
+
+
+
+<p>Let’s set up a row of images that represents Netflix’s video previews. That includes:</p>
+
+
+
+<ul><li>A &nbsp;<code>.container</code>&nbsp;parent element with several <code>.item</code> elements inside</li><li>Each <code>.item</code> element consisting of an image wrapped in an anchor tag</li><li>Turning <code>.container</code> into a flex container that aligns the items in a row</li><li>Setting the flex behavior for the <code>.item</code> class so they take up equal space in the row</li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYNMawe" src="//codepen.io/anon/embed/eYNMawe?height=350&amp;theme-id=1&amp;slug-hash=eYNMawe&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYNMawe" title="CodePen Embed eYNMawe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Expanding an item on hover</h3>
+
+
+
+<p>Our next step is getting an item to expand when it is hovered. We could do this by animating the element’s <code>width</code>, but that would affect the flow of the document and cause the hovered item’s siblings to shrink – plus, animating the <code>width</code> property is known to be <a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance">poor for performance</a> in some cases.</p>
+
+
+
+<p>To avoid squeezing the sibling of the hovered item, we are going to animate the <code>transform</code> property — specifically, its <code>scale()</code> function — instead. This won’t affect document flow the same way <code>width</code> does.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_LYVdooX" src="//codepen.io/anon/embed/LYVdooX?height=350&amp;theme-id=1&amp;slug-hash=LYVdooX&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed LYVdooX" title="CodePen Embed LYVdooX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Moving siblings outward</h3>
+
+
+
+<p>Getting the siblings of a hovered item to move away from the hovered item is the tricky part of this whole thing. One CSS feature we have at our disposal is the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator">general sibling combinator</a>. This lets us select all of the sibling items that are positioned <em>after</em> the hovered item.</p>
+
+
+
+<p>We’ll turn to the <code>transform</code>&nbsp;property’s <code>translateX()</code>&nbsp;function to move things around. Again, animating <code>transform</code> is much nicer than other properties that impact document flow, like margins and padding.</p>
+
+
+
+<p>Since we’ve set an item to scale up 150% on hover, the translation should be set to 25%. That’s half of the additional space that is being occupied by the hovered item.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.item:hover ~ .item {
+  transform: translateX(25%);
+}</code></pre>
+
+
+
+<p>That handles moving things to the right, but how can we translate the items on the <em>left</em>? Since the general sibling combinator only applies to siblings positioned <em>after</em> a given selector (no going “backwards”), we’ll need another approach.</p>
+
+
+
+<p>One way is to add an additional hover rule on the parent container itself. Here is the plan:</p>
+
+
+
+<ul><li>When hovering the parent container, shift all the items inside that container to the left.</li><li>Use the general sibling combinator to make the items positioned after the hovered item move to the right.</li><li>Get super specific so a hovered item isn’t translated like the rest of the items.</li></ul>
+
+
+
+<p>We’re making a big assumption that your document uses a left-to-right writing mode. If you want to use this effect in a right-to-left context, you will need to set all items inside the hovered outer container to move <em>right</em> and use the general sibling combinator to move all selected items <em>left</em>.</p>
+
+
+
+<h3>Demo time!</h3>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RwPjBag" src="//codepen.io/anon/embed/RwPjBag?height=350&amp;theme-id=1&amp;slug-hash=RwPjBag&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RwPjBag" title="CodePen Embed RwPjBag" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>One little thing to note: this final version is using <code>:focus</code> and <code>:focus-within</code> pseudo-classes to support keyboard navigation. The Netflix example isn’t using it, but I think that’s a nice touch for accessibility.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>There we have it! Yes, we could have used JavaScript event listeners instead of CSS hover rules., and that could possibly be better for maintainability and readability. But it’s sometimes fun to see just how far CSS can take us!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/">How to Re-Create a Nifty Netflix Animation in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-re-create-a-nifty-netflix-animation-in-css/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305681</post-id>	</item>
+		<item>
+		<title>Animated Matryoshka Dolls in CSS</title>
+		<link>https://css-tricks.com/animated-matryoshka-dolls-in-css/</link>
+					<comments>https://css-tricks.com/animated-matryoshka-dolls-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Thu, 27 Feb 2020 15:23:10 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[checkbox hack]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[keyframes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303748</guid>
+
+					<description><![CDATA[<p>Here’s a fun one. How might we create a set of those cool Matryoshka dolls where they nest inside one another&#8230; but in CSS?</p>
+<p>I toyed with this idea in my head for a little while. Then, I saw a tweet from CSS-Tricks and the article image had the dolls. I took that as a sign! It was time to put fingers to the keyboard.</p>
+<p>Our goal here is to make these fun and interactive, where we can click on &#8230; <a href="https://css-tricks.com/animated-matryoshka-dolls-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Animated Matryoshka Dolls in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animated-matryoshka-dolls-in-css/">Animated Matryoshka Dolls in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s a fun one. How might we create a set of those cool Matryoshka dolls where they nest inside one another&#8230; but in CSS?</p>
+
+
+
+<p>I toyed with this idea in my head for a little while. Then, I saw a tweet from CSS-Tricks and the article image had the dolls. I took that as a sign! It was time to put fingers to the keyboard.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/10/matryoshka-dolls.png?ssl=1" alt="" class="wp-image-296824" data-recalc-dims="1"/></figure>
+
+
+
+<p>Our goal here is to make these fun and interactive, where we can click on a doll to open it up and reveal another, smaller doll. Oh, and stick with just CSS for the functionality. And while we’re at it, let’s replace the dolls with our own character, say a CodePen bear. Something like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/beqrs-finalbears-final.gif?ssl=1" alt="" class="wp-image-303772" data-recalc-dims="1"/></figure>
+
+
+
+<p>We won&#8217;t dwell on making things pretty to start. Let&#8217;s get some markup on the page and thrash out the mechanics first.</p>
+
+
+
+<p>We can’t have an infinite amount of dolls. When we reach the innermost doll, it&#8217;d be nice to be able to reset the dolls without having to do a page refresh. A neat trick for this is to wrap our scene in an HTML form. That way we can use an input and set the <code>type</code>&nbsp;attribute to <code>reset</code> to avoid using any JavaScript.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;form>
+  &lt;input type="reset" id="reset"/>
+  &lt;label for="reset" title="Reset">Reset&lt;/label>
+&lt;/form></code></pre>
+
+
+
+<p>Next, we need some dolls. Or bears. Or something to start with. The key here will be to use the classic <a href="https://css-tricks.com/the-checkbox-hack/">checkbox hack</a> and any associated form labels. As a note, I’m going to use Pug to handle the markup because it supports loops, making things a little easier. But, you can certainly write the HTML by hand. Here’s the start with form fields and labels that set up the checkbox hack.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RwNmPwr" src="//codepen.io/anon/embed/RwNmPwr?height=350&amp;theme-id=1&amp;slug-hash=RwNmPwr&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RwNmPwr" title="CodePen Embed RwNmPwr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Try clicking some of the inputs and hitting the Reset input. They all become unchecked. Nice, we’ll use that.</p>
+
+
+
+<p>We have some interactivity but nothing is really happening yet. Here’s the plan:</p>
+
+
+
+<ol><li>We’ll only show one checkbox at a time</li><li>Checking a checkbox should reveal the label for the next checkbox.</li><li>When we get to the last checkbox, there our only option should be to reset the form.</li></ol>
+
+
+
+<p>The trick will be to make use of the CSS adjacent sibling combinator (<code>+</code>).</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label + input + label {
+  display: block;
+}</code></pre>
+
+
+
+<p>When a checkbox is checked, we need to show the label for the next doll, which will be three siblings along in the DOM. How do we make the first label visible? Give it an explicit <code>display: block</code> via inline styles in our markup. Putting this together, we have something along these lines:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_MWYdwjP" src="//codepen.io/anon/embed/MWYdwjP?height=350&amp;theme-id=1&amp;slug-hash=MWYdwjP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed MWYdwjP" title="CodePen Embed MWYdwjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Clicking each label reveals the next. Hold on, the last label isn’t shown! That’s correct. And that’s because the last label doesn’t have a checkbox. We need to add a rule that caters to that last label.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label + input + label,
+input:checked + label + label {
+  display: block;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWPVqyM" src="//codepen.io/anon/embed/NWPVqyM?height=350&amp;theme-id=1&amp;slug-hash=NWPVqyM&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWPVqyM" title="CodePen Embed NWPVqyM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Cool. We&#8217;re getting somewhere. That&#8217;s the basic mechanics. Now things are going to get a little trickier.&nbsp;</p>
+
+
+
+<h3>Basic styling</h3>
+
+
+
+<p>So, you might be thinking, “Why aren’t we hiding the checked label?” Good question! But, if we hide it straight away, we won’t have any transition between the current doll and the next. Before we start animating our dolls, let’s create basic boxes that will represent a doll. We can style them up so they mimic the doll outline without the detail.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.doll {
+  color: #fff;
+  cursor: pointer;
+  height: 200px;
+  font-size: 2rem;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+}
+
+.doll:nth-of-type(even) {
+  background: #00f;
+}
+
+.doll:nth-of-type(odd) {
+  background: #f00;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNgRjvZ" src="//codepen.io/anon/embed/oNgRjvZ?height=350&amp;theme-id=1&amp;slug-hash=oNgRjvZ&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNgRjvZ" title="CodePen Embed oNgRjvZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Clicking one doll instantly reveals the next one and, when we’ve reached the last doll, we can reset the form to start again. That’s what we want here.</p>
+
+
+
+<h3>The mechanics</h3>
+
+
+
+<p>We are going to animate the dolls based on a center point. Our animation will consist of many steps:</p>
+
+
+
+<ol><li>Slide the current doll out to the left.</li><li>Open the doll to reveal the next one.</li><li>Move the next doll where the current one started.</li><li>Make the current doll fade out.</li><li>Assign the next doll as the current doll.</li></ol>
+
+
+
+<p>Let’s start by sliding the current doll out to the left. We apply an animation when we click a label. Using the <code>:checked</code> pseudo-selector we can target the current doll. At this point, it’s worth noting that we are going to use CSS variables to control animation speed and behavior. This will make it easier to chain animations on the labels.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --speed: 0.25;
+  --base-slide: 100;
+  --slide-distance: 60;
+}
+
+input:checked + label {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+}
+
+@keyframes slideLeft {
+  to {
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -1%), 0);
+  }
+}</code></pre>
+
+
+
+<p>That looks great. But there’s an issue. As soon as we click a label, we could click it again and reset the animation. We don&#8217;t want that to happen.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-01.gif?ssl=1" alt="" class="wp-image-303763" data-recalc-dims="1"/></figure>
+
+
+
+<p>How can we get around this? We can remove pointer events from a label once it’s been clicked.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-02.gif?ssl=1" alt="" class="wp-image-303764" data-recalc-dims="1"/></figure>
+
+
+
+<p>Great! Now once we have started, we can’t stop the animation chain from happening.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_KKwLdXP" src="//codepen.io/anon/embed/KKwLdXP?height=350&amp;theme-id=1&amp;slug-hash=KKwLdXP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed KKwLdXP" title="CodePen Embed KKwLdXP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Next up, we need to crack open the doll to reveal the next one. This is where things get tricky because we are going to need some extra elements, not only to create the effect that the doll is opening up, but also to reveal the next doll inside of it. That&#8217;s right: we need to duplicate the inner doll. The trick here is to reveal a &#8220;fake&#8221; doll that we swap for the real one once we&#8217;ve animated it. This also means delaying the reveal of the next label.</p>
+
+
+
+<p>Now our markup updates labels so that they contains span elements.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label class="doll" for="doll--1">
+  &lt;span class="doll doll--dummy">&lt;/span>
+  &lt;span class="doll__half doll__half--top">Top&lt;/span>
+  &lt;span class="doll__half doll__half--bottom">Bottom&lt;/span>
+&lt;/label></code></pre>
+
+
+
+<p>These will act as the “dummy” doll as well as the lid and base for the current doll.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.doll {
+  color: #fff;
+  cursor: pointer;
+  height: 200px;
+  font-size: 2rem;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+
+.doll:nth-of-type(even) {
+  --bg: #00f;
+  --dummy-bg: #f00;
+}
+
+.doll:nth-of-type(odd) {
+  --bg: #f00;
+  --dummy-bg: #00f;
+}
+
+.doll__half {
+  background: var(--bg);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+}
+
+.doll__half--top {
+  top: 0;
+}
+
+.doll__half--bottom {
+  bottom: 0;
+}
+
+.doll__dummy {
+  background: var(--dummy-bg);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}</code></pre>
+
+
+
+<p>The lid requires three translations to create the opening effect: one to pop it up, one to move it left and then one to pop it down.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-03.png?ssl=1" alt="" class="wp-image-303765" data-recalc-dims="1"/></figure>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes open {
+  0% {
+    transform: translate(0, 0);
+  }
+  33.333333333333336% {
+    transform: translate(0, -100%);
+  }
+  66.66666666666667% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translate(-100%, 100%);
+  }
+}</code></pre>
+
+
+
+<p>Next is where we can use CSS custom properties to handle changing values. Once the doll has slid over to the left, we can open it. But how do we know how long to delay it from opening until that happens? We can use the <code>--speed</code> custom property we defined earlier to calculate the correct delay.</p>
+
+
+
+<p>It looks a little quick if we use the <code>--speed</code> value as it is, so let’s multiply it by two seconds:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}
+
+input:checked + .doll .doll__half--top {
+  animation: open calc(var(--speed) * 2s) calc(var(--speed) * 1s) forwards; // highlight
+}</code></pre>
+
+
+
+<p>Much better:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_LYEopKm" src="//codepen.io/anon/embed/LYEopKm?height=350&amp;theme-id=1&amp;slug-hash=LYEopKm&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed LYEopKm" title="CodePen Embed LYEopKm" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Now we need to move the inner “dummy” doll to the new position. This animation is like the open animation in that it consists of three stages. Again, that’s one to move up, one to move right, and one to set down. It&#8217;s like the slide animation, too. We are going to use CSS custom properties to determine the distance that the doll moves.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  // Introduce a new variable that defines how high the dummy doll should pop out.
+  --pop-height: 60;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 0) translate(0, 0);
+  }
+  33.333333333333336% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(0, 0);
+  }
+  66.66666666666667% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(calc((var(--base-slide) * 1px) + var(--slide-distance) * 1%), 0);
+  }
+  100% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(calc((var(--base-slide) * 1px) + var(--slide-distance) * 1%), calc(var(--pop-height) * 1%));
+  }
+}</code></pre>
+
+
+
+<p>Almost there!&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wvBbYmP" src="//codepen.io/anon/embed/wvBbYmP?height=350&amp;theme-id=1&amp;slug-hash=wvBbYmP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wvBbYmP" title="CodePen Embed wvBbYmP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The only thing is that the next doll is available as soon as we click a doll. that means we can spam click our way through the set.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-04.gif?ssl=1" alt="" class="wp-image-303767" data-recalc-dims="1"/></figure>
+
+
+
+<p>Technically, the next doll shouldn’t show until the “fake” one has moved into place. It’s only once the “fake” doll is in place that we can hide it and reveal the real one. That means we going to use zero-second scale animations! That&#8217;s right. We can play pretend by delaying two zero-second animations and using <code>animation-fill-mode</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes appear {
+  from {
+    transform: scale(0);
+  }
+}</code></pre>
+
+
+
+<p>We actually only need one set of <code>@keyframes</code>. because we can re-use what we have to create the opposite movement with <code>animation-direction: reverse</code>. With that in mind, all our animations get applied something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">// The next doll
+input:checked + .doll + input + .doll,
+// The last doll (doesn't have an input)
+input:checked + .doll + .doll {
+  animation: appear 0s calc(var(--speed) * 5s) both;
+  display: block;
+}
+
+// The current doll
+input:checked + .doll,
+// The current doll that isn't the first. Specificity prevails
+input:checked + .doll + input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}
+
+input:checked + .doll .doll__half--top,
+input:checked + .doll + input:checked + .doll .doll__half--top {
+  animation: open calc(var(--speed) * 2s) calc(var(--speed) * 1s) forwards;
+}
+
+input:checked + .doll .doll__dummy,
+input:checked + .doll + input:checked + .doll .doll__dummy {
+  animation: move calc(var(--speed) * 2s) calc(var(--speed) * 3s) forwards, appear 0s calc(var(--speed) * 5s) reverse forwards;
+}</code></pre>
+
+
+
+<p>Note how important the variables are, especially where we are chaining animations. That gets us almost where we need to be.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_povmxMG" src="//codepen.io/anon/embed/povmxMG?height=350&amp;theme-id=1&amp;slug-hash=povmxMG&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed povmxMG" title="CodePen Embed povmxMG" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I can hear it now: &#8220;They&#8217;re all the same size!&#8221; Yep. That&#8217;s the missing piece. They need to scale down. The trick here is to adjust the markup again and make use of CSS custom properties yet again.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-html" data-line="3,5,6,9"><code markup="tt">&lt;input id="doll--0" type="checkbox"/&gt;
+&lt;label class="doll" for="doll--0" style="display: block; --doll-index: 0;"&gt;
+  &lt;span class="doll__dummy-container"&gt;
+    &lt;span class="doll__dummy"&gt;&lt;/span&gt;
+  &lt;/span&gt; //highlight
+  &lt;span class="doll__container"&gt;
+    &lt;span class="doll__half doll__half--top"&gt;&lt;/span&gt;
+    &lt;span class="doll__half doll__half--bottom"&gt;&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/label&gt;</code></pre>
+
+
+
+<p>We just introduced a CSS custom property inline that tells us the index of the doll. We can use this to generate a scale of each half as well as the fake inner doll. The halves will have to scale to match the actual doll size, but the fake inner doll scale will need to match that of the next doll. Tricky!</p>
+
+
+
+<p>We can apply these scales inside the containers so that our animations are not affected.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="15,24"><code markup="tt">:root {
+  --scale-step: 0.05;
+}
+
+.doll__container,
+.doll__dummy-container {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.doll__container {
+  transform: scale(calc(1 - ((var(--doll-index)) * var(--scale-step))));
+  transform-origin: bottom;
+}
+
+.doll__dummy {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(calc(1 - ((var(--doll-index) + 1) * var(--scale-step))));
+  transform-origin: bottom center;
+  width: 100%;
+}</code></pre>
+
+
+
+<p>Note how the <code>.doll__dummy</code> class uses <code>var(--doll-index) + 1)</code> to calculate the scale so that it matches the next doll. &nbsp;&#x1f44d;</p>
+
+
+
+<p>Lastly, we re-assign the animation to the <code>.doll__dummy-container</code> class instead of the <code>.doll__dummy</code> class.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + .doll .doll__dummy-container,
+input:checked + .doll + input:checked + .doll .doll__dummy-container {
+  animation: move calc(var(--speed) * 2s) calc(var(--speed) * 3s) forwards, appear 0s calc(var(--speed) * 5s) reverse forwards;
+}</code></pre>
+
+
+
+<p>Here&#8217;s a demo where the containers have been given a background color to see what’s happening.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLydOwQ" src="//codepen.io/anon/embed/yLydOwQ?height=350&amp;theme-id=1&amp;slug-hash=yLydOwQ&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLydOwQ" title="CodePen Embed yLydOwQ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>We can see that, although the content size changes, they remain the same size. This makes for consistent animation behavior and makes the code easier to maintain.</p>
+
+
+
+<h3>Finishing touches</h3>
+
+
+
+<p>Wow, things are looking pretty slick! All we need are some finishing touches and we are done!</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-905.gif?ssl=1" alt="" class="wp-image-303768" data-recalc-dims="1"/></figure>
+
+
+
+<p>The scene starts to look cluttered because we’re stacking the “old” dolls off to the side when a new one is introduced. So let&#8217;s slide a doll out of view when the next one is revealed to clean that mess up.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes slideOut {
+  from {
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -1%), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -2%), 0);
+  }
+}
+
+input:checked + .doll,
+input:checked + .doll + input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards,
+    slideOut calc(var(--speed) * 1s) calc(var(--speed) * 6s) forwards;
+  pointer-events: none;
+}</code></pre>
+
+
+
+<p>The new <code>slideOut</code> animation fades the doll out while it translates to the left. Perfect. &nbsp;&#x1f44d;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-06.gif?ssl=1" alt="" class="wp-image-303769" data-recalc-dims="1"/></figure>
+
+
+
+<p>That’s it for the CSS trickery we need to make this effect work. All that’s left style the dolls and the scene.</p>
+
+
+
+<p>We have many options to style the dolls. We could use a background image, CSS illustration, SVG, or what have you. We could even throw together some emoji dolls that use random inline hues!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNgrBYY" src="//codepen.io/anon/embed/oNgrBYY?height=350&amp;theme-id=1&amp;slug-hash=oNgrBYY&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNgrBYY" title="CodePen Embed oNgrBYY" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let’s go with inline SVG.</p>
+
+
+
+<p>I’m basically using the same underlying mechanics we’ve already covered. The difference is that I’m also generating inline variables for hue and lightness so the bears sport different shirt colors.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jOOYMLm" src="//codepen.io/anon/embed/jOOYMLm?height=500&amp;theme-id=1&amp;slug-hash=jOOYMLm&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jOOYMLm" title="CodePen Embed jOOYMLm" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>There we have it! Stacking dolls — err, bears — with nothing but HTML and CSS! All the code for all the steps is available in <a href="https://codepen.io/collection/nmqWpx">this CodePen collection</a>. Questions or suggestions? Feel free to reach out to me here in the comments.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animated-matryoshka-dolls-in-css/">Animated Matryoshka Dolls in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/animated-matryoshka-dolls-in-css/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303748</post-id>	</item>
+		<item>
+		<title>Weaving a Line Through Text in CSS</title>
+		<link>https://css-tricks.com/weaving-a-line-through-text-in-css/</link>
+					<comments>https://css-tricks.com/weaving-a-line-through-text-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Ana Tudor]]></dc:creator>
+		<pubDate>Wed, 26 Feb 2020 15:04:24 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[transform]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303448</guid>
+
+					<description><![CDATA[<p>Earlier this year, I came across <a href="https://codepen.io/FlorinPop17/pen/LYYGMOV">this demo</a> by Florin Pop, which makes a line go either over or under the letters of a single line heading. I thought this was a cool idea, but there were a few little things about the implementation I felt I could simplify and improve at the same time.</p>
+<p>First off, the original demo duplicates the headline text, which I knew could be easily avoided. Then there&#8217;s the fact that the length of the &#8230; <a href="https://css-tricks.com/weaving-a-line-through-text-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Weaving a Line Through Text in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/weaving-a-line-through-text-in-css/">Weaving a Line Through Text in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Earlier this year, I came across <a href="https://codepen.io/FlorinPop17/pen/LYYGMOV">this demo</a> by Florin Pop, which makes a line go either over or under the letters of a single line heading. I thought this was a cool idea, but there were a few little things about the implementation I felt I could simplify and improve at the same time.</p>
+
+
+
+<span id="more-303448"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/interweaving-headline.png?fit=1024%2C324&amp;ssl=1" alt="" class="wp-image-303821"/></figure>
+
+
+
+<p>First off, the original demo duplicates the headline text, which I knew could be easily avoided. Then there&#8217;s the fact that the length of the line going through the text is a magic number, which is not a very flexible approach. And finally, can&#8217;t we get rid of the JavaScript?</p>
+
+
+
+<p>So let&#8217;s take a look into where I ended up taking this.</p>
+
+
+
+<h3 id="structure">HTML structure</h3>
+
+
+
+<p>Florin puts the text into a heading element and then duplicates this heading, using <a href="https://splitting.js.org/">Splitting.js</a> to replace the text content of the duplicated heading with spans, each containing one letter of the original text.</p>
+
+
+
+<p>Already having decided to do this without text duplication, using a library to split the text into characters and then put each into a <code>span</code> feels a bit like overkill, so we&#8217;re doing it all with an HTML preprocessor.</p>
+
+
+
+<pre rel="Pug" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">- let text = 'We Love to Play';
+- let arr = text.split('');
+
+h1(role='image' aria-label=text)
+  - arr.forEach(letter => {
+    span.letter #{letter}
+  - });</code></pre>
+
+
+
+<p>Since splitting text into multiple elements may not work nicely with screen readers, we&#8217;ve given the whole thing a <code>role</code> of <code>image</code> and an <code>aria-label</code>.</p>
+
+
+
+<p>This generates the following HTML:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;h1 role="image" aria-label="We Love to Play">
+  &lt;span class="letter">W&lt;/span>
+  &lt;span class="letter">e&lt;/span>
+  &lt;span class="letter"> &lt;/span>
+  &lt;span class="letter">L&lt;/span>
+  &lt;span class="letter">o&lt;/span>
+  &lt;span class="letter">v&lt;/span>
+  &lt;span class="letter">e&lt;/span>
+  &lt;span class="letter"> &lt;/span>
+  &lt;span class="letter">t&lt;/span>
+  &lt;span class="letter">o&lt;/span>
+  &lt;span class="letter"> &lt;/span>
+  &lt;span class="letter">P&lt;/span>
+  &lt;span class="letter">l&lt;/span>
+  &lt;span class="letter">a&lt;/span>
+  &lt;span class="letter">y&lt;/span>
+&lt;/h1></code></pre>
+
+
+
+<h3 id="basic-styles">Basic styles</h3>
+
+
+
+<p>We place the heading in the middle of its parent (the <code>body</code> in this case) by using a <code>grid</code> layout:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">body {
+  display: grid;
+  place-content: center;
+}</code></pre>
+
+
+
+<figure class="wp-block-image"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/grid_item.png?ssl=1" alt="Screenshot of grid layout lines around the centrally placed heading when inspecting it with Firefox DevTools." data-recalc-dims="1"/><figcaption>The heading doesn&#8217;t stretch across its parent to cover its entire <code>width</code>, but is instead placed in the middle.</figcaption></figure>
+
+
+
+<p>We may also add some prettifying touches, like a nice <code>font</code> or a <code>background</code> on the container.</p>
+
+
+
+<p>Next, we create the line with an absolutely positioned <code>::after</code> pseudo-element of thickness (<code>height</code>) <code>$h</code>:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">$h: .125em;
+$r: .5*$h;
+
+h1 {
+  position: relative;
+  
+  &amp;::after {
+    position: absolute;
+    top: calc(50% - #{$r}); right: 0;
+    height: $h;
+    border-radius: 0 $r $r 0;
+    background: crimson;
+  }
+}</code></pre>
+
+
+
+<p>The above code takes care of the positioning and <code>height</code> of the pseudo-element, but what about the <code>width</code>? How do we make it stretch from the left edge of the viewport to the right edge of the heading text?</p>
+
+
+
+<h3 id="line-length">Line length</h3>
+
+
+
+<p>Well, since we have a <code>grid</code> layout where the heading is middle-aligned horizontally, this means that the vertical midline of the viewport coincides with that of the heading, splitting both into two equal-width halves:</p>
+
+
+
+<figure class="wp-block-image"><img src="https://css-tricks.com/wp-content/uploads/2020/02/heading_viewport_split.svg" alt="SVG illustration. Shows how the vertical midline of the viewport coincides with that of the heading and splits both into equal width halves."/><figcaption>The middle-aligned heading.</figcaption></figure>
+
+
+
+<p>Consequently, the distance between the left edge of the viewport and the right edge of the heading is half the viewport width (<code>50vw</code>) plus half the heading width, which can be expressed as a <code>%</code> value when used in the computation of its pseudo-element&#8217;s <code>width</code>.</p>
+
+
+
+<p>So the <code>width</code> of our <code>::after</code> pseudo-element is:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">width: calc(50vw + 50%);</code></pre>
+
+
+
+<h3 id="over-and-under">Making the line go over and under</h3>
+
+
+
+<p>So far, the result is just a crimson line crossing some black text:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RwPNxNG" src="//codepen.io/anon/embed/RwPNxNG?height=250&amp;theme-id=1&amp;slug-hash=RwPNxNG&amp;default-tab=result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RwPNxNG" title="CodePen Embed RwPNxNG" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>What we want is for some of the letters to show up on top of the line. In order to get this effect, we give them (or we don&#8217;t give them) a class of <code>.over</code> at random. This means slightly altering the Pug code:</p>
+
+
+
+<pre rel="Pug" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">- let text = 'We Love to Play';
+- let arr = text.split('');
+
+h1(role='image' aria-label=text)
+  - arr.forEach(letter => {
+    span.letter(class=Math.random() > .5 ? 'over' : null) #{letter}
+  - });</code></pre>
+
+
+
+<p>We then relatively position the letters with a class of <code>.over</code> and give them a positive <code>z-index</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.over {
+  position: relative;
+  z-index: 1;
+}</code></pre>
+
+
+
+<p class="explanation">My initial idea involved using <code>translatez(1px)</code> instead of <code>z-index: 1</code>, but then it hit me that using <code>z-index</code> has both better  browser support and involves less effort.</p>
+
+
+
+<p>The line passes over some letters, but underneath others:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNXgpxj" src="//codepen.io/anon/embed/oNXgpxj?height=250&amp;theme-id=1&amp;slug-hash=oNXgpxj&amp;default-tab=result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNXgpxj" title="CodePen Embed oNXgpxj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3 id="animation">Animate it!</h3>
+
+
+
+<p>Now that we got over the tricky part, we can also add in an <code>animation</code> to make the line enter in. This means having the crimson line shift to the left (in the negative direction of the x-axis, so the sign will be minus) by its full <code>width</code> (<code>100%</code>) at the beginning, only to then allow it to go back to its normal position.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes slide { 0% { transform: translate(-100%); } }</code></pre>
+
+
+
+<p>I opted to have a bit of time to breathe before the start of the <code>animation</code>. This meant adding in the <code>1s</code> delay which, in turn, meant adding the <code>backwards</code> keyword for the <code>animation-fill-mode</code>, so that the line would stay in the state specified by the <code>0%</code> keyframe before the start of the <code>animation</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">animation: slide 2s ease-out 1s backwards;</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_vYErMKQ" src="//codepen.io/anon/embed/vYErMKQ?height=250&amp;theme-id=1&amp;slug-hash=vYErMKQ&amp;default-tab=result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed vYErMKQ" title="CodePen Embed vYErMKQ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3 id="3d-touch">A 3D touch</h3>
+
+
+
+<p>Doing this gave me another idea, which was to make the line go through every single letter, that is, start above the letter, go through it and finish underneath (or the other way around).</p>
+
+
+
+<p>This requires real 3D and a few small tweaks.</p>
+
+
+
+<p>First off, we set <code>transform-style</code> to <code>preserve-3d</code> on the heading since we want all its children (and pseudo-elements) to a be part of the same 3D assembly, which will make them be ordered and intersect according to how they&#8217;re positioned in 3D.</p>
+
+
+
+<p>Next, we want to rotate each letter around its y-axis, with the direction of rotation depending on the presence of the randomly assigned class (whose name we change to <code>.rev</code> from &#8220;reverse&#8221; as &#8220;over&#8221; isn&#8217;t really suggestive of what we&#8217;re doing here anymore).</p>
+
+
+
+<p>However, before we do this, we need to remember our span elements are still inline ones at this point and setting a <code>transform</code> on an inline element has absolutely no effect.</p>
+
+
+
+<p>To get around this issue, we set <code>display: flex</code> on the heading. However, this creates a new issue and that&#8217;s the fact that span elements that contain only a space (<code>" "</code>) get squished to zero <code>width</code>.</p>
+
+
+
+<figure class="wp-block-image"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/02/space_flex_item.png?ssl=1" alt="Screenshot showing how the span containing only a space gets squished to zero width when setting `display: flex` on its parent." data-recalc-dims="1"/><figcaption>Inspecting a space only <code>&lt;span&gt;</code> in Firefox DevTools.</figcaption></figure>
+
+
+
+<p>A simple fix for this is to set <code>white-space: pre</code> on our <code>.letter</code> spans.</p>
+
+
+
+<p>Once we&#8217;ve done this, we can rotate our spans by an angle <code>$a</code>&#8230; in one direction or the other!</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">$a: 2deg;
+
+.letter {
+  white-space: pre;
+  transform: rotatey($a);
+}
+
+.rev { transform: rotatey(-$a); }</code></pre>
+
+
+
+<p>Since rotation around the y-axis squishes our letters horizontally, we can scale them along the x-axis by a factor (<code>$f</code>) that&#8217;s the inverse of the cosine of <code>$a</code>.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">$a: 2deg;
+$f: 1/cos($a)
+
+.letter {
+  white-space: pre;
+  transform: rotatey($a) scalex($f)
+}
+
+.rev { transform: rotatey(-$a) scalex($f) }</code></pre>
+
+
+
+<p class="explanation">If you wish to understand the why behind using this particular scaling factor, you can check out this older <a href="https://css-tricks.com/solving-last-item-problem-circular-distribution-partially-overlapping-items/">article</a> where I explain it all in detail.</p>
+
+
+
+<p>And that&#8217;s it! We now have the 3D result we&#8217;ve been after! Do note however that the font used here was chosen so that our result looks good and another font may not work as well.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_KKpwmEg" src="//codepen.io/anon/embed/KKpwmEg?height=350&amp;theme-id=1&amp;slug-hash=KKpwmEg&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed KKpwmEg" title="CodePen Embed KKpwmEg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/weaving-a-line-through-text-in-css/">Weaving a Line Through Text in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/weaving-a-line-through-text-in-css/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303448</post-id>	</item>
+		<item>
+		<title>Pac-Man&#8230; in CSS!</title>
+		<link>https://css-tricks.com/pac-man-in-css/</link>
+					<comments>https://css-tricks.com/pac-man-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Maks Akymenko]]></dc:creator>
+		<pubDate>Mon, 11 Nov 2019 15:45:20 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[clip-path]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298239</guid>
+
+					<description><![CDATA[<p>You all know famous <a href="http://pacman.com/en/">Pac-Man video game</a>, right? The game is fun and building an animated Pac-Man character in HTML and CSS is just as fun! I’ll show you how to create one while leveraging the powers of the <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> property.</p>
+</p>
+<p class="codepen" data-height="380" style="height: 380px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="maximakymenko" data-slug-hash="WNeMPKr" style="height: 380px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Animated Pac-Man ">
+  See the Pen <a href="https://codepen.io/maximakymenko/pen/WNeMPKr"><br />
+  Animated Pac-Man </a> by Maks Akymenko (<a href="https://codepen.io/maximakymenko">@maximakymenko</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.
+</p>
+<p>Are you excited? Let’s get to it!</p>
+<p>First, let’s bootstrap the project</p>
+<p>We only need two files for our project: <code>index.html</code> and <code>style.css</code>. &#8230; <a href="https://css-tricks.com/pac-man-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Pac-Man&#8230; in CSS!&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/pac-man-in-css/">Pac-Man&#8230; in CSS!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>You all know famous <a href="http://pacman.com/en/">Pac-Man video game</a>, right? The game is fun and building an animated Pac-Man character in HTML and CSS is just as fun! I’ll show you how to create one while leveraging the powers of the <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> property.</p>
+<p><span id="more-298239"></span></p>
+<p class="codepen" data-height="380" style="height: 380px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="maximakymenko" data-slug-hash="WNeMPKr" style="height: 380px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Animated Pac-Man ">
+  <span>See the Pen <a href="https://codepen.io/maximakymenko/pen/WNeMPKr"><br />
+  Animated Pac-Man </a> by Maks Akymenko (<a href="https://codepen.io/maximakymenko">@maximakymenko</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Are you excited? Let’s get to it!</p>
+<h3>First, let’s bootstrap the project</h3>
+<p>We only need two files for our project: <code>index.html</code> and <code>style.css</code>. We could do this manually by creating an empty folder with the files inside. Or, we can use this as an excuse to work with the command line, if you’d like:</p>
+<pre rel="Terminal"><code class="language-javascript">mkdir pacman
+cd pacman
+touch index.html &amp;&amp; touch style.css</code></pre>
+<h3>Set up the baseline styles</h3>
+<p>Go to <code>style.css</code> and add basic styling for your project. You could also use things like <code><a href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a></code> and <code><a href="https://necolas.github.io/normalize.css/">normalize.css</a></code> to reset the browser styling, but our project is simple and straightforward, so we won’t do much here.One thing you&#8217;ll want to do for sure is use <a href="https://autoprefixer.github.io">Autoprefixer</a> to help with cross-browser compatibility.</p>
+<p>We&#8217;re basically setting the body to the full width and height of the viewport and centering things right smack dab in the middle of it. Things like the background color and fonts are purely aesthetic.</p>
+<pre rel="CSS"><code class="language-css">@import url('https://fonts.googleapis.com/css?family=Slabo+27px&amp;display=swap');
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  font-family: 'Slabo 27px', serif;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+<h3>Behold, Pac-Man in HTML!</h3>
+<p>Do you remember how Pac-Man looks? He&#8217;s essentially a yellow circle and an opening in the circle for a mouth. He’s a two-dimensional dot-eating machine!</p>
+<p>So he has a body (or is he just a head?) and a mouth. He doesn’t even have eyes, but we’ll give him one anyway.</p>
+<p>This’ll be our HTML markup:</p>
+<pre rel="HTML"><code class="language-html">&lt;div class="pacman"&gt;
+  &lt;div class="pacman__eye"&gt;&lt;/div&gt;
+  &lt;div class="pacman__mouth"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3>Dressing up Pac-Man with CSS</h3>
+<p>The most interesting part starts! Go to <code>style.css</code> and create the styles for Pac-Man.</p>
+<p>First, we’ll create his body/head/whatever-that-is. Again, that’s merely a circle with a yellow background:</p>
+<pre rel="CSS"><code class="language-css">.pacman {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #f2d648;
+  position: relative;
+  margin-top: 20px;
+}</code></pre>
+<p>His (non-existent) eye is pretty much the same — a circle, but smaller and dark gray. We’ll give it absolute positioning so we can place it right where it needs to be:</p>
+<pre rel="CSS"><code class="language-css">.pacman__eye {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 20px;
+  right: 40px;
+  background: #333333;
+}</code></pre>
+<p>Now we have the basic shape!</p>
+<p class="codepen" data-height="350" style="height: 350px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="wvvpGWP" style="height: 350px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Mouthless Pac-Man">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/wvvpGWP"><br />
+  Mouthless Pac-Man</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Using clip-path to draw the mouth</h3>
+<p>Pretty straightforward so far, right? If our Pac-Man is going to eat some dots (and chase some ghosts), he’s going to need a mouth. We’re going to create yet another circle, but make it black this time and overlay it right on top of his yellow head. Then we’re going to use the <code>clip-path</code> property to cut out a slice of it — sort of like an empty pie container except for one last piece of pie.</p>
+<figure id="post-298244" class="align-left media-298244"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/11/pac-man-diagram.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The dotted border shows where the black circle has been cut out, leaving only a slice of it to be Pac-Man&#8217;s mouth.</figcaption></figure>
+<pre rel="CSS" data-line="6"><code class="language-css">.pacman__mouth {
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+}</code></pre>
+<p>Why a polygon and all those percentages?!?! Notice that we’ve already established the width and height of the element. The <code>polygon()</code> function let’s us draw a free-form shape inside the bounds of the element and that shape serves as a mask that only displays that portion of the element. So, we’re using <code>clip-path</code> and telling it we want a shape (<code>polygon()</code>) that contains a series of points at specific positions (<code>100% 74%, 44% 48%, 100% 21%</code>).</p>
+<p class="explanation">The <code>clip-path</code>  property can be hard to grok. The CSS-Tricks Almanac <a href="https://css-tricks.com/almanac/properties/c/clip-path/">helps explain it</a>. There’s also the cool <a href="https://bennettfeely.com/clippy/">Clippy app</a> that makes it easy to draw <code>clip-patch</code> shapes and export the CSS, which is what I did for this tutorial.</p>
+<p>So far, so good:</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="OJJzNEQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pac-Man with Mouth">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/OJJzNEQ"><br />
+  Pac-Man with Mouth</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Make Pac-Man eat</h3>
+<p>We’ve got a pretty good-looking Pac-Man, but it will be way cooler but there’s no way for him to chew his food. I mean, maybe we wants to swallow his food whole, but we’re not going to allow that. Let’s make his mouth open and close instead.</p>
+<p>All we need to do is animate the <code>clip-path</code> property, and we’ll use  <code><a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">@keyframes</a></code> for that. I’m naming this animation <code>eat</code>: </p>
+<pre rel="CSS"><code class="language-css">@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+  75% {
+    clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+  100% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+}</code></pre>
+<p>Again, I used the Clippy app to get the values, however, feel free to pass in your own. Maybe, you’ll be able to make animation even smoother!</p>
+<p>We’ve got our keyframes in place, so let’s add it to our <code>.pacman</code> class. We could use the shorthand <code><a href="https://css-tricks.com/almanac/properties/a/animation/">animation</a></code> property, but I’ve broken out the properties to make things more self-explanatory so you can see what’s going on:</p>
+<pre rel="CSS"><code class="language-css">animation-name: eat;
+animation-duration: 0.7s;
+animation-iteration-count: infinite;</code></pre>
+<p>There we go!</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="KKKZzGJ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Chewing Pac-Man">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/KKKZzGJ"><br />
+  Chewing Pac-Man</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>We’ve gotta feed Pac-Man</h3>
+<p>If Pac-Man can chomp, why not to give him some food to eat! Let’s slightly modify our HTML markup a bit to include some food: </p>
+<pre rel="HMTL" data-line="4"><code class="language-html">&lt;div class="pacman"&gt;
+  &lt;div class="pacman__eye"&gt;&lt;/div&gt;
+  &lt;div class="pacman__mouth"&gt;&lt;/div&gt;
+  &lt;div class="pacman__food"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>&#8230;and let’s style it up. After all, food needs to be appetizing to the eyes as well as the mouth! We’re going to make yet <em>another</em> circle because that’s what the game uses.</p>
+<pre rel="CSS"><code class="language-css">.pacman__food {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  top: 40%;
+  left: 120px;
+}</code></pre>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="vYYpGPe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Chewing Pac-Man with Teasing Food">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/vYYpGPe"><br />
+  Chewing Pac-Man with Teasing Food</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Aw, poor Pac-Man sees the food, but is unable to eat it. Let&#8217;s make the food come to him using another sprinkle of CSS animation:</p>
+<pre rel="CSS"><code class="language-css">@keyframes food {
+  0% {
+    transform: translateX(0);
+      opacity: 1;
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}</code></pre>
+<p>Now we only need to pass this animation to our <code>.pacman__food</code> class.</p>
+<pre rel="CSS"><code class="language-css">animation-name: food;
+animation-duration: 0.7s;
+animation-iteration-count: infinite;</code></pre>
+<p>We have a happy, eating Pac-Man!</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="Rwwxamj" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title=" Pac-Man Eating">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/Rwwxamj"><br />
+    Pac-Man Eating</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Like before, the animation took some tweaking on my end to get it just right. What’s happening is the food starts away from Pac-Man at full opacity, then slides closer to him using <code>transform: translateX()</code> to move from left to right and disappears with zero opacity. Then it’s set to run infinitely so he eats all day, every day!</p>
+<hr>
+<p>That’s a wrap! It’s fun to take little things like this and see how HTML and CSS can be used to re-create them. I’d like to see your own Pac-Man (or <a href="https://en.wikipedia.org/wiki/Ms._Pac-Man">Ms. Pac-Man</a>!). Share in the comments!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/pac-man-in-css/">Pac-Man&#8230; in CSS!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/pac-man-in-css/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298239</post-id>	</item>
+		<item>
+		<title>The Trick to Animating the Dot on the Letter &#8220;i&#8221;</title>
+		<link>https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/</link>
+					<comments>https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/#comments</comments>
+		
+		<dc:creator><![CDATA[Ali Churcher]]></dc:creator>
+		<pubDate>Mon, 04 Nov 2019 15:02:06 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[glyphs]]></category>
+		<category><![CDATA[unicode]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=297783</guid>
+
+					<description><![CDATA[<p>Here’s the trick: by combining the Turkish letter &#8220;ı&#8221; and the period &#8220;.&#8221; we can create something that looks like the letter &#8220;i,&#8221; but is made from two separate elements. This opens us up to some fun options to style or animate the dot of the letter independently from the stalk. Worried about accessibility? Don’t worry, we’ll cover that the best way we know how.</p>
+<p>Let’s look at how to create and style these separate &#8220;letters,&#8221; and find out when &#8230; <a href="https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Trick to Animating the Dot on the Letter &#8220;i&#8221;&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/">The Trick to Animating the Dot on the Letter &#8220;i&#8221;</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Here’s the trick: by combining the Turkish letter &#8220;ı&#8221; and the period &#8220;.&#8221; we can create something that looks like the letter &#8220;i,&#8221; but is made from two separate elements. This opens us up to some fun options to style or animate the dot of the letter independently from the stalk. Worried about accessibility? Don’t worry, we’ll cover that the best way we know how.</p>
+<p>Let’s look at how to create and style these separate &#8220;letters,&#8221; and find out when they can be used, and when to avoid them.</p>
+<p><span id="more-297783"></span></p>
+<h3>Check out some examples</h3>
+<p>Here are some different styles and animations we can do with this idea:</p>
+<p class="codepen" data-height="266" style="height: 266px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alichur" data-slug-hash="vYYLdej" style="height: 390px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Styles and animations">
+  <span>See the Pen <a href="https://codepen.io/alichur/pen/vYYLdej"><br />
+  Styles and animations</a> by Ali C (<a href="https://codepen.io/alichur">@alichur</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Because both parts of the letter are regular Unicode characters, they will respect font changes and page zoom the same as any other text. Here’s some examples of different fonts, styles, and zoom levels:</p>
+<p class="codepen" data-height="266" style="height: 266px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alichur" data-slug-hash="YzzwYEG" style="height: 266px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Different fonts and zoom">
+  <span>See the Pen <a href="https://codepen.io/alichur/pen/YzzwYEG"><br />
+  Different fonts and zoom</a> by Ali C (<a href="https://codepen.io/alichur">@alichur</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Step-by-step through the technique</h3>
+<p>Let’s break down how this technique works.</p>
+<h4>Choose the Unicode characters to combine</h4>
+<p>We are using the dotless &#8220;i&#8221; character (ı) and a full stop. And, yes, we could use other characters as well, such as the dotless &#8220;j&#8221; character (ȷ) or even the accents on characters such as &#8220;ñ&#8221; (~) or &#8220;è&#8221; (`).</p>
+<p>Stack the characters on top of each other by wrapping them in a span and setting the <code>display</code> property to <code>block</code>.</p>
+<pre rel="HTML"><code class="language-html">&lt;span class="character"&gt;.&lt;/span&gt;
+&lt;span class="character"&gt;ı&lt;/span&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.character {
+  display: block;
+}</code></pre>
+<h4>Align the characters</h4>
+<p>They need to be close to each other. We can do that by adjusting the line heights and removing the margins from them.</p>
+<pre rel="CSS"><code class="language-css">.character {
+  display: block;
+  line-height: 0.5;
+  margin-top: 0;
+  margin-bottom: 0;
+}</code></pre>
+<h4>Add a CSS animation to the dot element</h4>
+<p>Something like this bouncing animation:</p>
+<pre rel="CSS"><code class="language-css">@keyframes bounce {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.bounce {
+  animation: bounce 0.4s infinite alternate;
+}</code></pre>
+<p class="explanation">There’s <a href="https://css-tricks.com/almanac/properties/a/animation/">more on CSS animations</a> in the CSS-Tricks Almanac.</p>
+<p>Checking in, here’s where we are so far:</p>
+<p class="codepen" data-height="350" style="height: 350px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="alichur" data-slug-hash="OJJNZYO" style="height: 350px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Creating the letter">
+  <span>See the Pen <a href="https://codepen.io/alichur/pen/OJJNZYO"><br />
+  Creating the letter</a> by Ali C (<a href="https://codepen.io/alichur">@alichur</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Add any remaining letters of the word</h4>
+<p>It’s fine to animate the &#8220;i&#8221; on its own, but perhaps it’s merely one letter in a word, like &#8220;Ping.&#8221; We’ll wrap the animated characters in a span to make sure everything stays on a single line.</p>
+<pre rel="HTML"><code class="language-html">&lt;p&gt;
+  P
+  &lt;span&gt;
+    &lt;span class="character"&gt;.&lt;/span&gt;
+    &lt;span class="character&gt;ı&lt;/span&gt; 
+  &lt;/span&gt;
+  ng
+&lt;/p&gt;</code></pre>
+<p>There’s an <a href="https://css-tricks.com/fighting-the-space-between-inline-block-elements/">automatic gap between inline-block elements</a>, so be sure to remove that if the spacing looks off.</p>
+<p>The final stages:</p>
+<p class="codepen" data-height="250" style="height: 250px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alichur" data-slug-hash="WNNwzov" style="height: 250px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Adding the letter inside a word">
+  <span>See the Pen <a href="https://codepen.io/alichur/pen/WNNwzov"><br />
+  Adding the letter inside a word</a> by Ali C (<a href="https://codepen.io/alichur">@alichur</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>What about SVG?</h3>
+<p>The same effect can be achieved by creating a letter from two or more SVG elements. Here&#8217;s an example where the circle element is animated independently from the rectangle element.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="html,result" data-user="alichur" data-slug-hash="eYYgyEB" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="SVG animated i">
+  <span>See the Pen <a href="https://codepen.io/alichur/pen/eYYgyEB"><br />
+  SVG animated i</a> by Ali C (<a href="https://codepen.io/alichur">@alichur</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Although an SVG letter won’t respond to font changes, it opens up more possibilities for animating sections of letters that aren’t represented by Unicode characters and letter styles that don&#8217;t exist in any font.</p>
+<h3>Where would you use this?</h3>
+<p>Where would you want to use something like this? I mean, it’s not a great use case for body content or any sort of long-form content. Not only would that affect legibility (can you imagine if every &#8220;i&#8221; in this post was animated?) but it would have a negative impact on assistive technology, like screen readers, which we will touch on next.</p>
+<p>Instead, it’s probably best to use this technique where the content is intended for decoration. A logo is a good example of that. <a href="https://css-tricks.com/tips-aligning-icons-text/">Or perhaps in an icon</a> that’s intended to be described, but not interpreted as text by assistive technology.</p>
+<h3>Let’s talk accessibility</h3>
+<p>Going back to our &#8220;Ping&#8221; example, a screen reader will read that as <code>P . ı ng</code>. Not exactly the pronunciation we’re looking for and definitely confusing to anyone listening to it.</p>
+<p>Depending on the usage, different ARIA attributes can be added so that text is read differently. For example, we can describe the entire element as an image and add the text as its label:</p>
+<pre rel="HTML"><code class="language-html">&lt;div role=img aria-label="Ping"&gt;
+  &lt;p&gt;P&lt;span&gt;.&lt;/span&gt;&lt;span&gt;ı&lt;/span&gt;ng&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>This way, the outer div element describes the meaning of the text which gets read by screen readers. However, we also want assistive technology to skip the inner elements. We can add <code>aria-hidden="true"</code> or <code>role="presentation"</code> to them so that they are also not interpreted as text:</p>
+<pre rel="HTML"><code class="language-html">&lt;div role=img aria-label="Ping"&gt;
+  &lt;p role="presentation"&gt;P
+    &lt;span&gt;.&lt;/span&gt;
+    &lt;span&gt;ı&lt;/span&gt;
+  ng&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p class="explanation">This was only tested on a Mac with VoiceOver in Safari. If there are issues in other assistive technology, please let us know in the comments.</p>
+<h3>More Unicode!</h3>
+<p>There’s many more &#8220;letters&#8221; we can create by combining Unicode characters. Here&#8217;s a <a href="https://css-tricks.com/snippets/html/glyphs/">full outline of common glyphs</a>, or you can have some fun with the ones below and share your creations in the comments. But remember: no cool effect is worth compromising accessibility on a live site!</p>
+<table>
+<thead>
+<tr>
+<th>First Glyph</th>
+<th>Second Glyph</th>
+<th>Combined</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ı</td>
+<td>.</td>
+<td>i</td>
+</tr>
+<tr>
+<td>ȷ</td>
+<td>.</td>
+<td>j</td>
+</tr>
+<tr>
+<td>n</td>
+<td>~</td>
+<td>ñ</td>
+</tr>
+<tr>
+<td>a</td>
+<td>e</td>
+<td>æ</td>
+</tr>
+<tr>
+<td>a</td>
+<td>`</td>
+<td>à</td>
+</tr>
+</tbody>
+</table>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/">The Trick to Animating the Dot on the Letter &#8220;i&#8221;</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-trick-to-animating-the-dot-on-the-letter-i/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">297783</post-id>	</item>
+		<item>
+		<title>Are There Random Numbers in CSS?</title>
+		<link>https://css-tricks.com/are-there-random-numbers-in-css/</link>
+					<comments>https://css-tricks.com/are-there-random-numbers-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Alvaro Montoro]]></dc:creator>
+		<pubDate>Tue, 29 Oct 2019 15:00:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[random numbers]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=297613</guid>
+
+					<description><![CDATA[<p>CSS allows you to create dynamic layouts and interfaces on the web, but as a language, it is static: once a value is set, it cannot be changed. The idea of randomness is off the table. Generating random numbers at runtime is the territory of JavaScript, not so much CSS. Or is it? If we factor in a little user interaction, we actually can generate some degree of randomness in CSS. Let’s take a look!</p>
+</p>
+<p>Randomization from other languages</p>
+<p>There &#8230; <a href="https://css-tricks.com/are-there-random-numbers-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Are There Random Numbers in CSS?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/are-there-random-numbers-in-css/">Are There Random Numbers in CSS?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>CSS allows you to create dynamic layouts and interfaces on the web, but as a language, it is static: once a value is set, it cannot be changed. The idea of randomness is off the table. Generating random numbers at runtime is the territory of JavaScript, not so much CSS. Or is it? If we factor in a little user interaction, we actually can generate some degree of randomness in CSS. Let’s take a look!</p>
+<p><span id="more-297613"></span></p>
+<h3>Randomization from other languages</h3>
+<p>There are ways to get some &#8220;dynamic randomization&#8221; using CSS variables as <a href="https://css-tricks.com/random-numbers-css/">Robin Rendle explains in an article on CSS-Tricks</a>. But these solutions are not 100% CSS, as they require JavaScript to update the CSS variable with the new random value.</p>
+<p>We can use preprocessors such as Sass or Less to generate random values, but once the CSS code is compiled and exported, the values are fixed and the randomness is lost. As Jake Albaugh explains:</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">random in sass is like randomly choosing the name of a main character in a story. it&#39;s only random when written. it doesn&#39;t change.</p>
+<p>&mdash; jake albaugh (@jake_albaugh) <a href="https://twitter.com/jake_albaugh/status/814510609219911680?ref_src=twsrc%5Etfw">December 29, 2016</a></p></blockquote>
+<p> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </p>
+<h3>Why do I care about random values in CSS?</h3>
+<p>In the past, I&#8217;ve developed simple CSS-only apps such as a <a href="https://codepen.io/alvaromontoro/pen/jGLOBy">trivia game</a>, a <a href="https://codepen.io/alvaromontoro/pen/BGNaYo">Simon game</a>, and a <a href="https://codepen.io/alvaromontoro/pen/xagVOa">magic trick</a>. But I wanted to do something a little bit more complicated. I&#8217;ll leave a discussion about the validity, utility, or practicality of creating these CSS-only snippets for a later time.</p>
+<p>Based on the premise that some board games could be represented as Finite State Machines (<abbr>FSM</abbr>), they could be represented using HTML and CSS. So I started developing a game of <a href="https://en.wikipedia.org/wiki/Snakes_and_Ladders">Snakes and Ladders</a> (<abbr>aka</abbr> Chutes and Ladders). It is a simple game. The goal is to advance a pawn from the beginning to the end of the board by avoiding the snakes and trying to go up the ladders.</p>
+<p>The project seemed feasible, but there was something that I was missing: <strong>rolling dice</strong>!</p>
+<p>The roll of dice (along with the flip of a coin) are universally recognized for randomization. You roll the dice or flip the coin, and you get an unknown value each time.</p>
+<h3>Simulating a random dice roll</h3>
+<p>I was going to superimpose layers with labels, and use CSS animations to &#8220;rotate&#8221; and exchange which layer was on top. Something like this:</p>
+<figure id="post-297618" class="align-left media-297618"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/10/random-01.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Simulation of how the layers animate on a browser</figcaption></figure>
+<p>The code to mimic this randomization is not excessively complicated and can be achieved with an animation and different animation delays:</p>
+<pre rel="CSS"><code class="language-css">/* The highest z-index is the numbers of sides in the dice */ 
+@keyframes changeOrder {
+  from { z-index: 6; } 
+  to { z-index: 1; } 
+} 
+
+/* All the labels overlap by using absolute positioning */ 
+label { 
+  animation: changeOrder 3s infinite linear;
+  background: #ddd;
+  cursor: pointer;
+  display: block;
+  left: 1rem;
+  padding: 1rem;
+  position: absolute;
+  top: 1rem; 
+  user-select: none;
+} 
+    
+/* Negative delay so all parts of the animation are in motion */ 
+label:nth-of-type(1) { animation-delay: -0.0s; } 
+label:nth-of-type(2) { animation-delay: -0.5s; } 
+label:nth-of-type(3) { animation-delay: -1.0s; } 
+label:nth-of-type(4) { animation-delay: -1.5s; } 
+label:nth-of-type(5) { animation-delay: -2.0s; } 
+label:nth-of-type(6) { animation-delay: -2.5s; }</code></pre>
+<p class="explanation">The animation has been slowed down to allow easier interaction (but still fast enough to see the roadblock explained below). The pseudo-randomness is clearer, too.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alvaromontoro" data-slug-hash="dyybyXW" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Demo of pseudo-randomly generated number with CSS">
+  <span>See the Pen <a href="https://codepen.io/alvaromontoro/pen/dyybyXW"><br />
+  Demo of pseudo-randomly generated number with CSS</a> by Alvaro Montoro (<a href="https://codepen.io/alvaromontoro">@alvaromontoro</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>But then I hit a roadblock: I was getting random numbers, but sometimes, even when I was clicking on my &#8220;dice,&#8221; it was not returning <em>any</em> value.</p>
+<p>I tried increasing the times in the animation, and that seemed to help a bit, but I was still having some unexpected values.</p>
+<p>That&#8217;s when I did what most developers do when they find a roadblock they cannot resolve just by searching online: I asked other developers for help in the form of a <a href="https://stackoverflow.com/q/51449737/3695983">StackOverflow question</a>.</p>
+<p>Luckily for me, the always resourceful Temani Afif came up with <a href="https://stackoverflow.com/a/51451218/3695983">an explanation and a solution</a>.</p>
+<p>To simplify a little, the problem was that <strong>the browser only triggers the click/press event when the element that is active on mouse down is the same element that is active on mouse up.</strong></p>
+<p>Because of the rotating animation, the top label on mouse down was not the top label on mouse up, unless I did it fast or slow enough for the animation to circle around. That&#8217;s why increasing the animation times hid these issues.</p>
+<p>The solution was to apply a position of &#8220;static&#8221; to break the stacking context, and use a pseudo-element like <code>::before</code> or <code>::after</code> with a higher <code>z-index</code> to occupy its place. This way, the active label would always be on top when the mouse went up.</p>
+<pre rel="CSS"><code class="language-css">/* The active tag will be static and moved out of the window */ 
+label:active {
+  margin-left: 200%;
+  position: static;
+}
+
+/* A pseudo-element of the label occupies all the space with a higher z-index */
+label:active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+}</code></pre>
+<p>Here is the code with the solution with a faster animation time:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alvaromontoro" data-slug-hash="dyybyXW" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Demo of pseudo-randomly generated number with CSS">
+  <span>See the Pen <a href="https://codepen.io/alvaromontoro/pen/dyybyXW"><br />
+  Demo of pseudo-randomly generated number with CSS</a> by Alvaro Montoro (<a href="https://codepen.io/alvaromontoro">@alvaromontoro</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>After making this change, the one thing left was to create a small interface to draw a fake dice to click, and the <a href="https://codepen.io/alvaromontoro/pen/gjWPNW">CSS Snakes and Ladders</a> was completed.</p>
+<h3>This technique has some obvious inconveniences</h3>
+<ul>
+<li><strong>It requires user input:</strong> a label must be clicked to trigger the &#8220;random number generation.&#8221;</li>
+<li><strong>It doesn&#8217;t scale well:</strong> it works great with small sets of values, but it is a pain for large ranges.</li>
+<li><strong>It’s not really random, but pseudo-random:</strong> a computer could easily detect which value would be generated in each moment.</li>
+</ul>
+<p>But on the other hand, it is 100% CSS (no need for preprocessors or other external helpers) and, for a human user, it can look 100% random.</p>
+<p>And talking about hands&#8230; This method can be used not only for random numbers but for random anything. In this case, we used it to &#8220;randomly&#8221; pick the computer choice in a Rock-Paper-Scissors game:</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="alvaromontoro" data-slug-hash="BaaBYyz" style="height: 450px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Rock-Paper-Scissors">
+  <span>See the Pen <a href="https://codepen.io/alvaromontoro/pen/BaaBYyz"><br />
+  CSS Rock-Paper-Scissors</a> by Alvaro Montoro (<a href="https://codepen.io/alvaromontoro">@alvaromontoro</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/are-there-random-numbers-in-css/">Are There Random Numbers in CSS?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/are-there-random-numbers-in-css/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">297613</post-id>	</item>
+		<item>
+		<title>Digging Into the Preview Loading Animation in WordPress</title>
+		<link>https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/</link>
+					<comments>https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/#comments</comments>
+		
+		<dc:creator><![CDATA[Geoff Graham]]></dc:creator>
+		<pubDate>Tue, 22 Oct 2019 14:24:37 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[loader]]></category>
+		<category><![CDATA[SVG animation]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=297358</guid>
+
+					<description><![CDATA[<p>WordPress shipped the <a href="https://css-tricks.com/guides/learning-gutenberg/">Block Editor</a> (<abbr>aka</abbr> Gutenberg) <a href="https://wordpress.org/news/2018/12/bebo/">back in version 5.0</a> and with it came a snazzy new post preview screen that shows the WordPress logo drawing itself while the preview loads.</p>
+</p>
+<p>That&#8217;s what you get when saving a post draft and clicking the &#8220;Preview&#8221; button in the editor. How&#8217;d they make it? I had a tough time viewing source for the page because the preview loads up pretty quickly, but I did see that SVG is being used &#8230; <a href="https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Digging Into the Preview Loading Animation in WordPress&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/">Digging Into the Preview Loading Animation in WordPress</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>WordPress shipped the <a href="https://css-tricks.com/guides/learning-gutenberg/">Block Editor</a> (<abbr>aka</abbr> Gutenberg) <a href="https://wordpress.org/news/2018/12/bebo/">back in version 5.0</a> and with it came a snazzy new post preview screen that shows the WordPress logo drawing itself while the preview loads.</p>
+<p><span id="more-297358"></span></p>
+<figure id="post-297359" class="align-left media-297359"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/10/wp-preview-loader.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>That&#8217;s what you get when saving a post draft and clicking the &#8220;Preview&#8221; button in the editor. How&#8217;d they make it? I had a tough time viewing source for the page because the preview loads up pretty quickly, but I did see that SVG is being used for the WordPress logo. That&#8217;s all I really needed because my mind instantly went back to <a hrf="https://css-tricks.com/svg-line-animation-works/">something Chris wrote in 2014</a> that uses uses the <code>stroke-dasharray</code> and <code>stroke-dashoffset</code> properties to create the same effect.</p>
+<p>This is the example Chris shared in that post:</p>
+<p data-height="403" style="height: 403px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="bGyoz" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/chriscoyier/pen/bGyoz'>bGyoz</a> by Chris Coyier (<a href='http://codepen.io/chriscoyier'>@chriscoyier</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p>I&#8217;ve since been able to get my hands on the CSS to confirm that the WordPress drawing is indeed using the same technique, but I&#8217;ll share how my mind broke things out while I was trying to reverse-engineer it.</p>
+<h3>We&#8217;re working with a straight-up inlined SVG</h3>
+<p>The neat thing about the WordPress version is that we&#8217;re working with two SVG paths instead of one. That means we have two parts that appear to be drawing at the same time. Here&#8217;s the SVG which is inlined in the HTML. We&#8217;ve got that &#8220;Generating preview&#8221; text as well, which can live outside the SVG.</p>
+<pre rel="HTML"><code class="language-html">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-hidden="true" focusable="false"&gt;
+  &lt;path d="M48 12c19.9 0 36 16.1 36 36S67.9 84 48 84 12 67.9 12 48s16.1-36 36-36" fill="none"&gt;&lt;/path&gt;
+  &lt;path d="M69.5 46.4c0-3.9-1.4-6.7-2.6-8.8-1.6-2.6-3.1-4.9-3.1-7.5 0-2.9 2.2-5.7 5.4-5.7h.4C63.9 19.2 56.4 16 48 16c-11.2 0-21 5.7-26.7 14.4h2.1c3.3 0 8.5-.4 8.5-.4 1.7-.1 1.9 2.4.2 2.6 0 0-1.7.2-3.7.3L40 67.5l7-20.9L42 33c-1.7-.1-3.3-.3-3.3-.3-1.7-.1-1.5-2.7.2-2.6 0 0 5.3.4 8.4.4 3.3 0 8.5-.4 8.5-.4 1.7-.1 1.9 2.4.2 2.6 0 0-1.7.2-3.7.3l11.5 34.3 3.3-10.4c1.6-4.5 2.4-7.8 2.4-10.5zM16.1 48c0 12.6 7.3 23.5 18 28.7L18.8 35c-1.7 4-2.7 8.4-2.7 13zm32.5 2.8L39 78.6c2.9.8 5.9 1.3 9 1.3 3.7 0 7.3-.6 10.6-1.8-.1-.1-.2-.3-.2-.4l-9.8-26.9zM76.2 36c0 3.2-.6 6.9-2.4 11.4L64 75.6c9.5-5.5 15.9-15.8 15.9-27.6 0-5.5-1.4-10.8-3.9-15.3.1 1 .2 2.1.2 3.3z" fill="none"&gt;&lt;/path&gt;
+&lt;/svg&gt;
+
+&lt;p&gt;Generating preview...&lt;/p&gt;</code></pre>
+<p>The first path is an ellipse that acts as a border around the second path, which is the shape of the WordPress logo. It&#8217;s probably a good idea to give each path a class &mdash; especially if this isn&#8217;t the only element on the page &mdash; but I decided to leave things class-less since this is the only element in the demo. We can select both paths together in CSS or use pseudo-selectors (e.g. <code>path:nth-child(2)</code>) to select them individually in this instance.</p>
+<p>There are a few other housekeeping things happening in there. For example, the SVG gets attributes to make it more accessible, such as identifying it as an image, hiding it from screen readers, and preventing it from being focused.</p>
+<h3>We need to lightly style the SVG</h3>
+<p>Very, very light styling. We need a stroke since there is no fill color on the paths. Otherwise we&#8217;ll be looking at a whole lot of nothing. Well, an invisible shape, but essentially a nothing burger.</p>
+<pre rel="CSS"><code class="language-css">svg {
+  stroke: #555;
+  stroke-width: 0.5;
+  width: 250px;
+}</code></pre>
+<p>That gives us the outline for both paths. The nice thing about the <code>stroke-width</code> property is that it accepts decimal values, so we get to make the lines a little thinner. The drawing sorta looks like it&#8217;s drawn in pencil that way.</p>
+<p>The width is pretty arbitrary here, but it&#8217;s important because the <code>stroke-dasharray</code> and <code>stroke-dashoffset</code> properties we&#8217;ll be working with rely on it. If those property values are smaller than the size of the SVG, then the drawing will stop short of completing. If it&#8217;s too large, then the speed of the drawing becomes too fast.</p>
+<p>Now that we know our width and can see the path strokes, we can set <code>stroke-dasharray</code> and <code>stroke-dashoffset</code> accordingly.</p>
+<pre rel="CSS"><code class="language-css">svg path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}</code></pre>
+<p>A <em>little</em> larger than the SVG and lots of space between the dashes, which should be just about right. Those values can be adjusted to tailor the animation to your liking.</p>
+<h3>The rest is merely using Chris&#8217; technique</h3>
+<p>The drawing is a CSS animation using one keyframe. If we start the <code>stroke-dashoffset</code> at zero, then the paths will be invisible on initial load and grow to the 300 value we set earlier when the animation reaches 100%. Again, we set the offset at 300 so that the stroke dashes and the spaces between them will extend beyond the SVG to cover the entire thing.</p>
+<p>All the magic is a mere five lines of code:</p>
+<pre rel="CSS"><code class="language-css">@keyframes draw {
+  0% {
+    stroke-dashoffset: 0;
+  }
+}</code></pre>
+<p>Name the animation whatever you&#8217;d like. We can get away with only defining the animation at 0% since 100% is implicit.</p>
+<p>Oh! And we&#8217;ve gotta attach the animation to the paths, so:</p>
+<pre rel="CSS" data-line="2"><code class="language-css">svg path {
+  animation: draw 2s ease-out infinite alternate;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}</code></pre>
+<p>You can definitely tweak those values as well to speed thing up or down. Easing gives the animation that slight pulsing effect where it starts and ends a little slower than the middle of the movement.</p>
+<h3>All together now!</h3>
+<p class="codepen" data-height="400" style="height: 400px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="geoffgraham" data-slug-hash="zYYBGbB" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="WordPress Preview Loading State">
+    <span>See the Pen <a href="https://codepen.io/geoffgraham/pen/zYYBGbB"><br />
+    WordPress Preview Loading State</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+    on <a href="https://codepen.io">CodePen</a>.</span>
+  </p>
+<p>I mentioned it earlier, but I was eventually able to snatch the source code from the actual implementation and it&#8217;s pretty darn close, using the same principles.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/">Digging Into the Preview Loading Animation in WordPress</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/digging-into-the-preview-loading-animation-in-wordpress/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">297358</post-id>	</item>
+		<item>
+		<title>Using Custom Properties to Wrangle Variations in Keyframe Animations</title>
+		<link>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/</link>
+					<comments>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Thu, 12 Sep 2019 14:22:16 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[custom properties]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=295286</guid>
+
+					<description><![CDATA[<p>Have you ever wondered how to customize <a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">CSS animations keyframes</a> without using any preprocessor feature, like <a href="https://sass-lang.com/documentation/at-rules/mixin">mixins</a>? I keep reaching for preprocessors for this reason, but it would be so nice to drop yet one more dependency and go with vanilla CSS.</p>
+<p>Well, I found a way to account for variations within a keyframe animation using nothing but CSS and it’s thanks to <a href="https://css-tricks.com/making-custom-properties-css-variables-dynamic/">custom properties</a>! Let’s learn a little more about how CSS keyframes work and how we &#8230; <a href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using Custom Properties to Wrangle Variations in Keyframe Animations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/">Using Custom Properties to Wrangle Variations in Keyframe Animations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Have you ever wondered how to customize <a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">CSS animations keyframes</a> without using any preprocessor feature, like <a href="https://sass-lang.com/documentation/at-rules/mixin">mixins</a>? I keep reaching for preprocessors for this reason, but it would be so nice to drop yet one more dependency and go with vanilla CSS.</p>
+<p>Well, I found a way to account for variations within a keyframe animation using nothing but CSS and it’s thanks to <a href="https://css-tricks.com/making-custom-properties-css-variables-dynamic/">custom properties</a>! Let’s learn a little more about how CSS keyframes work and how we can enhance them with CSS and a touch of custom properties.</p>
+<p><span id="more-295286"></span></p>
+<h3>Understanding CSS animations inheritance</h3>
+<p>When we assign an animation to an element, we can customize some of its properties such as duration, delay, and so on. Let me show you a dummy example: we have two classes: <code>.walk</code> and <code>.run</code>. Both share the same animation (named <code>breath</code>) and  <code>.run</code> executes the animation faster than <code>.walk</code> (<code>0.5s</code> to <code>2s</code>, respectively).</p>
+<pre rel="CSS"><code class="language-css">@keyframes breath {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+/* Both share the same animation, but walking is _slower_ than running */
+.walk {
+  animation: breath 2s alternate;
+}
+
+.run {
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>Each time we reuse an animation, <strong>it can behave differently based on the properties we assign it</strong>. So, we can say that an animation inherits its behavior based on the element where it’s applied.</p>
+<p>But what about the animation *rules* (the scale in this case)? Let’s go back to the <code>breath</code> animation example: The <code>.walk</code> class executes <code>breath</code> slower but it also needs to be deeper, so we need to change its scale value to be larger than it is for the <code>.run</code> class, which takes smaller, more frequent breaths.</p>
+<p>The common approach in plain CSS is to duplicate the original animation and tweak the values directly in the class:</p>
+<pre rel="CSS"><code class="language-css">@keyframes breath {
+  /* same as before... */
+}
+
+/* similar to breath, but with different scales */
+@keyframes breathDeep {
+  from {
+    transform: scale(0.3);
+  }
+  to {
+    transform: scale(1.7);
+  }
+}
+
+.walk {
+  animation: breathDeep 2s alternate;
+}
+
+.run {
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>While this works fine, there’s a better solution which allow us to reuse both the animation’s properties and its values! How? By taking advantage of CSS variables inheritance! Let’s see how:</p>
+<pre rel="CSS" data-line="13,14,19,20"><code class="language-css">/* breath behaves based on the
+CSS variables values that are inherited */
+@keyframes breath {
+  from {
+    transform: scale(var(--scaleStart));
+  }
+  to {
+    transform: scale(var(--scaleEnd));
+  }
+}
+
+.walk {
+  --scaleStart: 0.3;
+  --scaleEnd: 1.7;
+  animation: breath 2s alternate;
+}
+
+.run {
+  --scaleStart: 0.8;
+  --scaleEnd: 1.2;
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>Cool, right? Now we don’t need to write <em>duplicate</em> animations to get varying effects from the same animation!</p>
+<p>If you need to go even further, remember that we can also <a href="https://css-tricks.com/updating-a-css-variable-with-javascript/">update CSS custom properties with JavaScript</a>. Not only <a href="https://css-tricks.com/breaking-css-custom-properties-out-of-root-might-be-a-good-idea/">root variables</a>, but also in specific elements. I find this incredible powerful because we can create more efficient animations by taking advantage of JavaScript without losing the native optimizations from CSS animation. It’s a win-win!</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sandrina-p" data-slug-hash="axVeGg" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Dynamic CSS @keyframes w/ CSS Vanilla">
+  <span>See the Pen <a href="https://codepen.io/sandrina-p/pen/axVeGg/"><br />
+  Dynamic CSS @keyframes w/ CSS Vanilla</a> by Sandrina Pereira (<a href="https://codepen.io/sandrina-p">@sandrina-p</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/">Using Custom Properties to Wrangle Variations in Keyframe Animations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">295286</post-id>	</item>
+		<item>
+		<title>Bounce Element Around Viewport in CSS</title>
+		<link>https://css-tricks.com/bounce-element-around-viewport-in-css/</link>
+					<comments>https://css-tricks.com/bounce-element-around-viewport-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 19 Aug 2019 14:34:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[viewport units]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=293871</guid>
+
+					<description><![CDATA[<p>Let&#8217;s say you were gonna bounce an element all around a screen, sorta like an <a href="https://www.youtube.com/watch?v=rAjfE9JHO_I">old school screensaver</a> or <a href="https://en.wikipedia.org/wiki/Pong">Pong</a> or something. </p>
+<p>You&#8217;d probably be tracking the X location of the element, increasing or decreasing it in a time loop and &#8212; when the element reached the maximum or minimum value &#8212; it would reverse direction. Then do that same thing with the Y location and you&#8217;ve got the effect we&#8217;re after. Simple enough with some JavaScript and math. </p>
+</p>
+<p>Here&#8217;s &#8230; <a href="https://css-tricks.com/bounce-element-around-viewport-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Bounce Element Around Viewport in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/bounce-element-around-viewport-in-css/">Bounce Element Around Viewport in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Let&#8217;s say you were gonna bounce an element all around a screen, sorta like an <a href="https://www.youtube.com/watch?v=rAjfE9JHO_I">old school screensaver</a> or <a href="https://en.wikipedia.org/wiki/Pong">Pong</a> or something. </p>
+<p>You&#8217;d probably be tracking the <var>X</var> location of the element, increasing or decreasing it in a time loop and &mdash; when the element reached the maximum or minimum value &mdash; it would reverse direction. Then do that same thing with the <var>Y</var> location and you&#8217;ve got the effect we&#8217;re after. Simple enough with some JavaScript and math. </p>
+<p><span id="more-293871"></span></p>
+<p>Here&#8217;s The Coding Train explaining it clearly:</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/LO3Awjn_gyU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>Here&#8217;s a canvas implementation. It&#8217;s Pong so it factors in paddles and is slightly more complicated, but the basic math is still there:</p>
+<p class="codepen" data-height="703" style="height: 703px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="DerBaumeister" data-slug-hash="rvxPwX" style="height: 703px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pong">
+  <span>See the Pen <a href="https://codepen.io/DerBaumeister/pen/rvxPwX/"><br />
+  Pong</a> by Joseph Gutierrez (<a href="https://codepen.io/DerBaumeister">@DerBaumeister</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>But what if we wanted to do this purely in CSS? We could write <code>@keyframes</code> that move the <code>transform</code> or <code>left</code>/<code>top</code> properties&#8230; but what values would we use? If we&#8217;re trying to bounce around the entire screen (viewport), we&#8217;d need to know the dimensions of the screen and then use those values. But we never know that exact size in CSS. </p>
+<p><em>Or do we?</em></p>
+<p>CSS has <a href="https://css-tricks.com/fun-viewport-units/">viewport units</a>, which are based on the size of the entire viewport. Plus, we&#8217;ve got <code>calc()</code> and we presumably know the size of our own element. </p>
+<p>That&#8217;s the clever root of <a href="https://codepen.io/scottkellum/pen/BoZvjR">Scott Kellum&#8217;s demo</a>:</p>
+<p class="codepen" data-height="429" style="height: 429px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="scottkellum" data-slug-hash="BoZvjR" style="height: 429px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Codepen screensaver">
+  <span>See the Pen <a href="https://codepen.io/scottkellum/pen/BoZvjR/"><br />
+  Codepen screensaver</a> by Scott Kellum (<a href="https://codepen.io/scottkellum">@scottkellum</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>The extra tricky part is breaking the <var>X</var> animation and the <var>Y</var> animation apart into two separate animations (one on a parent and one on a child) so that, when the direction reverses, it can happen independently and it looks more screensaver-like. </p>
+<pre rel="HTML"><code class="language-markup">&lt;div class="el-wrap x"&gt;
+  &lt;div class="el y"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">:root {
+  --width: 300px;
+  --x-speed: 13s;
+  --y-speed: 7s;
+  --transition-speed: 2.2s;
+}
+
+.el { 
+  width: var(--width);
+  height: var(--width);
+}
+
+.x {
+  animation: x var(--x-speed) linear infinite alternate;
+}
+.y {
+  animation: y var(--y-speed) linear infinite alternate;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(100vw - var(--width)));
+  }
+}
+@keyframes y {
+  100% {
+    transform: translateY(calc(100vh - var(--width)));
+  }
+}</code></pre>
+<p>I stole that idea, and added some blobbiness and an extra element for this little demo:</p>
+<p class="codepen" data-height="605" style="height: 605px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="chriscoyier" data-slug-hash="eqpoGZ" style="height: 605px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Morphing Blogs with `border-radius`">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/eqpoGZ/"><br />
+  Morphing Blogs with `border-radius`</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/bounce-element-around-viewport-in-css/">Bounce Element Around Viewport in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/bounce-element-around-viewport-in-css/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">293871</post-id>	</item>
+		<item>
+		<title>Different Approaches for Creating a Staggered Animation</title>
+		<link>https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/</link>
+					<comments>https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/#comments</comments>
+		
+		<dc:creator><![CDATA[Daniel Benmore]]></dc:creator>
+		<pubDate>Thu, 27 Jun 2019 15:00:14 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[custom properties]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=291730</guid>
+
+					<description><![CDATA[<p>Animating elements, at its most basic, is fairly straightforward. Define the keyframes. Name the animation. Call it on an element.</p>
+<p>But sometimes we need something a <em>little</em> more complex to get the right “feel&#8221; for the way things move. For example, a sound equalizer might use the same animation on each bar, but they are staggered to give the illusion of being animated independently.</p>
+</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="geoffgraham" data-slug-hash="XmMJqj" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Apple Music Sound Equilizer in SVG">
+See the Pen <a href="https://codepen.io/geoffgraham/pen/XmMJqj/"><br />
+Apple Music Sound Equilizer in SVG</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on &#8230; <a href="https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Different Approaches for Creating a Staggered Animation&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/">Different Approaches for Creating a Staggered Animation</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Animating elements, at its most basic, is fairly straightforward. Define the keyframes. Name the animation. Call it on an element.</p>
+<p>But sometimes we need something a <em>little</em> more complex to get the right “feel&#8221; for the way things move. For example, a sound equalizer might use the same animation on each bar, but they are staggered to give the illusion of being animated independently.</p>
+<p><span id="more-291730"></span></p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="geoffgraham" data-slug-hash="XmMJqj" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Apple Music Sound Equilizer in SVG">
+<span>See the Pen <a href="https://codepen.io/geoffgraham/pen/XmMJqj/"><br />
+Apple Music Sound Equilizer in SVG</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>I was recently building a dashboard and wanted the items in one of the widgets to flow into view with a staggered animation.</p>
+<figure>
+  <video src="https://css-tricks.com/wp-content/uploads/2019/06/css-staggered-animation.mp4" controls><br />
+</figure>
+<p>Just like the sound equalizer above, I started going down the <code>:nth-child</code> route. I used the unordered list (<code>&lt;ul&gt;</code>) as the parent container, gave it a class and employed the <code>:nth-child</code> pseudo selector to offset each list item with <code>animaton-delay</code>.</p>
+<pre rel="CSS"><code class="language-css">.my-list li {
+  animation: my-animation 300ms ease-out;
+}
+
+.my-list li:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.my-list li:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.my-list li:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+/* and so on */</code></pre>
+<p>This technique does indeed stagger items well, particularly if you know how many items are going to be in the list at any given time. Where things fall apart, however, is when the number of items is unpredictable, which was the case for the widget I was building for the dashboard. I really didn’t want to come back to this piece of code every time the number of items in the list changed, so I knocked out a quick Sass loop that accounts for up to 50 items and increments the animation delay with each item:</p>
+<pre rel="SCSS"><code class="language-scss">.my-list {
+  li {
+    animation: my-animation 300ms ease-out;
+      
+    @for $i from 1 through 50 {
+      &amp;:nth-child(#{$i}) {
+        animation-delay: 100ms * $i;
+      }
+    }
+  }
+}</code></pre>
+<p>That should do it! Yet, it feels way too hacky. Sure, it doesn’t add that much weight to the file, but you know the compiled CSS will include a bunch of unused selectors, like <code>nth-child(45)</code>.</p>
+<p>There must be a better way. This is where I would normally reach for JavaScript to find all of the items and add a delay but… this time I spent a little time exploring to see if there is a way to do it with CSS alone.</p>
+<h3>How about CSS counters?</h3>
+<p>The first thing I thought of was using a CSS counter in combination with the <code>calc()</code> function:</p>
+<pre rel="CSS"><code class="language-css">.my-list {
+  counter-reset: my-counter;
+}
+
+.my-list li {
+  counter-increment: my-counter;
+  animation-delay: calc(counter(my-counter) * 100ms);
+}</code></pre>
+<p>Unfortunately, that won’t work because the spec says <a href="https://www.w3.org/TR/css3-values/#calc-notation">counters cannot be used in <code>calc()</code></a>):</p>
+<blockquote><p>Components of a <code>calc()</code> expression can be literal values or <code>attr()</code> or <code>calc()</code> expressions.</p></blockquote>
+<p>Turns out a few people like this idea, but it hasn’t gone further <a href="https://github.com/w3c/csswg-drafts/issues/1026">than the draft stage</a>.</p>
+<h3>How about a data attribute?</h3>
+<p>Having read that excerpt from the spec, I learned that <code>calc()</code> can use <code>attr()</code>. And, according to the <a href="https://www.w3.org/TR/css3-values/#funcdef-attr">CSS Values and Units specification</a>): </p>
+<blockquote><p>In CSS3, the <code>attr()</code> expression can return many different types</p></blockquote>
+<p>This made me think; perhaps a data attribute could do the trick.</p>
+<pre rel="HTML"><code class="language-html">&lt;ul class="my-list"&gt;
+  &lt;li data-count="1"&gt;&lt;/li&gt;
+  &lt;li data-count="2"&gt;&lt;/li&gt;
+  &lt;li data-count="3"&gt;&lt;/li&gt;
+  &lt;li data-count="4"&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.my-list li {
+  animation-delay: calc(attr(data-count) * 150ms);
+}</code></pre>
+<p>But my hopes were dashed as the browser support for this is diabolical!</p>
+<p><div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=css3-attr">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="n nope" title="Chrome - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Edge - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Safari - "><span class="caniuse-agents-version version">No</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="n nope" title="Android Chrome - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="iOS Safari - "><span class="caniuse-agents-version version">No</span></td></tr></table></div></div></p>
+<p>So, back to the drawing board.</p>
+<h3>How about custom properties?</h3>
+<p>The next idea I had was using CSS custom properties. It’s not pretty, but it worked &#x1f642; </p>
+<p class="codepen" data-height="655" style="height: 655px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="dbenmore" data-slug-hash="eMGzLq" style="height: 655px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS variables animation order">
+  <span>See the Pen <a href="https://codepen.io/dbenmore/pen/eMGzLq/"><br />
+  CSS variables animation order</a> by Dan Benmore (<a href="https://codepen.io/dbenmore">@dbenmore</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Turns out it’s pretty flexible too. For example, the animation can be reversed:</p>
+<p class="codepen" data-height="655" style="height: 655px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="dbenmore" data-slug-hash="zVxrpB" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS variables reverse animation order">
+  <span>See the Pen <a href="https://codepen.io/dbenmore/pen/zVxrpB/"><br />
+  CSS variables reverse animation order</a> by Dan Benmore (<a href="https://codepen.io/dbenmore">@dbenmore</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>It can also do something completely random <em>and</em> animate elements at the same time:</p>
+<p class="codepen" data-height="655" style="height: 655px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="dbenmore" data-slug-hash="pXvgLz" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS variables random animation order">
+  <span>See the Pen <a href="https://codepen.io/dbenmore/pen/pXvgLz/"><br />
+  CSS variables random animation order</a> by Dan Benmore (<a href="https://codepen.io/dbenmore">@dbenmore</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>We can even push it a bit further and do a diagonal swoosh:</p>
+<p class="codepen" data-height="560" style="height: 560px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="dbenmore" data-slug-hash="aYBZqR" style="height: 561px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Set animation stagger with CSS properties / variables">
+  <span>See the Pen <a href="https://codepen.io/dbenmore/pen/aYBZqR/"><br />
+  Set animation stagger with CSS properties / variables</a> by Dan Benmore (<a href="https://codepen.io/dbenmore">@dbenmore</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>The browser support isn’t all that bad (<em>pokes stick at Internet Explorer</em>).</p>
+<p><div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=css-variables">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">49</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">31</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">16</span></td><td class="y yep" title="Safari - "><span class="caniuse-agents-version version">9.1</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">9.3</span></td></tr></table></div></div></p>
+<p>One of the great features of CSS is that <a href="https://css-tricks.com/using-feature-detection-to-write-css-with-cross-browser-support/">it will ignore things it doesn’t understand</a>, thanks to <a href="https://css-tricks.com/the-c-in-css-the-cascade/">the cascade</a>. That means everything will animate in into view together. If that’s not your bag, you can add a feature query to override a default animation:</p>
+<pre rel="CSS"><code class="language-css">.my-list li {
+  animation: fallback-animation;
+}
+
+@supports (--variables) {
+  .my-list li {
+    animation: fancy-animation;
+    animation-delay: calc(var(--animation-order) * 100ms);
+  }
+}</code></pre>
+<h3>Vanilla CSS <abbr title="For the Win">FTW</abbr></h3>
+<p>The more I stop and ask myself whether I need JavaScript, the more I’m amazed what CSS can do on its own. Sure, it would be nice if CSS counters could be used in a <code>calc()</code> function and it would be a pretty elegant solution. But for now, inline custom properties provide both a powerful and flexible way to solve this problem.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/">Different Approaches for Creating a Staggered Animation</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/different-approaches-for-creating-a-staggered-animation/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/06/css-staggered-animation.mp4" length="28212" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">291730</post-id>	</item>
+	</channel>
+</rss>

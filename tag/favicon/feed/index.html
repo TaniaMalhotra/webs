@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>favicon &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/favicon/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 24 Apr 2020 14:58:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>SVG, Favicons, and All the Fun Things We Can Do With Them</title>
+		<link>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/</link>
+					<comments>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/#comments</comments>
+		
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2020 14:58:29 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306644</guid>
+
+					<description><![CDATA[<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+<p>Here’s the code for how to add favicons &#8230; <a href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/" class="read-more">Read article <span class="screen-reader-text"> &#8220;SVG, Favicons, and All the Fun Things We Can Do With Them&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+
+
+
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+
+
+
+<span id="more-306644"></span>
+
+
+
+<p>Here’s the code for how to add favicons to your site:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg">
+&lt;link rel="alternate icon" href="/favicon.ico">
+&lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"></code></pre>
+
+
+
+<p>If a browser doesn’t support a SVG favicon, it will ignore the first link element declaration and continue on to the second. This ensures that all browsers that support favicons can enjoy the experience.&nbsp;</p>
+
+
+
+<p>You may also notice the alternate attribute value for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel">our <code>rel</code> declaration</a> in the second line. This programmatically communicates to the browser that the favicon with a file format that uses <code>.ico</code> is specifically used as an alternate presentation.</p>
+
+
+
+<p>Following the favicons is a line of code that loads another SVG image, one called <code>safari-pinned-tab.svg</code>. This is to support <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html">Safari’s pinned tab functionality</a>, which existed before other browsers had SVG favicon support. There’s additional files you can add here to enhance your site for different apps and services, but more on that in a bit.</p>
+
+
+
+<p>Here’s more detail on the current level of SVG favicon support:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”link-icon-svg”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">80</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">41</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">80</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5</span></td></tr></table></div></div>
+
+
+
+<h3>Why SVG?</h3>
+
+
+
+<p>You may be questioning why this is needed. The <code>.ico</code> file format has been around forever and can support images up to 256×256 pixels in size. Here are three answers for you.</p>
+
+
+
+<h4>Ease of authoring</h4>
+
+
+
+<p>It’s a pain to make <code>.ico</code> files. The file is a <a href="https://en.m.wikipedia.org/wiki/ICO_(file_format)">proprietary format</a> used by Microsoft, meaning you’ll need <a href="https://www.kodlian.com/apps/icon-slate">specialized tools</a> to make them. <a href="https://www.w3.org/TR/SVG2/">SVG is an open standard</a>, meaning you can use them without any further tooling or platform lock-in.</p>
+
+
+
+<h4>Future-proofing</h4>
+
+
+
+<p>Retina? 5k? 6k? When we use a resolution-agnostic SVG file for a favicon, we guarantee that our favicons look crisp on future devices, regardless of <a href="https://www.apple.com/pro-display-xdr/">how large their displays get</a>.&nbsp;</p>
+
+
+
+<h4>Performance</h4>
+
+
+
+<p>SVGs are usually very small files, especially when compared to their raster image counterparts — even more-so if you <a href="https://css-tricks.com/tools-for-optimizing-svg/">optimize them beforehand</a>. By only using a 16×16 pixel favicon as a fallback for browsers that don’t support SVG, we provide a combination that enjoys a high degree of support with a smaller file size to boot.&nbsp;</p>
+
+
+
+<p>This might seem a bit extreme, but when it comes to web performance, every byte counts!</p>
+
+
+
+<h3>Tricks</h3>
+
+
+
+<p>Another cool thing about SVG is we can <a href="https://css-tricks.com/svg-properties-and-css/">embed CSS directly in it</a>. This means we can do fun things like dynamically adjust them with JavaScript, provided the SVG is declared inline and not embedded using an <code>img</code> element.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line=""><code markup="tt">&lt;svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  &lt;style>
+    path { fill: #272019; }
+  &lt;/style>
+  &lt;!-- etc. -->
+&lt;/svg></code></pre>
+
+
+
+<p>Since SVG favicons are embedded using the <code>link</code> element, they can’t really be modified using JavaScript. We can, however, use things like emoji and media queries.</p>
+
+
+
+<h4>Emoji</h4>
+
+
+
+<p><a href="https://twitter.com/leaverou/">Lea Verou</a> had a genius idea about using emoji inside of <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text">SVG’s <code>text</code> element</a> to make a quick favicon with a transparent background that holds up at small sizes.</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/LeaVerou/status/1241619866475474946
+</div></figure>
+
+
+
+<p>In response, <a href="https://css-tricks.com/emojis-as-favicons/">Chris Coyier whipped up a neat little demo</a> that lets you play around with the concept.</p>
+
+
+
+<h4>Dark Mode support</h4>
+
+
+
+<p>Both <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">Thomas Steiner</a> and <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=294179#c72">Mathias Bynens</a> independently stumbled across the idea that you can use the <code>prefers-color-scheme</code> media query to provide support for dark mode. This work is built off of <a href="https://jakearchibald.com/2016/svg-media-queries/">Jake Archibald’s exploration of SVG and media queries</a>.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line="4-6"><code markup="tt">&lt;svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  &lt;style>
+    path { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #ffffff; }
+    }
+  &lt;/style>
+  &lt;path d="M111.904 52.937a1.95 1.95 0 00-1.555-1.314l-30.835-4.502-13.786-28.136c-.653-1.313-2.803-1.313-3.456 0L48.486 47.121l-30.835 4.502a1.95 1.95 0 00-1.555 1.314 1.952 1.952 0 00.48 1.99l22.33 21.894-5.28 30.918c-.115.715.173 1.45.768 1.894a1.904 1.904 0 002.016.135L64 95.178l27.59 14.59c.269.155.576.232.883.232a1.98 1.98 0 001.133-.367 1.974 1.974 0 00.768-1.894l-5.28-30.918 22.33-21.893c.518-.522.71-1.276.48-1.99z" fill-rule="nonzero"/>
+&lt;/svg></code></pre>
+
+
+
+<p>For supporting browsers, this code means our star-shaped SVG favicon will change its fill color from black to white when <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">dark mode</a> is activated. Pretty neat!</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov"></video></figure>
+
+
+
+<h4>Other media queries</h4>
+
+
+
+<p>Dark mode support got me thinking: if SVGs can support <code>prefers-color-scheme</code>, what other things can we do with them? While the support for <a href="https://www.w3.org/TR/mediaqueries-5/">Level 5 Media Queries</a> may not be there yet, here’s some ideas to consider:</p>
+
+
+
+<ul><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#light-level"><code>light-level</code></a> to desaturate favicon colors in a low-light environment.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#inverted"><code>inverted-colors</code></a> to “flip” inverted colors to preserve branding, or to ensure a photorealistic favicon looks as intended.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion"><code>prefers-reduced-motion</code></a> to remove <a href="https://css-tricks.com/the-making-of-an-animated-favicon/">favicon animation</a>. Ideally, we&#8217;d <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/">avoid animating favicons in the first place</a>, as they can be a trigger for ADHD and other related disabilities.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#forced-colors"><code>forced-colors</code></a> and/or a <a href="https://css-tricks.com/accessible-svgs-high-contrast-mode/">Windows High Contrast Mode media query</a> to make sure the favicon holds up visually in a high contrast color context. Remember to <a href="https://www.gwhitworth.com/blog/2017/04/how-to-use-ms-high-contrast/">use color keywords</a> to keep the favicon’s colors dynamic!</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?fit=1024%2C427&amp;ssl=1" alt="Mockup of four SVG favicon treatments. The first treatment is a pink star with a tab title of, “SVG Favicon.” The second treatment is a hot pink star with a tab title of, “Light Level SVG Favicon.” The third treatment is a light pink star with a tab title of, “Inverted Colors SVG Favicon.” The fourth treatment is a black pink star with a tab title of, “High Contrast Mode SVG Favicon.” The tabs are screen captures from Microsoft Edge, with the browser chrome updating to match each specialized mode." class="wp-image-306647" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?w=1608&amp;ssl=1 1608w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=300%2C125&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1024%2C427&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=768%2C320&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1536%2C640&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1000%2C417&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>A mockup of how these media query-based adjustments could work.</figcaption></figure>
+
+
+
+<h3>Keep it crisp</h3>
+
+
+
+<p>Another important aspect of good favicon design is making sure they look good in the small browser tab area. The secret to this is making the paths of the vector image <a href="https://icons8.com/articles/make-pixel-perfect-icons/">line up to the pixel grid</a>, the guide a computer uses to turn SVG math into the bitmap we see on a screen.&nbsp;</p>
+
+
+
+<p>Here’s a simplified example using a square shape:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?ssl=1" alt="A crisp orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306649" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?w=895&amp;ssl=1 895w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=300%2C257&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>When the vector points of the square align to the pixel grid of the artboard, the antialiasing effect a computer uses to smooth out the shapes isn&#8217;t needed. When the vector points aren’t aligned, we get a “smearing” effect:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?ssl=1" alt="A blurred orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306650" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?w=895&amp;ssl=1 895w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=300%2C257&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>A vector point’s position can be adjusted on the pixel grid by using a vector editing program such as <a href="https://www.figma.com/">Figma</a>, <a href="https://www.sketch.com/">Sketch</a>, <a href="https://inkscape.org/">Inkscape</a>, or <a href="https://www.adobe.com/products/illustrator.html">Illustrator</a>. These programs export SVGs as well. To adjust a vector point’s location, select each node with a precision selection tool and drag it into position.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov"></video></figure>
+
+
+
+<p>Some more complicated icons may need to be simplified, in order to look good at such a small size. If you’re looking for a good primer on this, <a href="https://www.viget.com/articles/responsive-logos-part-1-tips-for-adapting-logos-for-small-screens/">Jeremy Frank wrote a really good two-part article over at Vidget</a>.</p>
+
+
+
+<h3>Go the extra mile</h3>
+
+
+
+<p>In addition to favicons, there are a bunch of different (and unfortunately proprietary) ways to use icons to enhance its experience. These include things like the aforementioned pinned tab icon for Safari<a href="#fn:1">¹</a>, <a href="https://medium.com/slack-developer-blog/everything-you-ever-wanted-to-know-about-unfurling-but-were-afraid-to-ask-or-how-to-make-your-e64b4bb9254">chat app unfurls</a>, a <a href="https://webdesign.tutsplus.com/tutorials/how-to-add-windows-tiles-to-your-website--cms-23099">pinned Windows start menu tile</a>, social media previews, and homescreen launchers.</p>
+
+
+
+<p>If you’re looking for a great place to get started with these kinds of enhancements, I really like <a href="https://realfavicongenerator.net/">realfavicongenerator.net</a>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?ssl=1" alt="Icon output from realfavicongenerator.net arranged in a grid using CSS-Trick’s logo. There are two rows of five icons: android-chrome-192x192.png, android-chrome-384x384.png, apple-touch-icon.png, favicon-16x16.png, favicon-32x32.png, mstile-150x150.png, safari-pinned-tab.svg, favicon.ico, browserconfig.xml, and site.webmanifest." class="wp-image-306652" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?w=715&amp;ssl=1 715w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>It’s a lot, but it guarantees robust support.</figcaption></figure>
+
+
+
+<p>A funny thing about the history of the favicon: Internet Explorer was the first browser to support them and <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">they were snuck in at the 11th hour</a> by a developer named Bharat Shyam:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>As the story goes, late one night, Shyam was working on his new favicon feature. He called over junior project manager Ray Sun to take a look.</p><p>Shyam commented, “This is good, right? Check it in?”, requesting permission to check the code into the Internet Explorer codebase so it could be released in the next version. Sun didn’t think too much of it, the feature was cool and would clearly give IE an edge. So he told Shyam to go ahead and add it. And just like that, the favicon made its way into Internet Explorer 5, which would go on to become one of the largest browser releases the web has ever seen.</p><p>The next day, Sun was reprimanded by his manager for letting the feature get by so quickly. As it turns out, Shyam had specifically waited until later in the day, knowing that a less experienced Program Manager would give him a pass. But by then, the code had been merged in. Incidentally, you’d be surprised just how many relatively major browser features have snuck their way into releases like this.</p><cite>From <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">How We Got the Favicon</a> by <a href="https://twitter.com/jay_hoffmann">Jay Hoffmann</a></cite></blockquote>
+
+
+
+<p>I’m happy to see the platform throw a little love at favicons. They’ve long been one of my favorite little design details, and I’m excited that they’re becoming more reactive to user’s needs. If you have a moment, why not sneak a SVG favicon into your project the same way Bharat Shyam did way back in 1999.&nbsp;</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<p><a href="#fn1">¹</a> I haven’t been able to determine if Safari is going to implement SVG favicon support, but I hope they do. Has anyone heard anything?</p>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov" length="889060" type="video/quicktime" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov" length="6707087" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306644</post-id>	</item>
+		<item>
+		<title>Emojis as Favicons</title>
+		<link>https://css-tricks.com/emojis-as-favicons/</link>
+					<comments>https://css-tricks.com/emojis-as-favicons/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 24 Mar 2020 18:43:23 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[SVG]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305613</guid>
+
+					<description><![CDATA[<p>Lea Verou had <a href="https://twitter.com/LeaVerou/status/1241619866475474946">a dang genius idea</a> to use an emoji as a favicon. The idea only recently possible as browsers have started supporting SVG for favicons. Chuck an emoji inside an SVG <code>&#60;text&#62;</code> element and use that as the favicon. </p>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">Now that all modern browsers support SVG favicons, here&#39;s how to turn any emoji into a favicon.svg:</p>
+<p>&#60;svg xmlns=&#34;<a href="https://t.co/TJalgdayix">https://t.co/TJalgdayix</a>&#34; viewBox=&#34;0 0 100 100&#34;&#62;<br />&#60;text y=&#34;.9em&#34; font-size=&#34;90&#34;&#62;&#x1f4a9;&#60;/text&#62;<br />&#60;/svg&#62;</p>
+<p>Useful for quick apps when you can&#39;t be bothered to </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/emojis-as-favicons/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Emojis as Favicons&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/emojis-as-favicons/">Emojis as Favicons</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Lea Verou had <a href="https://twitter.com/LeaVerou/status/1241619866475474946">a dang genius idea</a> to use an emoji as a favicon. The idea only recently possible as browsers have started supporting SVG for favicons. Chuck an emoji inside an SVG <code>&lt;text&gt;</code> element and use that as the favicon. </p>
+
+
+
+<span id="more-305613"></span>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Now that all modern browsers support SVG favicons, here&#39;s how to turn any emoji into a favicon.svg:<br><br>&lt;svg xmlns=&quot;<a href="https://t.co/TJalgdayix">https://t.co/TJalgdayix</a>&quot; viewBox=&quot;0 0 100 100&quot;&gt;<br>&lt;text y=&quot;.9em&quot; font-size=&quot;90&quot;&gt;&#x1f4a9;&lt;/text&gt;<br>&lt;/svg&gt;<br><br>Useful for quick apps when you can&#39;t be bothered to design a favicon! <a href="https://t.co/S2F8IQXaZU">pic.twitter.com/S2F8IQXaZU</a></p>&mdash; Lea Verou (@LeaVerou) <a href="https://twitter.com/LeaVerou/status/1241619866475474946?ref_src=twsrc%5Etfw">March 22, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>Here&#8217;s the one-liner in use:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>&lt;text y=%22.9em%22 font-size=%2290%22>&#x1f3af;&lt;/text>&lt;/svg>"></code></pre>
+
+
+
+<h3>Demo Project</h3>
+
+
+
+<p>I made <a href="https://codepen.io/chriscoyier/project/editor/ZeWQWJ">a quick little demo project</a> so you can see it at work. See <a href="https://000458870.codepen.website/">the deployed project</a> to actually see the favicons. That works in Firefox and Chrome. Safari only does those &#8220;mask&#8221; style icons in SVG so this doesn&#8217;t work there. Maybe it could though? I dunno I&#8217;ll let you try it.</p>
+
+
+
+<p>Here&#8217;s a video in case you just wanna see it.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://res.cloudinary.com/css-tricks/video/upload/f_auto,q_auto,vc_auto/v1585074956/emojis_bxshdw.mp4"></video></figure>
+
+
+
+<h3>Related Concepts</h3>
+
+
+
+<ul><li>Ada Rose Cannon <a href="https://glitch.com/edit/#!/favicon-badge?path=script.js:1:14">added a badge</a> that can increment.</li><li>Taylor Hunt dropped some code on how he uses the <a href="https://gist.github.com/tigt/86b25ce970e46370dd61339380e2d6bd">current Git branch name</a> to create an SVG favicon (related to the <a href="https://css-tricks.com/different-favicon-for-development/">&#8220;different favicon for development&#8221;</a> idea)  </li><li>You could duck a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"><code>prefers-color-scheme</code> media query</a> in the SVG if you wanted to do something special for dark mode (although emojis generally work well on any background)</li></ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/emojis-as-favicons/">Emojis as Favicons</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/emojis-as-favicons/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		<enclosure url="https://res.cloudinary.com/css-tricks/video/upload/f_auto,q_auto,vc_auto/v1585074956/emojis_bxshdw.mp4" length="107601" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">305613</post-id>	</item>
+		<item>
+		<title>Different Favicon for Development</title>
+		<link>https://css-tricks.com/different-favicon-for-development/</link>
+					<comments>https://css-tricks.com/different-favicon-for-development/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 23 Mar 2020 23:17:49 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[favicon]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305353</guid>
+
+					<description><![CDATA[<p>I bet a lot of us tend to have the production website <em>and</em> the development website up simultaneously a lot. It&#8217;s almost a developer cliché at this point to make some local change, refresh, refresh, refresh, refresh, and just not see the change, only to discover you were looking at the production website, not your local development website. </p>
+<p>It&#8217;s just funny at first, but it&#8217;s frustrating if it happens a lot. It&#8217;s also totally avoidable by having an obvious visual&#8230; <a href="https://css-tricks.com/different-favicon-for-development/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Different Favicon for Development&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/different-favicon-for-development/">Different Favicon for Development</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I bet a lot of us tend to have the production website <em>and</em> the development website up simultaneously a lot. It&#8217;s almost a developer cliché at this point to make some local change, refresh, refresh, refresh, refresh, and just not see the change, only to discover you were looking at the production website, not your local development website. </p>
+
+
+
+<p>It&#8217;s just funny at first, but it&#8217;s frustrating if it happens a lot. It&#8217;s also totally avoidable by having an obvious visual<a href="#fn:1">¹</a> difference between the two sites. An easy way to do that? Different favicons.</p>
+
+
+
+<span id="more-305353"></span>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Got around to doing that thing where I change the favicon for local development. Get so confusing otherwise when you have both open, which is very common for me. <a href="https://t.co/6Eu4MMfp5I">pic.twitter.com/6Eu4MMfp5I</a></p>&mdash; Chris Coyier (@chriscoyier) <a href="https://twitter.com/chriscoyier/status/1239906515219173376?ref_src=twsrc%5Etfw">March 17, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<p>There is no real trick to this. I literally just have a different <code>favicon.ico</code> file in development than I do in production. On this (WordPress) site, I only <a href="https://css-tricks.com/video-screencasts/177-local-wordpress-development-to-production-workflow/">version control and deploy</a> the <code>wp-content</code> folder, which is not the root of the site where the favicon lives. Any files at the root I have to manually SFTP in to change. I simply changed my local version, and there it sits, being all different. </p>
+
+
+
+<h3>Other trickery</h3>
+
+
+
+<ul><li>Just <a href="https://twitter.com/Blake_Petersen/status/1240088224363470849">don&#8217;t have</a> a local favicon so it shows the default logo thing for that browser. Different enough.</li><li>A <a href="https://twitter.com/tigt_/status/1240036467445030915">dynamic SVG file</a> that shows the branch name (<em>Whaaat?!</em>)</li><li>Chrome has an <a href="https://www.howtogeek.com/656707/how-to-enable-and-use-tab-groups-in-google-chrome/">experimental &#8220;tab groups&#8221; feature</a>. Have different tab groups for dev vs. prod. </li><li>Use a <a href="https://github.com/Lazyuki/ReTitle">browser extension</a> to add <a href="https://twitter.com/AlexVanderbist/status/1239907037229842434">title prefixes</a>. </li><li>Use a <a href="https://github.com/ao5357/development_favicon">browser extension</a> to automatically colorize favicons based on URL matches.</li></ul>
+
+
+
+<h3>Speaking of favicons&#8230;</h3>
+
+
+
+<p>This has me wondering what best practices for favicons are in 2020, at least for garden variety content websites like this.</p>
+
+
+
+<p>I hate to say it, but I don&#8217;t really care about what the icon is when someone adds this site to the home screen on an iPad, ya know? Aside from one fellow who wanted a copy of the whole database to use the site offline to teach prisoners, nobody has ever asked me about &#8220;installing&#8221; CSS-Tricks.</p>
+
+
+
+<p>Nor do I care about the tile color on a Windows 8 tablet or to customize the color of the browser chrome on Android. That kinda stuff tends to be part of the process when &#8220;generating&#8221; favicons.</p>
+
+
+
+<p>I <em>do</em> care that the favicon looks good on high-resolution displays (a 32×32 graphic isn&#8217;t much of a splurge). I like the idea of SVG favicons. I like the idea of making sure dark mode is handled. I like the idea of doing this with as little code and files as possible. Anyone dig into this lately and want to enlighten me?</p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>&#8220;Visual&#8221; difference. Hm. I wonder what could be done for developers with visual impairments? Ideas?</li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/different-favicon-for-development/">Different Favicon for Development</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/different-favicon-for-development/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305353</post-id>	</item>
+		<item>
+		<title>Dark Mode Favicons</title>
+		<link>https://css-tricks.com/dark-mode-favicons/</link>
+					<comments>https://css-tricks.com/dark-mode-favicons/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 03 Dec 2019 23:10:46 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[SVG]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=299767</guid>
+
+					<description><![CDATA[<p>Oooo! <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">A bonafide trick</a> from Thomas Steiner. Chrome will soon be supporting SVG favicons (e.g. <code>&#60;link rel="icon" href="/icon.svg"&#62;</code>). And you can embed CSS within an SVG with a <code>&#60;style&#62;</code> element. That CSS can use a <code>perfers-color-scheme</code> media query, and as a result, a favicon that supports dark mode!</p>
+</p>
+<pre rel="HTML"><code class="language-markup">&#60;svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"&#62;
+  &#60;style&#62;
+    circle {
+      fill: yellow;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    @media (prefers-color-scheme: dark) {
+      circle {
+        fill: black;
+        stroke: yellow;
+      }
+    }
+  &#60;/style&#62;
+  &#60;circle cx="50" cy="50" r="47"/&#62;
+</code></pre>
+<p>&#8230; <a href="https://css-tricks.com/dark-mode-favicons/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Dark Mode Favicons&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-mode-favicons/">Dark Mode Favicons</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Oooo! <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">A bonafide trick</a> from Thomas Steiner. Chrome will soon be supporting SVG favicons (e.g. <code>&lt;link rel="icon" href="/icon.svg"&gt;</code>). And you can embed CSS within an SVG with a <code>&lt;style&gt;</code> element. That CSS can use a <code>perfers-color-scheme</code> media query, and as a result, a favicon that supports dark mode!</p>
+<p><span id="more-299767"></span></p>
+<pre rel="HTML"><code class="language-markup">&lt;svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;style&gt;
+    circle {
+      fill: yellow;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    @media (prefers-color-scheme: dark) {
+      circle {
+        fill: black;
+        stroke: yellow;
+      }
+    }
+  &lt;/style&gt;
+  &lt;circle cx="50" cy="50" r="47"/&gt;
+&lt;/svg&gt;</code></pre>
+<figure><video src="https://css-tricks.com/wp-content/uploads/2019/11/favicon-darkmode.mp4" controls></figure>
+<hr>
+<p>Safari also supports SVG, but it&#8217;s different&#8230;</p>
+<pre rel="HTML"><code class="language-markup">&lt;link rel="mask-icon" href="/favicon.svg" color="#990000"&gt;</code></pre>
+<p>You specify the color, so there is no opportunity there for a dark mode situation. A little surprising, since Apple is so all-in on this dark mode stuff. I have no idea if they plan to address that or what.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-mode-favicons/">Dark Mode Favicons</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/dark-mode-favicons/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/11/favicon-darkmode.mp4" length="614477" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">299767</post-id>	</item>
+		<item>
+		<title>The Making of an Animated Favicon</title>
+		<link>https://css-tricks.com/the-making-of-an-animated-favicon/</link>
+					<comments>https://css-tricks.com/the-making-of-an-animated-favicon/#comments</comments>
+		
+		<dc:creator><![CDATA[Preethi]]></dc:creator>
+		<pubDate>Thu, 15 Aug 2019 14:47:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[canvas]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[loader]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=294094</guid>
+
+					<description><![CDATA[<p>It’s the first thing your eyes look for when you’re switching tabs.</p>
+<p>That’s one way of explaining what a <strong>favicon</strong> is. The tab area is a much more precious screen real-estate than what most assume. If done right, besides being a label with icon, it can be the perfect billboard to represent what’s in or what’s <em>happening</em> on a web page.</p>
+</p>
+<p>The CSS-Tricks Favicon</p>
+<p>Favicons are actually at their most useful when you’re <em>not active on a tab</em>. Here’s &#8230; <a href="https://css-tricks.com/the-making-of-an-animated-favicon/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Making of an Animated Favicon&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-making-of-an-animated-favicon/">The Making of an Animated Favicon</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>It’s the first thing your eyes look for when you’re switching tabs.</p>
+<p>That’s one way of explaining what a <strong>favicon</strong> is. The tab area is a much more precious screen real-estate than what most assume. If done right, besides being a label with icon, it can be the perfect billboard to represent what’s in or what’s <em>happening</em> on a web page.</p>
+<p><span id="more-294094"></span></p>
+<figure id="post-294097" class="align-left media-294097"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/08/s_756730CEF4FBFC43D6F30A8CF52F0C71A93AF5BC13BD01F736BA699314A1BD38_1564493246537_favicon.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The CSS-Tricks Favicon</figcaption></figure>
+<p>Favicons are actually at their most useful when you’re <em>not active on a tab</em>. Here’s an example:</p>
+<p>Imagine you’re backing up photos from your recent summer vacation to a cloud service. While they are uploading, you’ve opened a new tab to gather details about the places you went on vacation to later annotate those photos. One thing led to the other, and now you’re watching Casey Neistat on the seventh tab. But you can’t continue your YouTube marathon without the anxious intervals of checking back on the cloud service page to see if the photos have been uploaded.</p>
+<p>It’s this type of situation where we can get creative! What if we could dynamically change the pixels in that favicon and display the upload progress? That’s exactly what we’ll do in this article. </p>
+<p>In supported browsers, we can display a loading/progress animation as a favicon with the help of JavaScript, HTML <code>&lt;canvas&gt;</code> and some centuries-old geometry.</p>
+<figure style="width:50%;margin:auto;"><video controls src="https://css-tricks.com/wp-content/uploads/2019/08/square-loading-favicon.mov"></video></figure>
+<p>Jumping straight in, we’ll start with the easiest part: <strong>adding the icon and canvas elements</strong> to the HTML.</p>
+<pre rel="HTML"><code class="language-html">&lt;head&gt;
+    &lt;link rel="icon" type="image/png" href="" width=32px&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;canvas width=32 height=32&gt;&lt;/canvas&gt;
+&lt;/body&gt;</code></pre>
+<p>In practical use, you would want to hide the <code>&lt;canvas&gt;</code> on the page, and one way of doing that is with the HTML <code>hidden</code> attribute.</p>
+<pre rel="HTML"><code class="language-html">&lt;canvas hidden width=32 height=32&gt;&lt;/canvas&gt;</code></pre>
+<p>I’m going to leave the <code>&lt;canvas&gt;</code> visible on the page for you to see both the favicon and canvas images animate together.</p>
+<p>Both the favicon and the canvas are given a standard favicon size: <strong>32 square pixels.</strong></p>
+<p>For demo purposes, in order to trigger the loading animation, I’m adding a button to the page which will start the animation when clicked. This also goes in the HTML:</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;Load&lt;/button&gt;</code></pre>
+<p>Now let’s set up the JavaScript. First, a check for canvas support:</p>
+<pre rel="JavaScript"><code class="language-javascript">onload = ()=&gt; {
+  canvas = document.querySelector('canvas'),
+  context = canvas.getContext('2d');
+  if (!!context) {
+      /* if canvas is supported */
+  }
+};</code></pre>
+<p>Next, adding the button click event handler that will prompt the animation in the canvas.</p>
+<pre rel="JavaScript"><code class="language-javascript">button = document.querySelector('button');
+button.addEventListener('click', function() { 
+    /* A variable to track the drawing intervals */
+    n = 0, 
+    /* Interval speed for the animation */
+    loadingInterval = setInterval(drawLoader, 60); 
+});</code></pre>
+<p><code>drawLoader</code> will be the function doing the drawing at intervals of 60 milliseconds each, but before we code it, I want to <strong>define the style of the lines</strong> of the square to be drawn. Let’s do a gradient.</p>
+<pre rel="JavaScript"><code class="language-javascript">/* Style of the lines of the square that'll be drawn */
+let gradient = context.createLinearGradient(0, 0, 32, 32);
+gradient.addColorStop(0, '#c7f0fe');
+gradient.addColorStop(1, '#56d3c9');
+context.strokeStyle = gradient;
+context.lineWidth = 8;</code></pre>
+<p>In <code>drawLoader</code>, we’ll draw the lines percent-wise: during the first 25 intervals, the top line will be incrementally drawn; in second quarter, the right line will be drawn; and so forth.</p>
+<p>The animation effect is achieved by <em>erasing</em> the <code>&lt;canvas&gt;</code> in each interval <em>before</em> redrawing the line(s) from previous interval a little longer.</p>
+<p>During each interval, once the drawing is done in the canvas, it’s quickly translated to a PNG image to be assigned as the favicon.</p>
+<pre rel="JavaScript"><code class="language-javascript">function drawLoader() {
+  with(context) {
+    clearRect(0, 0, 32, 32);
+    beginPath();
+    /* Up to 25% */
+    if (n&lt;=25){ 
+      /*
+        (0,0)-----(32,0)
+      */
+      // code to draw the top line, incrementally
+    }
+    /* Between 25 to 50 percent */
+    else if(n&gt;25 &amp;&amp; n&lt;=50){ 
+      /*
+        (0,0)-----(32,0)
+                  |
+                  |
+                  (32,32)
+      */
+      // code to draw the top and right lines.
+    }
+    /* Between 50 to 75 percent */
+    else if(n&gt;50 &amp;&amp; n&lt;= 75){ 
+      /*
+        (0,0)-----(32,0)
+                  |
+                  |
+        (0,32)----(32,32)
+      */
+      // code to draw the top, right and bottom lines.
+    }
+      /* Between 75 to 100 percent */
+    else if(n&gt;75 &amp;&amp; n&lt;=100){
+      /*
+        (0,0)-----(32,0)
+            |      |
+            |      |
+        (0,32)----(32,32)
+      */
+      // code to draw all four lines of the square.
+    }
+    stroke();
+  }
+  // Convert the Canvas drawing to PNG and assign it to the favicon
+  favicon.href = canvas.toDataURL('image/png');
+  /* When finished drawing */
+  if (n === 100) {
+    clearInterval(loadingInterval);
+    return;
+  }
+  // Increment the variable used to keep track of the drawing intervals
+  n++;
+}</code></pre>
+<p>Now to the math and the code for drawing the lines.</p>
+<p>Here’s how we incrementally draw the top line at each interval during the first 25 intervals:</p>
+<pre><code>n = current interval, 
+x = x-coordinate of the line’s end point at a given interval.
+(y-coordinate of the end point is 0 and start point of the line is 0,0)</code></pre>
+<p>At the completion of all 25 intervals, the value of <var>x</var> is 32 (the size of the favicon and canvas.)</p>
+<p>So&#8230;</p>
+<pre><code>x/n = 32/25
+x = (32/25) * n</code></pre>
+<p>The code to apply this math and draw the line is:</p>
+<pre rel="JavaScript"><code class="language-javascript">moveTo(0, 0); lineTo((32/25)*n, 0);</code></pre>
+<p>For the next 25 intervals (right line), we target the y coordinate similarly. </p>
+<pre rel="JavaScript"><code class="language-javascript">moveTo(0, 0); lineTo(32, 0);
+moveTo(32, 0); lineTo(32, (32/25)*(n-25));</code></pre>
+<p>And here’s the instruction to draw <em>all four</em> of the lines with the rest of the code.</p>
+<pre rel="JavaScript" data-line="10,20,21,31,32,33,43,44,45,46"><code class="language-javascript">function drawLoader() {
+  with(context) {
+    clearRect(0, 0, 32, 32);
+    beginPath();
+    /* Up to 25% of the time assigned to draw */
+    if (n&lt;=25){ 
+      /*
+        (0,0)-----(32,0)
+      */
+      moveTo(0, 0); lineTo((32/25)*n, 0);
+    }
+    /* Between 25 to 50 percent */
+    else if(n&gt;25 &amp;&amp; n&lt;=50){ 
+      /*
+        (0,0)-----(32,0)
+                  |
+                  |
+                  (32,32)
+      */
+      moveTo(0, 0); lineTo(32, 0);
+      moveTo(32, 0); lineTo(32, (32/25)*(n-25));
+    }
+    /* Between 50 to 75 percent */
+    else if(n&gt;50 &amp;&amp; n&lt;= 75){ 
+      /*
+        (0,0)-----(32,0)
+                  |
+                  |
+        (0,32)----(32,32)
+      */
+      moveTo(0, 0); lineTo(32, 0);
+      moveTo(32, 0); lineTo(32, 32);
+      moveTo(32, 32); lineTo(-((32/25)*(n-75)), 32);
+    }
+      /* Between 75 to 100 percent */
+    else if(n&gt;75 &amp;&amp; n&lt;=100){
+      /*
+        (0,0)-----(32,0)
+            |      |
+            |      |
+        (0,32)----(32,32)
+      */
+      moveTo(0, 0); lineTo(32, 0);
+      moveTo(32, 0); lineTo(32, 32);
+      moveTo(32, 32); lineTo(0, 32);
+      moveTo(0, 32); lineTo(0, -((32/25)*(n-100)));
+    }
+    stroke();
+  }
+
+  // Convert the Canvas drawing to PNG and assign it to the favicon
+  favicon.href = canvas.toDataURL('image/png');
+  /* When finished drawing */
+  if (n === 100) {
+      clearInterval(loadingInterval);
+      return;
+  }
+  // Increment the variable used to keep track of drawing intervals
+  n++;
+}</code></pre>
+<p>That’s all! You can see and download the demo code from this <a href="https://github.com/rpsthecoder/square-loading-favicon">GitHub repo</a>. Bonus: if you’re looking for a circular loader, check out <a href="https://github.com/rpsthecoder/favicon-canvas-loader">this repo</a>.</p>
+<p>You can use <em>any</em> shape you want, and if you use the <code>fill</code> attribute in the canvas drawing, that’ll give you a different effect.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-making-of-an-animated-favicon/">The Making of an Animated Favicon</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-making-of-an-animated-favicon/feed/</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/08/square-loading-favicon.mov" length="1037016" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">294094</post-id>	</item>
+		<item>
+		<title>Weekly Platform News: Favicon Guidelines, Accessibility Testing, Web Almanac</title>
+		<link>https://css-tricks.com/weekly-platform-news-favicon-guidelines-accessibility-testing-web-almanac/</link>
+					<comments>https://css-tricks.com/weekly-platform-news-favicon-guidelines-accessibility-testing-web-almanac/#comments</comments>
+		
+		<dc:creator><![CDATA[Šime Vidas]]></dc:creator>
+		<pubDate>Fri, 31 May 2019 14:55:33 +0000</pubDate>
+				<category><![CDATA[Weekly Platform News]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[subgrid]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=288641</guid>
+
+					<description><![CDATA[<p>In this week's news, Google defines guidelines for favicons, a new a11y testing tool from The Paciello Group, and changes to how the W3C plans to engage the community, plus more.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/weekly-platform-news-favicon-guidelines-accessibility-testing-web-almanac/">Weekly Platform News: Favicon Guidelines, Accessibility Testing, Web Almanac</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="explanation"> Šime posts regular content for web developers on <a href="https://webplatform.news">webplatform.news</a>.</p>
+<h3>Google posts guidelines for defining favicons</h3>
+<p><strong><a href="https://www.blog.google/products/search/new-design-google-search/">Jamie Leach</a>:</strong> Google Search now displays favicons in search results on mobile. Your favicon should be a multiple of 48×48 (Google will re-scale it to 16×16 for use in search results). If a website doesn’t have a favicon or Google deems the favicon inappropriate, a generic globe icon will be displayed instead.</p>
+<p><span id="more-288641"></span></p>
+<figure id="post-288642" class="align-left media-288642"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/05/google-search-favicon.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<blockquote><p>Your favicon should be a visual representation of your website’s brand, in order to help users quickly identify your site when they scan through search results.</p></blockquote>
+<p>Top websites are surprisingly inconsistent in the way they declare icons (via <code>&lt;link&gt;</code> elements in the page’s head). Twitter and Pinterest, two relatively modern progressive web apps, provide icons in two sizes.</p>
+<pre rel="HTML"><code class="language-html">&lt;!-- example --&gt;
+&lt;link rel="icon" href="/icon-32x32.png"&gt;
+&lt;link rel="apple-touch-icon" href="/icon-192x192.png"&gt;</code></pre>
+<h3>The Paciello Group releases <abbr>ARC</abbr> Toolkit</h3>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">In honor of Global Accessibility Awareness Day, <abbr>TPG</abbr> is releasing our professional-level accessibility testing tool to the public. Learn all about it at <a href="https://t.co/ol33pizq2v">https://t.co/ol33pizq2v</a> and download it from the Google Chrome store today. <a href="https://twitter.com/hashtag/GAAD?src=hash&amp;ref_src=twsrc%5Etfw">#GAAD</a></p>
+<p>&mdash; The Paciello Group (@paciellogroup) <a href="https://twitter.com/paciellogroup/status/1129013674675449864?ref_src=twsrc%5Etfw">May 16, 2019</a></p></blockquote>
+<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p><strong><a href="https://twitter.com/paciellogroup/status/1129013674675449864">The Paciello Group</a>:</strong> ARC Toolkit, our professional-level accessibility testing tool, is now available as a Chrome DevTools extension. This tool detects issues related to the <a href="https://w3c.github.io/wcag/21/guidelines/">WCAG 2.1 guidelines</a>. You can run the test on the entire page or just the node selected in the DevTools Elements panel.</p>
+<figure><video controls src="https://css-tricks.com/wp-content/uploads/2019/05/arc-toolkit-demo.mp4"></video></figure>
+<p>Remember, automated accessibility tools are only able to find <em>some</em> accessibility issues, and manual testing is necessary to ensure full accessibility. Lighthouse (via the Audits panel) suggests manual checks after performing an accessibility audit.</p>
+<figure id="post-288643" class="align-left media-288643"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/05/lighthouse-manual-audits.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Other news</h3>
+<ul>
+<li><strong><a href="https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/">Jeff Jaffe</a>:</strong> W3C and WHATWG have reached an agreement to collaborate on the development of HTML. &#8220;W3C shall encourage the community &#8230; to contribute directly to the <strong>WHATWG HTML and DOM repositories</strong>; raising issues, proposing solutions, commenting on proposed solutions, and indicating support or otherwise for proposals.&#8221;</li>
+<li><strong><a href="https://discuss.httparchive.org/t/analyzing-resource-age-by-content-type/1659">Paul Calvano</a>:</strong> &#8220;There is a significant gap in the first- vs. third-party resource age of CSS and web fonts. 95% of first-party fonts are older than one week compared to 50% of third-party fonts &#8230; This makes a strong case for <strong>self-hosting web fonts</strong>!&#8221;</li>
+<li><strong><a href="https://www.smashingmagazine.com/2019/05/display-grid-subgrid/">Rachel Andrew</a>:</strong> The <strong>CSS <code>subgrid</code> value</strong> is a relatively straightforward addition to grid layout. For example, if you have nested grids, and you apply <code>grid-template-rows: subgrid</code> to the child grid, then this grid will use the row tracks of the parent grid instead of creating its own row tracks. That’s all there is to it. (This feature is currently only supported in Firefox Nightly.)</li>
+<li><a href="https://github.blog/2019-05-23-introducing-new-ways-to-keep-your-code-secure/">GitHub Blog</a>: GitHub can now generate automated security fixes for your dependencies with known security vulnerabilities. On GitHub’s website, check your repository’s Security tab for security alerts. If you open an alert and press the <strong>&#8220;Create automated security fix&#8221; button</strong>, GitHub will create an automated pull request that fixes the security vulnerability.</li>
+<li><a href="https://dev.to/rick_viscomi/introducing-the-web-almanac-6dl">Rick Viscomi</a>: HTTP Archive plans to release the first annual <strong>Web Almanac</strong> in November, a report of the state of the web with interesting insights written by different experts. About 50 volunteers from the web community are currently working on it, and they are looking for more contributors.</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/weekly-platform-news-favicon-guidelines-accessibility-testing-web-almanac/">Weekly Platform News: Favicon Guidelines, Accessibility Testing, Web Almanac</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/weekly-platform-news-favicon-guidelines-accessibility-testing-web-almanac/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/05/arc-toolkit-demo.mp4" length="3339133" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">288641</post-id>	</item>
+		<item>
+		<title>Give Your Development Domain a Different Favicon Than Production</title>
+		<link>https://css-tricks.com/give-development-domain-different-favicon-production/</link>
+					<comments>https://css-tricks.com/give-development-domain-different-favicon-production/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 25 Jul 2016 13:16:01 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[git]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=243849</guid>
+
+					<description><![CDATA[<p>I got frustrated of not being able to tell the tabs apart as I was working on stuff. So this is my so-dumb-it&#8217;s-smart solution.</p>
+<p>The only hitch in my gittyup was that I had to add it to .gitignore, which untracked the file, which deletes it, and had to manually slip it back onto the server. Although it looks like there are <a href="http://stackoverflow.com/questions/1274057/making-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore">smarter ways</a>.&#8230; <a href="https://css-tricks.com/give-development-domain-different-favicon-production/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Give Your Development Domain a Different Favicon Than Production&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/give-development-domain-different-favicon-production/">Give Your Development Domain a Different Favicon Than Production</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I got frustrated of not being able to tell the tabs apart as I was working on stuff. So this is my so-dumb-it&#8217;s-smart solution.</p>
+<figure id="post-243850" class="align-none media-243850"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/07/dif-favicons.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>The only hitch in my gittyup was that I had to add it to .gitignore, which untracked the file, which deletes it, and had to manually slip it back onto the server. Although it looks like there are <a href="http://stackoverflow.com/questions/1274057/making-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore">smarter ways</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/give-development-domain-different-favicon-production/">Give Your Development Domain a Different Favicon Than Production</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/give-development-domain-different-favicon-production/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">243849</post-id>	</item>
+		<item>
+		<title>Favicons Next To External Links</title>
+		<link>https://css-tricks.com/favicons-next-to-external-links/</link>
+					<comments>https://css-tricks.com/favicons-next-to-external-links/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Sat, 26 May 2012 17:28:26 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=17083</guid>
+
+					<description><![CDATA[<p>A couple of techniques and food for thought around the idea of adding a favicon next to links on websites.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/favicons-next-to-external-links/">Favicons Next To External Links</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;ve had this <del>JSFiddle</del> <ins>(broken, <a href="http://codepen.io/chriscoyier/pen/emRayE">see this Pen</a> for fixed version)</ins> from <a href="http://csswizardry.com/">CSS Wizardry</a> open for like 2 weeks in my browser. I kept thinking about it, because before that I got an email from someone asking about essentially the same thing and it stuck in my head. They were wanting to insert a favicon next to links and use only CSS to do it. Unfortunately I haven&#8217;t found a way to do exactly that, but using some jQuery we can do it pretty easily.</p>
+<h3>The &#8220;I Wish&#8221; CSS Only Technique</h3>
+<p>What would be nice is if you had simple semantic HTML like this:</p>
+<pre rel="HTML" class="lang-html"><code>&lt;a href="http://github.com"&gt;GitHub&lt;/a&gt;</code></pre>
+<p>And then you could access everything you needed to insert a background image of the favicon using a service like <a href="http://getfavicon.appspot.com/">getFavicon</a>. </p>
+<pre rel="CSS" class="lang-css"><code>/* Fair warning, this doesn't work */
+
+a[href^="http"]:before {
+  content: url(http://g.etfv.co/ + attr(href));
+}</code></pre>
+<p>Maybe the syntax wouldn&#8217;t be exactly like that, but something like it. The point is, you can&#8217;t mix up the url() syntax into parts like that in CSS. </p>
+<h3>Google&#8217;s Favicon Service</h3>
+<p><del>Google has it&#8217;s own favicon service you can use.</del> For example:</p>
+<p><a href="http://www.google.com/s2/u/0/favicons?domain=css-tricks.com">http://www.google.com/s2/u/0/favicons?domain=css-tricks.com</a></p>
+<div class="explanation">Update: thats broken now. You can use <a href="http://grabicon.com/">Grabicon</a> instead now though.</div>
+<div class="explanation">Update: Grabicon requires a referrer apparently now which makes it fail in a variety of circumstances. Heidi Pungartnik pointed out Google&#8217;s service still exists, it&#8217;s just moved URL&#8217;s slightly. Example: <a href="http://www.google.com/s2/favicons?domain=css-tricks.com">http://www.google.com/s2/favicons?domain=css-tricks.com</a></div>
+<p data-height="198" style="height: 198px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="emRayE" data-default-tab="result" data-user="chriscoyier" class="codepen">See the Pen <a href="http://codepen.io/chriscoyier/pen/emRayE/">Favicons Next To External Links</a> by Chris Coyier (<a href="http://codepen.io/chriscoyier">@chriscoyier</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h4>Automating</h4>
+<p>The trick is you need just the hostname and <abbr title="top level domain">TLD</abbr> and nothing else. I searched around and found a simple regex for getting that from any URL. We&#8217;ll need that because links aren&#8217;t always (or even usually) the root of sites.</p>
+<pre rel="JavaScript"><code class="language-javascript">function getDomain(url) {
+  return url.match(/:\/\/(.[^/]+)/)[1];
+}</code></pre>
+<p>Using these things, and jQuery, we&#8217;ll find all links and apply the favicon as a background image. The external link checking is pretty rudimentary, but there are <a href="https://css-tricks.com/snippets/jquery/target-only-external-links/">more robust methods here</a> if need be.</p>
+<pre rel="jQuery"><code class="language-javascript">$("a[href^='http']").each(function() {
+  $(this).css({
+    background: "url(http://www.google.com/s2/favicons?domain=" + getDomain(this.href) + ") left center no-repeat",
+    "padding-left": "20px"
+  });    
+});</code></pre>
+<p>Then <a href="https://twitter.com/travis/status/206423627258806274">@travis reminded me</a> that you can just use <code>this.hostname</code> instead of the fancy regex. So:</p>
+<pre rel="jQuery"><code class="language-javascript">/* Nothing else needed */
+$("a[href^='http']").each(function() {
+  $(this).css({
+    background: "url(http://www.google.com/s2/favicons?domain=" + this.hostname + ") left center no-repeat",
+    "padding-left": "20px"
+  });    
+});</code></pre>
+<p>I&#8217;m not sure what the browser support is for <code>hostname</code>, whether it&#8217;s just as good as <code>href</code> or less so, not sure.</p>
+<h3>getFavicon Method</h3>
+<div class="explanation">Update: This service appears to be gone. Just leaving up for posterity.</div>
+<p><a href="https://twitter.com/seanodotcom/status/206412314004553728">@seanodotcom showed me</a> another similar service galled <a href="http://getfavicon.appspot.com/">getFavicon</a>. </p>
+<p>It&#8217;s hosted by Google AppEngine, but it&#8217;s not Google&#8217;s own service. I did find it a bit slower. But the advantage being that you don&#8217;t need to deal with host names at all, you just give them the full URL.</p>
+<p>So then it becomes:</p>
+<pre rel="jQuery"><code class="language-javascript">$("a[href^='http']").each(function() {
+    $(this).css({
+        background: "url(http://g.etfv.co/" + this.href + ") left center no-repeat",
+        "padding-left": "20px"
+    });
+});​</code></pre>
+<p><a href="http://codepen.io/css-tricks/pen/dCGAt" class="button">View Demo</a></p>
+<h3>Performance?</h3>
+<p>As I&#8217;m sure you know, the number of HTTP requests a page makes is a huge deal in performance. Each little image in these techniques are one page request each.</p>
+<p><a href="https://twitter.com/yuritkachenko/status/206425269588869120">@yuritkanchenko pointed out to me</a> a cool favicon service that  can automatically sprite the favicons for you so you can keep it to one request. </p>
+<p>For instance:</p>
+<p><a href="http://favicon.yandex.net/favicon/google.com/yandex.ru/css-tricks.com">http://favicon.yandex.net/favicon/google.com/yandex.ru/css-tricks.com</a></p>
+<p>I&#8217;m afraid I didn&#8217;t go the extra mile here and write the JavaScript needed to find all links, concatenate the domains, make the request, and then apply the images as a sprite, but I&#8217;m sure you could whip that up pretty quick if you really needed it.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/favicons-next-to-external-links/">Favicons Next To External Links</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/favicons-next-to-external-links/feed/</wfw:commentRss>
+			<slash:comments>51</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">17083</post-id>	</item>
+	</channel>
+</rss>

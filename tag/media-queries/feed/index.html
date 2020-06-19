@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>media queries &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/media-queries/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 24 Apr 2020 14:58:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>SVG, Favicons, and All the Fun Things We Can Do With Them</title>
+		<link>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/</link>
+					<comments>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/#comments</comments>
+		
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2020 14:58:29 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306644</guid>
+
+					<description><![CDATA[<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+<p>Here’s the code for how to add favicons &#8230; <a href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/" class="read-more">Read article <span class="screen-reader-text"> &#8220;SVG, Favicons, and All the Fun Things We Can Do With Them&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+
+
+
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+
+
+
+<span id="more-306644"></span>
+
+
+
+<p>Here’s the code for how to add favicons to your site:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg">
+&lt;link rel="alternate icon" href="/favicon.ico">
+&lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"></code></pre>
+
+
+
+<p>If a browser doesn’t support a SVG favicon, it will ignore the first link element declaration and continue on to the second. This ensures that all browsers that support favicons can enjoy the experience.&nbsp;</p>
+
+
+
+<p>You may also notice the alternate attribute value for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel">our <code>rel</code> declaration</a> in the second line. This programmatically communicates to the browser that the favicon with a file format that uses <code>.ico</code> is specifically used as an alternate presentation.</p>
+
+
+
+<p>Following the favicons is a line of code that loads another SVG image, one called <code>safari-pinned-tab.svg</code>. This is to support <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html">Safari’s pinned tab functionality</a>, which existed before other browsers had SVG favicon support. There’s additional files you can add here to enhance your site for different apps and services, but more on that in a bit.</p>
+
+
+
+<p>Here’s more detail on the current level of SVG favicon support:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”link-icon-svg”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">80</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">41</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">80</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5</span></td></tr></table></div></div>
+
+
+
+<h3>Why SVG?</h3>
+
+
+
+<p>You may be questioning why this is needed. The <code>.ico</code> file format has been around forever and can support images up to 256×256 pixels in size. Here are three answers for you.</p>
+
+
+
+<h4>Ease of authoring</h4>
+
+
+
+<p>It’s a pain to make <code>.ico</code> files. The file is a <a href="https://en.m.wikipedia.org/wiki/ICO_(file_format)">proprietary format</a> used by Microsoft, meaning you’ll need <a href="https://www.kodlian.com/apps/icon-slate">specialized tools</a> to make them. <a href="https://www.w3.org/TR/SVG2/">SVG is an open standard</a>, meaning you can use them without any further tooling or platform lock-in.</p>
+
+
+
+<h4>Future-proofing</h4>
+
+
+
+<p>Retina? 5k? 6k? When we use a resolution-agnostic SVG file for a favicon, we guarantee that our favicons look crisp on future devices, regardless of <a href="https://www.apple.com/pro-display-xdr/">how large their displays get</a>.&nbsp;</p>
+
+
+
+<h4>Performance</h4>
+
+
+
+<p>SVGs are usually very small files, especially when compared to their raster image counterparts — even more-so if you <a href="https://css-tricks.com/tools-for-optimizing-svg/">optimize them beforehand</a>. By only using a 16×16 pixel favicon as a fallback for browsers that don’t support SVG, we provide a combination that enjoys a high degree of support with a smaller file size to boot.&nbsp;</p>
+
+
+
+<p>This might seem a bit extreme, but when it comes to web performance, every byte counts!</p>
+
+
+
+<h3>Tricks</h3>
+
+
+
+<p>Another cool thing about SVG is we can <a href="https://css-tricks.com/svg-properties-and-css/">embed CSS directly in it</a>. This means we can do fun things like dynamically adjust them with JavaScript, provided the SVG is declared inline and not embedded using an <code>img</code> element.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line=""><code markup="tt">&lt;svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  &lt;style>
+    path { fill: #272019; }
+  &lt;/style>
+  &lt;!-- etc. -->
+&lt;/svg></code></pre>
+
+
+
+<p>Since SVG favicons are embedded using the <code>link</code> element, they can’t really be modified using JavaScript. We can, however, use things like emoji and media queries.</p>
+
+
+
+<h4>Emoji</h4>
+
+
+
+<p><a href="https://twitter.com/leaverou/">Lea Verou</a> had a genius idea about using emoji inside of <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text">SVG’s <code>text</code> element</a> to make a quick favicon with a transparent background that holds up at small sizes.</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/LeaVerou/status/1241619866475474946
+</div></figure>
+
+
+
+<p>In response, <a href="https://css-tricks.com/emojis-as-favicons/">Chris Coyier whipped up a neat little demo</a> that lets you play around with the concept.</p>
+
+
+
+<h4>Dark Mode support</h4>
+
+
+
+<p>Both <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">Thomas Steiner</a> and <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=294179#c72">Mathias Bynens</a> independently stumbled across the idea that you can use the <code>prefers-color-scheme</code> media query to provide support for dark mode. This work is built off of <a href="https://jakearchibald.com/2016/svg-media-queries/">Jake Archibald’s exploration of SVG and media queries</a>.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line="4-6"><code markup="tt">&lt;svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  &lt;style>
+    path { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #ffffff; }
+    }
+  &lt;/style>
+  &lt;path d="M111.904 52.937a1.95 1.95 0 00-1.555-1.314l-30.835-4.502-13.786-28.136c-.653-1.313-2.803-1.313-3.456 0L48.486 47.121l-30.835 4.502a1.95 1.95 0 00-1.555 1.314 1.952 1.952 0 00.48 1.99l22.33 21.894-5.28 30.918c-.115.715.173 1.45.768 1.894a1.904 1.904 0 002.016.135L64 95.178l27.59 14.59c.269.155.576.232.883.232a1.98 1.98 0 001.133-.367 1.974 1.974 0 00.768-1.894l-5.28-30.918 22.33-21.893c.518-.522.71-1.276.48-1.99z" fill-rule="nonzero"/>
+&lt;/svg></code></pre>
+
+
+
+<p>For supporting browsers, this code means our star-shaped SVG favicon will change its fill color from black to white when <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">dark mode</a> is activated. Pretty neat!</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov"></video></figure>
+
+
+
+<h4>Other media queries</h4>
+
+
+
+<p>Dark mode support got me thinking: if SVGs can support <code>prefers-color-scheme</code>, what other things can we do with them? While the support for <a href="https://www.w3.org/TR/mediaqueries-5/">Level 5 Media Queries</a> may not be there yet, here’s some ideas to consider:</p>
+
+
+
+<ul><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#light-level"><code>light-level</code></a> to desaturate favicon colors in a low-light environment.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#inverted"><code>inverted-colors</code></a> to “flip” inverted colors to preserve branding, or to ensure a photorealistic favicon looks as intended.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion"><code>prefers-reduced-motion</code></a> to remove <a href="https://css-tricks.com/the-making-of-an-animated-favicon/">favicon animation</a>. Ideally, we&#8217;d <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/">avoid animating favicons in the first place</a>, as they can be a trigger for ADHD and other related disabilities.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#forced-colors"><code>forced-colors</code></a> and/or a <a href="https://css-tricks.com/accessible-svgs-high-contrast-mode/">Windows High Contrast Mode media query</a> to make sure the favicon holds up visually in a high contrast color context. Remember to <a href="https://www.gwhitworth.com/blog/2017/04/how-to-use-ms-high-contrast/">use color keywords</a> to keep the favicon’s colors dynamic!</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?fit=1024%2C427&amp;ssl=1" alt="Mockup of four SVG favicon treatments. The first treatment is a pink star with a tab title of, “SVG Favicon.” The second treatment is a hot pink star with a tab title of, “Light Level SVG Favicon.” The third treatment is a light pink star with a tab title of, “Inverted Colors SVG Favicon.” The fourth treatment is a black pink star with a tab title of, “High Contrast Mode SVG Favicon.” The tabs are screen captures from Microsoft Edge, with the browser chrome updating to match each specialized mode." class="wp-image-306647" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?w=1608&amp;ssl=1 1608w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=300%2C125&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1024%2C427&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=768%2C320&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1536%2C640&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1000%2C417&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>A mockup of how these media query-based adjustments could work.</figcaption></figure>
+
+
+
+<h3>Keep it crisp</h3>
+
+
+
+<p>Another important aspect of good favicon design is making sure they look good in the small browser tab area. The secret to this is making the paths of the vector image <a href="https://icons8.com/articles/make-pixel-perfect-icons/">line up to the pixel grid</a>, the guide a computer uses to turn SVG math into the bitmap we see on a screen.&nbsp;</p>
+
+
+
+<p>Here’s a simplified example using a square shape:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?ssl=1" alt="A crisp orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306649" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?w=895&amp;ssl=1 895w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=300%2C257&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>When the vector points of the square align to the pixel grid of the artboard, the antialiasing effect a computer uses to smooth out the shapes isn&#8217;t needed. When the vector points aren’t aligned, we get a “smearing” effect:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?ssl=1" alt="A blurred orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306650" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?w=895&amp;ssl=1 895w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=300%2C257&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>A vector point’s position can be adjusted on the pixel grid by using a vector editing program such as <a href="https://www.figma.com/">Figma</a>, <a href="https://www.sketch.com/">Sketch</a>, <a href="https://inkscape.org/">Inkscape</a>, or <a href="https://www.adobe.com/products/illustrator.html">Illustrator</a>. These programs export SVGs as well. To adjust a vector point’s location, select each node with a precision selection tool and drag it into position.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov"></video></figure>
+
+
+
+<p>Some more complicated icons may need to be simplified, in order to look good at such a small size. If you’re looking for a good primer on this, <a href="https://www.viget.com/articles/responsive-logos-part-1-tips-for-adapting-logos-for-small-screens/">Jeremy Frank wrote a really good two-part article over at Vidget</a>.</p>
+
+
+
+<h3>Go the extra mile</h3>
+
+
+
+<p>In addition to favicons, there are a bunch of different (and unfortunately proprietary) ways to use icons to enhance its experience. These include things like the aforementioned pinned tab icon for Safari<a href="#fn:1">¹</a>, <a href="https://medium.com/slack-developer-blog/everything-you-ever-wanted-to-know-about-unfurling-but-were-afraid-to-ask-or-how-to-make-your-e64b4bb9254">chat app unfurls</a>, a <a href="https://webdesign.tutsplus.com/tutorials/how-to-add-windows-tiles-to-your-website--cms-23099">pinned Windows start menu tile</a>, social media previews, and homescreen launchers.</p>
+
+
+
+<p>If you’re looking for a great place to get started with these kinds of enhancements, I really like <a href="https://realfavicongenerator.net/">realfavicongenerator.net</a>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?ssl=1" alt="Icon output from realfavicongenerator.net arranged in a grid using CSS-Trick’s logo. There are two rows of five icons: android-chrome-192x192.png, android-chrome-384x384.png, apple-touch-icon.png, favicon-16x16.png, favicon-32x32.png, mstile-150x150.png, safari-pinned-tab.svg, favicon.ico, browserconfig.xml, and site.webmanifest." class="wp-image-306652" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?w=715&amp;ssl=1 715w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>It’s a lot, but it guarantees robust support.</figcaption></figure>
+
+
+
+<p>A funny thing about the history of the favicon: Internet Explorer was the first browser to support them and <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">they were snuck in at the 11th hour</a> by a developer named Bharat Shyam:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>As the story goes, late one night, Shyam was working on his new favicon feature. He called over junior project manager Ray Sun to take a look.</p><p>Shyam commented, “This is good, right? Check it in?”, requesting permission to check the code into the Internet Explorer codebase so it could be released in the next version. Sun didn’t think too much of it, the feature was cool and would clearly give IE an edge. So he told Shyam to go ahead and add it. And just like that, the favicon made its way into Internet Explorer 5, which would go on to become one of the largest browser releases the web has ever seen.</p><p>The next day, Sun was reprimanded by his manager for letting the feature get by so quickly. As it turns out, Shyam had specifically waited until later in the day, knowing that a less experienced Program Manager would give him a pass. But by then, the code had been merged in. Incidentally, you’d be surprised just how many relatively major browser features have snuck their way into releases like this.</p><cite>From <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">How We Got the Favicon</a> by <a href="https://twitter.com/jay_hoffmann">Jay Hoffmann</a></cite></blockquote>
+
+
+
+<p>I’m happy to see the platform throw a little love at favicons. They’ve long been one of my favorite little design details, and I’m excited that they’re becoming more reactive to user’s needs. If you have a moment, why not sneak a SVG favicon into your project the same way Bharat Shyam did way back in 1999.&nbsp;</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<p><a href="#fn1">¹</a> I haven’t been able to determine if Safari is going to implement SVG favicon support, but I hope they do. Has anyone heard anything?</p>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov" length="889060" type="video/quicktime" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov" length="6707087" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306644</post-id>	</item>
+		<item>
+		<title>Solving Sticky Hover States with @media (hover: hover)</title>
+		<link>https://medium.com/@mezoistvan/finally-a-css-only-solution-to-hover-on-touchscreens-c498af39c31c</link>
+					<comments>https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2020 20:38:41 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[hover]]></category>
+		<category><![CDATA[media queries]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303871</guid>
+
+					<description><![CDATA[<p>Mezo Istvan does a good job of <a href="https://medium.com/@mezoistvan/finally-a-css-only-solution-to-hover-on-touchscreens-c498af39c31c">covering</a> the problem and a solution to it in a blog post on Medium.</p>
+<p>If you tap on something that has a <code>:hover</code> state but you don't leave the page then, on a mobile device, there is a chance that <code>:hover</code> state "sticks." You'll see this with stuff like <a href="https://css-tricks.com/a-complete-guide-to-links-and-buttons/#jump-link">jump-links</a> used as tabs or buttons that trigger on-page functionality.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/">Solving Sticky Hover States with @media (hover: hover)</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Mezo Istvan does a good job of <a href="https://medium.com/@mezoistvan/finally-a-css-only-solution-to-hover-on-touchscreens-c498af39c31c">covering</a> the problem and a solution to it in a blog post on Medium<a href="#fn:1">¹</a>.</p>
+
+
+
+<p>If you tap on something that has a <code>:hover</code> state but you don&#8217;t leave the page then, on a mobile device, there is a chance that <code>:hover</code> state &#8220;sticks.&#8221; You&#8217;ll see this with stuff like <a href="https://css-tricks.com/a-complete-guide-to-links-and-buttons/#jump-link">jump-links</a> used as tabs or buttons that trigger on-page functionality. </p>
+
+
+
+<span id="more-303871"></span>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">button:hover {
+  border: 3px solid green; /* might stick! */
+}</code></pre>
+
+
+
+<p>The solution, or trick, is a new(ish) <a href="https://www.w3.org/TR/mediaqueries-4/#descdef-media-hover">&#8220;CSS4&#8221; media query</a> that allows you only to apply styles on devices with hover capability.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  button:hover {
+    border: 3px solid green; /* solves sticky problem */
+  }
+}</code></pre>
+
+
+
+<p>Your typical touch screen mobile device will fail that media query, the style won&#8217;t apply, and you&#8217;ll avoid the sticky problem. </p>
+
+
+
+<p><a href="https://caniuse.com/#feat=mdn-css_at-rules_media_hover">Support is solid</a>, so not much worry there. </p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>It almost feels like we have to apologize to linking to things on Medium lately. I have no idea what you&#8217;re going to experience when you get there. Will you just be able to read it? Will it be a teaser where you have to log in to read more? Will it be behind a paywall? I have no idea. In this case, hopefully, this link post has enough info in it that isn&#8217;t not blocking you from learning anything.</li></ol>
+</div></div>
+
+
+
+<p><br></p>
+<p><a href="https://medium.com/@mezoistvan/finally-a-css-only-solution-to-hover-on-touchscreens-c498af39c31c" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/">Solving Sticky Hover States with @media (hover: hover)</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303871</post-id>	</item>
+		<item>
+		<title>Let&#8217;s Not Forget About Container Queries</title>
+		<link>https://css-tricks.com/lets-not-forget-about-container-queries/</link>
+					<comments>https://css-tricks.com/lets-not-forget-about-container-queries/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 09 Oct 2019 13:56:13 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[container-queries]]></category>
+		<category><![CDATA[media queries]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=296609</guid>
+
+					<description><![CDATA[<p>Container queries are always on the top of the list of requested improvements to CSS. The general sentiment is that if we had container queries, we wouldn&#8217;t write as many global media queries based on page size. That&#8217;s because we&#8217;re <em>actually</em> trying to control a more scoped container, and the only reason we use media queries for that now is because it&#8217;s the best tool we have in CSS. I absolutely believe that. </p>
+</p>
+<p>There is another sentiment that goes around &#8230; <a href="https://css-tricks.com/lets-not-forget-about-container-queries/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Let&#8217;s Not Forget About Container Queries&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/lets-not-forget-about-container-queries/">Let&#8217;s Not Forget About Container Queries</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Container queries are always on the top of the list of requested improvements to CSS. The general sentiment is that if we had container queries, we wouldn&#8217;t write as many global media queries based on page size. That&#8217;s because we&#8217;re <em>actually</em> trying to control a more scoped container, and the only reason we use media queries for that now is because it&#8217;s the best tool we have in CSS. I absolutely believe that. </p>
+<p><span id="more-296609"></span></p>
+<p>There is another sentiment that goes around once in a while that goes something like: &#8220;you developers think you need container queries but you really don&#8217;t.&#8221; I am not a fan of that. It seems terribly obvious that we would do good things with them if they were available, not the least of which is writing cleaner, portable, understandable code. Everyone seems to agree that building UIs from components is the way to go these days which makes the need for container queries all the more obvious.</p>
+<p>It&#8217;s wonderful that there are modern JavaScript ideas that help us do use them today &mdash; but that doesn&#8217;t mean the technology needs to stay there. It makes way more sense in CSS.</p>
+<p>Here&#8217;s my late 2019 thought dump on the subject:</p>
+<ul>
+<li>Philip Walton&#8217;s <a href="https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/">&#8220;Responsive Components: a Solution to the Container Queries Problem&#8221;</a> is a great look at using JavaScript&#8217;s <code>ResizeObserver</code> as one way to solve the issue today. It performs great and works anywhere. <a href="https://philipwalton.github.io/responsive-components/">The demo site</a> is the best one out there because it highlights the need for responsive components (although there are other <a href="https://wicg.github.io/cq-usecases/">documented use cases</a> as well). Philip even says a pure CSS solution would be more ideal. </li>
+<li>CSS nesting got <a href="https://github.com/w3c/csswg-drafts/issues/2701">a little round of enthusiasm</a> about a year ago. The conversation makes it seem like nesting is plausible. I&#8217;m in favor of this as a <a href="https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/">long-time fan of sensible Sass nesting</a>. It makes me wonder if the syntax for container queries could leverage the same sort of thing. Maybe nested queries are scoped to the parent selector? Or you prefix the media statement with an ampersand as the current spec does with descendant selectors?</li>
+<li>Other proposed syntaxes generally involve some use of the colon, like <code>.container:media(max-width: 400px) { }</code>. I like that, too. Single-colon selectors (pseduo selectors) are philosophically &#8220;select the element under these conditions&#8221; &mdash; like <code>:hover</code>, <code>:nth-child</code>, etc. &mdash; so a media scope makes sense.</li>
+<li>I don&#8217;t think syntax is the biggest enemy of this feature; it&#8217;s the performance of how it is implemented. Last I understood, it&#8217;s not even performance as much as it mucks with the entire rendering flow of how browsers work. That seems like a massive hurdle. I still don&#8217;t wanna forget about it. There is lots of innovation happening on the web and, just because it&#8217;s not clear how to implement it today, that doesn&#8217;t mean someone won&#8217;t figure out a practical path forward tomorrow.</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/lets-not-forget-about-container-queries/">Let&#8217;s Not Forget About Container Queries</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/lets-not-forget-about-container-queries/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">296609</post-id>	</item>
+		<item>
+		<title>Can you nest @media and @support queries?</title>
+		<link>https://css-tricks.com/can-you-nest-media-and-support-queries/</link>
+					<comments>https://css-tricks.com/can-you-nest-media-and-support-queries/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 05 Aug 2019 14:50:22 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[@supports]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[nesting]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=293607</guid>
+
+					<description><![CDATA[<p>Yes, you can, and it doesn&#8217;t really matter in what order. A CSS preprocessor is <em>not</em> required. It works in regular CSS.</p>
+<p>This works:</p>
+<pre rel="CSS"><code class="language-css">@supports(--a: b) {
+  @media (min-width: 1px) {
+    body {
+      background: red;
+    }
+  }
+}</code></pre>
+<p>And so does this, the reverse nesting of the above:</p>
+<pre rel="CSS"><code class="language-css">@media (min-width: 1px) {
+  @supports(--a: b) {
+    body {
+      background: green;
+    }
+  }
+}</code></pre>
+</p>
+<p>You can keep going with the nesting, if it ever makes sense:</p>
+<pre rel="CSS"><code class="language-css">@media (min-width: 2px) {
+  @media (min-width: </code></pre>
+<p>&#8230; <a href="https://css-tricks.com/can-you-nest-media-and-support-queries/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Can you nest @media and @support queries?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/can-you-nest-media-and-support-queries/">Can you nest @media and @support queries?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Yes, you can, and it doesn&#8217;t really matter in what order. A CSS preprocessor is <em>not</em> required. It works in regular CSS.</p>
+<p>This works:</p>
+<pre rel="CSS"><code class="language-css">@supports(--a: b) {
+  @media (min-width: 1px) {
+    body {
+      background: red;
+    }
+  }
+}</code></pre>
+<p>And so does this, the reverse nesting of the above:</p>
+<pre rel="CSS"><code class="language-css">@media (min-width: 1px) {
+  @supports(--a: b) {
+    body {
+      background: green;
+    }
+  }
+}</code></pre>
+<p><span id="more-293607"></span></p>
+<p>You can keep going with the nesting, if it ever makes sense:</p>
+<pre rel="CSS"><code class="language-css">@media (min-width: 2px) {
+  @media (min-width: 1px) {
+    @supports (--a: b) {
+      @supports (display: flex) {
+        body {
+          background: pink;
+        }
+      }
+    }
+  }
+}</code></pre>
+<p>There is probably a point where the logic of that gets out of hand, so careful. But hey, it works. Presumably, you can &#8220;infinitely&#8221; nest <a href="https://css-tricks.com/the-at-rules-of-css/">at-rules</a>.</p>
+<p>To look at nested code like that looks a little like a CSS preprocessor is in use, but that&#8217;s not the case here. Regular ol&#8217; CSS handles this just fine, and in fact, CSS preprocessors don&#8217;t meaningfully manipulate it at all (tested Sass, Less, and Stylus).</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/can-you-nest-media-and-support-queries/">Can you nest @media and @support queries?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/can-you-nest-media-and-support-queries/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">293607</post-id>	</item>
+		<item>
+		<title>A responsive grid layout with no media queries</title>
+		<link>https://andy-bell.design/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/</link>
+					<comments>https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/#comments</comments>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Thu, 09 May 2019 14:23:40 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[grid]]></category>
+		<category><![CDATA[media queries]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=287489</guid>
+
+					<description><![CDATA[<p>Andy Bell made <a href="https://codepen.io/andybelldesign/pen/vMMYKJ">a really cool demo</a> that shows us how to create a responsive grid layout without <em>any</em> media queries at all. It happens to look like this when you change the size of the browser window:</p>
+<p>I think this is a wonderful layout technique that’s just 6 lines (!) of CSS.</p>
+<pre rel="CSS"><code class="language-css">.auto-grid {
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: 1rem;
+}</code></pre>
+<p>What this shows us is that we don’t have to write a million media &#8230; <a href="https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A responsive grid layout with no media queries&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/">A responsive grid layout with no media queries</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Andy Bell made <a href="https://codepen.io/andybelldesign/pen/vMMYKJ">a really cool demo</a> that shows us how to create a responsive grid layout without <em>any</em> media queries at all. It happens to look like this when you change the size of the browser window:</p>
+<figure id="post-287490" class="align-none media-287490"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/05/email-newsletter.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>I think this is a wonderful layout technique that’s just 6 lines (!) of CSS.</p>
+<pre rel="CSS"><code class="language-css">.auto-grid {
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: 1rem;
+}</code></pre>
+<p>What this shows us is that we don’t have to write a million media queries to change the number of columns in a grid. Andy also proves that CSS Grid can automate so much of the tedious work of styling layouts.</p>
+<p><span id="more-287489"></span></p>
+<p>I’ve seen this technique used in a couple of places (and we have a <A href="https://css-tricks.com/snippets/css/css-grid-starter-layouts/">few starter grid templates</a> to boot) but Andy’s article about <a href="https://andy-bell.design/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/">how it all works</a> finally made it all sink in just how useful grid is.</p>
+<p><a href="https://andy-bell.design/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/">A responsive grid layout with no media queries</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/a-responsive-grid-layout-with-no-media-queries/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">287489</post-id>	</item>
+		<item>
+		<title>Look Ma, No Media Queries! Responsive Layouts Using CSS Grid</title>
+		<link>https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/</link>
+					<comments>https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/#comments</comments>
+		
+		<dc:creator><![CDATA[Juan Martín García]]></dc:creator>
+		<pubDate>Wed, 27 Feb 2019 01:14:37 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[grid]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[responsive]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=283245</guid>
+
+					<description><![CDATA[<p>Not only has CSS Grid reshaped the way we think and build layouts for the web, but it has also contributed to writing more resilient code, replacing &#8220;hacky&#8221; techniques we&#8217;ve used before, and in some cases, killing the need to rely on code for specific resolutions and viewports. What&#8217;s so cool about this era in web development is that <strong>we&#8217;re capable of doing more and more with fewer lines of code.</strong></p>
+<p>In this article, we&#8217;ll start dipping our toes into &#8230; <a href="https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Look Ma, No Media Queries! Responsive Layouts Using CSS Grid&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/">Look Ma, No Media Queries! Responsive Layouts Using CSS Grid</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Not only has CSS Grid reshaped the way we think and build layouts for the web, but it has also contributed to writing more resilient code, replacing &#8220;hacky&#8221; techniques we&#8217;ve used before, and in some cases, killing the need to rely on code for specific resolutions and viewports. What&#8217;s so cool about this era in web development is that <strong>we&#8217;re capable of doing more and more with fewer lines of code.</strong></p>
+<p>In this article, we&#8217;ll start dipping our toes into the power of CSS Grid by building a couple of common responsive navigation layouts. It&#8217;s easier than what you may think, and since CSS Grid was built with responsiveness in mind, it&#8217;ll take less code than writing media queries all over the place. Let’s do this!</p>
+<p><span id="more-283245"></span></p>
+<h3>Layout #1: Hero content and list of articles</h3>
+<p class="codepen" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="imjuangarcia" data-slug-hash="pGgmbe" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Hero Content and List of Articles">
+<span>See the Pen <a href="https://codepen.io/imjuangarcia/pen/pGgmbe/"><br />
+Hero Content and List of Articles</a> by Juan Martín García (<a href="https://codepen.io/imjuangarcia">@imjuangarcia</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>We&#8217;ll kick off this set of examples by creating a common website layout: A full-width hero section, with a grid of cards below.</p>
+<p>Both elements will respond to window resizing and adapt accordingly. Though this might seem like a lot of code at first glance, the responsive behavior is done with <strong>only six lines of CSS Grid code, and without writing a single <code>@media</code> rule</code></strong>. Let&#8217;s break down the code to see what&#8217;s going on:</p>
+<h4>The hero section</h4>
+<p>Let’s take a look at the code for the <code>.hero</code> element:</p>
+<pre rel="HTML"><code class="language-html">&lt;section class="hero"&gt;
+  &lt;h1&gt;You thirsty?&lt;/h1&gt;
+  &lt;article&gt;
+    &lt;p&gt;Explore local breweries with just one click and stirred by starlight across the centuries light years great turbulent clouds circumnavigated paroxysm of global death.&lt;/p&gt;
+    &lt;a href="#breweries"&gt;Browse Breweries&lt;/a&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.hero {
+  /* Photo by mnm.all on Unsplash */
+  background: url('https://images.unsplash.com/photo-1518176258769-f227c798150e') center;
+  background-size: cover;
+  padding: 4rem 2rem;
+
+  /* Grid styles */
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}</code></pre>
+<p>We have a bunch of background styles to enable the beer background, a bit of padding to separate the content from the edge of the screen, and then three lines of grid styles:</p>
+<ol>
+<li>The first line (<code>display: grid;</code>) is changing the behavior of the <code>.hero</code> element to be a grid container. That means the elements inside <code>.hero</code> are now grid items.</li>
+<li>The second line (<code>align-items: center;</code>) is going to vertically center the columns on our grid. But these two lines don&#8217;t do anything on their own until we set the columns of our grid.</li>
+<li>And that&#8217;s where the third line comes in. A lot of stuff is going on in that single property, so let&#8217;s go one step at a time.</li>
+</ol>
+<h4>The repeat() function</h4>
+<p>Generally speaking, what we usually do to define our columns and rows on a CSS Grid is to add the value for each track after defining the property, like this:</p>
+<pre rel="CSS"><code class="language-css">.element {
+  /* This will result on four columns, each one of 1fr */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* This will result on two rows, each one of 300px */
+  grid-template-rows: 300px 300px;
+}</code></pre>
+<p>Now, that&#8217;s quite dull. We can use the <code>repeat()</code> function to make that less verbose and easier to follow. The function takes two parameters:</p>
+<ol>
+<li>The number of times to repeat the value.</li>
+<li>The value itself.</li>
+</ol>
+<p>After refactoring our code to use <code>repeat()</code>, we should expect the same results from these lines of code:</p>
+<pre rel="CSS" data-line="3,5"><code class="language-css">.element {
+  /* this is the same as grid-template-columns: 1fr 1fr 1fr 1fr; */
+  grid-template-columns: repeat(4, 1fr);
+  /* this is the same as grid-template-rows: 300px 300px; */
+  grid-template-rows: repeat(2, 300px);
+}</code></pre>
+<p>Much cleaner, yeah?</p>
+<h5>The minmax() function</h5>
+<p>Now, the above examples are explicitly defining sizes for the tracks (<code>1fr</code> and <code>300px</code>). That might work for some scenarios, but for our beer example here, we need to be able to automatically calculate the size of the track, based on the width of the viewport, and automatically adjust the number of columns shown. To be able to do that, we&#8217;ll define a range of values using the <code>minmax()</code> function. What will we be defining? You&#8217;ve probably guessed by now: The *minimum* and *maximum* values we want these columns to be able to resize to.</p>
+<p>In the hero for our beer example above, we set our <code>minmax()</code> property to be 240px at its minimum size, and 1fr at its maximum size. <code>fr</code> units, if you&#8217;ve never heard of them, stand for fractional units. Nobody can explain them better than Jen Simmons on <a href="https://www.youtube.com/watch?v=ZPtpzuRajzM">this video</a> and Robin Rendle <a href="https://css-tricks.com/introduction-fr-css-unit/">in this post</a>.</p>
+<figure id="post-283251" class="align-left media-283251"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_A656CD952C34AF3C349DBC1866EBB3976E0A97F53BA070FACC154F0A9C0EB2AA_1548530142901_Sizingtrackswithminmaxandfrunits.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Using the Firefox Grid Inspector to check the change on the track&#8217;s size when resizing</figcaption></figure>
+<p>That results in our tracks being 1fr when there&#8217;s plenty of space on our viewport (<abbr title="also known as">aka</abbr> desktop resolutions), and 240px when there&#8217;s not enough space for both columns (like on mobile devices). That&#8217;s why they nicely grow when we make our browser wider, since they&#8217;re taking the remaining space and equally dividing it across the existing columns. Now, moving to the last piece of the puzzle!</p>
+<h5>The auto-fit keyword</h5>
+<p>The <code>auto-fit</code> keyword allows us to wrap our columns into rows when there&#8217;s not enough space in our viewport to fit the 240px minimum value without overflowing the content. Sara Soueidan <a href="https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/">wrote an excellent article</a> about auto-sizing columns using the <code>auto-fill</code> and <code>auto-fit</code> keywords, in case you want to dive a little deeper into what&#8217;s going on under the hood. Now, with that last bit of code in place, we should be able to achieve this result:</p>
+<figure id="post-283253" class="align-left media-283253"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_A656CD952C34AF3C349DBC1866EBB3976E0A97F53BA070FACC154F0A9C0EB2AA_1548530384304_Wrappingcolumnswithauto-fit.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The column is automatically wrapping when there&#8217;s not enough space in the viewport</figcaption></figure>
+<h4>The article list</h4>
+<p>Now that we&#8217;ve thoroughly reviewed the behavior of the elements inside our hero element, it&#8217;s likely that the first two lines of CSS code for the breweries list below it might already seem familiar to you:</p>
+<pre rel="CSS"><code class="language-css">.breweries &gt; ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+}</code></pre>
+<p>That&#8217;s right! We&#8217;re using the exact same approach: On the first line we define our grid, on the second one we size our tracks using the same magic one-liner, and on the third line we set a gap for these columns. Nothing new under the sun, and what&#8217;s really neat about this, is that our code is resilient enough to adjust the number of tracks and their sizes, according to the number of items we have inside our unordered list:</p>
+<figure id="post-283255" class="align-left media-283255"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_A656CD952C34AF3C349DBC1866EBB3976E0A97F53BA070FACC154F0A9C0EB2AA_1548529663206_ezgif.com-resize.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The grid responds to the change in the number of tracks, and adapts the layout</figcaption></figure>
+<p>That&#8217;s all, folks! A fully responsive website layout, using just six lines of CSS code. Not bad, huh? Make sure you check the source code and play around with this example on <a href="https://codepen.io/imjuangarcia/pen/pGgmbe">CodePen</a>.</p>
+<h3>Layout #2: Full-width image gallery</h3>
+<p class="codepen" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="imjuangarcia" data-slug-hash="bzpYyj" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Full Width Image Gallery">
+<span>See the Pen <a href="https://codepen.io/imjuangarcia/pen/bzpYyj/"><br />
+Full Width Image Gallery</a> by Juan Martín García (<a href="https://codepen.io/imjuangarcia">@imjuangarcia</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>On this next example, we&#8217;ll embrace the power of our newly learned combination of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/repeat"><code>repeat()</code></a>, <a href="https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/"><code>auto-fit</code></a> and <a href="https://developer.mozilla.org/es/docs/Web/CSS/minmax"><code>minmax()</code></a> to create this responsive image gallery. We&#8217;ll also be sizing our tracks using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column"><code>grid-column</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row"><code>grid-row</code></a>, </a> and learning about the handy property:value combination of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow)"><code>grid-auto-flow: dense;</code></a> that allows us to change the default behavior of the elements that can&#8217;t fit on our explicit tracks: Instead of wrapping themselves in new rows or columns, we&#8217;ll make them fit into the unused spots on our grid. Let&#8217;s get into the coding!</p>
+<h4>The grid setup</h4>
+<p>The grid is created using our familiar <code>display: grid;</code> property, where columns are defined using <code>repeat()</code>, <code>auto-fit</code> and <code>minmax()</code>. We also added a bunch rows with a <code>repeat()</code> function and defined a gap to our images, using <code>grid-gap</code>. But the new player here is the <code>grid-auto-flow: dense;</code>. We’ll get to it in a second.</p>
+<pre rel="CSS"><code class="language-css">.gallery &gt; .gallery__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-rows: repeat(6, 200px);
+  grid-gap: 1rem;
+  grid-auto-flow: dense;
+}</code></pre>
+<p>We also created a repetition pattern using the <a href="https://css-tricks.com/almanac/selectors/n/nth-child/"><code>nth-child()</code></a> pseudo-selector to set different sizes for our tracks using grid-column and grid-row. Notice here that we’re using the <code>span</code> keyword to allow the selected item to occupy more than one column or row.</p>
+<pre rel="CSS"><code class="language-css">/* This will create 2x images every 4 elements */
+.gallery &gt; .gallery__list &gt; li:nth-child(4n) {
+  grid-column: span 2; /* Spans two columns */
+  grid-row: span 2; /* Spans two rows */
+}
+
+/* This will create 3x images every 8 elements */
+.gallery &gt; .gallery__list &gt; li:nth-child(8n) {
+  grid-column: span 3;
+  grid-row: span 3;
+}</code></pre>
+<p>And finally, we&#8217;ll make sure our images cover the entire area of its container, regardless if it&#8217;s 1x, 2x or 3x, using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit"><code>object-fit: cover;</code></a>. If you have never heard of <code>object-fit</code>, it works fairly similar to how <code>background-image</code> does, but with HTML <code>&lt;img&gt;</code> tags:</p>
+<pre rel="CSS"><code class="language-css">.gallery &gt; .gallery__list &gt; li &gt; figure &gt; img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}</code></pre>
+<p>Now, the real deal here is <code>grid-auto-flow: dense;</code>. Check what happens when we take that out from our code:</p>
+<figure id="post-283257" class="align-left media-283257"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_A656CD952C34AF3C349DBC1866EBB3976E0A97F53BA070FACC154F0A9C0EB2AA_1549131912999_Takingoutgrid-auto-flow.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Removing grid-auto-flow: dense; leads to inconsistent placement of the elements on the grid</figcaption></figure>
+<p>See those holes on our beautifully crafted grid? That&#8217;s because some of the elements on it are taking 2x or 3x spots, and when there isn&#8217;t enough space on our tracks to fit them, they&#8217;ll wrap into a new row, since that&#8217;s the default behavior. By changing it from <code>row</code> to <code>dense</code>, we&#8217;re telling the grid to fill any gaps we might have with elements that could fit them, regardless of their source order on the DOM.</p>
+<p>That&#8217;s why this technique might come especially handy for things like image galleries, but might not be suitable for other use cases where you might need to preserve the order of the markup. Feel free to play around with the <a href="https://codepen.io/imjuangarcia/pen/bzpYyj">CodePen demo</a> to check the differences between where items are placed.</p>
+<h3>Layout #3: Trello-style card layout</h3>
+<p class="codepen" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="imjuangarcia" data-slug-hash="MLyQPO" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Trello-Style Card Layout">
+<span>See the Pen <a href="https://codepen.io/imjuangarcia/pen/MLyQPO/"><br />
+Trello-Style Card Layout</a> by Juan Martín García (<a href="https://codepen.io/imjuangarcia">@imjuangarcia</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Now, on to the last demo, where we&#8217;ll take advantage of the ability to nest grids to recreate this <a href="https://trello.com/b/1Jz6SorC/the-dev-board">Trello Board</a>. We&#8217;ll be creating a grid to hold our four different columns, and inside of those, we&#8217;ll create a child grid for our cards. Even though this example won&#8217;t explore new properties or revolutionary methods, it&#8217;ll help us to get a grasp on how easy it is to build complex layouts with a few lines of CSS code. This demo has a lot of extra code to achieve the styling of the Trello layout, so we’ll focus solely on the grid styles.</p>
+<h4>The columns</h4>
+<p>To create the four columns, we&#8217;ll use <code>display: grid;</code> on the container and use our magical one-liner for our <code>grid-template-columns</code>. We&#8217;ll also be defining a gap between them, and use <code>align-items: flex-start;</code> to ensure that our columns don&#8217;t stretch to the bottom of the screen.</p>
+<pre rel="CSS"><code class="language-css">.column__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: .5rem;
+  align-items: flex-start;
+}</code></pre>
+<p>Now, the original Trello is not responsive by default: If you resize your browser on a Trello Board, you&#8217;ll notice that you&#8217;ll end up having a horizontal scroll on your columns, rather than wrapping them on a new row. We&#8217;re not following that behavior here since we want to build responsive layouts, but in case you&#8217;re curious, and want to emulate Trello&#8217;s functionality, you can achieve that by adding two more lines of CSS code:</p>
+<pre rel="CSS" data-line="7,8"><code class="language-css">.column__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: .5rem;
+  align-items: flex-start;
+  /* Uncomment these lines if you want to have the standard Trello behavior instead of the column wrapping */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+}</code></pre>
+<p>We learned about <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow"><code>grid-auto-flow</code></a> in our previous demo and discovered that it let us control how the auto-placement algorithm work, and how implicit elements should be added in the flow of the grid. The default behavior is <code>row</code>, meaning that any extra element that won&#8217;t fit on our grid will wrap into a new line. We changed that to be <code>dense</code> on our previous demo, and we&#8217;ll change it to be <code>column</code> on this one: That way, any new column added here will end up in an implicit column, and have a horizontal scroll. We&#8217;ll also define a width for those auto-generated columns with the <code>grid-auto-columns</code> property.</p>
+<figure id="post-283259" class="align-left media-283259"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_A656CD952C34AF3C349DBC1866EBB3976E0A97F53BA070FACC154F0A9C0EB2AA_1549135031553_Changingtheauto-flowbehavior.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Modifying the <code>grid-auto-flow</code> property will make this demo behave like the real-world Trello</figcaption></figure>
+<h4>The cards</h4>
+<p>For the cards grid, we&#8217;ll use a similar approach. We&#8217;ll <code>display: grid;</code> on the container. We won&#8217;t define any columns here, since we don&#8217;t want to have any, and we&#8217;ll put <code>grid-template-rows: auto;</code> to use to avoid all cards having the same height — we want some of them to be bigger and some of them smaller, based on the type of content being added to them.</p>
+<pre rel="CSS"><code class="language-css">.card__list {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: .5rem;
+  margin: .5rem 0;
+}</code></pre>
+<p>And, again, that&#8217;s all folks! Two more lines to set a gap and a margin to the cards, and we&#8217;re done! Everything else in the <a href="https://codepen.io/imjuangarcia/pen/MLyQPO">Pen</a> is standard CSS to achieve the Trello look and feel.</p>
+<h3>So then&#8230; are media queries dead?</h3>
+<p>Back in the day, when we were building layouts using <code>display: inline-block</code> or floats, media queries made a lot of sense in order to change the size of our elements as the viewport got smaller. But now, with the incredibly powerful layouts that we&#8217;re able to create with a couple of CSS lines, you might feel tempted to think that media queries are doomed. I strongly disagree with that: I believe that we should change the way we think about them, and therefore use them differently.</p>
+<p>As <a href="https://www.smashingmagazine.com/2018/02/media-queries-responsive-design-2018/">Rachel Andrew stated</a> about a year ago, we should use media queries to fix our layout when it breaks, rather than targeting devices: There are so many out there! With the advent of Media Queries <a href="https://drafts.csswg.org/mediaqueries-4/">Level 4</a> and <a href="https://drafts.csswg.org/mediaqueries-5/">5</a>, we&#8217;re not only able to detect screen sizes now, but pointer types as well. As a result, we can dig into a user’s system preferences and adapt our code for those who prefer reduced motion or whether we should use inverted colors. That means media queries are not dead; on the flipside, I&#8217;d say it&#8217;s an exciting time for using media queries, but we need to learn to use them right. In the meantime, building robust layouts using modern techniques such as Flexbox or CSS Grid, will save you a bunch of time, code, and headaches.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/">Look Ma, No Media Queries! Responsive Layouts Using CSS Grid</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/feed/</wfw:commentRss>
+			<slash:comments>24</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">283245</post-id>	</item>
+		<item>
+		<title>Where Do You Nest Your Sass Breakpoints?</title>
+		<link>https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/</link>
+					<comments>https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 11 Feb 2019 15:16:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[nesting]]></category>
+		<category><![CDATA[Sass]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=282174</guid>
+
+					<description><![CDATA[<p>I love nesting my @media query breakpoints. It&#8217;s perhaps the most important feature of Sass to me. Maybe I <a href="https://css-tricks.com/approaches-media-queries-sass/">pick a method</a> and do it like this:</p>
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.element {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  @include breakpoint(baby-bear) {
+    display: block;
+  }
+}</code></pre>
+<p>That&#8217;s straightforward enough. But what if my element has several sub-elements and the breakpoint affects them as well? There are different approaches, and I&#8217;m never quite sure which one I should be doing.</p>
+<p>I could duplicate the breakpoint for &#8230; <a href="https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Where Do You Nest Your Sass Breakpoints?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/">Where Do You Nest Your Sass Breakpoints?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I love nesting my @media query breakpoints. It&#8217;s perhaps the most important feature of Sass to me. Maybe I <a href="https://css-tricks.com/approaches-media-queries-sass/">pick a method</a> and do it like this:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.element {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  @include breakpoint(baby-bear) {
+    display: block;
+  }
+}</code></pre>
+
+
+
+<p>That&#8217;s straightforward enough. But what if my element has several sub-elements and the breakpoint affects them as well? There are different approaches, and I&#8217;m never quite sure which one I should be doing.</p>
+
+
+
+<span id="more-282174"></span>
+
+
+
+<p>I could duplicate the breakpoint for each child:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.parent {
+
+    @include breakpoint(desktop) {
+    }
+
+    .child {
+        @include breakpoint(desktop) {
+        }
+    }
+
+   .child-2 {
+        @include breakpoint(desktop) {
+        }
+    }
+
+}</code></pre>
+
+
+
+<p>The compiled CSS comes out to something like this:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">@media screen and (min-width: 700px) {
+  .parent {
+  }
+}
+@media screen and (min-width: 700px) {
+  .parent .child {
+  }
+}
+@media screen and (min-width: 700px) {
+  .parent .child-2 {
+  }
+}</code></pre>
+
+
+
+<p>Or, I could duplicate the children under the first nested breakpoint:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.parent {
+
+    @include breakpoint(desktop) {
+
+       .child {
+       }
+
+       .child-2 {
+       } 
+
+    }
+
+    .child {
+    }
+
+   .child-2 {
+    }
+
+}</code></pre>
+
+
+
+<p>That results in:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">@media screen and (min-width: 700px) {
+  .parent .child {
+  }
+  .parent .child-2 {
+  }
+}
+.parent .child {
+}
+.parent .child-2 {
+}</code></pre>
+
+
+
+<p>Or I could do a combination of the two. Neither of them feels particularly great because of the duplication, but I&#8217;m not sure there is a perfect answer here. I err a little more on duplicating the media query, as it seems less error-prone than duplicating selectors.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/">Where Do You Nest Your Sass Breakpoints?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/where-do-you-nest-your-sass-breakpoints/feed/</wfw:commentRss>
+			<slash:comments>40</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">282174</post-id>	</item>
+		<item>
+		<title>Dark Mode in CSS</title>
+		<link>https://css-tricks.com/dark-modes-with-css/</link>
+					<comments>https://css-tricks.com/dark-modes-with-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Wed, 14 Nov 2018 15:00:57 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[macOS]]></category>
+		<category><![CDATA[media queries]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=278513</guid>
+
+					<description><![CDATA[<p>With the introduction of <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">dark mode in macOS</a>, Safari Technology Preview 68 has released a new feature called <code>prefers-color-scheme</code> which lets us detect whether the user has dark mode enabled with a media query. Safari Technology Preview 71 also has <code>supported-color-schemes</code>, which&#8230; well, I couldn&#8217;t exactly tell you what that does.</p>
+<p>The media query is like this:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+
+}</code></pre>
+<p>It may not be supported everywhere just yet, but it&#8217;s a great progressive enhancement, it&#8217;s implemented &#8230; <a href="https://css-tricks.com/dark-modes-with-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Dark Mode in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-modes-with-css/">Dark Mode in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>With the introduction of <a href="https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/">dark mode in macOS</a>, Safari Technology Preview 68 has released a new feature called <code>prefers-color-scheme</code> which lets us detect whether the user has dark mode enabled with a media query. Safari Technology Preview 71 also has <code>supported-color-schemes</code>, which&#8230; well, I couldn&#8217;t exactly tell you what that does.</p>
+<p>The media query is like this:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+
+}</code></pre>
+<p>It may not be supported everywhere just yet, but it&#8217;s a great progressive enhancement, it&#8217;s implemented in a good/smart/standards-compliant way, so it&#8217;s safe to start using. Just like <a href="https://css-tricks.com/introduction-reduced-motion-media-query/">prefers-reduced-motion</a>!</p>
+<p><span id="more-278513"></span></p>
+<h3>It&#8217;s not just setting dark backgrounds with light text&#8230;</h3>
+<p>Recently Mark Otto described <a href="http://markdotto.com/2018/11/05/css-dark-mode/">how we can start using prefers-color-scheme</a> today in order to create themes that dynamically adjust to the new user setting. And the neat thing about this post is that Mark sort of frames it as an accessibility issue and shows how he uses it on his own website to adjust images so that they’re not too bright for the user:</p>
+<pre rel="CSS"><code class="language-css">@media (prefers-color-scheme: dark) {
+  img {
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
+  }
+}</code></pre>
+<p>In the code above, Mark detects whether the user has dark mode enabled with the media query and then makes the images darker so that they match a dark background. </p>
+<h3>CSS Custom Properties may be useful</h3>
+<p>This reminds me of an excellent post by Marcin Wichary where he <a href="https://medium.com/@mwichary/dark-theme-in-a-day-3518dde2955a">explores a similar technique</a> and goes one step further by adding all sorts of filters to make sure they have a much higher contrast.</p>
+<pre rel="CSS"><code class="language-css">html {
+  --text-color-normal: #0a244d;
+  --text-color-light: #8cabd9;
+}
+
+html[data-theme='dark'] {
+  --text-color-normal: hsl(210, 10%, 62%);
+  --text-color-light: hsl(210, 15%, 35%);
+  --text-color-richer: hsl(210, 50%, 72%);
+  --text-color-highlight: hsl(25, 70%, 45%);
+}</code></pre>
+<figure id="post-280586" class="align-none media-280586"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/11/1_I19P12klUjdEG4q21uKg1A.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>It doesn&#8217;t mean you have to give up your brand</h3>
+<p>Andy Clarke also wrote up some thoughts about how to take this fancy new CSS feature and how we might <a href="https://stuffandnonsense.co.uk/blog/redesigning-your-product-and-website-for-dark-mode">apply a dark theme across our website</a>. He describes how to pick colors so our light/dark themes are consistent in terms of branding and how we might want to use a lighter font-weight for darker backgrounds. He writes:</p>
+<blockquote>
+<p>Designing for dark mode shouldn’t stop with choosing darker colours. You should also consider altering typography styles to maintain readability for people who use dark mode. Light text against dark backgrounds appears higher in contrast than when the same colours are used in reverse, so to make your dark mode designs easier to read you’ll need to add more white/dark space to your text.</p>
+<p>If your fonts offer a lighter weight, using that for your dark mode design will open up the letterforms and make them appear further apart&#8230;</p>
+</blockquote>
+<figure id="post-280584" class="align-none media-280584"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/11/2018-11-02-1.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>What was that? It sure sounded like the joyous applause of typography nerds and designers everywhere!</p>
+<h3>It&#8217;s about inclusive design</h3>
+<p><a href="https://charlesrt.uk/blog/the-dark-web-rises/">Charles Reynolds-Talbot writes</a> about his friend Molly, who has trouble with high-contrast white backgrounds with black text:</p>
+<blockquote><p>Assuming a style switcher is the solution to this problem, it’s nothing new. It’s just something that isn’t trendy anymore. But this shouldn’t be about fashion, this is about inclusive design for all. Solving this problem for Molly will actually solve problems for other people too. A dark mode will be better for people who suffer from migraines, have a hangover or are just browsing the web in bed at night with the light off. Designing for the few, makes things better for the many.</p></blockquote>
+<figure id="post-280587" class="align-none media-280587"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/11/Screen-Shot-2018-12-28-at-9.14.54-AM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Dark mode by default</h3>
+<p>Remember you can reverse it and go dark by default but change to a light theme if a user specifically wants it:</p>
+<pre rel="CSS"><code class="language-css">body {
+  background-color: black;
+  color: white;
+}
+@media screen and (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: black;
+  }
+}</code></pre>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dark-modes-with-css/">Dark Mode in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/dark-modes-with-css/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">278513</post-id>	</item>
+		<item>
+		<title>How to create a logo that responds to its own aspect ratio</title>
+		<link>https://medium.com/9elements/building-a-responsive-image-e4c6229fa1f6</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 28 Jun 2018 21:16:41 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[SVG]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=273265</guid>
+
+					<description><![CDATA[<p>One of the cool things about <code>&#60;svg&#62;</code> is that it&#8217;s literally its own document, so <code>@media</code> queries in CSS inside the SVG are based on its viewport rather than the HTML document that likely contains it.</p>
+<p>This unique feature has let people play around for years. Tim Kadlec <a href="https://timkadlec.com/2013/04/media-queries-within-svg/">experimented with</a> SVG formats and which ones respect the media queries most reliably. Sara Soueidan <a href="https://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/">experimented with that</a> a bunch more. Jake Archibald <a href="https://jakearchibald.com/2016/svg-media-queries/">embedded a canvas inside</a> and tested cross-browser compatibility that &#8230; <a href="https://css-tricks.com/how-to-create-a-logo-that-responds-to-its-own-aspect-ratio/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to create a logo that responds to its own aspect ratio&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-a-logo-that-responds-to-its-own-aspect-ratio/">How to create a logo that responds to its own aspect ratio</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>One of the cool things about <code>&lt;svg&gt;</code> is that it&#8217;s literally its own document, so <code>@media</code> queries in CSS inside the SVG are based on its viewport rather than the HTML document that likely contains it.</p>
+<p>This unique feature has let people play around for years. Tim Kadlec <a href="https://timkadlec.com/2013/04/media-queries-within-svg/">experimented with</a> SVG formats and which ones respect the media queries most reliably. Sara Soueidan <a href="https://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/">experimented with that</a> a bunch more. Jake Archibald <a href="https://jakearchibald.com/2016/svg-media-queries/">embedded a canvas inside</a> and tested cross-browser compatibility that way. Estelle Weyl used that ability to <a href="https://github.com/estelle/clowncar">do responsive images before responsive images</a>.</p>
+<p>Another thing that has really tripped people&#8217;s triggers is using that local media query stuff to make responsive logos. Most famously <a href="http://responsivelogos.co.uk/">Joe Harrison&#8217;s site</a>, but <a href="https://cloudfour.com/thinks/responsive-logo-composition-with-svg/">Tyler Sticka</a>, <a href="https://www.viget.com/articles/responsive-logos-part-2-making-logos-truly-responsive-with-svg/">Jeremy Frank</a>, and <a href="https://codepen.io/chrisaustin/pen/ENomxL">Chris Austin</a> all had a go as well. </p>
+<p>Nils Binder has <a href="https://medium.com/9elements/building-a-responsive-image-e4c6229fa1f6">the latest take</a>. Nils take is especially clever in how it uses <code>&lt;symbol&gt;</code>s referencing other <code>&lt;symbol&gt;</code>s for extra efficiency and <code>min-aspect-ratio</code> media queries rather than <a href="https://css-tricks.com/magic-numbers-in-css/">magic number</a> widths.</p>
+<p>For the record, we still very much need container queries for HTML elements. I get that it&#8217;s hard, but the difficulty of implementation and usefulness are different things. I much prefer <a href="https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/">interesting modern solutions</a> over trying to be <a href="https://codepen.io/gregwhitworth/full/aKpVeV/">talked out of it</a>.</p>
+<p><a href="https://medium.com/9elements/building-a-responsive-image-e4c6229fa1f6" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/how-to-create-a-logo-that-responds-to-its-own-aspect-ratio/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-a-logo-that-responds-to-its-own-aspect-ratio/">How to create a logo that responds to its own aspect ratio</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">273265</post-id>	</item>
+		<item>
+		<title>Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</title>
+		<link>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/</link>
+					<comments>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Fri, 05 May 2017 11:59:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[mobile]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=254168</guid>
+
+					<description><![CDATA[<p>A month ago I <a href="https://css-tricks.com/touch-devices-not-judged-size/">explored the importance of relying on Interaction Media Features</a> to identify the user&#8217;s ability to hover over elements or to detect the accuracy of their pointing device, meaning a fine pointer like a mouse or a coarse one like a finger.</p>
+<p>But it goes beyond the input devices or the ability to hover; the screen refresh rate, the color of the screen, or the orientation. Making assumptions about these factors based on the width of the &#8230; <a href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/">Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>A month ago I <a href="https://css-tricks.com/touch-devices-not-judged-size/">explored the importance of relying on Interaction Media Features</a> to identify the user&#8217;s ability to hover over elements or to detect the accuracy of their pointing device, meaning a fine pointer like a mouse or a coarse one like a finger.</p>
+<p>But it goes beyond the input devices or the ability to hover; the screen refresh rate, the color of the screen, or the orientation. Making assumptions about these factors based on the width of the viewport is not reliable and can lead to a broken interface.</p>
+<p>I&#8217;ll take you on a journey through the land of <a href="https://www.w3.org/TR/mediaqueries-4/#color-gamut">Media Query Level 4</a> and explore the opportunities that the <a href="https://www.w3.org/Style/CSS/members.en.php3">W3C CSS WG</a> has drafted to help us deal with all the device fruit salad madness.</p>
+<p><span id="more-254168"></span></p>
+<h3>Media queries</h3>
+<p>Media queries, in a nutshell, inform us about the context in which our content is being displayed, allowing us to scope and optimize our styles. Meaning, we can display the same content in different ways depending on the context.</p>
+<p>The <a href="https://www.w3.org/TR/mediaqueries-4/">Media Queries Level 4 spec</a> answers two questions:</p>
+<ul>
+<li>What is the device viewport size and resolution?</li>
+<li>What is the device capable of doing?</li>
+</ul>
+<p>We can detect the device type where the document is being displayed using the media type keywords <code>all</code>, <code>print</code>, <code>screen</code> or <code>speech</code> or you can get more granular using Media Features.</p>
+<h3>Media Features</h3>
+<p>Each Media Feature tests a single, specific feature of the device. There are five types:</p>
+<ul>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-dimensions">Screen Dimensions Media Features</a> detect the viewport size and orientation.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-display-quality">Display Quality Media Features</a> identify the resolution and update speed.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-colors">Color Media Features</a> spot the amount of colors a device is capable to displaying.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-interaction">Interaction Media Features</a> find if a device is able to hover and the quality of its input device.</li>
+<li><a href="https://www.w3.org/TR/mediaqueries-4/#mf-scripting">Scripting Media Features</a> recognize if scripting languages, for example javascript, are supported.</li>
+</ul>
+<p>We can use these features on their own or combine them using the keyword <code>and</code> or a comma to mean &#8220;or&#8221;. It&#8217;s also possible to negate them with the keyword <code>not</code>. </p>
+<p>For example:</p>
+<pre rel="CSS"><code class="language-css">@media screen and ((min-width: 50em) and (orientation: landscape)), print and (not(color)) {
+  ...
+}</code></pre>
+<p>Scopes the styles to landscape orientated screens that are less than or equal to <code>50em</code> wide, or monochrome print outputs.</p>
+<p>The best way to understand something is by actually doing it. Let&#8217;s delve into the corner cases of a navigation bar to test these concepts.</p>
+<h3>The Unnecessarily Complicated Navbar</h3>
+<p>One of the best pieces of advice that Brad Frost gave us on &#8220;<a href="http://bradfrost.com/blog/post/7-habits-of-highly-effective-media-queries/">7 Habits of Highly Effective Media Queries</a>&#8221; is not to go overboard.</p>
+<blockquote><p>The more complex we make our interfaces the more we have to think in order to properly maintain them. <cite>&#8211; <a href="http://bradfrost.com/">Brad Frost</a></cite></p></blockquote>
+<p>And that&#8217;s exactly what I&#8217;m about to do. Let&#8217;s go overboard!</p>
+<p>Be aware that the following demo was designed as an example to understand what each Media Feature does: if you want to use it (and maintain it), do it at your own risk (and <a href="https://twitter.com/andresgalante">let me know</a>!).</p>
+<p>With that in mind, let&#8217;s start with the less capable smaller experience, also know as &#8220;The mobile, small, portrait, slow, interlace, monochrome, coarse, non-hover first&#8221; approach.</p>
+<h3>The HTML structure</h3>
+<p>To test the media query features, I started with a very simple structure. On one side: a <code>header</code> with an <code>h1</code> for a brand name and a <code>nav</code> with an unordered list. On the other side: a <code>main</code> area with a placeholder title and text.</p>
+<p data-height="353" style="height: 353px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="GmgdZM" data-default-tab="html,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 1: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/GmgdZM/">Part 1: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h3>Default your CSS for less capable devices and smaller viewport</h3>
+<p>As I mentioned before, we are thinking of the less capable smaller devices first. Even though we are not scoping styles yet, I am considering an experience that is:</p>
+<ul>
+<li><code>max-width: 45em</code> small viewport, less than or equal to 45em wide</li>
+<li><code>orientation: portrait</code> portrait viewport, height is larger than width</li>
+<li><code>update: slow</code>  the output device is not able to render or display changes quickly enough for them to be perceived as a smooth animation.</li>
+<li><code>monochrome</code> all monochrome devices</li>
+<li><code>pointer: coarse</code> the primary input mechanism has limited accuracy, like a finger</li>
+<li><code>hover: none</code> indicates that the primary pointing system can&#8217;t hover</li>
+</ul>
+<p>Let&#8217;s take care of positioning. For portrait, small, touchscreen devices, I want to pin the menu at the bottom of the viewport so users have comfortable access to the menu with their thumbs.</p>
+<pre rel="CSS"><code class="language-css">nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}</code></pre>
+<p>Since we are targeting touchscreen devices, it is important to increase the touch target. On <a href="https://www.smashingmagazine.com/inclusive-design-patterns/">Inclusive Design Patterns</a>, <a href="https://twitter.com/heydonworks">Heydon Pickering</a> mentions that it&#8217;s still unclear what the magical size of a touch area is, different vendors recommend different sizes. </p>
+<p>Pickering mentions Anthony Thomas&#8217;s <a href="http://uxmovement.com/mobile/finger-friendly-design-ideal-mobile-touch-target-sizes/">article about finger-friendly experiences</a> and Patrick H Lauke research for <a href="https://www.w3.org/WAI/GL/mobile-a11y-tf/wiki/Summary_of_Research_on_Touch/Pointer_Target_Size">The W3C Mobile Accessibility Taskforce into touch / pointer target size</a>, and the main takeaway is, &#8220;&#8230;to make each link larger than the diameter of an adult finger pad&#8221;.</p>
+<p>That&#8217;s why I&#8217;ve increased the height of the menu items to <code>4em</code>. Since this is not scoped, it&#8217;ll be applied to any viewport size, so both large touchscreen devices like an iPad Pro and tiny smartphones alike will have comfortable touch targets.</p>
+<pre rel="CSS"><code class="language-css">li a {
+  min-height: 4em;
+}</code></pre>
+<p>To help readability on monochromatic or slow devices, like a Kindle, I haven&#8217;t removed the underlines from links or added animations. I&#8217;ll do that later on.</p>
+<p data-height="431" style="height: 431px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="jmExNv" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 2: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/jmExNv/">Part 2: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254356" class="align-none media-254356"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/04/portrait-phones.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Small landscape viewports, vertical large displays, or mouse pointers</h3>
+<p>For landscape viewports <code>orientation: landscape</code>, large portrait viewports like vertical monitors or tablets <code>min-width: 45em</code>, or small portrait devices with fine pointers like a stylus <code>pointer: fine</code>, users will no longer be using their thumbs on a handheld device; that&#8217;s why I unpinned the menu and put it at the top right of the header.</p>
+<pre rel="CSS"><code class="language-css">@media (orientation: landscape), (pointer: fine), (min-width: 45em) {
+  main {
+    padding-bottom: 1em;
+    padding-top: 1em;
+  }
+  h1, nav {
+    position: static;
+  }
+}</code></pre>
+<p>Since the menu and the brand name are already flexed and stretched, then they&#8217;ll accommodate themselves nicely.</p>
+<p>For users that have a fine pointer like a mouse or a stylus, we want to decrease the hit target to gain the real estate on the main area:</p>
+<pre rel="CSS"><code class="language-css">@media (pointer: fine) {
+  h1, li a {
+    min-height: 2.5em;
+  }
+}</code></pre>
+<p data-height="431" style="height: 431px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="eWmKeW" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 3: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/eWmKeW/">Part 3: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254352" class="align-none media-254352"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5446.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Vertical nav for large landscape viewports</h3>
+<p>Vertical navigations are great for large landscape viewports <code>(orientation: landscape) and (min-width: 45em)</code>, like a tablet or a computer display. To do that I&#8217;ll flex the container:</p>
+<pre rel="CSS"><code class="language-css">@media (orientation: landscape) and (min-width: 45em) {
+  .container {
+    display: flex;
+  }
+  ...
+}</code></pre>
+<p>Notice that hit targets have nothing to do with the size of the viewport or style of navigation. If the user is on a large touchscreen device with a vertical tab, they&#8217;ll see larger targets regardless of the size of the width of the screen.</p>
+<p data-height="434" style="height: 434px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="eWmjGL" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 4: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/eWmjGL/">Part 4: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254353" class="align-none media-254353"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5479.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Animations, decorations and edge cases</h3>
+<p>Animations are a great way to <a href="https://material.io/guidelines/motion/material-motion.html#">enhance interactions</a> and help users achieve their goals quickly and easily. But some devices are incapable of producing smooth animations &#8211; like e-readers. That&#8217;s why I am limiting animations to devices that are capable of generating a good experience <code>(update: fast), (scan: progressive), (hover: hover)</code>.</p>
+<pre rel="CSS"><code class="language-css">@media (update: fast), (scan: progressive), (hover: hover) {
+  li a {
+    transition: all 0.3s ease-in-out;
+  }
+}</code></pre>
+<p>I am also removing the text decoration on color devices:</p>
+<pre rel="CSS"><code class="language-css">@media (color) {
+  li a { text-decoration: none; }
+}</code></pre>
+<p>Removing underlines (via <code>text-decoration</code>) is tricky territory. Our accessibility consultant Marcy Sutton put it well:</p>
+<blockquote><p>Some users really benefit from link underlines, especially in body copy. But since these particular links are part of the navigation with a distinct design treatment, the link color just needs <a href="https://www.w3.org/TR/WCAG20-TECHS/F73.html">adequate contrast</a> from the background color for users with low vision or color blindness.</p></blockquote>
+<figure id="post-254537" class="align-none media-254537"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/05/contrast.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>We made sure the colors had enough <a href="http://webaim.org/resources/contrastchecker/">color contrast</a> to pass WCAG AAA.</figcaption></figure>
+<p>I&#8217;m also increasing the border width to 2px to avoid &#8220;<a href="https://en.wikipedia.org/wiki/Interlaced_video#Interline_twitter">twitter</a>&#8221; (real term!) on interlace devices like plasma TVs:</p>
+<pre rel="CSS"><code class="language-css">@media (scan: interlace) {
+  li a, li:first-child a {
+    border-width: 2px;
+  }
+}</code></pre>
+<p>And here is the final result:</p>
+<p data-height="419" style="height: 419px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="RVbpvd" data-default-tab="css,result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 5: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/RVbpvd/">Part 5: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<h3>Test it out</h3>
+<p>Testing all this may not be that easy!. This example relies on flexbox, and some browsers have limited support for other modern CSS features. A Kindle, for example, won&#8217;t read <code>@media</code>, <code>@support</code>, or flexbox properties.</p>
+<p>I&#8217;ve added float fallbacks here:</p>
+<p data-height="371" style="height: 371px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="vmgrKb" data-default-tab="result" data-user="andresgalante" data-embed-version="2" data-pen-title="Part 6: Mobile, coarse, portrait, slow, monochromatic, non-hover first" class="codepen">See the Pen <a href="https://codepen.io/andresgalante/pen/vmgrKb/">Part 6: Mobile, coarse, portrait, slow, monochromatic, non-hover first</a> by Andres Galante (<a href="http://codepen.io/andresgalante">@andresgalante</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<figure id="post-254354" class="align-none media-254354"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/04/IMG_5476.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>You can open the <a href="https://rawgit.com/andresgalante/test/master/test.html">full page example</a> in different devices, landscape, or portrait and test it out!</p>
+<h3>How soon will we realistically be able to use all these features?</h3>
+<p>Now! That is, if you are ok offering different experiences on different browsers.</p>
+<p>Today, Firefox doesn&#8217;t support Interaction Media Queries. A Firefox user with a fine pointer mechanism, like a mouse, will see large hit areas reducing the main area real estate.</p>
+<p>Browser support for <a href="http://caniuse.com/#feat=css-mediaqueries">most of these features</a> is already available and support for <a href="https://css-tricks.com/touch-devices-not-judged-size/#article-header-id-5">Interaction Media Features, support isn&#8217;t bad</a>! I am sure that we will see it <a href="http://caniuse.com/#feat=css-media-interaction">supported across the board</a> soon.</p>
+<p>Remember to test as much as you can and don&#8217;t assume that any of this will just work, especially in less capable or older devices.</p>
+<h3>There is more!</h3>
+<p>I&#8217;ve covered some of the Media Features along the example, but I left others behind. For example the <a href="https://www.w3.org/TR/mediaqueries-4/#resolution">Resolution Media Feature</a> that describes the resolution of the output device.</p>
+<p>My goal is to make you think beyond your almighty MacBook or iPhone with a retina display. The web is so much more and it&#8217;s everywhere. We have the tools to create the most amazing, flexible, inclusive, and adaptable experiences; let&#8217;s use them.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/">Mobile, Small, Portrait, Slow, Interlace, Monochrome, Coarse, Non-Hover, First</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/mobile-small-portrait-slow-interlace-monochrome-coarse-non-hover-first/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">254168</post-id>	</item>
+	</channel>
+</rss>

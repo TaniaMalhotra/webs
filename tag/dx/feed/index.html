@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>dx &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/dx/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 16 Jun 2020 12:59:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>What is Developer Experience (DX)?</title>
+		<link>https://css-tricks.com/what-is-developer-experience-dx/</link>
+					<comments>https://css-tricks.com/what-is-developer-experience-dx/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 23:31:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dx]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311245</guid>
+
+					<description><![CDATA[<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it &#8230; <a href="https://css-tricks.com/what-is-developer-experience-dx/" class="read-more">Read article <span class="screen-reader-text"> &#8220;What is Developer Experience (DX)?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it to the different ways people think about and use the term.</p>
+
+
+
+<span id="more-311245"></span>
+
+
+
+<div class="wp-block-group ticss-c360ab1e"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-companies">specific companies.</span></h3>
+
+
+
+<p>I hear DX and <a href="https://stripe.com/">Stripe</a> together a lot. That makes sense. Stripe is a payment gateway company almost exclusively for developers. They are serious about providing a good experience for their customers (developers), hence &#8220;developer experience.&#8221; Just listen to Suz Hinton <a href="https://shoptalkshow.com/409/">talk about &#8220;friction journals&#8221;</a>, which is the idea of sitting down to use a product (like Stripe) and noting down every single little WTF moment, confusion, and frustration so that improvements can be made:</p>
+
+
+
+<figure class="wp-block-audio"><audio controls src="https://css-tricks.com/wp-content/uploads/2020/06/shoptalkshow-409-mp3cut.net_.mp3"></audio></figure>
+
+
+
+<p>Netlify is like Stripe in this way, as is Heroku, CodePen, and any number of companies where the <em>entire customer base</em> is developers. For companies like this, it&#8217;s almost like DX is what UX (User Experience) is for any other company. </p>
+</div></div>
+
+
+
+<div class="wp-block-group ticss-0c6f0b01"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-technologies">specific technologies.</span></h3>
+
+
+
+<p>It&#8217;s common to hear DX invoked when <em>comparing</em> technologies. For instance, some people will say that Vue offers a better developer experience than React. (I&#8217;m not trying to start anything, I don&#8217;t even have much of an opinion on this.) They are talking about things like APIs. Perhaps the <strong>state</strong> is more intuitive to manage in one vs. the other. Or they are talking about features. I know Vue and Svelte have animation helpers built-in while React does not. But React has hooks and people generally like those. These are aspects of the DX of these technologies.</p>
+
+
+
+<p>Or they might be speaking about the feeling around the tools <em>surrounding</em> the core technology. I know <a href="https://reactjs.org/docs/create-a-new-react-app.html">create-react-app</a> is widely beloved, but so is the <a href="https://cli.vuejs.org/">Vue CLI</a>. <a href="https://reacttraining.com/react-router/">React Router</a> is hugely popular, but Vue <a href="https://router.vuejs.org/">has a router</a> that is blessed (and maintained) by the core team which offers a certain feeling of trust.</p>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> vue create hello-world</code></pre>
+</div>
+
+
+
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> npx create-react-app my-app</code></pre>
+</div>
+</div>
+
+
+
+<p>I&#8217;m not using JavaScript frameworks/libraries as just any random example. I hear people talk about DX as it relates to JavaScript more than anything else — which could be due to the people in my circles, but it feels notable.</p>
+</div></div>
+
+
+
+<h3>People think of the world <span id="around-tech">around</span> the technology.</h3>
+
+
+
+<p>Everybody thinks good docs are important. There is no such thing as a technology that is better than another but has much worse docs. The one with the better docs is better overall <em>because</em> it has better docs. That&#8217;s not the technology itself; that&#8217;s the world around it.</p>
+
+
+
+<p>Have you ever seen a developer product with an API, and when you view the docs for the API while logged in, it uses API keys and data and settings <em>from your own account</em> to demonstrate? That&#8217;s extraordinary to me. That feels like DX to me.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?fit=1024%2C673&amp;ssl=1" alt="" class="wp-image-312927" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?w=2424&amp;ssl=1 2424w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=300%2C197&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1024%2C673&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=768%2C505&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1536%2C1010&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=2048%2C1347&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1000%2C658&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Airtable docs showing me API usage with my own data.</figcaption></figure>
+
+
+
+<p><a href="https://twitter.com/JakeDohm/status/1261799440622522374">&#8220;Make the right thing easy,&#8221;</a> notes Jake Dohm. </p>
+
+
+
+<p>That word, <em>easy</em>, feels highly related to DX. Technologies that make things easy are technologies with good DX. In usage as well as in understanding. How easily (and <a href="https://twitter.com/micahgodbolt/status/1261770428038524929">quickly</a>) can I understand what your technology does and what I can do with it? </p>
+
+
+
+<p>What the technology <em>does</em> is often only <em id="half-story">half of the story</em>. The happy path might be great, but what happens when it breaks or errors? How is the error reporting and logging? I think of <a href="https://www.apollographql.com/docs/">Apollo</a> and GraphQL here in my own experience. It&#8217;s such a great technology, but the error reporting feels horrendous in that it&#8217;s very difficult to track down even stuff like typos triggering errors in development. </p>
+
+
+
+<p>What is the debugging story like? Are there special tools for it? The same goes for testing. These things are fundamental DX issues.</p>
+
+
+
+<h3>People think of technology <span id="tech-offerings">offerings</span>.</h3>
+
+
+
+<p>For instance, a technology might be &#8220;good&#8221; already. Say it has an API that developers like. Then it starts offering a CLI. That&#8217;s (generally) a DX improvement, because it opens up doors for developers who prefer working in that world and who build processes around it.</p>
+
+
+
+<p>I think of things like <a href="https://www.netlify.com/products/dev/">Netlify Dev</a> here. They already have this great platform and then say, here, you can run it all on your own machine too. That&#8217;s taking DX seriously.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?fit=1024%2C799&amp;ssl=1" alt="" class="wp-image-312931" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?w=2448&amp;ssl=1 2448w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=300%2C234&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1024%2C799&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=768%2C599&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1536%2C1198&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=2048%2C1598&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1000%2C780&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>One aspect of Netlify Dev that is nice: The terminal command to start my local dev environment across all my sites on Netlify, regardless of what technology powers them, is the same: <code>netlify dev</code></figcaption></figure>
+
+
+
+<p>Having a dedicated CLI is almost always a good DX step, assuming it is well done and maintained. I remember WordPress before <a href="https://wp-cli.org/">WP-CLI</a>, and now lots of documentation just assumes you&#8217;re using it. I wasn&#8217;t even aware <a href="https://cloudinary.com/documentation/cloudinary_cli">Cloudinary had a CLI</a> until the other day when I needed it and was pleasantly surprised that it was there. I remember when npm scripts started <a href="https://css-tricks.com/why-npm-scripts/">taking over the world</a>. (What would npm be without a CLI?) We used to have a variety of different task runners, but now it&#8217;s largely assumed a project has run commands built into the <code>package.json</code> that you use to do anything the project needs to do.</p>
+
+
+
+<p>Melanie Sumner <a href="https://twitter.com/melaniersumner/status/1261851049020854272">thinks of CLIs</a> immediately as core DX.</p>
+
+
+
+<div class="wp-block-group ticss-d7589fd7"><div class="wp-block-group__inner-container">
+<h3>People think of the literal experience of <span id="coding">coding</span>.</h3>
+
+
+
+<p>There is nothing more directly DX than the experience of typing code into code editing software and running it. That&#8217;s what &#8220;coding&#8221; is and that&#8217;s what developers do. It&#8217;s no wonder that developers take that experience seriously and are constantly trying to improve it for themselves and their teams. I think of things like <a href="https://code.visualstudio.com/">VS Code</a> in how it&#8217;s essentially the DX of it that has made it so dominant in the code editing space in such a short time. VS Code does all kinds of things that developers like, does them well, does them fast, and <a href="https://css-tricks.com/my-visual-studio-code-setup-extensions-and-themes/">allows for a very wide degree of customization</a>. </p>
+
+
+
+<p>TypeScript keeps <a href="https://visualstudiomagazine.com/articles/2020/03/04/redmonk-feb20.aspx">growing in popularity</a> no doubt in part due to the experience it offers within VS Code. TypeScript literally helps you code better by showing you, for example, what functions need as parameters, and making it hard to do the wrong thing.</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?fit=1024%2C387&amp;ssl=1" alt="" class="wp-image-312933" width="695" height="262" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?w=2616&amp;ssl=1 2616w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=300%2C113&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1024%2C387&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=768%2C290&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1536%2C580&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=2048%2C773&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1000%2C378&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Then there is the experience <em>outside</em> the editor, which in the browser itself. Years ago, I wrote <a href="https://css-tricks.com/style-injection-is-for-winners/">Style Injection is for&nbsp;Winners</a> where my point was, as a CSS developer, the experience of saving CSS code and seeing the changes instantly in the browser is a DX you definitely want to have. That concept continues to live on, growing up to JavaScript as well, where &#8220;hot reloading&#8221; <a href="https://twitter.com/TheLarkInn/status/1261784047006580736">is goosebump-worthy</a>. </p>
+
+
+
+<p>The difference between a poor developer environment (no IDE help, slow saves, manual refreshes, slow pipelines) and a great developer environment (fancy editor assistance, hot reloading, fast everything) is startling. A good developer environment, good DX, makes you a better and more productive programmer. </p>
+</div></div>
+
+
+
+<h3>People <span id="compare">compare</span> it to user experience (UX).</h3>
+
+
+
+<p>There is <strong>a strong negative connotation</strong> to DX sometimes. It happens when people <a href="https://twitter.com/ShaneHudson/status/1261782642346819588">blame it</a> for it existing <em><a href="https://twitter.com/Cennydd/status/1261797134447378433">at the cost of user experience</a></em>.</p>
+
+
+
+<p>I think of things like client-side developer-only libraries. Think of the classic library that everyone loves to dunk: <a href="https://momentjs.com/">Moment.js</a>. Moment allows you to manipulate dates in JavaScript, and is often used client-side to do that. Users don&#8217;t care if you have a fancy API available to manipulate dates. That is entirely a developer convenience. So, you ship this library for yourself (good DX) at the cost of slowing down the website (bad UX). <em>Most</em> client-side JavaScript is in this category. </p>
+
+
+
+<p>Equally as often, people<strong> <em>connect</em> developer experience and user experience</strong>. If developers are empowered and effective, that will &#8220;trickle down&#8221; to produce good software, the theory goes. </p>
+
+
+
+<p>Worst case, we&#8217;re in a situation where UX and DX are on a teeter totter. Pile on some DX and UX suffers on the other side. Best case, we find ways to disentangle DX and UX entirely, finding value in both and taking both seriously. Although if one has to win, certainly it should be the users. Like the <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">HTML spec says</a>:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?fit=1024%2C775&amp;ssl=1" alt="" class="wp-image-312934" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?w=1388&amp;ssl=1 1388w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=300%2C227&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1024%2C775&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=768%2C581&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1000%2C756&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><em>In case of conflict, consider users over authors over implementors over specifiers over theoretical purity.</em></figcaption></figure>
+
+
+
+<div class="wp-block-group ticss-db118f54"><div class="wp-block-group__inner-container">
+<h3>People think about <span id="dx-time">time</span>.</h3>
+
+
+
+<p>How <em>long</em> does a technology take to adopt? Good DX considers this. Can I take advantage of it without rewriting everything? How quickly can I spin it up? How well does it play with other technologies I use?  What is my time investment?</p>
+
+
+
+<p>This kind of thing makes me think of some recent experience with <a href="https://workers.cloudflare.com/">Cloudflare Workers</a>. It&#8217;s really cool technology that we don&#8217;t have time to get all into right here, but suffice to say it gives you control over a website at a high level that we often don&#8217;t think about. Like what if you could manipulate a network request before it even gets to your web server? You don&#8217;t have to use it, but because of the level it operates on, new doors open up without caring about or interfering with whatever technologies you are using. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?fit=1024%2C718&amp;ssl=1" alt="" class="wp-image-312940" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?w=1405&amp;ssl=1 1405w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=300%2C210&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1024%2C718&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=768%2C538&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1000%2C701&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Not only does the technology itself position itself well, the DX of using it, while there are some rough edges, is at least well-considered, providing a browser-based testing environment. </p>
+
+
+
+<p>A powerful tool with a high investment cost, eh, that&#8217;s cool. But a powerful tool with <em>low</em> investment cost is good DX.</p>
+</div></div>
+
+
+
+<h3>People <span id="dont-think">don&#8217;t want to think</span> about it. </h3>
+
+
+
+<p>They say the best typography goes unnoticed because all you see is the what the words are telling you, not the typography itself. That can be true of developer experience. The best DX is that you never notice the tools or the technology because they just work. </p>
+
+
+
+<p>Good DX is just being able to <a href="https://twitter.com/jnowland/status/1261810491627696130">do your job</a> rather than fight with tools. The tools could be your developer environment, it could be build tooling, it could be hosting stuff, or it could even be whatever APIs you are interfacing with. Is the API <a href="https://twitter.com/wp_acf/status/1261787514173440000">intuitive</a> and helpful, or obtuse and tricky?</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Feel free to keep going on this in the comments. What is DX to <em>you?</em></p>
+
+
+
+<div class="wp-block-group footnotes ticss-92e47876" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Are we capitalizing Developer Experience? I&#8217;m just gonna go for it.</li><li>Looks like Michael Mahemoff has <a href="https://twitter.com/mahemoff/status/1947230411948032">a decent claim</a> on coining the term.</li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/what-is-developer-experience-dx/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311245</post-id>	</item>
+	</channel>
+</rss>

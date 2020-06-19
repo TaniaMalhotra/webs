@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>z-index &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/z-index/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 12 Jun 2020 14:43:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Learn Z-Index Using a Visualization Tool</title>
+		<link>https://thirumanikandan.com/posts/learn-z-index-using-a-visualization-tool</link>
+					<comments>https://css-tricks.com/learn-z-index-using-a-visualization-tool/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2020 14:43:22 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[z-index]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312701</guid>
+
+					<description><![CDATA[<p>There are some neat interactive demos <a href="https://thirumanikandan.com/posts/learn-z-index-using-a-visualization-tool">in here</a> from Thiru Manikandan. There are a couple of very tricky things with <code><a href="https://css-tricks.com/almanac/properties/z/z-index/">z-index</a></code> that never fail to confuse. In addition to things like requiring positioning and source order, the trickiest are the stacking contexts and parent/child relationships. <code>z-index</code> isn&#8217;t a flat playing field. Even if you put <code>z-index: 2147483644</code><a href="#fn:1">¹</a> on an element, it&#8217;s possible nothing will happen because that element might be inside a parent element with its own stacking context &#8230; <a href="https://css-tricks.com/learn-z-index-using-a-visualization-tool/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Learn Z-Index Using a Visualization Tool&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/learn-z-index-using-a-visualization-tool/">Learn Z-Index Using a Visualization Tool</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>There are some neat interactive demos <a href="https://thirumanikandan.com/posts/learn-z-index-using-a-visualization-tool">in here</a> from Thiru Manikandan. There are a couple of very tricky things with <code><a href="https://css-tricks.com/almanac/properties/z/z-index/">z-index</a></code> that never fail to confuse. In addition to things like requiring positioning and source order, the trickiest are the stacking contexts and parent/child relationships. <code>z-index</code> isn&#8217;t a flat playing field. Even if you put <code>z-index: 2147483644</code><a href="#fn:1">¹</a> on an element, it&#8217;s possible nothing will happen because that element might be inside a parent element with its own stacking context and a lower <code>z-index</code> than a sibling or some higher-up level DOM element.</p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Just three shy of the maximum 2147483647. LOLZ. Hat tip to Dan Danney who mentioned seeing that in the wild recently. </li></ol>
+</div></div>
+
+
+
+<p></p>
+<p><a href="https://thirumanikandan.com/posts/learn-z-index-using-a-visualization-tool" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/learn-z-index-using-a-visualization-tool/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/learn-z-index-using-a-visualization-tool/">Learn Z-Index Using a Visualization Tool</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/learn-z-index-using-a-visualization-tool/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312701</post-id>	</item>
+		<item>
+		<title>Putting things on top of other things</title>
+		<link>http://tellthemachines.com/stacking-contexts/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 25 Sep 2018 17:09:40 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[stacking contexts]]></category>
+		<category><![CDATA[z-index]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=276822</guid>
+
+					<description><![CDATA[<p>A plain-language romp through the trials and tribulations of <code>z-index</code>by Isabel Brison. On the surface, <code>z-index</code> seems simple. It&#8217;s a number and it represents what is on top of what&#8230; assuming it is positioned&#8230; and assuming it is within the same stacking context as the other things. </p>
+<blockquote>
+<p>&#8230; that is the gist of it: stacking contexts are caused by a variety of properties and the main reasons for their existence are performance concerns and ease of implementation by browsers. </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/putting-things-on-top-of-other-things/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Putting things on top of other things&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/putting-things-on-top-of-other-things/">Putting things on top of other things</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>A plain-language romp through the trials and tribulations of <code>z-index</code>by Isabel Brison. On the surface, <code>z-index</code> seems simple. It&#8217;s a number and it represents what is on top of what&#8230; assuming it is positioned&#8230; and assuming it is within the same stacking context as the other things. </p>
+<blockquote><p>&#8230; that is the gist of it: stacking contexts are caused by a variety of properties and the main reasons for their existence are performance concerns and ease of implementation by browsers. They are not always related to z-index or ordering; they pop up wherever it makes sense to have several elements all on the same layer for rendering purposes.</p></blockquote>
+<p><a href="http://tellthemachines.com/stacking-contexts/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/putting-things-on-top-of-other-things/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/putting-things-on-top-of-other-things/">Putting things on top of other things</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">276822</post-id>	</item>
+	</channel>
+</rss>

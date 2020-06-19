@@ -1,0 +1,2216 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Jhey Tompkins &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/jheytompkins/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 18 Jun 2020 01:08:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Advice for Complex CSS Illustrations</title>
+		<link>https://css-tricks.com/advice-for-complex-css-illustrations/</link>
+					<comments>https://css-tricks.com/advice-for-complex-css-illustrations/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2020 19:14:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312636</guid>
+
+					<description><![CDATA[<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I &#8230; <a href="https://css-tricks.com/advice-for-complex-css-illustrations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Advice for Complex CSS Illustrations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+
+
+
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I told you that you were only a few properties and techniques away from creating anything you wanted? The truth is that you are indeed that close.</p>
+
+
+
+<span id="more-312636"></span>
+
+
+
+<p>I&#8217;ve been wanting to compose an article like this for some time, but it&#8217;s a hard topic to cover because there are so many possibilities and so many techniques that there’s often more than one way to accomplish the same thing. The same is true with CSS illustrations. There&#8217;s no right or wrong way to do it. We&#8217;re all using the same canvas. There are simply so many different tools to get those pixels on the page.</p>
+
+
+
+<p>While there is no &#8220;one size fits all&#8221; approach to CSS illustration, what I can offer is a set of techniques that might help you on your journey.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mLaXRe" src="//codepen.io/anon/embed/mLaXRe?height=500&amp;theme-id=1&amp;slug-hash=mLaXRe&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mLaXRe" title="CodePen Embed mLaXRe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Time and practice</h3>
+
+
+
+<p>CSS illustration takes lots of time and practice. The more accurate you want to be and the more complicated the illustration, the longer it&#8217;s going to take. The time-consuming part isn’t usually deciding on <em>which</em> properties to use and how, but the <em>tinkering</em> of getting things to look right. <strong>Be prepared to get very familiar with the <a href="https://developers.google.com/web/tools/chrome-devtools/css">styles inspector</a> in your browser dev tools!</strong> I also recommend trying out <a href="https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc?hl=en">VisBug</a> if you haven&#8217;t.</p>
+
+
+
+<p>Two fantastic CSS artists are Ben Evans and Diana Smith. Both have recently talked about time consumption when referring to CSS illustration.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?ssl=1" alt="Screenshot of a realistic looking woman gazing up with her hards across her chest." class="wp-image-312637" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?w=2050&amp;ssl=1 2050w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=300%2C278&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1024%2C950&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=768%2C713&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1536%2C1425&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=2048%2C1900&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1000%2C928&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Diana’s PureCSS Gaze took her two long weekends to complete. She talks about some of her techniques here and here. &#8220;If you have the time, patience, and drive, it is certainly possible,&#8221; she <a href="https://www.vice.com/en_us/article/9kgx7p/painting-made-with-code-html-pure-css-browser-art-diana-smith">says</a>.</figcaption></figure>
+
+
+
+<p>I posted a meme-like picture about a cup and <a href="https://twitter.com/ivorjetski/status/1259893362129350658">Ben’s response</a> summed things up perfectly:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>I  was tempted to create this in CSS when I first saw the tweet but then thought my reply would take about a month.</p></blockquote>
+
+
+
+<p>It takes time!</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/jh3yy/status/1259487385554911233
+</div></figure>
+
+
+
+<h3>Tracing is perfectly acceptable</h3>
+
+
+
+<p>We often have an idea of what it is that we want to illustrate. This article isn&#8217;t about design, after all.; it&#8217;s about taking an image and rendering it with the DOM and CSS. I&#8217;m pretty sure this technique has been around since the dawn of time. But, it&#8217;s one I&#8217;ve been <a href="https://twitter.com/jh3yy/status/1258130582841757700">sharing</a> the last few months.</p>
+
+
+
+<ul><li>Find or create an image of what it is you want to illustrate.</li><li>Pull it into your HTML with an <code>&lt;img&gt;</code> tag.</li><li>Position it in a way that it will sit underneath your illustration.</li><li>Reduce the image opacity so that it&#8217;s still visible but not too overpowering.</li><li>Trace it with the DOM.</li></ul>
+
+
+
+<p>To my surprise, this technique <a href="https://twitter.com/therealpaulcook/status/1256283143587405824">isn&#8217;t common knowledge</a>. But it&#8217;s invaluable for creating accurate CSS illustrations.</p>
+
+
+
+<p>See this trick in action here:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#8217;s a timelapse of creating that CSS <a href="https://twitter.com/eggheadio?ref_src=twsrc%5Etfw">@eggheadio</a> &#x1f60e;<br><br>Tweaked the shadows with clip-path after &#x1f6e0;&#xfe0f;<br><br>&#x1f4bb; <a href="https://t.co/XhDRspwwFg">https://t.co/XhDRspwwFg</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/Timelapse?src=hash&amp;ref_src=twsrc%5Etfw">#Timelapse</a> <a href="https://t.co/ZQ1hyzcoSA">https://t.co/ZQ1hyzcoSA</a> <a href="https://t.co/iPf7ksYCGX">pic.twitter.com/iPf7ksYCGX</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1256281143244136448?ref_src=twsrc%5Etfw">May 1, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>And try it out here:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNVZR" src="//codepen.io/anon/embed/OJMNVZR?height=450&amp;theme-id=1&amp;slug-hash=OJMNVZR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNVZR" title="CodePen Embed OJMNVZR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Pay attention to responsiveness</h3>
+
+
+
+<p>If there are two takeaway techniques to take from this article, let it be the &#8220;Tracing&#8221; one above and this next one.&nbsp;</p>
+
+
+
+<p>There are some fantastic examples of CSS illustration out there. But the one unfortunate thing about some of them is that they aren&#8217;t styled — or even viewable — on small screens. We live in an age where first impressions with tech are important. Consider the example of a keyboard illustrated with CSS. Someone comes across your work, opens it up on their smartphone, and they&#8217;re greeted with only half the illustration or a small section of it. They probably missed the coolest parts of the demo!</p>
+
+
+
+<p>Here&#8217;s my trick: <strong>leverage viewport units for your illustrations and create your own scaled unit.&nbsp;</strong></p>
+
+
+
+<p>For sizing and positioning, you either have the option of using a scaled unit or percentage. This is particularly useful when you need to use a box shadow because the property accepts viewport units but not percentages.</p>
+
+
+
+<p>Consider the CSS egghead.io logo I created above. I found the image I wanted to use and popped it in the DOM with an img tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;image src='egghead.png'/></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">img {
+  height: 50vmin;
+  left: 50%;
+  opacity: 0.25;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>The height, 50vmin, is the desired size of the CSS illustration. The reduced opacity allows us to “trace” the illustration clearly as we progress.</p>
+
+
+
+<p>Then, we create our scaled unit.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/**
+  * image dimensions are 742 x 769
+  * width is 742
+  * height is 769
+  * my desired size is 50vmin
+*/
+:root {
+  --size: 50;
+  --unit: calc((var(--size) / 769) * 1vmin);
+}</code></pre>
+
+
+
+<p>With the image dimensions in place, we can create a uniform unit that’s going to scale with our image. We know the height is the largest unit, so we use that as a base to create a fractional unit.</p>
+
+
+
+<p>We get something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">--unit: 0.06501950585vmin;</code></pre>
+
+
+
+<p>That looks awkward but, trust me, it’s fine. We can use this to size our illustration’s container using <code>calc()</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.egg {
+  height: calc(769 * var(--unit));
+  position: relative;
+  width: calc(742 * var(--unit));
+  z-index: 2;
+}</code></pre>
+
+
+
+<p>If we use either percentages or our new <code>--unit</code> custom property to style elements within the container of our CSS illustration, we will get responsive CSS illustrations… and all it took was a few lines of math using CSS variables!</p>
+
+
+
+<p>Resize this demo and you’ll see that everything stay in proportion always using 50vmin as the sizing constraint.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOzYJZ" src="//codepen.io/anon/embed/rNOzYJZ?height=450&amp;theme-id=1&amp;slug-hash=rNOzYJZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOzYJZ" title="CodePen Embed rNOzYJZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Measure twice, cut once</h3>
+
+
+
+<p>Another tip is to measure things. Heck, you van even grab a tape measure if you’re working with a physical object!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_BaNGKPw" src="//codepen.io/anon/embed/BaNGKPw?height=450&amp;theme-id=1&amp;slug-hash=BaNGKPw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed BaNGKPw" title="CodePen Embed BaNGKPw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This may look a little funky but I measured this scene. It&#8217;s the TV combo unit I have in my lounge. Those measurements equate to centimeters. I used those to get a responsive unit based on the actual height of the TV. We can give that number — and all others — a name that makes it easy to remember what it’s for, thanks to custom properties.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --light-switch: 15;
+  --light-switch-border: 10;
+  --light-switch-top: 15;
+  --light-switch-bottom: 25;
+  --tv-bezel: 15;
+  --tv-unit-bezel: 4;
+  --desired-height: 25vmin;
+  --one-cm: calc(var(--desired-height) / var(--tv-height));
+  --tv-width: 158.1;
+  --tv-height: 89.4;
+  --unit-height: 42;
+  --unit-width: 180;
+  --unit-top: 78.7;
+  --tv-bottom: 114.3;
+  --scaled-tv-width: calc(var(--tv-width) * var(--one-cm));
+  --scaled-tv-height: calc(var(--tv-height) * var(--one-cm));
+  --scaled-unit-width: calc(var(--unit-width) * var(--one-cm));
+  --scaled-unit-height: calc(var(--unit-height) * var(--one-cm));
+}</code></pre>
+
+
+
+<p>As soon as we calculate a variable, we can use it everywhere. I know my TV is 158.1cm wide and 89.4cm tall. I checked the manual. But in my CSS illustration, it will always scale to 25vmin.</p>
+
+
+
+<h3>Use absolute positioning on all the things</h3>
+
+
+
+<p>This one will save you a few keystrokes. More often than not, you&#8217;ll be looking to absolutely position elements. Save yourself and put this rule somewhere.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Your class name may vary */
+.css-illustration *,
+.css-illustration *:after,
+.css-illustration *:before,
+.css-illustration:after,
+.css-illustration:before {
+  box-sizing: border-box;
+  position: absolute;
+}</code></pre>
+
+
+
+<p>Your keyboard will thank you!</p>
+
+
+
+<p class="explanation">Positioning is a tricky concept in CSS. You can <a href="https://css-tricks.com/almanac/properties/p/position/%23article-header-id-1">read up on it in the CSS Almanac</a> for more information on how to use it.</p>
+
+
+
+<p>Or, have a play with this little positioning playground:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pogyJbw" src="//codepen.io/anon/embed/pogyJbw?height=450&amp;theme-id=1&amp;slug-hash=pogyJbw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pogyJbw" title="CodePen Embed pogyJbw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Stick to an approach</h3>
+
+
+
+<p>This is by far the hardest thing to do. How do you approach a CSS illustration? Where do you even start? Should you start with the outermost part and work your way in? That doesn&#8217;t work so well.</p>
+
+
+
+<p>Odds are that you&#8217;ll try some approaches and find a better way to go about it. You’ll certainly do a little back-and-forth but, the more you practice, the better you&#8217;ll get at spotting patterns and developing an approach that works best for you.</p>
+
+
+
+<p>I tend to relate my approach to how you&#8217;d go about creating a vector image where illustrations are made up of layers. Split it up and sketch it on paper if you need to. But, start from the bottom and work your way up. This tends to mean larger shapes first, and finer details later. You can always tinker with the stacking index when you need to move elements around.</p>
+
+
+
+<h3>Maintain a solid structure for your styles</h3>
+
+
+
+<p>That leads us to the structure. Try to avoid a flat DOM structure for your illustration. Keeping things atomic makes it easier to move parts of your illustration. It will also makes it much easier to show and hide parts of the illustration or even animate them later. Consider the CSS Snorlax demo. The arms, feet, head, etc. are separate elements. That made animating the arm a lot easier than if I had tried to keep things together since I could simply apply the animation to the <code>.snorlax__arm-left</code> class.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLYXVJa" src="//codepen.io/anon/embed/yLYXVJa?height=450&amp;theme-id=1&amp;slug-hash=yLYXVJa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLYXVJa" title="CodePen Embed yLYXVJa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s a timelapse shot of me creating the demo:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Attempted to put together a timelapse of the CSS Snorlax we built last night &#x1f605;<br><br>Amusing watching it back!<br><br>&#x1f4bb; <a href="https://t.co/vbVYmFUN5V">https://t.co/vbVYmFUN5V</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a><a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://t.co/0mJtLPRQfP">pic.twitter.com/0mJtLPRQfP</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1255207715137339396?ref_src=twsrc%5Etfw">April 28, 2020</a></blockquote>
+
+
+
+<h3>Handling awkward shapes</h3>
+
+
+
+<p>There&#8217;s <a href="https://css-tricks.com/the-shapes-of-css/">a pretty good article</a> right here on CSS-Tricks for creating shapes with CSS. But what about more “awkward” shapes, like a long curve or even an outer curve? In these scenarios, we need to think outside the box. Properties such as <code>overflow</code>, <code>border-radius</code>, and <code>clip-path</code> are big helpers.</p>
+
+
+
+<p>Consider this CSS Jigglypuff demo. Toggle the checkbox.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOaVJMB" src="//codepen.io/anon/embed/gOaVJMB?height=450&amp;theme-id=1&amp;slug-hash=gOaVJMB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOaVJMB" title="CodePen Embed gOaVJMB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>That’s the key for creating curved shapes! We have an element much larger than the body with a <code>border-radius</code> applied. We then apply <code>overflow: hidden</code> to the body to cut that part off.</p>
+
+
+
+<p>How might we create an outer curve? This one’s a little tricky. But a trick I like to use is a transparent element with a thick border. Then apply a <code>border-radius</code> and clip the excess, if required.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEbgNKO" src="//codepen.io/anon/embed/ZEbgNKO?height=450&amp;theme-id=1&amp;slug-hash=ZEbgNKO&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEbgNKO" title="CodePen Embed ZEbgNKO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you hit the toggle, it reveals the element we are using to go across that corner. Another trick might be to overlay a circle that matches the background color. This is fine until we need to change the background color. It&#8217;s OK if you have a variable or something in place for that color. But, it could make things a little harder to maintain.</p>
+
+
+
+<h3><code>clip-path</code> is your friend</h3>
+
+
+
+<p>You might have noticed a couple of interesting CSS properties in that last demo, including clip-path. You&#8217;ll most likely need <a href="https://css-tricks.com/almanac/properties/c/clip-path/"><code>clip-path</code></a> if you want to create complex CSS shapes. It&#8217;s especially handy for cutting off bits of elements when hiding parent box overflow doesn’t do.</p>
+
+
+
+<p>Here’s a little demo I built some time ago that showcases different <code>clip-path</code> possibilities.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XqVQqa" src="//codepen.io/anon/embed/XqVQqa?height=450&amp;theme-id=1&amp;slug-hash=XqVQqa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XqVQqa" title="CodePen Embed XqVQqa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s also this demo that takes ideas from the <a href="https://css-tricks.com/the-shapes-of-css/">“Shapes of CSS”</a> article and re-created with <code>clip-path</code>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOpLBEa" src="//codepen.io/anon/embed/gOpLBEa?height=450&amp;theme-id=1&amp;slug-hash=gOpLBEa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOpLBEa" title="CodePen Embed gOpLBEa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><code>border-radius</code> is your other friend</h3>
+
+
+
+<p>You&#8217;re going to need <a href="https://css-tricks.com/almanac/properties/b/border-radius/"><code>border-radius</code></a> to create curves. One uncommon trick is to use a &#8220;double&#8221; syntax. This allows you to create a horizontal and vertical radius for each corner.</p>
+
+
+
+<p>Play with this demo to really appreciate the power of <code>border-radius</code>. I advocate using percentages across the board in order keep things responsive.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XWmvwYg" src="//codepen.io/anon/embed/XWmvwYg?height=450&amp;theme-id=1&amp;slug-hash=XWmvwYg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XWmvwYg" title="CodePen Embed XWmvwYg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Shading techniques</h3>
+
+
+
+<p>You&#8217;ve got all the shapes, everything is nicely laid out, and all the right colors are in place… but something still looks off. Odds are that it’s a lack of shading.</p>
+
+
+
+<p>Shading adds depth and create a realistic feel. Consider this ecreation of a Gal Shir illustration. Gal is fantastic at using shades and gradients to make beautiful illustrations. I thought it would be fun to do a recreate it and include a switch that toggles the shading to see just what a difference it makes.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNyVg" src="//codepen.io/anon/embed/OJMNyVg?height=450&amp;theme-id=1&amp;slug-hash=OJMNyVg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNyVg" title="CodePen Embed OJMNyVg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Shading effects are often created with a <code>box-shadow</code> and <code>background-image</code> combination.</p>
+
+
+
+<p>The key thing with these properties is that we can stack them in a comma-separated list. For example, the cauldron in the demo has a list of gradients that are being used across the body.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron {
+  background:
+    radial-gradient(25% 25% at 25% 55%, var(--rim-color), transparent),
+    radial-gradient(100% 100% at -2% 50%, transparent, transparent 92%, var(--cauldron-color)),
+    radial-gradient(100% 100% at -5% 50%, transparent, transparent 80%, var(--darkness)),
+    linear-gradient(310deg, var(--inner-rim-color) 25%, transparent), var(--cauldron-color);
+}</code></pre>
+
+
+
+<p>Note that <code>radial-gradient()</code> and a <code>linear-gradient()</code> are being used here and not always with perfectly round numeric values. Again, those numbers are just fine. In fact, you’ll spend a lot of time tweaking and tinkering with things in the style inspector.</p>
+
+
+
+<p>It’s generally the same working with <a href="https://css-tricks.com/snippets/css/css-box-shadow/"><code>box-shadow</code></a>. However, with that, we can also use the inset value to create tricky borders and additional depth.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron__opening {
+  box-shadow:
+    0 0px calc(var(--size) * 0.05px) calc(var(--size) * 0.005px) var(--rim-color) inset,
+    0 calc(var(--size) * 0.025px) 0 calc(var(--size) * 0.025px) var(--inner-rim-color) inset,
+    0 10px 20px 0px var(--darkness), 0 10px 20px -10px var(--inner-rim-color);
+}</code></pre>
+
+
+
+<p>There are certainly times where it will make more sense to go with <a href="https://css-tricks.com/almanac/properties/f/filter/"><code>filter: drop-shadow()</code></a> instead to get the effect you want.</p>
+
+
+
+<p>Lynn Fisher’s <a href="https://a.singlediv.com">a.singlediv.com</a> is a brilliant example of these properties in action. Have a poke around on that site and inspect some of the illustrations for great ways to use <code>box-shadow</code> and <code>background-image</code> in illustrations.</p>
+
+
+
+<p><code>box-shadow</code> is so powerful that you could create your entire illustration with it. I once joked about creating a CSS illustration of a dollar.</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In CSS right? &#x1f605;<a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://t.co/VmyeySsK83">https://t.co/VmyeySsK83</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1252924614281486336?ref_src=twsrc%5Etfw">April 22, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>I used a generator to <a href="https://codepen.io/jh3y/details/eYpBwgN">create the illustration with a single div</a>. But Alvaro Montoro <a href="https://dev.to/alvaromontoro/drawing-a-single-element-dollar-bill-with-css-and-javascript-3mj4">took it a little further</a> and wrote a generator that does it with box-shadow instead.</p>
+
+
+
+<h3>Preprocessors are super helpful</h3>
+
+
+
+<p>While they aren’t required, using preprocessors can help keep your code neat and tidy. For example, Pug makes writing HTML faster, especially when it comes to using loops for dealing with a bunch of repeating elements. From there, <a href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">we can scope CSS custom properties</a> in a way that we only need to define styles once, then overwrite them where needed.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xJXvjP" src="//codepen.io/anon/embed/xJXvjP?height=500&amp;theme-id=1&amp;slug-hash=xJXvjP&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xJXvjP" title="CodePen Embed xJXvjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s another example that demonstrates a DRY structure. The flowers are constructed with the same markup, but each has its own index class that is used to apply scoped CSS properties.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYpjXvj" src="//codepen.io/anon/embed/eYpjXvj?height=450&amp;theme-id=1&amp;slug-hash=eYpjXvj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYpjXvj" title="CodePen Embed eYpjXvj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The first flower has these properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--1 {
+  --hue: 190;
+  --x: 0;
+  --y: 0;
+  --size: 125;
+  --r: 0;
+}</code></pre>
+
+
+
+<p>It’s the first one, so all the others are based off it. Notice how the second flower is off to the right and up slightly. All that takes is assigning different values to the same custom properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--2 {
+  --hue: 320;
+  --x: 140;
+  --y: -75;
+  --size: 75;
+  --r: 40;
+}</code></pre>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Animated responsive CSS Leif features in the latest CodePen Spark! &#x2728;<br><br>For those who don&#8217;t know Animal Crossing, Leif is a green-thumbed Sloth who visits your island &#x1f33b;<br><br>Here&#8217;s a timelapse! &#x1f4f9;<br><br>&#x1f4bb; <a href="https://t.co/tkHX4nWXp7">https://t.co/tkHX4nWXp7</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://t.co/naJIrsSlYM">pic.twitter.com/naJIrsSlYM</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1262856791873945601?ref_src=twsrc%5Etfw">May 19, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<h3>That’s it!</h3>
+
+
+
+<p>Go forth, use these tips, come up with your own, share them, and share your CSS masterpieces! And hey, if you have your own advice, please share that too! This is definitely the sort of thing that is learned through lots of trial and error — what works for me may look different from what works for you and we can learn from those different approaches</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/advice-for-complex-css-illustrations/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312636</post-id>	</item>
+		<item>
+		<title>Create a Responsive CSS Motion Path? Sure We Can!</title>
+		<link>https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/</link>
+					<comments>https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 15 Apr 2020 14:51:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[offset]]></category>
+		<category><![CDATA[offset-path]]></category>
+		<category><![CDATA[offset-rotate]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306066</guid>
+
+					<description><![CDATA[<p>There was a discussion recently on the <a href="https://damp-lake-50659.herokuapp.com/">Animation at Work Slack</a>: <em>how could you make a CSS motion path responsive?</em> What techniques would be work? This got me thinking.</p>
+<p>A CSS motion path allows us to animate elements along custom user-defined paths. Those paths follow the same structure as SVG paths. We define a path for an element using <code>offset-path</code>.</p>
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.block {
+  offset-path: path('M20,20 C20,100 200,0 200,100');
+}</code></pre>
+<p>These values appear relative at first and they would be &#8230; <a href="https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Create a Responsive CSS Motion Path? Sure We Can!&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/">Create a Responsive CSS Motion Path? Sure We Can!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>There was a discussion recently on the <a href="https://damp-lake-50659.herokuapp.com/">Animation at Work Slack</a>: <em>how could you make a CSS motion path responsive?</em> What techniques would be work? This got me thinking.</p>
+
+
+
+<p>A CSS motion path allows us to animate elements along custom user-defined paths. Those paths follow the same structure as SVG paths. We define a path for an element using <code>offset-path</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.block {
+  offset-path: path('M20,20 C20,100 200,0 200,100');
+}</code></pre>
+
+
+
+<p>These values appear relative at first and they would be if we were using SVG. But, when used in an <a href="https://css-tricks.com/almanac/properties/o/offset-path/"><code>offset-path</code></a>, <strong>they behave like px units.</strong> This is exactly the problem. Pixel units aren’t really responsive. This path won’t flex as the element it is in gets smaller or larger. Let’s figure this out.</p>
+
+
+
+<p>To set the stage, the <code>offset-distance</code> property dictates where an element should be on that path:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_cd95c54d57891b095df99eaa02cdbd67" src="//codepen.io/anon/embed/cd95c54d57891b095df99eaa02cdbd67?height=450&amp;theme-id=1&amp;slug-hash=cd95c54d57891b095df99eaa02cdbd67&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed cd95c54d57891b095df99eaa02cdbd67" title="CodePen Embed cd95c54d57891b095df99eaa02cdbd67" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Not only can we define the distance an element is along a path, but we can also define an element&#8217;s rotation with offset-rotate. The default value is auto which results in our element following the path. Check out the property’s <a href="https://css-tricks.com/almanac/properties/o/offset-rotate/">almanac article</a> for more values.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_d5aa1448cb745c1affe9fd6786958053" src="//codepen.io/anon/embed/d5aa1448cb745c1affe9fd6786958053?height=450&amp;theme-id=1&amp;slug-hash=d5aa1448cb745c1affe9fd6786958053&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed d5aa1448cb745c1affe9fd6786958053" title="CodePen Embed d5aa1448cb745c1affe9fd6786958053" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>To animate an element along the path, we animate the <code>offset-distance</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_df6858993397f31e2d15dba096bc75c2" src="//codepen.io/anon/embed/df6858993397f31e2d15dba096bc75c2?height=450&amp;theme-id=1&amp;slug-hash=df6858993397f31e2d15dba096bc75c2&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed df6858993397f31e2d15dba096bc75c2" title="CodePen Embed df6858993397f31e2d15dba096bc75c2" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>OK, that catches up to speed on moving elements along a path. Now we have to answer…</p>
+
+
+
+<h3>Can we make responsive paths?</h3>
+
+
+
+<p>The sticking point with CSS motion paths is the hardcoded nature. It&#8217;s not flexible. We are stuck hardcoding paths for particular dimensions and viewport sizes. A path that animates an element 600px, will animate that element 600px regardless of whether the viewport is 300px or 3440px wide.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/03/rwd-motion-path-1.mp4"></video></figure>
+
+
+
+<p>This differs from what we are familiar with when using SVG paths. They will scale with the size of the SVG viewbox.</p>
+
+
+
+<p>Try resizing this next demo below and you’ll see:</p>
+
+
+
+<ul><li>The SVG will scale with the viewport size as will the contained path.</li><li>The offset-path <strong>does not</strong> scale and the element goes off course.</li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_9fa8d87f764fbb682732b81985a87d5a" src="//codepen.io/anon/embed/9fa8d87f764fbb682732b81985a87d5a?height=450&amp;theme-id=1&amp;slug-hash=9fa8d87f764fbb682732b81985a87d5a&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed 9fa8d87f764fbb682732b81985a87d5a" title="CodePen Embed 9fa8d87f764fbb682732b81985a87d5a" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This could be okay for simpler paths. But once our paths become more complicated, it will be hard to maintain. Especially if we wish to use paths we&#8217;ve created in vector drawing applications.</p>
+
+
+
+<p>For example, consider the path we worked with earlier:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.element {
+  --path: 'M20,20 C20,100 200,0 200,100';
+  offset-path: path(var(--path));
+}</code></pre>
+
+
+
+<p>To scale that up to a different container size, we would need to work out the path ourselves, then apply that path at different breakpoints. But even with this &#8220;simple&#8221; path, is it a case of multiplying all the path values? Will that give us the right scaling?</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media(min-width: 768px) {
+  .element {
+    --path: 'M40,40 C40,200 400,0 400,200'; // ????
+  }
+}</code></pre>
+
+
+
+<p>A more complex path such as one drawn in a vector application is going to be trickier to maintain. It will need the developer to open the application, rescale the path, export it, and integrate it with the CSS. This will need to happen for all container size variations. It’s not the worst solution, but it does require a level of maintenance that we might not want to get ourselves into.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.element {
+  --path: 'M40,228.75L55.729166666666664,197.29166666666666C71.45833333333333,165.83333333333334,102.91666666666667,102.91666666666667,134.375,102.91666666666667C165.83333333333334,102.91666666666667,197.29166666666666,165.83333333333334,228.75,228.75C260.2083333333333,291.6666666666667,291.6666666666667,354.5833333333333,323.125,354.5833333333333C354.5833333333333,354.5833333333333,386.0416666666667,291.6666666666667,401.7708333333333,260.2083333333333L417.5,228.75';
+  offset-path: path(var(--path));
+}
+ 
+@media(min-width: 768px) {
+  .element {
+    --path: 'M40,223.875L55.322916666666664,193.22916666666666C70.64583333333333,162.58333333333334,101.29166666666667,101.29166666666667,131.9375,101.29166666666667C162.58333333333334,101.29166666666667,193.22916666666666,162.58333333333334,223.875,223.875C254.52083333333334,285.1666666666667,285.1666666666667,346.4583333333333,315.8125,346.4583333333333C346.4583333333333,346.4583333333333,377.1041666666667,285.1666666666667,392.4270833333333,254.52083333333334L407.75,223.875';
+  }
+}
+ 
+@media(min-width: 992px) {
+  .element {
+    --path: 'M40,221.625L55.135416666666664,191.35416666666666C70.27083333333333,161.08333333333334,100.54166666666667,100.54166666666667,130.8125,100.54166666666667C161.08333333333334,100.54166666666667,191.35416666666666,161.08333333333334,221.625,221.625C251.89583333333334,282.1666666666667,282.1666666666667,342.7083333333333,312.4375,342.7083333333333C342.7083333333333,342.7083333333333,372.9791666666667,282.1666666666667,388.1145833333333,251.89583333333334L403.25,221.625';
+  }
+}</code></pre>
+
+
+
+<p>It feels like a JavaScript solution makes sense here. GreenSock is my first thought because its <a href="https://greensock.com/motionpath/">MotionPath</a> plugin can scale SVG paths. But what if we want to animate outside of an SVG? Could we write a function that scales the paths for us? We could but it won&#8217;t be straightforward.</p>
+
+
+
+<h3>Trying different approaches</h3>
+
+
+
+<p>What tool allows us to define a path in some way without the mental overhead? A charting library! Something like <a href="https://d3js.org">D3.js</a> allows us to pass in a set of coordinates and receive a generated path string. We can tailor that string to our needs with different curves, sizing, etc.</p>
+
+
+
+<p>With a little tinkering, we can create a function that scales a path based on a defined coordinate system:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_9af4e20e6307178f27ede2f3e7ff6f78" src="//codepen.io/anon/embed/9af4e20e6307178f27ede2f3e7ff6f78?height=450&amp;theme-id=1&amp;slug-hash=9af4e20e6307178f27ede2f3e7ff6f78&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed 9af4e20e6307178f27ede2f3e7ff6f78" title="CodePen Embed 9af4e20e6307178f27ede2f3e7ff6f78" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This definitely works, but it’s also less than ideal because it&#8217;s unlikely we are going to be declaring SVG paths using sets of coordinates. What we want to do is take a path straight out of a vector drawing application, optimize it, and drop it on a page. That way, we can invoke some JavaScript function and let that do the heavy lifting.</p>
+
+
+
+<p>So that’s exactly what we are going to do.</p>
+
+
+
+<p>First, we need to create a path. This one was thrown together quickly in Inkscape. Other vector drawing tools are available.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/path-doodle.png?ssl=1" alt="" class="wp-image-306067" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/path-doodle.png?w=700&amp;ssl=1 700w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/path-doodle.png?resize=300%2C116&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>A path created in Inkscape on a 300&#215;300 canvas</figcaption></figure>
+
+
+
+<p>Next, let’s optimize the SVG. After saving the SVG file, we’ll run it through Jake Archibald’s brilliant <a href="https://jakearchibald.github.io/svgomg/">SVGOMG</a> tool. That gives us something along these lines:</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line=""><code markup="tt">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.375 79.375" height="300" width="300">&lt;path d="M10.362 18.996s-6.046 21.453 1.47 25.329c10.158 5.238 18.033-21.308 29.039-18.23 13.125 3.672 18.325 36.55 18.325 36.55l12.031-47.544" fill="none" stroke="#000" stroke-width=".265"/>&lt;/svg></code></pre>
+
+
+
+<p>The parts we’re interested are <code>path</code> and <code>viewBox</code>.</p>
+
+
+
+<h3>Expanding the JavaScript solution</h3>
+
+
+
+<p>Now we can create a JavaScript function to handle the rest. Earlier, we created a function that takes a set of data points and converts them into a scalable SVG path. But now we want to take that a step further and take the path string and work out the data set. This way our users never have to worry about trying to convert their paths into data sets.</p>
+
+
+
+<p>There is one caveat to our function: Besides the path string, we also need some bounds by which to scale the path against. These bounds are likely to be the third and fourth values of the viewBox attribute in our optimized SVG.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const path =
+"M10.362 18.996s-6.046 21.453 1.47 25.329c10.158 5.238 18.033-21.308 29.039-18.23 13.125 3.672 18.325 36.55 18.325 36.55l12.031-47.544";
+const height = 79.375 // equivalent to viewbox y2
+const width = 79.375 // equivalent to viewbox x2
+ 
+const motionPath = new ResponsiveMotionPath({
+  height,
+  width,
+  path,
+});</code></pre>
+
+
+
+<p>We won’t go through this function line-by-line. You can check it out in the demo! But we will highlight the important steps that make this possible.</p>
+
+
+
+<h4>First, we’re converting a path string into a data set</h4>
+
+
+
+<p>The biggest part of making this possible is being able to read the path segments. This is totally possible, thanks to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement">SVGGeometryElement API</a>. We start by creating an SVG element with a path and assigning the path string to its <code>d</code> attribute.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// To convert the path data to points, we need an SVG path element.
+const svgContainer = document.createElement('div');
+// To create one though, a quick way is to use innerHTML
+svgContainer.innerHTML = `
+  &lt;svg xmlns="http://www.w3.org/2000/svg">
+    &lt;path d="${path}" stroke-width="${strokeWidth}"/>
+  &lt;/svg>`;
+const pathElement = svgContainer.querySelector('path');</code></pre>
+
+
+
+<p>Then we can use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGeometryElement">SVGGeometryElement API</a> on that path element. All we need to do is iterate over the total length of the path and return the point at each length of the path.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">convertPathToData = path => {
+  // To convert the path data to points, we need an SVG path element.
+  const svgContainer = document.createElement('div');
+  // To create one though, a quick way is to use innerHTML
+  svgContainer.innerHTML = `&lt;svg xmlns="http://www.w3.org/2000/svg">
+                              &lt;path d="${path}"/>
+                            &lt;/svg>`;
+  const pathElement = svgContainer.querySelector('path');
+  // Now to gather up the path points.
+  const DATA = [];
+  // Iterate over the total length of the path pushing the x and y into
+  // a data set for d3 to handle &#x1f44d;
+  for (let p = 0; p &lt; pathElement.getTotalLength(); p++) {
+    const { x, y } = pathElement.getPointAtLength(p);
+    DATA.push([x, y]);
+  }
+  return DATA;
+}</code></pre>
+
+
+
+<h4>Next, we generate scaling ratios</h4>
+
+
+
+<p>Remember how we said we’d need some bounds likely defined by the <code>viewBox</code>? This is why. We need some way to calculate a ratio of the motion path against its container. This ratio will be equal to that of the path against the SVG <code>viewBox</code>. We will then use these with <a href="https://github.com/d3/d3-scale">D3.js scales</a>.</p>
+
+
+
+<p>We have two functions: one to grab the largest <code>x</code> and <code>y</code> values, and another to calculate the ratios in relation to the <code>viewBox</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">getMaximums = data => {
+  const X_POINTS = data.map(point => point[0])
+  const Y_POINTS = data.map(point => point[1])
+  return [
+    Math.max(...X_POINTS), // x2
+    Math.max(...Y_POINTS), // y2
+  ]
+}
+getRatios = (maxs, width, height) => [maxs[0] / width, maxs[1] / height]</code></pre>
+
+
+
+<h4>Now we need to generate the path</h4>
+
+
+
+<p>The last piece of the puzzle is to actually generate the path for our element. This is where D3.js actually comes into play. Don&#8217;t worry if you haven&#8217;t used it before because we’re only using a couple of functions from it. Specifically, we are going to use D3 to generate a path string with the data set we generated earlier.</p>
+
+
+
+<p>To create a line with our data set, we do this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">d3.line()(data); // M10.362000465393066,18.996000289916992L10.107386589050293, etc.</code></pre>
+
+
+
+<p>The issue is that those points aren&#8217;t scaled to our container. The cool thing with D3 is that it provides the ability to create scales. These act as interpolation functions. See where this is going? We can write one set of coordinates and then have D3 recalculate the path. We can do this based on our container size using the ratios we generated.</p>
+
+
+
+<p>For example, here’s the scale for our <code>x</code> coordinates:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const xScale = d3
+  .scaleLinear()
+  .domain([
+    0,
+    maxWidth,
+  ])
+  .range([0, width * widthRatio]);</code></pre>
+
+
+
+<p>The domain is from 0 to our highest <code>x</code> value. The range in most cases will go from 0 to container width multiplied by our width ratio.</p>
+
+
+
+<p>There are times where our range may differ and we need to scale it. This is when the aspect ratio of our container doesn’t match that of our path. For example, consider a path in an SVG with a <code>viewBox</code> of <code>0 0 100 200</code>. That’s an aspect ratio of 1:2. But if we then draw this in a container that has a height and width of 20vmin, the aspect ratio of the container is 1:1. We need to pad the width range to keep the path centered and maintain the aspect ratio.</p>
+
+
+
+<p>What we can do in these cases is calculate an offset so that our path will still be centered in our container.&nbsp;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const widthRatio = (height - width) / height
+const widthOffset = (ratio * containerWidth) / 2
+const xScale = d3
+  .scaleLinear()
+  .domain([0, maxWidth])
+  .range([widthOffset, containerWidth * widthRatio - widthOffset])</code></pre>
+
+
+
+<p>Once we have two scales, we can map our data points using the scales and generate a new line.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const SCALED_POINTS = data.map(POINT => [
+  xScale(POINT[0]),
+  yScale(POINT[1]),
+]);
+d3.line()(SCALED_POINTS); // Scaled path string that is scaled to our container</code></pre>
+
+
+
+<p>We can apply that path to our element by passing it inline via a CSS property &#x1f44d;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">ELEMENT.style.setProperty('--path', `"${newPath}"`);</code></pre>
+
+
+
+<p>Then it’s our responsibility to decide when we want to generate and apply a new scaled path. Here’s one possible solution:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const setPath = () => {
+  const scaledPath = responsivePath.generatePath(
+    CONTAINER.offsetWidth,
+    CONTAINER.offsetHeight
+  )
+  ELEMENT.style.setProperty('--path', `"${scaledPath}"`)
+}
+const SizeObserver = new ResizeObserver(setPath)
+SizeObserver.observe(CONTAINER)</code></pre>
+
+
+
+<p>This demo (viewed best in full screen) shows three versions of the element using a motion path. The paths are present to easier see the scaling. The first version is the unscaled SVG. The second is a scaling container illustrating how the path doesn&#8217;t scale. The third is using our JavaScript solution to scale the path.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNXdaZp" src="//codepen.io/anon/embed/oNXdaZp?height=800&amp;theme-id=1&amp;slug-hash=oNXdaZp&amp;default-tab=result" height="800" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNXdaZp" title="CodePen Embed oNXdaZp" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Phew, we did it!</h3>
+
+
+
+<p>This was a really cool challenge and I definitely learned a bunch from it! Here’s a couple of demos using the solution.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ExjpmZV" src="//codepen.io/anon/embed/ExjpmZV?height=350&amp;theme-id=1&amp;slug-hash=ExjpmZV&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ExjpmZV" title="CodePen Embed ExjpmZV" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEGjZvj" src="//codepen.io/anon/embed/ZEGjZvj?height=350&amp;theme-id=1&amp;slug-hash=ZEGjZvj&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEGjZvj" title="CodePen Embed ZEGjZvj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>It should work as a proof of concept and looks promising! Feel free to drop your own optimized SVG files into this demo to try them out! — it should catch most aspect ratios.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dyoewER" src="//codepen.io/anon/embed/dyoewER?height=600&amp;theme-id=1&amp;slug-hash=dyoewER&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dyoewER" title="CodePen Embed dyoewER" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I&#8217;ve created a package named &#8220;<a class="ek-link" href="https://npmjs.org/meanderer">Meanderer</a>&#8221; on <a class="ek-link" href="https://github.com/jh3y/meanderer">GitHub</a> and <a class="ek-link" href="https://npmjs.org/meanderer">npm</a>. You can also pull it down with <a class="ek-link" href="https://unpkg.com/meanderer">unpkg CDN</a> to play with it in CodePen, if you want to try it out.</p>
+
+
+
+<p>I look forward to seeing where this might go and hope we might see some native way of handling this in the future. &#x1f64f;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/">Create a Responsive CSS Motion Path? Sure We Can!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/create-a-responsive-css-motion-path-sure-we-can/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/03/rwd-motion-path-1.mp4" length="416880" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306066</post-id>	</item>
+		<item>
+		<title>Animated Matryoshka Dolls in CSS</title>
+		<link>https://css-tricks.com/animated-matryoshka-dolls-in-css/</link>
+					<comments>https://css-tricks.com/animated-matryoshka-dolls-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Thu, 27 Feb 2020 15:23:10 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[checkbox hack]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[keyframes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303748</guid>
+
+					<description><![CDATA[<p>Here’s a fun one. How might we create a set of those cool Matryoshka dolls where they nest inside one another&#8230; but in CSS?</p>
+<p>I toyed with this idea in my head for a little while. Then, I saw a tweet from CSS-Tricks and the article image had the dolls. I took that as a sign! It was time to put fingers to the keyboard.</p>
+<p>Our goal here is to make these fun and interactive, where we can click on &#8230; <a href="https://css-tricks.com/animated-matryoshka-dolls-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Animated Matryoshka Dolls in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animated-matryoshka-dolls-in-css/">Animated Matryoshka Dolls in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s a fun one. How might we create a set of those cool Matryoshka dolls where they nest inside one another&#8230; but in CSS?</p>
+
+
+
+<p>I toyed with this idea in my head for a little while. Then, I saw a tweet from CSS-Tricks and the article image had the dolls. I took that as a sign! It was time to put fingers to the keyboard.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/10/matryoshka-dolls.png?ssl=1" alt="" class="wp-image-296824" data-recalc-dims="1"/></figure>
+
+
+
+<p>Our goal here is to make these fun and interactive, where we can click on a doll to open it up and reveal another, smaller doll. Oh, and stick with just CSS for the functionality. And while we’re at it, let’s replace the dolls with our own character, say a CodePen bear. Something like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/beqrs-finalbears-final.gif?ssl=1" alt="" class="wp-image-303772" data-recalc-dims="1"/></figure>
+
+
+
+<p>We won&#8217;t dwell on making things pretty to start. Let&#8217;s get some markup on the page and thrash out the mechanics first.</p>
+
+
+
+<p>We can’t have an infinite amount of dolls. When we reach the innermost doll, it&#8217;d be nice to be able to reset the dolls without having to do a page refresh. A neat trick for this is to wrap our scene in an HTML form. That way we can use an input and set the <code>type</code>&nbsp;attribute to <code>reset</code> to avoid using any JavaScript.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;form>
+  &lt;input type="reset" id="reset"/>
+  &lt;label for="reset" title="Reset">Reset&lt;/label>
+&lt;/form></code></pre>
+
+
+
+<p>Next, we need some dolls. Or bears. Or something to start with. The key here will be to use the classic <a href="https://css-tricks.com/the-checkbox-hack/">checkbox hack</a> and any associated form labels. As a note, I’m going to use Pug to handle the markup because it supports loops, making things a little easier. But, you can certainly write the HTML by hand. Here’s the start with form fields and labels that set up the checkbox hack.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_RwNmPwr" src="//codepen.io/anon/embed/RwNmPwr?height=350&amp;theme-id=1&amp;slug-hash=RwNmPwr&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed RwNmPwr" title="CodePen Embed RwNmPwr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Try clicking some of the inputs and hitting the Reset input. They all become unchecked. Nice, we’ll use that.</p>
+
+
+
+<p>We have some interactivity but nothing is really happening yet. Here’s the plan:</p>
+
+
+
+<ol><li>We’ll only show one checkbox at a time</li><li>Checking a checkbox should reveal the label for the next checkbox.</li><li>When we get to the last checkbox, there our only option should be to reset the form.</li></ol>
+
+
+
+<p>The trick will be to make use of the CSS adjacent sibling combinator (<code>+</code>).</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label + input + label {
+  display: block;
+}</code></pre>
+
+
+
+<p>When a checkbox is checked, we need to show the label for the next doll, which will be three siblings along in the DOM. How do we make the first label visible? Give it an explicit <code>display: block</code> via inline styles in our markup. Putting this together, we have something along these lines:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_MWYdwjP" src="//codepen.io/anon/embed/MWYdwjP?height=350&amp;theme-id=1&amp;slug-hash=MWYdwjP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed MWYdwjP" title="CodePen Embed MWYdwjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Clicking each label reveals the next. Hold on, the last label isn’t shown! That’s correct. And that’s because the last label doesn’t have a checkbox. We need to add a rule that caters to that last label.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label + input + label,
+input:checked + label + label {
+  display: block;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWPVqyM" src="//codepen.io/anon/embed/NWPVqyM?height=350&amp;theme-id=1&amp;slug-hash=NWPVqyM&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWPVqyM" title="CodePen Embed NWPVqyM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Cool. We&#8217;re getting somewhere. That&#8217;s the basic mechanics. Now things are going to get a little trickier.&nbsp;</p>
+
+
+
+<h3>Basic styling</h3>
+
+
+
+<p>So, you might be thinking, “Why aren’t we hiding the checked label?” Good question! But, if we hide it straight away, we won’t have any transition between the current doll and the next. Before we start animating our dolls, let’s create basic boxes that will represent a doll. We can style them up so they mimic the doll outline without the detail.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.doll {
+  color: #fff;
+  cursor: pointer;
+  height: 200px;
+  font-size: 2rem;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+}
+
+.doll:nth-of-type(even) {
+  background: #00f;
+}
+
+.doll:nth-of-type(odd) {
+  background: #f00;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNgRjvZ" src="//codepen.io/anon/embed/oNgRjvZ?height=350&amp;theme-id=1&amp;slug-hash=oNgRjvZ&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNgRjvZ" title="CodePen Embed oNgRjvZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Clicking one doll instantly reveals the next one and, when we’ve reached the last doll, we can reset the form to start again. That’s what we want here.</p>
+
+
+
+<h3>The mechanics</h3>
+
+
+
+<p>We are going to animate the dolls based on a center point. Our animation will consist of many steps:</p>
+
+
+
+<ol><li>Slide the current doll out to the left.</li><li>Open the doll to reveal the next one.</li><li>Move the next doll where the current one started.</li><li>Make the current doll fade out.</li><li>Assign the next doll as the current doll.</li></ol>
+
+
+
+<p>Let’s start by sliding the current doll out to the left. We apply an animation when we click a label. Using the <code>:checked</code> pseudo-selector we can target the current doll. At this point, it’s worth noting that we are going to use CSS variables to control animation speed and behavior. This will make it easier to chain animations on the labels.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --speed: 0.25;
+  --base-slide: 100;
+  --slide-distance: 60;
+}
+
+input:checked + label {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+}
+
+@keyframes slideLeft {
+  to {
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -1%), 0);
+  }
+}</code></pre>
+
+
+
+<p>That looks great. But there’s an issue. As soon as we click a label, we could click it again and reset the animation. We don&#8217;t want that to happen.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-01.gif?ssl=1" alt="" class="wp-image-303763" data-recalc-dims="1"/></figure>
+
+
+
+<p>How can we get around this? We can remove pointer events from a label once it’s been clicked.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + label {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-02.gif?ssl=1" alt="" class="wp-image-303764" data-recalc-dims="1"/></figure>
+
+
+
+<p>Great! Now once we have started, we can’t stop the animation chain from happening.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_KKwLdXP" src="//codepen.io/anon/embed/KKwLdXP?height=350&amp;theme-id=1&amp;slug-hash=KKwLdXP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed KKwLdXP" title="CodePen Embed KKwLdXP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Next up, we need to crack open the doll to reveal the next one. This is where things get tricky because we are going to need some extra elements, not only to create the effect that the doll is opening up, but also to reveal the next doll inside of it. That&#8217;s right: we need to duplicate the inner doll. The trick here is to reveal a &#8220;fake&#8221; doll that we swap for the real one once we&#8217;ve animated it. This also means delaying the reveal of the next label.</p>
+
+
+
+<p>Now our markup updates labels so that they contains span elements.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label class="doll" for="doll--1">
+  &lt;span class="doll doll--dummy">&lt;/span>
+  &lt;span class="doll__half doll__half--top">Top&lt;/span>
+  &lt;span class="doll__half doll__half--bottom">Bottom&lt;/span>
+&lt;/label></code></pre>
+
+
+
+<p>These will act as the “dummy” doll as well as the lid and base for the current doll.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.doll {
+  color: #fff;
+  cursor: pointer;
+  height: 200px;
+  font-size: 2rem;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+
+.doll:nth-of-type(even) {
+  --bg: #00f;
+  --dummy-bg: #f00;
+}
+
+.doll:nth-of-type(odd) {
+  --bg: #f00;
+  --dummy-bg: #00f;
+}
+
+.doll__half {
+  background: var(--bg);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+}
+
+.doll__half--top {
+  top: 0;
+}
+
+.doll__half--bottom {
+  bottom: 0;
+}
+
+.doll__dummy {
+  background: var(--dummy-bg);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}</code></pre>
+
+
+
+<p>The lid requires three translations to create the opening effect: one to pop it up, one to move it left and then one to pop it down.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-03.png?ssl=1" alt="" class="wp-image-303765" data-recalc-dims="1"/></figure>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes open {
+  0% {
+    transform: translate(0, 0);
+  }
+  33.333333333333336% {
+    transform: translate(0, -100%);
+  }
+  66.66666666666667% {
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    transform: translate(-100%, 100%);
+  }
+}</code></pre>
+
+
+
+<p>Next is where we can use CSS custom properties to handle changing values. Once the doll has slid over to the left, we can open it. But how do we know how long to delay it from opening until that happens? We can use the <code>--speed</code> custom property we defined earlier to calculate the correct delay.</p>
+
+
+
+<p>It looks a little quick if we use the <code>--speed</code> value as it is, so let’s multiply it by two seconds:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}
+
+input:checked + .doll .doll__half--top {
+  animation: open calc(var(--speed) * 2s) calc(var(--speed) * 1s) forwards; // highlight
+}</code></pre>
+
+
+
+<p>Much better:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_LYEopKm" src="//codepen.io/anon/embed/LYEopKm?height=350&amp;theme-id=1&amp;slug-hash=LYEopKm&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed LYEopKm" title="CodePen Embed LYEopKm" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Now we need to move the inner “dummy” doll to the new position. This animation is like the open animation in that it consists of three stages. Again, that’s one to move up, one to move right, and one to set down. It&#8217;s like the slide animation, too. We are going to use CSS custom properties to determine the distance that the doll moves.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  // Introduce a new variable that defines how high the dummy doll should pop out.
+  --pop-height: 60;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 0) translate(0, 0);
+  }
+  33.333333333333336% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(0, 0);
+  }
+  66.66666666666667% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(calc((var(--base-slide) * 1px) + var(--slide-distance) * 1%), 0);
+  }
+  100% {
+    transform: translate(0, calc(var(--pop-height) * -1%)) translate(calc((var(--base-slide) * 1px) + var(--slide-distance) * 1%), calc(var(--pop-height) * 1%));
+  }
+}</code></pre>
+
+
+
+<p>Almost there!&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wvBbYmP" src="//codepen.io/anon/embed/wvBbYmP?height=350&amp;theme-id=1&amp;slug-hash=wvBbYmP&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wvBbYmP" title="CodePen Embed wvBbYmP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The only thing is that the next doll is available as soon as we click a doll. that means we can spam click our way through the set.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-04.gif?ssl=1" alt="" class="wp-image-303767" data-recalc-dims="1"/></figure>
+
+
+
+<p>Technically, the next doll shouldn’t show until the “fake” one has moved into place. It’s only once the “fake” doll is in place that we can hide it and reveal the real one. That means we going to use zero-second scale animations! That&#8217;s right. We can play pretend by delaying two zero-second animations and using <code>animation-fill-mode</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes appear {
+  from {
+    transform: scale(0);
+  }
+}</code></pre>
+
+
+
+<p>We actually only need one set of <code>@keyframes</code>. because we can re-use what we have to create the opposite movement with <code>animation-direction: reverse</code>. With that in mind, all our animations get applied something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">// The next doll
+input:checked + .doll + input + .doll,
+// The last doll (doesn't have an input)
+input:checked + .doll + .doll {
+  animation: appear 0s calc(var(--speed) * 5s) both;
+  display: block;
+}
+
+// The current doll
+input:checked + .doll,
+// The current doll that isn't the first. Specificity prevails
+input:checked + .doll + input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards;
+  pointer-events: none;
+}
+
+input:checked + .doll .doll__half--top,
+input:checked + .doll + input:checked + .doll .doll__half--top {
+  animation: open calc(var(--speed) * 2s) calc(var(--speed) * 1s) forwards;
+}
+
+input:checked + .doll .doll__dummy,
+input:checked + .doll + input:checked + .doll .doll__dummy {
+  animation: move calc(var(--speed) * 2s) calc(var(--speed) * 3s) forwards, appear 0s calc(var(--speed) * 5s) reverse forwards;
+}</code></pre>
+
+
+
+<p>Note how important the variables are, especially where we are chaining animations. That gets us almost where we need to be.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_povmxMG" src="//codepen.io/anon/embed/povmxMG?height=350&amp;theme-id=1&amp;slug-hash=povmxMG&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed povmxMG" title="CodePen Embed povmxMG" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I can hear it now: &#8220;They&#8217;re all the same size!&#8221; Yep. That&#8217;s the missing piece. They need to scale down. The trick here is to adjust the markup again and make use of CSS custom properties yet again.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-html" data-line="3,5,6,9"><code markup="tt">&lt;input id="doll--0" type="checkbox"/&gt;
+&lt;label class="doll" for="doll--0" style="display: block; --doll-index: 0;"&gt;
+  &lt;span class="doll__dummy-container"&gt;
+    &lt;span class="doll__dummy"&gt;&lt;/span&gt;
+  &lt;/span&gt; //highlight
+  &lt;span class="doll__container"&gt;
+    &lt;span class="doll__half doll__half--top"&gt;&lt;/span&gt;
+    &lt;span class="doll__half doll__half--bottom"&gt;&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/label&gt;</code></pre>
+
+
+
+<p>We just introduced a CSS custom property inline that tells us the index of the doll. We can use this to generate a scale of each half as well as the fake inner doll. The halves will have to scale to match the actual doll size, but the fake inner doll scale will need to match that of the next doll. Tricky!</p>
+
+
+
+<p>We can apply these scales inside the containers so that our animations are not affected.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="15,24"><code markup="tt">:root {
+  --scale-step: 0.05;
+}
+
+.doll__container,
+.doll__dummy-container {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.doll__container {
+  transform: scale(calc(1 - ((var(--doll-index)) * var(--scale-step))));
+  transform-origin: bottom;
+}
+
+.doll__dummy {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(calc(1 - ((var(--doll-index) + 1) * var(--scale-step))));
+  transform-origin: bottom center;
+  width: 100%;
+}</code></pre>
+
+
+
+<p>Note how the <code>.doll__dummy</code> class uses <code>var(--doll-index) + 1)</code> to calculate the scale so that it matches the next doll. &nbsp;&#x1f44d;</p>
+
+
+
+<p>Lastly, we re-assign the animation to the <code>.doll__dummy-container</code> class instead of the <code>.doll__dummy</code> class.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">input:checked + .doll .doll__dummy-container,
+input:checked + .doll + input:checked + .doll .doll__dummy-container {
+  animation: move calc(var(--speed) * 2s) calc(var(--speed) * 3s) forwards, appear 0s calc(var(--speed) * 5s) reverse forwards;
+}</code></pre>
+
+
+
+<p>Here&#8217;s a demo where the containers have been given a background color to see what’s happening.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLydOwQ" src="//codepen.io/anon/embed/yLydOwQ?height=350&amp;theme-id=1&amp;slug-hash=yLydOwQ&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLydOwQ" title="CodePen Embed yLydOwQ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>We can see that, although the content size changes, they remain the same size. This makes for consistent animation behavior and makes the code easier to maintain.</p>
+
+
+
+<h3>Finishing touches</h3>
+
+
+
+<p>Wow, things are looking pretty slick! All we need are some finishing touches and we are done!</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-905.gif?ssl=1" alt="" class="wp-image-303768" data-recalc-dims="1"/></figure>
+
+
+
+<p>The scene starts to look cluttered because we’re stacking the “old” dolls off to the side when a new one is introduced. So let&#8217;s slide a doll out of view when the next one is revealed to clean that mess up.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@keyframes slideOut {
+  from {
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -1%), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc((var(--base-slide) * -1px) + var(--slide-distance) * -2%), 0);
+  }
+}
+
+input:checked + .doll,
+input:checked + .doll + input:checked + .doll {
+  animation: slideLeft calc(var(--speed) * 1s) forwards,
+    slideOut calc(var(--speed) * 1s) calc(var(--speed) * 6s) forwards;
+  pointer-events: none;
+}</code></pre>
+
+
+
+<p>The new <code>slideOut</code> animation fades the doll out while it translates to the left. Perfect. &nbsp;&#x1f44d;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/bears-06.gif?ssl=1" alt="" class="wp-image-303769" data-recalc-dims="1"/></figure>
+
+
+
+<p>That’s it for the CSS trickery we need to make this effect work. All that’s left style the dolls and the scene.</p>
+
+
+
+<p>We have many options to style the dolls. We could use a background image, CSS illustration, SVG, or what have you. We could even throw together some emoji dolls that use random inline hues!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNgrBYY" src="//codepen.io/anon/embed/oNgrBYY?height=350&amp;theme-id=1&amp;slug-hash=oNgrBYY&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNgrBYY" title="CodePen Embed oNgrBYY" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let’s go with inline SVG.</p>
+
+
+
+<p>I’m basically using the same underlying mechanics we’ve already covered. The difference is that I’m also generating inline variables for hue and lightness so the bears sport different shirt colors.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jOOYMLm" src="//codepen.io/anon/embed/jOOYMLm?height=500&amp;theme-id=1&amp;slug-hash=jOOYMLm&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jOOYMLm" title="CodePen Embed jOOYMLm" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>There we have it! Stacking dolls — err, bears — with nothing but HTML and CSS! All the code for all the steps is available in <a href="https://codepen.io/collection/nmqWpx">this CodePen collection</a>. Questions or suggestions? Feel free to reach out to me here in the comments.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animated-matryoshka-dolls-in-css/">Animated Matryoshka Dolls in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/animated-matryoshka-dolls-in-css/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303748</post-id>	</item>
+		<item>
+		<title>The Power (and Fun) of Scope with CSS Custom Properties</title>
+		<link>https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/</link>
+					<comments>https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 27 Nov 2019 15:22:27 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css variables]]></category>
+		<category><![CDATA[custom properties]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298885</guid>
+
+					<description><![CDATA[<p>You’re probably already at least a little familiar with CSS variables. If not, here’s a two-second overview: they are really called custom properties, you set them in declaration blocks like <code>--size: 1em</code> and use them as values like <code>font-size: var(--size);</code>, they <a href="https://css-tricks.com/difference-between-types-of-css-variables/">differ from preprocessor variables</a> (e.g. they cascade), and here’s <a href="https://css-tricks.com/guides/css-custom-properties/">a guide</a> with way more information. </p>
+<p>But are we using them to their full potential? Do we fall into old habits and overlook opportunities where variables could significantly reduce &#8230; <a href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Power (and Fun) of Scope with CSS Custom Properties&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">The Power (and Fun) of Scope with CSS Custom Properties</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>You’re probably already at least a little familiar with CSS variables. If not, here’s a two-second overview: they are really called custom properties, you set them in declaration blocks like <code>--size: 1em</code> and use them as values like <code>font-size: var(--size);</code>, they <a href="https://css-tricks.com/difference-between-types-of-css-variables/">differ from preprocessor variables</a> (e.g. they cascade), and here’s <a href="https://css-tricks.com/guides/css-custom-properties/">a guide</a> with way more information. </p>
+<p>But are we using them to their full potential? Do we fall into old habits and overlook opportunities where variables could significantly reduce the amount of code we write?</p>
+<p><span id="more-298885"></span></p>
+<p>This article was prompted by a recent tweet I made about using CSS variables to create dynamic animation behavior.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">CSS variables are awesome, right? But scope power is often overlooked. For example, take this demo, 3 different animations but only 1 animation defined &#x1f4aa; That means dynamic animations &#x1f60e; <a href="https://t.co/VN02NlC4G8">https://t.co/VN02NlC4G8</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://t.co/ig8baxr7F3">pic.twitter.com/ig8baxr7F3</a></p>
+<p>&mdash; Jhey @ NodeConfEU 2019 &#x1f4cd;&#x1f1ee;&#x1f1ea;&#x2328;&#xfe0f; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1191695646752948225?ref_src=twsrc%5Etfw">November 5, 2019</a></p></blockquote>
+<p> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </p>
+<p>Let’s look at a couple of instances where CSS variables can be used to do some pretty cool things that we may not have considered.</p>
+<h3>Basic scoping wins</h3>
+<p>The simplest and likely most common example would be scoped colors. And what’s our favorite component to use with color? The button. &#x1f605; </p>
+<p>Consider the standard setup of primary and secondary buttons. Let’s start with some basic markup that uses a <a href="https://css-tricks.com/bem-101/">BEM syntax</a>.</p>
+<pre rel="HTML"><code class="language-html">&lt;button class="button button--primary"&gt;Primary&lt;/button&gt;
+&lt;button class="button button--secondary"&gt;Secondary&lt;/button&gt;</code></pre>
+<p>Traditionally, we might do something like this to style them up:</p>
+<pre rel="CSS"><code class="language-css">.button {
+  padding: 1rem 1.25rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin: 4px;
+  transition: background 0.1s ease;
+}
+
+.button--primary {
+  background: hsl(233, 100%, 50%);
+  outline-color: hsl(233, 100%, 80%);
+}
+
+.button--primary:hover {
+  background: hsl(233, 100%, 40%);
+}
+
+.button--primary:active {
+  background: hsl(233, 100%, 30%);
+}
+
+.button--secondary {
+  background: hsl(200, 100%, 50%);
+  outline-color: hsl(200, 100%, 80%);
+}
+
+.button--secondary:hover {
+  background: hsl(200, 100%, 40%);
+}
+
+.button--secondary:active {
+  background: hsl(200, 100%, 30%);
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="zYYWPoO" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Basic buttons">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/zYYWPoO"><br />
+  Basic buttons</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>That’s an awful lot of code for something not particularly complex. We haven’t added many styles and we’ve added a lot of rules to cater to the button’s different states and colors. We could significantly reduce the code with a scoped variable.</p>
+<p>In our example, the only differing value between the two button variants is the hue. Let’s refactor that code a little then. We won’t change the markup but cleaning up the styles a little, we get this:</p>
+<pre rel="CSS"><code class="language-css">.button {
+  padding: 1rem 1.25rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin: 1rem;
+  transition: background 0.1s ease;
+  background: hsl(var(--hue), 100%, 50%);
+  outline-color: hsl(var(--hue), 100%, 80%);
+
+}
+.button:hover {
+  background: hsl(var(--hue), 100%, 40%);
+}
+
+.button:active {
+  background: hsl(var(--hue), 100%, 30%);
+}
+
+.button--primary {
+  --hue: 233;
+}
+
+.button--secondary {
+  --hue: 200;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="wvvmPqX" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Refactoring styles with a scoped variable">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/wvvmPqX"><br />
+  Refactoring styles with a scoped variable</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>This not only reduces the code but makes maintenance so much easier. Change the core button styles in one place and it will update all the variants! &#x1f64c; </p>
+<p>I’d likely leave it there to make it easier for devs wanting to use those buttons. But, we could take it further. We could inline the variable on the actual element and remove the class declarations completely. &#x1f632; </p>
+<pre rel="HTML"><code class="language-html">&lt;button class="button" style="--hue: 233;"&gt;Primary&lt;/button&gt;
+&lt;button class="button" style="--hue: 200;"&gt;Secondary&lt;/button&gt;</code></pre>
+<p>Now we don’t need these. &#x1f44d; </p>
+<pre rel="CSS"><code class="language-css">.button--primary {
+  --hue: 233;
+}
+
+.button--secondary {
+  --hue: 200;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="abbYVYd" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Scoping w/ inline CSS variables">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/abbYVYd"><br />
+  Scoping w/ inline CSS variables</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Inlining those variables might not be best for your next design system or app but it does open up opportunities. Like, for example, if we had a button instance where we needed to override the color.</p>
+<pre rel="Pug"><code class="language-javascript">button.button.button--primary(style=`--hue: 20;`) Overridden</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="rNNqXQR" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Overridden with inline scope">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/rNNqXQR"><br />
+  Overridden with inline scope</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Having fun with inline variables</h3>
+<p>Another opportunity is to have a little fun with it. This is a technique I use for <a href="https://codepen.io/jh3y">many of the Pens I create over on CodePen</a>. &#x1f609;</p>
+<p>You may be writing straightforward HTML, but in many cases, you may be using a framework, like React or a preprocessor like Pug, to write your markup. These solutions allow you to leverage JavaScript to create random inline variables. For the following examples, I’ll be using Pug. Pug is an indentation-based HTML templating engine. If you aren’t familiar with Pug, do not fear! I’ll try to keep the markup simple.</p>
+<p>Let’s start by randomizing the hue for our buttons:</p>
+<pre rel="Pug"><code class="language-javascript">button.button(style=`--hue: ${Math.random() * 360}`) First</code></pre>
+<p>With Pug, we can use ES6 template literals to inline randomized CSS variables. &#x1f4aa; </p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="wvvmPQY" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Random inline CSS variable hues">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/wvvmPQY"><br />
+  Random inline CSS variable hues</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Animation alterations</h3>
+<p>So, now that we have the opportunity to define random characteristics for an element, what else could we do? Well, one overlooked opportunity is animation. True, we can’t animate the variable itself, like this:</p>
+<pre rel="CSS"><code class="language-css">@keyframes grow {
+  from { --scale: 1; }
+  to   { --scale: 2; }
+}</code></pre>
+<p>But we can create dynamic animations based on scoped variables. We can change the behavior of animation on the fly! &#x1f929; </p>
+<h4>Example 1: The excited button</h4>
+<p>Let’s create a button that floats along minding its own business and then gets excited when we hover over it.</p>
+<p>Start with the markup:</p>
+<pre rel="Pug"><code class="language-javascript">button.button(style=`--hue: ${Math.random() * 360}`) Show me attention</code></pre>
+<p>A simple floating animation may look like this:</p>
+<pre rel="CSS"><code class="language-css">@keyframes flow {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -25%);
+  }
+}</code></pre>
+<p>This will give us something like this:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="KKKoZVK" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="The excited button foundation">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/KKKoZVK"><br />
+  The excited button foundation</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>I’ve added a little shadow as an extra but it’s not vital. &#x1f44d; </p>
+<p>Let’s make it so that our button gets excited when we hover over it. Now, we could simply change the animation being used to something like this:</p>
+<pre rel="CSS"><code class="language-css">.button:hover {
+  animation: shake .1s infinite ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-1%, 3%) rotate(-2deg);
+  }
+  50% {
+    transform: translate(1%, 2%) rotate(2deg);
+  }
+  75% {
+    transform: translate(1%, -2%) rotate(-1deg);
+  }
+}</code></pre>
+<p>And it works:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="qBBYOQa" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="The excited button gets another keyframes definition">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/qBBYOQa"><br />
+  The excited button gets another keyframes definition</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>But, we need to introduce another keyframes definition. What if we could merge the two animations into one? They aren’t too far off from each other in terms of structure.</p>
+<p>We could try:</p>
+<pre rel="CSS"><code class="language-css">@keyframes flow-and-shake {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25%, 75% {
+    transform: translate(0, -12.5%) rotate(0deg);
+  }
+  50% {
+    transform: translate(0, -25%) rotate(0deg);
+  }
+}</code></pre>
+<p>Although this works, we end up with an animation that isn’t quite as smooth because of the translation steps. So what else could we do? Let’s find a compromise by removing the steps at 25% and 75%.</p>
+<pre rel="CSS"><code class="language-css">@keyframes flow-and-shake {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(0, -25%) rotate(0deg);
+  }
+}</code></pre>
+<p>It works fine, as we expected, but here comes the trick: Let’s update our button with some variables.</p>
+<pre rel="CSS"><code class="language-css">.button {
+  --y: -25;
+  --x: 0;
+  --rotation: 0;
+  --speed: 2;
+}</code></pre>
+<p>Now let’s plug them into the animation definition, along with the button’s animation properties.</p>
+<pre rel="CSS"><code class="language-css">.button {
+  animation-name: flow-and-shake;
+  animation-duration: calc(var(--speed) * 1s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes flow-and-shake {
+  0%, 100% {
+    transform: translate(calc(var(--x) * -1%), calc(var(--y) * -1%))
+      rotate(calc(var(--rotation) * -1deg));
+  }
+  50% {
+    transform: translate(calc(var(--x) * 1%), calc(var(--y) * 1%))
+      rotate(calc(var(--rotation) * 1deg));
+  }
+}</code></pre>
+<p>All is well. &#x1f44d; </p>
+<p>Let’s change those values when the button is hovered:</p>
+<pre rel="CSS"><code class="language-css">.button:hover {
+  --speed: .1;
+  --x: 1;
+  --y: -1;
+  --rotation: -1;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="zYYjrKK" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="The excited button with refactored keyframes &amp;amp; scoped variables">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/zYYjrKK"><br />
+  The excited button with refactored keyframes &amp; scoped variables</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Nice! Now our button has two different types of animations but defined via one set of keyframes. &#x1f92f;</p>
+<p>Let’s have a little more fun with it. If we take it a little further, we can make the button a little more playful and maybe stop animating altogether when it’s active. &#x1f605; </p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="NWWMxbV" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="The Excited Button w/ dynamic animation &#x1f913;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/NWWMxbV"><br />
+  The Excited Button w/ dynamic animation &#x1f913;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Example 2: Bubbles</h4>
+<p>Now that we’ve gone through some different techniques for things we can do with the power of scope, let’s put it all together. We are going to create a randomly generated bubble scene that heavily leverages scoped CSS variables.</p>
+<p>Let’s start by creating a bubble. A static bubble.</p>
+<figure id="post-298887" class="align-left media-298887"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/11/css-bubble.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<pre rel="CSS"><code class="language-css">.bubble {
+  background: radial-gradient(100% 115% at 25% 25%, #fff, transparent 33%),
+    radial-gradient(15% 15% at 75% 75%, #80dfff, transparent),
+    radial-gradient(100% 100% at 50% 25%, transparent, #66d9ff 98%);
+  border: 1px solid #b3ecff;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+}</code></pre>
+<p>We are using <code>background</code> with multiple values and a <code>border</code> to make the bubble effect — but it’s not very dynamic. We know the <code>border-radius</code> will always be the same. And we know the structure of the <code>border</code> and <code>background</code> will not change. But the values used within those properties and the other property values could all be random.</p>
+<p>Let’s refactor the CSS to make use of variables:</p>
+<pre rel="CSS"><code class="language-css">.bubble {
+  --size: 50;
+  --hue: 195;
+  --bubble-outline: hsl(var(--hue), 100%, 50%);
+  --bubble-spot: hsl(var(--hue), 100%, 75%);
+  --bubble-shade: hsl(var(--hue), 100%, 70%);
+  background: radial-gradient(100% 115% at 25% 25%, #fff, transparent 33%),
+    radial-gradient(15% 15% at 75% 75%, var(--bubble-spot), transparent),
+    radial-gradient(100% 100% at 50% 25%, transparent, var(--bubble-shade) 98%);
+  border: 1px solid var(--bubble-outline);
+  border-radius: 100%;
+  height: calc(var(--size) * 1px);
+  width: calc(var(--size) * 1px);
+}</code></pre>
+<p>That’s a good start. &#x1f44d; </p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="MWWGywm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Bubbles foundation">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/MWWGywm"><br />
+  Bubbles foundation</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Let’s add some more bubbles and leverage the inline scope to position them as well as size them. Since we are going to start randomizing more than one value, it’s handy to have a function to generate a random number in range for our markup.</p>
+<pre rel="Pug"><code class="language-javascript">- const randomInRange = (max, min) =&gt; Math.floor(Math.random() * (max - min + 1)) + min</code></pre>
+<p>With Pug, we can utilize iteration to create a large set of bubbles:</p>
+<pre rel="Pug"><code class="language-javascript">- const baseHue = randomInRange(0, 360)
+- const bubbleCount = 50
+- let b = 0
+while b &lt; bubbleCount
+  - const size = randomInRange(10, 50)
+  - const x = randomInRange(0, 100)
+  .bubble(style=`--x: ${x}; --size: ${size}; --hue: ${baseHue}`)
+  - b++</code></pre>
+<p>Updating our <code>.bubble</code> styling allows us to make use of the new inline variables.</p>
+<pre rel="CSS"><code class="language-css">.bubble {
+  left: calc(var(--x) * 1%);
+  position: absolute;
+  transform: translate(-50%, 0);
+}</code></pre>
+<p>Giving us a random set of bubbles:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="ZEEoWOX" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Adding bubbles">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/ZEEoWOX"><br />
+  Adding bubbles</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Let’s take it even further and animate those bubbles so they float from top to bottom and fade out. </p>
+<pre rel="CSS"><code class="language-css">.bubble {
+  animation: float 5s infinite ease-in-out;
+  top: 100%;
+}
+
+@keyframes float {
+  from {
+    opacity: 1;
+    transform: translate(0, 0) scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, -100vh) scale(1);
+  }
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="PooeNOZ" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Bubbles rising together">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/PooeNOZ"><br />
+  Bubbles rising together</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>That’s pretty boring. They all do the same thing at the same time. So let’s randomize the speed, delay, end scale and distance each bubble is going to travel.</p>
+<pre rel="Pug"><code class="language-javascript">- const randomInRange = (max, min) =&gt; Math.floor(Math.random() * (max - min + 1)) + min
+- const baseHue = randomInRange(0, 360)
+- const bubbleCount = 50
+- let b = 0
+while b &lt; bubbleCount
+  - const size = randomInRange(10, 50)
+  - const delay = randomInRange(1, 10)
+  - const speed = randomInRange(2, 20)
+  - const distance = randomInRange(25, 150)
+  - const scale = randomInRange(100, 150) / 100
+  - const x = randomInRange(0, 100)
+  .bubble(style=`--x: ${x}; --size: ${size}; --hue: ${baseHue}; --distance: ${distance}; --speed: ${speed}; --delay: ${delay}; --scale: ${scale}`)
+  - b++</code></pre>
+<p>And now, let’s update our styles</p>
+<pre rel="CSS"><code class="language-css">.bubble {
+  animation-name: float;
+  animation-duration: calc(var(--speed) * 1s);
+  animation-delay: calc(var(--delay) * -1s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes float {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, calc(var(--distance) * -1vh)) scale(var(--scale));
+  }
+}</code></pre>
+<p>And we will get this:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="PooeNeN" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Random bubble scene using variable scope &#x1f60e;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/PooeNeN"><br />
+  Random bubble scene using variable scope &#x1f60e;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>With around 50 lines of code, you can create a randomly generated animated scene by honing the power of the scope! &#x1f4aa; </p>
+<h3>That’s it!</h3>
+<p>We can create some pretty cool things with very little code by putting CSS variables to use and leveraging some little tricks.</p>
+<p>I do hope this article has raised some awareness for the power of CSS variable scope and I do hope you will hone the power and pass it on &#x1f60e; </p>
+<p>All the demos in this article are available in <a href="https://codepen.io/collection/XgGdGd">this CodePen collection</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">The Power (and Fun) of Scope with CSS Custom Properties</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/feed/</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298885</post-id>	</item>
+		<item>
+		<title>Ghost Buttons with Directional Awareness in CSS</title>
+		<link>https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/</link>
+					<comments>https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Fri, 13 Sep 2019 13:49:05 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[buttons]]></category>
+		<category><![CDATA[hover]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=295334</guid>
+
+					<description><![CDATA[<p>It would surprise me if you&#8217;d never come across a ghost button &#x1f47b;. You know the ones: they have a transparent background that fills with a solid color on hover. Smashing Magazine has <a href="https://www.smashingmagazine.com/2018/01/ghost-button-design/">a whole article</a> going into the idea. In this article, we’re going to build a ghost button, but that will be the easy part. The fun and tricky part will be animating the fill of that ghost button such that the background fills up in the direction &#8230; <a href="https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Ghost Buttons with Directional Awareness in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/">Ghost Buttons with Directional Awareness in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>It would surprise me if you&#8217;d never come across a ghost button &#x1f47b;. You know the ones: they have a transparent background that fills with a solid color on hover. Smashing Magazine has <a href="https://www.smashingmagazine.com/2018/01/ghost-button-design/">a whole article</a> going into the idea. In this article, we’re going to build a ghost button, but that will be the easy part. The fun and tricky part will be animating the fill of that ghost button such that the background fills up in the direction from which a cursor hovers over it.</p>
+<p><span id="more-295334"></span></p>
+<p>Here’s a basic starter for a ghost button:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="VwZbXNN" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Basic Ghost Button &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/VwZbXNN/"><br />
+  Basic Ghost Button &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>In most cases, the <code>background-color</code> has a <code>transition</code> to a solid color. There are designs out there where the button might fill from left to right, top to bottom, etc., for some visual flair. For example, here’s left-to-right:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="QWLvrwp" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Directional filling Ghost Button &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/QWLvrwp/"><br />
+  Directional filling Ghost Button &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>There&#8217;s a <abbr>UX</abbr> nitpick here. It feels off if you hover against the fill. Consider this example. The button fills from the left while you hover from the right.</p>
+<figure id="post-295335" class="align-left media-295335"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/s_F790914C0EB8AF7D7ED52D576A2D1ABF09C6B554530F0EEB9D42E134D37BA833_1567182887640_LTR-OFF-HOVER.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Hover feels off &#x1f44e;</figcaption></figure>
+<p>It is better if the button fills from our initial hover point. </p>
+<figure id="post-295337" class="align-left media-295337"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/s_F790914C0EB8AF7D7ED52D576A2D1ABF09C6B554530F0EEB9D42E134D37BA833_1567182965082_LTR-GOOD-HOVER.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Hover feels good &#x1f44d;</figcaption></figure>
+<p>So, how can we give the button <em>directional awareness</em>? Your initial instinct might be to reach for a JavaScript solution, but we can create something with CSS and a little extra markup instead.</p>
+<p>For those in camp <abbr title="Too long didn’t read">TL;DR</abbr>, here are some pure CSS ghost buttons with directional awareness!</p>
+<p class="codepen" data-height="447" style="height: 447px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="jjRezM" style="height: 447px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pure CSS Ghost Buttons w/ Directional Awareness &#x2728;&#x1f47b;&#x1f60e;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/jjRezM/"><br />
+  Pure CSS Ghost Buttons w/ Directional Awareness &#x2728;&#x1f47b;&#x1f60e;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Let’s build this thing step by step. All the code is available in <a href="https://codepen.io/collection/XRLRkV/">this CodePen collection</a>.</p>
+<h3>Creating a foundation</h3>
+<p>Let’s start by creating the foundations of our ghost button. The markup is straightforward.</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;Boo!&lt;/button&gt;</code></pre>
+<p>Our CSS implementation will leverage CSS custom properties. These make maintenance easier. They also make for simple customization via inline properties.</p>
+<pre rel="CSS"><code class="language-css">button {
+  --borderWidth: 5;
+  --boxShadowDepth: 8;
+  --buttonColor: #f00;
+  --fontSize: 3;
+  --horizontalPadding: 16;
+  --verticalPadding: 8;
+
+  background: transparent;
+  border: calc(var(--borderWidth) * 1px) solid var(--buttonColor);
+  box-shadow: calc(var(--boxShadowDepth) * 1px) calc(var(--boxShadowDepth) * 1px) 0 #888;
+  color: var(--buttonColor);
+  cursor: pointer;
+  font-size: calc(var(--fontSize) * 1rem);
+  font-weight: bold;
+  outline: transparent;
+  padding: calc(var(--verticalPadding) * 1px) calc(var(--horizontalPadding) * 1px);
+  transition: box-shadow 0.15s ease;
+}
+
+button:hover {
+  box-shadow: calc(var(--boxShadowDepth) / 2 * 1px) calc(var(--boxShadowDepth) / 2 * 1px) 0 #888;
+}
+
+button:active {
+  box-shadow: 0 0 0 #888;
+}</code></pre>
+<p>Putting it all together gives us this:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="WNeOwRK" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Ghost Button Foundation &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/WNeOwRK/"><br />
+  Ghost Button Foundation &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Great! We have a button and a hover effect, but no fill to go with it. Let’s do that next.</p>
+<h3>Adding a fill</h3>
+<p>To do this, we create elements that show the filled state of our ghost button. The trick is to clip those elements with <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> and hide them. We can reveal them when we hover over the button by transitioning the <code>clip-path</code>.</p>
+<figure id="post-295342" class="align-left media-295342"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/ghost-button-01.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Child element with a 50% clip</figcaption></figure>
+<p>They <strong>must</strong> line up with the parent button. Our CSS variables will help a lot here.</p>
+<p>At first thought, we could have reached for pseudo-elements. There won&#8217;t be enough pseudo-elements for every direction though. They will also interfere with accessibility&#8230; but more on this later.</p>
+<p>Let&#8217;s start by adding a basic fill from left to right on hover. First, let&#8217;s add a span. That span will need the same text content as the button.</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;Boo!
+  &lt;span&gt;Boo!&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+<p>Now we need to line our span up with the button. Our CSS variables will do the heavy lifting here.</p>
+<pre rel="CSS"><code class="language-css">button span {
+  background: var(--buttonColor);
+  border: calc(var(--borderWidth) * 1px) solid var(--buttonColor);
+  bottom: calc(var(--borderWidth) * -1px);
+  color: var(--bg, #fafafa);
+  left: calc(var(--borderWidth) * -1px);
+  padding: calc(var(--verticalPadding) * 1px) calc(var(--horizontalPadding) * 1px);
+  position: absolute;
+  right: calc(var(--borderWidth) * -1px);
+  top: calc(var(--borderWidth) * -1px);
+}</code></pre>
+<p>Finally, we clip the span out of view and add a rule that will reveal it on hover by updating the clip. Defining a transition will give it that cherry on top.</p>
+<pre rel="CSS"><code class="language-css">button span {
+  --clip: inset(0 100% 0 0);
+  -webkit-clip-path: var(--clip);
+  clip-path: var(--clip);
+  transition: clip-path 0.25s ease, -webkit-clip-path 0.25s ease;
+  // ...Remaining div styles
+}
+
+button:hover span {
+  --clip: inset(0 0 0 0);
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="MWgoyzg" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Ghost Button w/ LTR fill &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/MWgoyzg/"><br />
+  Ghost Button w/ LTR fill &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Adding directional awareness</h3>
+<p>So, how might we add directional awareness? We need four elements. Each element will be responsible for detecting a hover entry point. With <code>clip-path</code>, we can split the button area into four segments.</p>
+<figure id="post-295343" class="align-left media-295343"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/ghost-button-02.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Four <code>:hover</code> segments</figcaption></figure>
+<p>Let&#8217;s add four spans to a button and position them to fill the button.</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;
+  Boo!
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">button span {
+  background: var(--bg);
+  bottom: calc(var(--borderWidth) * -1px);
+  -webkit-clip-path: var(--clip);
+  clip-path: var(--clip);
+  left: calc(var(--borderWidth) * -1px);
+  opacity: 0.5;
+  position: absolute;
+  right: calc(var(--borderWidth) * -1px);
+  top: calc(var(--borderWidth) * -1px);
+  z-index: 1;
+}</code></pre>
+<p>We can target each element and assign a clip and color with CSS variables.</p>
+<pre rel="CSS"><code class="language-css">button span:nth-of-type(1) {
+  --bg: #00f;
+  --clip: polygon(0 0, 100% 0, 50% 50%, 50% 50%);
+}
+button span:nth-of-type(2) {
+  --bg: #f00;
+  --clip: polygon(100% 0, 100% 100%, 50% 50%);
+}
+button span:nth-of-type(3) {
+  --bg: #008000;
+  --clip: polygon(0 100%, 100% 100%, 50% 50%);
+}
+button span:nth-of-type(4) {
+  --bg: #800080;
+  --clip: polygon(0 0, 0 100%, 50% 50%);
+}</code></pre>
+<p>Cool. To test this, let&#8217;s change the opacity on hover.</p>
+<pre rel="CSS"><code class="language-css">button span:nth-of-type(1):hover,
+button span:nth-of-type(2):hover,
+button span:nth-of-type(3):hover,
+button span:nth-of-type(4):hover {
+  opacity: 1;
+}</code></pre>
+<figure id="post-295344" class="align-left media-295344"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/09/s_F790914C0EB8AF7D7ED52D576A2D1ABF09C6B554530F0EEB9D42E134D37BA833_1567183872555_HOVER_NOT_QUITE.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>So close</figcaption></figure>
+<p>Uh-oh. There&#8217;s an issue here. If we enter and hover one segment but then hover over another, the fill direction would change. That&#8217;s going to look off. To fix this, we can set a <code>z-index</code> and <code>clip-path</code> on hover so that a segment fills the space.</p>
+<pre rel="CSS"><code class="language-css">button span:nth-of-type(1):hover,
+button span:nth-of-type(2):hover,
+button span:nth-of-type(3):hover,
+button span:nth-of-type(4):hover {
+  --clip: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  opacity: 1;
+  z-index: 2;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="YzKQBBQ" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pure CSS Directional Awareness w/ clip-path &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/YzKQBBQ/"><br />
+  Pure CSS Directional Awareness w/ clip-path &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Putting it all together</h3>
+<p>We know how to create the fill animation, and we know how to detect direction. How can we put the two together? Use the <a href="https://css-tricks.com/almanac/selectors/g/general-sibling/">sibling combinator</a>!</p>
+<p>Doing so means when we hover a directional segment, we can reveal a particular fill element.</p>
+<p>First, let&#8217;s update the markup.</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;
+  Boo!
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;b&gt;Boo!&lt;/b&gt;
+  &lt;b&gt;Boo!&lt;/b&gt;
+  &lt;b&gt;Boo!&lt;/b&gt;
+  &lt;b&gt;Boo!&lt;/b&gt;
+&lt;/button&gt;</code></pre>
+<p>Now, we can update the CSS. Referring to our left-to-right fill, we can reuse the styling. We only need to set a specific <code>clip-path</code> for each element. I&#8217;ve approached the ordering the same as some property values. The first child is top, the second is right, and so on. </p>
+<pre rel="CSS"><code class="language-css">button b:nth-of-type(1) {
+  --clip: inset(0 0 100% 0);
+}
+button b:nth-of-type(2) {
+  --clip: inset(0 0 0 100%);
+}
+button b:nth-of-type(3) {
+  --clip: inset(100% 0 0 0);
+}
+button b:nth-of-type(4) {
+  --clip: inset(0 100% 0 0);
+}</code></pre>
+<p>The last piece is to update the <code>clip-path</code> for the relevant element when hovering the paired segment.</p>
+<pre rel="CSS"><code class="language-css">button span:nth-of-type(1):hover ~ b:nth-of-type(1),
+button span:nth-of-type(2):hover ~ b:nth-of-type(2),
+button span:nth-of-type(3):hover ~ b:nth-of-type(3),
+button span:nth-of-type(4):hover ~ b:nth-of-type(4) {
+  --clip: inset(0 0 0 0);
+}</code></pre>
+<p>Tada! We have a pure CSS ghost button with directional awareness.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="ZEzyPQG" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pure CSS Ghost Button w/ Directional Awareness &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/ZEzyPQG/"><br />
+  Pure CSS Ghost Button w/ Directional Awareness &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Accessibility</h3>
+<p>In its current state, the button isn&#8217;t accessible.</p>
+<figure id="post-295346" class="align-left media-295346"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/09/s_F790914C0EB8AF7D7ED52D576A2D1ABF09C6B554530F0EEB9D42E134D37BA833_1567184369494_Screenshot2019-08-29at22.58.18.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The extra markup is read by VoiceOver.</figcaption></figure>
+<p>Those extra elements aren&#8217;t helping much as a screen reader will repeat the content four times. We need to hide those elements from a screen reader.</p>
+<pre rel="HTML"><code class="language-html">&lt;button&gt;
+  Boo!
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;b aria-hidden="true"&gt;Boo!&lt;/b&gt;
+  &lt;b aria-hidden="true"&gt;Boo!&lt;/b&gt;
+  &lt;b aria-hidden="true"&gt;Boo!&lt;/b&gt;
+  &lt;b aria-hidden="true"&gt;Boo!&lt;/b&gt;
+&lt;/button&gt;</code></pre>
+<p>No more repeated content.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="jh3y" data-slug-hash="wvwqomy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Accessible Pure CSS Ghost Button w/ Directional Awareness &#x1f47b;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/wvwqomy/"><br />
+  Accessible Pure CSS Ghost Button w/ Directional Awareness &#x1f47b;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>That’s it!</h3>
+<p>With a little extra markup and some CSS trickery, we can create ghost buttons with directional awareness. Use a preprocessor or put together a component in your app and you won&#8217;t need to write out all the HTML, too.</p>
+<p>Here&#8217;s a demo making use of inline CSS variables to control the button color.</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="jh3y" data-slug-hash="jjRezM" style="height: 459px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pure CSS Ghost Buttons w/ Directional Awareness &#x2728;&#x1f47b;&#x1f60e;">
+  <span>See the Pen <a href="https://codepen.io/jh3y/pen/jjRezM/"><br />
+  Pure CSS Ghost Buttons w/ Directional Awareness &#x2728;&#x1f47b;&#x1f60e;</a> by Jhey (<a href="https://codepen.io/jh3y">@jh3y</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/">Ghost Buttons with Directional Awareness in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/ghost-buttons-with-directional-awareness-in-css/feed/</wfw:commentRss>
+			<slash:comments>18</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">295334</post-id>	</item>
+	</channel>
+</rss>

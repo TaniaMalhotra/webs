@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>web animation api &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/web-animation-api/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 16 Jun 2020 14:40:06 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Everything You Need to Know About FLIP Animations in React</title>
+		<link>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/</link>
+					<comments>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/#respond</comments>
+		
+		<dc:creator><![CDATA[Kirill Vasiltsov]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2020 14:40:04 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[flip]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[web animation api]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312119</guid>
+
+					<description><![CDATA[<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &#160;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+<p>One of &#8230; <a href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Everything You Need to Know About FLIP Animations in React&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &nbsp;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+
+
+
+<p>One of the most efficient <em>approaches</em> to animation is <a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">FLIP</a>. FLIP requires a bit of JavaScript to do its thing.&nbsp;</p>
+
+
+
+<p>Let’s take a look at the intersection of using the WAAPI, FLIP, and integrating all that into React. But we’ll start without React first, then get to that.</p>
+
+
+
+<span id="more-312119"></span>
+
+
+
+<h3>FLIP and WAAPI</h3>
+
+
+
+<p><a href="https://aerotwist.com/blog/flip-your-animations/">FLIP animations</a> are made much easier by the WAAPI!</p>
+
+
+
+<p><strong>Quick refresher on FLIP:</strong> The big idea is that you position the element <em>where you want it to end up first</em>. Next, apply transforms to move it to the starting position. Then unapply those transforms.&nbsp;</p>
+
+
+
+<p>Animating transforms is super efficient, thus FLIP is super efficient. Before WAAPI, we had to directly manipulate element’s styles to set transforms and wait for the next frame to unset/invert it:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// FLIP Before the WAAPI
+el.style.transform = `translateY(200px)`;
+ 
+requestAnimationFrame(() => {
+  el.style.transform = '';
+});</code></pre>
+
+
+
+<p>A lot of libraries are built upon this approach. &nbsp;However, there are several problems with this:</p>
+
+
+
+<ul><li>Everything feels like a huge hack.</li><li>It is extremely difficult to reverse the FLIP animation. While CSS transforms are reversed “for free” once a class is removed, this is not the case here. Starting a new FLIP while a previous one is running can cause glitches. Reversing requires parsing a transform matrix with <code>getComputedStyles</code> and using it to calculate the current dimensions before setting a new animation.</li><li>Advanced animations are close to impossible. For example, to prevent distorting a scaled parent’s children, we need to have access to current scale value each frame. This can only be done by parsing the transform matrix.</li><li>There’s lots of browser gotchas. For example, <a href="https://github.com/joshwcomeau/react-flip-move/blob/12f58727d38ac33cefb0fe20c91d5d7e19485a3c/src/FlipMove.js#L420">sometimes</a> getting a FLIP animation to work flawlessly in Firefox requires calling <code>requestAnimationFrame</code> twice:</li></ul>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    el.style.transform = '';
+  });
+});</code></pre>
+
+
+
+<p>We get none of these problems when WAAPI is used. Reversing can be painlessly done with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Animation/reverse">the <code>reverse</code>&nbsp;function</a>.The counter-scaling of children <a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">is also possible</a>. And when there is a bug, it is easy to pinpoint the exact culprit since we’re only working with simple functions, like <code>animate</code>&nbsp;and <code>reverse</code>, rather than combing through things like the <code>requestAnimationFrame</code> approach.&nbsp;</p>
+
+
+
+<p>Here’s the outline of the WAAPI version:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">el.classList.toggle('someclass');
+const keyframes = /* Calculate the size/position diff */;
+el.animate(keyframes, 2000);</code></pre>
+
+
+
+<h3>FLIP and React</h3>
+
+
+
+<p>To understand how FLIP animations work in React, it is important to know <em>how</em> and, most importantly, <em>why</em> they work in plain JavaScript. Recall the anatomy of a FLIP animation:</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=299%2C723&#038;ssl=1" alt="Diagram. Cache current site and position, make a style change, get new size and position, calculate the difference, set transforms, and cancel transforms. Each item has a purple background, except the last one, indicating they happen before paint." class="wp-image-312120" width="299" height="723" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?w=398&amp;ssl=1 398w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=124%2C300&amp;ssl=1 124w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Everything that has a purple background needs to happen before the “paint” step of rendering. Otherwise, we would see a flash of new styles for a moment which is not good. Things get a little bit more complicated in React since all DOM updates are done for us.</p>
+
+
+
+<p>The magic of FLIP animations is that an element is transformed <em>before</em> the browser has a chance to paint. So how do we know the “before paint” moment in React?</p>
+
+
+
+<p>Meet <a href="https://reactjs.org/docs/hooks-reference.html%23uselayouteffect">the <code>useLayoutEffect</code> hook</a>. If you even wondered what is for… this is it! Anything we pass in this callback happens synchronously <em>after</em> DOM updates but <em>before</em> paint. In other words, this is a great place to set up a FLIP!</p>
+
+
+
+<p>Let us do something the FLIP technique is very good for: <strong>animating the DOM position.</strong> There’s nothing CSS can do if we want to animate how an element moves from one DOM position to another. (Imagine completing a task in a to-do list and moving it to the list of “completed” tasks like when you click on items in the Pen below.)</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mdeYMdX" src="//codepen.io/anon/embed/mdeYMdX?height=450&amp;theme-id=1&amp;slug-hash=mdeYMdX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mdeYMdX" title="CodePen Embed mdeYMdX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let&#8217;s look at the simplest example. Clicking on any of the two squares in the following Pen makes them swap positions. Without FLIP, it would happen instantly.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNjaMrK" src="//codepen.io/anon/embed/oNjaMrK?height=450&amp;theme-id=1&amp;slug-hash=oNjaMrK&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNjaMrK" title="CodePen Embed oNjaMrK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s a lot going on there. Notice how all work happens inside lifecycle hook callbacks: <code>useEffect</code> and <code>useLayoutEffect</code>. What makes it a little bit confusing is that the timeline of our FLIP animation is not obvious from code alone since it happens across <strong>two</strong> React renders. Here’s the anatomy of a React FLIP animation to show the different order of operations:</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?fit=1024%2C1024&amp;ssl=1" alt="Diagram. Cache the size and position, retrieve previous size and position from cache, get new size and position, calculate the difference, and play the animation." class="wp-image-312122" width="768" height="767" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?w=1229&amp;ssl=1 1229w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1024%2C1024&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=150%2C150&amp;ssl=1 150w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=768%2C767&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1000%2C999&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=100%2C100&amp;ssl=1 100w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Although <code>useEffect</code> always runs after <code>useLayoutEffect</code> and after browser paint, it is important that we cache the element&#8217;s position and size after the first render. We won’t get a chance to do it on second render because <code>useLayoutEffect</code> is run after all DOM updates. But the procedure is essentially the same as with vanilla FLIP animations.</p>
+
+
+
+<h3>Caveats</h3>
+
+
+
+<p>Like most things, there are some caveats to consider when working with FLIP in React.</p>
+
+
+
+<h4>Keep it under 100ms</h4>
+
+
+
+<p>A FLIP animation is calculation. Calculation takes time and before you can show that smooth 60fps transform you need to do quite some work. People won’t notice a delay if it is under 100ms, so make sure everything is below that. The Performance tab in DevTools is a good place to check that.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?fit=1024%2C275&amp;ssl=1" alt="" class="wp-image-312123" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?w=2129&amp;ssl=1 2129w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=300%2C81&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1024%2C275&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=768%2C206&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1536%2C413&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=2048%2C550&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1000%2C269&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h4>Unnecessary renders</h4>
+
+
+
+<p>We can’t use useState for caching size, positions and animation objects because every <code>setState</code> will cause an unnecessary render and slow down the app. It can even cause bugs in the worst of cases. Try using <code>useRef</code> instead and think of it as an object that can be mutated without rendering anything.</p>
+
+
+
+<h4>Layout thrashing</h4>
+
+
+
+<p>Avoid repeatedly triggering browser layout. In the context of FLIP animations, that means avoid looping through elements and reading their position with <code>getBoundingClientRect</code>, then immediately animating them with animate. Batch “reads” and “writes” whenever possible. This will allow for extremely smooth animations.</p>
+
+
+
+<h4>Animation canceling</h4>
+
+
+
+<p>Try randomly clicking on the squares in <a href="https://codepen.io/jlkiri/pen/oNjaMrK">the earlier demo</a> while they move, then again after they stop. You will see glitches. In real life, users will interact with elements while they move, so it’s worth making sure they are canceled, paused, and updated smoothly.&nbsp;</p>
+
+
+
+<p>However, not all animations can be reversed with <code>reverse</code>. Sometimes, we want them to stop and then move to a new position (like when randomly shuffling a list of elements). In this case, we need to:</p>
+
+
+
+<ul><li>obtain a size/position of a moving element</li><li>finish the current animation</li><li>calculate the new size and position differences</li><li>start a new animation</li></ul>
+
+
+
+<p>In React, this can be harder than it seems. I wasted a lot of time struggling with it. The current animation object must be cached. A good way to do it is to create a <code>Map</code> so to get the animation by an ID. Then, we need to obtain the size and position of the moving element. There are two ways to do it:</p>
+
+
+
+<ol><li><strong>Use a function component:</strong> Simply loop through every animated element right in the body of the function and cache the current positions.</li><li><strong>Use a class component:</strong> Use the <a href="https://reactjs.org/docs/react-component.html%23getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate</code></a> lifecycle method.</li></ol>
+
+
+
+<p>In fact, official React docs recommend using <code>getSnapshotBeforeUpdate</code> “because there may be delays between the “render” phase lifecycles (like <code>render</code>) and “commit” phase lifecycles (like <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>).” However, there is no hook counterpart of this method yet. I found that using the body of the function component is fine enough.</p>
+
+
+
+<h4>Don’t fight the browser</h4>
+
+
+
+<p>I’ve said it before, but avoid fighting the browser and try to make things happen the way the browser would do it. If we need to animate a simple size change, then consider whether CSS would suffice (e.g. &nbsp;<code>transform: scale()</code>) . I’ve found that FLIP animations are used best where browsers really can’t help:</p>
+
+
+
+<ul><li>Animating DOM position change (as we did above)</li><li>Sharing layout animations</li></ul>
+
+
+
+<p>The second is a more complicated version of the first. There are two DOM elements that act and look as one changing its position (while another is unmounted/hidden). This tricks enables some cool animations. For example, this animation is made with a library I built called <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a> that uses this approach:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wvKbeqy" src="//codepen.io/anon/embed/wvKbeqy?height=450&amp;theme-id=1&amp;slug-hash=wvKbeqy&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wvKbeqy" title="CodePen Embed wvKbeqy" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h4>Libraries</h4>
+
+
+
+<p>There are quite a few libraries that make FLIP animations in React easier and abstract the boilerplate. Ones that are currently maintained actively include: <a href="https://github.com/aholachek/react-flip-toolkit"><code>react-flip-toolkit</code></a> and mine, <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a>.</p>
+
+
+
+<p>If you do not mind something heavier but capable of more general animations, <a href="https://www.framer.com/motion/">check out <code>framer-motion</code></a>. It also does cool shared layout animations! <a href="https://css-tricks.com/video-screencasts/176-working-with-framer-motion/">There is a video</a> digging into that library.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Resources and references</h3>
+
+
+
+<ul><li><a href="https://joshwcomeau.com/react/animating-the-unanimatable/">Animating the Unanimatable</a> by Josh W. Comeau</li><li><a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">Build performant expand &amp; collapse animation</a>s by Paul Lewis and Stephen McGruer</li><li><a href="https://inventingwithmonster.io/20200409-inside-magic-motion/">The Magic Inside Magic Motion</a> by Matt Perry</li><li><a href="https://twitter.com/keyframers/status/1255510937014018050">Using animate CSS variables from JavaScript</a>, tweeted by @keyframers</li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3/#inner_workings_of_a_renderer_process">Inside look at modern web browser (part 3)</a> by Mariko Kosaka</li><li><a href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/">Building a Complex UI Animation in React, Simply</a> by Alex Holachek</li><li><a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">Animating Layouts with the FLIP Technique</a> by David Khourshid</li><li><a href="https://dev.to/jlkiri/smooth-animations-with-react-hooks-again-51a4">Smooth animations with React Hooks, again</a> by Kirill Vasiltsov&nbsp;</li><li><a href="https://blog.jayantbhawal.in/shared-element-transitions-with-react-hooks/">Shared element transition with React Hooks</a> by Jayant Bhawal</li></ul>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312119</post-id>	</item>
+	</channel>
+</rss>

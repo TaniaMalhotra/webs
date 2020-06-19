@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Sarah Fossheim &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/sarahfossheim/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 23 Apr 2020 22:10:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Creating Playful Effects With CSS Text Shadows</title>
+		<link>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/</link>
+					<comments>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Fossheim]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2020 13:58:18 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[text effect]]></category>
+		<category><![CDATA[text-shadow]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306182</guid>
+
+					<description><![CDATA[<p>Let’s have a look at how we can use the CSS text-shadow property to create truly 3D-looking text. You might think of text-shadow as being able to apply blurred, gradient-looking color behind text, and you would be right! But just like box-shadow, you can control how blurred the shadow is, including taking it all the way down to no blur at all. That, combined with comma-separating shadows and stacking them, is the CSS trickery we’ll be doing here.</p>
+<p>By the &#8230; <a href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating Playful Effects With CSS Text Shadows&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/">Creating Playful Effects With CSS Text Shadows</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Let’s have a look at how we can use the CSS text-shadow property to create truly 3D-looking text. You might think of text-shadow as being able to apply blurred, gradient-looking color behind text, and you would be right! But just like box-shadow, you can control how blurred the shadow is, including taking it all the way down to no blur at all. That, combined with comma-separating shadows and stacking them, is the CSS trickery we’ll be doing here.</p>
+
+
+
+<span id="more-306182"></span>
+
+
+
+<p>By the end, we’ll have something that looks like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?fit=1024%2C636&amp;ssl=1" alt="" class="wp-image-306183" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?w=1456&amp;ssl=1 1456w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=300%2C186&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=1024%2C636&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=768%2C477&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/uqOihAQg.png?resize=1000%2C621&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Quick refresher on text-shadow</h3>
+
+
+
+<p>The syntax is like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.el {
+  text-shadow: [x-offset] [y-offset] [blur] [color];
+}</code></pre>
+
+
+
+<ul><li><code>x-offset</code>: Position on the x-axis. A positive value moves the shadow to the right, a negative value moves the shadow to the left. <em>(required)</em></li><li><code>y-offset</code>: Position on the y-axis. A positive value moves the shadow to the bottom, a negative value moves the shadow to the top. <em>(required)</em></li><li><code>blur</code>: How much blur the shadow should have. The higher the value, the softer the shadow. The default value is 0px (no blur). <em>(optional)</em></li><li><code>color</code>: The color of the shadow. <em>(required)</em></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOyBQP" src="//codepen.io/anon/embed/rNOyBQP?height=425&amp;theme-id=1&amp;slug-hash=rNOyBQP&amp;default-tab=result" height="425" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOyBQP" title="CodePen Embed rNOyBQP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>The first shadow</h3>
+
+
+
+<p>Let&#8217;s start creating our effect by adding just <strong>one</strong> shadow. The shadow will be pushed 6px to the right and 6px to the bottom:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="8"><code markup="tt">:root {
+  --text: #5362F6; /* Blue */
+  --shadow: #E485F8; /* Pink */
+}
+ 
+.playful {
+  color: var(--text);
+  text-shadow: 6px 6px var(--shadow);
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?fit=1024%2C601&amp;ssl=1" alt="" class="wp-image-306184" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?w=1424&amp;ssl=1 1424w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=300%2C176&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=1024%2C601&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=768%2C451&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/wV5bcyhQ.png?resize=1000%2C587&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Creating depth with more shadows</h3>
+
+
+
+<p>All we have is a flat shadow at this point — there&#8217;s not much 3D to it yet. We can create the depth and connect the shadow to the actual text by adding more <code>text-shadow</code> instances to the same element. All it takes is comma-separating them. Let&#8217;s start with adding one more in the middle:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="4"><code markup="tt">.playful {
+  color: var(--text);
+  text-shadow: 6px 6px var(--shadow),
+               3px 3px var(--shadow);
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?fit=1024%2C540&amp;ssl=1" alt="" class="wp-image-306185" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?w=1440&amp;ssl=1 1440w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=300%2C158&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=1024%2C540&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=768%2C405&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/6bWHooUg.png?resize=1000%2C528&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>This is already getting somewhere, but we&#8217;ll need to add a few more shadows for it to look good. The more steps we add, the more detailed the the end result will be. In this example, we&#8217;ll start from 6px 6px and gradually build down in 0.25px increments until we&#8217;ve reached 0.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful {
+  color: var(--text);
+  text-shadow: 
+    6px 6px        var(--shadow), 
+    5.75px 5.75px  var(--shadow), 
+    5.5px 5.5px    var(--shadow), 
+    5.25px 5.25px  var(--shadow),
+    5px 5px        var(--shadow), 
+    4.75px 4.75px  var(--shadow), 
+    4.5px 4.5px    var(--shadow), 
+    4.25px 4.25px  var(--shadow),
+    4px 4px        var(--shadow),
+    3.75px 3.75px  var(--shadow),
+    3.5px 3.5px    var(--shadow),
+    3.25px 3.25px  var(--shadow),
+    3px 3px        var(--shadow),
+    2.75px 2.75px  var(--shadow),
+    2.5px 2.5px    var(--shadow),
+    2.25px 2.25px  var(--shadow),
+    2px 2px        var(--shadow),
+    1.75px 1.75px  var(--shadow),
+    1.5px 1.5px    var(--shadow),
+    1.25px 1.25px  var(--shadow),
+    1px 1px        var(--shadow),
+    0.75px 0.75px  var(--shadow),
+    0.5px 0.5px    var(--shadow),
+    0.25px 0.25px  var(--shadow);
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_MWwPGgb" src="//codepen.io/anon/embed/MWwPGgb?height=450&amp;theme-id=1&amp;slug-hash=MWwPGgb&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed MWwPGgb" title="CodePen Embed MWwPGgb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Simplifying the code with Sass</h3>
+
+
+
+<p>The result may look good, but the code right now is quite hard to read and edit. If we want to make the shadow larger, we&#8217;d have to do a lot of copying and pasting to achieve it. For example, increasing the shadow size to 10px would mean adding 16 more shadows manually.</p>
+
+
+
+<p>And that&#8217;s where SCSS comes in the picture. We can use functions to automate generating all of the shadows.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">@function textShadow($precision, $size, $color){
+  $value: null; 
+  $offset: 0;
+  $length: $size * (1 / $precision) - 1;
+ 
+  @for $i from 0 through $length {
+    $offset: $offset + $precision;
+    $shadow: $offset + px $offset + px $color;
+    $value: append($value, $shadow, comma);
+  }
+ 
+  @return $value;
+}
+ 
+.playful {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+}</code></pre>
+
+
+
+<p>The function <code>textShadow</code> takes three different arguments: the precision, size and color of the shadow. It then creates a loop where the offset gets increased by <code>$precision</code> (in this case, it’s 0.25px) until it reaches the total size (in this case 6px) of the shadow.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_poJxVob" src="//codepen.io/anon/embed/poJxVob?height=450&amp;theme-id=1&amp;slug-hash=poJxVob&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed poJxVob" title="CodePen Embed poJxVob" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This way we can easily increase the size or precision of the shadow. For example, to create a shadow that&#8217;s 10px large and increases with 0.1px, we would only have to change this in our code:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">text-shadow: textShadow(0.1, 10, #E485F8);</code></pre>
+
+
+
+<h3>Alternating colors</h3>
+
+
+
+<p>We want to spice things up a bit by going for alternating colors. We will split up the text in individual letters wrapped in spans (this can be done manually, or automated with <a href="https://fossheim.io/writing/posts/react-text-splitting/">React</a> or <a href="https://css-irl.info/how-to-accessibly-split-text/">JavaScript</a>). The output will look like this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;p class="playful" aria-label="Wash your hands!">
+  &lt;span aria-hidden="true">W&lt;/span>&lt;span aria-hidden="true">a&lt;/span>&lt;span aria-hidden="true">s&lt;/span>&lt;span aria-hidden="true">h&lt;/span> ...
+&lt;/p></code></pre>
+
+
+
+<p>Then we can use the <code>:nth-child()</code> selector on the spans to change the color of their text and shadow.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span:nth-child(2n) {
+  color: #ED625C;
+  text-shadow: textShadow(0.25, 6, #F2A063);
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_poJxVbN" src="//codepen.io/anon/embed/poJxVbN?height=450&amp;theme-id=1&amp;slug-hash=poJxVbN&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed poJxVbN" title="CodePen Embed poJxVbN" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If we had done this in vanilla CSS, then here&#8217;s what we&#8217;d end up with:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful span {
+  color: var(--text);
+  text-shadow: 
+    6px 6px var(--shadow),
+    5.75px 5.75px var(--shadow),
+    5.5px 5.5px var(--shadow),
+    5.25px 5.25px var(--shadow),
+    5px 5px var(--shadow),
+    4.75px 4.75px var(--shadow),
+    4.5px 4.5px var(--shadow),
+    4.25px 4.25px var(--shadow),
+    4px 4px var(--shadow),
+    3.75px 3.75px var(--shadow),
+    3.5px 3.5px var(--shadow),
+    3.25px 3.25px var(--shadow),
+    3px 3px var(--shadow),
+    2.75px 2.75px var(--shadow),
+    2.5px 2.5px var(--shadow),
+    2.25px 2.25px var(--shadow),
+    2px 2px var(--shadow),
+    1.75px 1.75px var(--shadow),
+    1.5px 1.5px var(--shadow),
+    1.25px 1.25px var(--shadow),
+    1px 1px var(--shadow),
+    0.75px 0.75px var(--shadow),
+    0.5px 0.5px var(--shadow),
+    0.25px 0.25px var(--shadow);
+}
+ 
+.playful span:nth-child(2n) {
+  --text: #ED625C;
+  --shadow: #F2A063;
+}</code></pre>
+
+
+
+<p>We can repeat the same a couple of times with other colors and indexes until we achieve a pattern we like:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzXJLXR" src="//codepen.io/anon/embed/YzXJLXR?height=450&amp;theme-id=1&amp;slug-hash=YzXJLXR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzXJLXR" title="CodePen Embed YzXJLXR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Bonus points: Adding animation</h3>
+
+
+
+<p>Using the same principles, we can bring the text to life even more by adding animations. First, we&#8217;ll add a repeating animation that makes each span move up and down:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.playful span {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+  position: relative;
+  animation: scatter 1.75s infinite;
+}</code></pre>
+
+
+
+<p>We can optimize this a little further by using the <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/"><code>prefers-reduced-motion</code></a> media query. That way, folks who don’t want the animation won’t get it.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span {
+  color: #5362F6;
+  text-shadow: textShadow(0.25, 6, #E485F8);
+  position: relative;
+  animation: scatter 1.75s infinite;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  animation: none;
+}</code></pre>
+
+
+
+<p>Then, in each <code>nth-child(n)</code> we&#8217;ll add a different animation delay.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.playful span:nth-child(2n) {
+  color: #ED625C;
+  text-shadow: textShadow(0.25, 6, #F2A063);
+  animation-delay: 0.3s;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ExjdLRp" src="//codepen.io/anon/embed/ExjdLRp?height=450&amp;theme-id=1&amp;slug-hash=ExjdLRp&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ExjdLRp" title="CodePen Embed ExjdLRp" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-playful-effects-with-css-text-shadows/">Creating Playful Effects With CSS Text Shadows</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-playful-effects-with-css-text-shadows/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306182</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	
+	>
+<channel>
+	<title>
+	Comments on: A Complete Guide to CSS Functions	</title>
+	<atom:link href="https://css-tricks.com/complete-guide-to-css-functions/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com/complete-guide-to-css-functions/</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 16 Jun 2020 21:16:07 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+	<item>
+		<title>
+		By: Eric Bailey		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1757796</link>
+
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2020 21:16:07 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1757796</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://css-tricks.com/complete-guide-to-css-functions/#comment-1757709&quot;&gt;Ana Tudor&lt;/a&gt;.
+
+Thanks for the reply, Ana. I really respect your work and appreciate the time you spent pointing out the above. I&#039;ll try and get updates from your feedback incorporated as soon as possible.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://css-tricks.com/complete-guide-to-css-functions/#comment-1757709">Ana Tudor</a>.</p>
+<p>Thanks for the reply, Ana. I really respect your work and appreciate the time you spent pointing out the above. I&#8217;ll try and get updates from your feedback incorporated as soon as possible.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Ana Tudor		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1757709</link>
+
+		<dc:creator><![CDATA[Ana Tudor]]></dc:creator>
+		<pubDate>Sat, 13 Jun 2020 09:19:06 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1757709</guid>
+
+					<description><![CDATA[A few notes:
+
+&lt;ol&gt;
+&lt;li&gt;&quot;sizing &#038; scaling functions&quot; is incorrect. None of those functions performs sizing. &lt;code&gt;translate[x&#124;y&#124;z&#124;3d]&lt;/code&gt; (&lt;a href=&quot;https://en.wikipedia.org/wiki/Translation_(geometry)&quot; rel=&quot;nofollow ugc&quot;&gt;translation&lt;/a&gt;), &lt;code&gt;rotate[x&#124;y&#124;z&#124;3d]&lt;/code&gt; (&lt;a href=&quot;https://en.wikipedia.org/wiki/Rotation_(mathematics)&quot; rel=&quot;nofollow ugc&quot;&gt;rotation&lt;/a&gt;), &lt;code&gt;skew[x&#124;y]&lt;/code&gt; (&lt;a href=&quot;https://en.wikipedia.org/wiki/Shear_matrix&quot; rel=&quot;nofollow ugc&quot;&gt;shearing&lt;/a&gt;) don&#039;t perform scaling either. They are &lt;em&gt;transform functions&lt;/em&gt;, just like &lt;code&gt;matrix&lt;/code&gt; and &lt;code&gt;matrix3d&lt;/code&gt;, which, as far as I know, are not deprecated. At least &lt;a href=&quot;https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d&quot; rel=&quot;nofollow ugc&quot;&gt;the spec says nothing about them being deprecated&lt;/a&gt;, so I&#039;m not sure where that info comes from. The source linked in that section gives me a 404. What has been deprecated for almost a decade however is the &lt;code&gt;skew(x, y)&lt;/code&gt; function (&lt;a href=&quot;https://drafts.csswg.org/css-transforms/#two-d-transform-functions&quot; rel=&quot;nofollow ugc&quot;&gt;spec&lt;/a&gt;). It was even removed from Firefox in August 2012, but it was later reintroduced for backwards compatibility reasons. Also on skewing: &quot;amount of distortion is proportionate to the angle and distance declared&quot; - there&#039;s no distance in the &lt;code&gt;skew[x&#124;y]&lt;/code&gt; functions. &lt;a href=&quot;https://css-tricks.com/transforms-on-svg-elements/#skewing&quot;&gt;This section&lt;/a&gt; explains how skewing works, as well as the difference between how it&#039;s applied on HTML and SVG elements.&lt;/li&gt;
+&lt;/ol&gt;
+
+And note that stretching and squashing is only a tiny part of what can be done with transform functions.
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sqrt()&lt;/code&gt;, &lt;code&gt;pow()&lt;/code&gt; and &lt;code&gt;hypot()&lt;/code&gt; are not trigonometric functions. Together with &lt;code&gt;log()&lt;/code&gt; and &lt;code&gt;exp()&lt;/code&gt;, they&#039;re classed as exponential functions. There are also sign-related functions (&lt;code&gt;abs()&lt;/code&gt; and &lt;code&gt;sign()&lt;/code&gt;) and stepped value functions (&lt;code&gt;round()&lt;/code&gt;, &lt;code&gt;mod()&lt;/code&gt;, &lt;code&gt;rem()&lt;/code&gt;). Here&#039;s &lt;a href=&quot;https://drafts.csswg.org/css-values-4/&quot; rel=&quot;nofollow ugc&quot;&gt;the spec for that&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;conic-gradient()&lt;/code&gt; actually has decent support now if we are to ignore pre-Chromium Edge. Chromium browsers support it. Safari supports it. Even Firefox supports it behind a flag - go to &lt;code&gt;about:config&lt;/code&gt;, search for the &lt;code&gt;layout.css.conic-gradient.enabled&lt;/code&gt; flag and set its value to &lt;code&gt;true&lt;/code&gt; (it&#039;s &lt;code&gt;false&lt;/code&gt; by default, double-clicking sets it to &lt;code&gt;true&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/ff_flag.png&quot; alt=&quot;screeshot of enabling the flag&quot; /&gt;
+
+Same goes for &lt;code&gt;min()&lt;/code&gt;, &lt;code&gt;max()&lt;/code&gt; and &lt;code&gt;clamp()&lt;/code&gt;. Leaving aside old Edge/ IE, which surely won&#039;t evolve to support them, they are actually well-supported.]]></description>
+			<content:encoded><![CDATA[<p>A few notes:</p>
+<ol>
+<li>&#8220;sizing &amp; scaling functions&#8221; is incorrect. None of those functions performs sizing. <code>translate[x|y|z|3d]</code> (<a href="https://en.wikipedia.org/wiki/Translation_(geometry)" rel="nofollow ugc">translation</a>), <code>rotate[x|y|z|3d]</code> (<a href="https://en.wikipedia.org/wiki/Rotation_(mathematics)" rel="nofollow ugc">rotation</a>), <code>skew[x|y]</code> (<a href="https://en.wikipedia.org/wiki/Shear_matrix" rel="nofollow ugc">shearing</a>) don&#8217;t perform scaling either. They are <em>transform functions</em>, just like <code>matrix</code> and <code>matrix3d</code>, which, as far as I know, are not deprecated. At least <a href="https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d" rel="nofollow ugc">the spec says nothing about them being deprecated</a>, so I&#8217;m not sure where that info comes from. The source linked in that section gives me a 404. What has been deprecated for almost a decade however is the <code>skew(x, y)</code> function (<a href="https://drafts.csswg.org/css-transforms/#two-d-transform-functions" rel="nofollow ugc">spec</a>). It was even removed from Firefox in August 2012, but it was later reintroduced for backwards compatibility reasons. Also on skewing: &#8220;amount of distortion is proportionate to the angle and distance declared&#8221; &#8211; there&#8217;s no distance in the <code>skew[x|y]</code> functions. <a href="https://css-tricks.com/transforms-on-svg-elements/#skewing">This section</a> explains how skewing works, as well as the difference between how it&#8217;s applied on HTML and SVG elements.</li>
+</ol>
+<p>And note that stretching and squashing is only a tiny part of what can be done with transform functions.</p>
+<ol>
+<li><code>sqrt()</code>, <code>pow()</code> and <code>hypot()</code> are not trigonometric functions. Together with <code>log()</code> and <code>exp()</code>, they&#8217;re classed as exponential functions. There are also sign-related functions (<code>abs()</code> and <code>sign()</code>) and stepped value functions (<code>round()</code>, <code>mod()</code>, <code>rem()</code>). Here&#8217;s <a href="https://drafts.csswg.org/css-values-4/" rel="nofollow ugc">the spec for that</a>.</li>
+<li>
+<p><code>conic-gradient()</code> actually has decent support now if we are to ignore pre-Chromium Edge. Chromium browsers support it. Safari supports it. Even Firefox supports it behind a flag &#8211; go to <code>about:config</code>, search for the <code>layout.css.conic-gradient.enabled</code> flag and set its value to <code>true</code> (it&#8217;s <code>false</code> by default, double-clicking sets it to <code>true</code>).</p>
+</li>
+</ol>
+<p><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/ff_flag.png" alt="screeshot of enabling the flag" /></p>
+<p>Same goes for <code>min()</code>, <code>max()</code> and <code>clamp()</code>. Leaving aside old Edge/ IE, which surely won&#8217;t evolve to support them, they are actually well-supported.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Neil		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756956</link>
+
+		<dc:creator><![CDATA[Neil]]></dc:creator>
+		<pubDate>Fri, 22 May 2020 20:25:16 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756956</guid>
+
+					<description><![CDATA[I forgot to include in my 1st comment that I think this article is a wonderful piece of work. Hats off to the person(s) who did the work!!]]></description>
+			<content:encoded><![CDATA[<p>I forgot to include in my 1st comment that I think this article is a wonderful piece of work. Hats off to the person(s) who did the work!!</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Neil		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756955</link>
+
+		<dc:creator><![CDATA[Neil]]></dc:creator>
+		<pubDate>Fri, 22 May 2020 20:10:45 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756955</guid>
+
+					<description><![CDATA[re: fit-content() function
+what am I missing here? 250 px vs 350 px in your example...
+In this example, we are using an argument of 250px for the fit-content() function. This tells the browser to restrict the first grid column to a width of 350px,]]></description>
+			<content:encoded><![CDATA[<p>re: fit-content() function<br />
+what am I missing here? 250 px vs 350 px in your example&#8230;<br />
+In this example, we are using an argument of 250px for the fit-content() function. This tells the browser to restrict the first grid column to a width of 350px,</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Jakub T. Jankiewicz		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756534</link>
+
+		<dc:creator><![CDATA[Jakub T. Jankiewicz]]></dc:creator>
+		<pubDate>Sat, 09 May 2020 13:35:00 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756534</guid>
+
+					<description><![CDATA[Nice, especially has and other functions that are not supported by any browser: https://developer.mozilla.org/en-US/docs/Web/CSS/:has]]></description>
+			<content:encoded><![CDATA[<p>Nice, especially has and other functions that are not supported by any browser: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has" rel="nofollow ugc">https://developer.mozilla.org/en-US/docs/Web/CSS/:has</a></p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Amit Biswas		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756367</link>
+
+		<dc:creator><![CDATA[Amit Biswas]]></dc:creator>
+		<pubDate>Wed, 06 May 2020 03:31:35 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756367</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://css-tricks.com/complete-guide-to-css-functions/#comment-1756327&quot;&gt;sandywitch&lt;/a&gt;.
+
+I am always grateful to css-tricks. This article is written in a great way and helpful for anyone.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://css-tricks.com/complete-guide-to-css-functions/#comment-1756327">sandywitch</a>.</p>
+<p>I am always grateful to css-tricks. This article is written in a great way and helpful for anyone.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: impshum		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756353</link>
+
+		<dc:creator><![CDATA[impshum]]></dc:creator>
+		<pubDate>Tue, 05 May 2020 12:46:42 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756353</guid>
+
+					<description><![CDATA[&lt;code&gt;calc()&lt;/code&gt; is absolutely fantastic! That is all.]]></description>
+			<content:encoded><![CDATA[<p><code>calc()</code> is absolutely fantastic! That is all.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Amayi Okiru		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756341</link>
+
+		<dc:creator><![CDATA[Amayi Okiru]]></dc:creator>
+		<pubDate>Tue, 05 May 2020 06:24:50 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756341</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://css-tricks.com/complete-guide-to-css-functions/#comment-1756328&quot;&gt;Emanuel&lt;/a&gt;.
+
+Very nice article please &lt;em&gt;more of this please&lt;/em&gt;]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://css-tricks.com/complete-guide-to-css-functions/#comment-1756328">Emanuel</a>.</p>
+<p>Very nice article please <em>more of this please</em></p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Eric Bailey		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756333</link>
+
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Mon, 04 May 2020 21:23:59 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756333</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://css-tricks.com/complete-guide-to-css-functions/#comment-1756328&quot;&gt;Emanuel&lt;/a&gt;.
+
+Possibly! You might want to check out &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Houdini&quot; rel=&quot;nofollow ugc&quot;&gt;Houdini&lt;/a&gt;. It grants access to the CSSOM, which is incredibly powerful stuff.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://css-tricks.com/complete-guide-to-css-functions/#comment-1756328">Emanuel</a>.</p>
+<p>Possibly! You might want to check out <a href="https://developer.mozilla.org/en-US/docs/Web/Houdini" rel="nofollow ugc">Houdini</a>. It grants access to the CSSOM, which is incredibly powerful stuff.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Emanuel		</title>
+		<link>https://css-tricks.com/complete-guide-to-css-functions/#comment-1756328</link>
+
+		<dc:creator><![CDATA[Emanuel]]></dc:creator>
+		<pubDate>Mon, 04 May 2020 16:43:28 +0000</pubDate>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307668#comment-1756328</guid>
+
+					<description><![CDATA[Ver good article to understant what functions in CSS are.
+But I was hoping for the answer to the question: will we ever be able to write our own functions in CSS?]]></description>
+			<content:encoded><![CDATA[<p>Ver good article to understant what functions in CSS are.<br />
+But I was hoping for the answer to the question: will we ever be able to write our own functions in CSS?</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

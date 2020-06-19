@@ -1,0 +1,1523 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>font-size &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/font-size/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Sat, 25 Apr 2020 12:34:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Accessible Font Sizing, Explained</title>
+		<link>https://css-tricks.com/accessible-font-sizing-explained/</link>
+					<comments>https://css-tricks.com/accessible-font-sizing-explained/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Thu, 23 Apr 2020 14:56:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[user agent stylesheets]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306222</guid>
+
+					<description><![CDATA[<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+<p>The answer: &#8230; <a href="https://css-tricks.com/accessible-font-sizing-explained/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessible Font Sizing, Explained&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+
+
+
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+
+
+
+<p>The answer: it’s not up to us. It Depends&#x2122;. We’ll get into some specific a bit later but, for now, let’s explore the WCAG requirements for fonts.</p>
+
+
+
+<span id="more-306222"></span>
+
+
+
+<h3>Sizing, contrast, and 300 alphabets</h3>
+
+
+
+<p>First, <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-scale.html">resizing text</a>. &nbsp;We want to provide users with low vision a way to choose how fonts are displayed. Not in a crazy way. More like the ability to increase the size by 200% while maintaining readability and avoiding content collisions and overlaps.</p>
+
+
+
+<p>Secondly, there’s <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">contrast</a>. This is why I said “it depends” on what makes an accessible font size. Text has to follow a <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23contrast-ratiodef">contrast ratio</a> of at least 4.5:1, with the exception of a large-scale text that should have a contrast ratio of at least 3:1. You can use tools like <a href="https://webaim.org/resources/contrastchecker/" class="ek-link">WebAIM’s Contrast Checker</a> to ensure your text meets the guidelines. <a href="https://css-tricks.com/understanding-web-accessibility-color-contrast-guidelines-and-ratios/">Stacy Arrelano’s deep dive on color contrast</a> provides an excellent explanation of how contrast ratios are calculated.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://css-tricks.com/wp-content/uploads/2020/04/Frame-1-1.svg" alt="A contrast ratio of 2.39 to 1 would not pass any of the WCAG checks, a ratio of 4.65 to 1 would pass only the AA check for normal text sizes and a 10.09 to 1 contrast ratio would pass both AA and AAA WCAG checks." class="wp-image-306367"/><figcaption>Example of three color contrast measurements and their WCAG test results according to WebAIM&#8217;s contrast checker.</figcaption></figure>
+
+
+
+<p>There are around 300 alphabets in the world. Some characters are simple and readable in smaller sizes, others are incredibly complex and would lose vital details at the same size. That’s why specs cannot define a font size that meets the specification for contrast ratios.</p>
+
+
+
+<p>And when we talk about “text” and “large text” sizes, we’re referring to what <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23larger-scaledef">the spec</a> calls “the minimum large print size used for those languages and the next larger standard large print size.” To meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html%23uc-levels-head">AAA criteria</a> using Roman text, for example, “large” is 18 points. Since we live in a world with different screen densities, specs measure sizes in points, not pixels, and in some displays, 18pt is equal to 24px. For other fonts, like CJK (Chinese, Japanese, Korean) or Arabic languages, the actual size in pixel would be different. Here&#8217;s the word &#8220;Hello&#8221; compared next to three other languages:</p>
+
+
+
+<p class="hello-examples"><span>Hello</span> <span>สวัสดี</span> <span>مرحبا</span> <span>你好</span></p>
+
+
+
+<p>In short, WCAG specifies <em>contrast</em> instead of <em>size</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&#038;ssl=1" alt="" class="wp-image-306256" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=300%2C89&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=768%2C228&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1000%2C297&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?w=1086&amp;ssl=1 1086w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>The WCAG recommended font size for large text has greater contrast than something half the size. Notice how a larger font size lets in more of the background that sits behind the text.</figcaption></figure>
+
+
+
+<p>Here is the good news: a browser’s default styles are accessible and we can leverage them to build an accessible font size strategy. Let’s see how.</p>
+
+
+
+<h3>Think about proportions, not size</h3>
+
+
+
+<p>The browser first loads its default styles (also known as the “User Agent stylesheet”), then those cascade to the author’s styles (the ones we define), and they both cascade and get overwritten by the user&#8217;s styles.</p>
+
+
+
+<p>As <a href="https://twitter.com/Adysandu">Adrian Sandu</a> mentions in his <a href="https://www.sitepoint.com/understanding-and-using-rem-units-in-css/">article about rem CSS units</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] there is an <a href="https://medium.com/@vamptvo/pixels-vs-ems-users-do-change-font-size-5cfb20831773">empirical study run by the people behind the Internet Archive</a> showing that there is a significant amount of users who change their default font size in the browser settings.</p></blockquote>
+
+
+
+<p>We don’t fully control the <code>font-family</code> property, either. The content might be translated, the custom font family might fail to load, or it might even be changed. For example, <a href="https://gumroad.com/l/OpenDyslexic">OpenDyslexic</a> is a typeface created to increase readability for readers with dyslexia. In some situations, we may even <a href="https://dev.to/devteam/new-feature-display-configuration-sans-serif-fontsnight-mode-beta-23o0">explicitly allow switching between a limited set of fonts</a>.&nbsp;</p>
+
+
+
+<p>Therefore, when defining fonts, we have to avoid hindering the ability of a user or a device to change our styles and let go of assumptions: <strong>we just don’t know where our content is going to land </strong>and we can’t be sure about the exact size, language, or font that’s used to display content.</p>
+
+
+
+<p>But there is one thing that we can control: <strong>proportions</strong>.</p>
+
+
+
+<p>By using CSS relative units, we can set our content to be proportional to whatever the environment tells it to be. <a href="https://www.w3.org/TR/WCAG20-TECHS/C14.html">WCAG recommends using em units to define font size</a>. There are several publications discussing the benefits of using ems and rems and it’s beyond the scope of this article. What I’d say here is to use rems and ems for <em>everything</em>, even for other properties besides font-size (with the exception of borders, where I use pixels).</p>
+
+
+
+<h3>Avoid setting a base font-size</h3>
+
+
+
+<p>My recommendation is to avoid setting <code>font-size</code> on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> elements in favor of letting the browser’s default size serve as a baseline from where we can cascade our own styles. Since this default is accessible, the content will also be accessible. The <a href="https://www.w3.org/TR/2020/WD-WCAG22-20200227/">WACAG 2.2 working draft</a> states that:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>When using text without specifying the font size, the smallest font size used on major browsers for unspecified text would be a reasonable size to assume for the font.</p></blockquote>
+
+
+
+<p>Of course, there is an exception to the rule. When using an intricate, thin, or super short x-height font, for example, you might consider bumping up the font size base to get the correct contrast. Remember that the spec defines contrast, not size:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Fonts with extraordinarily thin strokes or unusual features and characteristics that reduce the familiarity of their letter forms are harder to read, especially at lower contrast levels.</p></blockquote>
+
+
+
+<p>In the same manner, a user might change the base font size to fit their needs. A person with low vision would want to choose a larger size, while someone with an excellent vision can go smaller to gain real estate on their screens.</p>
+
+
+
+<p>It’s all about proportions: we define how much larger or smaller parts of the content should be by leveraging the default base to set the main text size.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  /* Do not set a font-size on a :root, body nor html level */
+  /* Let your main text size be decided by the browser or the user settings */ 
+}
+.small {
+  font-size: .8rem;
+}
+.large {
+  font-size: 2rem;
+}</code></pre>
+
+
+
+<h4>What about headings?</h4>
+
+
+
+<p>Since headings create a document outline that helps screenreaders navigate a document, we aren’t defining type selectors for heading sizes. <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html">Heading order is a WCAG criteria</a>: the heading elements should be organized in descending order without skipping a level, meaning that an <code>h4</code> should come right after an <code>h3</code>.</p>
+
+
+
+<p>Sometimes resetting the font sizing of all headings to <code>1rem</code> is a good strategy to make the separation of the visual treatment from the meaning mandatory.</p>
+
+
+
+<h3>How can we work with pixels?</h3>
+
+
+
+<p>Both <code>rem</code> or <code>em</code> sizing is relative to something else. For example, <code>rem</code> &nbsp;calculates size relative to the <code>&lt;html&gt;</code> &nbsp;element, where <code>em</code> is calculated by the sizing of its own element. It can be confusing, particularly since many of us came up working exclusively in pixels.</p>
+
+
+
+<p>So, how can we still think in pixels but implement relative units?</p>
+
+
+
+<p>More often than not, a typographical hierarchy is designed in pixels. Since we know about user agent stylesheets and that all major browsers have a default font size of <code>16px</code>, we can set that size for the main text and calculate the rest proportionately with <code>rem</code> units.</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Browser Name</th><th>Base Font Size</th></tr></thead><tbody><tr><td>Chrome v80.0</td><td>16px</td></tr><tr><td>FireFox v74.0</td><td>16px</td></tr><tr><td>Safari v13.0.4</td><td>16px</td></tr><tr><td>Edge v80.0 (Chromium based)</td><td>16px</td></tr><tr><td>Android (Samsung, Chrome, Firefox)</td><td>16px</td></tr><tr><td>Safari iOS</td><td>16px</td></tr><tr><td>Kindle Touch</td><td>26px (renders as 16px since it’s a high density screen)</td></tr></tbody></table></figure>
+
+
+
+<p>Now let&#8217;s explore three methods for using relative sizing in CSS by converting those pixels to rem units.</p>
+
+
+
+<h4>Method 1: The 62.5% rule</h4>
+
+
+
+<p>In order to seamlessly convert pixels to rem, we can set the root sizing to <code>62.5%</code>. That means <code>1rem</code> equals <code>10px</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+  --font-size--small: 1.4rem; /* 14px */
+  --font-size--default: 1.6rem; /* 16px */
+  --font-size--large: 2.4rem; /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 2: Using the <code>calc()</code> function</h4>
+
+
+
+<p>We can also calculate sizes with CSS <code>calc()</code> by dividing the pixel value by the font base we assume most browsers have:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --font-size--small: calc((14/16) * 1rem); /* 14px */
+  --font-size--default: calc((16/16) * 1rem); /* 16px */
+  --font-size--large: calc((24/16) * 1rem); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 3: Using a “pixel-to-rem” function</h4>
+
+
+
+<p>Similar to <code>calc()</code> , we can leverage a preprocessor to create a “pixel-to-rem” function. There are implementations of this in many flavors, including <a href="https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/">this Sass mixin</a> and<a href="https://polished.js.org/docs/%23rem"> styled-components polish</a>.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">:root {
+  --font-size--small: prem(14); /* 14px */
+  --font-size--default: prem(16); /* 16px */
+  --font-size--large: prem(24); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<p>It’s even possible to create a &#8220;pixel-to-rem&#8221; function with vanilla CSS:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Is it possible to create a &quot;Pixel to rem&quot; function without using a preprocessor? Yes!<br><br>✨See it in action!<a href="https://t.co/kPfIMxO0vw">https://t.co/kPfIMxO0vw</a><br><br>cc/ <a href="https://twitter.com/srambach?ref_src=twsrc%5Etfw">@srambach</a> <a href="https://twitter.com/matthewcarleton?ref_src=twsrc%5Etfw">@matthewcarleton</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/DontDoIt?src=hash&amp;ref_src=twsrc%5Etfw">#DontDoIt</a> <a href="https://t.co/PKxE7QCWuO">pic.twitter.com/PKxE7QCWuO</a></p>&mdash; Andres Galante (@andresgalante) <a href="https://twitter.com/andresgalante/status/1234903369774440448?ref_src=twsrc%5Etfw">March 3, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<h3>Embrace a diverse web!</h3>
+
+
+
+<p>The bottom line is this: we don’t have control over how content is consumed. Users have personal browser settings, the ability to zoom in and out, and various other ways to customize their reading experience. But we do have best CSS best practices we can use to maintain a good user experience alongside those preferences:</p>
+
+
+
+<ul><li>Work with proportions instead of explicit sizes.</li><li>Rely on default browser font sizes instead of setting it on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>.</li><li>Use <code>rem</code> units to help scale content with a user’s personal preferences.</li><li>Avoid making assumptions and let the environment decide how your content is being consumed.</li></ul>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p class="has-small-font-size">Special thanks to <a href="https://twitter.com/FranCorreaSosa" class="ek-link">Franco Correa</a> for all the help writing this post.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/accessible-font-sizing-explained/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306222</post-id>	</item>
+		<item>
+		<title>How Do You Do max-font-size in CSS?</title>
+		<link>https://css-tricks.com/how-do-you-do-max-font-size-in-css/</link>
+					<comments>https://css-tricks.com/how-do-you-do-max-font-size-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2020 23:09:47 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[fluid type]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[res]]></category>
+		<category><![CDATA[rwd]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301720</guid>
+
+					<description><![CDATA[<p>CSS doesn&#8217;t have <code>max-font-size</code>, so if we need something that does something along those lines, we have to get tricky. </p>
+<p>Why would you need it at all? Well, <code>font-size</code> itself can be set in dynamic ways. For example, <code>font-size: 10vw;</code>. That&#8217;s using &#8220;viewport units&#8221; to size the type, which will get larger and smaller with the size of the browser window. If we had <code>max-font-size</code>, we could limit how big it gets (similarly the other direction with &#8230; <a href="https://css-tricks.com/how-do-you-do-max-font-size-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How Do You Do max-font-size in CSS?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-do-you-do-max-font-size-in-css/">How Do You Do max-font-size in CSS?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>CSS doesn&#8217;t have <code>max-font-size</code>, so if we need something that does something along those lines, we have to get tricky. </p>
+<p>Why would you need it at all? Well, <code>font-size</code> itself can be set in dynamic ways. For example, <code>font-size: 10vw;</code>. That&#8217;s using &#8220;viewport units&#8221; to size the type, which will get larger and smaller with the size of the browser window. If we had <code>max-font-size</code>, we could limit how big it gets (similarly the other direction with <code>min-font-size</code>). </p>
+<p><span id="more-301720"></span></p>
+<p>One solution is to use a media query at a certain screen size breakpoint that sets the font size in a non-relative unit. </p>
+<pre rel="CSS"><code class="language-css">body {
+  font-size: 3vw;
+}
+@media screen and (min-width: 1600px) {
+  body {
+     font-size: 30px;
+  }
+}</code></pre>
+<p>There is a concept dubbed <a href="https://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/">CSS locks</a> that gets fancier here, slowly scaling a value between a minimum and maximum. <a href="https://css-tricks.com/snippets/css/fluid-typography/">We&#8217;ve covered that.</a> It can be like&#8230;</p>
+<pre rel="CSS"><code class="language-css">body {
+  font-size: 16px;
+}
+@media screen and (min-width: 320px) {
+  body {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  body {
+    font-size: 22px;
+  }
+}</code></pre>
+<p>We&#8217;ve also covered how <a href="https://css-tricks.com/simplified-fluid-typography/">it&#8217;s gotten (or will get) a lot simpler</a>.</p>
+<p>There is a <code>max()</code> function in CSS, so our example above becomes a one-liner:</p>
+<pre rel="CSS"><code class="language-css">font-size: max(30vw, 30px);</code></pre>
+<p>Or double it up with a min and max:</p>
+<pre rel="CSS"><code class="language-css">font-size: min(max(16px, 4vw), 22px);</code></pre>
+<p>Which is identical to:</p>
+<pre rel="CSS"><code class="language-css">font-size: clamp(16px, 4vw, 22px);</code></pre>
+<p>Browser compatibility for these functions <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clamp#Browser_compatibility">is pretty sparse</a> as I&#8217;m writing this, but Chrome currently has it. It will get there, but look at the first option in this article if you need it right now. </p>
+<p>Now that we have these functions, it seems unlikely to me we&#8217;ll ever get <code>min-font-size</code> and <code>max-font-size</code> in CSS, since the functions are almost more clear as-is.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-do-you-do-max-font-size-in-css/">How Do You Do max-font-size in CSS?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-do-you-do-max-font-size-in-css/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301720</post-id>	</item>
+		<item>
+		<title>Using a PostCSS function to automate your responsive workflow</title>
+		<link>https://css-tricks.com/using-a-postcss-function-to-automate-your-responsive-workflow/</link>
+		
+		<dc:creator><![CDATA[Martijn Cuppens]]></dc:creator>
+		<pubDate>Thu, 05 Sep 2019 14:17:12 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[fluid type]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[responsive]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=294206</guid>
+
+					<description><![CDATA[<p>A little while back, you might have bumped into <a href="https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/">this CSS-Tricks article</a> where I described how a mixin can be used to automate responsive font sizes using <a href="https://github.com/twbs/rfs">RFS</a>. In its latest version, <code>v9</code>, RFS is capable of rescaling any value for value for any CSS property with <code>px</code> or <code>rem</code> units, like <code>margin</code>, <code>padding</code>, <code>border-radius</code> or even <code>box-shadow</code>.</p>
+</p>
+<p>Today, we’ll focus on its PostCSS implementation. First thing to do, is install RFS with <code>npm</code>:&#8230; <a href="https://css-tricks.com/using-a-postcss-function-to-automate-your-responsive-workflow/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using a PostCSS function to automate your responsive workflow&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-a-postcss-function-to-automate-your-responsive-workflow/">Using a PostCSS function to automate your responsive workflow</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>A little while back, you might have bumped into <a href="https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/">this CSS-Tricks article</a> where I described how a mixin can be used to automate responsive font sizes using <a href="https://github.com/twbs/rfs">RFS</a>. In its latest version, <code>v9</code>, RFS is capable of rescaling any value for value for any CSS property with <code>px</code> or <code>rem</code> units, like <code>margin</code>, <code>padding</code>, <code>border-radius</code> or even <code>box-shadow</code>.</p>
+<p><span id="more-294206"></span></p>
+<p>Today, we’ll focus on its PostCSS implementation.<!--more--> First thing to do, is install RFS with <code>npm</code>:</p>
+<pre rel="Terminal"><code class="language-markdown">npm install rfs</code></pre>
+<p>Next step is to add RFS to the PostCSS plugins list. If you’re using a <code>postcss.config.js</code> file, you can add it to the list of other PostCSS plugins (e.g. <a href="https://github.com/postcss/autoprefixer">Autoprefixer</a>):</p>
+<pre rel="JavaScript"><code class="language-javascript">module.exports = {
+  plugins: [
+    require('rfs'),
+    require('autoprefixer'),
+  ]
+}</code></pre>
+<p>Once configured, you’ll be able to use the <code>rfs()</code> function wherever you want in your custom CSS. For example, if you want your font sizes to be responsive:</p>
+<pre rel="PostCSS"><code class="language-css">.title {
+  font-size: rfs(4rem);
+}</code></pre>
+<p>&#8230;or use it with whatever property you want:</p>
+<pre rel="PostCSS" data-line="3,4,5,7"><code class="language-css">.card {
+  background-color: #fff;
+  border-radius: rfs(4rem);
+  box-shadow: rfs(0 0 2rem rgba(0, 0, 0, .25));
+  margin: rfs(2rem);
+  max-width: 540px;
+  padding: rfs(3rem);
+}</code></pre>
+<p>The code above will output the following CSS:</p>
+<pre rel="CSS"><code class="language-css">.card {
+  background-color: #fff;
+  border-radius: calc(1.525rem + 3.3vw);
+  box-shadow: 0 0 calc(1.325rem + 0.9vw) rgba(0, 0, 0, .25);
+  margin: calc(1.325rem + 0.9vw);
+  max-width: 540px;
+  padding: calc(1.425rem + 2.1vw);
+}
+
+@media (min-width: 1200px) {
+  .card {
+    border-radius: 4rem;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, .25);
+    margin: 2rem;
+    padding: 3rem;
+  }
+}</code></pre>
+<h3>Demo</h3>
+<p>Here&#8217;s a Pen that shows how things work. You can resize the demo to see the fluid rescaling in action.</p>
+<p class="codepen" data-height="500" style="height: 500px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="MartijnCuppens" data-slug-hash="aeojgG" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RFS card- PostCSS">
+  <span>See the Pen <a href="https://codepen.io/MartijnCuppens/pen/aeojgG/"><br />
+  RFS card- PostCSS</a> by Martijn Cuppens (<a href="https://codepen.io/MartijnCuppens">@MartijnCuppens</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>A deeper look at how RFS parses the CSS</h3>
+<p>The plugin will look for any occurance of the <code>rfs()</code> function in the declaration values and replace the function with a fluid value using the <code>calc()</code> function. After each rule, RFS will generate a media query with some additional CSS that prevents the values from becoming too large. </p>
+<p>RFS only converts <code>px</code> and <code>rem</code> values in a declaration; all other values (e.g. <code>em</code>  values, numbers or colors) will be ignored. The function can also be used multiple times in a declaration, like this:</p>
+<pre rel="PostCSS"><code class="language-css">box-shadow: 0 rfs(2rem) rfs(1.5rem) rgba(0, 0, 255, .6)</code></pre>
+<h3>RFS and custom properties</h3>
+<pre rel="PostCSS"><code class="language-css">:root {
+  --title-font-size: rfs(2.125rem);
+  --card-padding: rfs(3rem);
+  --card-margin: rfs(2rem);
+  --card-border-radius: rfs(4rem);
+  --card-box-shadow: rfs(0 0 2rem rgba(0, 0, 0, .25));
+}</code></pre>
+<p>These variables can be used in your CSS later on.</p>
+<pre rel="CSS"><code class="language-css">.card {
+  max-width: 540px;
+  padding: var(--card-padding);
+  margin: var(--card-margin);
+  background-color: #fff;
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
+}</code></pre>
+<hr>
+<p>Hopefully you find these updates useful in your work. Leave a comment if you have any questions or feedback!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-a-postcss-function-to-automate-your-responsive-workflow/">Using a PostCSS function to automate your responsive workflow</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">294206</post-id>	</item>
+		<item>
+		<title>Using a Mixin to Take the Math out of Responsive Font Sizes</title>
+		<link>https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/</link>
+					<comments>https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/#comments</comments>
+		
+		<dc:creator><![CDATA[Martijn Cuppens]]></dc:creator>
+		<pubDate>Tue, 09 Apr 2019 14:20:49 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[fluid type]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[mixins]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=285274</guid>
+
+					<description><![CDATA[<p><a href="https://github.com/twbs/rfs">Responsive Font Size</a> (RFS) is an engine that <strong>automatically calculates and updates</strong> the <code>font-size</code> property on elements based on the dimensions of the browser viewport.</p>
+<p>If you’re thinking that sounds familiar, that’s because there is a slew of tools out there that offer various approaches for fluid typography. In fact, <a href="https://css-tricks.com/fitting-text-to-a-container/">Chris compiled a bunch of those</a> a little while back. Check that out because it’s always good to know what’s out there and what fits best for a particular task.&#8230; <a href="https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using a Mixin to Take the Math out of Responsive Font Sizes&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/">Using a Mixin to Take the Math out of Responsive Font Sizes</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://github.com/twbs/rfs">Responsive Font Size</a> (RFS) is an engine that <strong>automatically calculates and updates</strong> the <code>font-size</code> property on elements based on the dimensions of the browser viewport.</p>
+<p>If you’re thinking that sounds familiar, that’s because there is a slew of tools out there that offer various approaches for fluid typography. In fact, <a href="https://css-tricks.com/fitting-text-to-a-container/">Chris compiled a bunch of those</a> a little while back. Check that out because it’s always good to know what’s out there and what fits best for a particular task.</p>
+<p>RFS is different in that it makes writing code for fluid type feel a lot like writing native CSS (or, more accurately, like writing with a preprocessor) directly in the stylesheets you’re already working in — only without having to wrangle and manage a bunch of media queries. It’s even compatible with Sass, Less, Stylus and PostCSS, so it plugs into just about any stack.</p>
+<p><span id="more-285274"></span></p>
+<p>Just how integrated is it? Well, let’s compare a <a href="https://css-tricks.com/snippets/css/fluid-typography/">snippet for fluid typography</a> that uses the <code>calc()</code> function&#8230;</p>
+<pre rel="CSS"><code clas="language-scss">html {
+  font-size: 16px;
+}
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 22px;
+  }
+}</code></pre>
+<p>&#8230;with a similar example of how it can be done with RFS in Sass:</p>
+<pre rel="SCSS"><code class="language-scss">.title {
+  @include font-size(4rem);
+}</code></pre>
+<p>Which compiles to:</p>
+<pre rel="CSS"><code class="language-css">.title {
+  font-size: 4rem;
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: calc(1.525rem + 3.3vw);
+  }
+}</code></pre>
+<p>Curious how that works? Let’s check it out and then go into how to set it up for a project.</p>
+<h3>The magic behind automatic re-scaling</h3>
+<p>Here’s a graph to get a better understanding of how RFS re-scales font sizes:</p>
+<figure id="post-285277" class="align-left media-285277"><img src="https://css-tricks.com/wp-content/uploads/2019/03/s_982851817502A5ABFAC6BAAFF4F17790218BE0B0FED31AD02B612E9B56244442_1551909001834_rfs-graph2.svg" alt="" /></figure>
+<p>Every color represents a font size that gets passed to the <code>font-size()</code> mixin provided by RFS. The y-axis of the graph represents the font size (in <code>px</code>) and the x-axis represents the width of the viewport (again, in <code>px</code>).</p>
+<p>Let’s focus on the green line, which is generated by applying a mixin to an element:</p>
+<pre rel="SCSS"><code class="language-scss">.title {
+  @include font-size(40);
+}</code></pre>
+<p>In this case, a font size of <code>40px</code> is passed into the mixin. That value serves as the <em>maximum</em> font size of the element and reaches that size when the viewport is <code>1200px</code> or wider, at which point it stays at that size.</p>
+<p>Conversely, the font size will bottom out at <code>20px</code>, never going below that mark.</p>
+<p>Everything else? Well, that’s where the font size value is automatically calculated, using a function behind the scenes to determine the number according to the current width of the viewport.</p>
+<p>RFS is also a little opinionated in that it limits itself to font sizes that are  <code>20px</code> and above. The reasoning is that smaller text (e.g. normal body text) normally does not need to flex as much and is a lot easier to manage than larger pieces of content, like titles and such. That’s very much in line with <a href="http://fittextjs.com/">FitText</a>, which also prefers being used on large text (even though it will not stop you from doing it).</p>
+<p>If you’re the type of person who likes to look under the hood, the mixin for each preprocessor is available to view in the <a href="https://github.com/twbs/rfs">RFS GitHub repo</a>. For example, here’s a <a href="https://github.com/twbs/rfs/blob/master/scss.scss">direct link to the SCSS version</a>. It’s a lot of math!</p>
+<p>Note that every font size is generated in a combination of <code>rem</code> and <code>vw</code> units, but they are mapped  to <code>px</code> in the graph to make it easier to understand. In other words, it really takes all the mathwork out of the mix.</p>
+<h3>Everything is configurable</h3>
+<p>Seriously. Every. Single. Thing.</p>
+<p>For example, you may have wondered why the font size capped out at viewports <code>1200px</code> and wider in the previous example. That can be changed, as well as a ton of other things, including:</p>
+<ul>
+<li><strong>Base font size:</strong>  The lowest font size value.
+<li><strong>Font size unit:</strong>  The type of unit to use in the output value (<code>px</code> or <code>em</code>).</li>
+<li><strong>Breakpoint:</strong>  The maximum width of the viewport where the font size of the element reaches its maximum value.</li>
+<li><strong>Breakpoint unit:</strong>  The unit used for the media query that the mixin generates (<code>px</code>, <code>em</code> or <code>rem</code>).</li>
+<li><strong>Factor:</strong>  This serves as a sorta volume control that informs the mixin how aggressive it should be in calculating font sizes from the maximum viewport width all the way down.</li>
+<li><strong>Rem value:</strong>  This defines the value of <code>1rem</code> in pixel (<code>px</code>) units.</li>
+<li><strong>Two dimensional:</strong>  A feature that sniffs out the smallest side of a viewport and uses it to calculate the font size value. This comes in handy when, say, you’d like to keep the font from getting smaller when a device is rotated from a portrait orientation to landscape.</li>
+<li><strong>Class:</strong>  Provides class names that can be added to an element in the HTML to either enable or disable fluid sizing.</li>
+</ul>
+<p>So, yeah. A lot of options and flexibility here. The important thing to know is that all of these options are variables that can be defined in your stylesheets.</p>
+<p>All this said, the <strong>default settings are pretty safe to use</strong>, and they will prevent a lot of longer words truncating from the viewport. This is especially true for some languages — like German or Dutch — that contain a lot of compound words.</p>
+<h3>Using RFS in a project</h3>
+<p>Let’s dive straight into to the code. It would be exhaustive to look at the code for each preprocessor, so I’ll be explaining everything in the <code>.scss</code> syntax. But if you prefer something else, you can check out the examples in other languages in the GitHub repo in the <a href="https://github.com/twbs/rfs#usage">Usage section</a>.</p>
+<p>First and foremost, RFS needs to be installed on the project. It’s available in npm and Yarn:</p>
+<pre rel="Terminal"><code class="language-markdown">## npm
+npm install rfs
+
+## Yarn
+yarn add rfs
+
+## Bower is available, but has been deprecated
+bower install rfs --save</code></pre>
+<p>Then, gotta make sure the mixin is imported with the rest of the styles, wherever you do your imports for other partials:</p>
+<pre rel="SCSS"><code class="language-scss">@import "~rfs/scss";</code></pre>
+<p>Now, we can start cooking with the mixin!</p>
+<pre rel="SCSS"><code class="language-scss">.title {
+  color: #333;
+  @include font-size(64px);
+}
+
+.subtitle {
+  color: #666;
+  @include font-size(48px);
+}
+
+.paragraph {
+  @include font-size(16px);
+}</code></pre>
+<p class="explanation">I passed values in <code>px</code>, but <code>rem</code> units are also supported. If a value without a unit is passed, <code>px</code> is used by default. The font sizes are always rendered in <code>rem</code> (in combination with <code>vw</code>) to make sure the font sizes also increase when the default font size is increased in the browser (this is a feature often used by visually impaired people).</p>
+<p>The output is:</p>
+<pre rel="CSS"><code class="language-css">.title {
+  color: #333;
+  font-size: 4rem;
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: calc(1.525rem + 3.3vw);
+  }
+}
+
+.subtitle {
+  color: #666;
+  font-size: 3rem;
+}
+
+@media (max-width: 1200px) {
+  .subtitle {
+    font-size: calc(1.425rem + 2.1vw);
+  }
+}
+
+.paragraph {
+  font-size: 1rem;
+}</code></pre>
+<p>Notice that the mixin is <code>font-size()</code>, but RFS will also let you use it in two other ways:</p>
+<pre rel="SCSS"><code class="language-scss">.title {
+  @include font-size(4rem);
+  // or
+  @include responsive-font-size(64px);
+  // or
+  @include rfs(64);
+}</code></pre>
+<h3>RFS is baked right into Bootstrap</h3>
+<p>Here’s a little story for you. </p>
+<p>One day, I had this incredibly impulsive idea to put RFS into <a href="https://github.com/twbs/bootstrap">Bootstrap</a>. I actually did not use Bootstrap at that time, but believed it was a feature Bootstrap could definitely use. I made a pull request and waited a couple months to see what would happen.</p>
+<p>In the meantime, I was getting more and more intrigued by Bootstrap and version 4 had just been released. Slowly but surely, I got more involved in contributing to the project and a whole new world opened for me when I discovered the community behind it. It was during <a href="https://hacktoberfest.digitalocean.com/">hacktoberfest</a> (oh yes, I got my t-shirt) in October 2018 that I got asked to join the Bootstrap team by <a href="https://twitter.com/mdo">mdo</a>.</p>
+<p class="explanation">I believe contributing to open source projects is such a fun and rewarding thing. Andrés Galante has a <a href="https://alistapart.com/article/make-something-great-become-an-open-source-contributor">great post on the topic</a> if you&#8217;re interested in becoming a contributor.</p>
+<p>Since then, RFS has become <a href="https://github.com/twbs/rfs">a project of the Bootstrap team</a>, and on February 11th this year, we launched Bootstrap 4.3 which includes RFS right out of the box. It’s currently disabled by default, but can easily be switched on by setting the Sass variable <code>$enable-responsive-font-sizes: true</code>.</p>
+<p>But make no mistake: RFS can still be used on its own. Just cool that it&#8217;s baked right into a widely used framework.</p>
+<h3>Oh yeah, let&#8217;s talk browser support</h3>
+<p>Support is pretty darn good! In fact, RFS will work anywhere that supports <a href="https://caniuse.com/#feat=css-mediaqueries">media queries</a> and <a href="https://caniuse.com/#feat=viewport-units">viewport units</a>. RFS will set a font size for Legacy browsers, like Internet Explorer 8, but the fluidity won&#8217;t be there. In other words, should be safe for production!</p>
+<h3>What’s next for RFS</h3>
+<p>The next major version of Bootstrap is version 5 and we’re planning to enable RFS by default. We don’t have any plans to change the way it works for now. More than likely, the <code>$enable-responsive-font-sizes</code> variable will simply be set to <code>true</code> and that’s it.</p>
+<p>In the future, I hope I can make use of the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min"><code>min()</code></a> function because it would generate less CSS and make things a lot less complex. Browsers don’t seem to support this function all too well just yet, but if you’re interested in this feature, you can follow the progress in this <a href="https://github.com/twbs/rfs/issues/110">GitHub issue</a>.</p>
+<p>Anything else? No, but I can leave you with a little song and dance: <em>Na na na na, na na na na, hey hey hey <a href="https://www.youtube.com/watch?v=jsaTElBljOE">goodbye</a>!</em></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/">Using a Mixin to Take the Math out of Responsive Font Sizes</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">285274</post-id>	</item>
+		<item>
+		<title>Typography for Developers</title>
+		<link>https://css-tricks.com/typography-for-developers/</link>
+					<comments>https://css-tricks.com/typography-for-developers/#comments</comments>
+		
+		<dc:creator><![CDATA[Taimur Abdaal]]></dc:creator>
+		<pubDate>Wed, 27 Feb 2019 15:28:27 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[font loading]]></category>
+		<category><![CDATA[font-face]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[typography]]></category>
+		<category><![CDATA[web fonts]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=283420</guid>
+
+					<description><![CDATA[<p>This is intended as a practical guide for developers to learn web typography. We’ll cover a range of practical and useful topics, like how to choose and use custom fonts on the web, but more importantly, how to lay text out to create a pleasant user experience. We’ll go over the principles of typography and the CSS properties that control them, as well as handy tips to get good results, quickly.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/typography-for-developers/">Typography for Developers</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="explanation">Taimur Abdaal leads design at <a href="https://tryretool.com?utm_campaign=css_tricks" target="_blank" rel="noopener noreferrer">Retool</a>, a fast way to build internal tools. They&#8217;re working on a new design system for their platform, to let anyone easily build beautiful custom apps. Typography will be a huge part of this and Taimur wrote this based on that experience.</p>
+<p>You may have read the title for this post and thought, &#8220;Why on earth does a developer need to know anything about typography?&#8221; I mean, there’s already a lot on your plate and you’re making hundreds of decisions a day. Should you use React or Vue? npm or Yarn? ES6 or ES7? Sadly, this often leaves something like type as an afterthought. But, let’s remember that <a href="https://ia.net/topics/the-web-is-all-about-typography-period">web design is 95% typography</a>:</p>
+<blockquote><p>95% of the information on the web is written language. It is only logical to say that a web designer should get good training in the main discipline of shaping written information, in other words: Typography.</p></blockquote>
+<p>Even though we deal with content everyday — whether reading, writing, or designing it — typography can be daunting to delve into because it’s filled with jargon and subjectivity, and it’s uncommon to see it taught extensively at school.</p>
+<p>This is intended as a practical guide for developers to learn web typography. We’ll cover a range of practical and useful topics, like how to choose and use custom fonts on the web, but more importantly, how to lay text out to create a pleasant user experience. We’ll go over the principles of typography and the CSS properties that control them, as well as handy tips to get good results, quickly.</p>
+<p><span id="more-283420"></span></p>
+<h3>What is typography?</h3>
+<p>First and foremost, typography is about usability. Type is the <a href="https://ia.net/topics/the-web-is-all-about-typography-period">user interface</a> for conveying information, and conveying information is what we’re here to do on the web. There are many levers we can pull to affect the usability of reading text, and only by being deliberate about these can we create a pleasant experience for our users.</p>
+<p>After (and <em>only</em> after) usability, typography is about emotion. Do the letters complement your content, or contradict it? Do they amplify your brand’s personality, or dampen it? Applied to the same text, different type will make people feel different things. Being deliberate about typography lets us control these feelings.</p>
+<figure id="post-283455" class="align-left media-283455"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/experience.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Same text, different personalities. I’ll bet the first experience is much more expensive. Typefaces: Bodoni 72 (Top), Tsukushi A Round Gothic (Bottom)</figcaption></figure>
+<p>Despite what many <a href="https://digitaldeepak.com/golden-ratio-typography/">golden ratio enthusiasts</a> might try to tell you, typography isn’t an exact science. Good guidelines will get you most of the way there, but you’ll need to apply a little intuition too. Luckily, you’ve been reading text your whole life — books, magazines, the Internet — so you have a lot more untapped intuition than you think!</p>
+<h3>What’s in a font?</h3>
+<p>Let’s start off by getting a handle on some basic terminology and how fonts are categorized.</p>
+<h4>Typeface vs. Font</h4>
+<p>This is how the two have traditionally been defined and distinguished from one another:</p>
+<ul>
+<li><strong>Typeface:</strong> The design of a collection of glyphs (e.g. letters, numbers, symbols)</li>
+<li><strong>Font:</strong> A specific size, weight, or style of a typeface (e.g. regular, bold, italic)</li>
+</ul>
+<p>In essence, a typeface is like a song and a font is like its MP3 file. You’ll see both terms used in typography literature, so it’s worth knowing the distinction. &#8220;Font vs. Typeface&#8221; is also a bit of meme in the design community — you might see it crop up on Twitter, so it’ll help to be &#8220;in the know.&#8221;</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">HOW 2 MAJOR IN GRAPHIC DESIGN:<br />&#8211; CHOOSE A FONT<br />&#8211; &quot;ITS CALLED A TYPEFACE NOT A FONT&quot;<br />&#8211; CHOOSE A GODDAMN TYPEFACE<br />&#8211; U MADE THE WRONG CHOICE</p>
+<p>&mdash; Deena (@itsDeenasaur) <a href="https://twitter.com/itsDeenasaur/status/528945769261596673?ref_src=twsrc%5Etfw">November 2, 2014</a></p></blockquote>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">I may have used font and typeface interchangeably in this story. Please send all complaints to usuck@whocares.tk. <a href="https://t.co/IuHHmlaNAT">https://t.co/IuHHmlaNAT</a></p>
+<p>&mdash; Tristin Hopper (@TristinHopper) <a href="https://twitter.com/TristinHopper/status/1084872772189184000?ref_src=twsrc%5Etfw">January 14, 2019</a></p></blockquote>
+<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>But, more recently, you can essentially use both terms interchangeably and people will know what you mean.</p>
+<h4>How fonts are categorized</h4>
+<p>The broadest split is between <em>serif</em> and <em>sans-serif</em> typefaces. It’s likely you’ve come across these terms just by seeing some typeface names floating around (like, ahem, <em>Comic Sans</em>).</p>
+<p>A &#8220;serif&#8221; is a small stroke attached to the ends of letters, giving them a traditional feel. In fact, most books and newspapers are set in serif typefaces. On the contrary, sans-serif typefaces don’t have these extra strokes, giving them a smooth, modern feel.</p>
+<figure id="post-283435" class="align-left media-283435"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_FB64E0419C360FFF493C6558F3D017A34BD0F14D3B3A1B417EB66C07CF44FFD2_1548860551288_serifvssans.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Times (left) and Helvetica Neue (right)</figcaption></figure>
+<p>Both serif and sans-serif have categories within them. For example, serif has sub-categories including <em>didone</em>, <em>slab</em> and <em>old style</em>.</p>
+<figure id="post-283450" class="align-left media-283450"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_FB64E0419C360FFF493C6558F3D017A34BD0F14D3B3A1B417EB66C07CF44FFD2_1548860611131_serifs.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Didot (left), Rockwell (center) and Hoefler Text (right)</figcaption></figure>
+<p>As far as sans-serif goes, it includes <em>humanist</em>, <em>geometric</em> and <em>grotesk</em> as sub-categories.</p>
+<figure id="post-283436" class="align-left media-283436"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_FB64E0419C360FFF493C6558F3D017A34BD0F14D3B3A1B417EB66C07CF44FFD2_1548860620748_sans.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Gill Sans (left), Futura (center) and Aktiv Grotesk (right)</figcaption></figure>
+<p><em>Monospace</em> fonts (yes, fonts) are a noteworthy category all its own. Each glyph (i.e. letter/number/symbol) in a monospace font has the same width (hence the <em>mono spacing</em> terminology), so it’s possible to arrange them into visual structures. You may be well familiar with monospace because we see it often when writing code, where it’s helpful to make brackets and indents line up visually. The code editor you have open right now is likely using monospace.</p>
+<figure id="post-283456" class="align-left media-283456"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/monospace.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Monaco</figcaption></figure>
+<h3>How to choose fonts and font pairings</h3>
+<p>This is subjective and depends on what you’re trying to do. Each typeface has its own personality, so you’ll have to find one that aligns with your brand or the content it’s communicating. Typefaces have to be considered within the context that they’re being applied. Are we looking for formality? Maybe start with the serif family. Warm, fun and friendly? That might be a cue for sans-serif. Heck, there’s a time and a place even for Comic Sans… really! Just know that there is no hard science to choosing a font, and even the most trained of typographers are considering contextual cues to find the &#8220;right&#8221; one.</p>
+<p>But fonts can be paired together in the same design. For example, some designs use one typeface for headings and another for body text. This is a good way to get a unique look, but it does take a fair bit of work to get it right. Like colors in a palette, some typefaces work well together while others clash. And even purposeful clashing can make sense, again, given the right context.</p>
+<p>The only way to find out if two fonts are complementary is to see them together. Tools like <a href="https://fontpair.co/">FontPair</a> and <a href="http://www.typeconnection.com/">TypeConnection</a> can help with this. If a font catches your eye when surfing the web, <a href="https://chrome.google.com/webstore/detail/whatfont/jabopobgcpjmedljpbcaablpmlmfcogm?hl=en">WhatFont</a> is a great browser extension to help identify it. Another great resource is <a href="https://typewolf.com">Typewolf</a> which allows you to see examples of great web typography, including different font combinations in use:</p>
+<figure id="post-283438" class="align-left media-283438"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/typewolf-combinations.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Alice Lee (left), American Documentary (center) and Studio Stereo (right)</figcaption></figure>
+<p>While there’s a lot of subjectivity in choosing fonts, there are some objective considerations.</p>
+<h4>Font weight as a consideration</h4>
+<p>Some font families have a wide range of font weights — Light, Book, Regular, Medium, Semi-Bold, Bold, Black — whereas others just have a couple. </p>
+<figure id="post-283457" class="align-left media-283457"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/variants.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Inter UI comes with a fantastic range of weights</figcaption></figure>
+<p>If you’re building a complex web app UI, you might need a range of font weights to establish hierarchy in different contexts. For something less complex, say a blog, you’ll likely be fine with just a couple. </p>
+<figure id="post-283465" class="align-left media-283465"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/heading-systems-1.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Complex UI hierarchy (left) and Simple blog hierarchy (right)</figcaption></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide" rel="noopener noreferrer" target="_blank">Variable fonts</a> are an exciting new technology that provide precise control over a font&#8217;s characteristics. For font weights, this means there&#8217;s no longer limitations to using &#8220;Light,&#8221; &#8220;Regular,&#8221; and &#8220;Bold,&#8221; but really any weight in between. <a href="https://v-fonts.com/" rel="noopener noreferrer" target="_blank">Try some variable fonts out here</a> and <a href="https://css-tricks.com/one-file-many-options-using-variable-fonts-web/">check out Ollie Williams&#8217; post as well</a>.</p>
+<p>It&#8217;s still early days — there aren&#8217;t many variable fonts available right now, and browser support is limited. But definitely a space worth watching!</p>
+<h4>Consider the legibility of a font</h4>
+<p>Some typefaces are harder to read than others. Stay away from elaborate fonts when it comes to paragraphs, and if you <em>must</em> have tiny text somewhere, make sure its typeface is legible at those tiny sizes.</p>
+<p>Of these two examples, which is easier on the eyes? (There is a right answer here. &#x1f642;)</p>
+<p class="codepen" data-height="650" style="height: 650px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="geoffgraham" data-slug-hash="jdJobe" style="height: 647px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Font Comparison: Body">
+<span>See the Pen <a href="https://codepen.io/geoffgraham/pen/jdJobe/"><br />
+Font Comparison: Body</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Remember, fonts come in a variety of styles</h4>
+<p>Making a font bold isn’t as simple as adding an outline to the text, and italics are more than slanted letters. Good fonts have specific bold and italic styles, without which the browser tries to &#8220;fake&#8221; it:</p>
+<figure id="post-283463" class="align-left media-283463"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/faux-true.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Lato</figcaption></figure>
+<p>These faux styles tend to reduce legibility and break the text’s visual cohesion because the browser can only do so much with what it’s given. <a href="https://alistapart.com/article/say-no-to-faux-bold">Stick to fonts</a> <a href="https://alistapart.com/article/say-no-to-faux-bold">that offer</a> <a href="https://alistapart.com/article/say-no-to-faux-bold">true bold/italics styles</a>, if you can. </p>
+<h4>Other things worth consideration</h4>
+<p>What we’ve looked at so far are the high-level characteristics and features of fonts that can help us decide which to choose for a particular design or context. There are many other things that can (and probably should) be taken into consideration, including:</p>
+<ul>
+<li><strong>Language support:</strong> Some fonts have glyphs for foreign characters, which may be a requirement for a project geared toward a multilingual audience or that contains multilingual content.</li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-ligatures">Ligatures</a>:</strong> Some fonts (typically serifs) have glyphs to replace otherwise awkward characters, like ﬃ and ﬄ which are multiple characters in a single glyph.</li>
+<li><strong>File size:</strong> You’re a developer, so I know you care about performance. Some fonts come in bigger files than others and those can cause a site to take a hit on load times.</li>
+</ul>
+<h3>Using fonts on the world wide web</h3>
+<p>A mere 10 years ago, there were two complex ways to use custom fonts on the web:</p>
+<ul>
+<li>SiFR: Embedding a Flash (remember that thing?) widget to render text.</li>
+<li>cufon: converting the font to a proprietary format, and using a specific JavaScript rendering engine to generate the text using VML on an HTML <code>&lt;canvas&gt;</code>.</li>
+</ul>
+<p>Today, there’s all we need is a single simple one: <code>@font-face</code>. It lets you specify a font file URL, which the browser then downloads and uses on your site. </p>
+<p>You can use the <code>@font-face</code> declaration to define your custom font:</p>
+<pre rel="CSS"><code class="language-css">@font-face {
+  font-family: 'MyWebFont';
+  src: url('webfont.eot'); /* IE9 Compat Modes */
+  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+        url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+        url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}</code></pre>
+<p>And then refer to it as normal, by the <code>font-family</code> attribute:</p>
+<pre rel="CSS"><code class="language-css">body {
+  font-family: 'MyWebFont', Fallback, sans-serif;
+}</code></pre>
+<p class="explanation">Even though <code>@font-face</code> is light years ahead of the old school approaches to custom web fonts, there is quite a bit to consider as far as browser support goes. Here’s a guide to getting the <a href="https://css-tricks.com/snippets/css/using-font-face/) for loading fonts">right amount of cross-browser support</a>.</p>
+<h4>The impact of fonts on performance</h4>
+<p>Performance is the only downside to using custom fonts on the web. Fonts are relatively large assets — often hundreds of kilobytes in size — and will have and adverse effect on the speed of any site.</p>
+<p>Here are some tips to soften the blow:</p>
+<ul>
+<li>Use <a href="https://gzip.org/">GZIP compression</a> on your web font files.</li>
+<li>Disable font features you don’t need, e.g. <a href="https://www.typotheque.com/articles/hinting">hinting</a>, <a href="https://type.method.ac/">kerning.</a></li>
+<li>Remove glyphs that you don’t need, e.g. foreign language characters.</li>
+</ul>
+<p>One tool that can help tailor a font file to suit your needs is <a href="https://transfonter.org/">Transfonter</a>. Just make sure you have the rights to any font that you want to use on your site because, well, it’s just the right thing to do.</p>
+<h4>Some services will host web fonts for you</h4>
+<p>One other significant way to shed some of the weight of using custom web fonts is to use a service that will host and serve them for you. The benefit here is that third-parties store the files on a speedy <a href="https://css-tricks.com/adding-a-cdn-to-your-website/">CDN</a>, optimize them, and serve them to your site via a JavaScript snippet that gets dropped into the document head. In short: it takes a lot of hassle off your hands. </p>
+<p>How easy is it to use a hosted service? Consider that using anything on Google Fonts only requires a single <code>&lt;link&gt;</code> in the HTML head:</p>
+<pre rel="HTML"><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"&gt;
+  &lt;style&gt;
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;!-- Rest of the document --&gt;</code></pre>
+<p>This example was taken from <a href="https://fonts.google.com/">Google Fonts</a> — the most popular hosted font service. It’s free to use, and, at the time of writing, has a catalog of 915 font families. The quality of these can be hit-or-miss. Some are truly top-notch — beautiful design, many weights, true bold/italics, and advanced features like ligatures. Others, typically the more novel designs, are bare-bones, and might not be suitable for serious projects with evolving needs.</p>
+<p><a href="https://fonts.adobe.com/">Adobe Fonts</a> is also very popular. It comes bundled with Adobe’s Creative Cloud offering, which starts at $20.99 per month. At the time of writing, it has a catalog of 1,636 font families. These are typically high-quality fonts that you’d have to pay for, but with Adobe Fonts, you can access them all in a Netflix all-you-can-eat model. </p>
+<p>Here are some other options:</p>
+<ul>
+<li><a href="https://edgewebfonts.adobe.com/index"><strong>Adobe Edge Web Fonts</strong></a>: This is the free version of Adobe Fonts. Adobe partnered with Google on this, so there’s a lot of overlap with the Google Fonts library. It has 503 font families in total.</li>
+<li><a href="https://fontspring.com"><strong>Fontspring</strong></a>: This is a massive library of over 14,000 font families, but with an individual licensing model. This means paying more up-front, starting at ~$20 per individual font (and per weight or style), but no recurring costs. It’s also self-serve — you’ll have to host the files yourself.</li>
+<li><a href="https://www.myfonts.com"><strong>MyFonts by Monotype</strong></a>: This is major type foundry. Similar to Fontspring: massive library of font families with an individual licensing model.</li>
+<li><a href="https://fonts.com"><strong>Fonts.com</strong></a>: This is similar to Fontspring. Options for one-off or pay-as-you go pricing (based on page views).
+<li><a href="https://www.typography.com/webfonts/"><strong>Cloud.typography by Hoefler&#038;Co</strong></a>: This is a major type foundry. Over 1,000 font families (all by Hoefler&#038;Co), with options for hosted (subscription, starting at $99 per year) or self-hosted (individually licensed) web fonts. The benefit here is that you get access to a library of fonts you cannot find anywhere else.</li>
+<li><a href="https://fontstand.com/"><strong>Fontstand</strong></a>: This services allows you to &#8220;rent&#8221; individual fonts cheaply on a monthly basis, starting ~$10 per month), which you get to own automatically after 12 months. To date, it boasts 1,500 families, with a hosted web font service.</li>
+</ul>
+<h3>CSS and Typography</h3>
+<p>OK, let’s move on to the intersection of design and development. We’ve covered a lot of the foundational terms and concepts of typography, but now we can turn our attention to what affordances we have to manipulate and style type, specifically with CSS.</p>
+<h4>Adjusting font sizing</h4>
+<p>Changing the size of a font is something that inevitably pops up in a typical project. Size is important because it creates hierarchy, implicitly guiding the user through the page. So, in this section, we’re going to look at two CSS features that are available in our tool belt for adjusting font sizes to create better content hierarchy.</p>
+<h5>Sizes can be expressed in a different units of measure</h5>
+<p>Did you know that there are 15 different units for sizing in CSS? Crazy, right? Most of us are probably aware of and comfortable working with pixels (<code>px</code>) but there are so many other ways we can define the size of a font.</p>
+<p>Some of these are <em>relative</em> units, and others are <em>absolute</em>. The actual size of an element expressed in relative units depends on other parts of the page, while the actual size of an element expressed in absolute units is always the same. And, as you might expect, that difference is important because they serve different functions, depending on a design’s needs.</p>
+<p>Of the 15 units we have available, we will selectively look at two in particular: <code>px</code> and <code>em</code>. Not only are these perhaps the two most used units that you’ll see used to define font sizes, but they also perfectly demonstrate the difference between absolute and relative sizing.</p>
+<p>First off, <code>px</code> is an absolute unit and it actually doesn’t have much to do with pixels (it’s considered an <a href="http://inamidst.com/stuff/notes/csspx">angular measurement</a>), but it’s defined so that a line of width <code>1px</code> appears sharp and visible, no matter the screen resolution. The <code>px</code> value corresponds, roughly, to a little more than the distance from the highest ascender (e.g. the top of the letter A) to the lowest descender (e.g. the bottom of the letter p) in the font. Some fonts have taller letters than others, so <code>16px</code> in one font might look noticeably &#8220;bigger&#8221; than <code>16px</code> in another. Yet another consideration to take into account when choosing a font!</p>
+<p>Interestingly enough, when it comes to typography, the <code>px</code> is a unit to be understood, but not used. The true purpose of <code>px</code> units is to serve as the foundation of a type system based on relative units. In other words, it’s an absolute value that a relative unit can point to in order to define its own size relative to that value.</p>
+<p>Which takes us to <code>em</code>, a relative unit. Text with a font size of <code>2em</code> would be twice as big as the <code>font-size</code> of its parent element. Each device has its own default <code>font-size</code> for the <code>body</code> element. For example, desktop browsers usually default to <code>16px</code>. Other devices (e.g. mobile phones and TVs) might have different defaults that are optimized for their form factors.</p>
+<p>The <code>em</code> lets you reason about your typography intuitively: &#8220;I want this title to be twice as big as the paragraph text&#8221; corresponds directly to <code>2em</code>. It’s also easy to maintain — if you need a media query to make everything bigger on mobile, it’s a simple matter of increasing one <code>font-size</code> attribute. Dealing in <code>em</code> units also lets you set other typographical elements in relation to <code>font-size</code>, as we’ll see later.</p>
+<h5>There are semantic HTML elements that CSS can target to adjust size</h5>
+<p>You’re sold on the <code>em</code>, but how many <code>em</code> units should each element be? You’ll want to have a range of text sizes to establish hierarchy between different elements of your page. More often than not, you’ll see hierarchies that are six level deep, which corresponds to the HTML heading elements, <code>h1</code> through <code>h6</code>.</p>
+<p>The right size scale depends on the use case. As a guideline, many people choose to use a <em>modular scale</em>. That refers to a scale based on a constant ratio for successive text elements in the hierarchy.</p>
+<figure id="post-283442" class="align-left media-283442"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_FB64E0419C360FFF493C6558F3D017A34BD0F14D3B3A1B417EB66C07CF44FFD2_1548871340137_modularscale.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Example of a modular scale with a ratio of 1.4</figcaption></figure>
+<p><a href="https://www.modularscale.com/">Modular Scales</a> is a tool by Tim Brown, who popularized this approach, which makes it easy to visualize different size scales.</p>
+<h4>Adjusting a font’s vertical spacing and alignment</h4>
+<p>The physical size of a font is a super common way we use CSS to style a font, but vertical spacing is another incredibly powerful way CSS can help improve the legibility of content.</p>
+<h5>Use line-height to define how tall to make a line of text</h5>
+<p>Line height is one of the most important factors affecting readability. It’s controlled by the <code>line-height</code> property, best expressed as a unit-less number that corresponds to a multiple of the defined font size.</p>
+<p>Let’s say we are working with a computed font size of <code>16px</code> (specified in the CSS as <code>em</code> units, of course), a <code>line-height</code> of <code>1.2</code> would make each line <code>19.2px</code> tall. (Remember that <code>px</code>  aren’t actually pixels, so decimals are valid!)</p>
+<p>Most browsers default to a <code>line-height</code>  of <code>1.2</code> but the problem is that this is usually too tight — you probably want something closer to <code>1.5</code> because provides a little more breathing room for your eyes when reading.</p>
+<p>Here are some general guidelines to define a good line-height:</p>
+<ul>
+<li>Increase <code>line-height</code> for thick fonts</li>
+<li>Increase <code>line-height</code> when fonts are a dark color</li>
+<li>Increase <code>line-height</code> for long-form content</li>
+</ul>
+<figure id="post-283458" class="align-left media-283458"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/line-height.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Increasing the line-height can drastically improve legibility</figcaption></figure>
+<h5>Fonts can’t dance, but they still have rhythm</h5>
+<p>Rhythm describes how text flows vertically on a page. Much like music, some amount of consistency and structure usually leads to good &#8220;rhythm.&#8221; Like most design techniques, rhythm isn’t an exact science but there are some sensible guidelines that give good results.</p>
+<p>One school of thought prescribes the use of paragraph line height as a baseline unit from which all other spacing is derived. This includes gaps between paragraphs and headings and padding between the text and other page elements. </p>
+<p>Under this system, you might set the line height of a heading to twice the line height of paragraphs, and leave a one-line gap between a heading and paragraph. Handily, you can use the same <code>em</code> units to define margins and padding, so there’s really no need to hard-code anything.</p>
+<figure id="post-283598" class="align-left media-283598"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/vertical-rhythm.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p><a href="https://betterwebtype.com/rhythm-in-web-typography">Read more about rhythm here.</a></p>
+<h4>Horizontal Shape</h4>
+<p>Hopefully, you’re convinced by now that vertical spacing is an important factor in improving legibility that we can control in CSS. Equally important is the horizontal spacing of individual characters and the overall width of content.</p>
+<h5>CSS can control the space between letters</h5>
+<p>Letter spacing is one of the most important factors affecting legibility. It is controlled by the CSS <code>letter-spacing</code> property, best expressed (again) in <code>em</code> units to keep everything relative. Tracking (the typography term for &#8220;letter spacing&#8221;) depends entirely on the font — some fonts will look great by default, while others might need a little tweaking.</p>
+<p>In general, you only need to worry about letter spacing for text elements that are particularly big or small because most fonts are spaced well at a typical paragraph size. </p>
+<p>For larger text, like headings and titles, you’ll often want to reduce the space between letters. And a little bit of space goes a long way. For example, <code>-0.02em</code> is a tiny decimal, but a good starting point, which can be tweaked until it looks just right to your eye. The only time you should think about increasing letter spacing is when dealing with stylistically unusual text — things like all-capped titles and even some number sequences.</p>
+<figure id="post-283459" class="align-left media-283459"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/letter-spacing.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Adding or subtracting as little as 0.02em can refine the appearance of words</figcaption></figure>
+<p>Some specific pairs of letters, like <code>AV</code>, can look awkwardly spaced without a little manual tweaking. Well-crafted fonts typically specify custom spacing for such pairs, and setting the <code>font-kerning</code> property to <code>normal</code> lets you enable this. Browsers disable this on smaller text by default. Here is a little <a href="https://css-tricks.com/methods-controlling-spacing-web-typography/">more on letter spacing</a>, as well as other CSS tools we have to control font spacing in general.</p>
+<h5>The length of a line of text is more important than you might think</h5>
+<p>It’s unpleasant for our eyes to move long distances while reading, so the width of lines should be deliberate. The general consensus is that a good width is somewhere between 60 and 70 characters per line. If you find that a line of text (especially for long-form content) drastically falls outside this range, then start adjusting.</p>
+<p>The <code>ch</code> is a little-known CSS unit that we didn’t cover earlier, but can be helpful to keep line length in check. It’s a relative unit, defined as the width of the <code>0</code> character in the element’s font. Because narrow characters like <code>l</code> and <code>i</code> are relatively frequent, setting the width of a text container to something like <code>50ch</code> should result in lines that are 60-70 character long.</p>
+<pre rel="CSS"><code class="language-css">p {
+  width: 50ch;
+}</code></pre>
+<figure id="post-283461" class="align-left media-283461"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/characters-per-line.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h4>CSS can smooth otherwise crispy fonts</h4>
+<p><code>-webkit-font-smoothing</code> is a nifty CSS property that controls how fonts are anti-aliased. This is a fancy way of saying it can draw shades of gray around otherwise square pixels to create a smoother appearance. Do note, however, the <code>-webkit</code> prefix there, because that indicates that the property is only supported by WebKit browsers, e.g. Safari.</p>
+<p>The default setting is <code>subpixel-antialiased</code>, but it’s worth seeing what your type looks like when it’s set to just <code>antialiased</code>. It can improve the way many fonts look, especially for text on non-white backgrounds. </p>
+<p>At small font sizes, this should be used with caution — it lowers contrast, affecting readability. You should also make sure to adjust <code>letter-spacing</code> when using this, since greater anti-aliasing will increase the space between letters.</p>
+<figure id="post-283447" class="align-left media-283447"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/antialising.jpg?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Anti-aliased (left) Subpixel Anti-aliased (right)</figcaption></figure>
+<h3>Wrapping up</h3>
+<p>Phew! We covered a <em>lot</em> of ground in a relatively short amount of space. Still, this is by no means an exhaustive guide, but rather, something that I hope will encourage you to take more control over the typography in your future projects and to seek an even deeper knowledge of the topic. For that, I’ve compiled a list of additional resources to help you level up from here.</p>
+<hr>
+<h4>Learning about typography</h4>
+<ul>
+<li><a href="http://webtypography.net/toc/"><em>The Elements of Typographic Style Applied to the Web</em></a></li>
+<li><a href="https://practicaltypography.com/">Butterick’s Practical Typography</a>
+<li><a href="https://betterwebtype.com/">Better Web Type</a></li>
+</ul>
+<h4>Typography Inspiration</h4>
+<ul>
+<li><a href="https://www.typewolf.com/">Typewolf</a></li>
+<li><a href="https://fontsinuse.com/">Fonts in Use</a></li>
+<li><a href="https://www.awwwards.com/mireia_ortega/collections/typography-inspiration/">Awwwards</a></li>
+</ul>
+<h4>Identifying Fonts</h4>
+<li><a href="https://chrome.google.com/webstore/detail/whatfont/jabopobgcpjmedljpbcaablpmlmfcogm?hl=en">WhatFont</a></li>
+<li><a href="http://www.identifont.com/">Identifont</a></li>
+<li><a href="https://www.myfonts.com/WhatTheFont/">WhatTheFont</a></li>
+<h4>Typography in CSS</h4>
+<ul>
+<li><a href="https://cssreference.io/typography/">CSS Reference</a></li>
+<li><a href="https://css-tricks.com/guides/typography/">CSS-Tricks Guide to Typography</a></li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/typography-for-developers/">Typography for Developers</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/typography-for-developers/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">283420</post-id>	</item>
+		<item>
+		<title>The Equilateral Triangle of a Perfect Paragraph</title>
+		<link>https://css-tricks.com/equilateral-triangle-perfect-paragraph/</link>
+					<comments>https://css-tricks.com/equilateral-triangle-perfect-paragraph/#comments</comments>
+		
+		<dc:creator><![CDATA[Matej Latin]]></dc:creator>
+		<pubDate>Fri, 09 Jun 2017 12:11:50 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[color]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[line length]]></category>
+		<category><![CDATA[line-height]]></category>
+		<category><![CDATA[typography]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=255456</guid>
+
+					<description><![CDATA[<p>Still, too many web designers neglect the importance of typography on the web. So far, I&#8217;ve only met a few that really understand typography and know how to apply that knowledge to their work. And the lack of knowledge about typography doesn&#8217;t come from ignorance. I learned that web designers are commonly either self-taught and haven&#8217;t grasped the importance of typography yet, or they actually studied design but typography was just one of the classes they had to attend.</p>
+<p>I &#8230; <a href="https://css-tricks.com/equilateral-triangle-perfect-paragraph/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Equilateral Triangle of a Perfect Paragraph&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/equilateral-triangle-perfect-paragraph/">The Equilateral Triangle of a Perfect Paragraph</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Still, too many web designers neglect the importance of typography on the web. So far, I&#8217;ve only met a few that really understand typography and know how to apply that knowledge to their work. And the lack of knowledge about typography doesn&#8217;t come from ignorance. I learned that web designers are commonly either self-taught and haven&#8217;t grasped the importance of typography yet, or they actually studied design but typography was just one of the classes they had to attend.</p>
+<p>I created the <a href="http://betterwebtype.com">Better Web Type</a> course to help raise awareness of the important role typography plays on the web. <span id="more-255456"></span> In my opinion, both web designers and web developers should learn the basics—if a designer uses ligatures in her designs but the developer doesn&#8217;t even know what ligatures are, how can we expect him to correctly transform the most beautifully designed typography into code? With both roles knowing the basics, we&#8217;ll be able to start contributing to a better web by producing better web typography. Together.</p>
+<p>One of the most important things in typography is to shape a seamless reading experience that invites the reader and presents the content in an objective way. To do that, we need to be able to shape perfect paragraphs. There are three keys to doing that, as Josef Mueller-Brockmann—a renowned 20th-century typographer and visual communicator, put it:</p>
+<blockquote>
+<p>The reader should be able to read the message of a text easily and comfortably. This depends to a not inconsiderable extent on the size of the type, the length of the lines and the leading (line-height).</p>
+<p><cite>—Josef Mueller–Brockmann</cite></p></blockquote>
+<p>When I was writing the lessons for the Better Web Type course, I was trying to think of a simple concept that would illustrate exactly that: <code>font-size</code>, <code>line-height</code>, and length of lines need to be in perfect balance. I struggled for a while but then, out of nothing, it hit me—the equilateral triangle. All three sides of an equilateral triangle are equal and so are all the three angles. A great representation of three things in perfect balance. It turned out that it was easy to apply this idea to the three keys that shape a perfect paragraph. But first, let&#8217;s take a look at each of them in isolation.</p>
+<h3>Type size &#038; color</h3>
+<p>One of the mistakes that most websites make is that they make the main body text too small. Back in the early 2000s it was common practice to set the body text to a size of around 11px. But back then the screens were smaller with lower screen resolutions. 11px then was larger than it is now.</p>
+<p>A common rule for setting the body text is to set it to a size that would match the size of the text in a book at an arm&#8217;s length distance.</p>
+<figure id="post-255457" class="align-none media-255457"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/06/book-type.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Matching the font size with the text size from a book at an arm&#8217;s length. (Source: <a href="https://ia.net/topics/responsive-typography-the-basics/">iA</a>)</figcaption></figure>
+<p>The recommended size for today&#8217;s screens is 16px for mobile and from 18 to 22px for desktop. This also depends on the typeface. Some typefaces set at 16px may seem larger than others, as it&#8217;s clear in the picture below.</p>
+<figure id="post-255458" class="align-none media-255458"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/georgia-vs-merriweather.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The same text set in Merriweather seems larger and heavier than when set in Georgia.</figcaption></figure>
+<p>&#8220;Type color&#8221; in typography doesn’t mean actual color like red, blue or green. Type color means how heavy black type on a light background looks like. A typeface of the same size and same weight may seem heavier than another one. The contrast of the Merriweather typeface in the example above is lower (comparing the serifs and different stems) than the one of Georgia on the right. That makes it look heavier and the color of the type is darker.</p>
+<h3>Length of lines</h3>
+<p>Reading very long lines of text is tiring for our eyes. Our eyes need constant pauses which are provided by line breaks. In that instance of switching to the next line, they get that short pause. Short, but long enough to keep them going for longer. It&#8217;s like an engine that doesn&#8217;t run on full power all the time so it keeps going longer without overheating.</p>
+<p>The ideal length of a line of text is from 45 to 75 characters—including spaces. Anything that reaches far from that range becomes hard to read. Too much line switching when lines are too short and too few breaks for the eyes when they&#8217;re too long. </p>
+<figure id="post-255459" class="align-none media-255459"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/ideal-line-length.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Recommended line length in Google&#8217;s Material Design Guidelines (Source: <a href="https://material.io/guidelines/style/typography.html#typography-other-typographic-guidelines">material.io</a>)</figcaption></figure>
+<h3>Line-height (leading)</h3>
+<p>Line-height, or leading as it&#8217;s usually referred to in print, is the pillar of vertical rhythm in typography. Understanding how it works is key to producing better typography for the web.</p>
+<figure id="post-255460" class="align-none media-255460"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/06/font-size-and-line-height.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Line-height (leading) works differently on the web. It&#8217;s evenly distributed below and above the line of text.</figcaption></figure>
+<p>Too many designers or web developers that I&#8217;ve met think of <code>line-height</code> as an isolated text feature. So they tend to set it based on what seems right. Consequently, <code>line-height</code> is something that gets set without too much consideration. But <code>line-height</code> is too important to be set so mindlessly. The length of the lines affects the <code>line-height</code>. The longer the lines, the more space between them is required. Type size affects the <code>line-height</code>. The larger it is, the larger the line-height should be as well. </p>
+<p>Type color affects <code>line-height</code> too. Darker and heavier type requires more space between the lines. And in the end, the typeface itself may affect it as well. As we&#8217;ve seen earlier, some typefaces seem larger than others. Some, mostly serifed typefaces, will seem heavier. Those will require more space between the lines too. </p>
+<p>Now that you know that <code>line-height</code> is very important and that it should never be considered as an isolated feature, let&#8217;s look at general best practices. For paragraphs, ideal <code>line-height</code> is usually between 1.3 and 1.7. So a body text set at 16px should have a line-height from 21 to 26px. This will depend on the things mentioned earlier: typeface design, type size, weight etc.</p>
+<figure id="post-255461" class="align-none media-255461"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/georgia-and-georgia.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Same typeface, same <code>font-size</code>, different color. Darker text should have larger <code>line-height</code>.</figcaption></figure>
+<figure id="post-255462" class="align-none media-255462"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/georgia-and-georgia-2.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Same typeface, same font size, same color, different line length. The longer the line of text, the larger the line-height required.</figcaption></figure>
+<figure id="post-255463" class="align-none media-255463"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/06/georgia-and-merriweather.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Different typefaces, same font size, same color. Typefaces that seem larger and heavier need more line-height.</figcaption></figure>
+<h3>The equilateral triangle</h3>
+<p>There are some general best practices in typography but they&#8217;re never definite. As we saw with the line-height, we&#8217;re commonly presented with ranges that we should use. What to choose from that range takes time to learn. The eye needs time to get sharper in noticing these differences. </p>
+<p>And so we come to what I call <em>The Equilateral Triangle of a Perfect Paragraph</em>. We&#8217;ve looked at type size, measure and line-height in isolation (as much as we could). By doing so, we already learned that these properties are interconnected. They can&#8217;t be considered in isolation and they never should be. That&#8217;s why an equilateral triangle is a perfect representation of a well-designed paragraph of text. For it, we need a good type size that matches the measure, which matches the line height. Get one of them wrong and your triangle will get skewed. </p>
+<p>Unfortunately, I can&#8217;t give you definite numbers of a perfect paragraph as there are millions of combinations out there. But I can give you a few examples that will help you train your eye. Try to pay attention to the details and compare the type size, the lengths of the lines and the spacing between them. </p>
+<figure id="post-255464" class="align-none media-255464"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/equaliateral-triangle-paragraph.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>A perfectly balanced paragraph represented by an equilateral triangle.</figcaption></figure>
+<p>In the example above, the text is set in Merriweather — an uncommonly large and heavy typeface. That&#8217;s why it&#8217;s set to 14px. The <code>line-height</code> is, therefore, closer to the upper edge of the recommended range of 1.3 to 1.7. The paragraph above neatly fits 55 characters per line (also in the recommended range).</p>
+<figure id="post-255465" class="align-none media-255465"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/too-long-lines.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Lines of text in this paragraph are too long. The triangle isn&#8217;t equilateral. To fix this we&#8217;d need to either make the type size and line-height larger or decrease the length of the line.</figcaption></figure>
+<p>In the example above, the length of the lines is outside the recommended range of 55–75. It&#8217;s 84 on average, meaning that the bottom side of the triangle expands on both sides. The triangle is not equilateral anymore.</p>
+<figure id="post-255466" class="align-none media-255466"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/06/too-high-line-height.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The <code>line-height</code> of this paragraph is too large. The lines of text are starting to drift apart. This example could be improved if we increased the length of the lines. To properly fix it we&#8217;d also need to increase the font size to balance it out. A simpler way to fix it would be to decrease the line-height.</figcaption></figure>
+<p>The <code>line-height</code> in the example above is obviously too large. It&#8217;s set to 2 and very much outside the recommended range. The lines of text are too far apart. Unfortunately, this happens too often on the web. It seems like there&#8217;s a trend of setting type to a light gray color and applying a large line-height on top of it. It&#8217;s an attempt to get that clean, minimalistic style but it&#8217;s wrong. Texts like that, especially if long, are hard to read.</p>
+<figure id="post-255467" class="align-none media-255467"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2017/06/too-large-font-size.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The <code>font-size</code> is way too large in this paragraph. It forces the length of the lines to 30 characters and completely skews the triangle. The lines of text are too close together. To fix this we&#8217;d either have to decrease the size of the text or increase both line-height and the length of the lines.</figcaption></figure>
+<p>Fortunately, I don&#8217;t encounter this on the web too often. I still wanted to include it, so we cover all the possible options that can come out of this concept. The font size in the example above is way too large for the given line-height and length of the lines. Texts set like this are extremely hard to read. </p>
+<h3>The learning game</h3>
+<p>Many of the students of the Better Web Type course have asked me to elaborate on this concept. And what&#8217;s the best way to illustrate how this concept works in action? A learning game that will help you sharpen your eyes. Presenting &#8220;The Equilateral Triangle of a Perfect Paragraph — A Web Typography Learning Game&#8221;.</p>
+<p>The game consists of ten levels, each asking you to set one of the three properties: font size, line-height or the length of the lines. At the end, you get a score out of 100 and a chance to participate in the giveaway of the upcoming book <em>Better Web Typography for a Better Web</em>. Four, randomly chosen, highest scores will get a free book, which is based on the popular Better Web Type course.</p>
+<figure id="post-255468" class="align-none media-255468"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2017/06/triangle-game.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>I hope that as many people as possible come across this game and learn that <code>line-height</code>, <code>font-size</code>, and length of lines always need to be considered together. Try to get the best result and challenge your friends. The more people know about this, the better the web typography will get.</p>
+<p><a href="http://betterwebtype.com/triangle" class="button">Check out the game</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/equilateral-triangle-perfect-paragraph/">The Equilateral Triangle of a Perfect Paragraph</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/equilateral-triangle-perfect-paragraph/feed/</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">255456</post-id>	</item>
+		<item>
+		<title>Building Resizeable Components with Relative CSS Units</title>
+		<link>https://css-tricks.com/building-resizeable-components-relative-css-units/</link>
+					<comments>https://css-tricks.com/building-resizeable-components-relative-css-units/#comments</comments>
+		
+		<dc:creator><![CDATA[Ahmad Shadeed]]></dc:creator>
+		<pubDate>Fri, 09 Sep 2016 16:01:43 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[components]]></category>
+		<category><![CDATA[em]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[modules]]></category>
+		<category><![CDATA[relative sizing]]></category>
+		<category><![CDATA[rem]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=245258</guid>
+
+					<description><![CDATA[<p><em class="explanation">The following is a guest post by <a href="https://ishadeed.com/">Ahmad Shadeed</a>. Ahmad has put together a <strong>ton</strong> of examples to show off how using relative units can benefit us. I think a lot of us think of units like <code>em</code> as being for <code>font-size</code>, which it is, but can also be for lots of other things, tying together typographic sizing and other visual elements.</em></p>
+</p>
+<p>We are living in a dynamic world, everything we do could be changed at anytime. We, &#8230; <a href="https://css-tricks.com/building-resizeable-components-relative-css-units/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Building Resizeable Components with Relative CSS Units&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-resizeable-components-relative-css-units/">Building Resizeable Components with Relative CSS Units</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><em class="explanation">The following is a guest post by <a href="https://ishadeed.com/">Ahmad Shadeed</a>. Ahmad has put together a <strong>ton</strong> of examples to show off how using relative units can benefit us. I think a lot of us think of units like <code>em</code> as being for <code>font-size</code>, which it is, but can also be for lots of other things, tying together typographic sizing and other visual elements.</em></p>
+<p><span id="more-245258"></span></p>
+<p>We are living in a dynamic world, everything we do could be changed at anytime. We, as Front-End Developers should build our layouts in a dynamic approach.</p>
+<p>In this article, we will explore a concept that lets us resize our components by using CSS relative units (%, em, or rem). Not just the type size, but all the UI in that component. We&#8217;ll look at practical examples, pros and cons of the approach, and even a complete web page built out in this manner.</p>
+<h3>A simple example of proportional font sizes</h3>
+<figure id="post-245262" class="align-none media-245262"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/exploring.jpg?ssl=1" alt="" qq data-recalc-dims="1"/></figure>
+<p>There are three elements here:</p>
+<ol>
+<li>Subtitle</li>
+<li>Title</li>
+<li>Left Border</li>
+</ol>
+<p>With HTML something like this:</p>
+<pre rel="HTML"><code class="language-markup">&lt;article class="post"&gt;
+   &lt;a href="#"&gt;
+     &lt;span class="post-category"&gt;Featured&lt;/span&gt;
+     &lt;h2 class="post-title"&gt;Building Dynamic Components is Awesome&lt;/h2&gt;
+   &lt;/a&gt;
+&lt;/article&gt;</code></pre>
+<p>I want everything to be proportional to each other, so that when things resize, they do so together:</p>
+<figure id="post-245263" class="align-none media-245263"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/exploring2.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Let&#8217;s say we started in pixels:</p>
+<pre><code class="css">.post {
+  border-left: 4px solid #4a90e2;
+}
+.post-category {
+  font-size: 14px;
+  color: #7d7d7d;
+}
+.post-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #4a90de;
+}</code></pre>
+<p>The only way to resize the entire component proportionally, then, is to adjust the <code>font-size</code> of each element manually to match each other at a new size. Perhaps your client tells you they&#8217;d like to see that area 1.5× bigger, you&#8217;d have to adjust those sizes to <code>21px</code> and <code>54px</code> respectively. </p>
+<p>To make things a bit easier to adjust, we could use percentage font sizing. </p>
+<pre rel="CSS"><code class="language-css">.post-category {
+  font-size: 85%;
+}
+.post-title {
+  font-size: 135%;
+}</code></pre>
+<p>This is saying: the <code>font-size</code> should be 85% of its closest parent element with a defined <code>font-size</code>.</p>
+<p>We could set that <code>font-size</code> on the parent element:</p>
+<pre rel="CSS"><code class="language-css">.post {
+  font-size: 24px;
+
+  /* 
+    Child elements with % font sizes...
+
+    85%
+    0.85 * 24 = 20.4
+    
+    135%
+    1.35 * 24 = 32.4
+  */
+}</code></pre>
+<p>The browser calculates those font sizes for you when you use percentages and you don&#8217;t really need to care what the final values are. It&#8217;s just a proportion. </p>
+<figure id="post-245270" class="align-none media-245270"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/computed.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We could do the exact same thing with <code>em</code> values if we wanted. With font-size, percentage and em are kinda the same thing. </p>
+<pre rel="CSS"><code class="language-css">.post-category {
+  font-size: 85%;
+  /* the same as */
+  font-size: 0.85em;
+}
+.post-title {
+  font-size: 135%;
+  /* the same as */
+  font-size: 1.35em;
+}</code></pre>
+<p>When we use <code>em</code> for values other than <code>font-size</code>, the computed pixel value it represents is still based on <code>font-size</code>. This is unlike, say, percentages, where a percentage <code>width</code> is based on the <code>width</code> of the parent, not the <code>font-size</code>! </p>
+<p>For instance, if we set:</p>
+<pre rel="CSS"><code class="language-css">.post {
+  font-size: 24px;
+  border-left: 0.25em solid #4a90e2;
+}</code></pre>
+<p>The <code>border-left-width</code> will compute to <code>6px</code>. </p>
+<p>In the following interactive demo, the slider changes the <code>font-size</code> on both components. The first everything set in pixels: font-size, border, margin, and padding. The second sets all those things in ems:</p>
+<p data-height="500" style="height: 500px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="5037e798ccb88eb220f26540e6886f5c" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/5037e798ccb88eb220f26540e6886f5c/">See the demo.</a></p>
+<p>Proportional scaling for everything!</p>
+<h3>Proportional Buttons</h3>
+<p>Sometimes we need variations of a button. Perhaps a <em>bigger</em> version to emphasize a more important call to action. We can benefit from <code>em</code> units by using it for the padding, that way we can easily increase the size of the button through both <code>font-size</code> and <code>padding</code>.</p>
+<pre rel="HTML"><code class="language-markup">&lt;button class="button"&gt;Save Settings&lt;/button&gt;
+
+&lt;button class="button button--medium"&gt;Save Settings&lt;/button&gt;
+
+&lt;button class="button button--large"&gt;Save Settings&lt;/button&gt;</code></pre>
+<p>If we set all those variations in pixels, we&#8217;d have something like:</p>
+<pre rel="CSS"><code class="language-css">.button {
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 3px;
+}
+
+.button--medium {
+  font-size: 24px;
+  padding: 15px 24px;
+  border-radius: 4px;
+}
+
+.button--large {
+  font-size: 32px;
+  padding: 20px 32px;
+  border-radius: 5px;
+}</code></pre>
+<p>Instead, we could <em>combine</em> percentage and em values to make things proportional, including the <code>border-radius</code>!</p>
+<pre rel="CSS"><code class="language-css">.button {
+  font-size: 1em; /* Let's say this computes to 16px */
+  padding: 0.625em 1em; /* 0.1875 * 16 = 10px */
+  border-radius: 0.1875em; /* 0.1875 * 16 = 3px */
+}
+
+.button--medium {
+  font-size: 130%;
+}
+
+.button--large {
+  font-size: 160%;
+}</code></pre>
+<p>Check them all scale in proportion:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="f2de84b1d64c07b5085f2e4dadbca4e1" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/f2de84b1d64c07b5085f2e4dadbca4e1/">See the demo.</a></p>
+<h3>Proportional Width/Height of Images</h3>
+<p>Here&#8217;s an example where we need to keep an image avatar a bit bigger than the byline and publication date. Notice the blue highlight. Its height should change as we scale the <code>font-size</code>. </p>
+<figure id="post-245279" class="align-none media-245279"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/author-bio.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>The HTML could be like:</p>
+<pre rel="HTML"><code class="language-markup">&lt;div class="bio"&gt;
+  &lt;img src="author.jpg" alt="Photo of author Ahmad Shadeed"&gt;
+  &lt;div class="bio__meta"&gt;
+    &lt;h3&gt;&lt;b&gt;By:&lt;/b&gt; Ahmad Shadeed&lt;/h3&gt;
+    &lt;time&gt;Posted on August 5, 2016&lt;/time&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>And we&#8217;d set not only the font sizes in em values but also the width and height of the image. Make sure the image itself is big enough to scale without losing too much quality!</p>
+<pre rel="CSS"><code class="language-css">.bio h3 {
+  font-size: 1em;
+}
+.bio time {
+  font-size: 0.875em;
+}
+.bio img {
+  width: 3.125em;
+  height: 3.125em;
+}</code></pre>
+<h3>A scaling &#8220;border&#8221;</h3>
+<p>Another property that is happy to be set in em values: <code>box-shadow</code>. </p>
+<figure id="post-245280" class="align-none media-245280"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/headline.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We already know borders can be scaleable with em values. Here, we&#8217;ll set the &#8220;height&#8221; of an inset <code>box-shadow</code> with an em value so it scales with the size of the text.</p>
+<pre rel="CSS"><code class="language-css">.headline {
+  box-shadow: inset 0 -0.25em 0 0 #e7e7e7;
+}</code></pre>
+<p data-height="500" style="height: 500px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="2ec1144b424ca7017c22fea52aa01494" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/2ec1144b424ca7017c22fea52aa01494/">See the demo.</a></p>
+<p>Note: we could have also pulled this off with CSS gradients with hard color stops, as those stops could be set at em values as well!</p>
+<h3>Making Room for Icons</h3>
+<p>Say we have a decorative <code>&lt;blockquote&gt;</code> with a custom icon in the upper left. We should account for the scenario when the font size changes. Relative units can help again here. </p>
+<figure id="post-245281" class="align-none media-245281"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/blockquote.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<pre rel="HTML"><code class="language-markup">&lt;blockquote class="quote"&gt;
+  &lt;p&gt;
+    &lt;span&gt;
+      Building dynamic web components using modular design concepts is awesome. 
+      &lt;em&gt;- Ahmad Shadeed&lt;/em&gt;
+    &lt;/span&gt;
+  &lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+<p>We&#8217;ll set everything with relative units like we&#8217;ve touched on already. The decorative icon we will place with an SVG image applied via a pseudo element. We&#8217;ll position that pseudo element absolutely, again with relative positioning and sizing, leaving enough space for it (with relative padding) on the parent element.</p>
+<pre rel="CSS"><code class="language-css">.quote {
+  position: relative;
+  padding: 1.5em 2em;
+  padding-left: 4.5em;
+  border-radius: 0.3125em;
+}
+.quote p {
+  font-size: 2em;
+}
+.quote span {
+  box-shadow: inset 0 -0.25em 0 0 rgba(255, 255, 255, 0.4);
+}
+.quote:before {
+  content: "";
+  position: absolute;
+  top: 2.125em;
+  left: 1.875em;
+  background: url("quotes.svg") no-repeat;
+  height: 1.875em;
+  width: 1.875em;
+}</code></pre>
+<p>With that in place, if we change the font size, everything scales fine:</p>
+<figure id="post-245282" class="align-none media-245282"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/blockquote-2.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Notice how everything scales up proportionally, just as it would if we grouped these elements and drag-scaled it up in a design application!</p>
+<figure id="post-245283" class="align-none media-245283"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/resize.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>If we used pixel values instead, things wouldn&#8217;t have scaled quite so nicely. The icon, in particular, could get awkwardly close to the text, or awkwardly far away:</p>
+<figure id="post-245284" class="align-none media-245284"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/blockquote-3.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Interactive example:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="6c9015e777886666ce827db88da704b9" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/2ec1144b424ca7017c22fea52aa01494/">See the demo.</a></p>
+<h3>Figure with a caption</h3>
+<p>Imagine a photo and caption arranged like this:</p>
+<figure id="post-245306" class="align-none media-245306"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2016/09/figure.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We can make much of this design based on the font-size, like amount it is offset to the left and top, the padding, and even the shadow.</p>
+<pre rel="HTML"><code class="language-markup">&lt;figure class="figure"&gt;
+  &lt;img src="sunrise.jpg" alt="Sunrise"&gt;
+  &lt;figcaption&gt;The feeling you got from watching the sunrise is amazing.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.figure figcaption {
+  position: absolute;
+  top: 1.25em;
+  left: -1.875em;
+  right: 0;
+  padding: 1em;
+  box-shadow: -0.3125em 0.3125em 0 0 rgba(0, 0, 0, 0.15);
+  font-size: 1.75em;
+}</code></pre>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="c51b4e5d3e635e1bfc8d9fe499c247d6" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/c51b4e5d3e635e1bfc8d9fe499c247d6/">See the demo.</a></p>
+<h3>A Decorative Background</h3>
+<p>Take this darkened circle behind the title in this content block:</p>
+<figure id="post-245333" class="align-none media-245333"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/content-block.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Let&#8217;s make sure it sizes accordingly when the font size changes. But there are more subtle details here. The border-radius should be relative, as well as the thickness of that dashed line. </p>
+<pre rel="HTML"><code class="language-markup">&lt;section class="block"&gt;
+  &lt;h3 class="block__title"&gt;Content outline&lt;/h3&gt;
+  &lt;div class="block__content"&gt;
+    &lt;p&gt;Description to be there....&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.block__title {
+  position: relative;
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
+.block__title:after {
+  content: "";
+  position: absolute;
+  left: 0.25em;
+  top: 0;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.5;
+  transform: scale(1.75);
+}
+
+.block__title:before {
+  content: "";
+  margin-left: 0.5em;
+  border-bottom: 0.0625em dashed rgba(255, 255, 255, 0.5);
+}</code></pre>
+<p>Using relative units for as much as we can here, everything scales:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="8993265d72b2dc808ed144ff8a448295" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/8993265d72b2dc808ed144ff8a448295/">See the demo.</a></p>
+<h3>A Search Input with Icon</h3>
+<p>It&#8217;s common to use icons with buttons, but you can use them within inputs too. This is a common example where we indicate a search input by using a magnifying glass icon:</p>
+<figure id="post-245334" class="align-none media-245334"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/search.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>The icon is placed using <code>background-image</code>, and padding-left is added to keep the text from overlapping it. If the font size increases, we should increase the size of that icon commensurately. </p>
+<pre rel="HTML"><code class="language-markup">&lt;form class="search"&gt;
+  &lt;label for="search"&gt;Enter keyword:&lt;/label&gt;
+  &lt;input type="search" id="search" placeholder="What are you searching about?"&gt;
+&lt;/form&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.search input {
+  width: 25em;
+  font-size: 1em;
+  padding: 0.625em;
+  padding-left: 2.5em;
+  border-radius: 0.3125em;
+  border: 0.125em solid #b4b4b4;
+  background: url("search.svg") left 0.625em center/1.5em 1.5em no-repeat;
+}</code></pre>
+<p>All the classics are set in relative units here: padding, border, border-radius&#8230; but we&#8217;ve also used relative units for both the background-position and the background-size. Now it all scales up nicely!</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="a9eabeb1090744105254dd52fc2f6a6b" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/a9eabeb1090744105254dd52fc2f6a6b/">See the demo.</a></p>
+<h3>Toggle</h3>
+<p>Consider a customized checkbox in the form of a back-and-forth toggle switch:</p>
+<figure id="post-245337" class="align-none media-245337"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2016/09/toggle.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Nothing in here we can&#8217;t scale! </p>
+<pre rel="HTML"><code class="language-markup">&lt;form action="" class="switch"&gt;
+  &lt;p&gt;Do you want to subscribe?&lt;/p&gt;
+  &lt;input type="checkbox" name="" id="switch" class="off-screen"&gt;
+  &lt;label for="switch"&gt;&lt;span class="off-screen"&gt;Do you want to subscribe?&lt;/span&gt;&lt;/label&gt;
+&lt;/form&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.switch label {
+  width: 5.625em;
+  height: 2.5em;
+  border: 0.125em solid #b4b4b4;
+  border-radius: 2.5em;
+}
+
+.switch label:before {
+  content: "";
+  right: 0.25em;
+  top: 0.21875em;
+  width: 2em;
+  height: 2em;
+}</code></pre>
+<p>Scale away:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="1179b6e57a4fbe914bf099743b4e6945" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/1179b6e57a4fbe914bf099743b4e6945/">See the demo.</a></p>
+<h3>Limiting Line Length, Only When You Need To</h3>
+<p>Take a block of content like this:</p>
+<figure id="post-245338" class="align-none media-245338"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/hero.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We have quite a bit of horizontal space there. Without limiting anything, the line length of that paragraph would have been a bit too long to be comfortable. Setting <code>max-width</code> is a great way to limit line-length. We probably wouldn&#8217;t set it in pixels (for all the same reasons we&#8217;ve been covering all along: it doesn&#8217;t scale) and we probably wouldn&#8217;t use percentages either, as at narrower widths, 100% is likely fine. Relative units it is!</p>
+<pre rel="HTML"><code class="language-markup">&lt;div class="hero"&gt;
+  &lt;h2&gt;This is title for this hero section&lt;/h2&gt;
+  &lt;p&gt;And this paragraph is a sub title, as you know I'm writing an article about using em units to build dynamic components.&lt;/p&gt;
+  &lt;a href="#"&gt;Read about hero&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.hero h2 {
+  margin-bottom: 0.25em;
+  font-size: 1.75em;
+}
+
+.hero p {
+  margin-bottom: 1em;
+  max-width: 28.125em; /* limit line length */
+  font-size: 1.25em;
+}
+
+.hero a {
+  display: inline-block;
+  background: #4a90e2;
+  padding: 0.7em 1.5em;
+}</code></pre>
+<p>Now the line length is capped, but will happily go full width when less width is available. </p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="df7e6366a508171035ab9d5c96683eb5" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/df7e6366a508171035ab9d5c96683eb5/">See the demo.</a></p>
+<h3>SVG Icons in Buttons</h3>
+<p>One of the reasons people cite liking working with icon fonts is that the font is automatically sized along with the text. But that can also work with <code>&lt;img&gt;</code> (as we&#8217;ve seen), and can work with inline <code>&lt;svg&gt;</code> icons as well!</p>
+<figure id="post-245339" class="align-none media-245339"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/social.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We&#8217;ll use em values to set the <code>width</code> and <code>height</code>, and then the icons will scale proportionally as the font scales.</p>
+<pre rel="HTML"><code class="language-markup">&lt;ul class="social"&gt;
+    &lt;li class="social__item"&gt;
+      &lt;a href="#"&gt;
+        &lt;svg width="32" height="32" viewBox="0 0 32 32"&gt;
+        &lt;!-- SVG Data --&gt;                    
+        &lt;/svg&gt; 
+        Like on Facebook
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="social__item"&gt;
+      &lt;a href="#"&gt;
+        &lt;svg width="32" height="32" viewBox="0 0 32 32"&gt;
+        &lt;!-- SVG Data --&gt;                    
+        &lt;/svg&gt;  
+        Follow on Twitter
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="social__item"&gt;
+      &lt;a href="#"&gt;
+        &lt;svg width="32" height="32" viewBox="0 0 32 32"&gt;
+        &lt;!-- SVG Data --&gt;                    
+        &lt;/svg&gt; 
+        Follow on Dribbble
+      &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.social__item svg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 2.1875em;
+  height: 2.1875em;
+}</code></pre>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="06fb18a477bd6f2bf4b4f52db4adc424" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/06fb18a477bd6f2bf4b4f52db4adc424/">See the demo.</a></p>
+<h3>List Counters</h3>
+<p>Say we made a list with custom designed counters. With text set into containers like that, we&#8217;d better make sure everything scales proportionately or have a problem like this:</p>
+<figure id="post-245351" class="align-none media-245351"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/list-problem.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<pre rel="HTML"><code class="language-markup">&lt;ul class="list"&gt;
+  &lt;li&gt;Go to example.com and click on Register&lt;/li&gt;
+  &lt;li&gt;Enter your email address&lt;/li&gt;
+  &lt;li&gt;Pick a strong password&lt;/li&gt;
+  &lt;li&gt;Congrats! You now have an account&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.list li {
+  position: relative;
+  padding-left: 3.125em;
+  margin-bottom: 1em;
+  min-height: 2.5em;
+}
+
+.list li:before {
+  font-size: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  text-align: center;
+  line-height: 2.5em;
+  border-radius: 50%;
+}</code></pre>
+<p>Happy scaling:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="9eb5d1e604e275a2dce29f161aca1809" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/9eb5d1e604e275a2dce29f161aca1809/">See the demo.</a></p>
+<h3>Positioned Icon a List/Alert/Modal</h3>
+<p>I think you&#8217;re getting the point now, so let&#8217;s do a few more examples with just a demo where you can see for yourself how relative scaling is helpful:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="67bbdf87c292767549ce1ae0f71861f6" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/67bbdf87c292767549ce1ae0f71861f6/">See the demo.</a></p>
+<h3>Hamburger Menu Icon</h3>
+<p>Perhaps you&#8217;ve &#8220;faked&#8221; an icon by building it out of elements and pseudo elements. That should be scaleable too.</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="cf7eac4b80b41bd011a6e7699d05bdb1" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/cf7eac4b80b41bd011a6e7699d05bdb1/">See the demo.</a></p>
+<h3>Gradients</h3>
+<p>We already looked at how we can use relative units for background-size. We also eluded to the fact that a color stop in a gradient could be set with a relative unit. Let&#8217;s do just that!</p>
+<pre rel="CSS"><code class="language-css">.box-1 {
+  background: 
+    linear-gradient(
+      to right, 
+      #4a90e2 0, 
+      #4a90e2 0.625em, 
+      #1b5dab 0.625em, 
+      #1b5dab 1.875em, 
+      #4a90e2 0, 
+      #4a90e2 3.125em
+    );
+  background-size: 1.25em 100%;
+}</code></pre>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="c30dacfa463f2862bf845ffd707228b5" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/c30dacfa463f2862bf845ffd707228b5/">See the demo.</a></p>
+<h3>Image Sprites</h3>
+<p>Some things have fixed sizes that are a lot easier to think about in pixels, like raster images. But that doesn&#8217;t mean we still can&#8217;t work with them in relative units. If we combine background-position and background-size in ems, we can use <a href="https://css-tricks.com/css-sprites/">CSS sprites</a> that can scale in size. </p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="a761b067a8b7094bf58d7c6fe450ece5" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/a761b067a8b7094bf58d7c6fe450ece5/">See the demo.</a></p>
+<hr>
+<h3>Combining <code>em</code> and <code>rem</code></h3>
+<p>We&#8217;ve mainly used the <code>em</code> unit throughout this article. We established that the <code>em</code> unit is based on <code>font-size</code> and cascades. But <code>em</code> has a cousin unit: <code>rem</code>. The rem unit is still relative, but relative only to the root (e.g. <code>html {}</code> or <code>:root {}</code>). So it doesn&#8217;t really cascade like em does, but if you change the root <code>font-size</code>, it will change accordingly. </p>
+<p>By combining em and rem, we can keep some sizes fixed and keep the other dynamic. For example, say you wanted the text in these components to be only relative to the root, but have other elements be relative to the more immediate font size. Like the image, for example:</p>
+<figure id="post-245353" class="align-none media-245353"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/bio.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>See how adjusting the immediate font-size only affects the image now:</p>
+<p data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="f7fcc697cb69f606cd45e0a877379337" data-default-tab="result" data-embed-version="2" class="codepen"><a href="http://codepen.io/shadeed/pen/f7fcc697cb69f606cd45e0a877379337/">See the demo.</a></p>
+<hr>
+<h3>Building a complete site with relative sizes</h3>
+<p>I built an entire page to demonstrate how we can apply the concept of dynamic components to something real-world and not just isolated to a single example.</p>
+<figure id="post-245354" class="align-none media-245354"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/knowledge-space.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Everything here is dynamically sized: logo, tags, title, author, section title, numbered lists, form inputs, buttons, blockquotes&#8230; just about everything.</p>
+<figure id="post-245355" class="align-none media-245355"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2016/09/example-01-deconstruct.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>If we were to change the default browser font size from 16px to 20px, this is how the site scales:</p>
+<figure id="post-245357" class="align-none media-245357"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2016/09/changing-root.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Awesome, right? Did you notice how everything scaled, not just the type? That&#8217;s the beauty of <code>em</code>! &#x1f60d;</p>
+<p><a href="http://codepen.io/shadeed/full/d616aee645f87445b88df2a47d91dc95/">Check out the full page demo.</a></p>
+<p>Note that the font-size changes with a media query breakpoint as well.</p>
+<h3>Zooming</h3>
+<p>Our em-based design is happily compatible with browser zooming as well.</p>
+<figure id="post-245358" class="align-none media-245358"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2016/09/zoom-out-em.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>While the pixel-based design can run into issues:</p>
+<figure id="post-245359" class="align-none media-245359"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2016/09/zoom-out-px.jpg?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Challenges with <code>em</code></h3>
+<p>One thing to keep in mind when using em is that when you set the font-size in it, it&#8217;s based on the nearest parent element with a declared font-size. </p>
+<pre rel="SCSS"><code class="language-scss">.parent {  
+  font-size: 20px;
+  .child { 
+    /* This is based on 20px, so it's 30px */
+    font-size: 1.5em;
+  }
+}</code></pre>
+<p>I think we&#8217;ve established that pretty clearly. </p>
+<p>But when we size other things in em, it&#8217;s now based on the newly-adjusted font-size of the current element. For example:</p>
+<pre rel="SCSS"><code class="language-scss">.parent {
+  font-size: 20px;
+  .child {
+
+    /* This is based on 20px, so it's 30px */
+    font-size: 1.5em;
+    
+    /* This is based on 1.5em (not 20px), so it's also 30px */
+    border: 1em solid black;
+    
+  }
+}</code></pre>
+<p>It just can be weird to see two different em values in the same element evaluating to the same end value. </p>
+<p>This is in addition to the fact that the cascading effect of ems is sometimes challenging in itself. If you size things inside components in ems and those components can be nested, that can cause cascading of sizes that may be undesirable.</p>
+<figure id="post-245369" class="align-none media-245369"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2016/09/cascading-components.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Closing up</h3>
+<ul>
+<li>Sizing in pixels is <strong>harder to maintain</strong>. They aren&#8217;t relative to anything else. You need to manually adjust all of them to change a proportion. Difficult, time consuming, error prone.</li>
+<li>Settings values in ems makes things <strong>proportional to the font-size</strong>, so changing the font-size scales all the values on that element (and cascades to the children).</li>
+<li>Setting font sizes in pixels may prevent the user from changing their default font size via their browser settings, which is <strong>no good for accessibility</strong>.</li>
+</ul>
+<h3>Further reading</h3>
+<ul>
+<li><a href="http://simurai.com/blog/2015/09/09/back-to-the-roots">Back to the :roots</a></li>
+<li><a href="https://css-tricks.com/rems-ems/">Font Size Idea: px at the Root, rem for Components, em for Text Elements</a></li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-resizeable-components-relative-css-units/">Building Resizeable Components with Relative CSS Units</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/building-resizeable-components-relative-css-units/feed/</wfw:commentRss>
+			<slash:comments>21</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">245258</post-id>	</item>
+		<item>
+		<title>font-size-adjust</title>
+		<link>https://css-tricks.com/almanac/properties/f/font-size-adjust/</link>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Wed, 25 Nov 2015 17:02:32 +0000</pubDate>
+				<category><![CDATA[font-size]]></category>
+		<category><![CDATA[font-size-adjust]]></category>
+		<category><![CDATA[typography]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?page_id=235175</guid>
+
+					<description><![CDATA[<p>This property gives developers the ability to set the <code>font-size</code> of an element depending on the size of its lowercase letters, rather than the uppercase letters.</p>
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.element {
+  font-size: 22px;
+  font-size-adjust: .5;
+}</code></pre>
+<p>In this case the lowercase letters of the font would be 11px in height, since 22 x .5 = 11.</p>
+<p>When loading fonts there’s likely to be a different aspect ratio between the lowercase letters of a fallback font and the newly loaded typeface, so <code>font-size-adjust</code> is &#8230; <a href="https://css-tricks.com/almanac/properties/f/font-size-adjust/" class="read-more">Read article <span class="screen-reader-text"> &#8220;font-size-adjust&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/almanac/properties/f/font-size-adjust/">font-size-adjust</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>This property gives developers the ability to set the <code>font-size</code> of an element depending on the size of its lowercase letters, rather than the uppercase letters.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.element {
+  font-size: 22px;
+  font-size-adjust: .5;
+}</code></pre>
+
+
+
+<p>In this case the lowercase letters of the font would be 11px in height, since 22 x .5 = 11.</p>
+
+
+
+<p>When loading fonts there’s likely to be a different aspect ratio between the lowercase letters of a fallback font and the newly loaded typeface, so <code>font-size-adjust</code> is useful to control the amount of reflow when we declare a new <code>font-family</code> and see the Flash of Unstyled Text (FOUT).</p>
+
+
+
+<p>In the demo below, it’s possible to toggle this property on and off to show how a web font like Chaparral differs from the x-height and alignment of characters in Times, the fallback font. But beware, this property is only supported by a small number of browsers at the moment.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xwNYRX" src="//codepen.io/anon/embed/xwNYRX?height=450&amp;theme-id=1&amp;slug-hash=xwNYRX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xwNYRX" title="CodePen Embed xwNYRX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This can have dramatic effects when set on large portions of body text, and substantially improve the flicker that occurs when switching between fallback and the newly loaded font:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_da315d93ee525c38f53c9e42b80e93c1" src="//codepen.io/anon/embed/da315d93ee525c38f53c9e42b80e93c1?height=450&amp;theme-id=1&amp;slug-hash=da315d93ee525c38f53c9e42b80e93c1&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed da315d93ee525c38f53c9e42b80e93c1" title="CodePen Embed da315d93ee525c38f53c9e42b80e93c1" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>More information</h3>
+
+
+
+<ul><li><a href="https://developer.mozilla.org/en/docs/Web/CSS/font-size-adjust">MDN</a></li><li><a href="http://www.w3.org/TR/css3-fonts/#propdef-font-size-adjust">W3C</a></li></ul>
+
+
+
+<h3>Browser support</h3>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=font-size-adjust">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="n nope" title="Chrome - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">3</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Edge - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Safari - "><span class="caniuse-agents-version version">No</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="n nope" title="Android Chrome - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="iOS Safari - "><span class="caniuse-agents-version version">No</span></td></tr></table></div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/almanac/properties/f/font-size-adjust/">font-size-adjust</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">235175</post-id>	</item>
+	</channel>
+</rss>

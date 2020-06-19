@@ -1,0 +1,4365 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>accessibility &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/accessibility/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 12 Jun 2020 14:43:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Striking a Balance Between Native and Custom Select Elements</title>
+		<link>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/</link>
+					<comments>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2020 14:43:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[select]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312544</guid>
+
+					<description><![CDATA[<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&#60;select&#62;</code> element. We’re going to literally use a <code>&#60;select&#62;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as &#8230; <a href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Striking a Balance Between Native and Custom Select Elements&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&lt;select&gt;</code> element. We’re going to literally use a <code>&lt;select&gt;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as a select element.</p>
+
+
+
+<p>That’s what I mean by “hybrid” selects: they are both a native <code>&lt;select&gt;</code> and a styled alternate select in one design pattern.</p>
+
+
+
+<span id="more-312544"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?fit=1024%2C509&amp;ssl=1" alt="" class="wp-image-312546" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?w=1784&amp;ssl=1 1784w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=300%2C149&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1024%2C509&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=768%2C382&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1536%2C764&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1000%2C497&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Custom selects (left) are often used in place of native selects (right) for aesthetics and design consistency.</figcaption></figure>
+
+
+
+<h3>Select, dropdown, navigation, menu… the name matters</h3>
+
+
+
+<p>While doing the research for this article, I thought about many names that get tossed around when talking about selects, the most common of which are “dropdown” and “menu.” There are two types of naming mistakes we could make: giving the <em>same</em> name to different things, or giving <em>different</em> names to the same thing. A select can suffer from both mistakes.</p>
+
+
+
+<p>Before we move ahead, let me try to add clarity around using “dropdown” as a term. Here’s how I define the meaning of dropdown:</p>
+
+
+
+<blockquote class="wp-block-quote"><p><strong>Dropdown: </strong>An interactive component that consists of a button that shows and hides a list of items, typically on mouse hover, click or tap. The list is not visible by default until the interaction starts. The list usually displays a block of content (i.e. options) on top of other content.</p></blockquote>
+
+
+
+<p>A lot of interfaces can look <em>like</em> a dropdown. But simply calling an element a “dropdown&#8221; is like using “fish” to describe an animal. What type of fish it is? A clownfish is not the same as a shark. The same goes for dropdowns.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?fit=1024%2C640&amp;ssl=1" alt="" class="wp-image-312549" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?w=1920&amp;ssl=1 1920w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=300%2C188&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1024%2C640&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=768%2C480&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1536%2C960&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1000%2C625&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Like there are different types of fish in the sea, there are different types of components that we might be talking about when we toss the word “dropdown” around:</p>
+
+
+
+<ul><li><strong>Menu: </strong>A list of commands or actions that the user can perform within the page content.</li><li><strong>Navigation:</strong> A list of links used for navigating through a website.</li><li><strong>Select: </strong>A form control (<code>&lt;select&gt;</code>) that displays a list of options for the user to select within a form.</li></ul>
+
+
+
+<p>Deciding what type of dropdown we’re talking about can be a foggy task. Here are some examples from around the web that match how I would classify those three different types. This is based on my research and sometimes, when I can’t find a proper answer, <em>intuition</em> based on my experience.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?fit=1024%2C638&amp;ssl=1" alt="" class="wp-image-312552" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?w=1864&amp;ssl=1 1864w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=300%2C187&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1024%2C638&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=768%2C479&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1536%2C958&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1000%2C623&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Dropdown-land: Five scenarios where different dropdowns are used across the internet. Read the table below for a detailed description.</figcaption></figure>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Diagram Label</th><th>Scenario</th><th>Dropdown Type</th></tr></thead><tbody><tr><td>1</td><td>The dropdown expects a selected option to be submitted within a form context (e.g. Select Age)</td><td>Select</td></tr><tr><td>2</td><td>The dropdown does not need an active option (e.g. A list of actions: copy, paste and cut)</td><td>Menu</td></tr><tr><td>3</td><td>The selected option influences the content. (e.g. sorting list)</td><td>Menu or Select (more about it later)</td></tr><tr><td>4</td><td>The dropdown contains links to other pages. (e.g. A “meganav” with websites links)</td><td><a href="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/disclosure-navigation.html">Disclosure Navigation</a></td></tr><tr><td>5</td><td>The dropdown has content that is not a list. (e.g. a date picker)</td><td>Something else that should not be called dropdown</td></tr></tbody></table></figure>
+
+
+
+<p>Not everyone perceives and interacts with the internet in the same way. Naming user interfaces and defining design patterns is a fundamental process, though one with a lot of room for personal interpretation. All of that variation is what drives the population of dropdown<em>-land.&nbsp;</em></p>
+
+
+
+<p>There is a dropdown type that is clearly a <strong>menu. </strong>Its usage is a hot topic in conversations about accessibility. I won’t talk much about it here, but let me just reinforce that the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu"><code>&lt;menu&gt;</code></a> element is deprecated and no longer recommended. And here’s a detailed explanation about <a href="https://inclusive-components.design/menus-menu-buttons/">inclusive menus and menus buttons</a>, including why <a href="https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html">ARIA menu role should not be used for site navigation</a>.</p>
+
+
+
+<p>We haven’t even touched on other elements that fall into a rather gray area that makes classifying dropdowns even murkier because of a lack of practical uses cases from the WCAG community.</p>
+
+
+
+<p>Uff… that was a lot. Let’s forget about this dropdown-land mess and focus exclusively on the dropdown type that is clearly a <code>&lt;select&gt;</code> element.</p>
+
+
+
+<h3>Let’s talk about <code>&lt;select&gt;</code></h3>
+
+
+
+<p>Styling form controls is an interesting journey. As MDN puts it, there’s <a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms#Why_is_styling_form_widgets_challenging"><em>the good, the bad, and the ugly</em></a>. Good is stuff like <code>&lt;form&gt;</code> which is just a block-level element to style. Bad is stuff like checkboxes, which <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">can be done but is somewhat cumbersome</a>. <code>&lt;select&gt;</code> is definitely in ugly terrain.</p>
+
+
+
+<p>A lot of articles have been written about it and, even in 2020, <a href="https://css-tricks.com/making-a-better-custom-select-element/">it’s still a challenge to create custom selects</a> and <a href="https://www.24a11y.com/2019/select-your-poison-part-2/">some users still prefer the simple native ones</a>.&nbsp;</p>
+
+
+
+<p>Among developers, the <code>&lt;select&gt;</code> is the <a href="https://www.gwhitworth.com/blog/2019/07/form-controls-components/">most frustrating form control by far</a>, mainly because of <a href="https://www.gwhitworth.com/blog/2019/10/can-we-please-style-select/">its lack of styling support</a>. The UX struggle behind it is so big that we <a href="https://medium.com/@kollinz/dropdown-alternatives-for-better-mobile-forms-53e40d641b53">look for other alternatives</a>. Well, I guess the first rule of <code>&lt;select&gt;</code> is <a href="https://www.w3.org/TR/using-aria/%23firstrule">similar to ARIA</a>: <strong>avoid using it if you can.</strong></p>
+
+
+
+<p>I could finish the article right here with <em>“Don’t use <code>&lt;select&gt;</code>, period.&#8221;</em> But let’s face reality: a select is still our best solution in a number of circumstances. That might include scenarios where&nbsp;we’re working with a list that contains a lot of options, layouts that are tight on space, or simply a lack of time or budget to design and implement a great custom interactive component from scratch.</p>
+
+
+
+<h3>Custom <code>&lt;select&gt;</code> requirements</h3>
+
+
+
+<p>When we make the decision to create a custom select — even if it’s just a “simple” one — these are the requirements we generally have to work with:</p>
+
+
+
+<ul><li>There is a button that contains the current selected option.</li><li>Clicking the box toggles the visibility of the options list (also called listbox).</li><li>Clicking an option in the listbox updates the selected value. The button text changes and the listbox is closed.</li><li>Clicking outside the component closes the listbox.</li><li>The trigger contains a small triangle icon pointing downward to indicate there are options.</li></ul>
+
+
+
+<p>Something like this:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dyYqmya" src="//codepen.io/anon/embed/dyYqmya?height=575&amp;theme-id=1&amp;slug-hash=dyYqmya&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dyYqmya" title="CodePen Embed dyYqmya" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Some of you may be thinking this works and is good to go. But wait… does it work for <em>everyone</em>? &nbsp;Not everyone uses a mouse (or touch screen). Plus, a native <code>&lt;select&gt;</code> element comes with more features we get for free and aren&#8217;t included in those requirements, such as:</p>
+
+
+
+<ul><li>The checked option is perceivable for all users regardless of their visual abilities.</li><li>The component can interact with a keyboard in a predictable way across all browsers (e.g. using arrow keys to navigate, <code>Enter</code> to select, <code>Esc</code> to cancel, etc.).</li><li>Assistive technologies (e.g. screen readers) announce the element clearly to users, including its role, name and state.</li><li>The listbox position is adjusted. (i.e. does not get cut off of the screen).</li><li>The element respects the user’s operating system preferences (e.g high contrast, color scheme, motion, etc.).</li></ul>
+
+
+
+<p>This is where the majority of the custom selects fail in some way. Take a look at some of the major UI components libraries. I won’t mention any because the web is ephemeral, but go give it a try. You’ll likely notice that the select component in one framework behaves differently from another.&nbsp;</p>
+
+
+
+<p>Here are additional characteristics to watch for:</p>
+
+
+
+<ul><li>Is a listbox option immediately activated on focus when navigating with a keyboard?</li><li>Can you use <code>Enter</code> and/or <code>Space</code> to select an option?</li><li>Does the <code>Tab</code> key jump go to the next option in the listbox, or jump to the next form control?</li><li>What happens when you reach the last option in the listbox using arrow keys? Does it simply stay at the last item, does it go back to the first option, or worst of all, does focus move to the next form control?&nbsp;</li><li>Is it possible to jump directly to the last item in the listbox using the <code>Page Down</code> key?</li><li>Is it possible to scroll through the listbox items if there are more than what is currently in view?</li></ul>
+
+
+
+<p>This is a small sample of the features included in a native <code>&lt;select&gt;</code> element. </p>
+
+
+
+<blockquote class="wp-block-quote"><p>Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect.</p></blockquote>
+
+
+
+<p>But it gets worse. Even the native <code>&lt;select&gt;</code> <a href="https://www.24a11y.com/2019/select-your-poison/">behaves differently</a> across browsers and screen readers. Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect. That’s a dangerous decision and it’s in those details where the devil lives.</p>
+
+
+
+<h3>Building a “hybrid” select</h3>
+
+
+
+<p>When we build a simple custom select, we are making a trade-off without noticing it. Specifically, <strong>we sacrifice functionality to aesthetics. </strong>It should be the other way around.</p>
+
+
+
+<p>What if we instead deliver a native select by default and replace it with a more aesthetically pleasing one if possible? That’s where the “hybrid” select idea comes into action. It’s “hybrid” because it consists of two selects, showing the appropriate one at the right moment:</p>
+
+
+
+<ul><li>A native select, visible and accessible by default</li><li>A custom select, hidden until it’s safe to be interacted with a mouse</li></ul>
+
+
+
+<p>Let’s start with markup. First, we’ll add a native <code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> items <em>before</em> the custom selector for this to work. (I’ll explain why in just a bit.)</p>
+
+
+
+<p>Any form control must have a <a href="https://www.w3.org/WAI/tutorials/forms/labels/">descriptive label</a>. We could use <code>&lt;label&gt;</code>, but that would focus the native select when the label is clicked. To prevent that behavior, we’ll use a <code>&lt;span&gt;</code> and connect it to the select using <code>aria-labelledby</code>.</p>
+
+
+
+<p>Finally, we need to tell Assistive Technologies to ignore the custom select, using <code>aria-hidden="true"</code>. That way, only the native select is announced by them, no matter what.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line="3,4,5,6"><code markup="tt">&lt;span class="selectLabel" id="jobLabel">Main job role&lt;/span>
+&lt;div class="selectWrapper">
+  &lt;select class="selectNative js-selectNative" aria-labelledby="jobLabel">
+    &lt;!-- options -->
+    &lt;option>&lt;/option>
+  &lt;/select>
+  &lt;div class="selectCustom js-selectCustom" aria-hidden="true">
+     &lt;!-- The beautiful custom select -->
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>This takes us to styling, where we not only make things look pretty, but where we handle the switch from one select to the other. We need just a few new declarations to make all the magic happen.</p>
+
+
+
+<p>First, both native and custom selects must have the same width and height. This ensures people don’t see major differences in the layout when a switch happens.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectNative,
+.selectCustom {
+  position: relative;
+  width: 22rem;
+  height: 4rem;
+}</code></pre>
+
+
+
+<p>There are two selects, but only one can dictate the space that holds them. The other needs to be absolutely positioned to take it out of the document flow. Let’s do that to the custom select because it’s the “replacement” that’s used only if it can be. We’ll hide it by default so it can’t be reached by anyone just yet.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectCustom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}</code></pre>
+
+
+
+<p>Here comes the &#8220;funny” part. We need to detect if someone is using a device where hover is part of the primary input, like a computer with a mouse. While we typically think of media queries for responsive breakpoints or checking feature support, we can use it to detect hover support too using <code>@media query (hover :hover)</code>, which is supported by all major browsers. So, let&#8217;s use it to show the custom select only on devices that have hover:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectCustom {
+    display: block;
+  }
+}</code></pre>
+
+
+
+<p>Great, but what about people who use a keyboard to navigate even in devices that have hover? What we’ll do is hide the custom select when the native select is in focus. We can reach for an <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">adjacent Sibling combinatioron</a> (<code>+</code>). When the native select is in focus, hide the custom select next to it in the DOM order. (This is why the native select should be placed before the custom one.)</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+}</code></pre>
+
+
+
+<p>That’s it! The trick to switch between both selects is done! There are other CSS ways to do it, of course, but this works nicely.</p>
+
+
+
+<p>Last, we need a sprinkle of JavaScript. Let’s add some event listeners:</p>
+
+
+
+<ul><li>One for click events that trigger the custom select to open and reveal the options</li><li>One to sync both selects values. When one select value is changed, the other select value updates as well</li><li>One for basic keyboard navigation controls, like navigation with <code>Up</code> and <code>Down</code> keys, selecting options with the <code>Enter</code> or <code>Space</code> keys, and closing the select with <code>Esc</code></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzyOYRr" src="//codepen.io/anon/embed/YzyOYRr?height=575&amp;theme-id=1&amp;slug-hash=YzyOYRr&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzyOYRr" title="CodePen Embed YzyOYRr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Usability testing</h3>
+
+
+
+<p>I conducted a very small usability test where I asked a few people with disabilities to try the hybrid select component. The following devices and tools were tested using the latest versions of Chrome (81), Firefox (76) and Safari (13):</p>
+
+
+
+<ul><li>Desktop device using mouse only</li><li>Desktop device using keyboard only</li><li>VoiceOver on MacOS using keyboard</li><li>NVDA on Windows using keyboard</li><li>VoiceOver on iPhone and iPad using Safari</li></ul>
+
+
+
+<p>All these tests worked as expected, but I believe <strong>this could have even more usability tests with more diverse people and tools</strong>. If you have access to other devices or tools — such as JAWS, Dragon, etc. — please tell me how the test goes.</p>
+
+
+
+<p>An issue was found during testing. Specifically, the issue was with the VoiceOver setting “Mouse pointers: Moves Voice Over cursor.” If the user opens the select with a mouse, the custom select will be opened (instead of the native) and the user won’t experience the native select.</p>
+
+
+
+<p>What I most like about this approach is how it uses the best of both worlds without compromising the core functionality:</p>
+
+
+
+<ul><li>Users on mobile and tablets get the native select, which generally offers a better user experience than a custom select, including performance benefits.</li><li>Keyboard users get to interact with the native select the way they would expect.</li><li>Assistive Technologies can interact with the native select like normal.</li><li>Mouse users get to interact with the enhanced custom select.</li></ul>
+
+
+
+<p>This approach<strong> provides essential native functionality for everyone </strong>without the extra huge code effort to implement all the native features.</p>
+
+
+
+<p>Don’t get me wrong. This technique is not a one-size-fits-all solution. It may work for simple selects but probably won’t work for cases that involve complex interactions. In those cases, we’d need to use ARIA and JavaScript to complement the gaps and create a <a href="https://24ways.org/2019/making-a-better-custom-select-element/">truly accessible custom select</a>.</p>
+
+
+
+<h3>A note about selects that look like menus</h3>
+
+
+
+<p>Let’s take a look back at the third Dropdown-land scenario. If you recall, it’s &nbsp;a dropdown that always has a checked option (e.g. sorting some content). I classified it in the gray area, as either a menu or a select.&nbsp;</p>
+
+
+
+<p>Here’s my line of thought: Years ago, this type of dropdown was implemented mostly using a native <code>&lt;select&gt;</code>. Nowadays, it is common to see it implemented from scratch with custom styles (accessible or not). What we end up with is a select element that looks like a menu.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?ssl=1" alt="Three similar dropdowns that always have a selected option." class="wp-image-312555" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?w=718&amp;ssl=1 718w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p><strong>A <code>&lt;select&gt;</code> &nbsp;is a type of menu.</strong> Both have similar semantics and behavior, especially in a scenario that involves a list of options where one is always checked. &nbsp;Now, let me mention the <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">WCAG 3.2.2 On Input (Level A)</a> criterion:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Changing the setting of any user interface component should not automatically cause a change of context unless the user has been advised of the behavior before using the component.</p></blockquote>
+
+
+
+<p>Let’s put this in practice. Imagine a sortable list of students. Visually, it may be obvious that sorting is immediate, but that’s not necessarily true for everyone. So, when using <code>&lt;select&gt;</code>, we risk failing the WCAG guideline because the page content changed, and ignificantly re-arranging the content of a page is considered a <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html%23dfn-changes-of-context">change of context</a>.</p>
+
+
+
+<p>To ensure the criterion success, we must warn the user about the action before they interact with the element, or include a <code>&lt;button&gt;</code> immediately after the select to confirm the change.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label for="sortStudents">
+  Sort students
+  &lt;!-- Warn the user about the change when a confirmation button is not present. -->
+  &lt;span class="visually-hidden">(Immediate effect upon selection)&lt;/span>
+&lt;/label>
+&lt;select id="sortStudents"> ... &lt;/select></code></pre>
+
+
+
+<p>That said, using a <code>&lt;select&gt;</code> or building a custom menu are both good approaches when it comes to simple menus that change the page content. Just remember that your decision will dictate the amount of work required to make the component fully accessible. This is a scenario where the hybrid select approach could be used.</p>
+
+
+
+<h3>Final words</h3>
+
+
+
+<p>This whole idea started as an innocent CSS trick but, after all of this research, I was reminded once more that creating unique experiences without compromising accessibility is not an easy task.</p>
+
+
+
+<p>Building truly accessible select components (or any kind of dropdown) is harder than it looks. WCAG provides excellent guidance and best practices, but without specific examples and diverse practical uses cases, the guidelines are mostly aspirational. That’s not to mention the fact that ARIA support is tepid and that native <code>&lt;select&gt;</code> elements look and behave differently across browsers.</p>
+
+
+
+<p>The “hybrid” select is just another attempt to create a good looking select while getting as many native features as possible. Don’t look at this <s>technique</s> experiment as an excuse to downplay accessibility, but rather as an attempt to serve both worlds. If you have the resources, time and the needed skills, <em>please do it right</em> and make sure to test it with different users before shipping your component to the world.</p>
+
+
+
+<p>P.S. Remember to <a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">use a proper name</a> when making a “dropdown” component. &#x1f609;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312544</post-id>	</item>
+		<item>
+		<title>Block Links: The Search for a Perfect Solution</title>
+		<link>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/</link>
+					<comments>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#comments</comments>
+		
+		<dc:creator><![CDATA[Vikas Parashar]]></dc:creator>
+		<pubDate>Mon, 25 May 2020 19:58:40 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[links]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=309808</guid>
+
+					<description><![CDATA[<p>I was reading <a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">this article</a> by Chris where he talks about block links — you know, like wrapping an entire card element inside an anchor — being a bad idea. It’s bad accessibility because of how it affects screen readers. And it’s bad UX because it prevents simple user tasks, like selecting text.</p>
+<p>But maybe there’s something else at play. Maybe it’s less an issue with the pattern than the implementation of it. That led me to believe that this &#8230; <a href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Block Links: The Search for a Perfect Solution&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/">Block Links: The Search for a Perfect Solution</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I was reading <a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">this article</a> by Chris where he talks about block links — you know, like wrapping an entire card element inside an anchor — being a bad idea. It’s bad accessibility because of how it affects screen readers. And it’s bad UX because it prevents simple user tasks, like selecting text.</p>
+
+
+
+<p>But maybe there’s something else at play. Maybe it’s less an issue with the pattern than the implementation of it. That led me to believe that this is the time to write follow-up article to see if we can address some of the problems Chris pointed out.</p>
+
+
+
+<span id="more-309808"></span>
+
+
+
+<p>Throughout this post, I’ll use the term “card” to describe a component using the block link pattern. Here’s what we mean by that.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJPemmb" src="//codepen.io/anon/embed/OJPemmb?height=450&amp;theme-id=1&amp;slug-hash=OJPemmb&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJPemmb" title="CodePen Embed OJPemmb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let’s see how we want our Card Components to work:</p>
+
+
+
+<ol><li>The whole thing should be linked and clickable.</li><li>It should be able to contain more than one link.</li><li>Content should be semantic so assistive tech can understand it.</li><li>The text should be selectable, like regular links.</li><li>Things like right-click and keyboard shortcuts should work with it</li><li>Its elements should be focusable when tabbing.</li></ol>
+
+
+
+<p>That’s a long list! And since we don’t have any standard card widget provided by the browser, we don’t have any standard guidelines to build it.&nbsp;</p>
+
+
+
+<p>Like most things on the web, there’s more than one way to make a card component. However, I haven’t found something that checks all the requirements we just covered. In this article, we will try to hit all of them. That’s what we’re going to do now!</p>
+
+
+
+<h3>Method 1: Wrap everything an <code>&lt;a></code></h3>
+
+
+
+<p>This is the most common and the easiest way to make a linked card. Take the HTML for the card and wrap the entire thing in an anchor tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;a href="/">
+  &lt;!-- Card markup -->
+&lt;/a></code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pojNPjK" src="//codepen.io/anon/embed/pojNPjK?height=550&amp;theme-id=1&amp;slug-hash=pojNPjK&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pojNPjK" title="CodePen Embed pojNPjK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s what that gives us:</p>
+
+
+
+<ol><li>It’s clickable.</li><li>It works with right-click and keyboard shortcuts.</li></ol>
+
+
+
+<p>Well, not great. We still can’t:</p>
+
+
+
+<ol><li>Put another link inside the card because the entire thing is a single link</li><li>Use it with a screen reader — the content is not semantic, so assistive technology will announce everything inside the card, starting from the time stamp</li><li>Select text</li></ol>
+
+
+
+<p>That’s enough &#x1f44e; that we probably shouldn’t use it. Let’s move onto the next technique.</p>
+
+
+
+<h3>Method 2: Just link what needs linking</h3>
+
+
+
+<p>This is a nice compromise that sacrifices a little UX for improved accessibility.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_QWjpaye" src="//codepen.io/anon/embed/QWjpaye?height=550&amp;theme-id=1&amp;slug-hash=QWjpaye&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed QWjpaye" title="CodePen Embed QWjpaye" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>With this pattern we achieve most of our goals:</p>
+
+
+
+<ol><li>We can put as many links as we want.&nbsp;</li><li>Content is semantic.</li><li>We can select the text from Card.</li><li>Right Click and keyboard shortcuts work.</li><li>The focus is in proper order when tabbing.</li></ol>
+
+
+
+<p>But it is missing the main feature we want in a card: the whole thing should be clickable! Looks like we need to try some other way.</p>
+
+
+
+<h3>Method 3: The good ol’ &nbsp;::before pseudo element</h3>
+
+
+
+<p>In this one, we add a :<code>:before</code> or :<code>:after</code> element, place it above the card with absolute positioning and stretch it over the entire width and height of the card so it’s clickable.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_abvJEJw" src="//codepen.io/anon/embed/abvJEJw?height=550&amp;theme-id=1&amp;slug-hash=abvJEJw&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed abvJEJw" title="CodePen Embed abvJEJw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>But now:</p>
+
+
+
+<ol><li>We still can’t add more than one link because anything else that’s linked is under the pseudo element layer. We can try to put all the text above the pseudo element, but card link itself won’t work when clicking on top of the text.</li><li>We still can’t select the text. Again, we could swap layers, but then we’re back to the clickable link issue all over again.</li></ol>
+
+
+
+<p>Let’s try to actually check all the boxes here in our final technique.</p>
+
+
+
+<h3>Method 4: Sprinkle JavaScript on the second method</h3>
+
+
+
+<p>Let’s build off the second method. Recall that’s what where we link up everything we want to be a link:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;article class="card">
+  &lt;time datetime="2020-03-20">Mar 20, 2020&lt;/time>
+  &lt;h2>&lt;a href="https://css-tricks.com/a-complete-guide-to-calc-in-css/" class="main-link">A Complete Guide to calc() in CSS&lt;/a>&lt;/h2>
+  &lt;p>
+    In this guide, let’s cover just about everything there is to know about this very useful function.
+  &lt;/p>
+  &lt;a class="author-name" href="https://css-tricks.com/author/chriscoyier/" target="_blank">Chris Coyier&lt;/a>
+    &lt;div class="tags">
+      &lt;a class="tag" href="https://css-tricks.com/tag/calc/" >calc&lt;/a>
+    &lt;/div>
+&lt;/article></code></pre>
+
+
+
+<p>So how do we make the <em>whole</em> card clickable? We could use JavaScript as a progressive enhancement to do that. We’ll start by adding a <code>click</code> event listener to the card and trigger the click on the main link when it is triggered.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="7"><code markup="tt">const card = document.querySelector(".card")
+const mainLink = document.querySelector('.main-link')
+ 
+card.addEventListener("click", handleClick)
+ 
+function handleClick(event) {
+  mainLink.click();
+}</code></pre>
+
+
+
+<p>Temporarily, this introduces the problem that we can’t select the text, which we’ve been trying to fix this whole time. Here’s the trick: we’ll use the relatively less-known web API <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection"><code>window.getSelection</code></a>. From MDN:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>The <strong><code>Window.getSelection()</code></strong> method returns a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection"><code>Selection</code></a> object representing the range of text selected by the user or the current position of the caret.</p></blockquote>
+
+
+
+<p>Although, this method returns an Object, we can convert it to a string with <code>toString()</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const isTextSelected = window.getSelection().toString()</code></pre>
+
+
+
+<p>With one line and no complicated kung-fu tricks with event listeners, we know if the user has selected text. Let’s use that in our <code>handleClick</code> function.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const card = document.querySelector(".card")
+const mainLink = document.querySelector('.main-link')
+ 
+card.addEventListener("click", handleClick)
+ 
+function handleClick(event) {
+  const isTextSelected = window.getSelection().toString();
+  if (!isTextSelected) {
+    mainLink.click();
+  }
+}</code></pre>
+
+
+
+<p>This way, the main link can be clicked when no text selected, and all it took was a few lines of JavaScript. This satisfies our requirements:</p>
+
+
+
+<ol><li>The whole thing is linked and clickable.</li><li>It is able to contain more than one link.</li><li>This content is semantic so assistive tech can understand it.</li><li>The text should be selectable, like regular links.</li><li>Things like right-click and keyboard shortcuts should work with it</li><li>Its elements should be focusable when tabbing.</li></ol>
+
+
+
+<p>We have satisfied all the requirements but there are still some gotchas, like double event triggering on clickable elements like links and buttons in the card. We can fix this by adding a click event listener on all of them and stopping the propagation of event.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// You might want to add common class like 'clickable' on all elements and use that for the query selector.
+const clickableElements = Array.from(card.querySelectorAll("a"));
+clickableElements.forEach((ele) =>
+  ele.addEventListener("click", (e) => e.stopPropagation())
+);</code></pre>
+
+
+
+<p>Here&#8217;s the final demo with all the JavaScript code we have added:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_qBOwMWj" src="//codepen.io/anon/embed/qBOwMWj?height=550&amp;theme-id=1&amp;slug-hash=qBOwMWj&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed qBOwMWj" title="CodePen Embed qBOwMWj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I think we’ve done it! Now you know how to make a perfect clickable card component.</p>
+
+
+
+<p>What about other patterns? For example, what if the card contains the excerpt of a blog post followed by a “Read More’ link? Where should that go? Does that become the “main” link? What about image?</p>
+
+
+
+<p>For those questions and more, here’s some further reading on the topic:</p>
+
+
+
+<ul><li><a href="https://inclusive-components.design/cards/">Cards</a> by Heydon Pickering</li><li><a href="https://adrianroselli.com/2020/02/block-links-cards-clickable-regions-etc.html">Block Links, Cards, Clickable Regions, Rows, Etc.</a> by Adrian Roselli</li><li><a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">Block Links Are a Pain (and Maybe Just a Bad Idea)</a> by Chris Coyier</li><li><a href="https://daverupert.com/2018/04/pitfalls-of-card-uis/">Pitfalls of Card UIs</a> by Dave Rupert</li></ul>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/">Block Links: The Search for a Perfect Solution</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/feed/</wfw:commentRss>
+			<slash:comments>33</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">309808</post-id>	</item>
+		<item>
+		<title>Creating an Accessible Range Slider with CSS</title>
+		<link>https://www.a11ywithlindsey.com/blog/creating-accessible-range-slider-css</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 07 May 2020 18:17:01 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[inputs]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=308161</guid>
+
+					<description><![CDATA[<p>The <a href="https://www.a11ywithlindsey.com/blog/creating-accessible-range-slider-css">accessibility trick</a> is using <code>&#60;input type="range"&#62;</code> and <a href="https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/">wrestling it into shape with CSS</a> rather than giving up and re-building it with divs or whatever and later forget about accessibility. </p>
+<p>The most clever example uses an angled <code>linear-gradient</code> background making the input look like a volume slider where left = low and right = high.</p>
+<p>CodePen Embed Fallback</p>
+<p><a href="https://www.a11ywithlindsey.com/blog/creating-accessible-range-slider-css" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/creating-an-accessible-range-slider-with-css/">Permalink</a>&#8230; <a href="https://css-tricks.com/creating-an-accessible-range-slider-with-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating an Accessible Range Slider with CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-accessible-range-slider-with-css/">Creating an Accessible Range Slider with CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://www.a11ywithlindsey.com/blog/creating-accessible-range-slider-css">accessibility trick</a> is using <code>&lt;input type="range"&gt;</code> and <a href="https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/">wrestling it into shape with CSS</a> rather than giving up and re-building it with divs or whatever and later forget about accessibility. </p>
+
+
+
+<p>The most clever example uses an angled <code>linear-gradient</code> background making the input look like a volume slider where left = low and right = high.</p>
+
+
+
+<span id="more-308161"></span>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_PowVaJd" src="//codepen.io/anon/embed/PowVaJd?height=350&amp;theme-id=1&amp;slug-hash=PowVaJd&amp;default-tab=result" height="350" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed PowVaJd" title="CodePen Embed PowVaJd" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p><a href="https://www.a11ywithlindsey.com/blog/creating-accessible-range-slider-css" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/creating-an-accessible-range-slider-with-css/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-accessible-range-slider-with-css/">Creating an Accessible Range Slider with CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">308161</post-id>	</item>
+		<item>
+		<title>The Anatomy of a Tablist Component in Vanilla JavaScript Versus React</title>
+		<link>https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/</link>
+					<comments>https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/#comments</comments>
+		
+		<dc:creator><![CDATA[Nathan Smith]]></dc:creator>
+		<pubDate>Tue, 05 May 2020 15:00:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[accordion]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[tabs]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307347</guid>
+
+					<description><![CDATA[<p>If you follow the undercurrent of the JavaScript community, there seems to be a divide as of late. It goes back over a decade. Really, this sort of strife has always been. Perhaps it is human nature.</p>
+<p>Whenever a popular framework gains traction, you inevitably see people comparing it to rivals. I suppose that is to be expected. Everyone has a particular favorite.</p>
+<p>Lately, the framework everyone loves (to hate?) is <a href="https://reactjs.org/">React</a>. You often see it pitted against others &#8230; <a href="https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Anatomy of a Tablist Component in Vanilla JavaScript Versus React&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/">The Anatomy of a Tablist Component in Vanilla JavaScript Versus React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>If you follow the undercurrent of the JavaScript community, there seems to be a divide as of late. It goes back over a decade. Really, this sort of strife has always been. Perhaps it is human nature.</p>
+
+
+
+<p>Whenever a popular framework gains traction, you inevitably see people comparing it to rivals. I suppose that is to be expected. Everyone has a particular favorite.</p>
+
+
+
+<p>Lately, the framework everyone loves (to hate?) is <a href="https://reactjs.org/">React</a>. You often see it pitted against others in head-to-head blog posts and feature comparison matrices of enterprise whitepapers. Yet a few years ago, it seemed like jQuery would forever be king of the hill.</p>
+
+
+
+<p>Frameworks come and go. To me, what is more interesting is when React — or any JS framework for that matter — gets pitted against the programming language itself. Because of course, under the hood, it is all built atop JS.</p>
+
+
+
+<span id="more-307347"></span>
+
+
+
+<p>The two are not inherently at odds. I would even go so far as to say that if you do not have a good handle on JS fundamentals, you probably are not going to reap the full benefits of using React. It can still be helpful, similar to using a jQuery plugin without understanding its internals. But I feel like React presupposes more JS familiarity.</p>
+
+
+
+<p>HTML is equally important. There exists a fair bit of <a href="https://en.wikipedia.org/wiki/Fear,_uncertainty,_and_doubt">FUD</a> around how React affects accessibility. I think this narrative is inaccurate. In fact, the <a href="https://www.npmjs.com/package/eslint-plugin-jsx-a11y">ESLint JSX a11y plugin</a> will warn of possible accessibility violations in the <code>console</code>.</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?ssl=1"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?fit=1024%2C340&amp;ssl=1" alt="Console warnings from eslint-jsx-a11y-plugin" class="wp-image-307465" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?w=1280&amp;ssl=1 1280w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?resize=300%2C100&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?resize=1024%2C340&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?resize=768%2C255&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/eslint-jsx-a11y-plugin.png?resize=1000%2C332&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></a><figcaption><a href="https://en.wikipedia.org/wiki/ESLint">ESLint</a> warnings about empty <code>&lt;a&gt;</code> tags</figcaption></figure>
+
+
+
+<p>Recently, an <a href="https://webaim.org/projects/million/">annual study of the top 1 million sites</a> was released. It shows that for sites using JS frameworks, there is an increased likelihood of accessibility problems. This is correlation, not causation.</p>
+
+
+
+<blockquote class="wp-block-quote"><p>This does not necessarily mean that the frameworks caused these errors, but it does indicate that home pages with these frameworks had more errors than on average.</p></blockquote>
+
+
+
+<p>In a manner of speaking, React&#8217;s magic incantations work regardless of whether you recognize the words. Ultimately, you are still responsible for the outcome.</p>
+
+
+
+<p>Philosophical musings aside, I am a firm believer in choosing the best tool for the job. Sometimes, that means building a single page app with a <a href="https://jamstack.org/">Jamstack</a> approach. Or maybe a particular project is better suited to offloading HTML rendering to the server, where it has historically been handled.</p>
+
+
+
+<p>Either way, there inevitably comes the need for JS to augment the user experience. At <a href="https://reaktivstudios.com/">Reaktiv Studios</a>, to that end I have been attempting to keep most of our React components in sync with our &#8220;flat HTML&#8221; approach. I have been writing commonly used functionality in vanilla JS as well. This keeps our options open, so that our clients are free to choose. It also allows us to reuse the same CSS.</p>
+
+
+
+<p>If I may, I would like to share how I built our <code>&lt;Tabs&gt;</code> and <code>&lt;Accordion&gt;</code> React components. I will also demonstrate how I wrote the same functionality without using a framework.</p>
+
+
+
+<p>Hopefully, this lesson will feel like we are making a layered cake. Let us first start with the base markup, then cover the vanilla JS, and finish with how it works in React.</p>
+
+
+
+<div class="wp-block-group article-series"><div class="wp-block-group__inner-container">
+<h4>Table of contents</h4>
+
+
+
+<ol><li><a href="#article-header-id-0">Flat HTML examples</a></li><li><a href="#article-header-id-1">Vanilla JavaScript examples</a></li><li><a href="#article-header-id-2">React examples</a></li><li><a href="#article-header-id-3">Conclusion</a></li></ol>
+</div></div>
+
+
+
+<p>For reference, you can tinker with our live examples:</p>
+
+
+
+<ul><li><a href="https://ui.reaktivstudios.com/storybook/?path=/story/accordion--default">Live demo of Accordion</a></li><li><a href="https://ui.reaktivstudios.com/storybook/?path=/story/tabs--example">Live demo of Tabs</a></li></ul>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://ui.reaktivstudios.com/storybook/?path=/story/accordion--default"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?fit=1024%2C566&amp;ssl=1" alt="" class="wp-image-309040" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?w=1280&amp;ssl=1 1280w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?resize=300%2C166&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?resize=1024%2C566&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?resize=768%2C425&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/reaktiv-studios-storybook.png?resize=1000%2C553&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></a><figcaption><a href="https://reaktivstudios.com/">Reaktiv Studios</a> UI components</figcaption></figure>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Flat HTML examples</h3>
+
+
+
+<p>Since we need JavaScript to make interactive widgets either way, I figured the easiest approach — from a server side implementation standpoint — would be to require only the bare minimum HTML. The rest can be augmented with JS.</p>
+
+
+
+<p>The following are examples of markup for <strong>tabs</strong> and <strong>accordion</strong> components, showing a before/after comparison of how JS affects the DOM.</p>
+
+
+
+<p class="explanation">I have added <code>id="TABS_ID"</code> and <code>id="ACCORDION_ID"</code> for demonstrative purposes. This is to make it more obvious what is happening. But the JS that I will be explaining automatically generates unique IDs if nothing is supplied in the HTML. It would work fine either way, with or without an <code>id</code> specified.</p>
+
+
+
+<h4 class="ek-link">Tabs (without ARIA)</h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="tabs" id="TABS_ID">
+  &lt;ul class="tabs__list">
+    &lt;li class="tabs__item">
+      Tab 1
+    &lt;/li>
+    &lt;!-- .tabs__item -->
+
+    &lt;li class="tabs__item">
+      Tab 2
+    &lt;/li>
+    &lt;!-- .tabs__item -->
+  &lt;/ul>
+  &lt;!-- .tabs__list -->
+
+  &lt;div class="tabs__panel">
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .tabs__panel -->
+
+  &lt;div class="tabs__panel">
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .tabs__panel -->
+&lt;/div>
+&lt;!-- .tabs --></code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#tabs-with-aria"></a>Tabs (with ARIA)</h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="tabs" id="TABS_ID">
+  &lt;ul class="tabs__list" role="tablist">
+    &lt;li
+      aria-controls="tabpanel_TABS_ID_0"
+      aria-selected="false"
+      class="tabs__item"
+      id="tab_TABS_ID_0"
+      role="tab"
+      tabindex="0"
+    >
+      Tab 1
+    &lt;/li>
+    &lt;!-- .tabs__item -->
+
+    &lt;li
+      aria-controls="tabpanel_TABS_ID_1"
+      aria-selected="true"
+      class="tabs__item"
+      id="tab_TABS_ID_1"
+      role="tab"
+      tabindex="0"
+    >
+      Tab 2
+    &lt;/li>
+    &lt;!-- .tabs__item -->
+  &lt;/ul>
+  &lt;!-- .tabs__list -->
+
+  &lt;div
+    aria-hidden="true"
+    aria-labelledby="tab_TABS_ID_0"
+    class="tabs__panel"
+    id="tabpanel_TABS_ID_0"
+    role="tabpanel"
+  >
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .tabs__panel -->
+
+  &lt;div
+    aria-hidden="false"
+    aria-labelledby="tab_TABS_ID_1"
+    class="tabs__panel"
+    id="tabpanel_TABS_ID_1"
+    role="tabpanel"
+  >
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .tabs__panel -->
+&lt;/div>
+&lt;!-- .tabs --></code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#accordion-without-aria"></a>Accordion (without ARIA)</h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="accordion" id="ACCORDION_ID">
+  &lt;div class="accordion__item">
+    Tab 1
+  &lt;/div>
+  &lt;!-- .accordion__item -->
+
+  &lt;div class="accordion__panel">
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .accordion__panel -->
+
+  &lt;div class="accordion__item">
+    Tab 2
+  &lt;/div>
+  &lt;!-- .accordion__item -->
+
+  &lt;div class="accordion__panel">
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .accordion__panel -->
+&lt;/div>
+&lt;!-- .accordion --></code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#accordion-with-aria"></a>Accordion (with ARIA)</h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div
+  aria-multiselectable="true"
+  class="accordion"
+  id="ACCORDION_ID"
+  role="tablist"
+>
+  &lt;div
+    aria-controls="tabpanel_ACCORDION_ID_0"
+    aria-selected="true"
+    class="accordion__item"
+    id="tab_ACCORDION_ID_0"
+    role="tab"
+    tabindex="0"
+  >
+    &lt;i aria-hidden="true" class="accordion__item__icon">&lt;/i>
+    Tab 1
+  &lt;/div>
+  &lt;!-- .accordion__item -->
+
+  &lt;div
+    aria-hidden="false"
+    aria-labelledby="tab_ACCORDION_ID_0"
+    class="accordion__panel"
+    id="tabpanel_ACCORDION_ID_0"
+    role="tabpanel"
+  >
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .accordion__panel -->
+
+  &lt;div
+    aria-controls="tabpanel_ACCORDION_ID_1"
+    aria-selected="false"
+    class="accordion__item"
+    id="tab_ACCORDION_ID_1"
+    role="tab"
+    tabindex="0"
+  >
+    &lt;i aria-hidden="true" class="accordion__item__icon">&lt;/i>
+    Tab 2
+  &lt;/div>
+  &lt;!-- .accordion__item -->
+
+  &lt;div
+    aria-hidden="true"
+    aria-labelledby="tab_ACCORDION_ID_1"
+    class="accordion__panel"
+    id="tabpanel_ACCORDION_ID_1"
+    role="tabpanel"
+  >
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+  &lt;!-- .accordion__panel -->
+&lt;/div>
+&lt;!-- .accordion --></code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Vanilla JavaScript examples</h3>
+
+
+
+<p>Okay. Now that we have seen the aforementioned HTML examples, let us walk through how we get from <em>before</em> to <em>after</em>.</p>
+
+
+
+<p>First, I want to cover a few helper functions. These will make more sense in a bit. I figure it is best to get them documented first, so we can stay focused on the rest of the code once we dive in further.</p>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#file-getdomfallbackjs"></a>File: <code>getDomFallback.js</code></h4>
+
+
+
+<p>This function provides common DOM properties and methods as <a href="https://en.wikipedia.org/wiki/NOP_(code)">no-op</a>, rather than having to make lots of <code>typeof foo.getAttribute</code> checks and whatnot. We could forego those types of confirmations altogether.</p>
+
+
+
+<p>Since live HTML changes can be a potentially volatile environment, I always feel a bit safer making sure my JS is not bombing out and taking the rest of the page with it. Here is what that function looks like. It simply returns an object with the DOM equivalents of falsy results.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/*
+  Helper to mock DOM methods, for
+  when an element might not exist.
+*/
+const getDomFallback = () => {
+  return {
+    // Props.
+    children: [],
+    className: '',
+    classList: {
+      contains: () => false,
+    },
+    id: '',
+    innerHTML: '',
+    name: '',
+    nextSibling: null,
+    previousSibling: null,
+    outerHTML: '',
+    tagName: '',
+    textContent: '',
+
+    // Methods.
+    appendChild: () => Object.create(null),
+    blur: () => undefined,
+    click: () => undefined,
+    cloneNode: () => Object.create(null),
+    closest: () => null,
+    createElement: () => Object.create(null),
+    focus: () => undefined,
+    getAttribute: () => null,
+    hasAttribute: () => false,
+    insertAdjacentElement: () => Object.create(null),
+    insertBefore: () => Object.create(null),
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    removeAttribute: () => undefined,
+    removeChild: () => Object.create(null),
+    replaceChild: () => Object.create(null),
+    setAttribute: () => undefined,
+  };
+};
+
+// Export.
+export { getDomFallback };</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#file-uniquejs"></a>File: <code>unique.js</code></h4>
+
+
+
+<p>This function is a poor man&#8217;s <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a> equivalent.</p>
+
+
+
+<p>It generates a unique string that can be used to associate DOM elements with one another. It is handy, because then the author of an HTML page does not have to ensure that every <strong>tabs</strong> and <strong>accordion</strong> component have unique IDs. In the previous HTML examples, this is where <code>TABS_ID</code> and <code>ACCORDION_ID</code> would typically contain the randomly generated numeric strings instead.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// ==========
+// Constants.
+// ==========
+
+const BEFORE = '0.';
+const AFTER = '';
+
+// ==================
+// Get unique string.
+// ==================
+
+const unique = () => {
+  // Get prefix.
+  let prefix = Math.random();
+  prefix = String(prefix);
+  prefix = prefix.replace(BEFORE, AFTER);
+
+  // Get suffix.
+  let suffix = Math.random();
+  suffix = String(suffix);
+  suffix = suffix.replace(BEFORE, AFTER);
+
+  // Expose string.
+  return `${prefix}_${suffix}`;
+};
+
+// Export.
+export { unique };</code></pre>
+
+
+
+<p>On larger JavaScript projects, I would typically use <a href="https://www.npmjs.com/package/uuid"><code>npm install uuid</code></a>. But since we are keeping this simple and do not require cryptographic parity, concatenating two lightly edited <code>Math.random()</code> numbers will suffice for our <code>string</code> uniqueness needs.</p>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#file-tablistjs"></a>File: <code>tablist.js</code></h4>
+
+
+
+<p>This file does the bulk of the work. What is cool about it, if I do say so myself, is that there are enough similarities between a <strong>tabs</strong> component and an <strong>accordion</strong> that we can handle both with the same <code>*.js</code> file. Go ahead and scroll through the entirety, and then we will break down what each function does individually.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Helpers.
+import { getDomFallback } from './getDomFallback';
+import { unique } from './unique';
+
+// ==========
+// Constants.
+// ==========
+
+// Boolean strings.
+const TRUE = 'true';
+const FALSE = 'false';
+
+// ARIA strings.
+const ARIA_CONTROLS = 'aria-controls';
+const ARIA_LABELLEDBY = 'aria-labelledby';
+const ARIA_HIDDEN = 'aria-hidden';
+const ARIA_MULTISELECTABLE = 'aria-multiselectable';
+const ARIA_ORIENTATION = 'aria-orientation';
+const ARIA_SELECTED = 'aria-selected';
+
+// Attribute strings.
+const DATA_INDEX = 'data-index';
+const HORIZONTAL = 'horizontal';
+const ID = 'id';
+const ROLE = 'role';
+const TABINDEX = 'tabindex';
+const TABLIST = 'tablist';
+const VERTICAL = 'vertical';
+
+// Event strings.
+const AFTER_BEGIN = 'afterbegin';
+const ARROW_LEFT = 'arrowleft';
+const ARROW_RIGHT = 'arrowright';
+const CLICK = 'click';
+const KEYDOWN = 'keydown';
+
+// Key strings.
+const ENTER = 'enter';
+const FUNCTION = 'function';
+const SPACE = ' ';
+
+// Tag strings.
+const I = 'i';
+const LI = 'li';
+
+// Selector strings.
+const ACCORDION_ITEM_ICON = 'accordion__item__icon';
+const ACCORDION_ITEM_ICON_SELECTOR = `.${ACCORDION_ITEM_ICON}`;
+
+const TAB = 'tab';
+const TAB_SELECTOR = `[${ROLE}=${TAB}]`;
+
+const TABPANEL = 'tabpanel';
+const TABPANEL_SELECTOR = `[${ROLE}=${TABPANEL}]`;
+
+const ACCORDION = 'accordion';
+const TABLIST_CLASS_SELECTOR = '.accordion, .tabs';
+const TAB_CLASS_SELECTOR = '.accordion__item, .tabs__item';
+const TABPANEL_CLASS_SELECTOR = '.accordion__panel, .tabs__panel';
+
+// ===========
+// Get tab ID.
+// ===========
+
+const getTabId = (id = '', index = 0) => {
+  return `${TAB}_${id}_${index}`;
+};
+
+// =============
+// Get panel ID.
+// =============
+
+const getPanelId = (id = '', index = 0) => {
+  return `${TABPANEL}_${id}_${index}`;
+};
+
+// ==============
+// Click handler.
+// ==============
+
+const globalClick = (event = {}) => {
+  // Get target.
+  const { target = getDomFallback() } = event;
+
+  // Get key.
+  let { key = '' } = event;
+  key = key.toLowerCase();
+
+  // Key events.
+  const isArrowLeft = key === ARROW_LEFT;
+  const isArrowRight = key === ARROW_RIGHT;
+  const isArrowKey = isArrowLeft || isArrowRight;
+  const isTriggerKey = key === ENTER || key === SPACE;
+
+  // Get parent.
+  const { parentNode = getDomFallback(), tagName = '' } = target;
+
+  // Set later.
+  let wrapper = getDomFallback();
+
+  /*
+    =====
+    NOTE:
+    =====
+
+    We test for this, because the method does
+    not exist on `document.documentElement`.
+  */
+  if (typeof target.closest === FUNCTION) {
+    // Get wrapper.
+    wrapper = target.closest(TABLIST_CLASS_SELECTOR) || getDomFallback();
+  }
+
+  // Is multi?
+  const isMulti = wrapper.getAttribute(ARIA_MULTISELECTABLE) === TRUE;
+
+  // Valid target?
+  const isValidTarget =
+    target.getAttribute(ROLE) === TAB &amp;&amp; parentNode.getAttribute(ROLE) === TABLIST;
+
+  // Is `&lt;li>`?
+  const isListItem = isValidTarget &amp;&amp; tagName.toLowerCase() === LI;
+
+  // Valid event?
+  const isArrowEvent = isListItem &amp;&amp; isArrowKey;
+  const isTriggerEvent = isValidTarget &amp;&amp; (!key || isTriggerKey);
+  const isValidEvent = isArrowEvent || isTriggerEvent;
+
+  // Prevent default.
+  if (isValidEvent) {
+    event.preventDefault();
+  }
+
+  // ============
+  // Arrow event?
+  // ============
+
+  if (isArrowEvent) {
+    // Get index.
+    let index = target.getAttribute(DATA_INDEX);
+    index = parseFloat(index);
+
+    // Get list.
+    const list = wrapper.querySelectorAll(TAB_SELECTOR);
+
+    // Set later.
+    let newIndex = null;
+    let nextItem = null;
+
+    // Arrow left?
+    if (isArrowLeft) {
+      newIndex = index - 1;
+      nextItem = list[newIndex];
+
+      if (!nextItem) {
+        newIndex = list.length - 1;
+        nextItem = list[newIndex];
+      }
+    }
+
+    // Arrow right?
+    if (isArrowRight) {
+      newIndex = index + 1;
+      nextItem = list[newIndex];
+
+      if (!nextItem) {
+        newIndex = 0;
+        nextItem = list[newIndex];
+      }
+    }
+
+    // Fallback?
+    nextItem = nextItem || getDomFallback();
+
+    // Focus new item.
+    nextItem.click();
+    nextItem.focus();
+  }
+
+  // ==============
+  // Trigger event?
+  // ==============
+
+  if (isTriggerEvent) {
+    // Get panel.
+    const panelId = target.getAttribute(ARIA_CONTROLS);
+    const panel = wrapper.querySelector(`#${panelId}`) || getDomFallback();
+
+    // Get booleans.
+    let boolPanel = panel.getAttribute(ARIA_HIDDEN) !== TRUE;
+    let boolTab = target.getAttribute(ARIA_SELECTED) !== TRUE;
+
+    // List item?
+    if (isListItem) {
+      boolPanel = FALSE;
+      boolTab = TRUE;
+    }
+
+    // [aria-multiselectable="false"]
+    if (!isMulti) {
+      // Get tabs &amp; panels.
+      const childTabs = wrapper.querySelectorAll(TAB_SELECTOR);
+      const childPanels = wrapper.querySelectorAll(TABPANEL_SELECTOR);
+
+      // Loop through tabs.
+      childTabs.forEach((tab = getDomFallback()) => {
+        tab.setAttribute(ARIA_SELECTED, FALSE);
+
+        // li[tabindex="-1"]
+        if (isListItem) {
+          tab.setAttribute(TABINDEX, -1);
+        }
+      });
+
+      // Loop through panels.
+      childPanels.forEach((panel = getDomFallback()) => {
+        panel.setAttribute(ARIA_HIDDEN, TRUE);
+      });
+    }
+
+    // Set individual tab.
+    target.setAttribute(ARIA_SELECTED, boolTab);
+
+    // li[tabindex="0"]
+    if (isListItem) {
+      target.setAttribute(TABINDEX, 0);
+    }
+
+    // Set individual panel.
+    panel.setAttribute(ARIA_HIDDEN, boolPanel);
+  }
+};
+
+// ====================
+// Add ARIA attributes.
+// ====================
+
+const addAriaAttributes = () => {
+  // Get elements.
+  const allWrappers = document.querySelectorAll(TABLIST_CLASS_SELECTOR);
+
+  // Loop through.
+  allWrappers.forEach((wrapper = getDomFallback()) => {
+    // Get attributes.
+    const { id = '', classList } = wrapper;
+    const parentId = id || unique();
+
+    // Is accordion?
+    const isAccordion = classList.contains(ACCORDION);
+
+    // Get tabs &amp; panels.
+    const childTabs = wrapper.querySelectorAll(TAB_CLASS_SELECTOR);
+    const childPanels = wrapper.querySelectorAll(TABPANEL_CLASS_SELECTOR);
+
+    // Add ID?
+    if (!wrapper.getAttribute(ID)) {
+      wrapper.setAttribute(ID, parentId);
+    }
+
+    // [aria-multiselectable="true"]
+    if (isAccordion &amp;&amp; wrapper.getAttribute(ARIA_MULTISELECTABLE) !== FALSE) {
+      wrapper.setAttribute(ARIA_MULTISELECTABLE, TRUE);
+    }
+
+    // ===========================
+    // Loop through tabs &amp; panels.
+    // ===========================
+
+    for (let index = 0; index &lt; childTabs.length; index++) {
+      // Get elements.
+      const tab = childTabs[index] || getDomFallback();
+      const panel = childPanels[index] || getDomFallback();
+
+      // Get IDs.
+      const tabId = getTabId(parentId, index);
+      const panelId = getPanelId(parentId, index);
+
+      // ===================
+      // Add tab attributes.
+      // ===================
+
+      // Tab: add icon?
+      if (isAccordion) {
+        // Get icon.
+        let icon = tab.querySelector(ACCORDION_ITEM_ICON_SELECTOR);
+
+        // Create icon?
+        if (!icon) {
+          icon = document.createElement(I);
+          icon.className = ACCORDION_ITEM_ICON;
+          tab.insertAdjacentElement(AFTER_BEGIN, icon);
+        }
+
+        // [aria-hidden="true"]
+        icon.setAttribute(ARIA_HIDDEN, TRUE);
+      }
+
+      // Tab: add id?
+      if (!tab.getAttribute(ID)) {
+        tab.setAttribute(ID, tabId);
+      }
+
+      // Tab: add controls?
+      if (!tab.getAttribute(ARIA_CONTROLS)) {
+        tab.setAttribute(ARIA_CONTROLS, panelId);
+      }
+
+      // Tab: add selected?
+      if (!tab.getAttribute(ARIA_SELECTED)) {
+        const bool = !isAccordion &amp;&amp; index === 0;
+
+        tab.setAttribute(ARIA_SELECTED, bool);
+      }
+
+      // Tab: add role?
+      if (tab.getAttribute(ROLE) !== TAB) {
+        tab.setAttribute(ROLE, TAB);
+      }
+
+      // Tab: add data index?
+      if (!tab.getAttribute(DATA_INDEX)) {
+        tab.setAttribute(DATA_INDEX, index);
+      }
+
+      // Tab: add tabindex?
+      if (!tab.getAttribute(TABINDEX)) {
+        if (isAccordion) {
+          tab.setAttribute(TABINDEX, 0);
+        } else {
+          tab.setAttribute(TABINDEX, index === 0 ? 0 : -1);
+        }
+      }
+
+      // Tab: first item?
+      if (index === 0) {
+        // Get parent.
+        const { parentNode = getDomFallback() } = tab;
+
+        /*
+          We do this here, instead of outside the loop.
+
+          The top level item isn't always the `tablist`.
+
+          The accordion UI only has `&lt;div>`, whereas
+          the tabs UI has both `&lt;div>` and `&lt;ul>`.
+        */
+        if (parentNode.getAttribute(ROLE) !== TABLIST) {
+          parentNode.setAttribute(ROLE, TABLIST);
+        }
+
+        // Accordion?
+        if (isAccordion) {
+          // [aria-orientation="vertical"]
+          if (parentNode.getAttribute(ARIA_ORIENTATION) !== VERTICAL) {
+            parentNode.setAttribute(ARIA_ORIENTATION, VERTICAL);
+          }
+
+          // Tabs?
+        } else {
+          // [aria-orientation="horizontal"]
+          if (parentNode.getAttribute(ARIA_ORIENTATION) !== HORIZONTAL) {
+            parentNode.setAttribute(ARIA_ORIENTATION, HORIZONTAL);
+          }
+        }
+      }
+
+      // =====================
+      // Add panel attributes.
+      // =====================
+
+      // Panel: add ID?
+      if (!panel.getAttribute(ID)) {
+        panel.setAttribute(ID, panelId);
+      }
+
+      // Panel: add hidden?
+      if (!panel.getAttribute(ARIA_HIDDEN)) {
+        const bool = isAccordion || index !== 0;
+
+        panel.setAttribute(ARIA_HIDDEN, bool);
+      }
+
+      // Panel: add labelled?
+      if (!panel.getAttribute(ARIA_LABELLEDBY)) {
+        panel.setAttribute(ARIA_LABELLEDBY, tabId);
+      }
+
+      // Panel: add role?
+      if (panel.getAttribute(ROLE) !== TABPANEL) {
+        panel.setAttribute(ROLE, TABPANEL);
+      }
+
+      // Panel: add tabindex?
+      if (!panel.getAttribute(TABINDEX)) {
+        panel.setAttribute(TABINDEX, 0);
+      }
+    }
+  });
+};
+
+// =====================
+// Remove global events.
+// =====================
+
+const unbind = () => {
+  document.removeEventListener(CLICK, globalClick);
+  document.removeEventListener(KEYDOWN, globalClick);
+};
+
+// ==================
+// Add global events.
+// ==================
+
+const init = () => {
+  // Add attributes.
+  addAriaAttributes();
+
+  // Prevent doubles.
+  unbind();
+
+  document.addEventListener(CLICK, globalClick);
+  document.addEventListener(KEYDOWN, globalClick);
+};
+
+// ==============
+// Bundle object.
+// ==============
+
+const tablist = {
+  init,
+  unbind,
+};
+
+// =======
+// Export.
+// =======
+
+export { tablist };</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-gettabid-and-getpanelid"></a>Function: <code>getTabId</code> and <code>getPanelId</code></h4>
+
+
+
+<p>These two functions are used to create individually unique IDs for elements in a loop, based on an existing (or generated) parent ID. This is helpful to ensure matching values for attributes like <code>aria-controls="…"</code> and <code>aria-labelledby="…"</code>. Think of those as the accessibility equivalents of <code>&lt;label for="…"&gt;</code>, telling the browser which elements are related to one another.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const getTabId = (id = '', index = 0) => {
+  return `${TAB}_${id}_${index}`;
+};</code></pre>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const getPanelId = (id = '', index = 0) => {
+  return `${TABPANEL}_${id}_${index}`;
+};</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-globalclick"></a>Function: <code>globalClick</code></h4>
+
+
+
+<p>This is a click handler that is applied at the <code>document</code> level. That means we are not having to manually add click handlers to a number of elements. Instead, we use <a href="https://www.sitepoint.com/event-bubbling-javascript/">event bubbling</a> to listen for clicks further down in the document, and allow them to propagate up to the top.</p>
+
+
+
+<p>Conveniently, this is also how we can handle keyboard events such as the <code>ArrowLeft</code>, <code>ArrowRight</code>, <code>Enter</code> (or spacebar) keys being pressed. These are necessary to have an accessible UI.</p>
+
+
+
+<p>In the first part of the function, we destructure <code>target</code> and <code>key</code> from the incoming <code>event</code>. Next, we destructure the <code>parentNode</code> and <code>tagName</code> from the <code>target</code>.</p>
+
+
+
+<p>Then, we attempt to get the wrapper element. This would be the one with either <code>class="tabs"</code> or <code>class="accordion"</code>. Because we might actually be clicking on the ancestor element highest in the DOM tree — which exists but possibly does not have the <code>*.closest(…)</code> method — we do a <code>typeof</code> check. If that function exists, we attempt to get the element. Even still, we might come up without a match. So we have one more <code>getDomFallback</code> to be safe.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Get target.
+const { target = getDomFallback() } = event;
+
+// Get key.
+let { key = '' } = event;
+key = key.toLowerCase();
+
+// Key events.
+const isArrowLeft = key === ARROW_LEFT;
+const isArrowRight = key === ARROW_RIGHT;
+const isArrowKey = isArrowLeft || isArrowRight;
+const isTriggerKey = key === ENTER || key === SPACE;
+
+// Get parent.
+const { parentNode = getDomFallback(), tagName = '' } = target;
+
+// Set later.
+let wrapper = getDomFallback();
+
+/*
+  =====
+  NOTE:
+  =====
+
+  We test for this, because the method does
+  not exist on `document.documentElement`.
+*/
+if (typeof target.closest === FUNCTION) {
+  // Get wrapper.
+  wrapper = target.closest(TABLIST_CLASS_SELECTOR) || getDomFallback();
+}</code></pre>
+
+
+
+<p>Then, we store a boolean about whether the wrapper element has <code>aria-multiselectable="true"</code>. I will get back to that. Likewise, we store whether or not the tag that was clicked is a <code>&lt;li></code>. We need this info later on.</p>
+
+
+
+<p>We also determine if the click happened on a relevant <code>target</code>. Remember, we are using event bubbling so really the user could have clicked anything. We also interrogate the event a bit, to determine if it was triggered by the user pressing a key. If so, then we determine if the key is relevant.</p>
+
+
+
+<p>We want to make sure it:</p>
+
+
+
+<ul><li>Has <code>role="tab"</code></li><li>Has a parent element with <code>role="tablist"</code></li></ul>
+
+
+
+<p>Then we bundle up our other booleans into two categories, <code>isArrowEvent</code> and <code>isTriggerEvent</code>. Which in turn are further combined into <code>isValidEvent</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Is multi?
+const isMulti = wrapper.getAttribute(ARIA_MULTISELECTABLE) === TRUE;
+
+// Valid target?
+const isValidTarget =
+  target.getAttribute(ROLE) === TAB &amp;&amp; parentNode.getAttribute(ROLE) === TABLIST;
+
+// Is `&lt;li>`?
+const isListItem = isValidTarget &amp;&amp; tagName.toLowerCase() === LI;
+
+// Valid event?
+const isArrowEvent = isListItem &amp;&amp; isArrowKey;
+const isTriggerEvent = isValidTarget &amp;&amp; (!key || isTriggerKey);
+const isValidEvent = isArrowEvent || isTriggerEvent;
+
+// Prevent default.
+if (isValidEvent) {
+  event.preventDefault();
+}</code></pre>
+
+
+
+<p>We then enter an <code>if</code> conditional that checks if either the left or right arrow keys were pressed. If so, then we want to change the focus to the corresponding adjacent tab. If we are already at the beginning of our list, we will jump to the end. Or if we area already at the end, we will jump to the beginning.</p>
+
+
+
+<p>By triggering the <code>click</code> event, that causes this same function to be executed again. It is then evaluated as being a trigger event. This is covered in the next block.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">if (isArrowEvent) {
+  // Get index.
+  let index = target.getAttribute(DATA_INDEX);
+  index = parseFloat(index);
+
+  // Get list.
+  const list = wrapper.querySelectorAll(TAB_SELECTOR);
+
+  // Set later.
+  let newIndex = null;
+  let nextItem = null;
+
+  // Arrow left?
+  if (isArrowLeft) {
+    newIndex = index - 1;
+    nextItem = list[newIndex];
+
+    if (!nextItem) {
+      newIndex = list.length - 1;
+      nextItem = list[newIndex];
+    }
+  }
+
+  // Arrow right?
+  if (isArrowRight) {
+    newIndex = index + 1;
+    nextItem = list[newIndex];
+
+    if (!nextItem) {
+      newIndex = 0;
+      nextItem = list[newIndex];
+    }
+  }
+
+  // Fallback?
+  nextItem = nextItem || getDomFallback();
+
+  // Focus new item.
+  nextItem.click();
+  nextItem.focus();
+}</code></pre>
+
+
+
+<p>Assuming the trigger <code>event</code> is indeed valid, we make it past our next <code>if</code> check. Now, we are concerned with getting the <code>role="tabpanel"</code> element with an <code>id</code> that matches our tab&#8217;s <code>aria-controls="…"</code>.</p>
+
+
+
+<p>Once we have got it, we check whether the panel is hidden, and if the tab is selected. Basically, we first presuppose that we are dealing with an <strong>accordion</strong> and flip the booleans to their opposites.</p>
+
+
+
+<p>This is also where our earlier <code>isListItem</code> boolean comes into play. If the user is clicking an <code>&lt;li&gt;</code> then we know we are dealing with <strong>tabs</strong>, not an <strong>accordion</strong>. In which case, we want to flag our panel as being visible (via <code>aria-hiddden="false"</code>) and our tab as being selected (via <code>aria-selected="true"</code>).</p>
+
+
+
+<p>Also, we want to ensure that either the wrapper has <code>aria-multiselectable="false"</code> or is completely missing <code>aria-multiselectable</code>. If that is the case, then we loop through all neighboring <code>role="tab"</code> and all <code>role="tabpanel"</code> elements and set them to their inactive states. Finally, we arrive at setting the previously determined booleans for the individual tab and panel pairing.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">if (isTriggerEvent) {
+  // Get panel.
+  const panelId = target.getAttribute(ARIA_CONTROLS);
+  const panel = wrapper.querySelector(`#${panelId}`) || getDomFallback();
+
+  // Get booleans.
+  let boolPanel = panel.getAttribute(ARIA_HIDDEN) !== TRUE;
+  let boolTab = target.getAttribute(ARIA_SELECTED) !== TRUE;
+
+  // List item?
+  if (isListItem) {
+    boolPanel = FALSE;
+    boolTab = TRUE;
+  }
+
+  // [aria-multiselectable="false"]
+  if (!isMulti) {
+    // Get tabs &amp; panels.
+    const childTabs = wrapper.querySelectorAll(TAB_SELECTOR);
+    const childPanels = wrapper.querySelectorAll(TABPANEL_SELECTOR);
+
+    // Loop through tabs.
+    childTabs.forEach((tab = getDomFallback()) => {
+      tab.setAttribute(ARIA_SELECTED, FALSE);
+
+      // li[tabindex="-1"]
+      if (isListItem) {
+        tab.setAttribute(TABINDEX, -1);
+      }
+    });
+
+    // Loop through panels.
+    childPanels.forEach((panel = getDomFallback()) => {
+      panel.setAttribute(ARIA_HIDDEN, TRUE);
+    });
+  }
+
+  // Set individual tab.
+  target.setAttribute(ARIA_SELECTED, boolTab);
+
+  // li[tabindex="0"]
+  if (isListItem) {
+    target.setAttribute(TABINDEX, 0);
+  }
+
+  // Set individual panel.
+  panel.setAttribute(ARIA_HIDDEN, boolPanel);
+}</code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-addariaattributes"></a>Function: <code>addAriaAttributes</code></h4>
+
+
+
+<p>The astute reader might be thinking:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>You said earlier that we start with the most bare possible markup, yet the <code>globalClick</code> function was looking for attributes that would not be there. Why would you lie!?</p></blockquote>
+
+
+
+<p>Or perhaps not, for the astute reader would have also noticed the function named <code>addAriaAttributes</code>. Indeed, this function does exactly what it says on the tin. It breathes life into the base DOM structure, by adding all the requisite <code>aria-*</code> and <code>role</code> attributes.</p>
+
+
+
+<p>This not only makes the UI inherently more accessible to assistive technologies, but it also ensures the functionality actually works. I prefer to build vanilla JS things this way, rather than pivoting on <code>class="…"</code> for interactivity, because it forces me to think about the entirety of the user experience, beyond what I can see visually.</p>
+
+
+
+<p>First off, we get all elements on the page that have <code>class="tabs"</code> and/or <code>class="accordion"</code>. Then we check if we have something to work with. If not, then we would exit our function here. Assuming we do have a list, we loop through each of the wrapping elements and pass them into the scope of our function as <code>wrapper</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Get elements.
+const allWrappers = document.querySelectorAll(TABLIST_CLASS_SELECTOR);
+
+// Loop through.
+allWrappers.forEach((wrapper = getDomFallback()) => {
+  /*
+    NOTE: Cut, for brevity.
+  */
+});
+</code></pre>
+
+
+
+<p>Inside the scope of our looping function, we destructure <code>id</code> and <code>classList</code> from <code>wrapper</code>. If there is no ID, then we generate one via <code>unique()</code>. We set a boolean flag, to identify if we are working with an <strong>accordion</strong>. This is used later.</p>
+
+
+
+<p>We also get decendants of <code>wrapper</code> that are tabs and panels, via their class name selectors.</p>
+
+
+
+<p>Tabs:</p>
+
+
+
+<ul><li><code>class="tabs__item"</code> or</li><li><code>class="accordion__item"</code></li></ul>
+
+
+
+<p>Panels:</p>
+
+
+
+<ul><li><code>class="tabs__panel"</code> or</li><li><code>class="accordion__panel"</code></li></ul>
+
+
+
+<p>We then set the wrapper&#8217;s <code>id</code> if it does not already have one.</p>
+
+
+
+<p>If we are dealing with an <strong>accordion</strong> that lacks <code>aria-multiselectable="false"</code>, we set its flag to <code>true</code>. Reason being, if developers are reaching for an accordion UI paradigm — and also have tabs available to them, which are inherently mutually exclusive — then the safer assumption is that the accordion should support expanding and collapsing of several panels.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Get attributes.
+const { id = '', classList } = wrapper;
+const parentId = id || unique();
+
+// Is accordion?
+const isAccordion = classList.contains(ACCORDION);
+
+// Get tabs &amp; panels.
+const childTabs = wrapper.querySelectorAll(TAB_CLASS_SELECTOR);
+const childPanels = wrapper.querySelectorAll(TABPANEL_CLASS_SELECTOR);
+
+// Add ID?
+if (!wrapper.getAttribute(ID)) {
+  wrapper.setAttribute(ID, parentId);
+}
+
+// [aria-multiselectable="true"]
+if (isAccordion &amp;&amp; wrapper.getAttribute(ARIA_MULTISELECTABLE) !== FALSE) {
+  wrapper.setAttribute(ARIA_MULTISELECTABLE, TRUE);
+}</code></pre>
+
+
+
+<p>Next, we loop through tabs. Wherein, we also handle our panels.</p>
+
+
+
+<p>You may be wondering why this is an old school <code>for</code> loop, instead of a more modern <code>*.forEach</code>. The reason is that we want to loop through two <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList"><code>NodeList</code></a> instances: tabs and panels. Assuming they each map 1-to-1 we know they both have the same <code>*.length</code>. This allows us to have one loop instead of two.</p>
+
+
+
+<p>Let us peer inside of the loop. First, we get unique IDs for each tab and panel. These would look like one of the two following scenarios. These are used later on, to associate tabs with panels and vice versa.</p>
+
+
+
+<ul><li><code>tab_WRAPPER_ID_0</code> or<br><code>tab_GENERATED_STRING_0</code></li><li><code>tabpanel_WRAPPER_ID_0</code> or<br><code>tabpanel_GENERATED_STRING_0</code></li></ul>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">for (let index = 0; index &lt; childTabs.length; index++) {
+  // Get elements.
+  const tab = childTabs[index] || getDomFallback();
+  const panel = childPanels[index] || getDomFallback();
+
+  // Get IDs.
+  const tabId = getTabId(parentId, index);
+  const panelId = getPanelId(parentId, index);
+
+  /*
+    NOTE: Cut, for brevity.
+  */
+}</code></pre>
+
+
+
+<p>As we loop through, we first ensure that an expand/collapse icon exists. We create it if necessary, and set it to <code>aria-hidden="true"</code> since it is purely decorative.</p>
+
+
+
+<p>Next, we check on attributes for the current tab. If an <code>id="…"</code> does not exist on the tab, we add it. Likewise, if <code>aria-controls="…"</code> does not exist we add that as well, pointing to our newly created <code>panelId</code>.</p>
+
+
+
+<p>You will notice there is a little pivot here, checking if we do not have <code>aria-selected</code> and then further determining if we are <em>not</em> in the context of an accordion <em>and</em> if the <code>index</code> is <code>0</code>. In that case, we want to make our first tab look selected. The reason is that though an accordion can be fully collapsed, tabbed content cannot. There is always at least one panel visible.</p>
+
+
+
+<p>Then we ensure that <code>role="tab"</code> exists. We store the current <code>index</code> of our loop as <code>data-index="…"</code> in case we need it later for keyboard navigation.</p>
+
+
+
+<p>We also add the correct <code>tabindex="0"</code> or possibly <code>tabindex="-1"</code> depending on if what time of item it is. This allows all triggers of an <strong>accordion</strong> to receive keyboard <code>:focus</code>, versus just the currently active trigger in a <strong>tabs</strong> layout.</p>
+
+
+
+<p>Lastly, we check if we are on the first iteration of our loop where <code>index</code> is <code>0</code>. If so, we go up one level to the <code>parentNode</code>. If that element does not have <code>role="tablist"</code>, then we add it.</p>
+
+
+
+<p>We do this via <code>parentNode</code> instead of <code>wrapper</code> because in the context of tabs (not accordion) there is a <code>&lt;ul></code>element around the tab <code>&lt;li></code> that needs <code>role="tablist"</code>. In the case of an accordion, it would be the outermost <code>&lt;div></code> ancestor. This code accounts for both.</p>
+
+
+
+<p>We also set the correct <code>aria-orientation</code>, depending on the UI type. Accordion is <code>vertical</code> and tabs are <code>horizontal</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Tab: add icon?
+if (isAccordion) {
+  // Get icon.
+  let icon = tab.querySelector(ACCORDION_ITEM_ICON_SELECTOR);
+
+  // Create icon?
+  if (!icon) {
+    icon = document.createElement(I);
+    icon.className = ACCORDION_ITEM_ICON;
+    tab.insertAdjacentElement(AFTER_BEGIN, icon);
+  }
+
+  // [aria-hidden="true"]
+  icon.setAttribute(ARIA_HIDDEN, TRUE);
+}
+
+// Tab: add id?
+if (!tab.getAttribute(ID)) {
+  tab.setAttribute(ID, tabId);
+}
+
+// Tab: add controls?
+if (!tab.getAttribute(ARIA_CONTROLS)) {
+  tab.setAttribute(ARIA_CONTROLS, panelId);
+}
+
+// Tab: add selected?
+if (!tab.getAttribute(ARIA_SELECTED)) {
+  const bool = !isAccordion &amp;&amp; index === 0;
+
+  tab.setAttribute(ARIA_SELECTED, bool);
+}
+
+// Tab: add role?
+if (tab.getAttribute(ROLE) !== TAB) {
+  tab.setAttribute(ROLE, TAB);
+}
+
+// Tab: add data index?
+if (!tab.getAttribute(DATA_INDEX)) {
+  tab.setAttribute(DATA_INDEX, index);
+}
+
+// Tab: add tabindex?
+if (!tab.getAttribute(TABINDEX)) {
+  if (isAccordion) {
+    tab.setAttribute(TABINDEX, 0);
+  } else {
+    tab.setAttribute(TABINDEX, index === 0 ? 0 : -1);
+  }
+}
+
+// Tab: first item?
+if (index === 0) {
+  // Get parent.
+  const { parentNode = getDomFallback() } = tab;
+
+  /*
+    We do this here, instead of outside the loop.
+
+    The top level item isn't always the `tablist`.
+
+    The accordion UI only has `&lt;div>`, whereas
+    the tabs UI has both `&lt;div>` and `&lt;ul>`.
+  */
+  if (parentNode.getAttribute(ROLE) !== TABLIST) {
+    parentNode.setAttribute(ROLE, TABLIST);
+  }
+
+  // Accordion?
+  if (isAccordion) {
+    // [aria-orientation="vertical"]
+    if (parentNode.getAttribute(ARIA_ORIENTATION) !== VERTICAL) {
+      parentNode.setAttribute(ARIA_ORIENTATION, VERTICAL);
+    }
+
+    // Tabs?
+  } else {
+    // [aria-orientation="horizontal"]
+    if (parentNode.getAttribute(ARIA_ORIENTATION) !== HORIZONTAL) {
+      parentNode.setAttribute(ARIA_ORIENTATION, HORIZONTAL);
+    }
+  }
+}</code></pre>
+
+
+
+<p>Continuing within the earlier <code>for</code> loop, we add attributes for each <code>panel</code>. We add an <code>id</code> if needed. We also set <code>aria-hidden</code> to either <code>true</code> or <code>false</code> depending on the context of being an accordion (or not).</p>
+
+
+
+<p>Likewise, we ensure that our panel points back to its tab trigger via <code>aria-labelledby="…"</code>, and that <code>role="tabpanel"</code> has been set. We also give it <code>tabindex="0"</code> so it can receive <code>:focus</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Panel: add ID?
+if (!panel.getAttribute(ID)) {
+  panel.setAttribute(ID, panelId);
+}
+
+// Panel: add hidden?
+if (!panel.getAttribute(ARIA_HIDDEN)) {
+  const bool = isAccordion || index !== 0;
+
+  panel.setAttribute(ARIA_HIDDEN, bool);
+}
+
+// Panel: add labelled?
+if (!panel.getAttribute(ARIA_LABELLEDBY)) {
+  panel.setAttribute(ARIA_LABELLEDBY, tabId);
+}
+
+// Panel: add role?
+if (panel.getAttribute(ROLE) !== TABPANEL) {
+  panel.setAttribute(ROLE, TABPANEL);
+}
+
+// Panel: add tabindex?
+if (!panel.getAttribute(TABINDEX)) {
+  panel.setAttribute(TABINDEX, 0);
+}</code></pre>
+
+
+
+<p>At the very end of the file, we have a few setup and teardown functions. As a way to play nicely with other JS that might be in the page, we provide an <code>unbind</code> function that removes our global event listeners. It can be called by itself, via <code>tablist.unbind()</code> but is mostly there so that we can <code>unbind()</code> before (re-)binding. That way we prevent doubling up.</p>
+
+
+
+<p>Inside our <code>init</code> function, we call <code>addAriaAttributes()</code> which modifies the DOM to be accessible. We then call <code>unbind()</code> and then add our event listeners to the <code>document</code>.</p>
+
+
+
+<p>Finally, we bundle both methods into a parent object and export it under the name <code>tablist</code>. That way, when dropping it into a flat HTML page, we can call <code>tablist.init()</code> when we are ready to apply our functionality.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// =====================
+// Remove global events.
+// =====================
+
+const unbind = () => {
+  document.removeEventListener(CLICK, globalClick);
+  document.removeEventListener(KEYDOWN, globalClick);
+};
+
+// ==================
+// Add global events.
+// ==================
+
+const init = () => {
+  // Add attributes.
+  addAriaAttributes();
+
+  // Prevent doubles.
+  unbind();
+
+  document.addEventListener(CLICK, globalClick);
+  document.addEventListener(KEYDOWN, globalClick);
+};
+
+// ==============
+// Bundle object.
+// ==============
+
+const tablist = {
+  init,
+  unbind,
+};
+
+// =======
+// Export.
+// =======
+
+export { tablist };</code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>React examples</h3>
+
+
+
+<p>There is a scene in <a href="https://www.rottentomatoes.com/m/batman_begins/quotes/"><em>Batman Begins</em></a> where Lucius Fox (played by Morgan Freeman) explains to a recovering Bruce Wayne (Christian Bale) the scientific steps he took to save his life after being poisoned.</p>
+
+
+
+<p><strong>Lucius Fox:</strong> &#8220;I analyzed your blood, isolating the receptor compounds and the protein-based catalyst.&#8221;</p>
+
+
+
+<p><strong>Bruce Wayne:</strong> &#8220;Am I meant to understand any of that?&#8221;</p>
+
+
+
+<p><strong>Lucius Fox:</strong> &#8220;Not at all, I just wanted you to know how hard it was. Bottom line, I synthesized an antidote.&#8221;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/lucious-fox-and-bruce-wayne.jpg?ssl=1" alt="Morgan Freeman and Christian Bale, sitting inside the Batmobile" class="wp-image-307515" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/lucious-fox-and-bruce-wayne.jpg?w=1000&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/lucious-fox-and-bruce-wayne.jpg?resize=300%2C200&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/lucious-fox-and-bruce-wayne.jpg?resize=768%2C513&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>&#8220;How do I configure <a href="https://en.wikipedia.org/wiki/Webpack">Webpack</a>?&#8221;</figcaption></figure>
+
+
+
+<p>↑ When working with a framework, I think in those terms.</p>
+
+
+
+<p>Now that we know &#8220;hard&#8221; it is — not really, but humor me — to do raw DOM manipulation and event binding, we can better appreciate the existence of an antidote. React abstracts a lot of that complexity away, and handles it for us automatically.</p>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#file-tabsjs"></a>File: <code>Tabs.js</code></h4>
+
+
+
+<p>Now that we are diving into React examples, we will start with the <code>&lt;Tabs&gt;</code> component.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">// =============
+// Used like so…
+// =============
+
+&lt;Tabs>
+  &lt;div label="Tab 1">
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;div label="Tab 2">
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+&lt;/Tabs></code></pre>
+
+
+
+<p>Here is the content from our <code>Tabs.js</code> file. Note that in React parlance, it is standard practice to name the file with the same capitalization as its <code>export default</code> component.</p>
+
+
+
+<p>We start out with the same <code>getTabId</code> and <code>getPanelId</code> functions as in our vanilla JS approach, because we still need to make sure to accessibly map tabs to components. Take a look at the entirey of the code, and then we will continue to break it down.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+import cx from 'classnames';
+
+// Helpers.
+import { getDomFallback } from '../utils';
+
+// UI.
+import Render from './Render';
+
+// ==========
+// Constants.
+// ==========
+
+const ARROW_LEFT = 'arrowleft';
+const ARROW_RIGHT = 'arrowright';
+const ENTER = 'enter';
+const HORIZONTAL = 'horizontal';
+const SPACE = ' ';
+const STRING = 'string';
+
+// Selector strings.
+const TAB = 'tab';
+const TAB_SELECTOR = `[role="${TAB}"]`;
+
+const TABLIST = 'tablist';
+const TABLIST_SELECTOR = `[role="${TABLIST}"]`;
+
+const TABPANEL = 'tabpanel';
+
+// ===========
+// Get tab ID.
+// ===========
+
+const getTabId = (id = '', index = 0) => {
+  return `${TAB}_${id}_${index}`;
+};
+
+// =============
+// Get panel ID.
+// =============
+
+const getPanelId = (id = '', index = 0) => {
+  return `${TABPANEL}_${id}_${index}`;
+};
+
+// ==========
+// Is active?
+// ==========
+
+const getIsActive = ({ activeIndex = null, index = null, list = [] }) => {
+  // Index matches?
+  const isMatch = index === parseFloat(activeIndex);
+
+  // Is first item?
+  const isFirst = index === 0;
+
+  // Only first item exists?
+  const onlyFirstItem = list.length === 1;
+
+  // Item doesn't exist?
+  const badActiveItem = !list[activeIndex];
+
+  // Flag as active?
+  const isActive = isMatch || onlyFirstItem || (isFirst &amp;&amp; badActiveItem);
+
+  // Expose boolean.
+  return !!isActive;
+};
+
+getIsActive.propTypes = {
+  activeIndex: PropTypes.number,
+  index: PropTypes.number,
+  list: PropTypes.array,
+};
+
+// ===============
+// Focus new item.
+// ===============
+
+const focusNewItem = (target = getDomFallback(), newIndex = 0) => {
+  // Get tablist.
+  const tablist = target.closest(TABLIST_SELECTOR) || getDomFallback();
+
+  // Get list items.
+  const listItems = tablist.querySelectorAll(TAB_SELECTOR);
+
+  // Get new item.
+  const newItem = listItems[newIndex] || getDomFallback();
+
+  // Focus new item.
+  newItem.focus();
+};
+
+// ================
+// Get `&lt;ul>` list.
+// ================
+
+const getTabsList = ({ activeIndex = null, id = '', list = [], setActiveIndex = () => {} }) => {
+  // Build new list.
+  const newList = list.map((item = {}, index) => {
+    // =========
+    // Get data.
+    // =========
+
+    const { props: itemProps = {} } = item;
+    const { label = '' } = itemProps;
+    const idPanel = getPanelId(id, index);
+    const idTab = getTabId(id, index);
+    const isActive = getIsActive({ activeIndex, index, list });
+
+    // =======
+    // Events.
+    // =======
+
+    const handleClick = () => {
+      // Set active item.
+      setActiveIndex(index);
+    };
+
+    const handleKeyDown = (event = {}) => {
+      // Get target.
+      const { target } = event;
+
+      // Get key.
+      let { key = '' } = event;
+      key = key.toLowerCase();
+
+      // Key events.
+      const isArrowLeft = key === ARROW_LEFT;
+      const isArrowRight = key === ARROW_RIGHT;
+      const isArrowKey = isArrowLeft || isArrowRight;
+      const isTriggerKey = key === ENTER || key === SPACE;
+
+      // Valid event?
+      const isValidEvent = isArrowKey || isTriggerKey;
+
+      // Prevent default.
+      if (isValidEvent) {
+        event.preventDefault();
+      }
+
+      // ============
+      // Arrow event?
+      // ============
+
+      if (isArrowKey) {
+        // Set later.
+        let newIndex = null;
+        let nextItem = null;
+
+        // Arrow left?
+        if (isArrowLeft) {
+          newIndex = index - 1;
+          nextItem = list[newIndex];
+
+          if (!nextItem) {
+            newIndex = list.length - 1;
+            nextItem = list[newIndex];
+          }
+        }
+
+        // Arrow right?
+        if (isArrowRight) {
+          newIndex = index + 1;
+          nextItem = list[newIndex];
+
+          if (!nextItem) {
+            newIndex = 0;
+            nextItem = list[newIndex];
+          }
+        }
+
+        // Item exists?
+        if (nextItem) {
+          // Focus new item.
+          focusNewItem(target, newIndex);
+
+          // Set active item.
+          setActiveIndex(newIndex);
+        }
+      }
+
+      // ==============
+      // Trigger event?
+      // ==============
+
+      if (isTriggerKey) {
+        // Set active item.
+        setActiveIndex(index);
+      }
+    };
+
+    // ============
+    // Add to list.
+    // ============
+
+    return (
+      &lt;li
+        aria-controls={idPanel}
+        aria-selected={isActive}
+        className="tabs__item"
+        id={idTab}
+        key={idTab}
+        role={TAB}
+        tabIndex={isActive ? 0 : -1}
+        // Events.
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+      >
+        {label || `${index + 1}`}
+      &lt;/li>
+    );
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return (
+    &lt;Render if={newList.length}>
+      &lt;ul aria-orientation={HORIZONTAL} className="tabs__list" role={TABLIST}>
+        {newList}
+      &lt;/ul>
+    &lt;/Render>
+  );
+};
+
+getTabsList.propTypes = {
+  activeIndex: PropTypes.number,
+  id: PropTypes.string,
+  list: PropTypes.array,
+  setActiveIndex: PropTypes.func,
+};
+
+// =================
+// Get `&lt;div>` list.
+// =================
+
+const getPanelsList = ({ activeIndex = null, id = '', list = [] }) => {
+  // Build new list.
+  const newList = list.map((item = {}, index) => {
+    // =========
+    // Get data.
+    // =========
+
+    const { props: itemProps = {} } = item;
+    const { children = '', className = null, style = null } = itemProps;
+    const idPanel = getPanelId(id, index);
+    const idTab = getTabId(id, index);
+    const isActive = getIsActive({ activeIndex, index, list });
+
+    // =============
+    // Get children.
+    // =============
+
+    let content = children || item;
+
+    if (typeof content === STRING) {
+      content = &lt;p>{content}&lt;/p>;
+    }
+
+    // =================
+    // Build class list.
+    // =================
+
+    const classList = cx({
+      tabs__panel: true,
+      [String(className)]: className,
+    });
+
+    // ==========
+    // Expose UI.
+    // ==========
+
+    return (
+      &lt;div
+        aria-hidden={!isActive}
+        aria-labelledby={idTab}
+        className={classList}
+        id={idPanel}
+        key={idPanel}
+        role={TABPANEL}
+        style={style}
+        tabIndex={0}
+      >
+        {content}
+      &lt;/div>
+    );
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return newList;
+};
+
+getPanelsList.propTypes = {
+  activeIndex: PropTypes.number,
+  id: PropTypes.string,
+  list: PropTypes.array,
+};
+
+// ==========
+// Component.
+// ==========
+
+const Tabs = ({
+  children = '',
+  className = null,
+  selected = 0,
+  style = null,
+  id: propsId = uuid(),
+}) => {
+  // ===============
+  // Internal state.
+  // ===============
+
+  const [id] = useState(propsId);
+  const [activeIndex, setActiveIndex] = useState(selected);
+
+  // =================
+  // Build class list.
+  // =================
+
+  const classList = cx({
+    tabs: true,
+    [String(className)]: className,
+  });
+
+  // ===============
+  // Build UI lists.
+  // ===============
+
+  const list = Array.isArray(children) ? children : [children];
+
+  const tabsList = getTabsList({
+    activeIndex,
+    id,
+    list,
+    setActiveIndex,
+  });
+
+  const panelsList = getPanelsList({
+    activeIndex,
+    id,
+    list,
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return (
+    &lt;Render if={list[0]}>
+      &lt;div className={classList} id={id} style={style}>
+        {tabsList}
+        {panelsList}
+      &lt;/div>
+    &lt;/Render>
+  );
+};
+
+Tabs.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  selected: PropTypes.number,
+  style: PropTypes.object,
+};
+
+export default Tabs;</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-getisactive"></a>Function: <code>getIsActive</code></h4>
+
+
+
+<p>Due to a <code>&lt;Tabs&gt;</code> component always having something active and visible, this function contains some logic to determine whether an <code>index</code> of a given tab should be the lucky winner. Essentially, in sentence form the logic goes like this.</p>
+
+
+
+<p>This current tab is active if:</p>
+
+
+
+<ul><li>Its <code>index</code> matches the <code>activeIndex</code>, or</li><li>The tabs UI has only one tab, or</li><li>It is the first tab, and the <code>activeIndex</code> tab does not exist.</li></ul>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const getIsActive = ({ activeIndex = null, index = null, list = [] }) => {
+  // Index matches?
+  const isMatch = index === parseFloat(activeIndex);
+
+  // Is first item?
+  const isFirst = index === 0;
+
+  // Only first item exists?
+  const onlyFirstItem = list.length === 1;
+
+  // Item doesn't exist?
+  const badActiveItem = !list[activeIndex];
+
+  // Flag as active?
+  const isActive = isMatch || onlyFirstItem || (isFirst &amp;&amp; badActiveItem);
+
+  // Expose boolean.
+  return !!isActive;
+};</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-gettabslist"></a>Function: <code>getTabsList</code></h4>
+
+
+
+<p>This function generates the clickable <code>&lt;li role="tabs"&gt;</code> UI, and returns it wrapped in a parent <code>&lt;ul role="tablist"&gt;</code>. It assigns all the relevant <code>aria-*</code> and <code>role</code> attributes, and handles binding the <code>onClick</code>and <code>onKeyDown</code> events. When an event is triggered, <code>setActiveIndex</code> is called. This updates the component&#8217;s internal state.</p>
+
+
+
+<p>It is noteworthy how the content of the <code>&lt;li&gt;</code> is derived. That is passed in as <code>&lt;div label="…"&gt;</code> children of the parent <code>&lt;Tabs&gt;</code> component. Though this is not a real concept in flat HTML, it is a handy way to think about the relationship of the content. The <code>children</code> of that <code>&lt;div&gt;</code> become the the innards of our <code>role="tabpanel"</code> later.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const getTabsList = ({ activeIndex = null, id = '', list = [], setActiveIndex = () => {} }) => {
+  // Build new list.
+  const newList = list.map((item = {}, index) => {
+    // =========
+    // Get data.
+    // =========
+
+    const { props: itemProps = {} } = item;
+    const { label = '' } = itemProps;
+    const idPanel = getPanelId(id, index);
+    const idTab = getTabId(id, index);
+    const isActive = getIsActive({ activeIndex, index, list });
+
+    // =======
+    // Events.
+    // =======
+
+    const handleClick = () => {
+      // Set active item.
+      setActiveIndex(index);
+    };
+
+    const handleKeyDown = (event = {}) => {
+      // Get target.
+      const { target } = event;
+
+      // Get key.
+      let { key = '' } = event;
+      key = key.toLowerCase();
+
+      // Key events.
+      const isArrowLeft = key === ARROW_LEFT;
+      const isArrowRight = key === ARROW_RIGHT;
+      const isArrowKey = isArrowLeft || isArrowRight;
+      const isTriggerKey = key === ENTER || key === SPACE;
+
+      // Valid event?
+      const isValidEvent = isArrowKey || isTriggerKey;
+
+      // Prevent default.
+      if (isValidEvent) {
+        event.preventDefault();
+      }
+
+      // ============
+      // Arrow event?
+      // ============
+
+      if (isArrowKey) {
+        // Set later.
+        let newIndex = null;
+        let nextItem = null;
+
+        // Arrow left?
+        if (isArrowLeft) {
+          newIndex = index - 1;
+          nextItem = list[newIndex];
+
+          if (!nextItem) {
+            newIndex = list.length - 1;
+            nextItem = list[newIndex];
+          }
+        }
+
+        // Arrow right?
+        if (isArrowRight) {
+          newIndex = index + 1;
+          nextItem = list[newIndex];
+
+          if (!nextItem) {
+            newIndex = 0;
+            nextItem = list[newIndex];
+          }
+        }
+
+        // Item exists?
+        if (nextItem) {
+          // Focus new item.
+          focusNewItem(target, newIndex);
+
+          // Set active item.
+          setActiveIndex(newIndex);
+        }
+      }
+
+      // ==============
+      // Trigger event?
+      // ==============
+
+      if (isTriggerKey) {
+        // Set active item.
+        setActiveIndex(index);
+      }
+    };
+
+    // ============
+    // Add to list.
+    // ============
+
+    return (
+      &lt;li
+        aria-controls={idPanel}
+        aria-selected={isActive}
+        className="tabs__item"
+        id={idTab}
+        key={idTab}
+        role={TAB}
+        tabIndex={isActive ? 0 : -1}
+        // Events.
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+      >
+        {label || `${index + 1}`}
+      &lt;/li>
+    );
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return (
+    &lt;Render if={newList.length}>
+      &lt;ul aria-orientation={HORIZONTAL} className="tabs__list" role={TABLIST}>
+        {newList}
+      &lt;/ul>
+    &lt;/Render>
+  );
+};</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-getpanelslist"></a>Function: <code>getPanelsList</code></h4>
+
+
+
+<p>This function parses the incoming <code>children</code> of the top level component and extracts the content. It also makes use of <code>getIsActive</code> to determine whether (or not) to apply <code>aria-hidden="true"</code>. As one might expect by now, it adds all the other relevant <code>aria-*</code> and <code>role</code> attributes too. It also applies any extra <code>className</code> or <code>style</code> that was passed in.</p>
+
+
+
+<p>It also is &#8220;smart&#8221; enough to wrap any <code>string</code> content — anything lacking a wrapping tag already — in <code>&lt;p&gt;</code> tags for consistency.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const getPanelsList = ({ activeIndex = null, id = '', list = [] }) => {
+  // Build new list.
+  const newList = list.map((item = {}, index) => {
+    // =========
+    // Get data.
+    // =========
+
+    const { props: itemProps = {} } = item;
+    const { children = '', className = null, style = null } = itemProps;
+    const idPanel = getPanelId(id, index);
+    const idTab = getTabId(id, index);
+    const isActive = getIsActive({ activeIndex, index, list });
+
+    // =============
+    // Get children.
+    // =============
+
+    let content = children || item;
+
+    if (typeof content === STRING) {
+      content = &lt;p>{content}&lt;/p>;
+    }
+
+    // =================
+    // Build class list.
+    // =================
+
+    const classList = cx({
+      tabs__panel: true,
+      [String(className)]: className,
+    });
+
+    // ==========
+    // Expose UI.
+    // ==========
+
+    return (
+      &lt;div
+        aria-hidden={!isActive}
+        aria-labelledby={idTab}
+        className={classList}
+        id={idPanel}
+        key={idPanel}
+        role={TABPANEL}
+        style={style}
+        tabIndex={0}
+      >
+        {content}
+      &lt;/div>
+    );
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return newList;
+};</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-tabs"></a>Function: <code>Tabs</code></h4>
+
+
+
+<p>This is the main component. It sets an internal state for an <code>id</code>, to essentially cache any generated <code>uuid()</code> so that it does not change during the lifecycle of the component. React is finicky about its <code>key</code> attributes (in the previous loops) changing dynamically, so this ensures they remain static once set.</p>
+
+
+
+<p>We also employ <code>useState</code> to track the currently selected tab, and pass down a <code>setActiveIndex</code> function to each <code>&lt;li&gt;</code> to monitor when they are clicked. After that, it is pretty straightfowrard. We call <code>getTabsList</code> and <code>getPanelsList</code> to build our UI, and then wrap it all up in <code>&lt;div role="tablist"&gt;</code>.</p>
+
+
+
+<p>It accepts any wrapper level <code>className</code> or <code>style</code>, in case anyone wants further tweaks during implementation. Providing other developers (as consumers) this flexibility means that the likelihood of needing to make further edits to the core component is lower. Lately, I have been doing this as a &#8220;best practice&#8221; for all components I create.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const Tabs = ({
+  children = '',
+  className = null,
+  selected = 0,
+  style = null,
+  id: propsId = uuid(),
+}) => {
+  // ===============
+  // Internal state.
+  // ===============
+
+  const [id] = useState(propsId);
+  const [activeIndex, setActiveIndex] = useState(selected);
+
+  // =================
+  // Build class list.
+  // =================
+
+  const classList = cx({
+    tabs: true,
+    [String(className)]: className,
+  });
+
+  // ===============
+  // Build UI lists.
+  // ===============
+
+  const list = Array.isArray(children) ? children : [children];
+
+  const tabsList = getTabsList({
+    activeIndex,
+    id,
+    list,
+    setActiveIndex,
+  });
+
+  const panelsList = getPanelsList({
+    activeIndex,
+    id,
+    list,
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return (
+    &lt;Render if={list[0]}>
+      &lt;div className={classList} id={id} style={style}>
+        {tabsList}
+        {panelsList}
+      &lt;/div>
+    &lt;/Render>
+  );
+};</code></pre>
+
+
+
+<p class="explanation">If you are curious about the <code>&lt;Render&gt;</code> function, you can <a href="https://ui.reaktivstudios.com/storybook/?path=/story/render--example">read more about that in this example</a>.</p>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#file-accordionjs"></a>File: <code>Accordion.js</code></h4>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// =============
+// Used like so…
+// =============
+
+&lt;Accordion>
+  &lt;div label="Tab 1">
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;div label="Tab 2">
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+&lt;/Accordion></code></pre>
+
+
+
+<p>As you may have deduced — due to the vanilla JS example handling both tabs <em>and</em> accordion — this file has quite a few similarities to how <code>Tabs.js</code> works.</p>
+
+
+
+<p>Rather than belabor the point, I will simply provide the file&#8217;s contents for completeness and then speak about the specific areas in which the logic differs. So, take a gander at the contents and I will explain what makes <code>&lt;Accordion&gt;</code> quirky.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+import cx from 'classnames';
+
+// UI.
+import Render from './Render';
+
+// ==========
+// Constants.
+// ==========
+
+const ENTER = 'enter';
+const SPACE = ' ';
+const STRING = 'string';
+const VERTICAL = 'vertical';
+
+// ===========
+// Get tab ID.
+// ===========
+
+const getTabId = (id = '', index = 0) => {
+  return `tab_${id}_${index}`;
+};
+
+// =============
+// Get panel ID.
+// =============
+
+const getPanelId = (id = '', index = 0) => {
+  return `tabpanel_${id}_${index}`;
+};
+
+// ==============================
+// Get `tab` and `tabpanel` list.
+// ==============================
+
+const getTabsAndPanelsList = ({
+  activeItems = {},
+  id = '',
+  isMulti = true,
+  list = [],
+  setActiveItems = () => {},
+}) => {
+  // Build new list.
+  const newList = [];
+
+  // Loop through.
+  list.forEach((item = {}, index) => {
+    // =========
+    // Get data.
+    // =========
+
+    const { props: itemProps = {} } = item;
+
+    const { children = '', className = null, label = '', style = null } = itemProps;
+
+    const idPanel = getPanelId(id, index);
+    const idTab = getTabId(id, index);
+    const isActive = !!activeItems[index];
+
+    // =======
+    // Events.
+    // =======
+
+    const handleClick = (event = {}) => {
+      let { key = '' } = event;
+      key = key.toLowerCase();
+
+      // Trigger key?
+      const isTriggerKey = key === ENTER || key === SPACE;
+
+      // Early exit.
+      if (key &amp;&amp; !isTriggerKey) {
+        return;
+      }
+
+      // Keep active items?
+      const state = isMulti ? activeItems : null;
+
+      // Update active item.
+      const newState = {
+        ...state,
+        [index]: !activeItems[index],
+      };
+
+      // Prevent key press.
+      event.preventDefault();
+
+      // Set active item.
+      setActiveItems(newState);
+    };
+
+    // =============
+    // Get children.
+    // =============
+
+    let content = children || item;
+
+    if (typeof content === STRING) {
+      content = &lt;p>{content}&lt;/p>;
+    }
+
+    // =================
+    // Build class list.
+    // =================
+
+    const classList = cx({
+      accordion__panel: true,
+      [String(className)]: className,
+    });
+
+    // ========
+    // Add tab.
+    // ========
+
+    newList.push(
+      &lt;div
+        aria-controls={idPanel}
+        aria-selected={isActive}
+        className="accordion__item"
+        id={idTab}
+        key={idTab}
+        role="tab"
+        tabIndex={0}
+        // Events.
+        onClick={handleClick}
+        onKeyDown={handleClick}
+      >
+        &lt;i aria-hidden="true" className="accordion__item__icon" />
+        {label || `${index + 1}`}
+      &lt;/div>
+    );
+
+    // ==========
+    // Add panel.
+    // ==========
+
+    newList.push(
+      &lt;div
+        aria-hidden={!isActive}
+        aria-labelledby={idTab}
+        className={classList}
+        id={idPanel}
+        key={idPanel}
+        role="tabpanel"
+        style={style}
+        tabIndex={0}
+      >
+        {content}
+      &lt;/div>
+    );
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return newList;
+};
+
+getTabsAndPanelsList.propTypes = {
+  activeItems: PropTypes.object,
+  id: PropTypes.string,
+  isMulti: PropTypes.bool,
+  list: PropTypes.array,
+  setActiveItems: PropTypes.func,
+};
+
+// ==========
+// Component.
+// ==========
+
+const Accordion = ({
+  children = '',
+  className = null,
+  isMulti = true,
+  selected = {},
+  style = null,
+  id: propsId = uuid(),
+}) => {
+  // ===============
+  // Internal state.
+  // ===============
+
+  const [id] = useState(propsId);
+  const [activeItems, setActiveItems] = useState(selected);
+
+  // =================
+  // Build class list.
+  // =================
+
+  const classList = cx({
+    accordion: true,
+    [String(className)]: className,
+  });
+
+  // ===============
+  // Build UI lists.
+  // ===============
+
+  const list = Array.isArray(children) ? children : [children];
+
+  const tabsAndPanelsList = getTabsAndPanelsList({
+    activeItems,
+    id,
+    isMulti,
+    list,
+    setActiveItems,
+  });
+
+  // ==========
+  // Expose UI.
+  // ==========
+
+  return (
+    &lt;Render if={list[0]}>
+      &lt;div
+        aria-multiselectable={isMulti}
+        aria-orientation={VERTICAL}
+        className={classList}
+        id={id}
+        role="tablist"
+        style={style}
+      >
+        {tabsAndPanelsList}
+      &lt;/div>
+    &lt;/Render>
+  );
+};
+
+Accordion.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  isMulti: PropTypes.bool,
+  selected: PropTypes.object,
+  style: PropTypes.object,
+};
+
+export default Accordion;</code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#function-handleclick"></a>Function: <code>handleClick</code></h4>
+
+
+
+<p>While most of our <code>&lt;Accordion&gt;</code> logic is similar to <code>&lt;Tabs&gt;</code>, it differs in how it stores the currently active tab.</p>
+
+
+
+<p>Since <code>&lt;Tabs&gt;</code> are always mutually exclusive, we only really need a single numeric <code>index</code>. Easy peasy.</p>
+
+
+
+<p>However, because an <code>&lt;Accordion&gt;</code> can have concurrently visible panels — or be used in a mutually exclusive manner — we need to represent that to <code>useState</code> in a way that could handle both.</p>
+
+
+
+<p>If you were beginning to think…</p>
+
+
+
+<blockquote class="wp-block-quote"><p>&#8220;I would store that in an object.&#8221;</p></blockquote>
+
+
+
+<p>…then congrats. You are right!</p>
+
+
+
+<p>This function does a quick check to see if <code>isMulti</code> has been set to <code>true</code>. If so, we use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread syntax</a> to apply the existing <code>activeItems</code> to our <code>newState</code> object. We then set the current <code>index</code> to its boolean opposite.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const handleClick = (event = {}) => {
+  let { key = '' } = event;
+  key = key.toLowerCase();
+
+  // Trigger key?
+  const isTriggerKey = key === ENTER || key === SPACE;
+
+  // Early exit.
+  if (key &amp;&amp; !isTriggerKey) {
+    return;
+  }
+
+  // Keep active items?
+  const state = isMulti ? activeItems : null;
+
+  // Update active item.
+  const newState = {
+    ...state,
+    [index]: !activeItems[index],
+  };
+
+  // Prevent key press.
+  event.preventDefault();
+
+  // Set active item.
+  setActiveItems(newState);
+};</code></pre>
+
+
+
+<p>For reference, here is how our <code>activeItems</code> object looks if only the first accordion panel is active and a user clicks the second. Both indexes would be set to <code>true</code>. This allows for viewing two expanded <code>role="tabpanel"</code> simultaneously.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/*
+  Internal representation
+  of `activeItems` state.
+*/
+
+{
+  0: true,
+  1: true,
+}
+</code></pre>
+
+
+
+<p>Whereas if we were <em>not</em> operating in <code>isMulti</code> mode — when the wrapper has <code>aria-multiselectable="false"</code> — then <code>activeItems</code> would only ever contain one key/value pair.</p>
+
+
+
+<p>Because rather than spreading the current <code>activeItems</code>, we would be spreading <code>null</code>. That effectively wipes the slate clean, before recording the currently active tab.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/*
+  Internal representation
+  of `activeItems` state.
+*/
+
+{
+  1: true,
+}
+</code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Conclusion</h3>
+
+
+
+<p>Still here? Awesome.</p>
+
+
+
+<p>Hopefully you found this article informative, and maybe even learned a bit more about accessibility and JS(X) along the way. For review, let us look one more time at our flat HTML example and and the React usage of our <code>&lt;Tabs&gt;</code>component. Here is a comparison of the markup we would write in a vanilla JS approach, versus the <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> it takes to generate the same thing.</p>
+
+
+
+<p>I am not saying that one is better than the other, but you can see how React makes it possible to distill things down into a mental model. Working directly in HTML, you always have to be aware of every tag.</p>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#html"></a>HTML</h4>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="tabs">
+  &lt;ul class="tabs__list">
+    &lt;li class="tabs__item">
+      Tab 1
+    &lt;/li>
+    &lt;li class="tabs__item">
+      Tab 2
+    &lt;/li>
+  &lt;/ul>
+  &lt;div class="tabs__panel">
+    &lt;p>
+      Tab 1 content
+    &lt;/p>
+  &lt;/div>
+  &lt;div class="tabs__panel">
+    &lt;p>
+      Tab 2 content
+    &lt;/p>
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<h4><a href="https://gist.github.com/nathansmith/4d06cdb55502ca57c0e293ee64efdcc4#jsx"></a>JSX</h4>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">&lt;Tabs>
+  &lt;div label="Tab 1">
+    Tab 1 content
+  &lt;/div>
+  &lt;div label="Tab 2">
+    Tab 2 content
+  &lt;/div>
+&lt;/Tabs></code></pre>
+
+
+
+<p>↑ One of these probably looks preferrable, depending on your point of view.</p>
+
+
+
+<p>Writing code <a href="https://wiki.c2.com/?CloseToTheMetal">closer to the metal</a> means more direct control, but also more tedium. Using a framework like React means you get more functionality &#8220;for free,&#8221; but also it can be a black box.</p>
+
+
+
+<p>That is, unless you understand the underlying nuances already. Then you can fluidly operate in either realm. Because you can see <a href="https://www.youtube.com/watch?v=Vy7RaQUmOzE"><em>The Matrix</em></a> for what it really is: Just JavaScript&#x2122;. Not a bad place to be, no matter where you find yourself.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/">The Anatomy of a Tablist Component in Vanilla JavaScript Versus React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-anatomy-of-a-tablist-component-in-vanilla-javascript-versus-react/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">307347</post-id>	</item>
+		<item>
+		<title>Accessible Font Sizing, Explained</title>
+		<link>https://css-tricks.com/accessible-font-sizing-explained/</link>
+					<comments>https://css-tricks.com/accessible-font-sizing-explained/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrés Galante]]></dc:creator>
+		<pubDate>Thu, 23 Apr 2020 14:56:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[font-size]]></category>
+		<category><![CDATA[user agent stylesheets]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306222</guid>
+
+					<description><![CDATA[<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+<p>The answer: &#8230; <a href="https://css-tricks.com/accessible-font-sizing-explained/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessible Font Sizing, Explained&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</a> (WCAG), an organization that defines standards for web content accessibility, does not specify a minimum font size for the web.</p>
+
+
+
+<p>But we know there’s such a thing as text that is too small to be legible, just as text that can be too large to consume. So, how can we make sure our font sizes are accessible? What sort of best practices can we rely on to make for an accessible reading experience?</p>
+
+
+
+<p>The answer: it’s not up to us. It Depends&#x2122;. We’ll get into some specific a bit later but, for now, let’s explore the WCAG requirements for fonts.</p>
+
+
+
+<span id="more-306222"></span>
+
+
+
+<h3>Sizing, contrast, and 300 alphabets</h3>
+
+
+
+<p>First, <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-scale.html">resizing text</a>. &nbsp;We want to provide users with low vision a way to choose how fonts are displayed. Not in a crazy way. More like the ability to increase the size by 200% while maintaining readability and avoiding content collisions and overlaps.</p>
+
+
+
+<p>Secondly, there’s <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">contrast</a>. This is why I said “it depends” on what makes an accessible font size. Text has to follow a <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23contrast-ratiodef">contrast ratio</a> of at least 4.5:1, with the exception of a large-scale text that should have a contrast ratio of at least 3:1. You can use tools like <a href="https://webaim.org/resources/contrastchecker/" class="ek-link">WebAIM’s Contrast Checker</a> to ensure your text meets the guidelines. <a href="https://css-tricks.com/understanding-web-accessibility-color-contrast-guidelines-and-ratios/">Stacy Arrelano’s deep dive on color contrast</a> provides an excellent explanation of how contrast ratios are calculated.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://css-tricks.com/wp-content/uploads/2020/04/Frame-1-1.svg" alt="A contrast ratio of 2.39 to 1 would not pass any of the WCAG checks, a ratio of 4.65 to 1 would pass only the AA check for normal text sizes and a 10.09 to 1 contrast ratio would pass both AA and AAA WCAG checks." class="wp-image-306367"/><figcaption>Example of three color contrast measurements and their WCAG test results according to WebAIM&#8217;s contrast checker.</figcaption></figure>
+
+
+
+<p>There are around 300 alphabets in the world. Some characters are simple and readable in smaller sizes, others are incredibly complex and would lose vital details at the same size. That’s why specs cannot define a font size that meets the specification for contrast ratios.</p>
+
+
+
+<p>And when we talk about “text” and “large text” sizes, we’re referring to what <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html%23larger-scaledef">the spec</a> calls “the minimum large print size used for those languages and the next larger standard large print size.” To meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html%23uc-levels-head">AAA criteria</a> using Roman text, for example, “large” is 18 points. Since we live in a world with different screen densities, specs measure sizes in points, not pixels, and in some displays, 18pt is equal to 24px. For other fonts, like CJK (Chinese, Japanese, Korean) or Arabic languages, the actual size in pixel would be different. Here&#8217;s the word &#8220;Hello&#8221; compared next to three other languages:</p>
+
+
+
+<p class="hello-examples"><span>Hello</span> <span>สวัสดี</span> <span>مرحبا</span> <span>你好</span></p>
+
+
+
+<p>In short, WCAG specifies <em>contrast</em> instead of <em>size</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&#038;ssl=1" alt="" class="wp-image-306256" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1024%2C305&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=300%2C89&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=768%2C228&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?resize=1000%2C297&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/accessible-font-size.png?w=1086&amp;ssl=1 1086w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>The WCAG recommended font size for large text has greater contrast than something half the size. Notice how a larger font size lets in more of the background that sits behind the text.</figcaption></figure>
+
+
+
+<p>Here is the good news: a browser’s default styles are accessible and we can leverage them to build an accessible font size strategy. Let’s see how.</p>
+
+
+
+<h3>Think about proportions, not size</h3>
+
+
+
+<p>The browser first loads its default styles (also known as the “User Agent stylesheet”), then those cascade to the author’s styles (the ones we define), and they both cascade and get overwritten by the user&#8217;s styles.</p>
+
+
+
+<p>As <a href="https://twitter.com/Adysandu">Adrian Sandu</a> mentions in his <a href="https://www.sitepoint.com/understanding-and-using-rem-units-in-css/">article about rem CSS units</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] there is an <a href="https://medium.com/@vamptvo/pixels-vs-ems-users-do-change-font-size-5cfb20831773">empirical study run by the people behind the Internet Archive</a> showing that there is a significant amount of users who change their default font size in the browser settings.</p></blockquote>
+
+
+
+<p>We don’t fully control the <code>font-family</code> property, either. The content might be translated, the custom font family might fail to load, or it might even be changed. For example, <a href="https://gumroad.com/l/OpenDyslexic">OpenDyslexic</a> is a typeface created to increase readability for readers with dyslexia. In some situations, we may even <a href="https://dev.to/devteam/new-feature-display-configuration-sans-serif-fontsnight-mode-beta-23o0">explicitly allow switching between a limited set of fonts</a>.&nbsp;</p>
+
+
+
+<p>Therefore, when defining fonts, we have to avoid hindering the ability of a user or a device to change our styles and let go of assumptions: <strong>we just don’t know where our content is going to land </strong>and we can’t be sure about the exact size, language, or font that’s used to display content.</p>
+
+
+
+<p>But there is one thing that we can control: <strong>proportions</strong>.</p>
+
+
+
+<p>By using CSS relative units, we can set our content to be proportional to whatever the environment tells it to be. <a href="https://www.w3.org/TR/WCAG20-TECHS/C14.html">WCAG recommends using em units to define font size</a>. There are several publications discussing the benefits of using ems and rems and it’s beyond the scope of this article. What I’d say here is to use rems and ems for <em>everything</em>, even for other properties besides font-size (with the exception of borders, where I use pixels).</p>
+
+
+
+<h3>Avoid setting a base font-size</h3>
+
+
+
+<p>My recommendation is to avoid setting <code>font-size</code> on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> elements in favor of letting the browser’s default size serve as a baseline from where we can cascade our own styles. Since this default is accessible, the content will also be accessible. The <a href="https://www.w3.org/TR/2020/WD-WCAG22-20200227/">WACAG 2.2 working draft</a> states that:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>When using text without specifying the font size, the smallest font size used on major browsers for unspecified text would be a reasonable size to assume for the font.</p></blockquote>
+
+
+
+<p>Of course, there is an exception to the rule. When using an intricate, thin, or super short x-height font, for example, you might consider bumping up the font size base to get the correct contrast. Remember that the spec defines contrast, not size:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Fonts with extraordinarily thin strokes or unusual features and characteristics that reduce the familiarity of their letter forms are harder to read, especially at lower contrast levels.</p></blockquote>
+
+
+
+<p>In the same manner, a user might change the base font size to fit their needs. A person with low vision would want to choose a larger size, while someone with an excellent vision can go smaller to gain real estate on their screens.</p>
+
+
+
+<p>It’s all about proportions: we define how much larger or smaller parts of the content should be by leveraging the default base to set the main text size.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  /* Do not set a font-size on a :root, body nor html level */
+  /* Let your main text size be decided by the browser or the user settings */ 
+}
+.small {
+  font-size: .8rem;
+}
+.large {
+  font-size: 2rem;
+}</code></pre>
+
+
+
+<h4>What about headings?</h4>
+
+
+
+<p>Since headings create a document outline that helps screenreaders navigate a document, we aren’t defining type selectors for heading sizes. <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html">Heading order is a WCAG criteria</a>: the heading elements should be organized in descending order without skipping a level, meaning that an <code>h4</code> should come right after an <code>h3</code>.</p>
+
+
+
+<p>Sometimes resetting the font sizing of all headings to <code>1rem</code> is a good strategy to make the separation of the visual treatment from the meaning mandatory.</p>
+
+
+
+<h3>How can we work with pixels?</h3>
+
+
+
+<p>Both <code>rem</code> or <code>em</code> sizing is relative to something else. For example, <code>rem</code> &nbsp;calculates size relative to the <code>&lt;html&gt;</code> &nbsp;element, where <code>em</code> is calculated by the sizing of its own element. It can be confusing, particularly since many of us came up working exclusively in pixels.</p>
+
+
+
+<p>So, how can we still think in pixels but implement relative units?</p>
+
+
+
+<p>More often than not, a typographical hierarchy is designed in pixels. Since we know about user agent stylesheets and that all major browsers have a default font size of <code>16px</code>, we can set that size for the main text and calculate the rest proportionately with <code>rem</code> units.</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Browser Name</th><th>Base Font Size</th></tr></thead><tbody><tr><td>Chrome v80.0</td><td>16px</td></tr><tr><td>FireFox v74.0</td><td>16px</td></tr><tr><td>Safari v13.0.4</td><td>16px</td></tr><tr><td>Edge v80.0 (Chromium based)</td><td>16px</td></tr><tr><td>Android (Samsung, Chrome, Firefox)</td><td>16px</td></tr><tr><td>Safari iOS</td><td>16px</td></tr><tr><td>Kindle Touch</td><td>26px (renders as 16px since it’s a high density screen)</td></tr></tbody></table></figure>
+
+
+
+<p>Now let&#8217;s explore three methods for using relative sizing in CSS by converting those pixels to rem units.</p>
+
+
+
+<h4>Method 1: The 62.5% rule</h4>
+
+
+
+<p>In order to seamlessly convert pixels to rem, we can set the root sizing to <code>62.5%</code>. That means <code>1rem</code> equals <code>10px</code>:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+  --font-size--small: 1.4rem; /* 14px */
+  --font-size--default: 1.6rem; /* 16px */
+  --font-size--large: 2.4rem; /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 2: Using the <code>calc()</code> function</h4>
+
+
+
+<p>We can also calculate sizes with CSS <code>calc()</code> by dividing the pixel value by the font base we assume most browsers have:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --font-size--small: calc((14/16) * 1rem); /* 14px */
+  --font-size--default: calc((16/16) * 1rem); /* 16px */
+  --font-size--large: calc((24/16) * 1rem); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<h4>Method 3: Using a “pixel-to-rem” function</h4>
+
+
+
+<p>Similar to <code>calc()</code> , we can leverage a preprocessor to create a “pixel-to-rem” function. There are implementations of this in many flavors, including <a href="https://css-tricks.com/snippets/css/less-mixin-for-rem-font-sizing/">this Sass mixin</a> and<a href="https://polished.js.org/docs/%23rem"> styled-components polish</a>.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">:root {
+  --font-size--small: prem(14); /* 14px */
+  --font-size--default: prem(16); /* 16px */
+  --font-size--large: prem(24); /* 24px */
+}
+ 
+.font-size--small {
+  font-size: var(--font-size--small);
+}
+
+.font-size--default {
+  font-size: var(--font-size--default);
+}
+
+.font-size--large {
+  font-size: var(--font-size--large);
+}</code></pre>
+
+
+
+<p>It’s even possible to create a &#8220;pixel-to-rem&#8221; function with vanilla CSS:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Is it possible to create a &quot;Pixel to rem&quot; function without using a preprocessor? Yes!<br><br>✨See it in action!<a href="https://t.co/kPfIMxO0vw">https://t.co/kPfIMxO0vw</a><br><br>cc/ <a href="https://twitter.com/srambach?ref_src=twsrc%5Etfw">@srambach</a> <a href="https://twitter.com/matthewcarleton?ref_src=twsrc%5Etfw">@matthewcarleton</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/DontDoIt?src=hash&amp;ref_src=twsrc%5Etfw">#DontDoIt</a> <a href="https://t.co/PKxE7QCWuO">pic.twitter.com/PKxE7QCWuO</a></p>&mdash; Andres Galante (@andresgalante) <a href="https://twitter.com/andresgalante/status/1234903369774440448?ref_src=twsrc%5Etfw">March 3, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<h3>Embrace a diverse web!</h3>
+
+
+
+<p>The bottom line is this: we don’t have control over how content is consumed. Users have personal browser settings, the ability to zoom in and out, and various other ways to customize their reading experience. But we do have best CSS best practices we can use to maintain a good user experience alongside those preferences:</p>
+
+
+
+<ul><li>Work with proportions instead of explicit sizes.</li><li>Rely on default browser font sizes instead of setting it on the <code>:root</code>, <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>.</li><li>Use <code>rem</code> units to help scale content with a user’s personal preferences.</li><li>Avoid making assumptions and let the environment decide how your content is being consumed.</li></ul>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p class="has-small-font-size">Special thanks to <a href="https://twitter.com/FranCorreaSosa" class="ek-link">Franco Correa</a> for all the help writing this post.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-font-sizing-explained/">Accessible Font Sizing, Explained</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/accessible-font-sizing-explained/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306222</post-id>	</item>
+		<item>
+		<title>The Contrast Triangle</title>
+		<link>https://chipcullen.com/the-contrast-triangle/</link>
+					<comments>https://css-tricks.com/the-contrast-triangle/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 20 Apr 2020 22:15:39 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[high-contrast]]></category>
+		<category><![CDATA[links]]></category>
+		<category><![CDATA[text]]></category>
+		<category><![CDATA[underlines]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307032</guid>
+
+					<description><![CDATA[<p><a href="https://chipcullen.com/the-contrast-triangle/">Chip Cullen</a>:</p>
+<blockquote class="wp-block-quote">
+<p>Let’s say you’re building a site, and you’re working with a designer. They come to you with some solid designs, and you’re ready to go. You’re also a conscientious front end developer and you like to make sure the sites you build are accessible. The designs you’re working from have some body copy, but you notice that the links inside the body copy are missing underlines.</p>
+<p>You are now in&#160;<strong><a href="https://contrast-triangle.com/">The Contrast Triangle</a></strong>.</p>
+</blockquote>
+<p>The &#8220;triangle&#8221; meaning &#8230; <a href="https://css-tricks.com/the-contrast-triangle/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Contrast Triangle&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-contrast-triangle/">The Contrast Triangle</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://chipcullen.com/the-contrast-triangle/">Chip Cullen</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Let’s say you’re building a site, and you’re working with a designer. They come to you with some solid designs, and you’re ready to go. You’re also a conscientious front end developer and you like to make sure the sites you build are accessible. The designs you’re working from have some body copy, but you notice that the links inside the body copy are missing underlines.</p><p>You are now in&nbsp;<strong><a href="https://contrast-triangle.com/">The Contrast Triangle</a></strong>.</p></blockquote>
+
+
+
+<span id="more-307032"></span>
+
+
+
+<p>The &#8220;triangle&#8221; meaning a three-sided comparison:</p>
+
+
+
+<ul><li>The contrast between the <strong>background and text</strong></li><li>The contrast between the <strong>background and links</strong></li><li>the contrast between <strong>text and links</strong></li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?fit=1024%2C477&amp;ssl=1" alt="" class="wp-image-307033" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?w=2084&amp;ssl=1 2084w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=300%2C140&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=1024%2C477&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=768%2C357&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=1536%2C715&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=2048%2C953&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-17-at-9.55.58-AM.png?resize=1000%2C465&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>I would think this matters whether you underline links or not, but I take the point that without underlines the problem is worse.</p>
+
+
+
+<p>I&#8217;d also argue the problem is even <em>more</em> complicated. You&#8217;ve also got to consider the text when it is selected, and make sure everything has contrast when that is the case too. And the hover states, active states, visited states, and focus states. So it&#8217;s really like hexacontakaienneagon of contrast or something.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?fit=1024%2C458&amp;ssl=1" alt="" class="wp-image-307035" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?w=1144&amp;ssl=1 1144w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?resize=300%2C134&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?resize=1024%2C458&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?resize=768%2C344&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/link-rabbit-hole.png?resize=1000%2C448&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p></p>
+<p><a href="https://chipcullen.com/the-contrast-triangle/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/the-contrast-triangle/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/the-contrast-triangle/">The Contrast Triangle</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-contrast-triangle/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">307032</post-id>	</item>
+		<item>
+		<title>The WebAIM Million—Updated</title>
+		<link>http://www.webaxe.org/the-webaim-million-updated/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 08 Apr 2020 14:53:15 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306501</guid>
+
+					<description><![CDATA[<p>This report made a big splash last year. It&#8217;s a large chunk of research that shows just how terribly the web does with accessibility. It&#8217;s been updated this year and (drumroll&#8230;) we got a little worse. I&#8217;ll use <a href="http://www.webaxe.org/the-webaim-million-updated/">their</a> blockquote:</p>
+<blockquote class="wp-block-quote">
+<p>The number of errors increased 2.1% between February 2019 and February 2020.</p>
+</blockquote>
+<p>From the choir:</p>
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true">
+<p lang="en" dir="ltr">Over the last year websites got **checks notes** LESS accessible?!?1 Jesus, my dudes. <a href="https://t.co/zvwb2wQxsH">https://t.co/zvwb2wQxsH</a></p>
+<p>&#8212; Dave Rupert (@davatron5000) <a href="https://twitter.com/davatron5000/status/1247179071890640896?ref_src=twsrc%5Etfw">April 6, 2020</a></p></blockquote>
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true">
+<p lang="en" dir="ltr">“56% of the 3.4 </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/the-webaim-million-updated/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The WebAIM Million—Updated&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-webaim-million-updated/">The WebAIM Million—Updated</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>This report made a big splash last year. It&#8217;s a large chunk of research that shows just how terribly the web does with accessibility. It&#8217;s been updated this year and (drumroll&#8230;) we got a little worse. I&#8217;ll use <a href="http://www.webaxe.org/the-webaim-million-updated/">their</a> blockquote:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>The number of errors increased 2.1% between February 2019 and February 2020.</p></blockquote>
+
+
+
+<span id="more-306501"></span>
+
+
+
+<p>From the choir:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Over the last year websites got **checks notes** LESS accessible?!?1 Jesus, my dudes. <a href="https://t.co/zvwb2wQxsH">https://t.co/zvwb2wQxsH</a></p>&mdash; Dave Rupert (@davatron5000) <a href="https://twitter.com/davatron5000/status/1247179071890640896?ref_src=twsrc%5Etfw">April 6, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">“56% of the 3.4 million form inputs identified were unlabeled.”<br><br>aw come on</p>&mdash; Zach Leatherman (@zachleat) <a href="https://twitter.com/zachleat/status/1247238231277649923?ref_src=twsrc%5Etfw">April 6, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/notwaldorf/status/1247242609216458753
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Last year I wrote about <a href="https://twitter.com/webaim?ref_src=twsrc%5Etfw">@webaim</a>’s analysis of one million home pages, and how it painted an *incredibly* bleak picture of the web’s accessibility: <a href="https://t.co/yLG9poTSMf">https://t.co/yLG9poTSMf</a></p>&mdash; Ethan Marcotte (@beep) <a href="https://twitter.com/beep/status/1247180523090448386?ref_src=twsrc%5Etfw">April 6, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">the good news is that we&#39;re not facing any broad crises in which lots of vulnerable people are more reliant than usual on digita&#8211;<br><br>ahhhhhhhh fuck</p>&mdash; Actually, (@eaton) <a href="https://twitter.com/eaton/status/1247180982685483008?ref_src=twsrc%5Etfw">April 6, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/Accessibility?src=hash&amp;ref_src=twsrc%5Etfw">#Accessibility</a><br>The WebAIM report is out and it&#39;s apparently getting worse. Seriously, it&#39;s about time we start making the web more accessible, people rely now more than even on a lot of online services for security, health, information, etc.  <a href="https://t.co/7n0zxtUuyZ">https://t.co/7n0zxtUuyZ</a></p>&mdash; St�phanie W. (@WalterStephanie) <a href="https://twitter.com/WalterStephanie/status/1247422623392415746?ref_src=twsrc%5Etfw">April 7, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">Web accessibility is getting statistically worse. This is going to keep happening – and we’re going to keep being surprised about it – until we get honest about ableism. These cold, hard numbers are a human problem. <a href="https://t.co/gplKhUKQLy">https://t.co/gplKhUKQLy</a></p>&mdash; E.J. Mason (@codeability) <a href="https://twitter.com/codeability/status/1247424838232227840?ref_src=twsrc%5Etfw">April 7, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<p>Part of me thinks: it&#8217;s time for browsers to step up and auto-fix the things they can. But I also think that&#8217;s dangerous territory. AMP is a browser vendor&#8217;s version of &#8220;enough is enough&#8221; with poor web performance and I&#8217;m not loving how that&#8217;s turned out to date. That said, evangelism doesn&#8217;t seem to be working.</p>
+
+
+
+<p><em>You</em> can fix <em>your</em> site though. My favorite tool is <a href="https://www.deque.com/axe/">axe</a>. </p>
+<p><a href="http://www.webaxe.org/the-webaim-million-updated/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/the-webaim-million-updated/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/the-webaim-million-updated/">The WebAIM Million—Updated</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306501</post-id>	</item>
+		<item>
+		<title>Accessibility Links</title>
+		<link>https://css-tricks.com/accessibility-links/</link>
+					<comments>https://css-tricks.com/accessibility-links/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 02 Apr 2020 19:45:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305810</guid>
+
+					<description><![CDATA[<p>Austin Gil has kicked off <a href="https://stegosource.com/how-to-build-html-forms-right-semantics/">the first</a> in a five-part series about &#8220;HTML Forms Right&#8221; and to starts with semantics. It&#8217;s talking to the &#8220;we build our front-ends with JavaScript&#8221; crowd. The first block of code is an example of an Ajax form submission where the data submitted is gathered through the JavaScript API <code>FormData</code>.</p>
+<p>Why is that so vital? Well, no <code>&#60;form&#62;</code> tag, no <code>FormData</code>. Why else use a form (aside from the Enter-key submission):</p>
+<blockquote class="wp-block-quote">
+<p>“But Austin, </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/accessibility-links/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessibility Links&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessibility-links/">Accessibility Links</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Austin Gil has kicked off <a href="https://stegosource.com/how-to-build-html-forms-right-semantics/">the first</a> in a five-part series about &#8220;HTML Forms Right&#8221; and to starts with semantics. It&#8217;s talking to the &#8220;we build our front-ends with JavaScript&#8221; crowd. The first block of code is an example of an Ajax form submission where the data submitted is gathered through the JavaScript API <code>FormData</code>.</p>
+
+
+
+<span id="more-305810"></span>
+
+
+
+<p>Why is that so vital? Well, no <code>&lt;form&gt;</code> tag, no <code>FormData</code>. Why else use a form (aside from the Enter-key submission):</p>
+
+
+
+<blockquote class="wp-block-quote"><p>“But Austin, I’m building an&nbsp;<a href="https://en.wikipedia.org/wiki/Single-page_application">SPA</a>. Therefore if the user even sees the form, it means JavaScript MUST be enabled.” And you’d be right. Although, if it is an important form, you may want to consider supporting a no-JS world. The day may come that you want to implement SSR.</p></blockquote>
+
+
+
+<p>Server-Side Rendering (SSR) is going to get easier and easier to do as the benefits of it become more and more obvious. Google tells us a page that is client-side rendered has week-long-ish queue to get indexed and re-indexed on changes. Not to mention SSR is almost definitely going to be far faster to load.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Oscar Braunert&#8217;s <a href="https://www.ovl.design/text/inclusive-inputs/">Inclusive Inputs</a> is a nice follow-up read as it begins with form HTML that is <em>so close</em> to being right, but is painfully <em>not</em> right. (Hint: it&#8217;s missing the label/input connection). Then he gets into interesting patterns like how to accessibly mark up required fields and fields with errors. Like:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="form-group">
+  &lt;label for="password">
+    Password
+    &lt;span class="required" aria-hidden="true">*&lt;/span>
+    &lt;span class="sr-only">required&lt;/span>
+  &lt;/label>
+  &lt;input 
+    type="password"
+    id="password"
+    name="password"
+    aria-describedby="desc_pw"
+  >
+  &lt;p class="aside" id="desc_pw">Your password needs to have at least eight characters.&lt;/p>
+&lt;/div></code></pre>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Amber Wilson gets into <a href="https://amberwilson.co.uk/blog/accessible-html-elements/">Accessible HTML elements</a> with the twist of <em>avoiding</em> any ARIA usage at all:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>You may be aware that ARIA roles are often used with HTML elements. I haven&#8217;t written about them here, as it&#8217;s good to see how HTML written without ARIA can still be accessible.</p></blockquote>
+
+
+
+<p>Shout out to <code>&lt;dl&gt;</code>.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Sarah Higley <em>does</em> get into ARIA in <a href="https://sarahmhigley.com/writing/roles-and-relationships/">Roles and relationships</a>, but she warns us to be very careful upfront:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] a budding accessibility practitioner might find themselves experimenting with more serious roles like&nbsp;<code>menu</code>,&nbsp;<code>listbox</code>, or even&nbsp;<code>treegrid</code>. These are tantalizing, powerful patterns that allow you to create experiences that are not supported by only vanilla HTML. Unfortunately, they are also brittle; even small mistakes in using these roles can take a user on a very bad trip.<br><br>Talk to your kids about ARIA before it&#8217;s too late.</p></blockquote>
+
+
+
+<p>Ideally, don&#8217;t use ARIA at all. But if the accessibility is screwed up to the point it can&#8217;t be fixed at the DOM level, Sarah gets into some tricks. For example, one uses <code>role="presentation"</code> to essentially remove an element&#8217;s default role (when it is in the way).</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Speaking of ARIA and not using it unless you have to, one of the things you can do with ARIA is label controls. Adrian Roselli <a href="https://adrianroselli.com/2020/01/my-priority-of-methods-for-labeling-a-control.html">has thoughts</a> on how best to do that:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Here is the priority I follow when assigning an&nbsp;<a href="https://www.w3.org/TR/accname-1.1/#dfn-accessible-name">accessible name</a>&nbsp;to a control:</p><p>1. Native HTML techniques<br>2. <code>aria-labelledby</code>&nbsp;pointing at existing visible text<br>3. Visibly-hidden content that is still in the page<br>4. <code>aria-label</code></p></blockquote>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessibility-links/">Accessibility Links</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/accessibility-links/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305810</post-id>	</item>
+		<item>
+		<title>CSS Can Influence Screenreaders</title>
+		<link>https://blog.benmyers.dev/css-can-influence-screenreaders/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 23 Mar 2020 14:36:55 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[screen readers]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305359</guid>
+
+					<description><![CDATA[<p>Ben Myers covers some clear examples of where CSS totally changes what some screen readers announce. For example, some screenreader will see <code>text-transform: uppercase;</code> on a button label that says &#8220;Add&#8221; and read it like an abbreviation, &#8220;A.D.D.&#8221;</p>
+<blockquote class="wp-block-quote">
+<p>These cases of CSS messing with our screenreader announcements are initially shocking, perplexing, and maybe even appalling. After all, they seem to conflict with our mental model of CSS, one that&#8217;s likely been instilled in us since we started learning web development: </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/css-can-influence-screenreaders/" class="read-more">Read article <span class="screen-reader-text"> &#8220;CSS Can Influence Screenreaders&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-can-influence-screenreaders/">CSS Can Influence Screenreaders</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Ben Myers covers some clear examples of where CSS totally changes what some screen readers announce. For example, some screenreader will see <code>text-transform: uppercase;</code> on a button label that says &#8220;Add&#8221; and read it like an abbreviation, &#8220;A.D.D.&#8221;</p>
+
+
+
+<blockquote class="wp-block-quote"><p>These cases of CSS messing with our screenreader announcements are initially shocking, perplexing, and maybe even appalling. After all, they seem to conflict with our mental model of CSS, one that&#8217;s likely been instilled in us since we started learning web development: HTML is for content, and CSS is for visual appearance. It&#8217;s the separation of content and presentation. Here, by changing what screenreaders announce, it feels like CSS is encroaching on content territory.</p></blockquote>
+
+
+
+<p>All the more evidence that we have to actually test things. I tested that <a href="https://cdpn.io/chriscoyier/debug/bGdKWWZ">example</a> above in VoiceOver, and sure enough, &#8220;A.D.D.&#8221;</p>
+<p><a href="https://blog.benmyers.dev/css-can-influence-screenreaders/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/css-can-influence-screenreaders/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/css-can-influence-screenreaders/">CSS Can Influence Screenreaders</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305359</post-id>	</item>
+		<item>
+		<title>How to Create a “Skip to Content” Link</title>
+		<link>https://css-tricks.com/how-to-create-a-skip-to-content-link/</link>
+					<comments>https://css-tricks.com/how-to-create-a-skip-to-content-link/#comments</comments>
+		
+		<dc:creator><![CDATA[Paul Ryan]]></dc:creator>
+		<pubDate>Tue, 17 Mar 2020 14:54:56 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[:focus-within]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[hiding]]></category>
+		<category><![CDATA[links]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=304342</guid>
+
+					<description><![CDATA[<p>Skip links are little internal navigation links that help users move around a page. It’s possible you’ve never actually <em>seen</em> one before because they’re often hidden from view and used as an accessibility enhancement that lets keyboard users and screen readers jump from the top of the page to the content without have to go through other elements on the page first.</p>
+<p>In fact, you can find one right here on CSS-Tricks if you crack DevTools open.</p>
+<p>In my opinion, &#8230; <a href="https://css-tricks.com/how-to-create-a-skip-to-content-link/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Create a “Skip to Content” Link&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-a-skip-to-content-link/">How to Create a “Skip to Content” Link</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Skip links are little internal navigation links that help users move around a page. It’s possible you’ve never actually <em>seen</em> one before because they’re often hidden from view and used as an accessibility enhancement that lets keyboard users and screen readers jump from the top of the page to the content without have to go through other elements on the page first.</p>
+
+
+
+<p>In fact, you can find one right here on CSS-Tricks if you crack DevTools open.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/skip-01.png?ssl=1" alt="" class="wp-image-304345" data-recalc-dims="1"/></figure>
+
+
+
+<span id="more-304342"></span>
+
+
+
+<p>In my opinion, the best way to implement a skip link is to hide it and then bring it into view when it is focused. So, let’s say we have a link in the HTML:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;a class="skip-to-content-link" href="#main">
+  Skip to content
+&lt;/a></code></pre>
+
+
+
+<p>…we can give it an absolute position and translate it off the screen:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.skip-to-content-link {
+  left: 50%;
+  position: absolute;
+  transform: translateY(-100%);
+}</code></pre>
+
+
+
+<p>Then we can bring it back into view when it’s in focus and style it up a bit in the process:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.skip-to-content-link {
+  background: #e77e23;
+  height: 30px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(0%);
+}</code></pre>
+
+
+
+<p>This will hide our link until it is focused and then put it into view when it becomes focused.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_vYOXVOM" src="//codepen.io/anon/embed/vYOXVOM?height=400&amp;theme-id=1&amp;slug-hash=vYOXVOM&amp;default-tab=result" height="400" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed vYOXVOM" title="CodePen Embed vYOXVOM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Now, allow me to elaborate, starting with this quote from Miles Davis:</p>
+
+
+
+<blockquote class="wp-block-quote"><p><em>Time isn’t the main thing. It’s the only thing</em>.</p></blockquote>
+
+
+
+<p>As I sit down to write this article in a rainy Ireland, I think of the challenge that many users face as they use the web that I take for granted. We put so much thought into creating a great user experience without thinking of <em>all</em> our users and how to meet their needs. Admittedly, a skip link was something I had never heard of until completing a course on<a href="https://frontendmasters.com/courses/javascript-accessibility/"> Frontend Masters by Marcy Sutton</a>. Since learning the power and simplicity of using a skip link, I decided to make it my mission to spread more awareness — and what platform better than CSS-Tricks!</p>
+
+
+
+<p>A solution is an answer to a problem, so what’s the solution for helping keyboard users and screen readers find the content of a page quickly? In short, the solution is <em>time.</em> Giving users the ability to navigate to parts of our website that they are most interested in gives them the power to save valuable time.</p>
+
+
+
+<p>Take the <a href="https://news.sky.com/">Sky News</a> website as an example. It offers a “Skip to content” button that allows users to skip all the navigation items and jump straight to the main content.</p>
+
+
+
+<figure class="wp-block-video skip-video-margin"><video controls src="https://css-tricks.com/wp-content/uploads/2020/02/sky-news-skip-link-example.mp4"></video></figure>
+
+
+
+<p>You can see this button by navigating to the top of the page using your keyboard. &nbsp;This is similar to the implementation shown above. The link is always in the document but only becomes visible when it’s in focus.</p>
+
+
+
+<p>This is the type of skip link we are going to create together in this post.</p>
+
+
+
+<h3><strong>Our sample website</strong></h3>
+
+
+
+<p>I built a sample website that we will use to demonstrate a skip link.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mdJyaNX" src="//codepen.io/anon/embed/mdJyaNX?height=600&amp;theme-id=1&amp;slug-hash=mdJyaNX&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mdJyaNX" title="CodePen Embed mdJyaNX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The website has a number of navigation links but, in the interest of time, there are only two pages: the <strong>home page</strong> and the <strong>blog page</strong>. This is all we need to see how things work.</p>
+
+
+
+<h3>Identifying the problem</h3>
+
+
+
+<p>Here’s the navigation we’re working with:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/02/image_preview-12.png?ssl=1" alt="" class="wp-image-304346" data-recalc-dims="1"/></figure>
+
+
+
+<p>In total, we have eight navigation items that a keyboard user and screen reader must tab through before reaching the main content below the navigation.</p>
+
+
+
+<p>That’s the problem. The navigation may be irrelevant for the user. Perhaps the user was given a direct link to an article and they simply want to get to the content.</p>
+
+
+
+<p>This is a perfect use case for a skip link.</p>
+
+
+
+<h3>Creating the link</h3>
+
+
+
+<p>There are a couple of approaches to creating a Skip to content link. &nbsp;What I like to do is similar to the Sky News example, which is hiding the link until it is focused. &nbsp;That means we can drop the link at or near the top of the page, like inside the <code>&lt;header&gt;</code> element.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;header>
+  &lt;a class="skip-link" href='#main'>Skip to content&lt;/a>
+  &lt;!-- Navigation-->
+&lt;/header></code></pre>
+
+
+
+<p>This link has a <code>.skip-link</code> class so we can style it. The<code>href</code> attribute points to <code>#main</code>, which is the ID we will add to the <code>&lt;main&gt;</code> element that comes further down the page. That’s what the link will jump to when clicked.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;header>
+  &lt;a class="skip-link" href='#main'>Skip to content&lt;/a>
+  &lt;!-- Navigation-->
+&lt;/header>
+ 
+&lt;!-- Maybe some other stuff... -->
+ 
+&lt;main id="main">
+  &lt;!-- Content -->
+&lt;/main></code></pre>
+
+
+
+<p>Here’s what we have if we simply drop the link into the header with no styling.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jOPBQZw" src="//codepen.io/anon/embed/jOPBQZw?height=625&amp;theme-id=1&amp;slug-hash=jOPBQZw&amp;default-tab=result" height="625" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jOPBQZw" title="CodePen Embed jOPBQZw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This does not look great, but the functionality is there. Try navigating to the link with your keyboard and pressing Enter when it’s in focus.</p>
+
+
+
+<p>Now it’s time to make it look pretty. We must first fix the positioning and only show our skip link when it is in focus.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.skip-link {
+  background: #319795;
+  color: #fff;
+  font-weight: 700;
+  left: 50%;
+  padding: 4px;
+  position: absolute;
+  transform: translateY(-100%);
+}
+
+.skip-link:focus {
+  transform: translateY(0%);
+}</code></pre>
+
+
+
+<p>The magic here is in the <code>transform</code> property, which is hiding and showing our skip link depending on whether it is focused or not. Let’s make it look a little nicer with a quick transition on the <code>transform</code> property.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.skip-link {
+  /* Same as  before */
+  transition: transform 0.3s;
+}</code></pre>
+
+
+
+<p>It will now transition into view which makes that bit better.</p>
+
+
+
+<p>You should now (hopefully) have what I have below:</p>
+
+
+
+<figure class="wp-block-video skip-link-video-wrapper"><video controls src="https://css-tricks.com/wp-content/uploads/2020/02/my-site-skip-link-example.mp4"></video><figcaption><a href="https://cdpn.io/team/css-tricks/debug/OJVpazN">Live Demo</a></figcaption></figure>
+
+
+
+<p>As you can see, the skip link bypasses the navigation and jumps straight down to the <code>&lt;main&gt;</code> element when clicked.</p>
+
+
+
+<h3>It’s OK to use more than one link!</h3>
+
+
+
+<p>Right now, the link only serves one purpose and that is skip to the content of our website. But we don’t have to stop there.</p>
+
+
+
+<p>We can go even further and create a skip link that has more options, such as a way to jump to the footer of the site. As you might imagine, this is quite similar to what we’ve already done.</p>
+
+
+
+<p>Let’s make the blog page of the example site a little more usable by using multiple skip links. It’s common for blogs to use AJAX that loads in more posts when reaching the bottom of the page. This can make it very difficult to get to the footer of the website. That’s the problem we want to solve in this case.</p>
+
+
+
+<p>So let’s add a second link that bypasses all that auto-loading business and jumps the user straight to a <code>#footer</code> element on the page.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="skip-link" >
+  Skip to &lt;a href='#main'>content&lt;/a> or &lt;a href='#footer'>footer&lt;/a>
+&lt;/div></code></pre>
+
+
+
+<p>We also need to amend our CSS a little and use the <a href="https://css-tricks.com/almanac/selectors/f/focus-within/"><code>:focus-within</code></a> pseudo selector.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.skip-link {
+  transform: translateY(-100%);
+}
+
+.skip-link:focus-within {
+  transform: translateY(0%);
+}</code></pre>
+
+
+
+<p>This is saying if <em>anything</em> within our .skip-link element has focus, then we show it. Sadly, neither Internet Explorer nor Opera Mini support focus-within, but its coverage is pretty darn good and there is a <a href="https://github.com/matteobad/focus-within-polyfill">polyfill available</a>.</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”css-focus-within”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">60</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">52</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">79</span></td><td class="y yep" title="Safari - "><span class="caniuse-agents-version version">10.1</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">10.3</span></td></tr></table></div></div>
+
+
+
+<p>Last thing we need to do is make sure there&#8217;s an ID on our footer element so the link has something to jump to.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;footer id="footer"></code></pre>
+
+
+
+<p>Here&#8217;s what this gives us:</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/02/skip-to-footer-example.mp4"></video></figure>
+
+
+
+<p>If we wanted to go one step further (and I’d encourage it), we could style each link a little differently so users can distinguish between the two. Both links in this example are plain white which works great for a single button that does a single thing, but it’d be clearer that we’re dealing with two links if they were presented differently.</p>
+
+
+
+<h3>Jumping to conclusions</h3>
+
+
+
+<p>Are you using skip links on your site? Or, if not, does this convince you to use one? I hope it’s clear that skip links are a great value add when it comes to the accessibility of a site. While it’s not a silver bullet that solves every accessibility need, it does solve some use cases that make for a much more polished user experience.</p>
+
+
+
+<p>Here are some prominent sites that are using this or a similar technique:</p>
+
+
+
+<ul><li><a href="https://www.amazon.com/">Amazon</a></li><li><a href="https://www.chase.com/">Chase</a></li><li><a href="https://www.google.com/search?q=css">Google</a> (not a skip link, but a link to leave accessibility feedback)</li><li><a href="https://www.target.com/">Target</a></li><li><a href="https://www.nytimes.com/">The New York Times</a></li><li><a href="https://www.zillow.com/">Zillow</a></li></ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-a-skip-to-content-link/">How to Create a “Skip to Content” Link</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-create-a-skip-to-content-link/feed/</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/02/sky-news-skip-link-example.mp4" length="71743" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/02/my-site-skip-link-example.mp4" length="189457" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/02/skip-to-footer-example.mp4" length="374803" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">304342</post-id>	</item>
+	</channel>
+</rss>

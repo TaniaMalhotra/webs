@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>flip &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/flip/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 16 Jun 2020 14:40:06 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Everything You Need to Know About FLIP Animations in React</title>
+		<link>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/</link>
+					<comments>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/#respond</comments>
+		
+		<dc:creator><![CDATA[Kirill Vasiltsov]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2020 14:40:04 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[flip]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[web animation api]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312119</guid>
+
+					<description><![CDATA[<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &#160;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+<p>One of &#8230; <a href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Everything You Need to Know About FLIP Animations in React&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &nbsp;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+
+
+
+<p>One of the most efficient <em>approaches</em> to animation is <a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">FLIP</a>. FLIP requires a bit of JavaScript to do its thing.&nbsp;</p>
+
+
+
+<p>Let’s take a look at the intersection of using the WAAPI, FLIP, and integrating all that into React. But we’ll start without React first, then get to that.</p>
+
+
+
+<span id="more-312119"></span>
+
+
+
+<h3>FLIP and WAAPI</h3>
+
+
+
+<p><a href="https://aerotwist.com/blog/flip-your-animations/">FLIP animations</a> are made much easier by the WAAPI!</p>
+
+
+
+<p><strong>Quick refresher on FLIP:</strong> The big idea is that you position the element <em>where you want it to end up first</em>. Next, apply transforms to move it to the starting position. Then unapply those transforms.&nbsp;</p>
+
+
+
+<p>Animating transforms is super efficient, thus FLIP is super efficient. Before WAAPI, we had to directly manipulate element’s styles to set transforms and wait for the next frame to unset/invert it:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// FLIP Before the WAAPI
+el.style.transform = `translateY(200px)`;
+ 
+requestAnimationFrame(() => {
+  el.style.transform = '';
+});</code></pre>
+
+
+
+<p>A lot of libraries are built upon this approach. &nbsp;However, there are several problems with this:</p>
+
+
+
+<ul><li>Everything feels like a huge hack.</li><li>It is extremely difficult to reverse the FLIP animation. While CSS transforms are reversed “for free” once a class is removed, this is not the case here. Starting a new FLIP while a previous one is running can cause glitches. Reversing requires parsing a transform matrix with <code>getComputedStyles</code> and using it to calculate the current dimensions before setting a new animation.</li><li>Advanced animations are close to impossible. For example, to prevent distorting a scaled parent’s children, we need to have access to current scale value each frame. This can only be done by parsing the transform matrix.</li><li>There’s lots of browser gotchas. For example, <a href="https://github.com/joshwcomeau/react-flip-move/blob/12f58727d38ac33cefb0fe20c91d5d7e19485a3c/src/FlipMove.js#L420">sometimes</a> getting a FLIP animation to work flawlessly in Firefox requires calling <code>requestAnimationFrame</code> twice:</li></ul>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    el.style.transform = '';
+  });
+});</code></pre>
+
+
+
+<p>We get none of these problems when WAAPI is used. Reversing can be painlessly done with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Animation/reverse">the <code>reverse</code>&nbsp;function</a>.The counter-scaling of children <a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">is also possible</a>. And when there is a bug, it is easy to pinpoint the exact culprit since we’re only working with simple functions, like <code>animate</code>&nbsp;and <code>reverse</code>, rather than combing through things like the <code>requestAnimationFrame</code> approach.&nbsp;</p>
+
+
+
+<p>Here’s the outline of the WAAPI version:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">el.classList.toggle('someclass');
+const keyframes = /* Calculate the size/position diff */;
+el.animate(keyframes, 2000);</code></pre>
+
+
+
+<h3>FLIP and React</h3>
+
+
+
+<p>To understand how FLIP animations work in React, it is important to know <em>how</em> and, most importantly, <em>why</em> they work in plain JavaScript. Recall the anatomy of a FLIP animation:</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=299%2C723&#038;ssl=1" alt="Diagram. Cache current site and position, make a style change, get new size and position, calculate the difference, set transforms, and cancel transforms. Each item has a purple background, except the last one, indicating they happen before paint." class="wp-image-312120" width="299" height="723" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?w=398&amp;ssl=1 398w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=124%2C300&amp;ssl=1 124w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Everything that has a purple background needs to happen before the “paint” step of rendering. Otherwise, we would see a flash of new styles for a moment which is not good. Things get a little bit more complicated in React since all DOM updates are done for us.</p>
+
+
+
+<p>The magic of FLIP animations is that an element is transformed <em>before</em> the browser has a chance to paint. So how do we know the “before paint” moment in React?</p>
+
+
+
+<p>Meet <a href="https://reactjs.org/docs/hooks-reference.html%23uselayouteffect">the <code>useLayoutEffect</code> hook</a>. If you even wondered what is for… this is it! Anything we pass in this callback happens synchronously <em>after</em> DOM updates but <em>before</em> paint. In other words, this is a great place to set up a FLIP!</p>
+
+
+
+<p>Let us do something the FLIP technique is very good for: <strong>animating the DOM position.</strong> There’s nothing CSS can do if we want to animate how an element moves from one DOM position to another. (Imagine completing a task in a to-do list and moving it to the list of “completed” tasks like when you click on items in the Pen below.)</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mdeYMdX" src="//codepen.io/anon/embed/mdeYMdX?height=450&amp;theme-id=1&amp;slug-hash=mdeYMdX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mdeYMdX" title="CodePen Embed mdeYMdX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let&#8217;s look at the simplest example. Clicking on any of the two squares in the following Pen makes them swap positions. Without FLIP, it would happen instantly.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNjaMrK" src="//codepen.io/anon/embed/oNjaMrK?height=450&amp;theme-id=1&amp;slug-hash=oNjaMrK&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNjaMrK" title="CodePen Embed oNjaMrK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s a lot going on there. Notice how all work happens inside lifecycle hook callbacks: <code>useEffect</code> and <code>useLayoutEffect</code>. What makes it a little bit confusing is that the timeline of our FLIP animation is not obvious from code alone since it happens across <strong>two</strong> React renders. Here’s the anatomy of a React FLIP animation to show the different order of operations:</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?fit=1024%2C1024&amp;ssl=1" alt="Diagram. Cache the size and position, retrieve previous size and position from cache, get new size and position, calculate the difference, and play the animation." class="wp-image-312122" width="768" height="767" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?w=1229&amp;ssl=1 1229w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1024%2C1024&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=150%2C150&amp;ssl=1 150w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=768%2C767&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1000%2C999&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=100%2C100&amp;ssl=1 100w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Although <code>useEffect</code> always runs after <code>useLayoutEffect</code> and after browser paint, it is important that we cache the element&#8217;s position and size after the first render. We won’t get a chance to do it on second render because <code>useLayoutEffect</code> is run after all DOM updates. But the procedure is essentially the same as with vanilla FLIP animations.</p>
+
+
+
+<h3>Caveats</h3>
+
+
+
+<p>Like most things, there are some caveats to consider when working with FLIP in React.</p>
+
+
+
+<h4>Keep it under 100ms</h4>
+
+
+
+<p>A FLIP animation is calculation. Calculation takes time and before you can show that smooth 60fps transform you need to do quite some work. People won’t notice a delay if it is under 100ms, so make sure everything is below that. The Performance tab in DevTools is a good place to check that.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?fit=1024%2C275&amp;ssl=1" alt="" class="wp-image-312123" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?w=2129&amp;ssl=1 2129w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=300%2C81&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1024%2C275&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=768%2C206&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1536%2C413&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=2048%2C550&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1000%2C269&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h4>Unnecessary renders</h4>
+
+
+
+<p>We can’t use useState for caching size, positions and animation objects because every <code>setState</code> will cause an unnecessary render and slow down the app. It can even cause bugs in the worst of cases. Try using <code>useRef</code> instead and think of it as an object that can be mutated without rendering anything.</p>
+
+
+
+<h4>Layout thrashing</h4>
+
+
+
+<p>Avoid repeatedly triggering browser layout. In the context of FLIP animations, that means avoid looping through elements and reading their position with <code>getBoundingClientRect</code>, then immediately animating them with animate. Batch “reads” and “writes” whenever possible. This will allow for extremely smooth animations.</p>
+
+
+
+<h4>Animation canceling</h4>
+
+
+
+<p>Try randomly clicking on the squares in <a href="https://codepen.io/jlkiri/pen/oNjaMrK">the earlier demo</a> while they move, then again after they stop. You will see glitches. In real life, users will interact with elements while they move, so it’s worth making sure they are canceled, paused, and updated smoothly.&nbsp;</p>
+
+
+
+<p>However, not all animations can be reversed with <code>reverse</code>. Sometimes, we want them to stop and then move to a new position (like when randomly shuffling a list of elements). In this case, we need to:</p>
+
+
+
+<ul><li>obtain a size/position of a moving element</li><li>finish the current animation</li><li>calculate the new size and position differences</li><li>start a new animation</li></ul>
+
+
+
+<p>In React, this can be harder than it seems. I wasted a lot of time struggling with it. The current animation object must be cached. A good way to do it is to create a <code>Map</code> so to get the animation by an ID. Then, we need to obtain the size and position of the moving element. There are two ways to do it:</p>
+
+
+
+<ol><li><strong>Use a function component:</strong> Simply loop through every animated element right in the body of the function and cache the current positions.</li><li><strong>Use a class component:</strong> Use the <a href="https://reactjs.org/docs/react-component.html%23getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate</code></a> lifecycle method.</li></ol>
+
+
+
+<p>In fact, official React docs recommend using <code>getSnapshotBeforeUpdate</code> “because there may be delays between the “render” phase lifecycles (like <code>render</code>) and “commit” phase lifecycles (like <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>).” However, there is no hook counterpart of this method yet. I found that using the body of the function component is fine enough.</p>
+
+
+
+<h4>Don’t fight the browser</h4>
+
+
+
+<p>I’ve said it before, but avoid fighting the browser and try to make things happen the way the browser would do it. If we need to animate a simple size change, then consider whether CSS would suffice (e.g. &nbsp;<code>transform: scale()</code>) . I’ve found that FLIP animations are used best where browsers really can’t help:</p>
+
+
+
+<ul><li>Animating DOM position change (as we did above)</li><li>Sharing layout animations</li></ul>
+
+
+
+<p>The second is a more complicated version of the first. There are two DOM elements that act and look as one changing its position (while another is unmounted/hidden). This tricks enables some cool animations. For example, this animation is made with a library I built called <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a> that uses this approach:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wvKbeqy" src="//codepen.io/anon/embed/wvKbeqy?height=450&amp;theme-id=1&amp;slug-hash=wvKbeqy&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wvKbeqy" title="CodePen Embed wvKbeqy" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h4>Libraries</h4>
+
+
+
+<p>There are quite a few libraries that make FLIP animations in React easier and abstract the boilerplate. Ones that are currently maintained actively include: <a href="https://github.com/aholachek/react-flip-toolkit"><code>react-flip-toolkit</code></a> and mine, <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a>.</p>
+
+
+
+<p>If you do not mind something heavier but capable of more general animations, <a href="https://www.framer.com/motion/">check out <code>framer-motion</code></a>. It also does cool shared layout animations! <a href="https://css-tricks.com/video-screencasts/176-working-with-framer-motion/">There is a video</a> digging into that library.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Resources and references</h3>
+
+
+
+<ul><li><a href="https://joshwcomeau.com/react/animating-the-unanimatable/">Animating the Unanimatable</a> by Josh W. Comeau</li><li><a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">Build performant expand &amp; collapse animation</a>s by Paul Lewis and Stephen McGruer</li><li><a href="https://inventingwithmonster.io/20200409-inside-magic-motion/">The Magic Inside Magic Motion</a> by Matt Perry</li><li><a href="https://twitter.com/keyframers/status/1255510937014018050">Using animate CSS variables from JavaScript</a>, tweeted by @keyframers</li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3/#inner_workings_of_a_renderer_process">Inside look at modern web browser (part 3)</a> by Mariko Kosaka</li><li><a href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/">Building a Complex UI Animation in React, Simply</a> by Alex Holachek</li><li><a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">Animating Layouts with the FLIP Technique</a> by David Khourshid</li><li><a href="https://dev.to/jlkiri/smooth-animations-with-react-hooks-again-51a4">Smooth animations with React Hooks, again</a> by Kirill Vasiltsov&nbsp;</li><li><a href="https://blog.jayantbhawal.in/shared-element-transitions-with-react-hooks/">Shared element transition with React Hooks</a> by Jayant Bhawal</li></ul>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312119</post-id>	</item>
+		<item>
+		<title>Animating Layouts with the FLIP Technique</title>
+		<link>https://css-tricks.com/animating-layouts-with-the-flip-technique/</link>
+					<comments>https://css-tricks.com/animating-layouts-with-the-flip-technique/#comments</comments>
+		
+		<dc:creator><![CDATA[David Khourshid]]></dc:creator>
+		<pubDate>Mon, 27 Nov 2017 23:41:31 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[flip]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[waapi]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=262801</guid>
+
+					<description><![CDATA[<p>User interfaces are most effective when they are intuitive and easily understandable to the user. Animation plays a major role in this &#8211; as <a href="https://uxplanet.org/functional-animation-in-ux-design-what-makes-a-good-transition-d6e7b4344e5e">Nick Babich said, animation brings user interfaces to life</a>. However, adding meaningful transitions and micro-interactions is often an afterthought, or something that is &#8220;nice to have&#8221; if time permits. All too often, we experience web apps that simply &#8220;jump&#8221; from view to view without giving the user time to process what just happened in the &#8230; <a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Animating Layouts with the FLIP Technique&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">Animating Layouts with the FLIP Technique</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>User interfaces are most effective when they are intuitive and easily understandable to the user. Animation plays a major role in this &#8211; as <a href="https://uxplanet.org/functional-animation-in-ux-design-what-makes-a-good-transition-d6e7b4344e5e">Nick Babich said, animation brings user interfaces to life</a>. However, adding meaningful transitions and micro-interactions is often an afterthought, or something that is &#8220;nice to have&#8221; if time permits. All too often, we experience web apps that simply &#8220;jump&#8221; from view to view without giving the user time to process what just happened in the current context.</p>
+<p><span id="more-262801"></span></p>
+<p>This leads to unintuitive user experiences, but we can do better, by avoiding &#8220;jump cuts&#8221; and &#8220;teleportation&#8221; in creating UIs. After all, what&#8217;s more natural than real life, where nothing teleports (except maybe car keys), and everything you interact with moves with natural motion?</p>
+<p>In this article, we&#8217;ll explore a technique called &#8220;FLIP&#8221; that can be used to animate the positions and dimensions of any DOM element in a performant manner, regardless of how their layout is calculated or rendered (e.g., height, width, floats, absolute positioning, transform, flexbox, grid, etc.)</p>
+<h3>Why the FLIP technique?</h3>
+<p>Have you ever tried to animate <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, or any other properties besides <code>transform</code> and <code>opacity</code>? You might have noticed that the animations look a bit <em>janky</em>, and there&#8217;s a reason for that. When any property that triggers layout changes (such as <code>height</code>), the browser has to recursively check if any other element&#8217;s layout has changed as a result, and that can be expensive. If that calculation takes longer than one animation frame (around 16.7 milliseconds), then the animation frame will be skipped, resulting in &#8220;jank&#8221; since that frame wasn&#8217;t rendered in time. In Paul Lewis&#8217; article <a href="https://aerotwist.com/blog/pixels-are-expensive/">&#8220;Pixels are Expensive&#8221;</a>, he goes further in depth at how pixels are rendered and the various performance expenses.</p>
+<p>In short, our goal is to be short &#8211; we want to calculate the least amount of style changes necessary, as quickly as possible. The key to this is only animating <code>transform</code> and <code>opacity</code>, and FLIP explains how we can simulate layout changes using only <code>transform</code>.</p>
+<h3>What is FLIP?</h3>
+<p>FLIP is a mnemonic device and technique <a href="https://aerotwist.com/blog/flip-your-animations/">first coined by Paul Lewis</a>, which stands for <strong>F</strong>irst, <strong>L</strong>ast, <strong>I</strong>nvert, <strong>P</strong>lay. His article contains an excellent explanation of the technique, but I&#8217;ll outline it here:</p>
+<ul>
+<li><strong>First:</strong> before anything happens, record the current (i.e., first) position and dimensions of the element that will transition. You can use <code>element.getBoundingClientRect()</code> for this, as will be shown below.</li>
+<li><strong>Last:</strong> execute the code that causes the transition to instantaneously happen, and record the final (i.e., last) position and dimensions of the element.*</li>
+<li><strong>Invert:</strong> since the element is in the last position, we want to create the illusion that it&#8217;s in the first position, by using <code>transform</code> to modify its position and dimensions. This takes a little math, but it&#8217;s not too difficult.</li>
+<li><strong>Play:</strong> with the element inverted (and pretending to be in the first position), we can move it back to its last position by setting its <code>transform</code> to <code>none</code>.</li>
+</ul>
+<p>Below is how these steps can be implemented with the Web Animations API:</p>
+<pre rel="JavaScript"><code class="language-javascript">const elm = document.querySelector('.some-element');
+
+// First: get the current bounds
+const first = elm.getBoundingClientRect();
+
+// execute the script that causes layout change
+doSomething();
+
+// Last: get the final bounds
+const last = elm.getBoundingClientRect();
+
+// Invert: determine the delta between the 
+// first and last bounds to invert the element
+const deltaX = first.left - last.left;
+const deltaY = first.top - last.top;
+const deltaW = first.width / last.width;
+const deltaH = first.height / last.height;
+
+// Play: animate the final element from its first bounds
+// to its last bounds (which is no transform)
+elm.animate([{
+  transformOrigin: 'top left',
+  transform: `
+    translate(${deltaX}px, ${deltaY}px)
+    scale(${deltaW}, ${deltaH})
+  `
+}, {
+  transformOrigin: 'top left',
+  transform: 'none'
+}], {
+  duration: 300,
+  easing: 'ease-in-out',
+  fill: 'both'
+});</code></pre>
+<p><strong>Note:</strong> At the time of writing, the Web Animations API is not yet supported in all browsers. However, you can <a href="https://github.com/web-animations/web-animations-js">use a polyfill</a>.</p>
+<p data-height="419" style="height: 419px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="EbwrQQ" data-default-tab="result" data-user="davidkpiano" data-embed-version="2" data-pen-title="How the FLIP technique works" class="codepen">See the Pen <a href="https://codepen.io/davidkpiano/pen/EbwrQQ/">How the FLIP technique works</a> by David Khourshid (<a href="https://codepen.io/davidkpiano">@davidkpiano</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>There are two important things to note:</p>
+<ol>
+<li>If the element&#8217;s size changed, you can transform <code>scale</code> in order to &#8220;resize&#8221; it with no performance penalty; however, make sure to set <code>transformOrigin</code> to <code>'top left'</code> since that&#8217;s where we based our delta calculations.</li>
+<li>We&#8217;re using the <a href="https://css-tricks.com/lets-talk-about-the-web-animations-api/">Web Animations API</a> to animate the element here, but you&#8217;re free to use any other animation engine, such as GSAP, Anime, Velocity, Just-Animate, Mo.js and more.</li>
+</ol>
+<h3>Shared Element Transitions</h3>
+<p>One common use-case for transitioning an element between app views and states is that the final element might not be the same DOM element as the initial element. In Android, this is similar to a <a href="https://developer.android.com/training/material/animations.html">shared element transition</a>, except that the element isn&#8217;t &#8220;recycled&#8221; from view to view in the DOM as it is on Android.<br />
+Nevertheless, we can still achieve the FLIP transition with a little <s>magic</s> illusion:</p>
+<pre rel="JavaScript"><code class="language-javascript">const firstElm = document.querySelector('.first-element');
+
+// First: get the bounds and then hide the element (if necessary)
+const first = firstElm.getBoundingClientRect();
+firstElm.style.setProperty('visibility', 'hidden');
+
+// execute the script that causes view change
+doSomething();
+
+// Last: get the bounds of the element that just appeared
+const lastElm = document.querySelector('.last-element');
+const last = lastElm.getBoundingClientRect();
+
+// continue with the other steps, just as before.
+// remember: you're animating the lastElm, not the firstElm.</code></pre>
+<p>Below is an example of how two completely disparate elements can appear to be the same element using shared element transitions. Click one of the pictures to see the effect.</p>
+<p data-height="370" style="height: 370px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="305a618d4dd75cbe8423183c70d6a43e" data-default-tab="result" data-user="davidkpiano" data-embed-version="2" data-pen-title="FLIP example with WAAPI" class="codepen">See the Pen <a href="https://codepen.io/davidkpiano/pen/305a618d4dd75cbe8423183c70d6a43e/">FLIP example with WAAPI</a> by David Khourshid (<a href="https://codepen.io/davidkpiano">@davidkpiano</a>) on <a href="https://codepen.io">CodePen</a>.<br />
+<script async="" src="https://production-assets.codepen.io/assets/embed/ei.js"></script></p>
+<h3>Parent-Child Transitions</h3>
+<p>With the previous implementations, the element bounds are based on the <code>window</code>. For most use cases, this is fine, but consider this scenario:</p>
+<ul>
+<li>An element changes position and needs to transition.</li>
+<li>That element contains a child element, which itself needs to transition to a different position inside the parent.</li>
+</ul>
+<p>Since the previously calculated bounds are relative to the <code>window</code>, our calculations for the child element are going to be off. To solve this, we need to ensure that the bounds are calculated relative to the parent element instead:</p>
+<pre rel="JavaScript"><code class="language-javascript">const parentElm = document.querySelector('.parent');
+const childElm = document.querySelector('.parent &amp;gt; .child');
+
+// First: parent and child
+const parentFirst = parentElm.getBoundingClientRect();
+const childFirst = childElm.getBoundingClientRect();
+
+doSomething();
+
+// Last: parent and child
+const parentLast = parentElm.getBoundingClientRect();
+const childLast = childElm.getBoundingClientRect();
+
+// Invert: parent
+const parentDeltaX = parentFirst.left - parentLast.left;
+const parentDeltaY = parentFirst.top - parentLast.top;
+
+// Invert: child relative to parent
+const childDeltaX = (childFirst.left - parentFirst.left)
+  - (childLast.left - parentLast.left);
+const childDeltaY = (childFirst.top - parentFirst.top)
+  - (childLast.top - parentLast.top);
+  
+// Play: using the WAAPI
+parentElm.animate([
+  { transform: `translate(${parentDeltaX}px, ${parentDeltaY}px)` },
+  { transform: 'none' }
+], { duration: 300, easing: 'ease-in-out' });
+
+childElm.animate([
+  { transform: `translate(${childDeltaX}px, ${childDeltaY}px)` },
+  { transform: 'none' }
+], { duration: 300, easing: 'ease-in-out' });</code></pre>
+<p>A few things to note here, as well:</p>
+<ol>
+<li>The timing options for the parent and child (<code>duration</code>, <code>easing</code>, etc.) do <em>not</em> necessarily need to match with this technique. Feel free to be creative!</li>
+<li>Changing dimensions in parent and/or child (<code>width</code>, <code>height</code>) was purposefully omitted in this example, since it is an advanced and complex topic. Let&#8217;s save that for another tutorial.</li>
+<li>You can combine the shared element and parent-child techniques for greater flexibility.</li>
+</ol>
+<h3>Using Flipping.js for Full Flexibility</h3>
+<p>The above techniques might seem straightforward, but they can get quite tedious to code once you have to keep track of multiple elements transitioning. Android eases this burden by:</p>
+<ul>
+<li>baking shared element transitions into the core SDK</li>
+<li>allowing developers to identify which elements are shared by using a common <code>android:transitionName</code> XML attribute</li>
+</ul>
+<p>I&#8217;ve created a small library called <a href="https://github.com/davidkpiano/flipping">Flipping.js</a> with the same idea in mind. By adding a <code>data-flip-key="..."</code> attribute to HTML elements, it&#8217;s possible to predictably and efficiently keep track of elements that might change position and dimensions from state to state.</p>
+<p>For example, consider this initial view:</p>
+<pre rel="HTML"><code class="language-html">    &lt;section class="gallery"&gt;
+
+&lt;div class="photo-1" data-flip-key="photo-1"&gt;
+        &lt;img src="/photo-1"&gt;
+&lt;/div&gt;
+
+
+&lt;div class="photo-2" data-flip-key="photo-2"&gt;
+        &lt;img src="/photo-2"&gt;
+&lt;/div&gt;
+
+
+&lt;div class="photo-3" data-flip-key="photo-3"&gt;
+        &lt;img src="/photo-3"&gt;
+&lt;/div&gt;
+
+    &lt;/section&gt;</code></pre>
+<p>And this separate detail view:</p>
+<pre rel="HTML"><code class="language-html">    &lt;section class="details"&gt;
+
+&lt;div class="photo" data-flip-key="photo-1"&gt;
+        &lt;img src="/photo-1"&gt;
+&lt;/div&gt;
+
+      
+        Lorem ipsum dolor sit amet...
+      
+    
+&lt;/section&gt;</code></pre>
+<p>Notice in the above example that there are 2 elements with the same <code>data-flip-key="photo-1"</code>. Flipping.js tracks the &#8220;active&#8221; element by choosing the first element that meet these criteria:</p>
+<ul>
+<li>The element exists in the DOM (i.e., it hasn&#8217;t been removed or detached)</li>
+<li>The element is not hidden (hint: <code>elm.getBoundingClientRect()</code> will have <code>{ width: 0, height: 0 }</code> for hidden elements)</li>
+<li>Any custom logic specified in the <code>selectActive</code> option.</li>
+</ul>
+<h3>Getting Started with Flipping.js</h3>
+<p>There&#8217;s a few different packages for Flipping, depending on your needs:</p>
+<ul>
+<li><code>flipping.js</code>: tiny and low-level; only emits events when element bounds change</li>
+<li><code>flipping.web.js</code>: uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API" title="Web Animations API">WAAPI</a> to animate transitions</li>
+<li><code>flipping.gsap.js</code>: uses <a href="https://greensock.com" title="GreenSock Animation Platform">GSAP</a> to animate transitions</li>
+<li><em>More adapters coming soon!</em></li>
+</ul>
+<p>You can grab the minified code directly from unpkg:</p>
+<ul>
+<li><a href="https://unpkg.com/flipping@latest/dist/flipping.js">https://unpkg.com/flipping@latest/dist/flipping.js</a></li>
+<li><a href="https://unpkg.com/flipping@latest/dist/flipping.web.js">https://unpkg.com/flipping@latest/dist/flipping.web.js</a></li>
+<li><a href="https://unpkg.com/flipping@latest/dist/flipping.gsap.js">https://unpkg.com/flipping@latest/dist/flipping.gsap.js</a></li>
+</ul>
+<p>Or you can <code>npm install flipping --save</code> and import it into your projects:</p>
+<pre rel="JavaScript"><code class="language-javascript">// import not necessary when including the unpkg scripts in a &lt;script src="..."&gt; tag
+import Flipping from 'flipping/adapters/web';
+
+const flipping = new Flipping();
+
+// First: let Flipping read all initial bounds
+flipping.read();
+
+// execute the change that causes any elements to change bounds
+doSomething();
+
+// Last, Invert, Play: the flip() method does it all
+flipping.flip();</code></pre>
+<p>Handling FLIP transitions as a result of a function call is such a common pattern, that the <code>.wrap(fn)</code> method transparently wraps (or &#8220;decorates&#8221;) the given function by first calling <code>.read()</code>, then getting the return value of the function, then calling <code>.flip()</code>, then returning the return value. This leads to much less code:</p>
+<pre rel="JavaScript"><code class="language-javascript">const flipping = new Flipping();
+
+const flippingDoSomething = flipping.wrap(doSomething);
+
+// anytime this is called, FLIP will animate changed elements
+flippingDoSomething();</code></pre>
+<p>Here is an example of using <code>flipping.wrap()</code> to easily achieve the shifting letters effect. Click anywhere to see the effect.</p>
+<p data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="RjaBpW" data-default-tab="result" data-user="davidkpiano" data-embed-version="2" data-pen-title="Flipping Birthstones #Codevember" class="codepen">See the Pen <a href="https://codepen.io/davidkpiano/pen/RjaBpW/">Flipping Birthstones #Codevember</a> by David Khourshid (<a href="https://codepen.io/davidkpiano">@davidkpiano</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>Adding Flipping.js to Existing Projects</h3>
+<p>In <a href="https://css-tricks.com/robust-react-user-interfaces-with-finite-state-machines/">another article</a>, we created a simple React gallery app using finite state machines. It works just as expected, but the UI could use some smooth transitions between states to prevent &#8220;jumping&#8221; and improve the user experience. Let&#8217;s add Flipping.js into our React app to accomplish this. (Keep in mind, Flipping.js is framework-agnostic.)</p>
+<h4>Step 1: Initialize Flipping.js</h4>
+<p>The <code>Flipping</code> instance will live on the React component itself, so that it&#8217;s isolated to only changes that occur within that component. Initialize Flipping.js by setting it up in the <code>componentDidMount</code> lifecycle hook:</p>
+<pre rel="JavaScript"><code class="language-javascript">  componentDidMount() {
+    const { node } = this;
+    if (!node) return;
+    
+    this.flipping = new Flipping({
+      parentElement: node
+    });
+    
+    // initialize flipping with the initial bounds
+    this.flipping.read();
+  }</code></pre>
+<p>By specifying <code>parentElement: node</code>, we&#8217;re telling Flipping to only look for elements with a <code>data-flip-key</code> in the rendered <code>App</code>, instead of the entire document.<br />
+Then, modify the HTML elements with the <code>data-flip-key</code> attribute (similar to React&#8217;s <code>key</code> prop) to identify unique and &#8220;shared&#8221; elements:</p>
+<pre rel="JavaScript"><code class="language-javascript">  renderGallery(state) {
+    return (
+      &lt;section className="ui-items" data-state={state}&gt;
+        {this.state.items.map((item, i) =&gt;
+          &lt;img
+            src={item.media.m}
+            className="ui-item"
+            style={{'--i': i}}
+            key={item.link}
+            onClick={() =&gt; this.transition({
+              type: 'SELECT_PHOTO', item
+            })}
+            data-flip-key={item.link}
+          /&gt;
+        )}
+      &lt;/section&gt;
+    );
+  }
+  renderPhoto(state) {
+    if (state !== 'photo') return;
+    
+    return (
+      &lt;section
+        className="ui-photo-detail"
+        onClick={() =&gt; this.transition({ type: 'EXIT_PHOTO' })}&gt;
+        &lt;img
+          src={this.state.photo.media.m}
+          className="ui-photo"
+          data-flip-key={this.state.photo.link}
+        /&gt;
+      &lt;/section&gt;
+    )
+  }</code></pre>
+<p>Notice how the <code>img.ui-item</code> and <code>img.ui-photo</code> are represented by <code>data-flip-key={item.link}</code> and <code>data-flip-key={this.state.photo.link}</code> respectively: when the user clicks on an <code>img.ui-item</code>, that <code>item</code> is set to <code>this.state.photo</code>, so the <code>.link</code> values will be equal.</p>
+<p>And since they are equal, Flipping will smoothly transition from the <code>img.ui-item</code> thumbnail to the larger <code>img.ui-photo</code>.</p>
+<p>Now we need to do two more things:</p>
+<ol>
+<li>call <code>this.flipping.read()</code> whenever the component <em>will</em> update</li>
+<li>call <code>this.flipping.flip()</code> whenever the component <em>did</em> update</li>
+</ol>
+<p>Some of you might have already guessed where these method calls are going to occur: <code>componentWillUpdate</code> and </code>componentDidUpdate</code>, respectively:</p>
+<pre rel="JavaScript"><code class="language-javascript">  componentWillUpdate() {
+    this.flipping.read();
+  }
+  
+  componentDidUpdate() {
+    this.flipping.flip();
+  }</code></pre>
+<p>And, just like that, if you&#8217;re using a Flipping adapter (such as <code>flipping.web.js</code> or <code>flipping.gsap.js</code>), Flipping will keep track of all elements with a <code>[data-flip-key]</code> and smoothly transition them to their new bounds whenever they change. Here is the final result:</p>
+<p data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-slug-hash="xPVJwm" data-default-tab="result" data-user="davidkpiano" data-embed-version="2" data-pen-title="FLIPping Gallery App" class="codepen">See the Pen <a href="https://codepen.io/davidkpiano/pen/xPVJwm/">FLIPping Gallery App</a> by David Khourshid (<a href="https://codepen.io/davidkpiano">@davidkpiano</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p>If you would rather implement custom animations yourself, you can use <code>flipping.js</code> as a simple event emitter. <a href="https://github.com/davidkpiano/flipping">Read the documentation</a> for more advanced use-cases.</p>
+<p>Flipping.js and its adapters handle the shared element and parent-child transitions by default, as well as:</p>
+<ul>
+<li>interrupted transitions (in adapters)</li>
+<li>enter/move/leave states</li>
+<li>plugin support for plugins such as <code>mirror</code>, which allows newly entered elements to &#8220;mirror&#8221; another element&#8217;s movement</li>
+<li>and more planned in the future!</li>
+</ul>
+<h3>Resources</h3>
+<p>Similar libraries include:</p>
+<ul>
+<li><a href="https://github.com/googlearchive/flipjs">FlipJS</a> by Paul Lewis himself, which handles simple single-element FLIP transitions</li>
+<li><a href="https://github.com/joshwcomeau/react-flip-move/">React-Flip-Move</a>, a useful React library by Josh Comeau</li>
+<li><a href="http://barbajs.org/">BarbaJS</a>, not necessarily a FLIP library, but one that allows you to add smooth transitions between different URLs, without page jumps.</li>
+</ul>
+<p>Further resources:</p>
+<ul>
+<li><a href="https://medium.com/developers-writing/animating-the-unanimatable-1346a5aab3cd#.n7k4kcs11">Animating the Unanimatable &#8211; Joshua Comeau</a></li>
+<li><a href="https://aerotwist.com/blog/flip-your-animations/">FLIP your Animations &#8211; Paul Lewis</a></li>
+<li><a href="https://aerotwist.com/blog/pixels-are-expensive/">Pixels are Expensive &#8211; Paul Lewis</a></li>
+<li><a href="https://www.smashingmagazine.com/2016/07/improving-user-flow-through-page-transitions/">Improving User Flow Through Page Transitions &#8211; Luigi de Rosa</a></li>
+<li><a href="https://www.smashingmagazine.com/2013/10/smart-transitions-in-user-experience-design/">Smart Transitions in User Experience Design &#8211; Adrian Zumbrunnen</a></li>
+<li><a href="https://uxplanet.org/functional-animation-in-ux-design-what-makes-a-good-transition-d6e7b4344e5e#.t0usjdtlu">What Makes a Good Transition? &#8211; Nick Babich</a></li>
+<li><a href="https://material.google.com/motion/material-motion.html">Motion Guidelines in Google&#8217;s Material Design</a></li>
+<li><a href="https://medium.freecodecamp.org/shared-element-transition-with-react-native-159f8bc37f50">Shared Element Transition with React Native</a></li>
+</ul>
+<p></script></code></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">Animating Layouts with the FLIP Technique</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/animating-layouts-with-the-flip-technique/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">262801</post-id>	</item>
+		<item>
+		<title>Flip an Image</title>
+		<link>https://css-tricks.com/snippets/css/flip-an-image/</link>
+					<comments>https://css-tricks.com/snippets/css/flip-an-image/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 18 May 2010 13:48:20 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[flip]]></category>
+		<category><![CDATA[transform]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?page_id=6406</guid>
+
+					<description><![CDATA[<p>You can flip images with CSS! Possible scenario: having only one graphic for an &#8220;arrow&#8221;, but flipping it around to point in different directions.</p>
+<pre rel="CSS"><code class="language-css">.flip-horizontally {
+  transform: scaleX(-1);
+}</code></pre>
+<p>See how one arrow is used to point both directions here:</p>
+<p class="codepen" data-height="284" style="height: 284px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="default" data-default-tab="html,result" data-user="css-tricks" data-slug-hash="oNXNpjL" style="height: 284px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flip an Image">
+  See the Pen <a href="https://codepen.io/team/css-tricks/pen/oNXNpjL"><br />
+  Flip an Image</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.
+</p>
+<p>Rotation is another possibility, meaning our one arrow could go lots of directions:</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="default" data-default-tab="html,result" data-user="css-tricks" data-slug-hash="jOPOYqQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flip an Image">
+  See the Pen <a href="https://codepen.io/team/css-tricks/pen/jOPOYqQ"><br />
+  Flip an Image</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>&#8230; <a href="https://css-tricks.com/snippets/css/flip-an-image/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Flip an Image&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/snippets/css/flip-an-image/">Flip an Image</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>You can flip images with CSS! Possible scenario: having only one graphic for an &#8220;arrow&#8221;, but flipping it around to point in different directions.</p>
+<pre rel="CSS"><code class="language-css">.flip-horizontally {
+  transform: scaleX(-1);
+}</code></pre>
+<p>See how one arrow is used to point both directions here:</p>
+<p class="codepen" data-height="284" style="height: 284px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="default" data-default-tab="html,result" data-user="css-tricks" data-slug-hash="oNXNpjL" style="height: 284px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flip an Image">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/oNXNpjL"><br />
+  Flip an Image</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Rotation is another possibility, meaning our one arrow could go lots of directions:</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="default" data-default-tab="html,result" data-user="css-tricks" data-slug-hash="jOPOYqQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flip an Image">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/jOPOYqQ"><br />
+  Flip an Image</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>This is <em>any</em> image too, or really any element at all. </p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="default" data-default-tab="html,result" data-user="css-tricks" data-slug-hash="abObEmO" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flip an Image">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/abObEmO"><br />
+  Flip an Image</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Old Vendor Prefixes</h3>
+<p>For posterity:</p>
+<pre rel="CSS"><code class="language-css">img {
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}</code></pre>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/snippets/css/flip-an-image/">Flip an Image</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/snippets/css/flip-an-image/feed/</wfw:commentRss>
+			<slash:comments>75</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">6406</post-id>	</item>
+	</channel>
+</rss>

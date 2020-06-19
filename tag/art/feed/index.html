@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>art &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/art/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 18 Jun 2020 01:08:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Advice for Complex CSS Illustrations</title>
+		<link>https://css-tricks.com/advice-for-complex-css-illustrations/</link>
+					<comments>https://css-tricks.com/advice-for-complex-css-illustrations/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2020 19:14:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312636</guid>
+
+					<description><![CDATA[<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I &#8230; <a href="https://css-tricks.com/advice-for-complex-css-illustrations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Advice for Complex CSS Illustrations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+
+
+
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I told you that you were only a few properties and techniques away from creating anything you wanted? The truth is that you are indeed that close.</p>
+
+
+
+<span id="more-312636"></span>
+
+
+
+<p>I&#8217;ve been wanting to compose an article like this for some time, but it&#8217;s a hard topic to cover because there are so many possibilities and so many techniques that there’s often more than one way to accomplish the same thing. The same is true with CSS illustrations. There&#8217;s no right or wrong way to do it. We&#8217;re all using the same canvas. There are simply so many different tools to get those pixels on the page.</p>
+
+
+
+<p>While there is no &#8220;one size fits all&#8221; approach to CSS illustration, what I can offer is a set of techniques that might help you on your journey.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mLaXRe" src="//codepen.io/anon/embed/mLaXRe?height=500&amp;theme-id=1&amp;slug-hash=mLaXRe&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mLaXRe" title="CodePen Embed mLaXRe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Time and practice</h3>
+
+
+
+<p>CSS illustration takes lots of time and practice. The more accurate you want to be and the more complicated the illustration, the longer it&#8217;s going to take. The time-consuming part isn’t usually deciding on <em>which</em> properties to use and how, but the <em>tinkering</em> of getting things to look right. <strong>Be prepared to get very familiar with the <a href="https://developers.google.com/web/tools/chrome-devtools/css">styles inspector</a> in your browser dev tools!</strong> I also recommend trying out <a href="https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc?hl=en">VisBug</a> if you haven&#8217;t.</p>
+
+
+
+<p>Two fantastic CSS artists are Ben Evans and Diana Smith. Both have recently talked about time consumption when referring to CSS illustration.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?ssl=1" alt="Screenshot of a realistic looking woman gazing up with her hards across her chest." class="wp-image-312637" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?w=2050&amp;ssl=1 2050w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=300%2C278&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1024%2C950&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=768%2C713&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1536%2C1425&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=2048%2C1900&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1000%2C928&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Diana’s PureCSS Gaze took her two long weekends to complete. She talks about some of her techniques here and here. &#8220;If you have the time, patience, and drive, it is certainly possible,&#8221; she <a href="https://www.vice.com/en_us/article/9kgx7p/painting-made-with-code-html-pure-css-browser-art-diana-smith">says</a>.</figcaption></figure>
+
+
+
+<p>I posted a meme-like picture about a cup and <a href="https://twitter.com/ivorjetski/status/1259893362129350658">Ben’s response</a> summed things up perfectly:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>I  was tempted to create this in CSS when I first saw the tweet but then thought my reply would take about a month.</p></blockquote>
+
+
+
+<p>It takes time!</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/jh3yy/status/1259487385554911233
+</div></figure>
+
+
+
+<h3>Tracing is perfectly acceptable</h3>
+
+
+
+<p>We often have an idea of what it is that we want to illustrate. This article isn&#8217;t about design, after all.; it&#8217;s about taking an image and rendering it with the DOM and CSS. I&#8217;m pretty sure this technique has been around since the dawn of time. But, it&#8217;s one I&#8217;ve been <a href="https://twitter.com/jh3yy/status/1258130582841757700">sharing</a> the last few months.</p>
+
+
+
+<ul><li>Find or create an image of what it is you want to illustrate.</li><li>Pull it into your HTML with an <code>&lt;img&gt;</code> tag.</li><li>Position it in a way that it will sit underneath your illustration.</li><li>Reduce the image opacity so that it&#8217;s still visible but not too overpowering.</li><li>Trace it with the DOM.</li></ul>
+
+
+
+<p>To my surprise, this technique <a href="https://twitter.com/therealpaulcook/status/1256283143587405824">isn&#8217;t common knowledge</a>. But it&#8217;s invaluable for creating accurate CSS illustrations.</p>
+
+
+
+<p>See this trick in action here:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#8217;s a timelapse of creating that CSS <a href="https://twitter.com/eggheadio?ref_src=twsrc%5Etfw">@eggheadio</a> &#x1f60e;<br><br>Tweaked the shadows with clip-path after &#x1f6e0;&#xfe0f;<br><br>&#x1f4bb; <a href="https://t.co/XhDRspwwFg">https://t.co/XhDRspwwFg</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/Timelapse?src=hash&amp;ref_src=twsrc%5Etfw">#Timelapse</a> <a href="https://t.co/ZQ1hyzcoSA">https://t.co/ZQ1hyzcoSA</a> <a href="https://t.co/iPf7ksYCGX">pic.twitter.com/iPf7ksYCGX</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1256281143244136448?ref_src=twsrc%5Etfw">May 1, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>And try it out here:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNVZR" src="//codepen.io/anon/embed/OJMNVZR?height=450&amp;theme-id=1&amp;slug-hash=OJMNVZR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNVZR" title="CodePen Embed OJMNVZR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Pay attention to responsiveness</h3>
+
+
+
+<p>If there are two takeaway techniques to take from this article, let it be the &#8220;Tracing&#8221; one above and this next one.&nbsp;</p>
+
+
+
+<p>There are some fantastic examples of CSS illustration out there. But the one unfortunate thing about some of them is that they aren&#8217;t styled — or even viewable — on small screens. We live in an age where first impressions with tech are important. Consider the example of a keyboard illustrated with CSS. Someone comes across your work, opens it up on their smartphone, and they&#8217;re greeted with only half the illustration or a small section of it. They probably missed the coolest parts of the demo!</p>
+
+
+
+<p>Here&#8217;s my trick: <strong>leverage viewport units for your illustrations and create your own scaled unit.&nbsp;</strong></p>
+
+
+
+<p>For sizing and positioning, you either have the option of using a scaled unit or percentage. This is particularly useful when you need to use a box shadow because the property accepts viewport units but not percentages.</p>
+
+
+
+<p>Consider the CSS egghead.io logo I created above. I found the image I wanted to use and popped it in the DOM with an img tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;image src='egghead.png'/></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">img {
+  height: 50vmin;
+  left: 50%;
+  opacity: 0.25;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>The height, 50vmin, is the desired size of the CSS illustration. The reduced opacity allows us to “trace” the illustration clearly as we progress.</p>
+
+
+
+<p>Then, we create our scaled unit.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/**
+  * image dimensions are 742 x 769
+  * width is 742
+  * height is 769
+  * my desired size is 50vmin
+*/
+:root {
+  --size: 50;
+  --unit: calc((var(--size) / 769) * 1vmin);
+}</code></pre>
+
+
+
+<p>With the image dimensions in place, we can create a uniform unit that’s going to scale with our image. We know the height is the largest unit, so we use that as a base to create a fractional unit.</p>
+
+
+
+<p>We get something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">--unit: 0.06501950585vmin;</code></pre>
+
+
+
+<p>That looks awkward but, trust me, it’s fine. We can use this to size our illustration’s container using <code>calc()</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.egg {
+  height: calc(769 * var(--unit));
+  position: relative;
+  width: calc(742 * var(--unit));
+  z-index: 2;
+}</code></pre>
+
+
+
+<p>If we use either percentages or our new <code>--unit</code> custom property to style elements within the container of our CSS illustration, we will get responsive CSS illustrations… and all it took was a few lines of math using CSS variables!</p>
+
+
+
+<p>Resize this demo and you’ll see that everything stay in proportion always using 50vmin as the sizing constraint.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOzYJZ" src="//codepen.io/anon/embed/rNOzYJZ?height=450&amp;theme-id=1&amp;slug-hash=rNOzYJZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOzYJZ" title="CodePen Embed rNOzYJZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Measure twice, cut once</h3>
+
+
+
+<p>Another tip is to measure things. Heck, you van even grab a tape measure if you’re working with a physical object!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_BaNGKPw" src="//codepen.io/anon/embed/BaNGKPw?height=450&amp;theme-id=1&amp;slug-hash=BaNGKPw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed BaNGKPw" title="CodePen Embed BaNGKPw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This may look a little funky but I measured this scene. It&#8217;s the TV combo unit I have in my lounge. Those measurements equate to centimeters. I used those to get a responsive unit based on the actual height of the TV. We can give that number — and all others — a name that makes it easy to remember what it’s for, thanks to custom properties.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --light-switch: 15;
+  --light-switch-border: 10;
+  --light-switch-top: 15;
+  --light-switch-bottom: 25;
+  --tv-bezel: 15;
+  --tv-unit-bezel: 4;
+  --desired-height: 25vmin;
+  --one-cm: calc(var(--desired-height) / var(--tv-height));
+  --tv-width: 158.1;
+  --tv-height: 89.4;
+  --unit-height: 42;
+  --unit-width: 180;
+  --unit-top: 78.7;
+  --tv-bottom: 114.3;
+  --scaled-tv-width: calc(var(--tv-width) * var(--one-cm));
+  --scaled-tv-height: calc(var(--tv-height) * var(--one-cm));
+  --scaled-unit-width: calc(var(--unit-width) * var(--one-cm));
+  --scaled-unit-height: calc(var(--unit-height) * var(--one-cm));
+}</code></pre>
+
+
+
+<p>As soon as we calculate a variable, we can use it everywhere. I know my TV is 158.1cm wide and 89.4cm tall. I checked the manual. But in my CSS illustration, it will always scale to 25vmin.</p>
+
+
+
+<h3>Use absolute positioning on all the things</h3>
+
+
+
+<p>This one will save you a few keystrokes. More often than not, you&#8217;ll be looking to absolutely position elements. Save yourself and put this rule somewhere.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Your class name may vary */
+.css-illustration *,
+.css-illustration *:after,
+.css-illustration *:before,
+.css-illustration:after,
+.css-illustration:before {
+  box-sizing: border-box;
+  position: absolute;
+}</code></pre>
+
+
+
+<p>Your keyboard will thank you!</p>
+
+
+
+<p class="explanation">Positioning is a tricky concept in CSS. You can <a href="https://css-tricks.com/almanac/properties/p/position/%23article-header-id-1">read up on it in the CSS Almanac</a> for more information on how to use it.</p>
+
+
+
+<p>Or, have a play with this little positioning playground:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pogyJbw" src="//codepen.io/anon/embed/pogyJbw?height=450&amp;theme-id=1&amp;slug-hash=pogyJbw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pogyJbw" title="CodePen Embed pogyJbw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Stick to an approach</h3>
+
+
+
+<p>This is by far the hardest thing to do. How do you approach a CSS illustration? Where do you even start? Should you start with the outermost part and work your way in? That doesn&#8217;t work so well.</p>
+
+
+
+<p>Odds are that you&#8217;ll try some approaches and find a better way to go about it. You’ll certainly do a little back-and-forth but, the more you practice, the better you&#8217;ll get at spotting patterns and developing an approach that works best for you.</p>
+
+
+
+<p>I tend to relate my approach to how you&#8217;d go about creating a vector image where illustrations are made up of layers. Split it up and sketch it on paper if you need to. But, start from the bottom and work your way up. This tends to mean larger shapes first, and finer details later. You can always tinker with the stacking index when you need to move elements around.</p>
+
+
+
+<h3>Maintain a solid structure for your styles</h3>
+
+
+
+<p>That leads us to the structure. Try to avoid a flat DOM structure for your illustration. Keeping things atomic makes it easier to move parts of your illustration. It will also makes it much easier to show and hide parts of the illustration or even animate them later. Consider the CSS Snorlax demo. The arms, feet, head, etc. are separate elements. That made animating the arm a lot easier than if I had tried to keep things together since I could simply apply the animation to the <code>.snorlax__arm-left</code> class.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLYXVJa" src="//codepen.io/anon/embed/yLYXVJa?height=450&amp;theme-id=1&amp;slug-hash=yLYXVJa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLYXVJa" title="CodePen Embed yLYXVJa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s a timelapse shot of me creating the demo:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Attempted to put together a timelapse of the CSS Snorlax we built last night &#x1f605;<br><br>Amusing watching it back!<br><br>&#x1f4bb; <a href="https://t.co/vbVYmFUN5V">https://t.co/vbVYmFUN5V</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a><a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://t.co/0mJtLPRQfP">pic.twitter.com/0mJtLPRQfP</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1255207715137339396?ref_src=twsrc%5Etfw">April 28, 2020</a></blockquote>
+
+
+
+<h3>Handling awkward shapes</h3>
+
+
+
+<p>There&#8217;s <a href="https://css-tricks.com/the-shapes-of-css/">a pretty good article</a> right here on CSS-Tricks for creating shapes with CSS. But what about more “awkward” shapes, like a long curve or even an outer curve? In these scenarios, we need to think outside the box. Properties such as <code>overflow</code>, <code>border-radius</code>, and <code>clip-path</code> are big helpers.</p>
+
+
+
+<p>Consider this CSS Jigglypuff demo. Toggle the checkbox.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOaVJMB" src="//codepen.io/anon/embed/gOaVJMB?height=450&amp;theme-id=1&amp;slug-hash=gOaVJMB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOaVJMB" title="CodePen Embed gOaVJMB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>That’s the key for creating curved shapes! We have an element much larger than the body with a <code>border-radius</code> applied. We then apply <code>overflow: hidden</code> to the body to cut that part off.</p>
+
+
+
+<p>How might we create an outer curve? This one’s a little tricky. But a trick I like to use is a transparent element with a thick border. Then apply a <code>border-radius</code> and clip the excess, if required.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEbgNKO" src="//codepen.io/anon/embed/ZEbgNKO?height=450&amp;theme-id=1&amp;slug-hash=ZEbgNKO&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEbgNKO" title="CodePen Embed ZEbgNKO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you hit the toggle, it reveals the element we are using to go across that corner. Another trick might be to overlay a circle that matches the background color. This is fine until we need to change the background color. It&#8217;s OK if you have a variable or something in place for that color. But, it could make things a little harder to maintain.</p>
+
+
+
+<h3><code>clip-path</code> is your friend</h3>
+
+
+
+<p>You might have noticed a couple of interesting CSS properties in that last demo, including clip-path. You&#8217;ll most likely need <a href="https://css-tricks.com/almanac/properties/c/clip-path/"><code>clip-path</code></a> if you want to create complex CSS shapes. It&#8217;s especially handy for cutting off bits of elements when hiding parent box overflow doesn’t do.</p>
+
+
+
+<p>Here’s a little demo I built some time ago that showcases different <code>clip-path</code> possibilities.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XqVQqa" src="//codepen.io/anon/embed/XqVQqa?height=450&amp;theme-id=1&amp;slug-hash=XqVQqa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XqVQqa" title="CodePen Embed XqVQqa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s also this demo that takes ideas from the <a href="https://css-tricks.com/the-shapes-of-css/">“Shapes of CSS”</a> article and re-created with <code>clip-path</code>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOpLBEa" src="//codepen.io/anon/embed/gOpLBEa?height=450&amp;theme-id=1&amp;slug-hash=gOpLBEa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOpLBEa" title="CodePen Embed gOpLBEa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><code>border-radius</code> is your other friend</h3>
+
+
+
+<p>You&#8217;re going to need <a href="https://css-tricks.com/almanac/properties/b/border-radius/"><code>border-radius</code></a> to create curves. One uncommon trick is to use a &#8220;double&#8221; syntax. This allows you to create a horizontal and vertical radius for each corner.</p>
+
+
+
+<p>Play with this demo to really appreciate the power of <code>border-radius</code>. I advocate using percentages across the board in order keep things responsive.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XWmvwYg" src="//codepen.io/anon/embed/XWmvwYg?height=450&amp;theme-id=1&amp;slug-hash=XWmvwYg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XWmvwYg" title="CodePen Embed XWmvwYg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Shading techniques</h3>
+
+
+
+<p>You&#8217;ve got all the shapes, everything is nicely laid out, and all the right colors are in place… but something still looks off. Odds are that it’s a lack of shading.</p>
+
+
+
+<p>Shading adds depth and create a realistic feel. Consider this ecreation of a Gal Shir illustration. Gal is fantastic at using shades and gradients to make beautiful illustrations. I thought it would be fun to do a recreate it and include a switch that toggles the shading to see just what a difference it makes.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNyVg" src="//codepen.io/anon/embed/OJMNyVg?height=450&amp;theme-id=1&amp;slug-hash=OJMNyVg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNyVg" title="CodePen Embed OJMNyVg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Shading effects are often created with a <code>box-shadow</code> and <code>background-image</code> combination.</p>
+
+
+
+<p>The key thing with these properties is that we can stack them in a comma-separated list. For example, the cauldron in the demo has a list of gradients that are being used across the body.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron {
+  background:
+    radial-gradient(25% 25% at 25% 55%, var(--rim-color), transparent),
+    radial-gradient(100% 100% at -2% 50%, transparent, transparent 92%, var(--cauldron-color)),
+    radial-gradient(100% 100% at -5% 50%, transparent, transparent 80%, var(--darkness)),
+    linear-gradient(310deg, var(--inner-rim-color) 25%, transparent), var(--cauldron-color);
+}</code></pre>
+
+
+
+<p>Note that <code>radial-gradient()</code> and a <code>linear-gradient()</code> are being used here and not always with perfectly round numeric values. Again, those numbers are just fine. In fact, you’ll spend a lot of time tweaking and tinkering with things in the style inspector.</p>
+
+
+
+<p>It’s generally the same working with <a href="https://css-tricks.com/snippets/css/css-box-shadow/"><code>box-shadow</code></a>. However, with that, we can also use the inset value to create tricky borders and additional depth.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron__opening {
+  box-shadow:
+    0 0px calc(var(--size) * 0.05px) calc(var(--size) * 0.005px) var(--rim-color) inset,
+    0 calc(var(--size) * 0.025px) 0 calc(var(--size) * 0.025px) var(--inner-rim-color) inset,
+    0 10px 20px 0px var(--darkness), 0 10px 20px -10px var(--inner-rim-color);
+}</code></pre>
+
+
+
+<p>There are certainly times where it will make more sense to go with <a href="https://css-tricks.com/almanac/properties/f/filter/"><code>filter: drop-shadow()</code></a> instead to get the effect you want.</p>
+
+
+
+<p>Lynn Fisher’s <a href="https://a.singlediv.com">a.singlediv.com</a> is a brilliant example of these properties in action. Have a poke around on that site and inspect some of the illustrations for great ways to use <code>box-shadow</code> and <code>background-image</code> in illustrations.</p>
+
+
+
+<p><code>box-shadow</code> is so powerful that you could create your entire illustration with it. I once joked about creating a CSS illustration of a dollar.</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In CSS right? &#x1f605;<a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://t.co/VmyeySsK83">https://t.co/VmyeySsK83</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1252924614281486336?ref_src=twsrc%5Etfw">April 22, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>I used a generator to <a href="https://codepen.io/jh3y/details/eYpBwgN">create the illustration with a single div</a>. But Alvaro Montoro <a href="https://dev.to/alvaromontoro/drawing-a-single-element-dollar-bill-with-css-and-javascript-3mj4">took it a little further</a> and wrote a generator that does it with box-shadow instead.</p>
+
+
+
+<h3>Preprocessors are super helpful</h3>
+
+
+
+<p>While they aren’t required, using preprocessors can help keep your code neat and tidy. For example, Pug makes writing HTML faster, especially when it comes to using loops for dealing with a bunch of repeating elements. From there, <a href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">we can scope CSS custom properties</a> in a way that we only need to define styles once, then overwrite them where needed.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xJXvjP" src="//codepen.io/anon/embed/xJXvjP?height=500&amp;theme-id=1&amp;slug-hash=xJXvjP&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xJXvjP" title="CodePen Embed xJXvjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s another example that demonstrates a DRY structure. The flowers are constructed with the same markup, but each has its own index class that is used to apply scoped CSS properties.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYpjXvj" src="//codepen.io/anon/embed/eYpjXvj?height=450&amp;theme-id=1&amp;slug-hash=eYpjXvj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYpjXvj" title="CodePen Embed eYpjXvj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The first flower has these properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--1 {
+  --hue: 190;
+  --x: 0;
+  --y: 0;
+  --size: 125;
+  --r: 0;
+}</code></pre>
+
+
+
+<p>It’s the first one, so all the others are based off it. Notice how the second flower is off to the right and up slightly. All that takes is assigning different values to the same custom properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--2 {
+  --hue: 320;
+  --x: 140;
+  --y: -75;
+  --size: 75;
+  --r: 40;
+}</code></pre>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Animated responsive CSS Leif features in the latest CodePen Spark! &#x2728;<br><br>For those who don&#8217;t know Animal Crossing, Leif is a green-thumbed Sloth who visits your island &#x1f33b;<br><br>Here&#8217;s a timelapse! &#x1f4f9;<br><br>&#x1f4bb; <a href="https://t.co/tkHX4nWXp7">https://t.co/tkHX4nWXp7</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://t.co/naJIrsSlYM">pic.twitter.com/naJIrsSlYM</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1262856791873945601?ref_src=twsrc%5Etfw">May 19, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<h3>That’s it!</h3>
+
+
+
+<p>Go forth, use these tips, come up with your own, share them, and share your CSS masterpieces! And hey, if you have your own advice, please share that too! This is definitely the sort of thing that is learned through lots of trial and error — what works for me may look different from what works for you and we can learn from those different approaches</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/advice-for-complex-css-illustrations/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312636</post-id>	</item>
+		<item>
+		<title>Diana Smith&#8217;s Pure CSS Artwork &#8220;Lace&#8221;</title>
+		<link>https://diana-adrianne.com/purecss-lace/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 08 Nov 2019 21:17:24 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[art]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298624</guid>
+
+					<description><![CDATA[<p><a href="https://diana-adrianne.com/">Diana</a> is at it again with her absolutely unbelievable CSS paintings. This latest one is called <a href="https://diana-adrianne.com/purecss-lace/">Lace</a>. Past paintings are <a href="https://diana-adrianne.com/purecss-francine/">Francine</a>, <a href="https://diana-adrianne.com/purecss-vignes/">Vignes</a>, and <a href="https://github.com/cyanharlow/purecss-zigario">Zigario</a>.</p>
+<p>Update December 2019: Ooooo and now <a href="https://github.com/cyanharlow/purecss-pink">purecss-pink</a>.</p>
+</p>
+<p>She wrote for us last year if you&#8217;d like <a href="https://css-tricks.com/solving-lifes-problems-with-css/">a little insight</a> into her thinking. </p>
+<p>Andy Baio looked at the painting in a <a href="https://waxy.org/2019/11/painting-with-pure-css/">variety of older and incompatible browsers</a>, and the results are hilarious and amazing.</p>
+<p>IE 8<br />
+Safari 13</p>
+<p><a href="https://diana-adrianne.com/purecss-lace/" title="Direct link to featured article">Direct Link to </a>&#8230; <a href="https://css-tricks.com/diana-smiths-pure-css-artwork-lace/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Diana Smith&#8217;s Pure CSS Artwork &#8220;Lace&#8221;&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/diana-smiths-pure-css-artwork-lace/">Diana Smith&#8217;s Pure CSS Artwork &#8220;Lace&#8221;</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://diana-adrianne.com/">Diana</a> is at it again with her absolutely unbelievable CSS paintings. This latest one is called <a href="https://diana-adrianne.com/purecss-lace/">Lace</a>. Past paintings are <a href="https://diana-adrianne.com/purecss-francine/">Francine</a>, <a href="https://diana-adrianne.com/purecss-vignes/">Vignes</a>, and <a href="https://github.com/cyanharlow/purecss-zigario">Zigario</a>.</p>
+<p>Update December 2019: Ooooo and now <a href="https://github.com/cyanharlow/purecss-pink">purecss-pink</a>.</p>
+<p><span id="more-298624"></span></p>
+<p>She wrote for us last year if you&#8217;d like <a href="https://css-tricks.com/solving-lifes-problems-with-css/">a little insight</a> into her thinking. </p>
+<p>Andy Baio looked at the painting in a <a href="https://waxy.org/2019/11/painting-with-pure-css/">variety of older and incompatible browsers</a>, and the results are hilarious and amazing.</p>
+<figure id="post-298628" class="align-none media-298628"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/11/image-4.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>IE 8</figcaption></figure>
+<figure id="post-298629" class="align-none media-298629"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/11/image-2.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Safari 13</figcaption></figure>
+<p><a href="https://diana-adrianne.com/purecss-lace/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/diana-smiths-pure-css-artwork-lace/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/diana-smiths-pure-css-artwork-lace/">Diana Smith&#8217;s Pure CSS Artwork &#8220;Lace&#8221;</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298624</post-id>	</item>
+		<item>
+		<title>Diana Smith&#8217;s Top 5 CSS Properties She Uses to Produce CSS Art</title>
+		<link>http://diana-adrianne.com/how/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 20 Feb 2019 21:04:07 +0000</pubDate>
+				<category><![CDATA[Interview]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[line drawing]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=282953</guid>
+
+					<description><![CDATA[<p>Have you seen <a href="http://diana-adrianne.com/">Diana Smith&#8217;s</a> CSS drawings? Stunning. These far transcend the CSS drawings that sort of crudely replicate a flat SVG scene, like I might attempt. We were lucky enough for her to <a href="https://css-tricks.com/solving-lifes-problems-with-css/">post some of her CSS drawing techniques</a> here last year.</p>
+<p>Well, Diana has also listed the top five CSS properties she uses to get these masterpieces done, and they are surprising in their plainness:</p>
+<ol>
+<li>border-radius</li>
+<li>box-shadow</li>
+<li>transform</li>
+<li>gradients</li>
+<li>overflow</li>
+</ol>
+<p>&#8230;but of course, layered in trickery!</p>
+</p>
+<blockquote>
+<p>&#8230; </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/diana-smiths-top-5-css-properties-she-uses-to-produce-css-art/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Diana Smith&#8217;s Top 5 CSS Properties She Uses to Produce CSS Art&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/diana-smiths-top-5-css-properties-she-uses-to-produce-css-art/">Diana Smith&#8217;s Top 5 CSS Properties She Uses to Produce CSS Art</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Have you seen <a href="http://diana-adrianne.com/">Diana Smith&#8217;s</a> CSS drawings? Stunning. These far transcend the CSS drawings that sort of crudely replicate a flat SVG scene, like I might attempt. We were lucky enough for her to <a href="https://css-tricks.com/solving-lifes-problems-with-css/">post some of her CSS drawing techniques</a> here last year.</p>
+<p>Well, Diana has also listed the top five CSS properties she uses to get these masterpieces done, and they are surprising in their plainness:</p>
+<ol>
+<li>border-radius</li>
+<li>box-shadow</li>
+<li>transform</li>
+<li>gradients</li>
+<li>overflow</li>
+</ol>
+<p>&#8230;but of course, layered in trickery!</p>
+<p><span id="more-282953"></span></p>
+<blockquote><p>&#8230; for custom rounded elements that are meant to mimic organic objects like faces, it is imperative that you become intimately familiar with all eight available parameters in the <code>border-radius</code> property.</p></blockquote>
+<p>Diana shows her famous <a href="https://github.com/cyanharlow/purecss-francine">Francine</a> drawing with each of the most used properties turned off:</p>
+<figure id="post-283121" class="align-none media-283121"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/noborderradius.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Without border-radius</figcaption></figure>
+<figure id="post-283123" class="align-none media-283123"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/notransform.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Without transform</figcaption></figure>
+<p>Be sure to check out this VICE interview she did as well. She covers gems like the fact that Francine was inspired by American Dad (lol) and that the cross-browser fallbacks are both a fascinating and interesting mess.</p>
+<p><iframe width="560" height="315" src="https://video.vice.com/en_ca/embed/5b9ad409be40775f7049ff9f" frameBorder="0" scrolling="no" allowfullscreen></iframe></p>
+<figure id="post-283124" class="align-none media-283124"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/02/american-dad.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p><a href="http://diana-adrianne.com/how/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/diana-smiths-top-5-css-properties-she-uses-to-produce-css-art/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/diana-smiths-top-5-css-properties-she-uses-to-produce-css-art/">Diana Smith&#8217;s Top 5 CSS Properties She Uses to Produce CSS Art</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">282953</post-id>	</item>
+		<item>
+		<title>Awesome Demos from 2018</title>
+		<link>https://tympanus.net/codrops/2018/12/27/awesome-demos-from-2018/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 01 Jan 2019 19:21:39 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[codepen]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=280709</guid>
+
+					<description><![CDATA[<p>This is an outstanding list of creative and artistic browser demos from this past year from Mary Lou at Codrops.</p>
+<p><a href="https://tympanus.net/codrops/2018/12/27/awesome-demos-from-2018/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/awesome-demos-from-2018/">Permalink</a>&#8230; <a href="https://css-tricks.com/awesome-demos-from-2018/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Awesome Demos from 2018&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/awesome-demos-from-2018/">Awesome Demos from 2018</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>This is an outstanding list of creative and artistic browser demos from this past year from Mary Lou at Codrops.</p>
+<p><a href="https://tympanus.net/codrops/2018/12/27/awesome-demos-from-2018/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/awesome-demos-from-2018/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/awesome-demos-from-2018/">Awesome Demos from 2018</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">280709</post-id>	</item>
+		<item>
+		<title>Solving Life’s Problems with CSS</title>
+		<link>https://css-tricks.com/solving-lifes-problems-with-css/</link>
+					<comments>https://css-tricks.com/solving-lifes-problems-with-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Diana Smith]]></dc:creator>
+		<pubDate>Mon, 28 May 2018 15:33:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[job titles]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=270825</guid>
+
+					<description><![CDATA[<p><strong>Or: When all you have is a CSS hammer, the world looks like a CSS nail.</strong></p>
+<p>Whenever I hear a perfectly nice comment like, <em>&#8220;Yeah, representing the <strong>tech</strong> field!&#8221;</em> in response to <a href="https://github.com/cyanharlow/purecss-francine">my pure-CSS art</a>, I get a sharp feeling of panic. </p>
+<p>Like many people who work on <abbr title="User Interfaces">UIs</abbr> for a living, I have difficulty applying the &#8220;tech&#8221; term to myself without feeling like a fraud. Impostor syndrome is a hard thing to shake. A front-end specialist? Oh, you &#8230; <a href="https://css-tricks.com/solving-lifes-problems-with-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Solving Life’s Problems with CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/solving-lifes-problems-with-css/">Solving Life’s Problems with CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Or: When all you have is a CSS hammer, the world looks like a CSS nail.</strong></p>
+<p>Whenever I hear a perfectly nice comment like, <em>&#8220;Yeah, representing the <strong>tech</strong> field!&#8221;</em> in response to <a href="https://github.com/cyanharlow/purecss-francine">my pure-CSS art</a>, I get a sharp feeling of panic. </p>
+<p>Like many people who work on <abbr title="User Interfaces">UIs</abbr> for a living, I have difficulty applying the &#8220;tech&#8221; term to myself without feeling like a fraud. Impostor syndrome is a hard thing to shake. A front-end specialist? Oh, you mean the stuff that <em>isn’t really code?</em> That amps up the feeling from <em>impostor</em> to <em>villain</em>.</p>
+<p>Even though 90% of my daily work revolves around JavaScript, I feel as if the &#8220;tech&#8221; label is a shiny trophy that I greedily snatched from someone more deserving. As if there are nameless, starving computer science grads out there and I’m stealing the ramen right out of their mouths.</p>
+<p><span id="more-270825"></span></p>
+<p>Take for example this scenario that computer-science schooled people are probably familiar with:</p>
+<blockquote>
+<p>
+      <strong>CS Course Problem:</strong> Write a script that sorts then randomizes this dataset N times, but for every 8th Q print 12 trees stacks queues void flip flop and you don’t stop rockin’ till returning the sum of the results 4x + 3y.</p>
+<p>
+    <strong>My proposal:</strong> (<em>12 hours and eight gallons of coffee later</em>) Done! Here are 1,200 lines of beautifully formatted code! There are forty-three loops, thirty-two if/else conditions, and eighty-three lines of comments because I keep getting lost in the file &mdash; but I’ve achieved the exact desired result!
+  </p>
+<p>
+    <strong>CS Course Answer:</strong> Use three lines of recursion.
+  </p>
+<p>
+    <strong>My response:</strong> &#8230;%#@&#038; you.
+  </p>
+</blockquote>
+<p>An exaggeration, but it’s helpful to be regularly humbled like that. It helps you grow as a programmer, problem-solver, and human. Plus, it prepares you for real-world scenarios in your career where you will regularly come across interesting challenges that require a bit of creative thinking.</p>
+<p>When it comes to the CSS side of things, no employer will ever ask you to produce a detailed painterly CSS art piece. If they do, you really should immediately report that as harassment to HR. But it <em>is</em> very common to have a small and sometimes unusual request. One that may not have an obvious solution right away. </p>
+<p>The &#8220;tech-free&#8221; CSS &mdash; with its glaring lack of programming functions &mdash; may not immediately come to mind when given such a challenge. But make no mistake, it can be one of the most valuable tools in your algorithm arsenal! For example:</p>
+<blockquote>
+<p>
+    <strong>CSS Course Problem:</strong> A disclaimer message needs to pop up into view as a warning when a user clicks a certain input field.
+  </p>
+<p>
+    <strong>Proposal:</strong> Piece of cake! We use our trusty friend JavaScript to trigger a click or focus event on the input element. Then we load the disclaimer template. Then we make an Ajax call for content. Once our <code>Promise()</code> is resolved, we append the element to the page and find where to insert it by way of finding the <code>event.target</code>’s parent element. After the disclaimer is loaded, we need to ensure that we’ve handled another click event on the actual disclaimer itself to toggle out of it. Once we’ve toggled out of it, we destroy the element.  If the input is clicked again, we repeat this process.
+  </p>
+<p>
+    <strong>CSS Course Solution:</strong> <code>input:focus + .disclaimer { display: block; }</code>
+  </p>
+<p>
+    <strong>Response:</strong> &#8230;%#@&#038; off.
+  </p>
+</blockquote>
+<p>Again, it’s an exaggeration (and the world’s least efficient JavaScript solution), but it’s only a slight exaggeration. I see those types of proposals being put to use <em>way</em> more often than you’d expect. Being able to provide ridiculously quick solutions to what have long been thought of as lengthy JavaScript problems? <strong>That’s one of the ways in which CSS allows me to feel like a master of tech.</strong></p>
+<p>This is just one of the many things I love about CSS. The limited set of rules is exactly what makes it so fun. You don’t <em>expect</em> CSS to fulfill all of your needs, which is what makes it all the more rewarding when you end up finding a way that it can.</p>
+<p>Now, say there’s a design challenge. You’re asked to implement this shape in the browser:</p>
+<figure id="post-270865" class="align-none media-270865"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/05/new-scoop1.png?ssl=1" alt="A black box that is inwardly curved on the left and right sides." data-recalc-dims="1" /></figure>
+<blockquote>
+<p>
+    <strong>Proposal 1</strong>: <em>&#8220;There’s no &#8220;reverse-border-radius&#8221; property to create that shape in CSS, so that’s not possible. Just embed an image. Duh.&#8221;</em>
+  </p>
+<p>
+    <strong>Answer 1:</strong> Okay fine, don’t learn CSS for all I care.
+  </p>
+</blockquote>
+<p>No please come back! I want you to learn.</p>
+<p>It&#8217;s true that no one will penalize you for using an image. There are no CSS police enforcing this rule. Hell, there aren’t even any computer science police stopping you from using a terrible billion-line algorithm instead of a beautifully simple recursive one. <strong>But if there’s any concept to be shared between CSS and <abbr title="Computer Science">CS</abbr> it’s that &#8220;not possible&#8221; is hardly ever the answer.</strong></p>
+<p>So let’s try a brute-force method, shall we?</p>
+<blockquote><p>
+    <strong>Proposal 2</strong>: Start with a black rectangle, then notch out the sides with two border-radiused <code>&lt;div&gt;</code> elements that match the white background color, like so:
+</p></blockquote>
+<figure id="post-270866" class="align-none media-270866"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/05/new-scoop2.png?ssl=1" alt="A black box that is inwardly curved on the left and right sides with a diagram showing the CSS to make it." data-recalc-dims="1" /></figure>
+<blockquote><p>
+    <strong>Answer 2:</strong> Alright! Now we’re getting somewhere. The shape is coming together. But what if the background is varying? Or a gradient? Or an image? How would that look?
+</p></blockquote>
+<figure id="post-270867" class="align-none media-270867"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/05/new-scoop3.png?ssl=1" alt="A black box that is inwardly curved on the left and right sides with a a green to yellow gradient in the background. The scooped sides are white, causing them to not blend in nicely with the gradient background." data-recalc-dims="1"/></figure>
+<p>Hm. No longer looks quite as nice. So how we do allow our natural background to shine through, while still keeping a sloping-inward shape &mdash; something that CSS isn’t natively built to support?</p>
+<blockquote><p>
+    <strong>Proposal 3</strong>: Keep the rectangle. Keep the curved divs. But don’t fill the rectangle with color, and don’t fill the curved divs with color either. Instead, spread the black color <em>outside</em> of the curved divs,  using <code>box-shadow</code>. The rectangle will simply need an <code>overflow: hidden;</code> to keep that <code>box-shadow</code> color contained within its boundaries.
+</p></blockquote>
+<figure id="post-270831" class="align-none media-270831"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2018/05/scooped-box-4.png?ssl=1" alt="The same black box that is inwardly curved on the left and right sides, but with the curves blending in with the green-to-yellow background gradient." data-recalc-dims="1" /></figure>
+<blockquote><p>
+    <strong>Answer 3:</strong> Well done! Beautiful!
+</p></blockquote>
+<p>The above technique has been described in even better detail in Ana Tudor’s <a href="https://css-tricks.com/scooped-corners-in-2018/">excellent post on scooped corners</a>. And it’s an excellent concept to keep in mind when presented with “not possible with CSS” problems. It’s one that I love to use when creating art.</p>
+<p>Take, for example, this portion of one of my CSS paintings:</p>
+<figure id="post-270868" class="align-none media-270868"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2018/05/new-neck.png?ssl=1" alt="A closeup of a woman's neck that looks like a painting." data-recalc-dims="1"/></figure>
+<p>The human neck unfortunately does not usually come conveniently packaged in a perfect rectangular shape. But HTML does, so that’s what we have to work with.</p>
+<p>But wait, isn’t that neck-shape pretty similar to the curvy black shape that we outlined above?</p>
+<figure id="post-270830" class="align-none media-270830"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/05/css-painting-2.png?ssl=1" alt="A series of screenshots that shows the progression of how the formation of the neck started with a simple rectangle and ended with a smooth curvy shape that blends skin-colored gradients together." data-recalc-dims="1" /></figure>
+<p>Yep, it all started with a big rectangle. In this case, our outward-curving divs just used a softer blending on their box-shadow.</p>
+<h3>Outside of work, I keep coming back to CSS for artistic inspiration.</h3>
+<p>Because something about those limitations just <em>calls</em> to me. I know I’m not alone when I say that a rigid set of restrictions is the best catalyst for creativity. Total artistic freedom can be a paralyzing concept.</p>
+<p>That can sometimes be the case with programming. If you have the most powerful programming languages in the world at your disposal, it starts to seem natural that you should then have no difficulty solving any programming problem. With all these amazing tools offering countless solutions to solve the same problem, it&#8217;s no wonder that we sometimes freeze up with information overload.</p>
+<p>Sure, CSS can be thought of as not being a “true” component of the tech stack. I would not even argue against that. Let&#8217;s face it, pure CSS is not about recursion or data storage or database-querying. Its primary purpose is indeed for prettification &mdash; which doesn’t exactly help the stigma of front-enders not being “real” techies or programmers.</p>
+<p>CSS never made any bold claims or promises. It has merely offered assistance, and it just turns out that its assistance can be downright heroic.</p>
+<p>If you are a front-ender who has to deal with a bunch of DevOps folks mocking their CSS, just wait and see what the response is when you sneak a <code>body { display: none; }</code> onto production. We&#8217;ll see who&#8217;s laughing then!<sup>*</sup></p>
+<hr>
+<p><sup>*</sup> They will still be the ones laughing because you will be fired. Please don&#8217;t do this.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/solving-lifes-problems-with-css/">Solving Life’s Problems with CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/solving-lifes-problems-with-css/feed/</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">270825</post-id>	</item>
+		<item>
+		<title>Resolution Independent Pixel Illustrations</title>
+		<link>http://essenmitsosse.de/pixel/?showcase=true&#038;slide=4</link>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Fri, 18 Mar 2016 13:18:12 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[pixel]]></category>
+		<category><![CDATA[rwd]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=239398</guid>
+
+					<description><![CDATA[<p>Marcus Blättermann has made a series of beautiful illustrations that adapt to the size of the browser window (and your cursor position). Make sure to check these illustrations out on a big screen to get the full effect.</p>
+<p><a href="http://essenmitsosse.de/pixel/?showcase=true&#038;slide=4" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/resolution-independent-pixel-illustrations/">Permalink</a>&#8230; <a href="https://css-tricks.com/resolution-independent-pixel-illustrations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Resolution Independent Pixel Illustrations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/resolution-independent-pixel-illustrations/">Resolution Independent Pixel Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Marcus Blättermann has made a series of beautiful illustrations that adapt to the size of the browser window (and your cursor position). Make sure to check these illustrations out on a big screen to get the full effect.</p>
+<p><a href="http://essenmitsosse.de/pixel/?showcase=true&slide=4" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/resolution-independent-pixel-illustrations/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/resolution-independent-pixel-illustrations/">Resolution Independent Pixel Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">239398</post-id>	</item>
+	</channel>
+</rss>

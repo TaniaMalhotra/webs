@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>David Atanda &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/daveatanda/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 19 Jun 2020 10:22:21 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Stay DRY Using axios for API Requests</title>
+		<link>https://css-tricks.com/stay-dry-using-axios-for-api-requests/</link>
+					<comments>https://css-tricks.com/stay-dry-using-axios-for-api-requests/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Thu, 18 Jun 2020 15:02:25 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[axios]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312657</guid>
+
+					<description><![CDATA[<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like &#8230; <a href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Stay DRY Using axios for API Requests&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+
+
+
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like this, it is important to stay organized. One classic concept is DRY (short for Don’t Repeat Yourself), which is the process of abstracting code to prevent repeating it over and over. This is ideal because it often allows us to write something once, use it in multiple places, and update in a single place rather than each instance.</p>
+
+
+
+<p>We might also reach for libraries to help us. For Ajax, <a href="https://github.com/axios/axios">axios</a> is a popular choice. You might already be familiar with it, and even use it for things like independent POST and GET requests while developing.&nbsp;</p>
+
+
+
+<h3>Installation and the basics</h3>
+
+
+
+<p>It can be installed using npm (or yarn):</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm install axios</code></pre>
+
+
+
+<p>An independent POST request using Axios looks like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">axios.post('https://axios-app.firebaseio.com/users.json', formData)
+  .then(res => console.log(res))
+  .catch(error => console.log(error))</code></pre>
+
+
+
+<p>Native JavaScript has multiple ways of doing JavaScript too. Notably, <a href="https://css-tricks.com/using-fetch/"><code>fetch()</code></a>. So why use a library at all? Well, for one, error handling in fetch is pretty wonky. You’ll have a better time with axios right out of the gate with that. If you’d like to see a comparison, we have <a href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/">an article that covers both</a> and <a href="https://css-tricks.com/importance-javascript-abstractions-working-remote-data/">an article that talks about the value of abstraction</a> with stuff like this.</p>
+
+
+
+<p>Another reason to reach for axios? It gives us more opportunities for DRYness, so let’s look into that.&nbsp;</p>
+
+
+
+<h3>Global config</h3>
+
+
+
+<p>We can set up a global configuration (e.g. in our <code>main.js</code> file) that handles all application requests using <strong>a standard configuration</strong> that is set through a default object that ships with axios.&nbsp;</p>
+
+
+
+<p>This object contains:</p>
+
+
+
+<ul><li><strong><code>baseURL:</code></strong> A relative URL that acts as a prefix to all requests, and each request can append the URL</li><li><strong><code>headers</code>:</strong> Custom headers that can be set based on the requests</li><li><strong><code>timeout:</code></strong> The point at which the request is aborted, usually measured in milliseconds. The default value is <code>0</code>, meaning it’s not applicable.</li><li><strong><code>withCredentials</code>:</strong> Indicates whether or not cross-site Access-Control requests should be made using credentials. The default is <code>false</code>.</li><li><strong><code>responseType</code>:</strong> Indicates the type of data that the server will return, with options including <code>json</code> (default), <code>arraybuffe</code>r, <code>document</code>, <code>text</code>, and <code>stream</code>.</li><li><strong><code>responseEncoding</code>:</strong>&nbsp;Indicates encoding to use for decoding responses. The default value is <code>utf8</code>.</li><li><strong><code>xsrfCookieName</code>:</strong> The name of the cookie to use as a value for XSRF token, the default value is <code>XSRF-TOKEN</code>.</li><li><strong><code>xsrfHeaderName</code>:</strong> The name of the HTTP header that carries the XSRF token value. The default value is <code>X-XSRF-TOKEN</code>.</li><li><strong><code>maxContentLength</code>: </strong>Defines the max size of the HTTP response content in bytes allowed</li><li><strong><code>maxBodyLength</code>:</strong> Defines the max size of the HTTP request content in bytes allowed</li></ul>
+
+
+
+<p>Most of time, you’ll only be using <code>baseURL</code>,&nbsp;<code>header</code>,&nbsp;and maybe <code>timeout</code>. The rest of them are less frequently needed as they have smart defaults, but it’s nice to know there are there in case you need to fix up requests.</p>
+
+
+
+<p>This is the DRYness at work. For each request, we don’t have to repeat the <code>baseURL</code> of our API or repeat important headers that we might need on every request.&nbsp;</p>
+
+
+
+<p>Here’s an example where our API has a base, but it also has multiple different endpoints. First, we set up some defaults:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/ main.js
+import axios from 'axios';
+ 
+axios.defaults.baseURL = 'https://axios-app.firebaseio.com' // the prefix of the URL
+axios.defaults.headers.get['Accept'] = 'application/json'   // default header for all get request
+axios.defaults.headers.post['Accept'] = 'application/json'  // default header for all POST request
+ 
+Then, in a component, we can use axios more succinctly, not needing to set those headers, but still having an opportunity to customize the final URL endpoint:
+ 
+// form.js component
+import axios from 'axios';
+ 
+export default {
+  methods : {
+    onSubmit () {
+      // The URL is now https://axios-app.firebaseio.com/users.json
+      axios.post('/users.json', formData)
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<p class="explanation"><strong>Note:</strong> This example is in Vue, but the concept extends to any JavaScript situation.</p>
+
+
+
+<h3>Custom instance</h3>
+
+
+
+<p>Setting up a “custom instance” is similar to a global config, but scoped to specified components. So, it’s still a DRY technique, but with hierarchy.&nbsp;</p>
+
+
+
+<p>We’ll set up our custom instance in a new file (let’s call it&nbsp;<code>authAxios.js</code>) and import it into the “concern” components.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// authAxios.js
+import axios from 'axios'
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com'
+})
+customInstance.defaults.headers.post['Accept'] = 'application/json'
+ 
+// Or like this...
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com',
+  headers: {'Accept': 'application.json'}
+})</code></pre>
+
+
+
+<p>And then we import this file into the form components:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// form.js component
+ 
+// import from our custom instance
+import axios from './authAxios'
+ 
+export default {
+  methods : {
+    onSubmit () {
+      axios.post('/users.json', formData)
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<h3>Interceptors</h3>
+
+
+
+<p>Interceptors helps with cases where the global config or custom instance might be too generic, in the sense that if you set up an header within their objects, it applies to the header of every request within the affected components. Interceptors have the ability to change any object properties on the fly. For instance, we can send a different header (even if we have set one up in the object) based on any condition&nbsp;we choose within the interceptor.</p>
+
+
+
+<p>Interceptors can be in the <code>main.js</code> file or a custom instance file. Requests are intercepted after they’ve been sent out and allow us to change how the response is handled.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') { 
+    config.timeout = 4000 
+  } else { 
+    return config
+  }
+  console.log (config)
+    return config;
+  }, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage') }
+  else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});</code></pre>
+
+
+
+<p>Interceptors, as the name implies, intercept both requests and responses to act differently based on whatever conditions are provided. For instance, in the request interceptor above, we inserted a conditional timeout only if the requests have a particular <code>baseURL</code>. For the response, we can intercept it and modify what we get back, like change the route or have an alert box, depending on the status code. We can even provide multiple conditions based on different error codes.</p>
+
+
+
+<p>Interceptors will prove useful as your project becomes larger and you start to have lots of routes and nested routes all communicating to servers based on different triggers. Beyond the conditions I set above, there are many other situations that can warrant the use of interceptors, based on your project.</p>
+
+
+
+<p>Interestingly, we can eject an interceptor to prevent it from having any effect at all. We’ll have to assign the interceptor to a variable and eject it using the appropriately named <code>eject</code> method.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const reqInterceptor = axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') {
+    config.timeout = 4000
+  } else {
+    return config
+  }
+  console.log (config)
+  return config;
+}, function (error) {    
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+const resInterceptor = axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage')
+  } else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});
+ 
+axios.interceptors.request.eject(reqInterceptor);
+axios.interceptors.request.eject(resInterceptor);</code></pre>
+
+
+
+<p>Although it’s less commonly used, it’s possible to put and interceptor into a conditional statement or remove one based on some event.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Hopefully this gives you a good idea about the way axios works as well as how it can be used to keep API requests DRY in an application. While we scratched the surface by calling out common use cases and configurations, axis has so many other advantages you can explore in the <a href="https://github.com/axios/axios">documentation</a>, including the ability to cancel requests and protect against cross-site request forgery , among other awesome possibilities.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/stay-dry-using-axios-for-api-requests/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312657</post-id>	</item>
+		<item>
+		<title>Tackling Authentication With Vue Using RESTful APIs</title>
+		<link>https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/</link>
+					<comments>https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Mon, 18 May 2020 14:34:08 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[authentication]]></category>
+		<category><![CDATA[vue]]></category>
+		<category><![CDATA[vuex]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=308304</guid>
+
+					<description><![CDATA[<p>Authentication (logging in!) is a crucial part of many websites. Let’s look at how to go about it on a site using Vue, in the same way it can be done with any custom back end. Vue can’t actually do authentication all by itself, —we’ll need another service for that, so we’ll be using another service (Firebase) for that, but then integrating the whole experience in Vue.</p>
+<p>Authentication works quite differently on Single Page Applications (SPAs) than it works on &#8230; <a href="https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Tackling Authentication With Vue Using RESTful APIs&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/">Tackling Authentication With Vue Using RESTful APIs</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Authentication (logging in!) is a crucial part of many websites. Let’s look at how to go about it on a site using Vue, in the same way it can be done with any custom back end. Vue can’t actually do authentication all by itself, —we’ll need another service for that, so we’ll be using another service (Firebase) for that, but then integrating the whole experience in Vue.</p>
+
+
+
+<span id="more-308304"></span>
+
+
+
+<p>Authentication works quite differently on Single Page Applications (SPAs) than it works on sites that reload every page. You don’t <em>have</em> to make an SPA with Vue, but we will in this tutorial.&nbsp;</p>
+
+
+
+<p>Here’s the plan. We’ll build a UI for users to log in and the submitted data will be sent to a server to check if the user exists. If yes, we’ll be sent a token. That’s very useful, because it’s going to be used throughout our site &nbsp;tocheck if the user is still signed in. If no, the user can always sign up. In other words, it can be used in lots of conditional contexts. Beyond that, if we need any information from the server that requires been logged in, the token is sent to the server through the URL so that information can be only sent to logged in users.</p>
+
+
+
+<p>The complete demo of this tutorial is <a href="https://github.com/Atanda1/vue-auth">posted on GitHub</a> for those that who are comfortable reading through the code. The rest of us can follow through with the article. The starter file is also <a href="https://github.com/Atanda1/vue_starterfile/">on GitHub</a> so you can follow through as we code together.&nbsp;</p>
+
+
+
+<p>After downloading the repo, you&#8217;ll run <code>npm install</code> in your terminal. If you’re going to build this application completely on your own, you&#8217;ll have to install <a href="https://vuex.vuejs.org/installation.html">Vuex</a>, <a href="https://router.vuejs.org/installation.html">Vue Router</a>, and <a href="https://www.npmjs.com/package/axios">axios</a>. We&#8217;ll also use <a href="https://firebase.google.com">Firebase</a> for this project, so take a moment to set up a free account and create a new project in there.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-308305" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?w=1366&amp;ssl=1 1366w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?resize=300%2C169&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?resize=1024%2C576&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?resize=768%2C432&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/JtUYKNok.png?resize=1000%2C562&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>After adding the project to Firebase, go to the authentication section, and set up a sign in method where we would be using the traditional email/password provider, that&#8217;ll be stored on our Firebase servers.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-308306" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?w=1366&amp;ssl=1 1366w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?resize=300%2C169&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?resize=1024%2C576&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?resize=768%2C432&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/XoCEPHKv.png?resize=1000%2C562&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>After that we&#8217;ll then go to the <a href="https://firebase.google.com/docs/reference/rest/auth%23section-create-email-password">Firebase Auth REST API documentation</a> to get our sign up and sign in API endpoints. We’ll need an API key to use those endpoints in our app and it can be found in the Firebase project settings.</p>
+
+
+
+<p class="explanation">Firebase offers authentication over the SDK, but we&#8217;re using the Auth API to demonstrate authentication over any custom back end server.</p>
+
+
+
+<p>In our stater file, we have the sign up form below. We’re keeping things pretty simple here since we’re focusing on learning the concepts.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">&lt;template>
+  &lt;div id="signup">
+    &lt;div class="signup-form">
+      &lt;form @submit.prevent="onSubmit">
+        &lt;div class="input">
+          &lt;label for="email">Mail&lt;/label>
+          &lt;input
+             type="email"
+             id="email"
+             v-model="email">
+        &lt;/div>
+        &lt;div class="input">
+          &lt;label for="name">Your Name&lt;/label>
+          &lt;input
+            type="text"
+            id="name"
+            v-model.number="name">
+        &lt;/div>
+        &lt;div class="input">
+          &lt;label for="password">Password&lt;/label>
+          &lt;input
+            type="password"
+            id="password"
+            v-model="password">
+        &lt;/div>
+        &lt;div class="submit">
+          &lt;button type="submit">Submit&lt;/button>
+        &lt;/div>
+      &lt;/form>
+    &lt;/div>
+  &lt;/div>
+&lt;/template></code></pre>
+
+
+
+<p>If we weren’t working with an SPA, we would naturally use axios to send our data inside the script tag like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">axios.post('https://identitytoolkit.googleapis.com/v1/account
+  s:signUp?key=[API_KEY]', {
+    email: authData.email,
+    password: authData.password,
+    returnSecureToken: true
+  })
+  .then(res => {
+    console.log(res)
+  })
+  .catch(error => console.log(error))        
+  }
+}</code></pre>
+
+
+
+<h4>Sign up and log in</h4>
+
+
+
+<p>Working with an SPA (using Vue in this case) is very different from the above approach. Instead, we&#8217;ll be sending our authorization requests using <a href="https://vuex.vuejs.org">Vuex</a> in our actions in the <code>store.js</code> file. We’re doing it this way because we want the entire app to be aware of any change to the user’s authentication status.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">actions: {
+  signup ({commit}, authData) {
+    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]', {
+      email: authData.email,
+      password: authData.password,
+      returnSecureToken: true
+    })
+    .then(res => {
+      console.log(res)
+      router.push("/dashboard")
+    })
+    .catch(error => console.log(error))
+  },
+  login ({commit}, authData) {
+    axios.post(https://identitytoolkit.googleapis.com/v1/accounts:signIn?key=[API_KEY]', {
+      email: authData.email,
+      password: authData.password,
+      returnSecureToken: true
+    })
+    .then(res => {
+      console.log(res)
+      router.push("/dashboard")
+    })
+    .catch(error => console.log(error))
+  }
+}</code></pre>
+
+
+
+<p>We can use pretty much the same thing for the sign in method, but using the sign in API endpoint instead. We then dispatch both the sign up and log in from the components, to their respective actions in the store.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">methods : { 
+  onSubmit () {
+    const formData = {
+      email : this.email,
+      name : this.name,     
+      password : this.password
+    }
+    this.$store.dispatch('signup', formData)
+    }
+  }
+}</code></pre>
+
+
+
+<p class="explanation"><code>formData</code>&nbsp;contains the user’s data.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">methods : {
+  onSubmit () {
+    const formData = {
+      email : this.email,
+      password : this.password
+    }
+    this.$store.dispatch('login', {email: formData.email, password: formData.password})
+  }
+}</code></pre>
+
+
+
+<p>We’re taking the authentication data (i.e. the token and the user&#8217;s ID) that was received from the sign up/log in form, and using them as state with Vuex. It&#8217;ll initially result as <code>null</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">state: {
+  idToken: null,
+  userId: null,
+  user: null
+}</code></pre>
+
+
+
+<p>We now create a new method called <code>authUser</code> in the mutations that&#8217;ll store the data that&#8217;s collected from the response. We need to import the router into the store as we&#8217;ll need that later.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import router from '/router'
+ 
+mutations : {
+  authUser (state, userData) {
+    state.idToken = userData.token
+    state.userId = userData.userId
+  }
+}</code></pre>
+
+
+
+<p>Inside the <code>.then</code> block in the signup/login methods in our actions, we&#8217;ll commit our response to the <code>authUser</code> mutation just created and save to local storage.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">actions: {
+  signup ({commit}, authData) {
+    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]'), {
+      email: authData.email,
+      password: authData.password,
+      returnSecureToken: true
+    })
+    .then(res => {
+      console.log(res)
+      commit('authUser', {
+        token: res.data.idToken,
+        userId: res.data.localId
+      })
+      localStorage.setItem('token', res.data.idToken)
+      localStorage.setItem('userId', res.data.localId)
+      router.push("/dashboard")
+    })
+    .catch(error => console.log(error))
+  },
+  login ({commit}, authData) {
+    axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signIn?key=[API_KEY]'), {
+      email: authData.email,
+      password: authData.password,
+      returnSecureToken: true
+    })
+    .then(res => {
+      console.log(res)
+      commit('authUser', {
+        token: res.data.idToken,
+        userId: res.data.localId
+      })
+        localStorage.setItem('token', res.data.idToken)
+        localStorage.setItem('userId', res.data.localId)
+        router.push("/dashboard")
+      })
+    .catch(error => console.log(error))
+  }
+}</code></pre>
+
+
+
+<h3>Setting up an Auth guard</h3>
+
+
+
+<p>Now that we have our token stored within the application, we&#8217;re going touse this token while setting up our Auth guard. What’s an Auth guard? It protects the dashboard from unauthenticated users access it without tokens.</p>
+
+
+
+<p>First, we&#8217;ll go into our route file and import the store. The store is imported because of the token that’ll determine the logged in state of the user.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import store from './store.js'</code></pre>
+
+
+
+<p>Then within our routes array, go to the dashboard path and add the method <code>beforeEnter</code> which takes three parameters: <code>to</code>, <code>from</code> and <code>next</code>. Within this method, we&#8217;re simply saying that if the tokens are stored (which is automatically done if authenticated), then <code>next</code>, meaning it continues with the designated route. Otherwise, we&#8217;re leading the unauthenticated user back to the sign up page.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+  path: '/dashboard',
+  component: DashboardPage,
+  beforeEnter (to, from, next) {
+    if (store.state.idToken) {
+      next()
+    } 
+    else {
+      next('/signin')
+    }
+  }
+}</code></pre>
+
+
+
+<h3>Creating the UI state</h3>
+
+
+
+<p>At this point, we can still see the dashboard in the navigation whether we&#8217;re logged in or not, &nbsp;and that&#8217;s not what we want. We have to add another method under the getters called <code>ifAuthenticated</code> which checks if the token within our state is <code>null</code>, then update the navigation items accordingly.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">getters: {
+  user (state) {
+    return state.user
+  },
+  ifAuthenticated (state) {
+    return state.idToken !== null
+  }
+}</code></pre>
+
+
+
+<p>Next, let’s open up the header component and create a method called <code>auth</code> inside the <code>computed</code> property. That will dispatch to the <code>ifAuthenticated</code> getters we just created in the store. <code>ifAuthenticated</code> will return <code>false</code> if there&#8217;s no token, which automatically means <code>auth</code> would also be <code>null</code>, and vice versa. After that, we add a <code>v-if</code> to check if <code>auth</code> is <code>null</code> or not, determining whether the dashboard option would show in the navigation.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">&lt;template>
+  &lt;header id="header">
+    &lt;div class="logo">
+      &lt;router-link to="/">Vue Authenticate&lt;/router-link>
+    &lt;/div>
+    &lt;nav>
+      &lt;ul>
+        &lt;li v-if='auth'>
+          &lt;router-link to="/dashboard">Dashboard&lt;/router-link>
+        &lt;/li>
+        &lt;li  v-if='!auth'>
+          &lt;router-link to="/signup">Register&lt;/router-link>
+        &lt;/li>
+        &lt;li  v-if='!auth'>
+          &lt;router-link to="/signin">Log In&lt;/router-link>
+        &lt;/li>
+      &lt;/ul>
+    &lt;/nav>
+  &lt;/header>
+&lt;/template>
+&lt;script>
+  export default {
+    computed: {
+      auth () {
+        return this.$store.getters.ifAuthenticated
+      }
+    },
+  }
+&lt;/script></code></pre>
+
+
+
+<h3>Logging out</h3>
+
+
+
+<p>What&#8217;s an application without a logout button? Let’s create a new mutation called <code>clearAuth</code>, which sets both the token and <code>userId</code> to <code>null</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">mutations: {
+  authUser (state, userData) {
+    state.idToken = userData.token
+    state.userId = userData.userId
+  },
+  clearAuth (state) {
+    state.idToken = null
+    state.userId = null
+  }
+}</code></pre>
+
+
+
+<p>Then, in our <code>logout</code> action , we commit to <code>clearAuth</code>, delete local storage and add <code>router.replace('/')</code> to properly redirect the user following logout.</p>
+
+
+
+<p>Back to the header component. We have an <code>onLogout</code> method that dispatches our <code>logout</code> action in the store. We then add a <code>@click</code> to the button which calls the to the <code>onLogout</code> method as we can see below:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">&lt;template>
+  &lt;header id="header">
+    &lt;div class="logo">
+      &lt;router-link to="/">Vue Authenticate&lt;/router-link>
+    &lt;/div>
+    &lt;nav>
+      &lt;ul>
+        &lt;li v-if='auth'>
+          &lt;router-link to="/dashboard">Dashboard&lt;/router-link>
+        &lt;/li>
+        &lt;li  v-if='!auth'>
+          &lt;router-link to="/signup">Register&lt;/router-link>
+        &lt;/li>
+        &lt;li  v-if='!auth'>
+          &lt;router-link to="/signin">Log In&lt;/router-link>
+        &lt;/li>
+         &lt;li  v-if='auth'>
+          &lt;ul @click="onLogout">Log Out&lt;/ul>
+        &lt;/li>
+      &lt;/ul>
+    &lt;/nav>
+  &lt;/header>
+&lt;/template>
+&lt;script>
+  export default {
+    computed: {
+      auth () {
+        return this.$store.getters.ifAuthenticated
+      }
+    },
+    methods: {
+      onLogout() {
+        this.$store.dispatch('logout')
+      }
+    }
+  }
+&lt;/script></code></pre>
+
+
+
+<h3>Auto login? Sure!</h3>
+
+
+
+<p>We&#8217;re almost done with our app. We can sign up, log in, and log out with all the UI changes we just made. But, when we refresh our app, we lose the data and are signed out, having to start all over again because we stored our token and Id in Vuex, which is JavaScript. This means everything in the app gets reloaded in the browser when refreshed.&nbsp;</p>
+
+
+
+<p>What we&#8217;ll do is to retrieve the token within our local storage. By doing that, we can have the user&#8217;s token in the browser regardless of when we refresh the window, and even auto-login the user as long as the token is still valid.</p>
+
+
+
+<p>Create a new actions method called <code>AutoLogin</code>, where we&#8217;ll get the token and <code>userId</code> from the local storage, only if the user has one. Then we commit our data to the <code>authUser</code> method in the mutations.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">actions : {
+  AutoLogin ({commit}) {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      return
+    }
+    const userId = localStorage.getItem('userId')
+    const token = localStorage.getItem('token')
+    commit('authUser', {
+      idToken: token,
+      userId: userId
+    })
+  }
+}</code></pre>
+
+
+
+<p>We then go to our <code>App.vue</code> and make a <code>created</code> method where we&#8217;ll dispatch the <code>autoLogin</code> from our store when the app is loaded.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">created () {
+  this.$store.dispatch('AutoLogin')
+}</code></pre>
+
+
+
+<p>Yay! With that, we&#8217;ve successfully implemented authentication within our app and can now deploy using <code>npm run build</code>. <a href="https://v-auth.netlify.app">Check out the live demo</a> to see it in action.</p>
+
+
+
+<p class="explanation">The example site is purely for demonstration purposes. Please do not share real data, like your real email and password, while testing the demo app.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/">Tackling Authentication With Vue Using RESTful APIs</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/tackling-authentication-with-vue-using-restful-apis/feed/</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">308304</post-id>	</item>
+		<item>
+		<title>Creating an Editable Site with Google Sheets and Eleventy</title>
+		<link>https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/</link>
+					<comments>https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2020 14:37:07 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[eleventy]]></category>
+		<category><![CDATA[spreadsheet]]></category>
+		<category><![CDATA[zapier]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=305240</guid>
+
+					<description><![CDATA[<p>Remember Tabletop.js? <a href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/">We just covered it a little bit ago</a> in this same exact context: building editable websites. It’s a tool that turns a Google Sheet into  an API, that you as a developer can hit for data when building a website. In that last article, we used that API <em>on the client side</em>, meaning JavaScript needed to run on every single page view, hit that URL for the data, and build the page. That might be OK in &#8230; <a href="https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating an Editable Site with Google Sheets and Eleventy&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/">Creating an Editable Site with Google Sheets and Eleventy</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Remember Tabletop.js? <a href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/">We just covered it a little bit ago</a> in this same exact context: building editable websites. It’s a tool that turns a Google Sheet into  an API, that you as a developer can hit for data when building a website. In that last article, we used that API <em>on the client side</em>, meaning JavaScript needed to run on every single page view, hit that URL for the data, and build the page. That might be OK in some circumstances, but let’s do it one better. Let’s hit the API <em>during the build step</em> so that the content is built into the HTML directly. This will be far faster and more resilient.</p>
+
+
+
+<span id="more-305240"></span>
+
+
+
+<h3>The situation</h3>
+
+
+
+<p>As a developer, you might have had to work with clients who keep bugging you with unending revisions on content, sometimes, even after months of building the site. That can be frustrating as it keeps pulling you back, preventing you from doing more productive work.</p>
+
+
+
+<p>We’re going to give them the keys to updating content themselves using a tool they are probably already familiar with: Google Sheets.</p>
+
+
+
+<h3>A new tool</h3>
+
+
+
+<p><a href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/%230">In the last article</a>, we introduced the concept of using Google Sheets with Tabletop.js. Now let’s introduce a new tool to this party: <a href="https://www.11ty.dev/">Eleventy</a>.&nbsp;</p>
+
+
+
+<p>We’ll be using Eleventy (a static site generator) because we want the site to be rendered as a pure static site without having to ship all of the under workings of the site in the client side JavaScript. We’ll be pulling the content from the API at build time and having Eleventy create a minified index.html that we’ll push to the server for the production website. By being static, this allows the page to load faster and is better for security reasons.</p>
+
+
+
+<h3>The spreadsheet</h3>
+
+
+
+<p>We’ll be using <a href="https://11tygooglesheet.netlify.com/">a demo I built</a>, with its repo and <a href="https://docs.google.com/spreadsheets/d/1DpRZ4IA6Xd_rd4sNnkpuTkp_-6KOEJJWS-VqZxw4oU0/edit?usp=sharing">Google Sheet</a> to demonstrate how to replicate something similar in your own projects. First, we’ll need a Google Sheet which will be our data store.</p>
+
+
+
+<p><a href="https://docs.google.com/spreadsheets/u/0/create?usp=sheets_web">Open a new spreadsheet</a> and enter your own values in the columns <a href="https://docs.google.com/spreadsheets/d/1DpRZ4IA6Xd_rd4sNnkpuTkp_-6KOEJJWS-VqZxw4oU0/edit?usp=sharing">just like mine</a>. The first cell of each column is the reference that’ll be used later in our JavaScript, and the second cell is the actual content that gets displayed.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-305241" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?w=1366&amp;ssl=1 1366w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?resize=300%2C169&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?resize=1024%2C576&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?resize=768%2C432&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI.png?resize=1000%2C562&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>In the first column,&nbsp;“header”&nbsp;is the reference name and&nbsp;“Please&nbsp;edit me!”&nbsp;is the actual content in the first column.</figcaption></figure>
+
+
+
+<p>Next up, we’ll publish the data to the web by clicking on File → Publish to the web in the menu bar.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-305243" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?w=1366&amp;ssl=1 1366w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?resize=300%2C169&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?resize=1024%2C576&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?resize=768%2C432&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/03/sOcl_DJI-1.png?resize=1000%2C562&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>A link will be provided, but it’s technically useless to us, so we can ignore&nbsp;it. The important thing is that the spreadsheet(and&nbsp;its data) is now publicly accessible so we can fetch it for our app.</p>
+
+
+
+<p>Take note&nbsp;that&nbsp;we’ll&nbsp;need&nbsp;the&nbsp;unique ID of the sheet from its URL &nbsp;as we go on.</p>
+
+
+
+<p>Node&nbsp;is required to continue,&nbsp;so be sure&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://nodejs.org/en/">that’s installed</a>.&nbsp;If you want to cut through the process of installing all of thedependencies&nbsp;for this work, you&nbsp;can&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://github.com/Atanda1/Please-edit-me">fork or download my repo</a>&nbsp;and run:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm install</code></pre>
+
+
+
+<p>Run this command next — I’ll explain why it’s important in a bit:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm run seed</code></pre>
+
+
+
+<p>Then to run it locally:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm run dev</code></pre>
+
+
+
+<p>Alright, let’s go into <code>src/site/_data/prod/sheet.js</code>.&nbsp;This is where&nbsp;we’re&nbsp;going to&nbsp;pull in data from&nbsp;the GoogleSheet, then&nbsp;turn&nbsp;it&nbsp;into an object&nbsp;we can easily use,&nbsp;and&nbsp;finally&nbsp;convert the&nbsp;JavaScript&nbsp;object back to JSON format.&nbsp;The JSON is stored locally for development so we don’t need to hit the API every time.</p>
+
+
+
+<p>Here’s the code we want in there. Again, be sure to&nbsp;change&nbsp;the variable&nbsp;<code>sheetID</code>&nbsp;to&nbsp;the&nbsp;unique ID&nbsp;of your own sheet.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">
+module.exports = () => {
+  return new Promise((resolve, reject) => {
+    console.log(`Requesting content from ${googleSheetUrl}`);
+    axios.get(googleSheetUrl)
+      .then(response => {
+        // massage the data from the Google Sheets API into
+        // a shape that will more convenient for us in our SSG.
+        var data = {
+          "content": []
+        };
+        response.data.feed.entry.forEach(item => {
+          data.content.push({
+            "header": item.gsx$header.$t,
+            "header2": item.gsx$header2.$t,
+            "body": item.gsx$body.$t,
+            "body2": item.gsx$body2.$t,
+            "body3":  item.gsx$body3.$t,
+            "body4": item.gsx$body4.$t,
+            "body5": item.gsx$body5.$t,
+            "body6":  item.gsx$body6.$t,
+            "body7": item.gsx$body7.$t,
+            "body8": item.gsx$body8.$t,
+            "body9":  item.gsx$body9.$t,
+            "body10": item.gsx$body10.$t,
+            "body11": item.gsx$body11.$t,
+            "body12":  item.gsx$body12.$t,
+            "body13": item.gsx$body13.$t,
+            "body14": item.gsx$body14.$t,
+            "body15":  item.gsx$body15.$t,
+            "body16": item.gsx$body16.$t,
+            "body17": item.gsx$body17.$t,
+            
+          })
+        });
+        // stash the data locally for developing without
+        // needing to hit the API each time.
+        seed(JSON.stringify(data), `${__dirname}/../dev/sheet.json`);
+        // resolve the promise and return the data
+        resolve(data);
+      })
+      // uh-oh. Handle any errrors we might encounter
+      .catch(error => {
+        console.log('Error :', error);
+        reject(error);
+      });
+  })
+}</code></pre>
+
+
+
+<p>In <code>module.exports</code>, there’s a promise that’ll resolve our data or throw errors when necessary. You’ll notice that I’m using a <a href="https://github.com/axios/axios">axios</a> to fetch the data from the spreadsheet. I like that it handles status error codes by rejecting the promise automatically, unlike something like <a href="https://github.com/github/fetch">Fetch</a> that requires monitoring error codes manually.</p>
+
+
+
+<p>I created a <code>data</code> object in there with a <code>content</code> array in it. Feel free to change the structure of the object, depending on what the spreadsheet looks like.</p>
+
+
+
+<p>We’re using the <code>forEach()</code> method to loop through each spreadsheet column while equating it with the corresponding name we want to allocate to it, while pushing all of these into the data object as content.&nbsp;</p>
+
+
+
+<p>Remember that <code>seed</code> command from earlier? We’re using seed to transform what’s in the data object to JSON by way of <code>JSON.stringify</code>, which is then sent to <code>src/site/_data/dev/sheet.json</code>.&nbsp;</p>
+
+
+
+<p>Yes! Now have data in a format we can use with any templating engine, like <a href="https://github.com/mozilla/nunjucks">Nunjucks</a>, to manipulate it. But, we’re focusing on content in this project, so we’ll be using the index.md template format to communicate the data stored in the project.</p>
+
+
+
+<p>For example, here’s how it looks to pull item.header through a for loop statement:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="listing">
+{%- for item in sheet.content -%}
+  &lt;h1>{{ item.header }} &lt;/h1>
+{%- endfor -%}
+&lt;/div></code></pre>
+
+
+
+<p>If you’re using Nunjucks, or any other templating engine, you’ll have to pull the data accordingly.</p>
+
+
+
+<p>Finally, let’s build this out:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm run build</code></pre>
+
+
+
+<p>Note that you’ll want a <code>dist</code> folder in the project where the build process can send the compiled assets.</p>
+
+
+
+<p>But that’s not all! If we were to edit the Google Sheet, we won’t see anything update on our site. That’s where <a href="https://zapier.com/home">Zapier</a> comes in. We can “zap” Google sheet and Netlify so that an update to the Google Sheet triggers a deployment from Netlify.</p>
+
+
+
+<p>Assuming you have a Zapier account up and running, we can create the zap by granting permissions for Google and Netlify to talk to one another, then adding triggers.</p>
+
+
+
+<p>The recipe we’re looking for? We’re connecting Google Sheets to Netlify so that when a “new or updated sheet row” takes place, Netlify starts a deploy. It’s truly a set-it-and-forget-it sort of deal.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?fit=1024%2C576&amp;ssl=1" alt="" class="wp-image-305242" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?w=1366&amp;ssl=1 1366w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?resize=300%2C169&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?resize=1024%2C576&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?resize=768%2C432&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/03/7ipNx-2.png?resize=1000%2C562&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Yay, there we go! We have a performant static site that takes its data from Google Sheets and deploys automatically when updates are made to the sheet.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/">Creating an Editable Site with Google Sheets and Eleventy</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-an-editable-site-with-google-sheets-and-eleventy/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">305240</post-id>	</item>
+		<item>
+		<title>Creating an Editable Webpage With Google Spreadsheets and Tabletop.js</title>
+		<link>https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/</link>
+					<comments>https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Wed, 05 Feb 2020 15:26:50 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=302462</guid>
+
+					<description><![CDATA[<p>Please raise your hand if you’ve ever faced never-ending content revision requests from your clients. It’s not that the changes themselves are difficult, but wouldn&#8217;t it be less complicated if clients could just make the revisions themselves? That would save everyone valuable time, and &#160;allow you to turn your attention to more important tasks.</p>
+<p>In the case where the site is built on the flat files (e.g. HTML, CSS and JavaScript) instead of a CMS (e.g. WordPress), you’ll need some &#8230; <a href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating an Editable Webpage With Google Spreadsheets and Tabletop.js&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/">Creating an Editable Webpage With Google Spreadsheets and Tabletop.js</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Please raise your hand if you’ve ever faced never-ending content revision requests from your clients. It’s not that the changes themselves are difficult, but wouldn&#8217;t it be less complicated if clients could just make the revisions themselves? That would save everyone valuable time, and &nbsp;allow you to turn your attention to more important tasks.</p>
+
+
+
+<p>In the case where the site is built on the flat files (e.g. HTML, CSS and JavaScript) instead of a CMS (e.g. WordPress), you’ll need some other sort of solution to edit the content without directly editing those files.</p>
+
+
+
+<p><a href="https://github.com/jsoma/tabletop">Tabletop.js</a> allows us to use Google Spreadsheets as a sort of data store, by taking the spreadsheet and making it easily accessible through JavaScript. It provides the data from a Google Spreadsheet in JSON format, which can then use in an app, like pulling data from any other API. In this article, we’ll be adding data to a spreadsheet then setting up Tabletop so that it can pull data from the data source to our HTML. Let us get straight to the code!</p>
+
+
+
+<span id="more-302462"></span>
+
+
+
+<p>This article is going to be based off a real-world <a href="http://pleaseeditme.software">site</a> I built when I was initially trying to wrap my head around Tabletop. By the way, I always advise developers to build applications with any form of technology they’re trying to learn, even after watching or reading tutorials.</p>
+
+
+
+<p>We’ll be using the <a href="http://pleaseeditme.software">demo</a> I made, with its source <a href="https://github.com/Atanda1/Please-edit-me/">code</a> and <a href="https://docs.google.com/spreadsheets/d/1DpRZ4IA6Xd_rd4sNnkpuTkp_-6KOEJJWS-VqZxw4oU0/edit?usp=sharing">spreadsheet</a> . The first thing we’ll need is a <a href="https://accounts.google.com/signup/v2/webcreateaccount?continue=https%253A%252F%252Fwww.google.com%252F&amp;hl=en&amp;dsh=S1090889764%253A1578400491370419&amp;gmb=exp&amp;biz=false&amp;flowName=GlifWebSignIn&amp;flowEntry=SignUp">Google account</a> to access the spreadsheet.&nbsp;</p>
+
+
+
+<p>Open a new spreadsheet and input your own values in the columns just like <a href="https://docs.google.com/spreadsheets/d/1DpRZ4IA6Xd_rd4sNnkpuTkp_-6KOEJJWS-VqZxw4oU0/edit?usp=sharing">mine</a>. The first cell on each column is the reference that’ll be used later in our JavaScript, and the second cell is the actual content for the website. As in <code>header</code> is the reference name, and <code>Please edit me!</code> is the actual content in the first column. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/01/editable-01.png?resize=1024%2C576&#038;ssl=1" alt="" class="wp-image-302464" data-recalc-dims="1"/></figure>
+
+
+
+<p>Next up, we’ll publish the data to the web by clicking on File → Publish to the web in the menu bar.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/01/editable-02.png?resize=1024%2C576&#038;ssl=1" alt="" class="wp-image-302465" data-recalc-dims="1"/></figure>
+
+
+
+<p>A link will be provided, but it’s technically useless to us, so we can ignore. The important thing is that the spreadsheet (and its data) is now publicly accessible so we can fetch it for our app.</p>
+
+
+
+<p>That said, there is a link we need. Clicking the big green “Share” button in the upper-right corner of the page will trigger a modal that provides a sharable link to the spreadsheet and lets us set permissions as well. Let’s grab that link and set the permissions so that anyone with the link can view the spreadsheet. That way, the data won’t inadvertently be edited by someone else.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/01/editable-03.png?resize=1024%2C576&#038;ssl=1" alt="" class="wp-image-302466" data-recalc-dims="1"/></figure>
+
+
+
+<p>Now is the time to initialize Tabletop in our project. Let’s link up to their hosted minified file. Similarly, we could copy the raw minified code, drop it into our own script file and host it ourselves.</p>
+
+
+
+<p>Here’s the document file linked up to Tabletop’s CDN and with code snagged from the <a href="https://github.com/jsoma/tabletop">documentation</a>.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'>&lt;/script>
+
+&lt;script type='text/javascript'>    
+  var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1sbyMINQHPsJctjAtMW0lCfLrcpMqoGMOJj6AN-sNQrc/pubhtml';
+
+  function init() {
+    Tabletop.init( {
+      key: publicSpreadsheetUrl,
+      callback: showInfo,
+      simpleSheet: true 
+    } )
+  }
+
+  function showInfo(data, tabletop) {
+    alert('Successfully processed!')
+    console.log(data);
+  }
+
+  window.addEventListener('DOMContentLoaded', init)
+&lt;/script></code></pre>
+
+
+
+<p>Replace the <code>publicSpreadsheetUrl</code> variable in the code with the sharable link from the spreadsheet. See, told you we’d need that!</p>
+
+
+
+<p>Now to the interesting part. Let’s give the HTML unique IDs and leave them empty. Then, inside the <code>showInfo</code> function, we’ll use the <code>forEach()</code> method to loop through each spreadsheet column while equating it with the corresponding <code>ID.innerHTML</code> method which, in turn, loads the spreadsheet’s data into the HTML tag through the ID.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function showInfo(data, tabletop) {
+  data.forEach(function(data) {
+    header.innerHTML = data.header;
+    header2.innerHTML = data.header2;
+    body.innerHTML = data.body;
+    body2.innerHTML = data.body2;
+    body3.innerHTML = data.body3;
+    body4.innerHTML = data.body4;
+    body5.innerHTML = data.body5;
+    body6.innerHTML = data.body6;
+    body7.innerHTML = data.body7;
+    body8.innerHTML = data.body8;
+    body9.innerHTML = data.body9;
+    body10.innerHTML = data.body10;
+    body11.innerHTML = data.body11;
+    body12.innerHTML = data.body12;
+    body13.innerHTML = data.body13;
+    body14.innerHTML = data.body14;
+    body15.innerHTML = data.body15;
+    body16.innerHTML = data.body16;
+    body17.innerHTML = data.body17;
+ });
+}
+window.addEventListener('DOMContentLoaded', init)</code></pre>
+
+
+
+<p>This is a section of HTML from my demo showing the empty tags. This is a good way to go, but it could be abstracted further but creating the HTML elements directly from JavaScript.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;!-- Start Section One: Keep track of your snippets -->
+&lt;section class="feature">
+  &lt;div class="intro-text">
+    &lt;h3 id="body">&lt;/h3>
+    &lt;p id="body2">
+      
+    &lt;/p>
+  &lt;/div>
+  &lt;div class="track-snippets">
+    &lt;div class="snippet-left">&lt;img src="img/image-computer.png" alt="computer" />&lt;/div>
+    &lt;div class="snippet-right">
+      &lt;div>
+        &lt;h4 id="body3">&lt;/h4>
+        &lt;p id="body4">
+        &lt;/p>
+      &lt;/div>
+      &lt;div>
+        &lt;h4 id="body5">&lt;/h4>
+        &lt;p id="body6">&lt;/p>
+      &lt;/div>
+      &lt;div>
+        &lt;h4 id="body7">&lt;/h4>
+        &lt;p id="body8">
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/section></code></pre>
+
+
+
+<p>Hey, look at that! Now we can change the content on a website in real-time by editing the content in the spreadsheet.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/01/edit-example.mp4"></video></figure>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/">Creating an Editable Webpage With Google Spreadsheets and Tabletop.js</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-an-editable-webpage-with-google-spreadsheets-and-tabletop-js/feed/</wfw:commentRss>
+			<slash:comments>26</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/01/edit-example.mp4" length="2749076" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">302462</post-id>	</item>
+	</channel>
+</rss>

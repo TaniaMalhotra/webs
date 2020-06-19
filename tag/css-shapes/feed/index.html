@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>css shapes &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/css-shapes/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 18 Jun 2020 01:08:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Advice for Complex CSS Illustrations</title>
+		<link>https://css-tricks.com/advice-for-complex-css-illustrations/</link>
+					<comments>https://css-tricks.com/advice-for-complex-css-illustrations/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2020 19:14:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312636</guid>
+
+					<description><![CDATA[<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I &#8230; <a href="https://css-tricks.com/advice-for-complex-css-illustrations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Advice for Complex CSS Illustrations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+
+
+
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I told you that you were only a few properties and techniques away from creating anything you wanted? The truth is that you are indeed that close.</p>
+
+
+
+<span id="more-312636"></span>
+
+
+
+<p>I&#8217;ve been wanting to compose an article like this for some time, but it&#8217;s a hard topic to cover because there are so many possibilities and so many techniques that there’s often more than one way to accomplish the same thing. The same is true with CSS illustrations. There&#8217;s no right or wrong way to do it. We&#8217;re all using the same canvas. There are simply so many different tools to get those pixels on the page.</p>
+
+
+
+<p>While there is no &#8220;one size fits all&#8221; approach to CSS illustration, what I can offer is a set of techniques that might help you on your journey.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mLaXRe" src="//codepen.io/anon/embed/mLaXRe?height=500&amp;theme-id=1&amp;slug-hash=mLaXRe&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mLaXRe" title="CodePen Embed mLaXRe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Time and practice</h3>
+
+
+
+<p>CSS illustration takes lots of time and practice. The more accurate you want to be and the more complicated the illustration, the longer it&#8217;s going to take. The time-consuming part isn’t usually deciding on <em>which</em> properties to use and how, but the <em>tinkering</em> of getting things to look right. <strong>Be prepared to get very familiar with the <a href="https://developers.google.com/web/tools/chrome-devtools/css">styles inspector</a> in your browser dev tools!</strong> I also recommend trying out <a href="https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc?hl=en">VisBug</a> if you haven&#8217;t.</p>
+
+
+
+<p>Two fantastic CSS artists are Ben Evans and Diana Smith. Both have recently talked about time consumption when referring to CSS illustration.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?ssl=1" alt="Screenshot of a realistic looking woman gazing up with her hards across her chest." class="wp-image-312637" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?w=2050&amp;ssl=1 2050w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=300%2C278&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1024%2C950&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=768%2C713&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1536%2C1425&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=2048%2C1900&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1000%2C928&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Diana’s PureCSS Gaze took her two long weekends to complete. She talks about some of her techniques here and here. &#8220;If you have the time, patience, and drive, it is certainly possible,&#8221; she <a href="https://www.vice.com/en_us/article/9kgx7p/painting-made-with-code-html-pure-css-browser-art-diana-smith">says</a>.</figcaption></figure>
+
+
+
+<p>I posted a meme-like picture about a cup and <a href="https://twitter.com/ivorjetski/status/1259893362129350658">Ben’s response</a> summed things up perfectly:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>I  was tempted to create this in CSS when I first saw the tweet but then thought my reply would take about a month.</p></blockquote>
+
+
+
+<p>It takes time!</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/jh3yy/status/1259487385554911233
+</div></figure>
+
+
+
+<h3>Tracing is perfectly acceptable</h3>
+
+
+
+<p>We often have an idea of what it is that we want to illustrate. This article isn&#8217;t about design, after all.; it&#8217;s about taking an image and rendering it with the DOM and CSS. I&#8217;m pretty sure this technique has been around since the dawn of time. But, it&#8217;s one I&#8217;ve been <a href="https://twitter.com/jh3yy/status/1258130582841757700">sharing</a> the last few months.</p>
+
+
+
+<ul><li>Find or create an image of what it is you want to illustrate.</li><li>Pull it into your HTML with an <code>&lt;img&gt;</code> tag.</li><li>Position it in a way that it will sit underneath your illustration.</li><li>Reduce the image opacity so that it&#8217;s still visible but not too overpowering.</li><li>Trace it with the DOM.</li></ul>
+
+
+
+<p>To my surprise, this technique <a href="https://twitter.com/therealpaulcook/status/1256283143587405824">isn&#8217;t common knowledge</a>. But it&#8217;s invaluable for creating accurate CSS illustrations.</p>
+
+
+
+<p>See this trick in action here:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#8217;s a timelapse of creating that CSS <a href="https://twitter.com/eggheadio?ref_src=twsrc%5Etfw">@eggheadio</a> &#x1f60e;<br><br>Tweaked the shadows with clip-path after &#x1f6e0;&#xfe0f;<br><br>&#x1f4bb; <a href="https://t.co/XhDRspwwFg">https://t.co/XhDRspwwFg</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/Timelapse?src=hash&amp;ref_src=twsrc%5Etfw">#Timelapse</a> <a href="https://t.co/ZQ1hyzcoSA">https://t.co/ZQ1hyzcoSA</a> <a href="https://t.co/iPf7ksYCGX">pic.twitter.com/iPf7ksYCGX</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1256281143244136448?ref_src=twsrc%5Etfw">May 1, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>And try it out here:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNVZR" src="//codepen.io/anon/embed/OJMNVZR?height=450&amp;theme-id=1&amp;slug-hash=OJMNVZR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNVZR" title="CodePen Embed OJMNVZR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Pay attention to responsiveness</h3>
+
+
+
+<p>If there are two takeaway techniques to take from this article, let it be the &#8220;Tracing&#8221; one above and this next one.&nbsp;</p>
+
+
+
+<p>There are some fantastic examples of CSS illustration out there. But the one unfortunate thing about some of them is that they aren&#8217;t styled — or even viewable — on small screens. We live in an age where first impressions with tech are important. Consider the example of a keyboard illustrated with CSS. Someone comes across your work, opens it up on their smartphone, and they&#8217;re greeted with only half the illustration or a small section of it. They probably missed the coolest parts of the demo!</p>
+
+
+
+<p>Here&#8217;s my trick: <strong>leverage viewport units for your illustrations and create your own scaled unit.&nbsp;</strong></p>
+
+
+
+<p>For sizing and positioning, you either have the option of using a scaled unit or percentage. This is particularly useful when you need to use a box shadow because the property accepts viewport units but not percentages.</p>
+
+
+
+<p>Consider the CSS egghead.io logo I created above. I found the image I wanted to use and popped it in the DOM with an img tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;image src='egghead.png'/></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">img {
+  height: 50vmin;
+  left: 50%;
+  opacity: 0.25;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>The height, 50vmin, is the desired size of the CSS illustration. The reduced opacity allows us to “trace” the illustration clearly as we progress.</p>
+
+
+
+<p>Then, we create our scaled unit.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/**
+  * image dimensions are 742 x 769
+  * width is 742
+  * height is 769
+  * my desired size is 50vmin
+*/
+:root {
+  --size: 50;
+  --unit: calc((var(--size) / 769) * 1vmin);
+}</code></pre>
+
+
+
+<p>With the image dimensions in place, we can create a uniform unit that’s going to scale with our image. We know the height is the largest unit, so we use that as a base to create a fractional unit.</p>
+
+
+
+<p>We get something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">--unit: 0.06501950585vmin;</code></pre>
+
+
+
+<p>That looks awkward but, trust me, it’s fine. We can use this to size our illustration’s container using <code>calc()</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.egg {
+  height: calc(769 * var(--unit));
+  position: relative;
+  width: calc(742 * var(--unit));
+  z-index: 2;
+}</code></pre>
+
+
+
+<p>If we use either percentages or our new <code>--unit</code> custom property to style elements within the container of our CSS illustration, we will get responsive CSS illustrations… and all it took was a few lines of math using CSS variables!</p>
+
+
+
+<p>Resize this demo and you’ll see that everything stay in proportion always using 50vmin as the sizing constraint.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOzYJZ" src="//codepen.io/anon/embed/rNOzYJZ?height=450&amp;theme-id=1&amp;slug-hash=rNOzYJZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOzYJZ" title="CodePen Embed rNOzYJZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Measure twice, cut once</h3>
+
+
+
+<p>Another tip is to measure things. Heck, you van even grab a tape measure if you’re working with a physical object!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_BaNGKPw" src="//codepen.io/anon/embed/BaNGKPw?height=450&amp;theme-id=1&amp;slug-hash=BaNGKPw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed BaNGKPw" title="CodePen Embed BaNGKPw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This may look a little funky but I measured this scene. It&#8217;s the TV combo unit I have in my lounge. Those measurements equate to centimeters. I used those to get a responsive unit based on the actual height of the TV. We can give that number — and all others — a name that makes it easy to remember what it’s for, thanks to custom properties.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --light-switch: 15;
+  --light-switch-border: 10;
+  --light-switch-top: 15;
+  --light-switch-bottom: 25;
+  --tv-bezel: 15;
+  --tv-unit-bezel: 4;
+  --desired-height: 25vmin;
+  --one-cm: calc(var(--desired-height) / var(--tv-height));
+  --tv-width: 158.1;
+  --tv-height: 89.4;
+  --unit-height: 42;
+  --unit-width: 180;
+  --unit-top: 78.7;
+  --tv-bottom: 114.3;
+  --scaled-tv-width: calc(var(--tv-width) * var(--one-cm));
+  --scaled-tv-height: calc(var(--tv-height) * var(--one-cm));
+  --scaled-unit-width: calc(var(--unit-width) * var(--one-cm));
+  --scaled-unit-height: calc(var(--unit-height) * var(--one-cm));
+}</code></pre>
+
+
+
+<p>As soon as we calculate a variable, we can use it everywhere. I know my TV is 158.1cm wide and 89.4cm tall. I checked the manual. But in my CSS illustration, it will always scale to 25vmin.</p>
+
+
+
+<h3>Use absolute positioning on all the things</h3>
+
+
+
+<p>This one will save you a few keystrokes. More often than not, you&#8217;ll be looking to absolutely position elements. Save yourself and put this rule somewhere.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Your class name may vary */
+.css-illustration *,
+.css-illustration *:after,
+.css-illustration *:before,
+.css-illustration:after,
+.css-illustration:before {
+  box-sizing: border-box;
+  position: absolute;
+}</code></pre>
+
+
+
+<p>Your keyboard will thank you!</p>
+
+
+
+<p class="explanation">Positioning is a tricky concept in CSS. You can <a href="https://css-tricks.com/almanac/properties/p/position/%23article-header-id-1">read up on it in the CSS Almanac</a> for more information on how to use it.</p>
+
+
+
+<p>Or, have a play with this little positioning playground:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pogyJbw" src="//codepen.io/anon/embed/pogyJbw?height=450&amp;theme-id=1&amp;slug-hash=pogyJbw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pogyJbw" title="CodePen Embed pogyJbw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Stick to an approach</h3>
+
+
+
+<p>This is by far the hardest thing to do. How do you approach a CSS illustration? Where do you even start? Should you start with the outermost part and work your way in? That doesn&#8217;t work so well.</p>
+
+
+
+<p>Odds are that you&#8217;ll try some approaches and find a better way to go about it. You’ll certainly do a little back-and-forth but, the more you practice, the better you&#8217;ll get at spotting patterns and developing an approach that works best for you.</p>
+
+
+
+<p>I tend to relate my approach to how you&#8217;d go about creating a vector image where illustrations are made up of layers. Split it up and sketch it on paper if you need to. But, start from the bottom and work your way up. This tends to mean larger shapes first, and finer details later. You can always tinker with the stacking index when you need to move elements around.</p>
+
+
+
+<h3>Maintain a solid structure for your styles</h3>
+
+
+
+<p>That leads us to the structure. Try to avoid a flat DOM structure for your illustration. Keeping things atomic makes it easier to move parts of your illustration. It will also makes it much easier to show and hide parts of the illustration or even animate them later. Consider the CSS Snorlax demo. The arms, feet, head, etc. are separate elements. That made animating the arm a lot easier than if I had tried to keep things together since I could simply apply the animation to the <code>.snorlax__arm-left</code> class.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLYXVJa" src="//codepen.io/anon/embed/yLYXVJa?height=450&amp;theme-id=1&amp;slug-hash=yLYXVJa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLYXVJa" title="CodePen Embed yLYXVJa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s a timelapse shot of me creating the demo:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Attempted to put together a timelapse of the CSS Snorlax we built last night &#x1f605;<br><br>Amusing watching it back!<br><br>&#x1f4bb; <a href="https://t.co/vbVYmFUN5V">https://t.co/vbVYmFUN5V</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a><a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://t.co/0mJtLPRQfP">pic.twitter.com/0mJtLPRQfP</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1255207715137339396?ref_src=twsrc%5Etfw">April 28, 2020</a></blockquote>
+
+
+
+<h3>Handling awkward shapes</h3>
+
+
+
+<p>There&#8217;s <a href="https://css-tricks.com/the-shapes-of-css/">a pretty good article</a> right here on CSS-Tricks for creating shapes with CSS. But what about more “awkward” shapes, like a long curve or even an outer curve? In these scenarios, we need to think outside the box. Properties such as <code>overflow</code>, <code>border-radius</code>, and <code>clip-path</code> are big helpers.</p>
+
+
+
+<p>Consider this CSS Jigglypuff demo. Toggle the checkbox.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOaVJMB" src="//codepen.io/anon/embed/gOaVJMB?height=450&amp;theme-id=1&amp;slug-hash=gOaVJMB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOaVJMB" title="CodePen Embed gOaVJMB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>That’s the key for creating curved shapes! We have an element much larger than the body with a <code>border-radius</code> applied. We then apply <code>overflow: hidden</code> to the body to cut that part off.</p>
+
+
+
+<p>How might we create an outer curve? This one’s a little tricky. But a trick I like to use is a transparent element with a thick border. Then apply a <code>border-radius</code> and clip the excess, if required.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEbgNKO" src="//codepen.io/anon/embed/ZEbgNKO?height=450&amp;theme-id=1&amp;slug-hash=ZEbgNKO&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEbgNKO" title="CodePen Embed ZEbgNKO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you hit the toggle, it reveals the element we are using to go across that corner. Another trick might be to overlay a circle that matches the background color. This is fine until we need to change the background color. It&#8217;s OK if you have a variable or something in place for that color. But, it could make things a little harder to maintain.</p>
+
+
+
+<h3><code>clip-path</code> is your friend</h3>
+
+
+
+<p>You might have noticed a couple of interesting CSS properties in that last demo, including clip-path. You&#8217;ll most likely need <a href="https://css-tricks.com/almanac/properties/c/clip-path/"><code>clip-path</code></a> if you want to create complex CSS shapes. It&#8217;s especially handy for cutting off bits of elements when hiding parent box overflow doesn’t do.</p>
+
+
+
+<p>Here’s a little demo I built some time ago that showcases different <code>clip-path</code> possibilities.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XqVQqa" src="//codepen.io/anon/embed/XqVQqa?height=450&amp;theme-id=1&amp;slug-hash=XqVQqa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XqVQqa" title="CodePen Embed XqVQqa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s also this demo that takes ideas from the <a href="https://css-tricks.com/the-shapes-of-css/">“Shapes of CSS”</a> article and re-created with <code>clip-path</code>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOpLBEa" src="//codepen.io/anon/embed/gOpLBEa?height=450&amp;theme-id=1&amp;slug-hash=gOpLBEa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOpLBEa" title="CodePen Embed gOpLBEa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><code>border-radius</code> is your other friend</h3>
+
+
+
+<p>You&#8217;re going to need <a href="https://css-tricks.com/almanac/properties/b/border-radius/"><code>border-radius</code></a> to create curves. One uncommon trick is to use a &#8220;double&#8221; syntax. This allows you to create a horizontal and vertical radius for each corner.</p>
+
+
+
+<p>Play with this demo to really appreciate the power of <code>border-radius</code>. I advocate using percentages across the board in order keep things responsive.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XWmvwYg" src="//codepen.io/anon/embed/XWmvwYg?height=450&amp;theme-id=1&amp;slug-hash=XWmvwYg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XWmvwYg" title="CodePen Embed XWmvwYg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Shading techniques</h3>
+
+
+
+<p>You&#8217;ve got all the shapes, everything is nicely laid out, and all the right colors are in place… but something still looks off. Odds are that it’s a lack of shading.</p>
+
+
+
+<p>Shading adds depth and create a realistic feel. Consider this ecreation of a Gal Shir illustration. Gal is fantastic at using shades and gradients to make beautiful illustrations. I thought it would be fun to do a recreate it and include a switch that toggles the shading to see just what a difference it makes.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNyVg" src="//codepen.io/anon/embed/OJMNyVg?height=450&amp;theme-id=1&amp;slug-hash=OJMNyVg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNyVg" title="CodePen Embed OJMNyVg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Shading effects are often created with a <code>box-shadow</code> and <code>background-image</code> combination.</p>
+
+
+
+<p>The key thing with these properties is that we can stack them in a comma-separated list. For example, the cauldron in the demo has a list of gradients that are being used across the body.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron {
+  background:
+    radial-gradient(25% 25% at 25% 55%, var(--rim-color), transparent),
+    radial-gradient(100% 100% at -2% 50%, transparent, transparent 92%, var(--cauldron-color)),
+    radial-gradient(100% 100% at -5% 50%, transparent, transparent 80%, var(--darkness)),
+    linear-gradient(310deg, var(--inner-rim-color) 25%, transparent), var(--cauldron-color);
+}</code></pre>
+
+
+
+<p>Note that <code>radial-gradient()</code> and a <code>linear-gradient()</code> are being used here and not always with perfectly round numeric values. Again, those numbers are just fine. In fact, you’ll spend a lot of time tweaking and tinkering with things in the style inspector.</p>
+
+
+
+<p>It’s generally the same working with <a href="https://css-tricks.com/snippets/css/css-box-shadow/"><code>box-shadow</code></a>. However, with that, we can also use the inset value to create tricky borders and additional depth.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron__opening {
+  box-shadow:
+    0 0px calc(var(--size) * 0.05px) calc(var(--size) * 0.005px) var(--rim-color) inset,
+    0 calc(var(--size) * 0.025px) 0 calc(var(--size) * 0.025px) var(--inner-rim-color) inset,
+    0 10px 20px 0px var(--darkness), 0 10px 20px -10px var(--inner-rim-color);
+}</code></pre>
+
+
+
+<p>There are certainly times where it will make more sense to go with <a href="https://css-tricks.com/almanac/properties/f/filter/"><code>filter: drop-shadow()</code></a> instead to get the effect you want.</p>
+
+
+
+<p>Lynn Fisher’s <a href="https://a.singlediv.com">a.singlediv.com</a> is a brilliant example of these properties in action. Have a poke around on that site and inspect some of the illustrations for great ways to use <code>box-shadow</code> and <code>background-image</code> in illustrations.</p>
+
+
+
+<p><code>box-shadow</code> is so powerful that you could create your entire illustration with it. I once joked about creating a CSS illustration of a dollar.</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In CSS right? &#x1f605;<a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://t.co/VmyeySsK83">https://t.co/VmyeySsK83</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1252924614281486336?ref_src=twsrc%5Etfw">April 22, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>I used a generator to <a href="https://codepen.io/jh3y/details/eYpBwgN">create the illustration with a single div</a>. But Alvaro Montoro <a href="https://dev.to/alvaromontoro/drawing-a-single-element-dollar-bill-with-css-and-javascript-3mj4">took it a little further</a> and wrote a generator that does it with box-shadow instead.</p>
+
+
+
+<h3>Preprocessors are super helpful</h3>
+
+
+
+<p>While they aren’t required, using preprocessors can help keep your code neat and tidy. For example, Pug makes writing HTML faster, especially when it comes to using loops for dealing with a bunch of repeating elements. From there, <a href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">we can scope CSS custom properties</a> in a way that we only need to define styles once, then overwrite them where needed.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xJXvjP" src="//codepen.io/anon/embed/xJXvjP?height=500&amp;theme-id=1&amp;slug-hash=xJXvjP&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xJXvjP" title="CodePen Embed xJXvjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s another example that demonstrates a DRY structure. The flowers are constructed with the same markup, but each has its own index class that is used to apply scoped CSS properties.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYpjXvj" src="//codepen.io/anon/embed/eYpjXvj?height=450&amp;theme-id=1&amp;slug-hash=eYpjXvj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYpjXvj" title="CodePen Embed eYpjXvj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The first flower has these properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--1 {
+  --hue: 190;
+  --x: 0;
+  --y: 0;
+  --size: 125;
+  --r: 0;
+}</code></pre>
+
+
+
+<p>It’s the first one, so all the others are based off it. Notice how the second flower is off to the right and up slightly. All that takes is assigning different values to the same custom properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--2 {
+  --hue: 320;
+  --x: 140;
+  --y: -75;
+  --size: 75;
+  --r: 40;
+}</code></pre>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Animated responsive CSS Leif features in the latest CodePen Spark! &#x2728;<br><br>For those who don&#8217;t know Animal Crossing, Leif is a green-thumbed Sloth who visits your island &#x1f33b;<br><br>Here&#8217;s a timelapse! &#x1f4f9;<br><br>&#x1f4bb; <a href="https://t.co/tkHX4nWXp7">https://t.co/tkHX4nWXp7</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://t.co/naJIrsSlYM">pic.twitter.com/naJIrsSlYM</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1262856791873945601?ref_src=twsrc%5Etfw">May 19, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<h3>That’s it!</h3>
+
+
+
+<p>Go forth, use these tips, come up with your own, share them, and share your CSS masterpieces! And hey, if you have your own advice, please share that too! This is definitely the sort of thing that is learned through lots of trial and error — what works for me may look different from what works for you and we can learn from those different approaches</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/advice-for-complex-css-illustrations/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312636</post-id>	</item>
+		<item>
+		<title>css.gg</title>
+		<link>https://css.gg/</link>
+					<comments>https://css-tricks.com/css-gg/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 18 Dec 2019 15:14:43 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<category><![CDATA[icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=300569</guid>
+
+					<description><![CDATA[<p>I&#8217;m not sure what to call these icons from Astrit Malsija. The title is &#8220;500+ CSS Icons, Customizable, Retina Ready &#038; API&#8221; and the URL is &#8220;css.gg&#8221; but they aren&#8217;t really <em>named</em> anything. </p>
+<p>Anyway, their shtick is:</p>
+<blockquote>
+<p>The &#x1f30e;&#8217;s first icon library designed by code.</p>
+</blockquote>
+<p>The idea is that they don&#8217;t use <code>clip-path</code>, they aren&#8217;t icon fonts, they aren&#8217;t even SVG. They are just <code>&#60;i&#62;</code> tags essentially using the <a href="https://css-tricks.com/the-shapes-of-css/">shapes of CSS</a> and <a href="https://css-tricks.com/pseudo-element-roundup/">pseudo elements</a> as necessary to draw &#8230; <a href="https://css-tricks.com/css-gg/" class="read-more">Read article <span class="screen-reader-text"> &#8220;css.gg&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-gg/">css.gg</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;m not sure what to call these icons from Astrit Malsija. The title is &#8220;500+ CSS Icons, Customizable, Retina Ready &#038; API&#8221; and the URL is &#8220;css.gg&#8221; but they aren&#8217;t really <em>named</em> anything. </p>
+<p>Anyway, their shtick is:</p>
+<blockquote><p>The &#x1f30e;&#8217;s first icon library designed by code.</p></blockquote>
+<p>The idea is that they don&#8217;t use <code>clip-path</code>, they aren&#8217;t icon fonts, they aren&#8217;t even SVG. They are just <code>&lt;i&gt;</code> tags essentially using the <a href="https://css-tricks.com/the-shapes-of-css/">shapes of CSS</a> and <a href="https://css-tricks.com/pseudo-element-roundup/">pseudo elements</a> as necessary to draw themselves. It&#8217;s a very clever approach. They&#8217;ll render super fast, like inline SVG would, because they don&#8217;t require any other resource. They don&#8217;t scale particularly well because everything is sized in <code>px</code>, but they have modifier classes for a handful of predefined sizes. I probably wouldn&#8217;t use these in production (<a href="https://css-tricks.com/pretty-good-svg-icon-system/">inline SVG is the way to go</a>), but still, it&#8217;s clever.</p>
+<p>I wouldn&#8217;t call it the world&#8217;s first either. Nicolas Gallagher <a href="http://nicolasgallagher.com/pure-css-gui-icons/demo/">designed an icon set like this</a> 10 years ago (!). </p>
+<p><a href="https://css.gg/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/css-gg/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-gg/">css.gg</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/css-gg/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">300569</post-id>	</item>
+		<item>
+		<title>Pac-Man&#8230; in CSS!</title>
+		<link>https://css-tricks.com/pac-man-in-css/</link>
+					<comments>https://css-tricks.com/pac-man-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Maks Akymenko]]></dc:creator>
+		<pubDate>Mon, 11 Nov 2019 15:45:20 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[clip-path]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=298239</guid>
+
+					<description><![CDATA[<p>You all know famous <a href="http://pacman.com/en/">Pac-Man video game</a>, right? The game is fun and building an animated Pac-Man character in HTML and CSS is just as fun! I’ll show you how to create one while leveraging the powers of the <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> property.</p>
+</p>
+<p class="codepen" data-height="380" style="height: 380px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="maximakymenko" data-slug-hash="WNeMPKr" style="height: 380px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Animated Pac-Man ">
+  See the Pen <a href="https://codepen.io/maximakymenko/pen/WNeMPKr"><br />
+  Animated Pac-Man </a> by Maks Akymenko (<a href="https://codepen.io/maximakymenko">@maximakymenko</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.
+</p>
+<p>Are you excited? Let’s get to it!</p>
+<p>First, let’s bootstrap the project</p>
+<p>We only need two files for our project: <code>index.html</code> and <code>style.css</code>. &#8230; <a href="https://css-tricks.com/pac-man-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Pac-Man&#8230; in CSS!&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/pac-man-in-css/">Pac-Man&#8230; in CSS!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>You all know famous <a href="http://pacman.com/en/">Pac-Man video game</a>, right? The game is fun and building an animated Pac-Man character in HTML and CSS is just as fun! I’ll show you how to create one while leveraging the powers of the <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> property.</p>
+<p><span id="more-298239"></span></p>
+<p class="codepen" data-height="380" style="height: 380px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="maximakymenko" data-slug-hash="WNeMPKr" style="height: 380px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Animated Pac-Man ">
+  <span>See the Pen <a href="https://codepen.io/maximakymenko/pen/WNeMPKr"><br />
+  Animated Pac-Man </a> by Maks Akymenko (<a href="https://codepen.io/maximakymenko">@maximakymenko</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Are you excited? Let’s get to it!</p>
+<h3>First, let’s bootstrap the project</h3>
+<p>We only need two files for our project: <code>index.html</code> and <code>style.css</code>. We could do this manually by creating an empty folder with the files inside. Or, we can use this as an excuse to work with the command line, if you’d like:</p>
+<pre rel="Terminal"><code class="language-javascript">mkdir pacman
+cd pacman
+touch index.html &amp;&amp; touch style.css</code></pre>
+<h3>Set up the baseline styles</h3>
+<p>Go to <code>style.css</code> and add basic styling for your project. You could also use things like <code><a href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a></code> and <code><a href="https://necolas.github.io/normalize.css/">normalize.css</a></code> to reset the browser styling, but our project is simple and straightforward, so we won’t do much here.One thing you&#8217;ll want to do for sure is use <a href="https://autoprefixer.github.io">Autoprefixer</a> to help with cross-browser compatibility.</p>
+<p>We&#8217;re basically setting the body to the full width and height of the viewport and centering things right smack dab in the middle of it. Things like the background color and fonts are purely aesthetic.</p>
+<pre rel="CSS"><code class="language-css">@import url('https://fonts.googleapis.com/css?family=Slabo+27px&amp;display=swap');
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  font-family: 'Slabo 27px', serif;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+<h3>Behold, Pac-Man in HTML!</h3>
+<p>Do you remember how Pac-Man looks? He&#8217;s essentially a yellow circle and an opening in the circle for a mouth. He’s a two-dimensional dot-eating machine!</p>
+<p>So he has a body (or is he just a head?) and a mouth. He doesn’t even have eyes, but we’ll give him one anyway.</p>
+<p>This’ll be our HTML markup:</p>
+<pre rel="HTML"><code class="language-html">&lt;div class="pacman"&gt;
+  &lt;div class="pacman__eye"&gt;&lt;/div&gt;
+  &lt;div class="pacman__mouth"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3>Dressing up Pac-Man with CSS</h3>
+<p>The most interesting part starts! Go to <code>style.css</code> and create the styles for Pac-Man.</p>
+<p>First, we’ll create his body/head/whatever-that-is. Again, that’s merely a circle with a yellow background:</p>
+<pre rel="CSS"><code class="language-css">.pacman {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #f2d648;
+  position: relative;
+  margin-top: 20px;
+}</code></pre>
+<p>His (non-existent) eye is pretty much the same — a circle, but smaller and dark gray. We’ll give it absolute positioning so we can place it right where it needs to be:</p>
+<pre rel="CSS"><code class="language-css">.pacman__eye {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 20px;
+  right: 40px;
+  background: #333333;
+}</code></pre>
+<p>Now we have the basic shape!</p>
+<p class="codepen" data-height="350" style="height: 350px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="wvvpGWP" style="height: 350px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Mouthless Pac-Man">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/wvvpGWP"><br />
+  Mouthless Pac-Man</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Using clip-path to draw the mouth</h3>
+<p>Pretty straightforward so far, right? If our Pac-Man is going to eat some dots (and chase some ghosts), he’s going to need a mouth. We’re going to create yet another circle, but make it black this time and overlay it right on top of his yellow head. Then we’re going to use the <code>clip-path</code> property to cut out a slice of it — sort of like an empty pie container except for one last piece of pie.</p>
+<figure id="post-298244" class="align-left media-298244"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/11/pac-man-diagram.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The dotted border shows where the black circle has been cut out, leaving only a slice of it to be Pac-Man&#8217;s mouth.</figcaption></figure>
+<pre rel="CSS" data-line="6"><code class="language-css">.pacman__mouth {
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+}</code></pre>
+<p>Why a polygon and all those percentages?!?! Notice that we’ve already established the width and height of the element. The <code>polygon()</code> function let’s us draw a free-form shape inside the bounds of the element and that shape serves as a mask that only displays that portion of the element. So, we’re using <code>clip-path</code> and telling it we want a shape (<code>polygon()</code>) that contains a series of points at specific positions (<code>100% 74%, 44% 48%, 100% 21%</code>).</p>
+<p class="explanation">The <code>clip-path</code>  property can be hard to grok. The CSS-Tricks Almanac <a href="https://css-tricks.com/almanac/properties/c/clip-path/">helps explain it</a>. There’s also the cool <a href="https://bennettfeely.com/clippy/">Clippy app</a> that makes it easy to draw <code>clip-patch</code> shapes and export the CSS, which is what I did for this tutorial.</p>
+<p>So far, so good:</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="OJJzNEQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Pac-Man with Mouth">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/OJJzNEQ"><br />
+  Pac-Man with Mouth</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Make Pac-Man eat</h3>
+<p>We’ve got a pretty good-looking Pac-Man, but it will be way cooler but there’s no way for him to chew his food. I mean, maybe we wants to swallow his food whole, but we’re not going to allow that. Let’s make his mouth open and close instead.</p>
+<p>All we need to do is animate the <code>clip-path</code> property, and we’ll use  <code><a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">@keyframes</a></code> for that. I’m naming this animation <code>eat</code>: </p>
+<pre rel="CSS"><code class="language-css">@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+  75% {
+    clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+  100% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+}</code></pre>
+<p>Again, I used the Clippy app to get the values, however, feel free to pass in your own. Maybe, you’ll be able to make animation even smoother!</p>
+<p>We’ve got our keyframes in place, so let’s add it to our <code>.pacman</code> class. We could use the shorthand <code><a href="https://css-tricks.com/almanac/properties/a/animation/">animation</a></code> property, but I’ve broken out the properties to make things more self-explanatory so you can see what’s going on:</p>
+<pre rel="CSS"><code class="language-css">animation-name: eat;
+animation-duration: 0.7s;
+animation-iteration-count: infinite;</code></pre>
+<p>There we go!</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="KKKZzGJ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Chewing Pac-Man">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/KKKZzGJ"><br />
+  Chewing Pac-Man</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>We’ve gotta feed Pac-Man</h3>
+<p>If Pac-Man can chomp, why not to give him some food to eat! Let’s slightly modify our HTML markup a bit to include some food: </p>
+<pre rel="HMTL" data-line="4"><code class="language-html">&lt;div class="pacman"&gt;
+  &lt;div class="pacman__eye"&gt;&lt;/div&gt;
+  &lt;div class="pacman__mouth"&gt;&lt;/div&gt;
+  &lt;div class="pacman__food"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>&#8230;and let’s style it up. After all, food needs to be appetizing to the eyes as well as the mouth! We’re going to make yet <em>another</em> circle because that’s what the game uses.</p>
+<pre rel="CSS"><code class="language-css">.pacman__food {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  top: 40%;
+  left: 120px;
+}</code></pre>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="vYYpGPe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Chewing Pac-Man with Teasing Food">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/vYYpGPe"><br />
+  Chewing Pac-Man with Teasing Food</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Aw, poor Pac-Man sees the food, but is unable to eat it. Let&#8217;s make the food come to him using another sprinkle of CSS animation:</p>
+<pre rel="CSS"><code class="language-css">@keyframes food {
+  0% {
+    transform: translateX(0);
+      opacity: 1;
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}</code></pre>
+<p>Now we only need to pass this animation to our <code>.pacman__food</code> class.</p>
+<pre rel="CSS"><code class="language-css">animation-name: food;
+animation-duration: 0.7s;
+animation-iteration-count: infinite;</code></pre>
+<p>We have a happy, eating Pac-Man!</p>
+<p class="codepen" data-height="265" style="height: 265px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="css-tricks" data-slug-hash="Rwwxamj" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title=" Pac-Man Eating">
+  <span>See the Pen <a href="https://codepen.io/team/css-tricks/pen/Rwwxamj"><br />
+    Pac-Man Eating</a> by CSS-Tricks (<a href="https://codepen.io/css-tricks">@css-tricks</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Like before, the animation took some tweaking on my end to get it just right. What’s happening is the food starts away from Pac-Man at full opacity, then slides closer to him using <code>transform: translateX()</code> to move from left to right and disappears with zero opacity. Then it’s set to run infinitely so he eats all day, every day!</p>
+<hr>
+<p>That’s a wrap! It’s fun to take little things like this and see how HTML and CSS can be used to re-create them. I’d like to see your own Pac-Man (or <a href="https://en.wikipedia.org/wiki/Ms._Pac-Man">Ms. Pac-Man</a>!). Share in the comments!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/pac-man-in-css/">Pac-Man&#8230; in CSS!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/pac-man-in-css/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">298239</post-id>	</item>
+		<item>
+		<title>The Many Ways to Link Up Shapes and Images with HTML and CSS</title>
+		<link>https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/</link>
+					<comments>https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Bailey Jones]]></dc:creator>
+		<pubDate>Tue, 01 Oct 2019 14:20:33 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[clip-path]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<category><![CDATA[links]]></category>
+		<category><![CDATA[SVG]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=296263</guid>
+
+					<description><![CDATA[<p>Different website designs often call for a shape <em>other</em> than a square or rectangle to respond to a click event. Perhaps your site has some kind of tilted or curved banner where the click area would be awkwardly large as a straight rectangle. Or you have a large uniquely shaped logo where you only want that unique shape to be clickable. Or you have an interactive image that responds differently when different regions of it are clicked. </p>
+<p>You can surround &#8230; <a href="https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Many Ways to Link Up Shapes and Images with HTML and CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/">The Many Ways to Link Up Shapes and Images with HTML and CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Different website designs often call for a shape <em>other</em> than a square or rectangle to respond to a click event. Perhaps your site has some kind of tilted or curved banner where the click area would be awkwardly large as a straight rectangle. Or you have a large uniquely shaped logo where you only want that unique shape to be clickable. Or you have an interactive image that responds differently when different regions of it are clicked. </p>
+<p>You can surround those assets with an un-styled <code>&lt;a&gt;</code> tag to get a clickable rectangle that&#8217;s approximately the right size. However, you can also control the <em>shape</em> of that region with different techniques, making sure the target for your click area exactly matches what’s visible on the screen.</p>
+<p><span id="more-296263"></span></p>
+<h3>SVG shapes</h3>
+<p>If your click target is an image or a portion of an image, and you have the ability to choose SVG as its format, you already have a great deal of control over how that element will behave on your page.  The simplest way to make a portion of an SVG clickable is to add an <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a">SVG hyperlink element</a> to the markup. This is as easy as wrapping the target with an <code>&lt;a&gt;</code> tag, just as you would a nested html element. Your <code>&lt;a&gt;</code> tag can surround a simple shape or more complex paths. It can surround a group of SVG elements or just one. In this example the link for the bullseye wraps a single circle element, but the more complex arrow shape is made up of two polygons and a path element.</p>
+<p class="codepen" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="bailey_jones" data-slug-hash="GRKxroR" style="height: 601px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="target svg">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/GRKxroR/"><br />
+  target svg</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p class="explanation">Note that I’ve used the deprecated <code>xlink:href</code> property in this demo to ensure that the link will work on Safari. The <code>href</code> alone would have worked in Internet Explorer, Chrome, and Firefox.</p>
+<p>The only trick here is to make sure the <code>&lt;a&gt;</code> tag is inside the SVG markup and that the tag wraps the shape you want to be clickable. The viewbox for this SVG is still a rectangle, so wrapping the entire SVG element wouldn&#8217;t have the same effect.</p>
+<h3>Image maps</h3>
+<p>Let’s say you don’t have control over the SVG markup, or that you need to add a clickable area to a raster image instead. It’s possible to apply a clickable target to a portion of an <code>&lt;img&gt;</code> tag using an image map.</p>
+<p>Image maps are defined separately from the image source. The map will effectively overlay the entire image element, but it&#8217;s up to you to define the clickable area. Unlike the hyperlink element in the SVG example, the coordinates in the image map don’t have anything to do with the definition of the source image. Image maps have been around since HTML 3, meaning they have excellent browser support. However, they can’t be styled with CSS alone to provide interactive cues, like we were able to do with SVG on hover — the cursor is the only visual indicator that the target area of the image can be clicked. There are, however, <a href="https://stackoverflow.com/questions/8343531/is-it-possible-to-style-a-mouseover-on-an-image-map-using-css/42110914">options for styling the areas with JavaScript</a>.</p>
+<p>W3 Schools has an <a href="https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_areamap">excellent example of an image map</a> using a picture of the solar system where the sun and planets are linked to close-up images of those targets — everywhere else in the image is un-clickable. That’s because the coordinates of the areas defined in their image map match the locations of the sun and planets in the base image.</p>
+<p>Here’s another example from Derek Fogge that uses uses maps to create more interesting click targets. It does use jQuery to style the areas on click, but notice the way a map overlays the image and coordinates are used to create the targets.</p>
+<p class="codepen" data-height="550" style="height: 550px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="PositionRelativ" data-slug-hash="GmJOGo" style="height: 549px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="responsive image map demo">
+  <span>See the Pen <a href="https://codepen.io/PositionRelativ/pen/GmJOGo/"><br />
+  responsive image map demo</a> by Derek Fogge (<a href="https://codepen.io/PositionRelativ">@PositionRelativ</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>You can implement image maps on even more complex shapes too. In fact, let’s go back to the same  target shape from the SVG example but using a raster image instead. We still want to link up the arrow and the bullseye but this time do not have SVG elements to help us out. For the bullseye, we know the X and Y coordinates and its radius in the underlying image, so it’s fairly easy to define a circle for the region. The arrow shape is more complicated. I used <a href="https://www.image-map.net/">https://www.image-map.net</a> to plot out the shape and generate the area for the image map — it’s made up of one polygon and one circle for the rounded edge at the top. </p>
+<p class="codepen" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="bailey_jones" data-slug-hash="MWgVbme" style="height: 513px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="target image map">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/MWgVbme/"><br />
+  target image map</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Clip-path</h3>
+<p>What if you want to use CSS to define the shape of a custom click region without resorting to JavaScript for the styling? The CSS <code><a href="https://css-tricks.com/almanac/properties/c/clip-path/">clip-path</a></code> property provides considerable flexibility for defining and styling target areas on any HTML element. </p>
+<p>Here we have a click area in the shape of a five-pointed star. The star is technically a polygon, so we could use a star-shaped base image and an image map with corresponding coordinates like we did in the previous image map example. However, let’s put <code>clip-path</code>  to use. The following example shows the same <code>clip-path</code> applied to both a JPG image and an absolutely positioned hyperlink element.</p>
+<p class="codepen" data-height="425" style="height: 425px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="bailey_jones" data-slug-hash="oNvwYLx" style="height: 424px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Clip-path">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/oNvwYLx/"><br />
+  Clip-path</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p class="explanation">Browser support for <code>clip-path</code> has gotten much better, but it <a href="https://caniuse.com/#feat=css-clip-path">can still be inconsistent</a> for some values. Be sure to check support and vendor prefixes before relying on it.</p>
+<p>We can also mix and match different approaches depending on what best suits the shape of a particular click target. Here, I’ve combined the &#8220;close&#8221; shape using Bennet Freely’s <a href="https://bennettfeely.com/clippy/">clippy</a> with an SVG hyperlink element to build the start of a clickable tic-tac-toe game. SVG is useful here to make sure the &#8220;hole&#8221; in the middle of the &#8220;O&#8221; shape isn’t clickable. For the &#8220;X&#8221; though, which is a polygon, a single <code>clip-path</code> can style it.</p>
+<p class="codepen" data-height="350" style="height: 350px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="html,result" data-user="bailey_jones" data-slug-hash="LYPzjJg" style="height: 355px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="tic tac toe">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/LYPzjJg/"><br />
+  tic tac toe</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p class="explanation">Again, beware of browser support especially when mixing and matching techniques. The demo above will not be supported everywhere.</p>
+<h3>CSS shapes without transparent borders</h3>
+<p>The <code>clip-path</code>  property allowed us to apply a predefined shape to an HTML element of our choice, including hyperlink elements. There are plenty of other options for creating elements HTML and CSS that aren’t squares and rectangles — you can see some of them in <a href="https://css-tricks.com/the-shapes-of-css/">The Shapes of CSS</a>. However, not all techniques will affect the shape of the click area as you might expect. Most of the examples in the Shapes of CSS rely on transparent borders, which the DOM will still recognize as part of your click target even if your users can’t see them. Other tricks like positioning, transform, and pseudo elements like <code>::before</code> and <code>::after</code> will keep your styled hyperlink aligned with its visible shape.</p>
+<p>Here’s a CSS heart shape that does not rely on transparent borders. You can see how the the red heart shape is the only clickable area of the element.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="bailey_jones" data-slug-hash="jONaONK" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Clickable heart">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/jONaONK/"><br />
+  Clickable heart</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Here’s another example that creates a CSS triangle shape using transparent borders. You can see how the click area winds up being outside the actual shape. Hover over the element and you’ll be able to see the true size of the click area.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="bailey_jones" data-slug-hash="XWrEpZx" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="clickable triangle">
+  <span>See the Pen <a href="https://codepen.io/bailey_jones/pen/XWrEpZx/"><br />
+  clickable triangle</a> by Bailey Jones (<a href="https://codepen.io/bailey_jones">@bailey_jones</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<hr>
+<p>Hopefully this gives you a good baseline understanding of the many ways to create clickable regions on images and shapes, relying on HTML and CSS alone. You may find that it’s necessary to reach for JavaScript in order to get a more advanced interactive experience. However, the combined powers of HTML, CSS, and SVG provide considerable options for controlling the precise shape of your click target.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/">The Many Ways to Link Up Shapes and Images with HTML and CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/the-many-ways-to-link-up-shapes-and-images-with-html-and-css/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">296263</post-id>	</item>
+		<item>
+		<title>Oh, the Many Ways to Make Triangular Breadcrumb Ribbons!</title>
+		<link>https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/</link>
+					<comments>https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/#comments</comments>
+		
+		<dc:creator><![CDATA[Silvestar Bistrović]]></dc:creator>
+		<pubDate>Mon, 29 Apr 2019 14:39:45 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<category><![CDATA[navigation]]></category>
+		<category><![CDATA[SVG]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=286460</guid>
+
+					<description><![CDATA[<p>Oh, the Many Ways to Make Triangular Breadcrumb Ribbons</p>
+<p>Let’s have a look at how we can create a row of links that sorta run into each other with a chevron-like shape and notch on each block like you might see in a hierarchical breadcrumb navigation.</p>
+<p>You’ve probably seen this pattern a lot. It comes up often in things like multi-step forms and site breadcrumbs. For our purposes we’re going to call these “ribbons&#8221; so we know what we’re referring &#8230; <a href="https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Oh, the Many Ways to Make Triangular Breadcrumb Ribbons!&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/">Oh, the Many Ways to Make Triangular Breadcrumb Ribbons!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Oh, the Many Ways to Make Triangular Breadcrumb Ribbons</p>
+<p>Let’s have a look at how we can create a row of links that sorta run into each other with a chevron-like shape and notch on each block like you might see in a hierarchical breadcrumb navigation.</p>
+<p>You’ve probably seen this pattern a lot. It comes up often in things like multi-step forms and site breadcrumbs. For our purposes we’re going to call these “ribbons&#8221; so we know what we’re referring to as we go.</p>
+<figure id="post-286462" class="align-left media-286462"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/04/s_710D164D4631CF12F6B0DF6C32013709A242010E89D27C8821647C81A46B0A34_1553900414339_ScreenShot2019-03-29at3.58.42PM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Like a lot of things on the web, we can make ribbons like these in many ways! I’ve created <a href="https://play.silvestar.codes/ribbon/">a demo page</a> that brings a variety of them together, like using <a href="https://css-tricks.com/snippets/css/css-triangle/">CSS triangles</a>, SVG backgrounds, and the CSS <a href="https://css-tricks.com/almanac/properties/c/clip/"><code>clip-path</code></a> property. </p>
+<p><span id="more-286460"></span></p>
+<h3>Starting with the HTML structure</h3>
+<p>For each demo, the HTML structure will largely be the same where we have a <code>&lt;nav&gt;</code> that acts as the parent element and then links inside it as the children.</p>
+<pre rel="HTML"><code class="language-html">&lt;nav class="ribbon ribbon--modifier" role="navigation" aria-label="breadcrumbs"&gt;
+  &lt;a class="ribbon__element" href="https://www.silvestar.codes/"&gt;Home&lt;/a&gt;
+  &lt;a class="ribbon__element" href="https://www.silvestar.codes/categories/articles/"&gt;Blog&lt;/a&gt;
+  &lt;a class="ribbon__element" href="https://www.silvestar.codes/articles/building-an-animated-sticky-header-with-custom-offset/" aria-current="page"&gt;Post&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+<p>Note that these elements should be accessible, according to <a href="https://a11y-style-guide.com/style-guide/section-navigation.html">A11y Style Guide website</a>. It’s a good rule to build components with accessibility in mind and introducing accessibility at the very start is the best way to prevent the classic “I forgot to make it accessible&#8221; situation.</p>
+<h3>Let’s create some baseline styles</h3>
+<p>When it comes to things like this, we want to make sure the sizing of the elements is done right. For this purpose, we are going to define the font size of the <code>.ribbon</code> (that’s what we’re going to call these things) wrapper element and then use <code>em</code> units on the child element which are the links themselves.</p>
+<pre rel="CSS"><code class="language-css">/* Define font size of the wrapper element */ 
+.ribbon {
+  font-size: 15px;
+}
+
+/* Use ems to define the size of the ribbon element */ 
+.ribbon__element {
+  font-size: 1.5em;
+  letter-spacing: 0.01em;
+  line-height: 1.333em;
+  padding: 0.667em 0.667em 0.667em 1.333em;
+}</code></pre>
+<p>This particular technique would be beneficial for defining the size of the triangle shape for each ribbon because we would use the same sizes to calculate triangle. And since we are using <code>em</code> units to calculate the ribbon element size, we could resize all elements by redefining the <code>font-size</code> on the wrapper element.</p>
+<p>Let’s use <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS Grid</a> for the layout because, well, we can. We could do this in a way that offers deeper browser support, but we’ll leave that up to you based on your support requirements.</p>
+<p>We are going to define four columns:</p>
+<ul>
+<li>Three for ribbon elements</li>
+<li>One to fix spacing issues. As it is, the right arrow shape would be placed <em>outside</em> of the ribbon component and that could mess up the original layout.
+</ul>
+<pre rel="CSS"><code class="language-css">/* The wrapper element 
+ * We're using CSS Grid, but ensure that meets your browser support requirements.
+ * Assuming the use of autoprefixer for vendor prefixes and properties.
+ */
+  
+.ribbon {
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: repeat(auto-fill, 1fr) 1em; /* Auto-fill the three ribbon elements plus one narrow column to fix the sizing issues */
+}</code></pre>
+<p>If you prefer to avoid stretching the ribbon elements, the grid could be defined differently. For example, we could use <code>max-content</code> to adjust columns by content size. (Note, however, that <code>max-content</code> <a href="https://caniuse.com/#search=max-content">is not very well supported</a> yet in some key browsers.)</p>
+<pre rel="CSS"><code class="language-css">/* Make ribbon columns adjust to the maximum content size */
+.ribbon--auto {
+  grid-template-columns: repeat(3, max-content) 1em;
+}</code></pre>
+<p>I am sure there are many different ways we could have gone about the layout. I like this one because it defines the exact gap between ribbon elements without complicated calculations.</p>
+<p>Accessibility is not only adding aria attributes. It also includes color contrast and readability, as well as adding hover and focus states. If you don’t like <code>outline</code> style, you could use other CSS properties, like <code>box-shadow</code>, for example.</p>
+<pre rel="CSS"><code class="language-css">/* Use current link color, but add underline on hover  */
+.ribbon__element:hover, 
+.ribbon__element:active {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Clear default outline style and use inset box shadow for focus state */
+.ribbon__element:focus {
+  box-shadow: inset 0 -3px 0 0 #343435;
+  outline: none;
+}</code></pre>
+<h3>Creating the unique triangular shape</h3>
+<p>We have more than one option when it comes down to defining the triangle at the end of each ribbon. We could:</p>
+<ol>
+<li>We could create <a href="https://css-tricks.com/snippets/css/css-triangle/">a triangle using borders</a> with pseudo-elements</li>
+<li>We could use an SVG background image on pseudo-elements</li>
+<li>We could use inline SVG images</li>
+<li>We could create a <code>clip-path</code> using the <code>polygon()</code> function</li>
+</ol>
+<p>Let’s dig into each one.</p>
+<h4>Option 1: The border approach</h4>
+<p>First, we should set the element’s width and height to zero so it doesn’t get in the way of the pseudo-elements we’re using to draw the triangle with borders. Then we should draw the triangle using borders, specifically by defining a solid left border that matches the color of the background to make it blend in with the rest of the ribbon. From there, let’s define top and bottom borders and make them transparent. The trick here is to calculate the size of the border. </p>
+<p>Our ribbon element has a content size of the <code>line-height</code>  value plus the top and bottom paddings:</p>
+<pre><code>1.333em + 0.667em + 0.667em = 2.667em</code></pre>
+<p>That means our top and bottom borders should be half that size. The only thing left to do is to position elements absolutely to the correct side of the component.</p>
+<pre rel="CSS"><code class="language-css">/* The left arrow */
+.ribbon--alpha .ribbon__element:before {
+  /* Make the content size zero */
+  content: '';  
+  height: 0;  
+  width: 0;
+
+  /* Use borders to make the pseudo element fit the ribbon size */
+  border-bottom: 1.333em solid transparent;
+  border-left: 0.667em solid #fff;
+  border-top: 1.333em solid transparent;
+
+  /* Position the element absolutely on the left side of the ribbon element */
+  position: absolute;
+  top: 0;  
+  bottom: 0;  
+  left: 0;
+}
+
+/* The right arrow */
+.ribbon--alpha .ribbon__element:after {
+  /* Make the content size zero */
+  content: '';  
+  height: 0;  
+  width: 0;
+
+  /* Use borders to make the pseudo-element fit the ribbon size */
+  border-bottom: 1.333em solid transparent;
+  border-left: 0.667em solid;
+  border-top: 1.333em solid transparent;
+
+  /* Position the element absolutely on the right side of the ribbon element and push it outside */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translateX(0.667em);
+  transform: translateX(0.667em);
+}</code></pre>
+<p>Since the right triangle should match the background color of the ribbon, let’s remember to add the correct border color for each ribbon’s pseudo-element.</p>
+<pre rel="CSS"><code class="language-css">/* The right arrow of the first element */
+.ribbon--alpha .ribbon__element:nth-child(1):after {
+  border-left-color: #11d295;
+}
+
+/* The right arrow of the second element */
+.ribbon--alpha .ribbon__element:nth-child(2):after {
+  border-left-color: #ef3675;
+}
+
+/* The right arrow of the third element */
+.ribbon--alpha .ribbon__element:nth-child(3):after {
+  border-left-color: #4cd4e9;
+}</code></pre>
+<p>And there we  go!</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="moNQgY" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Alpha">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/moNQgY/"><br />
+CSS Grid Ribbon &#8211; Alpha</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Option 2: The background image approach</h4>
+<p>We can also create a triangle using a background image. This requires creating an image that matches the design, which is a little cumbersome, but still totally possible. We are going to use SVG here since it’s smooth at any resolution.</p>
+<p>Unlike the border triangle approach, we want to match the height of our pseudo-element with the height of the ribbon element, or 100%. The width of the component should match the left border width of the border triangle, which is 0.666666em in our case. Then we should use a white triangle for the background image on the triangle of the left side, and then use triangle images with color for the triangles on the right side. Again, we are using absolute positioning to place our triangles to the correct side of the ribbon element.</p>
+<pre rel="CSS"><code class="language-css">/* The left arrow */
+.ribbon--beta .ribbon__element:before {
+  /* Define the arrow size */
+  content: '';  
+  height: 100%;  
+  width: 0.666666em;
+  
+  /* Define the background image that matches the background color */
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTAgNDAiIHdpZHRoPSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjZmZmIj48cGF0aCBkPSJtNSAxNSAyMCAxMGgtNDB6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDAgLTEgLTEgMCAyNSAyNSkiLz48L3N2Zz4=);
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  
+  /* Position the element absolutely on the left side of the ribbon element */
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+}
+
+/* The right arrow */
+.ribbon--beta .ribbon__element:after {
+  /* Define the arrow size */
+  content: '';  
+  height: 100%;
+  width: 0.667em;
+
+  /* Define the background image attributes */
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  /* Position the element absolutely on the right side of the ribbon element and push it outside */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: translateX(0.667em);
+  transform: translateX(0.667em);
+}
+
+/* Define the background image that matches the background color of the first element */
+.ribbon--beta .ribbon__element:nth-child(1):after {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTAgNDAiIHdpZHRoPSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNSAxNSAyMCAxMGgtNDB6IiBmaWxsPSIjMTFkMjk1IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDAgLTEgLTEgMCAyNSAyNSkiLz48L3N2Zz4=);
+}
+
+/* Define the background image that matches the background color of the second element */
+.ribbon--beta .ribbon__element:nth-child(2):after {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTAgNDAiIHdpZHRoPSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNSAxNSAyMCAxMGgtNDB6IiBmaWxsPSIjZWYzNjc1IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDAgLTEgLTEgMCAyNSAyNSkiLz48L3N2Zz4=);
+}
+
+/* Define the background image that matches the background color of the third element */
+.ribbon--beta .ribbon__element:nth-child(3):after {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTAgNDAiIHdpZHRoPSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNSAxNSAyMCAxMGgtNDB6IiBmaWxsPSIjNGNkNGU5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDAgLTEgLTEgMCAyNSAyNSkiLz48L3N2Zz4=);
+}</code></pre>
+<p>There we go!</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="jJgQoM" style="height: 448px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Beta">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/jJgQoM/"><br />
+CSS Grid Ribbon &#8211; Beta</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Option 3: The inline SVG approach</h4>
+<p>Instead of loading a different SVG triangle for each background image, we could use inline SVG directly in the HTML.</p>
+<p>This particular approach allows us to control the <code>fill</code> color of each SVG arrow with CSS. The arrow size is calculated by the ribbon size. Once again, we are using the <code>em</code> units to define the size and arrows are absolutely positioned, like the other approaches we’ve seen so far.</p>
+<pre rel="CSS"><code class="language-css">/* Position arrows absolutely and set the correct size */
+.ribbon--gamma .ribbon__element svg {
+  height: 2.667em;
+  position: absolute;
+  top: 0;
+  width: 0.667em;
+}
+
+/* The left arrow */
+.ribbon--gamma .ribbon__element svg:first-child {
+  fill: #fff; /* Define the background image that matches the background color */
+  left: 0; /* Stick left arrows to the left side of the ribbon element */
+}
+
+/* The right arrow */
+.ribbon--gamma .ribbon__element svg:last-child {
+  left: 100%; /* Push right arrows outside of the ribbon element */
+}
+
+/* Define the fill color that matches the background color of the first element */
+.ribbon--gamma .ribbon__element:nth-child(1) svg:last-child {
+  fill: #11d295;
+}
+
+/* Define the fill color that matches the background color of the second element */
+.ribbon--gamma .ribbon__element:nth-child(2) svg:last-child {
+  fill: #ef3675;
+}
+
+/* Define the fill color that matches the background color of the third element */
+.ribbon--gamma .ribbon__element:nth-child(3) svg:last-child {
+  fill: #4cd4e9;
+}</code></pre>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="axdpXe" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Gamma">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/axdpXe/"><br />
+CSS Grid Ribbon &#8211; Gamma</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Option 4: The clip-path approach</h4>
+<p>We can create the ribbon triangles with a polygon that masks the background. <a href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Edit_CSS_shapes">Firefox’s Shape Editor</a> is a fantastic tool to draw shapes directly in the browser with a <abbr title="Graphical User Interface">GUI</abbr>, as is <a href="https://bennettfeely.com/clippy/">Clippy</a>.</p>
+<p>Since polygons must be created using percentages, we should use our best judgment to match the size of border triangles. Also, note that percentage-based polygons <em>might</em> look a little funny on some viewports, especially when element sizes are adapting to its surroundings, like wrapper elements. Consider redefining polygons for different viewports.</p>
+<pre rel="CSS"><code class="language-css">.ribbon--delta .ribbon__element {
+  clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+}</code></pre>
+<p>Since we defined our wrapper element using CSS Grid, we should expand the ribbon elements but leave the last one at the size of the polygon triangle, which is 5% in our case. The last ribbon element should be wider by the size of the border triangle width to match the first two examples.</p>
+<pre rel="CSS"><code class="language-css">/* Make all ribbon elements (except the last one) wider by the size of the polygon triangle */
+.ribbon--delta .ribbon__element:not(:last-child) {
+  width: 105%;
+}
+
+/* Make the last ribbon element wider by the size of the border triangle */
+.ribbon--delta .ribbon__element:last-child {
+  width: calc(100% + .667em);
+}</code></pre>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="YgmRbg" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Delta">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/YgmRbg/"><br />
+CSS Grid Ribbon &#8211; Delta</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Variations on these options</h3>
+<p>Now that we’ve learned how to create the breadcrumb ribbon a few different ways, we could play around with it, like adding shadows or gradients and different sizes.</p>
+<h4>Adding a shadow</h4>
+<p>We could add the shadow on our ribbon elements. Make sure to avoid the shadow on the left or right side of the ribbon element.</p>
+<pre rel="CSS"><code class="language-css">/* Add shadow under each ribbon element */
+.ribbon--shadow .ribbon__element {
+  box-shadow: 1px 3px 3px -3px black;
+}</code></pre>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="WmVYqx" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Shadow">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/WmVYqx/"><br />
+CSS Grid Ribbon &#8211; Shadow</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Using gradients for color</h4>
+<p>We could add gradients to our ribbon element. Be sure to match the color of the right triangle when doing so. Also, make sure to comply with <a href="https://webaim.org/resources/contrastchecker/">contrast accessibility</a>.</p>
+<p>For example, if we are going to use the border approach or background image approach, we should use mostly horizontal (i.e. left-to-right) gradients (with the exceptions of some carefully calculated angled gradients). If we are using the <code>clip-path</code> approach, we could use any gradient version we wish.</p>
+<pre rel="CSS"><code class="language-css">/* Add gradient to the first ribbon element */
+.ribbon--gradient .ribbon__element:nth-child(1) {
+  background-image: linear-gradient(to right, #11ced2, #11d295);
+}
+
+/* Add gradient to the second ribbon element */
+.ribbon--gradient .ribbon__element:nth-child(2) {
+  background-image: linear-gradient(to right, #ef36b2, #ef3675);
+}
+
+/* Add gradient to the third ribbon element */
+.ribbon--gradient .ribbon__element:nth-child(3) {
+  background-image: linear-gradient(to right, #4c9fe9, #4cd4e9);
+}</code></pre>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="xBvQoz" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Gradient">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/xBvQoz/"><br />
+CSS Grid Ribbon &#8211; Gradient</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Working with size variations</h4>
+<p>Since the size of our ribbon elements depends on the font size of the wrapper element, defining different sizes is pretty straightforward.</p>
+<pre rel="CSS"><code class="language-css">/* Small ribbons */
+.ribbon--small {
+  font-size: 10px;
+}
+
+/* Big ribbons */
+.ribbon--big {
+  font-size: 20px;
+}</code></pre>
+<p>Here we go with a smaller set of ribbons:</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="aMeQeG" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Small">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/aMeQeG/"><br />
+CSS Grid Ribbon &#8211; Small</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>And here’s a nice set of chunky ribbons:</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="CiTA" data-slug-hash="drxQxw" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Big">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/drxQxw/"><br />
+CSS Grid Ribbon &#8211; Big</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4>Combining all the things!</h4>
+<p>We can also combine different modifier classes to achieve an even more styling. For example, let’s use gradient and shadow modifiers together:</p>
+<p class="codepen" data-height="450" style="height: 450px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="CiTA" data-slug-hash="ywmQmb" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Grid Ribbon - Shadow Gradient">
+<span>See the Pen <a href="https://codepen.io/CiTA/pen/ywmQmb/"><br />
+CSS Grid Ribbon &#8211; Shadow Gradient</a> by Silvestar Bistrović (<a href="https://codepen.io/CiTA">@CiTA</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Any other angles to consider?</h3>
+<p>Making custom elements using different CSS techniques is a great way how each one of us could improve or refresh our knowledge. Before starting, it’s worth investing some thought into the maintainability and modularity of the component being built. A consistent naming convention, like <a href="https://css-tricks.com/bem-101/">BEM</a>, is certainly helpful that. Accessibility is also a big deal, so starting with it in mind and documenting accessibility features along the way will serve you well.</p>
+<p>We looked at four different approaches for drawing ribbon triangles. Have you used a different approach or know of one we haven’t considered here? Let me know in the comments!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/">Oh, the Many Ways to Make Triangular Breadcrumb Ribbons!</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/oh-the-many-ways-to-make-triangular-breadcrumb-ribbons/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">286460</post-id>	</item>
+		<item>
+		<title>CSS Triangles, Multiple Ways</title>
+		<link>https://pineco.de/quick-tip-css-triangles/</link>
+					<comments>https://css-tricks.com/css-triangles-multiple-ways/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 05 Mar 2019 00:35:37 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[clip-path]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<category><![CDATA[glyphs]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[triangle]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=282928</guid>
+
+					<description><![CDATA[<p>I like Adam Laki&#8217;s <a href="https://pineco.de/quick-tip-css-triangles/">Quick Tip: CSS Triangles</a> because it covers that ubiquitous fact about front-end techniques: <em>there are always <a href="https://css-tricks.com/hearts-in-html-and-css/">many ways</a> to do the same thing.</em> In this case, drawing a triangle can be done:</p>
+<ul>
+<li>with <code>border</code> and a collapsed element</li>
+<li>with <code>clip-path: polygon()</code></li>
+<li>with <code>transform: rotate()</code> and <code>overflow: hidden</code></li>
+<li>with glyphs like ▼</li>
+</ul>
+<p>I&#8217;d say that the way I&#8217;ve typically done triangles the <em>most</em> over the years is with the <a href="https://css-tricks.com/snippets/css/css-triangle/">border trick</a>, but I think my favorite &#8230; <a href="https://css-tricks.com/css-triangles-multiple-ways/" class="read-more">Read article <span class="screen-reader-text"> &#8220;CSS Triangles, Multiple Ways&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-triangles-multiple-ways/">CSS Triangles, Multiple Ways</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I like Adam Laki&#8217;s <a href="https://pineco.de/quick-tip-css-triangles/">Quick Tip: CSS Triangles</a> because it covers that ubiquitous fact about front-end techniques: <em>there are always <a href="https://css-tricks.com/hearts-in-html-and-css/">many ways</a> to do the same thing.</em> In this case, drawing a triangle can be done:</p>
+<ul>
+<li>with <code>border</code> and a collapsed element</li>
+<li>with <code>clip-path: polygon()</code></li>
+<li>with <code>transform: rotate()</code> and <code>overflow: hidden</code></li>
+<li>with glyphs like ▼</li>
+</ul>
+<p>I&#8217;d say that the way I&#8217;ve typically done triangles the <em>most</em> over the years is with the <a href="https://css-tricks.com/snippets/css/css-triangle/">border trick</a>, but I think my favorite way now is using <code>clip-path</code>. Code like this is fairly clear, understandable, and maintainable to me: <code>clip-path: polygon(50% 0, 0 100%, 100% 100%);</code> Brain: Middle top! Bottom right! Bottom left! Triangle!</p>
+<p>My 2nd Place method goes to an option that didn&#8217;t make Adam&#8217;s list: inline <code>&lt;svg&gt;</code>! This kind of thing is nearly just as brain-friendly: <code>&lt;polygon points="0,0 100,0 50,100"/&gt;</code>.</p>
+<p><a href="https://pineco.de/quick-tip-css-triangles/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/css-triangles-multiple-ways/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-triangles-multiple-ways/">CSS Triangles, Multiple Ways</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/css-triangles-multiple-ways/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">282928</post-id>	</item>
+		<item>
+		<title>A CSS Venn Diagram</title>
+		<link>http://adrianroselli.com/2018/12/a-css-venn-diagram.html</link>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Mon, 17 Dec 2018 21:42:31 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[charts]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<category><![CDATA[grid]]></category>
+		<category><![CDATA[shape-outside]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=280153</guid>
+
+					<description><![CDATA[<p>This is pretty wild: Adrian Roselli has made a series of rather complex Venn diagrams using nothing but CSS. With a combination of the Firefox dev inspector, plus a mixture of CSS Grid and the <a href="https://css-tricks.com/almanac/properties/s/shape-outside/"><code>shape-outside</code></a> property, it’s possible to do this and without a ton of hacks, too.</p>
+<p>I also think it’s super cute that Adrian has made the code snippets in this post look like the display from an old monitor, like the one Chris <a href="https://css-tricks.com/old-timey-terminal-styling/">recently</a> broke down.&#8230; <a href="https://css-tricks.com/a-css-venn-diagram/" class="read-more">Read article <span class="screen-reader-text"> &#8220;A CSS Venn Diagram&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-css-venn-diagram/">A CSS Venn Diagram</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>This is pretty wild: Adrian Roselli has made a series of rather complex Venn diagrams using nothing but CSS. With a combination of the Firefox dev inspector, plus a mixture of CSS Grid and the <a href="https://css-tricks.com/almanac/properties/s/shape-outside/"><code>shape-outside</code></a> property, it’s possible to do this and without a ton of hacks, too.</p>
+<p>I also think it’s super cute that Adrian has made the code snippets in this post look like the display from an old monitor, like the one Chris <a href="https://css-tricks.com/old-timey-terminal-styling/">recently</a> broke down.</p>
+<p><a href="http://adrianroselli.com/2018/12/a-css-venn-diagram.html" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/a-css-venn-diagram/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/a-css-venn-diagram/">A CSS Venn Diagram</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">280153</post-id>	</item>
+	</channel>
+</rss>

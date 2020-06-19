@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Leonardo Losoviz &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/leonardolosoviz/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 15 Jun 2020 14:37:50 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Adding a Custom Welcome Guide to the WordPress Block Editor</title>
+		<link>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/</link>
+					<comments>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/#respond</comments>
+		
+		<dc:creator><![CDATA[Leonardo Losoviz]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 14:37:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312604</guid>
+
+					<description><![CDATA[<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using &#8230; <a href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Adding a Custom Welcome Guide to the WordPress Block Editor&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+
+
+
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using it. There’s no native feature for something like this in WordPress but we can make something because WordPress is super flexible like that.</p>
+
+
+
+<p>So here’s the idea. We’re going to bake documentation directly into the plugin and make it easily accessible in the block editor. This way, users get to use the plugin right away while having answers to common questions directly where they’re working.&nbsp;</p>
+
+
+
+<span id="more-312604"></span>
+
+
+
+<p>My plugin operates through several Custom Post Types (CPT). What we’re going to build is essentially a popup modal that users get when they go to these CPTs.&nbsp;</p>
+
+
+
+<p>The WordPress block editor is built in React, which utilizes components that can be customized to and reused for different situations. &nbsp;That is the case with what we’re making — let’s call it the <code>&lt;Guide&gt;</code> component — which behaves like a modal, but is composed of several pages that the user can paginate through.</p>
+
+
+
+<p>WordPress itself has a <code>&lt;Guide&gt;</code>&nbsp;component that displays a welcome guide when opening the block editor for the first time:</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?ssl=1" alt="Screenshot showing a modal on top of the WordPress block editor welcoming users to the editor for the first time." class="wp-image-312605" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>WordPress displays a modal with instructions for using the block editor when a user loads the editor for the first time.</figcaption></figure>
+
+
+
+<p>The guide is a container filled with content that’s broken up into individual pages. In other words, it’s pretty much what we want. That means we don’t have to re-invent the wheel with this project; we can reuse this same concept for our own plugin.</p>
+
+
+
+<p>Let’s do exactly that.&nbsp;</p>
+
+
+
+<h3>What we want to achieve</h3>
+
+
+
+<p>Before we get to the solution, let’s talk about the end goal.</p>
+
+
+
+<p>The design satisfies the requirements of the plugin, which is a GraphQL server for WordPress. The plugin offers a variety of CPTs that are edited through custom blocks which, in turn, are <a href="https://developer.wordpress.org/block-editor/developers/block-api/block-templates/">defined through templates</a>. There’s a grand total of two blocks: one called &#8220;GraphiQL client&#8221; to input the GraphQL query, and one called &#8220;Persisted query options&#8221; to customize the behavior of the execution.</p>
+
+
+
+<p>Since creating a query for GraphQL is not a trivial task, I decided to add the guide component to the editor screen for that CPT. It’s available in the Document settings as a panel called &#8220;Welcome Guide.&#8221;</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?ssl=1" alt="Screenshot showing the WordPress editor with the document settings panel open in the right column. a welcome guide tab is highlighted in the settings." class="wp-image-312607" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Crack that panel open and the user gets a link. That link is what will trigger the modal.</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=274%2C342&#038;ssl=1" alt="Close-up screenshot of the welcome guide tab opened, revealing a link that says &quot;Open Guide: Creating Persisted Queries.&quot;" class="wp-image-312609" width="274" height="342" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?w=274&amp;ssl=1 274w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=240%2C300&amp;ssl=1 240w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>For the modal itself, I decided to display a tutorial video on using the CPT on the first page, and then describe in detail all the options available in the CPT on subsequent pages.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?ssl=1" alt="Screenshot showing the custom modal open in the block editor and containing an embedded video on how to use the plugin." class="wp-image-312611" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>I believe this layout is an effective way to show documentation to the user. It is out of the way, but still conveniently close to the action. Sure, we can use a different design or even place the modal trigger somewhere else using a different component instead of repurposing <code>&lt;Guide&gt;</code>, but this is perfectly good.</p>
+
+
+
+<h3>Planning the implementation</h3>
+
+
+
+<p>The implementation comprises the following steps:</p>
+
+
+
+<ol><li>Scaffolding a new script to register the custom sidebar panel</li><li>Displaying the custom sidebar panel on the editor for our Custom Post Type only</li><li>Creating the guide</li><li>Adding content to the guide</li></ol>
+
+
+
+<p>Let&#8217;s start!</p>
+
+
+
+<h3>Step 1: Scaffolding the script</h3>
+
+
+
+<p>Starting in WordPress 5.4, we can use a component called <a href="https://developer.wordpress.org/block-editor/developers/slotfills/plugin-document-setting-panel/"><code>&lt;PluginDocumentSettingPanel&gt;</code></a> to add a <a href="https://developer.wordpress.org/block-editor/components/panel/">panel</a> on the editor&#8217;s Document settings like this:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost;
+ 
+const PluginDocumentSettingPanelDemo = () => (
+  &lt;PluginDocumentSettingPanel
+    name="custom-panel"
+    title="Custom Panel"
+    className="custom-panel"
+  >
+    Custom Panel Contents
+  &lt;/PluginDocumentSettingPanel>
+);
+registerPlugin( 'plugin-document-setting-panel-demo', {
+  render: PluginDocumentSettingPanelDemo,
+  icon: 'palmtree',
+} );</code></pre>
+
+
+
+<p>If you&#8217;re experienced with the block editor and already know how to execute this code, then you can skip ahead. I&#8217;ve been coding with the block editor for less than three months, and using React/npm/webpack is a new world for me — this plugin is my first project using them! I&#8217;ve found that the docs in the <a href="https://github.com/WordPress/gutenberg">Gutenberg repo</a> are not always adequate for beginners like me, and sometimes the documentation is missing altogether, so I&#8217;ve had to dig into the source code to find answers.</p>
+
+
+
+<p>When the documentation for the component indicates to use that piece of code above, I don&#8217;t know what to do next, because <code>&lt;PluginDocumentSettingPanel&gt;</code> is not a block and I am unable to scaffold a new block or add the code there. Plus, we’re working with JSX, which means we need to have a <a href="https://developer.wordpress.org/block-editor/tutorials/javascript/js-build-setup/">JavaScript build step</a> to compile the code.</p>
+
+
+
+<p>I did, however, find the <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">equivalent ES5 code</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var el = wp.element.createElement;
+var __ = wp.i18n.__;
+var registerPlugin = wp.plugins.registerPlugin;
+var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
+ 
+function MyDocumentSettingPlugin() {
+  return el(
+    PluginDocumentSettingPanel,
+    {
+      className: 'my-document-setting-plugin',
+      title: 'My Panel',
+    },
+    __( 'My Document Setting Panel' )
+  );
+}
+ 
+registerPlugin( 'my-document-setting-plugin', {
+  render: MyDocumentSettingPlugin
+} );</code></pre>
+
+
+
+<p>ES5 code does not need be compiled, so we can load it like any other script in WordPress. But I don&#8217;t want to use that. I want the full, modern experience of ESNext and JSX.</p>
+
+
+
+<p>So my thinking goes like this: I can&#8217;t use the <a href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">block scaffolding tools</a> since it&#8217;s not a block, and I don&#8217;t know how to compile the script (I&#8217;m certainly not going to set-up webpack all by myself). That means I&#8217;m stuck.</p>
+
+
+
+<p>But wait! The only difference between a block and a regular script is just how they are registered in WordPress. A block is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($blockScriptName, $blockScriptURL, $dependencies, $version);
+register_block_type('my-namespace/my-block', [
+  'editor_script' => $blockScriptName,
+]);</code></pre>
+
+
+
+<p>And a regular script is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($scriptName, $scriptURL, $dependencies, $version);
+wp_enqueue_script($scriptName);</code></pre>
+
+
+
+<p>We can use any of the block scaffolding tools to modify things then register a regular script instead of a block, which gains us access to the webpack configuration to compile the ESNext code. Those available tools are:</p>
+
+
+
+<ul><li>The <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">WP CLI</a> <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">‘scaffold’ command</a></li><li>Ahmad Awais&#8217;s <a href="https://github.com/ahmadawais/create-guten-block">create-guten-block</a> package</li><li>The official <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package</li></ul>
+
+
+
+<p>I chose to use the <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package because it is maintained by the team developing Gutenberg.</p>
+
+
+
+<p>To scaffold the block, <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/#usage">we execute this</a> in the command line:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm init @wordpress/block</code></pre>
+
+
+
+<p>After completing all the prompts for information — including the block’s name, title and description — the tool will generate a <a href="https://make.wordpress.org/meta/2019/03/08/the-block-directory-and-a-new-type-of-plugin/">single-block plugin</a>, with an entry PHP file containing code similar to this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/**
+ * Registers all block assets so that they can be enqueued through the block editor
+ * in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
+ */
+function my_namespace_my_block_block_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-namespace/my-block" block first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+ 
+  $editor_css = 'editor.css';
+  wp_register_style(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $editor_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$editor_css" )
+  );
+ 
+  $style_css = 'style.css';
+  wp_register_style(
+    'my-namespace-my-block-block',
+    plugins_url( $style_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$style_css" )
+  );
+ 
+  register_block_type( 'my-namespace/my-block', array(
+    'editor_script' => 'my-namespace-my-block-block-editor',
+    'editor_style'  => 'my-namespace-my-block-block-editor',
+    'style'         => 'my-namespace-my-block-block',
+  ) );
+}
+add_action( 'init', 'my_namespace_my_block_block_init' );</code></pre>
+
+
+
+<p>We can copy this code into the plugin, and modify it appropriately, converting the block into a regular script. (Note that I&#8217;m also removing the CSS files along the way, but could keep them, if needed.)</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function my_script_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-script" script first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-script',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+  wp_enqueue_script(
+    'my-script'
+  );
+}
+add_action( 'init', 'my_script_init' );</code></pre>
+
+
+
+<p>Let’s copy the <code>package.json</code> file over:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+  "name": "my-block",
+  "version": "0.1.0",
+  "description": "This is my block",
+  "author": "The WordPress Contributors",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^9.1.0"
+  }
+}</code></pre>
+
+
+
+<p>Now, we can replace the contents of file <code>src/index.js</code> with the ESNext code from above to register the <code>&lt;PluginDocumentSettingPanel&gt;</code> component. Upon running <code>npm start</code> (or <code>npm run build</code> for production) the code will be compiled into <code>build/index.js</code>.</p>
+
+
+
+<p>There is a last problem to solve: the <code>&lt;PluginDocumentSettingPanel&gt;</code> component is not statically imported, but instead obtained from <code>wp.editPost</code>, and since <code>wp</code> is a global variable loaded by WordPress on runtime, this dependency is not present in <code>index.asset.php</code> (which is auto-generated during build). We must manually add a dependency to the <code>wp-edit-post</code> script when registering the script to make sure it loads before ours:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">$dependencies = array_merge(
+  $script_asset['dependencies'],
+  [
+    'wp-edit-post',
+  ]
+);
+wp_register_script(
+  'my-script',
+  plugins_url( $index_js, __FILE__ ),
+  $dependencies,
+  $script_asset['version']
+);</code></pre>
+
+
+
+<p>Now the script setup is ready!</p>
+
+
+
+<p class="explanation">The plugin can be updated with Gutenberg&#8217;s relentless development cycles. Run <code>npm run packages-update</code> to update the npm dependencies (and, consequently, the <a href="https://github.com/WordPress/gutenberg/blob/master/packages/scripts/config/webpack.config.js">webpack configuration</a>, which is defined on package <code>"@wordpress/scripts"</code>) to their latest supported versions.</p>
+
+
+
+<p>At this point, you might be wondering how I knew to add a dependency to the <code>"wp-edit-post"</code> script before our script. Well, I had to dig into Gutenberg&#8217;s source code. The documentation for <code>&lt;PluginDocumentSettingPanel&gt;</code> is somewhat incomplete, which is a perfect example of how Gutenberg&#8217;s documentation is lacking in certain places.</p>
+
+
+
+<p>While digging in code and browsing documentation, I discovered a few enlightening things. For example, there are two ways to code our scripts: using either the ES5 or the ESNext syntax. ES5 doesn&#8217;t require a build process, and it references instances of code from the runtime environment, most likely through the global <code>wp</code> variable. For instance, the code to create an icon goes like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var moreIcon = wp.element.createElement( 'svg' );</code></pre>
+
+
+
+<p>ESNext relies on webpack to resolve all dependencies, which enables us to import static components. For instance, the code to create an icon would be:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import { more } from '@wordpress/icons';</code></pre>
+
+
+
+<p>This applies pretty much everywhere. However, that&#8217;s not the case for the <code>&lt;PluginDocumentSettingPanel&gt;</code> component, which <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">references the runtime environment for ESNext</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const { PluginDocumentSettingPanel } = wp.editPost;</code></pre>
+
+
+
+<p>That&#8217;s why we have to add a dependency to the &#8220;wp-edit-post&#8221; script. That’s where the wp.editPost variable is defined.</p>
+
+
+
+<p>If <code>&lt;PluginDocumentSettingPanel&gt;</code> could be directly imported, then the dependency to &#8220;wp-edit-post&#8221; would be automatically handled by the block editor through the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/dependency-extraction-webpack-plugin">Dependency Extraction Webpack Plugin</a>. This plugin builds the bridge from static to runtime by creating a <code>index.asset.php</code> file containing all the dependencies for the runtime environment scripts, which are obtained by <a href="https://github.com/WordPress/gutenberg/blob/dd9f4544330be4aa32beb96c13a9ad9268c7e573/packages/dependency-extraction-webpack-plugin/util.js#L72">replacing <code>"@wordpress/"</code> from the package name with <code>"wp-"</code></a>. Hence, the <code>"@wordpress/edit-post"</code> package &nbsp;becomes the <code>"wp-edit-post"</code> runtime script. That&#8217;s how I figured out which script to add the dependency.</p>
+
+
+
+<h3><strong>Step 2: Blacklisting the custom sidebar panel on all other CPTs&nbsp;</strong></h3>
+
+
+
+<p>The panel will display documentation for a specific CPT, so it must be registered only to that CPT. That means we need to blacklist it from appearing on any other post types.</p>
+
+
+
+<p>Ryan Welcher (who created the <code>&lt;PluginDocumentSettingPanel&gt;</code> component) <a href="https://ryanwelcher.com/2020/02/restricting-plugindocumentsettingpanel-by-post-type/">describes this process</a> when registering the panel:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost
+const { withSelect } = wp.data;
+ 
+const MyCustomSideBarPanel = ( { postType } ) => {
+ 
+  if ( 'post-type-name' !== postType ) {
+    return null;
+  }
+ 
+  return(
+    &lt;PluginDocumentSettingPanel
+      name="my-custom-panel"
+      title="My Custom Panel"
+    >
+      Hello, World!
+    &lt;/PluginDocumentSettingPanel>
+  );
+}
+ 
+const CustomSideBarPanelwithSelect = withSelect( select => {
+  return {
+    postType: select( 'core/editor' ).getCurrentPostType(),
+  };
+} )( MyCustomSideBarPanel);
+ 
+ 
+registerPlugin( 'my-custom-panel', { render: CustomSideBarPanelwithSelect } );</code></pre>
+
+
+
+<p>He also suggests an alternative solution, using <code>useSelect</code> instead of <code>withSelect</code>.</p>
+
+
+
+<p>That said, I&#8217;m not totally convinced by this solution, because the JavaScript file must still be loaded, even if it isn’t needed, forcing the website to take a performance hit. Doesn&#8217;t it make more sense to <em>not</em> register the JavaScript file than it does to run JavaScript just to disable JavaScript?</p>
+
+
+
+<p>I have created a PHP solution. I’ll admit that it feels a bit hacky, but it works well. First, we find out which post type is related to the object being created or edited:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function get_editing_post_type(): ?string
+{
+  if (!is_admin()) {
+    return null;
+  }
+ 
+  global $pagenow;
+  $typenow = '';
+  if ( 'post-new.php' === $pagenow ) {
+    if ( isset( $_REQUEST['post_type'] ) &amp;&amp; post_type_exists( $_REQUEST['post_type'] ) ) {
+      $typenow = $_REQUEST['post_type'];
+    };
+  } elseif ( 'post.php' === $pagenow ) {
+    if ( isset( $_GET['post'] ) &amp;&amp; isset( $_POST['post_ID'] ) &amp;&amp; (int) $_GET['post'] !== (int) $_POST['post_ID'] ) {
+      // Do nothing
+    } elseif ( isset( $_GET['post'] ) ) {
+      $post_id = (int) $_GET['post'];
+    } elseif ( isset( $_POST['post_ID'] ) ) {
+      $post_id = (int) $_POST['post_ID'];
+    }
+    if ( $post_id ) {
+      $post = get_post( $post_id );
+      $typenow = $post->post_type;
+    }
+  }
+  return $typenow;
+}</code></pre>
+
+
+
+<p>Then, ,we register the script only if it matches our CPT:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">add_action('init', 'maybe_register_script');
+function maybe_register_script()
+{
+  // Check if this is the intended custom post type
+  if (get_editing_post_type() != 'my-custom-post-type') {
+    return;
+  }
+ 
+  // Only then register the block
+  wp_register_script(...);
+  wp_enqueue_script(...);
+}</code></pre>
+
+
+
+<p class="explanation"><a href="https://www.designbombs.com/registering-gutenberg-blocks-for-custom-post-type/">Check out this post</a> for a deeper dive on how this works.</p>
+
+
+
+<h3>Step 3: Creating the custom guide</h3>
+
+
+
+<p>I designed the functionality for my plugin’s guide based on the WordPress <code>&lt;Guide&gt;</code> component. I didn’t realize I’d be doing that at first, so here’s how I was able to figure that out.</p>
+
+
+
+<ol><li>Search the <a href="https://github.com/WordPress/gutenberg">source code</a> to see how it was done there.</li><li>Explore the catalogue of all available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a>.</li></ol>
+
+
+
+<p>First, I copied content from the block editor modal and did a basic search. <a href="https://github.com/WordPress/gutenberg/search?q=%22In+the+WordPress+editor%22&amp;type=">The results</a> pointed me to <a href="https://github.com/WordPress/gutenberg/blob/7b63e877336bb8f156bcd25191066bad38ba6635/packages/edit-post/src/components/welcome-guide/index.js">this file</a>. From there I discovered the component is called <code>&lt;Guide&gt;</code> and could simply copy and paste its code to my plugin as a base for my own guide.</p>
+
+
+
+<p>Then I looked for the component&#8217;s documentation. I browsed the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/components">@wordpress/components</a> package (which, as you may have guessed, is where components are implemented) and found <a href="https://github.com/WordPress/gutenberg/blob/master/packages/components/src/guide/README.md">the component’s README file</a>. That gave me all the information I needed to implement my own custom guide component.</p>
+
+
+
+<p>I also explored the catalogue of all the available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a> (which actually shows that these components can be used outside the context of WordPress). Clicking on all of them, I finally discovered <a href="https://wordpress.github.io/gutenberg/?path=/story/components-guide--default"><code>&lt;Guide&gt;</code></a>. The storybook provides the source code for several examples (or stories). It’s a handy resource for understanding how to customize a component through props.</p>
+
+
+
+<p>At this point, I knew <code>&lt;Guide&gt;</code> would make a solid base for my component. There is one missing element, though: how to trigger the guide on click. I had to rack my brain for this one!</p>
+
+
+
+<p>This is a button with a listener that opens the modal on click:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import MyGuide from './guide';
+ 
+const MyGuideWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button onClick={ () => setOpen( true ) }>
+        { __('Open Guide: “Creating Persisted Queries”') }
+      &lt;/Button>
+      { isOpen &amp;&amp; (
+        &lt;MyGuide 
+          { ...props }
+          onFinish={ () => setOpen( false ) }
+        />
+      ) }
+    &lt;/>
+  );
+};
+export default MyGuideWithButton;</code></pre>
+
+
+
+<p>Even though the block editor tries to hide it, we are operating within React. Until now, we’ve been dealing with JSX and components. But now we need the <a href="https://reactjs.org/docs/hooks-state.html"><code>useState</code> hook</a>, which is specific to React.</p>
+
+
+
+<p>I&#8217;d say that having a good grasp of React is required if you want to master the WordPress block editor. There is no way around it.</p>
+
+
+
+<h3>Step 4: Adding content to the guide</h3>
+
+
+
+<p>We’re almost there! Let’s create the <code>&lt;Guide&gt;</code> component, containing a <code>&lt;GuidePage&gt;</code> component for each page of content.</p>
+
+
+
+<p>The content can use HTML, include other components, and whatnot. In this particular case, I have added three <code>&lt;GuidePage&gt;</code> instances for my CPT just using HTML. The first page includes a video tutorial and the next two pages contain detailed instructions.</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { Guide, GuidePage } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+ 
+const MyGuide = ( props ) => {
+  return (
+    &lt;Guide { ...props } >
+      &lt;GuidePage>
+        &lt;video width="640" height="400" controls>
+          &lt;source src="https://d1c2lqfn9an7pb.cloudfront.net/presentations/graphql-api/videos/graphql-api-creating-persisted-query.mov" type="video/mp4" />
+          { __('Your browser does not support the video tag.') }
+        &lt;/video>
+        // etc.
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+    &lt;/Guide>
+  )
+}
+export default MyGuide;</code></pre>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-1.gif?ssl=1" alt="imaged gif showing the mouse cursor clicking on the Open Guide link in the block editor's document settings, which opens the custom welcome guide containing a video with links to other pages in the modal." class="wp-image-312613" data-recalc-dims="1"/><figcaption>Hey look, we have our own guide now!</figcaption></figure>
+
+
+
+<p>Not bad! There are a few issues, though:</p>
+
+
+
+<ul><li>I couldn&#8217;t embed the video inside the <code>&lt;Guide&gt;</code> because clicking the play button closes the guide. I assume that’s because the <code>&lt;iframe&gt;</code> falls outside the boundaries of the guide. I wound up uploading the video file to S3 and serving with <code>&lt;video&gt;</code>.</li><li>The page transition in the guide is not very smooth. The block editor’s modal looks alright because all pages have a similar height, but the transition in this one is pretty abrupt.</li><li>The hover effect on buttons could be improved. Hopefully, the Gutenberg team needs to fix this for their own purposes, because my CSS aren’t there. It’s not that my skills are bad; they are nonexistent.</li></ul>
+
+
+
+<p>But I can live with these issues. Functionality-wise, I&#8217;ve achieved what I need the guide to do.</p>
+
+
+
+<h3>Bonus: Opening docs independently&nbsp;</h3>
+
+
+
+<p>For our <code>&lt;Guide&gt;</code>, we created the content of each <code>&lt;GuidePage&gt;</code> component directly using HTML. However, if this HTML code is instead added through an autonomous component, then it can be reused for other user interactions.</p>
+
+
+
+<p>For instance, the component <code>&lt;CacheControlDescription&gt;</code> displays a description concerning HTTP caching:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const CacheControlDescription = () => {
+  return (
+    &lt;p>The Cache-Control header will contain the minimum max-age value from all fields/directives involved in the request, or "no-store" if the max-age is 0&lt;/p>
+  )
+}
+export default CacheControlDescription;</code></pre>
+
+
+
+<p>This component can be added inside a <code>&lt;GuidePage&gt;</code> as we did before, but also within a <code>&lt;Modal&gt;</code> component:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import CacheControlDescription from './cache-control-desc';
+ 
+const CacheControlModalWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button 
+        icon="editor-help"
+        onClick={ () => setOpen( true ) }
+      />
+      { isOpen &amp;&amp; (
+        &lt;Modal 
+          { ...props }
+          onRequestClose={ () => setOpen( false ) }
+        >
+          &lt;CacheControlDescription />
+        &lt;/Modal>
+      ) }
+    &lt;/>
+  );
+};
+export default CacheControlModalWithButton;</code></pre>
+
+
+
+<p>To provide a good user experience, we can offer to show the documentation only when the user is interacting with the block. For that, we show or hide the button depending on the value of <code>isSelected</code>:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { __ } from '@wordpress/i18n';
+import CacheControlModalWithButton from './modal-with-btn';
+ 
+const CacheControlHeader = ( props ) => {
+  const { isSelected } = props;
+  return (
+    &lt;>
+      { __('Cache-Control max-age') }
+      { isSelected &amp;&amp; (
+        &lt;CacheControlModalWithButton />
+      ) }
+    &lt;/>
+  );
+}
+export default CacheControlHeader;</code></pre>
+
+
+
+<p>Finally, the <code>&lt;CacheControlHeader&gt;</code> component is added to the appropriate control.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.gif?ssl=1" alt="Animated gif showing the option to view a guide displaying when a block is selected in the editor." class="wp-image-312615" data-recalc-dims="1"/></figure>
+
+
+
+<h3>Tadaaaaaaaa &#x1f389;</h3>
+
+
+
+<p>The WordPress block editor is quite a piece of software! I was able to accomplish things with it that I would have been unable to without it. Providing documentation to the user may not be the shiniest of examples or use cases, but it&#8217;s a very practical one and something that’s relevant for many other plugins. Want to use it for your own plugin? Go for it!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312604</post-id>	</item>
+	</channel>
+</rss>

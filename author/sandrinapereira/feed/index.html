@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Sandrina Pereira &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/sandrinapereira/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 12 Jun 2020 14:43:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Striking a Balance Between Native and Custom Select Elements</title>
+		<link>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/</link>
+					<comments>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2020 14:43:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[select]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312544</guid>
+
+					<description><![CDATA[<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&#60;select&#62;</code> element. We’re going to literally use a <code>&#60;select&#62;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as &#8230; <a href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Striking a Balance Between Native and Custom Select Elements&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&lt;select&gt;</code> element. We’re going to literally use a <code>&lt;select&gt;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as a select element.</p>
+
+
+
+<p>That’s what I mean by “hybrid” selects: they are both a native <code>&lt;select&gt;</code> and a styled alternate select in one design pattern.</p>
+
+
+
+<span id="more-312544"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?fit=1024%2C509&amp;ssl=1" alt="" class="wp-image-312546" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?w=1784&amp;ssl=1 1784w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=300%2C149&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1024%2C509&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=768%2C382&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1536%2C764&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1000%2C497&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Custom selects (left) are often used in place of native selects (right) for aesthetics and design consistency.</figcaption></figure>
+
+
+
+<h3>Select, dropdown, navigation, menu… the name matters</h3>
+
+
+
+<p>While doing the research for this article, I thought about many names that get tossed around when talking about selects, the most common of which are “dropdown” and “menu.” There are two types of naming mistakes we could make: giving the <em>same</em> name to different things, or giving <em>different</em> names to the same thing. A select can suffer from both mistakes.</p>
+
+
+
+<p>Before we move ahead, let me try to add clarity around using “dropdown” as a term. Here’s how I define the meaning of dropdown:</p>
+
+
+
+<blockquote class="wp-block-quote"><p><strong>Dropdown: </strong>An interactive component that consists of a button that shows and hides a list of items, typically on mouse hover, click or tap. The list is not visible by default until the interaction starts. The list usually displays a block of content (i.e. options) on top of other content.</p></blockquote>
+
+
+
+<p>A lot of interfaces can look <em>like</em> a dropdown. But simply calling an element a “dropdown&#8221; is like using “fish” to describe an animal. What type of fish it is? A clownfish is not the same as a shark. The same goes for dropdowns.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?fit=1024%2C640&amp;ssl=1" alt="" class="wp-image-312549" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?w=1920&amp;ssl=1 1920w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=300%2C188&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1024%2C640&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=768%2C480&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1536%2C960&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1000%2C625&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Like there are different types of fish in the sea, there are different types of components that we might be talking about when we toss the word “dropdown” around:</p>
+
+
+
+<ul><li><strong>Menu: </strong>A list of commands or actions that the user can perform within the page content.</li><li><strong>Navigation:</strong> A list of links used for navigating through a website.</li><li><strong>Select: </strong>A form control (<code>&lt;select&gt;</code>) that displays a list of options for the user to select within a form.</li></ul>
+
+
+
+<p>Deciding what type of dropdown we’re talking about can be a foggy task. Here are some examples from around the web that match how I would classify those three different types. This is based on my research and sometimes, when I can’t find a proper answer, <em>intuition</em> based on my experience.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?fit=1024%2C638&amp;ssl=1" alt="" class="wp-image-312552" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?w=1864&amp;ssl=1 1864w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=300%2C187&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1024%2C638&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=768%2C479&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1536%2C958&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1000%2C623&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Dropdown-land: Five scenarios where different dropdowns are used across the internet. Read the table below for a detailed description.</figcaption></figure>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Diagram Label</th><th>Scenario</th><th>Dropdown Type</th></tr></thead><tbody><tr><td>1</td><td>The dropdown expects a selected option to be submitted within a form context (e.g. Select Age)</td><td>Select</td></tr><tr><td>2</td><td>The dropdown does not need an active option (e.g. A list of actions: copy, paste and cut)</td><td>Menu</td></tr><tr><td>3</td><td>The selected option influences the content. (e.g. sorting list)</td><td>Menu or Select (more about it later)</td></tr><tr><td>4</td><td>The dropdown contains links to other pages. (e.g. A “meganav” with websites links)</td><td><a href="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/disclosure-navigation.html">Disclosure Navigation</a></td></tr><tr><td>5</td><td>The dropdown has content that is not a list. (e.g. a date picker)</td><td>Something else that should not be called dropdown</td></tr></tbody></table></figure>
+
+
+
+<p>Not everyone perceives and interacts with the internet in the same way. Naming user interfaces and defining design patterns is a fundamental process, though one with a lot of room for personal interpretation. All of that variation is what drives the population of dropdown<em>-land.&nbsp;</em></p>
+
+
+
+<p>There is a dropdown type that is clearly a <strong>menu. </strong>Its usage is a hot topic in conversations about accessibility. I won’t talk much about it here, but let me just reinforce that the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu"><code>&lt;menu&gt;</code></a> element is deprecated and no longer recommended. And here’s a detailed explanation about <a href="https://inclusive-components.design/menus-menu-buttons/">inclusive menus and menus buttons</a>, including why <a href="https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html">ARIA menu role should not be used for site navigation</a>.</p>
+
+
+
+<p>We haven’t even touched on other elements that fall into a rather gray area that makes classifying dropdowns even murkier because of a lack of practical uses cases from the WCAG community.</p>
+
+
+
+<p>Uff… that was a lot. Let’s forget about this dropdown-land mess and focus exclusively on the dropdown type that is clearly a <code>&lt;select&gt;</code> element.</p>
+
+
+
+<h3>Let’s talk about <code>&lt;select&gt;</code></h3>
+
+
+
+<p>Styling form controls is an interesting journey. As MDN puts it, there’s <a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms#Why_is_styling_form_widgets_challenging"><em>the good, the bad, and the ugly</em></a>. Good is stuff like <code>&lt;form&gt;</code> which is just a block-level element to style. Bad is stuff like checkboxes, which <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">can be done but is somewhat cumbersome</a>. <code>&lt;select&gt;</code> is definitely in ugly terrain.</p>
+
+
+
+<p>A lot of articles have been written about it and, even in 2020, <a href="https://css-tricks.com/making-a-better-custom-select-element/">it’s still a challenge to create custom selects</a> and <a href="https://www.24a11y.com/2019/select-your-poison-part-2/">some users still prefer the simple native ones</a>.&nbsp;</p>
+
+
+
+<p>Among developers, the <code>&lt;select&gt;</code> is the <a href="https://www.gwhitworth.com/blog/2019/07/form-controls-components/">most frustrating form control by far</a>, mainly because of <a href="https://www.gwhitworth.com/blog/2019/10/can-we-please-style-select/">its lack of styling support</a>. The UX struggle behind it is so big that we <a href="https://medium.com/@kollinz/dropdown-alternatives-for-better-mobile-forms-53e40d641b53">look for other alternatives</a>. Well, I guess the first rule of <code>&lt;select&gt;</code> is <a href="https://www.w3.org/TR/using-aria/%23firstrule">similar to ARIA</a>: <strong>avoid using it if you can.</strong></p>
+
+
+
+<p>I could finish the article right here with <em>“Don’t use <code>&lt;select&gt;</code>, period.&#8221;</em> But let’s face reality: a select is still our best solution in a number of circumstances. That might include scenarios where&nbsp;we’re working with a list that contains a lot of options, layouts that are tight on space, or simply a lack of time or budget to design and implement a great custom interactive component from scratch.</p>
+
+
+
+<h3>Custom <code>&lt;select&gt;</code> requirements</h3>
+
+
+
+<p>When we make the decision to create a custom select — even if it’s just a “simple” one — these are the requirements we generally have to work with:</p>
+
+
+
+<ul><li>There is a button that contains the current selected option.</li><li>Clicking the box toggles the visibility of the options list (also called listbox).</li><li>Clicking an option in the listbox updates the selected value. The button text changes and the listbox is closed.</li><li>Clicking outside the component closes the listbox.</li><li>The trigger contains a small triangle icon pointing downward to indicate there are options.</li></ul>
+
+
+
+<p>Something like this:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dyYqmya" src="//codepen.io/anon/embed/dyYqmya?height=575&amp;theme-id=1&amp;slug-hash=dyYqmya&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dyYqmya" title="CodePen Embed dyYqmya" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Some of you may be thinking this works and is good to go. But wait… does it work for <em>everyone</em>? &nbsp;Not everyone uses a mouse (or touch screen). Plus, a native <code>&lt;select&gt;</code> element comes with more features we get for free and aren&#8217;t included in those requirements, such as:</p>
+
+
+
+<ul><li>The checked option is perceivable for all users regardless of their visual abilities.</li><li>The component can interact with a keyboard in a predictable way across all browsers (e.g. using arrow keys to navigate, <code>Enter</code> to select, <code>Esc</code> to cancel, etc.).</li><li>Assistive technologies (e.g. screen readers) announce the element clearly to users, including its role, name and state.</li><li>The listbox position is adjusted. (i.e. does not get cut off of the screen).</li><li>The element respects the user’s operating system preferences (e.g high contrast, color scheme, motion, etc.).</li></ul>
+
+
+
+<p>This is where the majority of the custom selects fail in some way. Take a look at some of the major UI components libraries. I won’t mention any because the web is ephemeral, but go give it a try. You’ll likely notice that the select component in one framework behaves differently from another.&nbsp;</p>
+
+
+
+<p>Here are additional characteristics to watch for:</p>
+
+
+
+<ul><li>Is a listbox option immediately activated on focus when navigating with a keyboard?</li><li>Can you use <code>Enter</code> and/or <code>Space</code> to select an option?</li><li>Does the <code>Tab</code> key jump go to the next option in the listbox, or jump to the next form control?</li><li>What happens when you reach the last option in the listbox using arrow keys? Does it simply stay at the last item, does it go back to the first option, or worst of all, does focus move to the next form control?&nbsp;</li><li>Is it possible to jump directly to the last item in the listbox using the <code>Page Down</code> key?</li><li>Is it possible to scroll through the listbox items if there are more than what is currently in view?</li></ul>
+
+
+
+<p>This is a small sample of the features included in a native <code>&lt;select&gt;</code> element. </p>
+
+
+
+<blockquote class="wp-block-quote"><p>Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect.</p></blockquote>
+
+
+
+<p>But it gets worse. Even the native <code>&lt;select&gt;</code> <a href="https://www.24a11y.com/2019/select-your-poison/">behaves differently</a> across browsers and screen readers. Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect. That’s a dangerous decision and it’s in those details where the devil lives.</p>
+
+
+
+<h3>Building a “hybrid” select</h3>
+
+
+
+<p>When we build a simple custom select, we are making a trade-off without noticing it. Specifically, <strong>we sacrifice functionality to aesthetics. </strong>It should be the other way around.</p>
+
+
+
+<p>What if we instead deliver a native select by default and replace it with a more aesthetically pleasing one if possible? That’s where the “hybrid” select idea comes into action. It’s “hybrid” because it consists of two selects, showing the appropriate one at the right moment:</p>
+
+
+
+<ul><li>A native select, visible and accessible by default</li><li>A custom select, hidden until it’s safe to be interacted with a mouse</li></ul>
+
+
+
+<p>Let’s start with markup. First, we’ll add a native <code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> items <em>before</em> the custom selector for this to work. (I’ll explain why in just a bit.)</p>
+
+
+
+<p>Any form control must have a <a href="https://www.w3.org/WAI/tutorials/forms/labels/">descriptive label</a>. We could use <code>&lt;label&gt;</code>, but that would focus the native select when the label is clicked. To prevent that behavior, we’ll use a <code>&lt;span&gt;</code> and connect it to the select using <code>aria-labelledby</code>.</p>
+
+
+
+<p>Finally, we need to tell Assistive Technologies to ignore the custom select, using <code>aria-hidden="true"</code>. That way, only the native select is announced by them, no matter what.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line="3,4,5,6"><code markup="tt">&lt;span class="selectLabel" id="jobLabel">Main job role&lt;/span>
+&lt;div class="selectWrapper">
+  &lt;select class="selectNative js-selectNative" aria-labelledby="jobLabel">
+    &lt;!-- options -->
+    &lt;option>&lt;/option>
+  &lt;/select>
+  &lt;div class="selectCustom js-selectCustom" aria-hidden="true">
+     &lt;!-- The beautiful custom select -->
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>This takes us to styling, where we not only make things look pretty, but where we handle the switch from one select to the other. We need just a few new declarations to make all the magic happen.</p>
+
+
+
+<p>First, both native and custom selects must have the same width and height. This ensures people don’t see major differences in the layout when a switch happens.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectNative,
+.selectCustom {
+  position: relative;
+  width: 22rem;
+  height: 4rem;
+}</code></pre>
+
+
+
+<p>There are two selects, but only one can dictate the space that holds them. The other needs to be absolutely positioned to take it out of the document flow. Let’s do that to the custom select because it’s the “replacement” that’s used only if it can be. We’ll hide it by default so it can’t be reached by anyone just yet.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectCustom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}</code></pre>
+
+
+
+<p>Here comes the &#8220;funny” part. We need to detect if someone is using a device where hover is part of the primary input, like a computer with a mouse. While we typically think of media queries for responsive breakpoints or checking feature support, we can use it to detect hover support too using <code>@media query (hover :hover)</code>, which is supported by all major browsers. So, let&#8217;s use it to show the custom select only on devices that have hover:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectCustom {
+    display: block;
+  }
+}</code></pre>
+
+
+
+<p>Great, but what about people who use a keyboard to navigate even in devices that have hover? What we’ll do is hide the custom select when the native select is in focus. We can reach for an <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">adjacent Sibling combinatioron</a> (<code>+</code>). When the native select is in focus, hide the custom select next to it in the DOM order. (This is why the native select should be placed before the custom one.)</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+}</code></pre>
+
+
+
+<p>That’s it! The trick to switch between both selects is done! There are other CSS ways to do it, of course, but this works nicely.</p>
+
+
+
+<p>Last, we need a sprinkle of JavaScript. Let’s add some event listeners:</p>
+
+
+
+<ul><li>One for click events that trigger the custom select to open and reveal the options</li><li>One to sync both selects values. When one select value is changed, the other select value updates as well</li><li>One for basic keyboard navigation controls, like navigation with <code>Up</code> and <code>Down</code> keys, selecting options with the <code>Enter</code> or <code>Space</code> keys, and closing the select with <code>Esc</code></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzyOYRr" src="//codepen.io/anon/embed/YzyOYRr?height=575&amp;theme-id=1&amp;slug-hash=YzyOYRr&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzyOYRr" title="CodePen Embed YzyOYRr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Usability testing</h3>
+
+
+
+<p>I conducted a very small usability test where I asked a few people with disabilities to try the hybrid select component. The following devices and tools were tested using the latest versions of Chrome (81), Firefox (76) and Safari (13):</p>
+
+
+
+<ul><li>Desktop device using mouse only</li><li>Desktop device using keyboard only</li><li>VoiceOver on MacOS using keyboard</li><li>NVDA on Windows using keyboard</li><li>VoiceOver on iPhone and iPad using Safari</li></ul>
+
+
+
+<p>All these tests worked as expected, but I believe <strong>this could have even more usability tests with more diverse people and tools</strong>. If you have access to other devices or tools — such as JAWS, Dragon, etc. — please tell me how the test goes.</p>
+
+
+
+<p>An issue was found during testing. Specifically, the issue was with the VoiceOver setting “Mouse pointers: Moves Voice Over cursor.” If the user opens the select with a mouse, the custom select will be opened (instead of the native) and the user won’t experience the native select.</p>
+
+
+
+<p>What I most like about this approach is how it uses the best of both worlds without compromising the core functionality:</p>
+
+
+
+<ul><li>Users on mobile and tablets get the native select, which generally offers a better user experience than a custom select, including performance benefits.</li><li>Keyboard users get to interact with the native select the way they would expect.</li><li>Assistive Technologies can interact with the native select like normal.</li><li>Mouse users get to interact with the enhanced custom select.</li></ul>
+
+
+
+<p>This approach<strong> provides essential native functionality for everyone </strong>without the extra huge code effort to implement all the native features.</p>
+
+
+
+<p>Don’t get me wrong. This technique is not a one-size-fits-all solution. It may work for simple selects but probably won’t work for cases that involve complex interactions. In those cases, we’d need to use ARIA and JavaScript to complement the gaps and create a <a href="https://24ways.org/2019/making-a-better-custom-select-element/">truly accessible custom select</a>.</p>
+
+
+
+<h3>A note about selects that look like menus</h3>
+
+
+
+<p>Let’s take a look back at the third Dropdown-land scenario. If you recall, it’s &nbsp;a dropdown that always has a checked option (e.g. sorting some content). I classified it in the gray area, as either a menu or a select.&nbsp;</p>
+
+
+
+<p>Here’s my line of thought: Years ago, this type of dropdown was implemented mostly using a native <code>&lt;select&gt;</code>. Nowadays, it is common to see it implemented from scratch with custom styles (accessible or not). What we end up with is a select element that looks like a menu.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?ssl=1" alt="Three similar dropdowns that always have a selected option." class="wp-image-312555" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?w=718&amp;ssl=1 718w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p><strong>A <code>&lt;select&gt;</code> &nbsp;is a type of menu.</strong> Both have similar semantics and behavior, especially in a scenario that involves a list of options where one is always checked. &nbsp;Now, let me mention the <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">WCAG 3.2.2 On Input (Level A)</a> criterion:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Changing the setting of any user interface component should not automatically cause a change of context unless the user has been advised of the behavior before using the component.</p></blockquote>
+
+
+
+<p>Let’s put this in practice. Imagine a sortable list of students. Visually, it may be obvious that sorting is immediate, but that’s not necessarily true for everyone. So, when using <code>&lt;select&gt;</code>, we risk failing the WCAG guideline because the page content changed, and ignificantly re-arranging the content of a page is considered a <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html%23dfn-changes-of-context">change of context</a>.</p>
+
+
+
+<p>To ensure the criterion success, we must warn the user about the action before they interact with the element, or include a <code>&lt;button&gt;</code> immediately after the select to confirm the change.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label for="sortStudents">
+  Sort students
+  &lt;!-- Warn the user about the change when a confirmation button is not present. -->
+  &lt;span class="visually-hidden">(Immediate effect upon selection)&lt;/span>
+&lt;/label>
+&lt;select id="sortStudents"> ... &lt;/select></code></pre>
+
+
+
+<p>That said, using a <code>&lt;select&gt;</code> or building a custom menu are both good approaches when it comes to simple menus that change the page content. Just remember that your decision will dictate the amount of work required to make the component fully accessible. This is a scenario where the hybrid select approach could be used.</p>
+
+
+
+<h3>Final words</h3>
+
+
+
+<p>This whole idea started as an innocent CSS trick but, after all of this research, I was reminded once more that creating unique experiences without compromising accessibility is not an easy task.</p>
+
+
+
+<p>Building truly accessible select components (or any kind of dropdown) is harder than it looks. WCAG provides excellent guidance and best practices, but without specific examples and diverse practical uses cases, the guidelines are mostly aspirational. That’s not to mention the fact that ARIA support is tepid and that native <code>&lt;select&gt;</code> elements look and behave differently across browsers.</p>
+
+
+
+<p>The “hybrid” select is just another attempt to create a good looking select while getting as many native features as possible. Don’t look at this <s>technique</s> experiment as an excuse to downplay accessibility, but rather as an attempt to serve both worlds. If you have the resources, time and the needed skills, <em>please do it right</em> and make sure to test it with different users before shipping your component to the world.</p>
+
+
+
+<p>P.S. Remember to <a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">use a proper name</a> when making a “dropdown” component. &#x1f609;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312544</post-id>	</item>
+		<item>
+		<title>Using Custom Properties to Wrangle Variations in Keyframe Animations</title>
+		<link>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/</link>
+					<comments>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Thu, 12 Sep 2019 14:22:16 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[custom properties]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=295286</guid>
+
+					<description><![CDATA[<p>Have you ever wondered how to customize <a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">CSS animations keyframes</a> without using any preprocessor feature, like <a href="https://sass-lang.com/documentation/at-rules/mixin">mixins</a>? I keep reaching for preprocessors for this reason, but it would be so nice to drop yet one more dependency and go with vanilla CSS.</p>
+<p>Well, I found a way to account for variations within a keyframe animation using nothing but CSS and it’s thanks to <a href="https://css-tricks.com/making-custom-properties-css-variables-dynamic/">custom properties</a>! Let’s learn a little more about how CSS keyframes work and how we &#8230; <a href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Using Custom Properties to Wrangle Variations in Keyframe Animations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/">Using Custom Properties to Wrangle Variations in Keyframe Animations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Have you ever wondered how to customize <a href="https://css-tricks.com/snippets/css/keyframe-animation-syntax/">CSS animations keyframes</a> without using any preprocessor feature, like <a href="https://sass-lang.com/documentation/at-rules/mixin">mixins</a>? I keep reaching for preprocessors for this reason, but it would be so nice to drop yet one more dependency and go with vanilla CSS.</p>
+<p>Well, I found a way to account for variations within a keyframe animation using nothing but CSS and it’s thanks to <a href="https://css-tricks.com/making-custom-properties-css-variables-dynamic/">custom properties</a>! Let’s learn a little more about how CSS keyframes work and how we can enhance them with CSS and a touch of custom properties.</p>
+<p><span id="more-295286"></span></p>
+<h3>Understanding CSS animations inheritance</h3>
+<p>When we assign an animation to an element, we can customize some of its properties such as duration, delay, and so on. Let me show you a dummy example: we have two classes: <code>.walk</code> and <code>.run</code>. Both share the same animation (named <code>breath</code>) and  <code>.run</code> executes the animation faster than <code>.walk</code> (<code>0.5s</code> to <code>2s</code>, respectively).</p>
+<pre rel="CSS"><code class="language-css">@keyframes breath {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+/* Both share the same animation, but walking is _slower_ than running */
+.walk {
+  animation: breath 2s alternate;
+}
+
+.run {
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>Each time we reuse an animation, <strong>it can behave differently based on the properties we assign it</strong>. So, we can say that an animation inherits its behavior based on the element where it’s applied.</p>
+<p>But what about the animation *rules* (the scale in this case)? Let’s go back to the <code>breath</code> animation example: The <code>.walk</code> class executes <code>breath</code> slower but it also needs to be deeper, so we need to change its scale value to be larger than it is for the <code>.run</code> class, which takes smaller, more frequent breaths.</p>
+<p>The common approach in plain CSS is to duplicate the original animation and tweak the values directly in the class:</p>
+<pre rel="CSS"><code class="language-css">@keyframes breath {
+  /* same as before... */
+}
+
+/* similar to breath, but with different scales */
+@keyframes breathDeep {
+  from {
+    transform: scale(0.3);
+  }
+  to {
+    transform: scale(1.7);
+  }
+}
+
+.walk {
+  animation: breathDeep 2s alternate;
+}
+
+.run {
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>While this works fine, there’s a better solution which allow us to reuse both the animation’s properties and its values! How? By taking advantage of CSS variables inheritance! Let’s see how:</p>
+<pre rel="CSS" data-line="13,14,19,20"><code class="language-css">/* breath behaves based on the
+CSS variables values that are inherited */
+@keyframes breath {
+  from {
+    transform: scale(var(--scaleStart));
+  }
+  to {
+    transform: scale(var(--scaleEnd));
+  }
+}
+
+.walk {
+  --scaleStart: 0.3;
+  --scaleEnd: 1.7;
+  animation: breath 2s alternate;
+}
+
+.run {
+  --scaleStart: 0.8;
+  --scaleEnd: 1.2;
+  animation: breath 0.5s alternate;
+}</code></pre>
+<p>Cool, right? Now we don’t need to write <em>duplicate</em> animations to get varying effects from the same animation!</p>
+<p>If you need to go even further, remember that we can also <a href="https://css-tricks.com/updating-a-css-variable-with-javascript/">update CSS custom properties with JavaScript</a>. Not only <a href="https://css-tricks.com/breaking-css-custom-properties-out-of-root-might-be-a-good-idea/">root variables</a>, but also in specific elements. I find this incredible powerful because we can create more efficient animations by taking advantage of JavaScript without losing the native optimizations from CSS animation. It’s a win-win!</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sandrina-p" data-slug-hash="axVeGg" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Dynamic CSS @keyframes w/ CSS Vanilla">
+  <span>See the Pen <a href="https://codepen.io/sandrina-p/pen/axVeGg/"><br />
+  Dynamic CSS @keyframes w/ CSS Vanilla</a> by Sandrina Pereira (<a href="https://codepen.io/sandrina-p">@sandrina-p</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/">Using Custom Properties to Wrangle Variations in Keyframe Animations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/using-custom-properties-to-wrangle-variations-in-keyframe-animations/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">295286</post-id>	</item>
+	</channel>
+</rss>

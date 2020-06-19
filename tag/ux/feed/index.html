@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>ux &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/ux/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Tue, 16 Jun 2020 12:59:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>What is Developer Experience (DX)?</title>
+		<link>https://css-tricks.com/what-is-developer-experience-dx/</link>
+					<comments>https://css-tricks.com/what-is-developer-experience-dx/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 23:31:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dx]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311245</guid>
+
+					<description><![CDATA[<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it &#8230; <a href="https://css-tricks.com/what-is-developer-experience-dx/" class="read-more">Read article <span class="screen-reader-text"> &#8220;What is Developer Experience (DX)?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it to the different ways people think about and use the term.</p>
+
+
+
+<span id="more-311245"></span>
+
+
+
+<div class="wp-block-group ticss-c360ab1e"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-companies">specific companies.</span></h3>
+
+
+
+<p>I hear DX and <a href="https://stripe.com/">Stripe</a> together a lot. That makes sense. Stripe is a payment gateway company almost exclusively for developers. They are serious about providing a good experience for their customers (developers), hence &#8220;developer experience.&#8221; Just listen to Suz Hinton <a href="https://shoptalkshow.com/409/">talk about &#8220;friction journals&#8221;</a>, which is the idea of sitting down to use a product (like Stripe) and noting down every single little WTF moment, confusion, and frustration so that improvements can be made:</p>
+
+
+
+<figure class="wp-block-audio"><audio controls src="https://css-tricks.com/wp-content/uploads/2020/06/shoptalkshow-409-mp3cut.net_.mp3"></audio></figure>
+
+
+
+<p>Netlify is like Stripe in this way, as is Heroku, CodePen, and any number of companies where the <em>entire customer base</em> is developers. For companies like this, it&#8217;s almost like DX is what UX (User Experience) is for any other company. </p>
+</div></div>
+
+
+
+<div class="wp-block-group ticss-0c6f0b01"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-technologies">specific technologies.</span></h3>
+
+
+
+<p>It&#8217;s common to hear DX invoked when <em>comparing</em> technologies. For instance, some people will say that Vue offers a better developer experience than React. (I&#8217;m not trying to start anything, I don&#8217;t even have much of an opinion on this.) They are talking about things like APIs. Perhaps the <strong>state</strong> is more intuitive to manage in one vs. the other. Or they are talking about features. I know Vue and Svelte have animation helpers built-in while React does not. But React has hooks and people generally like those. These are aspects of the DX of these technologies.</p>
+
+
+
+<p>Or they might be speaking about the feeling around the tools <em>surrounding</em> the core technology. I know <a href="https://reactjs.org/docs/create-a-new-react-app.html">create-react-app</a> is widely beloved, but so is the <a href="https://cli.vuejs.org/">Vue CLI</a>. <a href="https://reacttraining.com/react-router/">React Router</a> is hugely popular, but Vue <a href="https://router.vuejs.org/">has a router</a> that is blessed (and maintained) by the core team which offers a certain feeling of trust.</p>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> vue create hello-world</code></pre>
+</div>
+
+
+
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> npx create-react-app my-app</code></pre>
+</div>
+</div>
+
+
+
+<p>I&#8217;m not using JavaScript frameworks/libraries as just any random example. I hear people talk about DX as it relates to JavaScript more than anything else — which could be due to the people in my circles, but it feels notable.</p>
+</div></div>
+
+
+
+<h3>People think of the world <span id="around-tech">around</span> the technology.</h3>
+
+
+
+<p>Everybody thinks good docs are important. There is no such thing as a technology that is better than another but has much worse docs. The one with the better docs is better overall <em>because</em> it has better docs. That&#8217;s not the technology itself; that&#8217;s the world around it.</p>
+
+
+
+<p>Have you ever seen a developer product with an API, and when you view the docs for the API while logged in, it uses API keys and data and settings <em>from your own account</em> to demonstrate? That&#8217;s extraordinary to me. That feels like DX to me.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?fit=1024%2C673&amp;ssl=1" alt="" class="wp-image-312927" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?w=2424&amp;ssl=1 2424w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=300%2C197&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1024%2C673&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=768%2C505&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1536%2C1010&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=2048%2C1347&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1000%2C658&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Airtable docs showing me API usage with my own data.</figcaption></figure>
+
+
+
+<p><a href="https://twitter.com/JakeDohm/status/1261799440622522374">&#8220;Make the right thing easy,&#8221;</a> notes Jake Dohm. </p>
+
+
+
+<p>That word, <em>easy</em>, feels highly related to DX. Technologies that make things easy are technologies with good DX. In usage as well as in understanding. How easily (and <a href="https://twitter.com/micahgodbolt/status/1261770428038524929">quickly</a>) can I understand what your technology does and what I can do with it? </p>
+
+
+
+<p>What the technology <em>does</em> is often only <em id="half-story">half of the story</em>. The happy path might be great, but what happens when it breaks or errors? How is the error reporting and logging? I think of <a href="https://www.apollographql.com/docs/">Apollo</a> and GraphQL here in my own experience. It&#8217;s such a great technology, but the error reporting feels horrendous in that it&#8217;s very difficult to track down even stuff like typos triggering errors in development. </p>
+
+
+
+<p>What is the debugging story like? Are there special tools for it? The same goes for testing. These things are fundamental DX issues.</p>
+
+
+
+<h3>People think of technology <span id="tech-offerings">offerings</span>.</h3>
+
+
+
+<p>For instance, a technology might be &#8220;good&#8221; already. Say it has an API that developers like. Then it starts offering a CLI. That&#8217;s (generally) a DX improvement, because it opens up doors for developers who prefer working in that world and who build processes around it.</p>
+
+
+
+<p>I think of things like <a href="https://www.netlify.com/products/dev/">Netlify Dev</a> here. They already have this great platform and then say, here, you can run it all on your own machine too. That&#8217;s taking DX seriously.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?fit=1024%2C799&amp;ssl=1" alt="" class="wp-image-312931" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?w=2448&amp;ssl=1 2448w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=300%2C234&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1024%2C799&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=768%2C599&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1536%2C1198&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=2048%2C1598&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1000%2C780&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>One aspect of Netlify Dev that is nice: The terminal command to start my local dev environment across all my sites on Netlify, regardless of what technology powers them, is the same: <code>netlify dev</code></figcaption></figure>
+
+
+
+<p>Having a dedicated CLI is almost always a good DX step, assuming it is well done and maintained. I remember WordPress before <a href="https://wp-cli.org/">WP-CLI</a>, and now lots of documentation just assumes you&#8217;re using it. I wasn&#8217;t even aware <a href="https://cloudinary.com/documentation/cloudinary_cli">Cloudinary had a CLI</a> until the other day when I needed it and was pleasantly surprised that it was there. I remember when npm scripts started <a href="https://css-tricks.com/why-npm-scripts/">taking over the world</a>. (What would npm be without a CLI?) We used to have a variety of different task runners, but now it&#8217;s largely assumed a project has run commands built into the <code>package.json</code> that you use to do anything the project needs to do.</p>
+
+
+
+<p>Melanie Sumner <a href="https://twitter.com/melaniersumner/status/1261851049020854272">thinks of CLIs</a> immediately as core DX.</p>
+
+
+
+<div class="wp-block-group ticss-d7589fd7"><div class="wp-block-group__inner-container">
+<h3>People think of the literal experience of <span id="coding">coding</span>.</h3>
+
+
+
+<p>There is nothing more directly DX than the experience of typing code into code editing software and running it. That&#8217;s what &#8220;coding&#8221; is and that&#8217;s what developers do. It&#8217;s no wonder that developers take that experience seriously and are constantly trying to improve it for themselves and their teams. I think of things like <a href="https://code.visualstudio.com/">VS Code</a> in how it&#8217;s essentially the DX of it that has made it so dominant in the code editing space in such a short time. VS Code does all kinds of things that developers like, does them well, does them fast, and <a href="https://css-tricks.com/my-visual-studio-code-setup-extensions-and-themes/">allows for a very wide degree of customization</a>. </p>
+
+
+
+<p>TypeScript keeps <a href="https://visualstudiomagazine.com/articles/2020/03/04/redmonk-feb20.aspx">growing in popularity</a> no doubt in part due to the experience it offers within VS Code. TypeScript literally helps you code better by showing you, for example, what functions need as parameters, and making it hard to do the wrong thing.</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?fit=1024%2C387&amp;ssl=1" alt="" class="wp-image-312933" width="695" height="262" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?w=2616&amp;ssl=1 2616w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=300%2C113&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1024%2C387&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=768%2C290&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1536%2C580&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=2048%2C773&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1000%2C378&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Then there is the experience <em>outside</em> the editor, which in the browser itself. Years ago, I wrote <a href="https://css-tricks.com/style-injection-is-for-winners/">Style Injection is for&nbsp;Winners</a> where my point was, as a CSS developer, the experience of saving CSS code and seeing the changes instantly in the browser is a DX you definitely want to have. That concept continues to live on, growing up to JavaScript as well, where &#8220;hot reloading&#8221; <a href="https://twitter.com/TheLarkInn/status/1261784047006580736">is goosebump-worthy</a>. </p>
+
+
+
+<p>The difference between a poor developer environment (no IDE help, slow saves, manual refreshes, slow pipelines) and a great developer environment (fancy editor assistance, hot reloading, fast everything) is startling. A good developer environment, good DX, makes you a better and more productive programmer. </p>
+</div></div>
+
+
+
+<h3>People <span id="compare">compare</span> it to user experience (UX).</h3>
+
+
+
+<p>There is <strong>a strong negative connotation</strong> to DX sometimes. It happens when people <a href="https://twitter.com/ShaneHudson/status/1261782642346819588">blame it</a> for it existing <em><a href="https://twitter.com/Cennydd/status/1261797134447378433">at the cost of user experience</a></em>.</p>
+
+
+
+<p>I think of things like client-side developer-only libraries. Think of the classic library that everyone loves to dunk: <a href="https://momentjs.com/">Moment.js</a>. Moment allows you to manipulate dates in JavaScript, and is often used client-side to do that. Users don&#8217;t care if you have a fancy API available to manipulate dates. That is entirely a developer convenience. So, you ship this library for yourself (good DX) at the cost of slowing down the website (bad UX). <em>Most</em> client-side JavaScript is in this category. </p>
+
+
+
+<p>Equally as often, people<strong> <em>connect</em> developer experience and user experience</strong>. If developers are empowered and effective, that will &#8220;trickle down&#8221; to produce good software, the theory goes. </p>
+
+
+
+<p>Worst case, we&#8217;re in a situation where UX and DX are on a teeter totter. Pile on some DX and UX suffers on the other side. Best case, we find ways to disentangle DX and UX entirely, finding value in both and taking both seriously. Although if one has to win, certainly it should be the users. Like the <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">HTML spec says</a>:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?fit=1024%2C775&amp;ssl=1" alt="" class="wp-image-312934" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?w=1388&amp;ssl=1 1388w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=300%2C227&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1024%2C775&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=768%2C581&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1000%2C756&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><em>In case of conflict, consider users over authors over implementors over specifiers over theoretical purity.</em></figcaption></figure>
+
+
+
+<div class="wp-block-group ticss-db118f54"><div class="wp-block-group__inner-container">
+<h3>People think about <span id="dx-time">time</span>.</h3>
+
+
+
+<p>How <em>long</em> does a technology take to adopt? Good DX considers this. Can I take advantage of it without rewriting everything? How quickly can I spin it up? How well does it play with other technologies I use?  What is my time investment?</p>
+
+
+
+<p>This kind of thing makes me think of some recent experience with <a href="https://workers.cloudflare.com/">Cloudflare Workers</a>. It&#8217;s really cool technology that we don&#8217;t have time to get all into right here, but suffice to say it gives you control over a website at a high level that we often don&#8217;t think about. Like what if you could manipulate a network request before it even gets to your web server? You don&#8217;t have to use it, but because of the level it operates on, new doors open up without caring about or interfering with whatever technologies you are using. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?fit=1024%2C718&amp;ssl=1" alt="" class="wp-image-312940" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?w=1405&amp;ssl=1 1405w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=300%2C210&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1024%2C718&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=768%2C538&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1000%2C701&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Not only does the technology itself position itself well, the DX of using it, while there are some rough edges, is at least well-considered, providing a browser-based testing environment. </p>
+
+
+
+<p>A powerful tool with a high investment cost, eh, that&#8217;s cool. But a powerful tool with <em>low</em> investment cost is good DX.</p>
+</div></div>
+
+
+
+<h3>People <span id="dont-think">don&#8217;t want to think</span> about it. </h3>
+
+
+
+<p>They say the best typography goes unnoticed because all you see is the what the words are telling you, not the typography itself. That can be true of developer experience. The best DX is that you never notice the tools or the technology because they just work. </p>
+
+
+
+<p>Good DX is just being able to <a href="https://twitter.com/jnowland/status/1261810491627696130">do your job</a> rather than fight with tools. The tools could be your developer environment, it could be build tooling, it could be hosting stuff, or it could even be whatever APIs you are interfacing with. Is the API <a href="https://twitter.com/wp_acf/status/1261787514173440000">intuitive</a> and helpful, or obtuse and tricky?</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Feel free to keep going on this in the comments. What is DX to <em>you?</em></p>
+
+
+
+<div class="wp-block-group footnotes ticss-92e47876" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Are we capitalizing Developer Experience? I&#8217;m just gonna go for it.</li><li>Looks like Michael Mahemoff has <a href="https://twitter.com/mahemoff/status/1947230411948032">a decent claim</a> on coining the term.</li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/what-is-developer-experience-dx/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311245</post-id>	</item>
+		<item>
+		<title>Block Links: The Search for a Perfect Solution</title>
+		<link>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/</link>
+					<comments>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#comments</comments>
+		
+		<dc:creator><![CDATA[Vikas Parashar]]></dc:creator>
+		<pubDate>Mon, 25 May 2020 19:58:40 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[links]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=309808</guid>
+
+					<description><![CDATA[<p>I was reading <a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">this article</a> by Chris where he talks about block links — you know, like wrapping an entire card element inside an anchor — being a bad idea. It’s bad accessibility because of how it affects screen readers. And it’s bad UX because it prevents simple user tasks, like selecting text.</p>
+<p>But maybe there’s something else at play. Maybe it’s less an issue with the pattern than the implementation of it. That led me to believe that this &#8230; <a href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Block Links: The Search for a Perfect Solution&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/">Block Links: The Search for a Perfect Solution</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I was reading <a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">this article</a> by Chris where he talks about block links — you know, like wrapping an entire card element inside an anchor — being a bad idea. It’s bad accessibility because of how it affects screen readers. And it’s bad UX because it prevents simple user tasks, like selecting text.</p>
+
+
+
+<p>But maybe there’s something else at play. Maybe it’s less an issue with the pattern than the implementation of it. That led me to believe that this is the time to write follow-up article to see if we can address some of the problems Chris pointed out.</p>
+
+
+
+<span id="more-309808"></span>
+
+
+
+<p>Throughout this post, I’ll use the term “card” to describe a component using the block link pattern. Here’s what we mean by that.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJPemmb" src="//codepen.io/anon/embed/OJPemmb?height=450&amp;theme-id=1&amp;slug-hash=OJPemmb&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJPemmb" title="CodePen Embed OJPemmb" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let’s see how we want our Card Components to work:</p>
+
+
+
+<ol><li>The whole thing should be linked and clickable.</li><li>It should be able to contain more than one link.</li><li>Content should be semantic so assistive tech can understand it.</li><li>The text should be selectable, like regular links.</li><li>Things like right-click and keyboard shortcuts should work with it</li><li>Its elements should be focusable when tabbing.</li></ol>
+
+
+
+<p>That’s a long list! And since we don’t have any standard card widget provided by the browser, we don’t have any standard guidelines to build it.&nbsp;</p>
+
+
+
+<p>Like most things on the web, there’s more than one way to make a card component. However, I haven’t found something that checks all the requirements we just covered. In this article, we will try to hit all of them. That’s what we’re going to do now!</p>
+
+
+
+<h3>Method 1: Wrap everything an <code>&lt;a></code></h3>
+
+
+
+<p>This is the most common and the easiest way to make a linked card. Take the HTML for the card and wrap the entire thing in an anchor tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;a href="/">
+  &lt;!-- Card markup -->
+&lt;/a></code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pojNPjK" src="//codepen.io/anon/embed/pojNPjK?height=550&amp;theme-id=1&amp;slug-hash=pojNPjK&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pojNPjK" title="CodePen Embed pojNPjK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s what that gives us:</p>
+
+
+
+<ol><li>It’s clickable.</li><li>It works with right-click and keyboard shortcuts.</li></ol>
+
+
+
+<p>Well, not great. We still can’t:</p>
+
+
+
+<ol><li>Put another link inside the card because the entire thing is a single link</li><li>Use it with a screen reader — the content is not semantic, so assistive technology will announce everything inside the card, starting from the time stamp</li><li>Select text</li></ol>
+
+
+
+<p>That’s enough &#x1f44e; that we probably shouldn’t use it. Let’s move onto the next technique.</p>
+
+
+
+<h3>Method 2: Just link what needs linking</h3>
+
+
+
+<p>This is a nice compromise that sacrifices a little UX for improved accessibility.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_QWjpaye" src="//codepen.io/anon/embed/QWjpaye?height=550&amp;theme-id=1&amp;slug-hash=QWjpaye&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed QWjpaye" title="CodePen Embed QWjpaye" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>With this pattern we achieve most of our goals:</p>
+
+
+
+<ol><li>We can put as many links as we want.&nbsp;</li><li>Content is semantic.</li><li>We can select the text from Card.</li><li>Right Click and keyboard shortcuts work.</li><li>The focus is in proper order when tabbing.</li></ol>
+
+
+
+<p>But it is missing the main feature we want in a card: the whole thing should be clickable! Looks like we need to try some other way.</p>
+
+
+
+<h3>Method 3: The good ol’ &nbsp;::before pseudo element</h3>
+
+
+
+<p>In this one, we add a :<code>:before</code> or :<code>:after</code> element, place it above the card with absolute positioning and stretch it over the entire width and height of the card so it’s clickable.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_abvJEJw" src="//codepen.io/anon/embed/abvJEJw?height=550&amp;theme-id=1&amp;slug-hash=abvJEJw&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed abvJEJw" title="CodePen Embed abvJEJw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>But now:</p>
+
+
+
+<ol><li>We still can’t add more than one link because anything else that’s linked is under the pseudo element layer. We can try to put all the text above the pseudo element, but card link itself won’t work when clicking on top of the text.</li><li>We still can’t select the text. Again, we could swap layers, but then we’re back to the clickable link issue all over again.</li></ol>
+
+
+
+<p>Let’s try to actually check all the boxes here in our final technique.</p>
+
+
+
+<h3>Method 4: Sprinkle JavaScript on the second method</h3>
+
+
+
+<p>Let’s build off the second method. Recall that’s what where we link up everything we want to be a link:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;article class="card">
+  &lt;time datetime="2020-03-20">Mar 20, 2020&lt;/time>
+  &lt;h2>&lt;a href="https://css-tricks.com/a-complete-guide-to-calc-in-css/" class="main-link">A Complete Guide to calc() in CSS&lt;/a>&lt;/h2>
+  &lt;p>
+    In this guide, let’s cover just about everything there is to know about this very useful function.
+  &lt;/p>
+  &lt;a class="author-name" href="https://css-tricks.com/author/chriscoyier/" target="_blank">Chris Coyier&lt;/a>
+    &lt;div class="tags">
+      &lt;a class="tag" href="https://css-tricks.com/tag/calc/" >calc&lt;/a>
+    &lt;/div>
+&lt;/article></code></pre>
+
+
+
+<p>So how do we make the <em>whole</em> card clickable? We could use JavaScript as a progressive enhancement to do that. We’ll start by adding a <code>click</code> event listener to the card and trigger the click on the main link when it is triggered.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="7"><code markup="tt">const card = document.querySelector(".card")
+const mainLink = document.querySelector('.main-link')
+ 
+card.addEventListener("click", handleClick)
+ 
+function handleClick(event) {
+  mainLink.click();
+}</code></pre>
+
+
+
+<p>Temporarily, this introduces the problem that we can’t select the text, which we’ve been trying to fix this whole time. Here’s the trick: we’ll use the relatively less-known web API <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection"><code>window.getSelection</code></a>. From MDN:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>The <strong><code>Window.getSelection()</code></strong> method returns a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection"><code>Selection</code></a> object representing the range of text selected by the user or the current position of the caret.</p></blockquote>
+
+
+
+<p>Although, this method returns an Object, we can convert it to a string with <code>toString()</code>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const isTextSelected = window.getSelection().toString()</code></pre>
+
+
+
+<p>With one line and no complicated kung-fu tricks with event listeners, we know if the user has selected text. Let’s use that in our <code>handleClick</code> function.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const card = document.querySelector(".card")
+const mainLink = document.querySelector('.main-link')
+ 
+card.addEventListener("click", handleClick)
+ 
+function handleClick(event) {
+  const isTextSelected = window.getSelection().toString();
+  if (!isTextSelected) {
+    mainLink.click();
+  }
+}</code></pre>
+
+
+
+<p>This way, the main link can be clicked when no text selected, and all it took was a few lines of JavaScript. This satisfies our requirements:</p>
+
+
+
+<ol><li>The whole thing is linked and clickable.</li><li>It is able to contain more than one link.</li><li>This content is semantic so assistive tech can understand it.</li><li>The text should be selectable, like regular links.</li><li>Things like right-click and keyboard shortcuts should work with it</li><li>Its elements should be focusable when tabbing.</li></ol>
+
+
+
+<p>We have satisfied all the requirements but there are still some gotchas, like double event triggering on clickable elements like links and buttons in the card. We can fix this by adding a click event listener on all of them and stopping the propagation of event.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// You might want to add common class like 'clickable' on all elements and use that for the query selector.
+const clickableElements = Array.from(card.querySelectorAll("a"));
+clickableElements.forEach((ele) =>
+  ele.addEventListener("click", (e) => e.stopPropagation())
+);</code></pre>
+
+
+
+<p>Here&#8217;s the final demo with all the JavaScript code we have added:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_qBOwMWj" src="//codepen.io/anon/embed/qBOwMWj?height=550&amp;theme-id=1&amp;slug-hash=qBOwMWj&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed qBOwMWj" title="CodePen Embed qBOwMWj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I think we’ve done it! Now you know how to make a perfect clickable card component.</p>
+
+
+
+<p>What about other patterns? For example, what if the card contains the excerpt of a blog post followed by a “Read More’ link? Where should that go? Does that become the “main” link? What about image?</p>
+
+
+
+<p>For those questions and more, here’s some further reading on the topic:</p>
+
+
+
+<ul><li><a href="https://inclusive-components.design/cards/">Cards</a> by Heydon Pickering</li><li><a href="https://adrianroselli.com/2020/02/block-links-cards-clickable-regions-etc.html">Block Links, Cards, Clickable Regions, Rows, Etc.</a> by Adrian Roselli</li><li><a href="https://css-tricks.com/block-links-are-a-pain-and-maybe-just-a-bad-idea/">Block Links Are a Pain (and Maybe Just a Bad Idea)</a> by Chris Coyier</li><li><a href="https://daverupert.com/2018/04/pitfalls-of-card-uis/">Pitfalls of Card UIs</a> by Dave Rupert</li></ul>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/block-links-the-search-for-a-perfect-solution/">Block Links: The Search for a Perfect Solution</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/block-links-the-search-for-a-perfect-solution/feed/</wfw:commentRss>
+			<slash:comments>33</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">309808</post-id>	</item>
+		<item>
+		<title>Radio Buttons Are Like Selects; Checkboxes Are Like Multiple Selects</title>
+		<link>https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/</link>
+					<comments>https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 20 May 2020 14:41:01 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[checkboxes]]></category>
+		<category><![CDATA[radio buttons]]></category>
+		<category><![CDATA[select]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311116</guid>
+
+					<description><![CDATA[<p>I was reading Anna Kaley&#8217;s <a href="https://www.nngroup.com/articles/listbox-dropdown/">&#8220;Listboxes vs. Dropdown Lists&#8221;</a> post the other day. It&#8217;s a fairly straightforward comparison between different UI implementations of selecting options. There is lots of good advice there. Classics like that you should use radio buttons (single select) or checkboxes (multiple select) if you&#8217;re showing five or fewer options, and the different options when the number of options grows from there. </p>
+<p>One thing that isn&#8217;t talked about is <em>how</em> you implement these things. I imagine that&#8217;s &#8230; <a href="https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Radio Buttons Are Like Selects; Checkboxes Are Like Multiple Selects&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/">Radio Buttons Are Like Selects; Checkboxes Are Like Multiple Selects</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I was reading Anna Kaley&#8217;s <a href="https://www.nngroup.com/articles/listbox-dropdown/">&#8220;Listboxes vs. Dropdown Lists&#8221;</a> post the other day. It&#8217;s a fairly straightforward comparison between different UI implementations of selecting options. There is lots of good advice there. Classics like that you should use radio buttons (single select) or checkboxes (multiple select) if you&#8217;re showing five or fewer options, and the different options when the number of options grows from there. </p>
+
+
+
+<span id="more-311116"></span>
+
+
+
+<p>One thing that isn&#8217;t talked about is <em>how</em> you implement these things. I imagine that&#8217;s somewhat on purpose as the point is to talk UX, not tech. But how you implement them plays a huge part in UX. In web design and development circles, the conversation about these things usually involves whether you can pull these things off with native controls, or if you need to rebuild them from scratch. If you <em>can</em> use native controls, you often <em>should</em>, because there are tons of UX that you get for free that that might otherwise be lost or forgotten when you rebuild — like how everything works via the keyboard.</p>
+
+
+
+<p>The reason people chose &#8220;rebuild&#8221; is often for styling reasons, but that&#8217;s changing slowly over time. We&#8217;ve got <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">lots of control over radios and checkboxes now</a>. We can <a href="https://css-tricks.com/the-current-state-of-styling-selects-in-2019/">style the outside of selects</a> pretty well and <a href="https://a11y-fundamentals.netlify.app/solutions/2.1.html">even the inside</a> with trickery. </p>
+
+
+
+<p>But even without custom styling, we still have some UI options. If you need to select one option from many, we&#8217;ve got <code>&lt;input type="radio"&gt;</code> buttons, but data and end-result-wise, that&#8217;s the same as a <code>&lt;select&gt;</code>. If you need to select multiple options, we&#8217;ve got <code>&lt;input type="checkbox"&gt;</code>, but that&#8217;s data and end-result-wise the same as <code>&lt;select multiple&gt;</code>. </p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_GRpBbGN" src="//codepen.io/anon/embed/GRpBbGN?height=450&amp;theme-id=1&amp;slug-hash=GRpBbGN&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed GRpBbGN" title="CodePen Embed GRpBbGN" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>You pick based on the room you have available and the UX of whatever you&#8217;re building. </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/">Radio Buttons Are Like Selects; Checkboxes Are Like Multiple Selects</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/radio-buttons-are-like-selects-checkboxes-are-like-multiple-selects/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311116</post-id>	</item>
+		<item>
+		<title>Better Form Inputs for Better Mobile User Experiences</title>
+		<link>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/</link>
+					<comments>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2020 15:08:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306387</guid>
+
+					<description><![CDATA[<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&#160;</p>
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can &#8230; <a href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Better Form Inputs for Better Mobile User Experiences&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&nbsp;</p>
+
+
+
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can ensure that the data entry process is as seamless as possible for our users. Let’s take a look at some examples and best practices we can use to create better user experiences on mobile devices.</p>
+
+
+
+<span id="more-306387"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?fit=1024%2C842&amp;ssl=1" alt="" class="wp-image-306391" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?w=2408&amp;ssl=1 2408w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1024%2C842&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=768%2C631&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1536%2C1263&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=2048%2C1684&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1000%2C822&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://better-mobile-inputs.netlify.com/" class="ek-link">Use this demo</a> to experiment on your own, if you’d like.</figcaption></figure>
+
+
+
+<h3>Using the correct input type</h3>
+
+
+
+<p>This is the easiest thing to get right. Input types, like <code>email</code>, <code>tel</code>, and <code>url</code>, are well-supported across browsers. While the benefit of using a type, like <code>tel</code> over the more generic <code>text</code>, might be hard to see on desktop browsers, it’s immediately apparent on mobile. </p>
+
+
+
+<p>Choosing the appropriate type changes the keyboard that pops up on Android and iOS devices when a user focuses the field. For very little effort, just by using the right type, we will show custom keyboards for <a href="https://better-mobile-inputs.netlify.com/?type=email" class="ek-link">email</a>, <a href="https://better-mobile-inputs.netlify.com/?type=tel" class="ek-link">telephone numbers</a>, <a href="https://better-mobile-inputs.netlify.com/?type=url" class="ek-link">URLs</a>, and even <a href="https://better-mobile-inputs.netlify.com/?type=search" class="ek-link">search inputs</a>.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306392" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Text input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306393" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Email input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306394" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>URL input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306395" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Search input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One thing to note is that both <code>input type="email"</code> and <code>input type="url"</code> come with validation functionality, and modern browsers will show an error tooltip if their values do not match the expected formats when the user submits the form. If you&#8217;d rather turn this functionality off, you <a href="https://codepen.io/aholachek/pen/poJMXpj" class="ek-link">can simply add the <code>novalidate</code> attribute to the containing <code>form</code></a>.</p>
+
+
+
+<h3>A quick detour into date types</h3>
+
+
+
+<p>HTML inputs comprise far more than specialized text inputs — you also have radio buttons, checkboxes, and so on. For the purposes of this discussion, though, I’m mostly talking about the more <strong>text-based inputs</strong>.&nbsp;</p>
+
+
+
+<p>There is a type of input that sits in the liminal space between the more free-form text inputs and input widgets like radio buttons: <strong><code>date</code></strong>. The <code>date</code> input type comes in a variety of flavors that are well-supported on mobile, including <a href="https://better-mobile-inputs.netlify.com/?type=date" class="ek-link"><code>date</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=time" class="ek-link"><code>time</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=datetime-local" class="ek-link"><code>datetime-local</code></a>, and <a href="https://better-mobile-inputs.netlify.com/?type=month" class="ek-link"><code>month</code></a>. These pop up custom widgets in iOS and Android when they are focused. Instead of triggering a specialized keyboard, they show a select-like interface in iOS, and various different types of widgets on Android (where the <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=date" class="ek-link"><code>date</code></a> and <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=time" class="ek-link"><code>time</code></a> selectors are particularly slick).&nbsp;</p>
+
+
+
+<p>I was excited to start using native defaults on mobile, until I looked around and realized that most major apps and mobile websites use custom date pickers rather than native date input types.&nbsp;There could be a couple reasons for this. First, I find the native iOS date selector to be less intuitive than a calendar-type widget. Second, even the beautifully-designed Android implementation is fairly limited compared to custom components — there’s no easy way to input a date range rather than a single date, for instance.&nbsp;</p>
+
+
+
+<p>Still, the date input types are worth checking out if the custom datepicker you’re using doesn’t perform well on mobile. If you’d like to try out the native input widgets on iOS and Android while making sure that desktop users see a custom widget instead of the default dropdown, this snippet of CSS <a href="https://codepen.io/aholachek/pen/RwPXjWJ?editors=1100" class="ek-link">will hide the calendar dropdown</a> for desktop browsers that implement it:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">::-webkit-calendar-picker-indicator {
+  display: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?fit=1024%2C521&amp;ssl=1" alt="" class="wp-image-306396" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?w=1315&amp;ssl=1 1315w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1024%2C521&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1000%2C509&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Date input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?fit=1024%2C486&amp;ssl=1" alt="" class="wp-image-306397" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?w=1411&amp;ssl=1 1411w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=300%2C142&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1024%2C486&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=768%2C364&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1000%2C474&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Time input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One final thing to note is that <code>date</code> types cannot be overridden by the <code>inputmode</code> attribute, which we&#8217;ll discuss next.</p>
+
+
+
+<h3>Why should I care about inputmode?</h3>
+
+
+
+<p>The <code>inputmode</code> attribute allows you to override the mobile keyboard specified by the input’s type and directly declare the type of keyboard shown to the user. When I first learned about this attribute, I wasn’t impressed — why not just use the correct <code>type</code> in the first place? But while <code>inputmode</code> is often unnecessary, there are a few places where the attribute can be extremely helpful. The most notable use case that I’ve found for <code>inputmode</code> is building a better number input.</p>
+
+
+
+<p>While some HTML5 input types, like <code>url</code> and <code>email</code>, are straightforward, <code>input type="number"</code> is a different matter. It has some <a href="https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/">accessibility concerns </a>as well as a somewhat awkward UI. For example, desktop browsers, like Chrome, show tiny increment arrows that are easy to trigger accidentally by scrolling.</p>
+
+
+
+<p>So here’s a pattern to memorize and use going forwards. For most numeric inputs, instead of using this:&nbsp;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="number" /></code></pre>
+
+
+
+<p>…you actually want to use this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<p>Why not <code>inputmode="numeric"</code> instead of <code>inputmode="decimal"</code> ?&nbsp;</p>
+
+
+
+<p>The <code>numeric</code> and <code>decimal</code> attribute values produce identical keyboards on Android. On iOS, however, <code>numeric</code> displays a keyboard that shows both numbers and punctuation, while <code>decimal</code> shows a focused grid of numbers that almost looks exactly like the <code>tel</code> input type, only without extraneous telephone-number focused options. That’s why it’s my preference for most types of number inputs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?fit=1024%2C424&amp;ssl=1" alt="" class="wp-image-306398" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?w=1615&amp;ssl=1 1615w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=300%2C124&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1024%2C424&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=768%2C318&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1536%2C636&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1000%2C414&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>iOS&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?fit=1024%2C315&amp;ssl=1" alt="" class="wp-image-306399" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?w=1615&amp;ssl=1 1615w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=300%2C92&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1024%2C315&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=768%2C236&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1536%2C473&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1000%2C308&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Android&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<p class="explanation">Christian Oliff has written&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">an excellent article</a>&nbsp;dedicated solely to the&nbsp;inputmode&nbsp;attribute.</p>
+
+
+
+<h3>Don’t forget autocomplete</h3>
+
+
+
+<p>Even more important than showing the correct mobile keyboard is showing helpful autocomplete suggestions. That can go a long way towards creating a faster and less frustrating user experience on mobile.</p>
+
+
+
+<p>While browsers have heuristics for showing autocomplete fields, you cannot rely on them, and should still be sure to add the correct <code>autocomplete</code> attribute. For instance, in iOS Safari, I found that an <code>input type="tel"</code> would only show autocomplete options if I <a href="https://better-mobile-inputs.netlify.com/?autocomplete=tel&amp;type=tel" class="ek-link">explicitly added a <code>autocomplete="tel"</code> attribute</a>.</p>
+
+
+
+<p>You may think that you are familiar with the basic <code>autocomplete</code> options, such as those that help the user fill in credit card numbers or address form fields, but I’d urge you to <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html%23inappropriate-for-the-control" class="ek-link">review them</a> to make sure that you are aware of all of the options. The spec lists over 50 values! Did you know that <code>autocomplete="one-time-code"</code> can make a phone verification user flow super smooth?</p>
+
+
+
+<figure class="wp-block-video"><video controls muted src="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" playsinline></video></figure>
+
+
+
+<h3>Speaking of autocomplete…</h3>
+
+
+
+<p>I’d like to mention one final element that allows you to create your own custom autocomplete functionality: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" class="ek-link"><code>datalist</code></a>. While it creates a serviceable — if somewhat basic — autocomplete experience on desktop Chrome and Safari, it shines on iOS by surfacing suggestions in a convenient row right above the keyboard, where the system autocomplete functionality usually lives. Further, it allows the user to toggle between text and select-style inputs.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4"></video></figure>
+
+
+
+<p>On Android, on the other hand, <code>datalist</code> creates a more typical autocomplete dropdown, with the area above the keyboard reserved for the system&#8217;s own typeahead functionality. One possible advantage to this style is that the dropdown list is easily scrollable, creating immediate access to all possible options as soon as the field is focused. (In iOS, in order to view more than the top three matches, the user would have to trigger the select picker by pressing the down arrow icon.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?fit=576%2C1024&amp;ssl=1" width="320" alt="" class="wp-image-306402" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?w=1080&amp;ssl=1 1080w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=169%2C300&amp;ssl=1 169w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=576%2C1024&amp;ssl=1 576w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=768%2C1365&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=864%2C1536&amp;ssl=1 864w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=1000%2C1778&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>You can use this demo to play around with&nbsp;<code>datalist</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqoxaZ" src="//codepen.io/anon/embed/NWqoxaZ?height=450&amp;theme-id=1&amp;slug-hash=NWqoxaZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqoxaZ" title="CodePen Embed NWqoxaZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>And you can explore all the autocomplete options, as well as input&nbsp;<code>type</code>&nbsp;and&nbsp;<code>inputmode</code>&nbsp;values, <a class="ek-link ek-link" href="https://better-mobile-inputs.netlify.com/">using&nbsp;this tool I made</a> to help you quickly preview various input configurations on mobile.</p>
+
+
+
+<h3>In summary</h3>
+
+
+
+<p>When I&#8217;m building a form, I&#8217;m often tempted to focus on perfecting the desktop experience while treating the mobile web as an afterthought. But while it does take a little extra work to ensure forms work well on mobile, it doesn&#8217;t have to be too difficult. Hopefully, this article has shown that with a few easy steps, you can make forms much more convenient for your users on mobile devices.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" length="703199" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4" length="1903465" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306387</post-id>	</item>
+		<item>
+		<title>&#8220;resize: none;&#8221; on textareas is bad UX</title>
+		<link>https://catalin.red/css-resize-none-is-bad-for-ux/</link>
+					<comments>https://css-tricks.com/resize-none-on-textareas-is-bad-ux/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 30 Jan 2020 20:20:07 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[resize]]></category>
+		<category><![CDATA[textarea]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=302594</guid>
+
+					<description><![CDATA[<p><a href="https://catalin.red/css-resize-none-is-bad-for-ux/">Catalin Rosu</a>:</p>
+<blockquote class="wp-block-quote">
+<p>Sometimes you need to type a long reply that consists of many paragraphs and wrapping that text within a tiny textarea box makes it hard to understand and to follow as you type. There were many times when I had to write that text within Notepad++ for example and then just paste the whole reply in that small textarea. I admit I also opened the DevTools to override the&#160;<code>resize: none</code>&#160;declaration but that’s not really a </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/resize-none-on-textareas-is-bad-ux/" class="read-more">Read article <span class="screen-reader-text"> &#8220;&#8220;resize: none;&#8221; on textareas is bad UX&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/resize-none-on-textareas-is-bad-ux/">&#8220;resize: none;&#8221; on textareas is bad UX</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://catalin.red/css-resize-none-is-bad-for-ux/">Catalin Rosu</a>:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Sometimes you need to type a long reply that consists of many paragraphs and wrapping that text within a tiny textarea box makes it hard to understand and to follow as you type. There were many times when I had to write that text within Notepad++ for example and then just paste the whole reply in that small textarea. I admit I also opened the DevTools to override the&nbsp;<code>resize: none</code>&nbsp;declaration but that’s not really a productive way to do things.</p></blockquote>
+
+
+
+<p>Removing the default resizeability of a <code>&lt;textarea></code> is generally user-hurting vanity. Even if the resized textarea &#8220;breaks&#8221; the site layout, too bad, the user is trying to do something very important on this site right now and you should not let anything get in the way of that. I know the web is a big place though, so feel free to prove me wrong in the comments. </p>
+
+
+
+<p>This must have been cathartic for Catalin, who has been steadily gaining a reputation on Stack Overflow for an answer on how to prevent a textarea from resizing from almost a decade ago.</p>
+<p><a href="https://catalin.red/css-resize-none-is-bad-for-ux/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/resize-none-on-textareas-is-bad-ux/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/resize-none-on-textareas-is-bad-ux/">&#8220;resize: none;&#8221; on textareas is bad UX</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/resize-none-on-textareas-is-bad-ux/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">302594</post-id>	</item>
+		<item>
+		<title>UX Considerations for Web Sharing</title>
+		<link>https://css-tricks.com/ux-considerations-for-web-sharing/</link>
+		
+		<dc:creator><![CDATA[Ollie Williams]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2019 14:17:47 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[ux]]></category>
+		<category><![CDATA[web share]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=295666</guid>
+
+					<description><![CDATA[<p>From trashy clickbait sites to the most august of publications, share buttons have long been ubiquitous across the web. And yet it is arguable that these buttons aren’t needed. All mobile browsers — Firefox, Edge, Safari, Chrome, Opera Mini, UC Browser, Samsung Internet — make it easy to share content directly from their native platforms. They all feature a built-in button to bring up a &#8220;share sheet&#8221; — a native dialog for sharing content. You can also highlight text to &#8230; <a href="https://css-tricks.com/ux-considerations-for-web-sharing/" class="read-more">Read article <span class="screen-reader-text"> &#8220;UX Considerations for Web Sharing&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/ux-considerations-for-web-sharing/">UX Considerations for Web Sharing</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>From trashy clickbait sites to the most august of publications, share buttons have long been ubiquitous across the web. And yet it is arguable that these buttons aren’t needed. All mobile browsers — Firefox, Edge, Safari, Chrome, Opera Mini, UC Browser, Samsung Internet — make it easy to share content directly from their native platforms. They all feature a built-in button to bring up a &#8220;share sheet&#8221; — a native dialog for sharing content. You can also highlight text to share an excerpt along with the link.</p>
+<p><span id="more-295666"></span></p>
+<figure id="post-295675" class="align-left media-295675"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-button-collage.png?ssl=1" alt="A collage of various share buttons from sites across the web." data-recalc-dims="1" /><figcaption>The ubiquitous share button, as seen at the BBC, Wired, BuzzFeed, PBS, The Wall Street Journal and elsewhere.</figcaption></figure>
+<p>Given that users can share by default, are custom buttons taking up unnecessary space and potentially distracting users from more important actions? And do people actually use them? </p>
+<p>A (unscientific) poll of 12,500 <a href="https://css-tricks.com/poll-results-sharing-buttons/">CSS-Tricks readers</a> found that 60% of its readers <em>never used custom share buttons</em>. That was in 2014 and native methods for sharing have only improved since then. A more recent poll from Smashing Magazine found much the same thing.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">How often do you use social sharing buttons on your mobile device?</p>
+<p>&mdash; Smashing Magazine (@smashingmag) <a href="https://twitter.com/smashingmag/status/1164825977987297282?ref_src=twsrc%5Etfw">August 23, 2019</a></p></blockquote>
+<p> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </p>
+<p>Users come with varying technological proficiency. Not everybody knows their way around there own mobile phone or browser meaning some users would struggle to find the native share button. It’s also worth thinking about what happens on desktop. Desktop browsers generally (with Safari as one exception) offer no built-in sharing functionality — users are left to copy and paste the link into their social network of choice.</p>
+<p>Some data suggests that <a href="https://www.lukew.com/ff/entry.asp?1852">clickthrough rates are relatively low</a>. However, clickthrough rates aren’t the best metric. For technically savvy users aware of how to share without assistance, the buttons can still act as a prompt — a visual reminder to share the content. Regardless of how the link is ultimately shared, a custom share button can still provide a cue, or a little nudge to elicit the share. For this reason, measuring click rates on the buttons themselves may not be entirely fair — people may see the button, feel encouraged to share the content, but then use the browsers built-in share button. A better metric would be whether shares increase after the addition of share buttons, regardless of how they’re shared. </p>
+<p>We’ve established that having a share button is <em>probably</em> useful. Websites have traditionally featured separate buttons for two or three of the most popular social networks. With a new-ish <abbr>API</abbr>, we can do better. While <a href="https://caniuse.com/#feat=web-share">browser support</a> is currently limited to Chrome for Android and Safari, those two browsers alone make up the vast majority of web traffic.</p>
+<h3>The Web Share <abbr>API</abbr></h3>
+<p>The Web Share <abbr>API</abbr> offers a simple way to bring up a <em>share sheet</em> — the native bit of UI that’s used for sharing. Rather than offering a standard list of popular social networks to share to (which the user may or may not be a member of), the options of the share sheet are catered to the individual. Only applications they have installed on their phone will be shown. Rather than a uniform list, the user will be shown only the option to share on networks they actually use — whether that be Twitter and Facebook or something more esoteric. </p>
+<p>Not showing the user irrelevant networks is obviously a good thing. Unfortunately, this is counterbalanced by the fact that some users visit social media websites rather than downloading them as apps. If you use twitter.com, for example, but haven’t installed the Twitter application natively, then Twitter will not be listed as a sharing option.  Currently, only native apps are listed but <abbr title= "Progressive Web App">PWA</abbr>s will be supported in the future.</p>
+<pre rel="JavaScript"><code class="language-javascript">websharebutton.addEventListener("click", function() {
+  navigator.share({
+    url: document.URL,
+    title: document.title,
+    text: "lorem ipsum..."
+  });
+});</code></pre>
+<p>The <abbr>API</abbr> requires user interaction (such as a button click as shown in the above code) to bring up the share sheet. This means you can’t do something obnoxious like bring up the share sheet on page load.</p>
+<p>The text might be a short excerpt or a summation of the page. The title is used when sharing via email but will be ignored when sharing to social networks. </p>
+<figure id="post-295676" class="align-left media-295676"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-button-android-ios.png?ssl=1" alt="Comparing the share sheets of Android and iPhone." data-recalc-dims="1" /><figcaption>Native sharesheet dialog on Android (left) and iOS (right). The apps listed here are dependent on which apps you have installed on your device.</figcaption></figure>
+<h3>Sharing on desktop</h3>
+<p>While we are pretty happy with the Web Share API for mobile, its implementation for desktop is currently limited to Safari and leaves a lot to be desired. (Chrome is planning to ship support eventually, but there is no clear timescale).</p>
+<figure><video src="https://css-tricks.com/wp-content/uploads/2019/09/share.mp4" controls></figure>
+<p>The provided options — Mail, Message, Airdrop, Notes, Reminders — omit social networks. Native apps for Twitter and Facebook are common on phones, but rare on other devices. </p>
+<p>Instead of relying on the Web Share API for desktop, its relatively common to have a generic share button that opens a modal that offers more multiple sharing options. This is the approach adopted by YouTube, Instagram and Pinterest, among others. </p>
+<figure id="post-295678" class="align-left media-295678"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-youtube-instagram.png?ssl=1" alt="Comparing Instagram and YouTube share options on desktop." data-recalc-dims="1" /><figcaption>Instagram (left) compared to YouTube (right)</figcaption></figure>
+<p>Facebook and Twitter account for the vast majority of sharing online, so offering an exhaustive list of social networks to choose from doesn’t feel necessary. (An option for Instagram would be ideal, but it is currently not technically possible to share to Instagram from a website.) It is also relatively common to include an email option. For anyone using a web-based email client like gmail.com or outlook.com rather than the operating system’s default email application, this is problematic. </p>
+<p>Many people make use of web-based email client’s gmail.com or outlook.com. A share-by-email button will open the operating system’s default email application. Users will be greeted by a prompt to set this up, which is far more effort than simply copy and pasting the URL. It is therefore advisable to omit the email option and instead include a button to copy the link to the clipboard, which is only infinitesimally easier than doing a copy in the address bar with the keyboard.</p>
+<figure id="post-295679" class="align-left media-295679"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-mac-email.png?ssl=1" alt="Screenshot of the share options offered by Mac's email application, including iCloud, Exchange, Google, Yahoo and AOL." data-recalc-dims="1" /><figcaption>A prompt to set up the default email application on Mac</figcaption></figure>
+<p>Prompting the user to set up an application they never use is far more effort than simply copy and pasting a URL into my preferred email client.  </p>
+<h3>Choosing a share icon</h3>
+<figure id="post-295680" class="align-left media-295680"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-icons.png?ssl=1" alt="Grid of various share icons in different variations." data-recalc-dims="1" /><figcaption>There have been plenty of other share icons over the years.</figcaption></figure>
+<p>There is no universal standardized share icon — far from it. While the Android symbol might not be recognizable to long-term iPhone users, the iOS icon is problematic. It is identical to the download icon — but with the arrow in the opposite direction, which would imply uploading, <em>not sharing</em>. </p>
+<p>Where I work at giffgaff, we polled 69 of our colleagues on whether they recognized the current <abbr>iOS</abbr> icon or the current Android icon as representing sharing. The Android icon was an overwhelming winner with 58 votes. While our sample did include iPhone users, some long-term iPhone users may not be familiar with this symbol (even though it has been adopted by some websites). Then there is the forward arrow, an icon that was abandoned by Apple, but adopted elsewhere. Reminiscent of the icon for forwarding an email, this symbol has been made recognizable by its usage on youtube.com. The icon was <a href="https://medium.com/microsoft-design/the-iconography-of-sharing-183a1ad9c6f1">adopted by Microsoft</a> in 2017 after A/B testing found a high level of familiarity.</p>
+<p>It’s also possible to take a contextual approach. Twitter will change the icon used depending on the platform of the user. This approach is also taken by the icon library <a href="https://ionicons.com/usage/">Ionicons</a>.</p>
+<figure id="post-295681" class="align-left media-295681"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/09/share-twitter-variations.jpg?ssl=1" alt="Showing the same tweet on both Android and iOS" data-recalc-dims="1" /><figcaption>Android (left) and Mac/iOS (right)</figcaption></figure>
+<hr>
+<p>Given the lack of a universally understood icon, this seems like a good approach. Alternatively, make sure to include a label alongside the icon to really spell things out to the user.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/ux-considerations-for-web-sharing/">UX Considerations for Web Sharing</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/09/share.mp4" length="2397379" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">295666</post-id>	</item>
+		<item>
+		<title>Five Methods for Five-Star Ratings</title>
+		<link>https://css-tricks.com/five-methods-for-five-star-ratings/</link>
+					<comments>https://css-tricks.com/five-methods-for-five-star-ratings/#comments</comments>
+		
+		<dc:creator><![CDATA[Alfred Genkin]]></dc:creator>
+		<pubDate>Fri, 05 Jul 2019 15:48:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=292151</guid>
+
+					<description><![CDATA[<p>In the world of likes and social statistics, reviews are a very important method for leaving feedback. Users often like to know the opinions of others before deciding on items to purchase themselves, or even articles to read movies to see, or restaurants to dine. </p>
+<p>Developers often struggle with reviews — it is common to see inaccessible and over-complicated implementations. Hey, CSS-Tricks has a <a href="https://css-tricks.com/star-ratings/">snippet for one</a> that’s now bordering on a decade.</p>
+<p>Let’s walk through new, accessible <em>and</em> maintainable &#8230; <a href="https://css-tricks.com/five-methods-for-five-star-ratings/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Five Methods for Five-Star Ratings&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/five-methods-for-five-star-ratings/">Five Methods for Five-Star Ratings</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In the world of likes and social statistics, reviews are a very important method for leaving feedback. Users often like to know the opinions of others before deciding on items to purchase themselves, or even articles to read movies to see, or restaurants to dine. </p>
+<p>Developers often struggle with reviews — it is common to see inaccessible and over-complicated implementations. Hey, CSS-Tricks has a <a href="https://css-tricks.com/star-ratings/">snippet for one</a> that’s now bordering on a decade.</p>
+<p>Let’s walk through new, accessible <em>and</em> maintainable approaches for this classic design pattern. Our goal will be to define the requirements and then take a journey on the thought-process and considerations for how to implement them.</p>
+<p><span id="more-292151"></span></p>
+<h3>Scoping the work</h3>
+<p>Did you know that using stars as a rating dates all the way back to 1844 when they were <a href="https://en.wikipedia.org/wiki/Star_(classification)">first used to rate restaurants</a> in <em>Murray&#8217;s Handbooks for Travellers</em> — and later popularized by <a href="https://en.wikipedia.org/wiki/Michelin_Guide"><em>Michelin Guides</em></a> in 1931 as a three-star system? There’s a lot of history there, so no wonder it’s something we’re used to seeing!</p>
+<p>There are a couple of good reasons why they’ve stood the test of time:</p>
+<ol>
+<li>Clear visuals (in the form of five hollow or filled stars in a row)</li>
+<li>A straightforward label (that provides an accessible description, like <code>aria-label</code>)</li>
+</ol>
+<p>When we implement it on the web, it is important that we focus on meeting both of those outcomes.</p>
+<p>It is also important to implement features like this in the most versatile way possible. That means we should reach for HTML and CSS as much as possible and try to avoid JavaScript where we can. And that’s because:</p>
+<ol>
+<li>JavaScript solutions will always differ per framework. Patterns that are typical in vanilla JavaScript might be anti-patterns in frameworks (e.g. React prohibits direct document manipulation).</li>
+<li>Languages like JavaScript evolve fast, which is great for the community, but not so great articles like this. We want a solution that’s maintainable and relevant for the long haul, so we should base our decisions on consistent, stable tooling.</li>
+</ol>
+<h3>Methods for creating the visuals</h3>
+<p>One of the many wonderful things about CSS is that there are often <a href="https://css-tricks.com/hearts-in-html-and-css/">many ways to write the same thing</a>. Well, the same thing goes for how we can tackle drawing stars. There are five options that I see:</p>
+<ul>
+<li>Using an image file</li>
+<li>Using a background image</li>
+<li>Using SVG to draw the shape</li>
+<li>Using CSS to <a href="https://css-tricks.com/the-shapes-of-css/">draw the shape</a></li>
+<li>Using Unicode symbols</li>
+</ul>
+<p>Which one to choose? It depends. Let&#8217;s check them all out.</p>
+<h4>Method 1: Using an image file</h4>
+<p>Using images means creating elements — at least 5 of them to be exact. Even if we’re calling the same image file for each star in a five-star rating, that’s five total requests. What are the consequences of that?</p>
+<ol>
+<li>More DOM nodes make document structure more complex, which could cause a slower page paint. The elements themselves need to render as well, which means either the server response time (if <abbr title="Server Side Rendering">SSR</abbr>) or the main thread generation (if we’re working in a <abbr title="Single Page Application">SPA</abbr>) has to increase. That doesn’t even account for the rendering logic that has to be implemented.</li>
+<li>It does not handle fractional ratings, say 2.3 stars out of 5. That would require a second group of duplicated elements masked with <code>clip-path</code> on top of them. This increases the document’s complexity by a minimum of seven more DOM nodes, and potentially tens of additional CSS property declarations.</li>
+<li>Optimized performance ought to consider how images are loaded and implementing something like <a href="https://css-tricks.com/a-deep-dive-into-native-lazy-loading-for-images-and-frames">lazy-loading</a>) for off-screen images becomes increasingly harder when repeated elements like this are added to the mix.</li>
+<li>It makes a request, which means that caching <abbr title="Time to live">TTL</abbr>s should be configured in order to achieve an instantaneous second image load. However, even if this is configured correctly, the first load will still suffer because <abbr title="Time to first byte">TTFB</abbr> awaits from the server. Prefetch, pre-connect techniques or the service-worker should be considered in order to optimize the first load of the image.</li>
+<li>It creates minimum of five non-meaningful elements for a screen reader. As we discussed earlier, the label is more important than the image itself. There is no reason to leave them in the DOM because they add no meaning to the rating — they are just a common visual.</li>
+<li>The images might be a part of manageable media, which means content managers will be able to change the star appearance at any time, even if it’s incorrect.</li>
+<li>It allows for a versatile appearance of the star, however <strong>the active state might only be similar to the initial state.</strong> It’s not possible to change the image <code>src</code> attribute without JavaScript and that’s something we’re trying to avoid.</li>
+</ol>
+<p>Wondering how the HTML structure might look? Probably something like this:</p>
+<pre rel="HTML"><code class="language-html">&lt;div class="Rating" aria-label="Rating of this item is 3 out of 5"&gt;
+  &lt;img src="/static/assets/star.png" class="Rating--Star Rating--Star__active"&gt;
+  &lt;img src="/static/assets/star.png" class="Rating--Star Rating--Star__active"&gt;
+  &lt;img src="/static/assets/star.png" class="Rating--Star Rating--Star__active"&gt;
+  &lt;img src="/static/assets/star.png" class="Rating--Star"&gt;
+  &lt;img src="/static/assets/star.png" class="Rating--Star"&gt;
+&lt;/div&gt;</code></pre>
+<p>In order to change the appearance of those stars, we can use multiple CSS properties. For example:</p>
+<pre rel="CSS"><code class="language-css">.Rating--Star {
+  filter: grayscale(100%); // maybe we want stars to become grey if inactive
+  opacity: .3; // maybe we want stars to become opaque
+}</code></pre>
+<p>An additional benefit of this method is that the <code>&lt;img&gt;</code> element is set to <code>inline-block</code> by default, so it takes a little bit less styling to position them in a single line.</p>
+<div class="personal-star-rating">
+Accessibility: <span>★★☆☆☆</span><br />
+Management: <span>★★★★☆</span><br />
+Performance: <span>★☆☆☆☆</span><br />
+Maintenance: <span>★★★★☆</span><br />
+Overall: <span>★★☆☆☆</span></div>
+<h4>Method 2: Using a background image</h4>
+<p>This was once a fairly common implementation. That said, it still has its pros and cons.</p>
+<p>For example:</p>
+<ol>
+<li>Sure, it’s only a single server request which alleviates a lot of caching needs. At the same time, we now have to wait for three additional events before displaying the stars: That would be (1) the CSS to download, (2) the <abbr>CSSOM</abbr> to parse, and (3) the image itself to download.</li>
+<li>It’s super easy to change the state of a star from empty to filled since all we’re really doing is changing the position of a background image. However, having to crack open an image editor and re-upload the file anytime a change is needed in the actual appearance of the stars is not the most ideal thing as far as maintenance goes.</li>
+<li>We can use CSS properties like <code>background-repeat</code> property and <code>clip-path</code> to reduce the number of DOM nodes. We could, in a sense, use a single element to make this work. On the other hand, it’s not great that we don’t technically have good accessible markup to identify the images to screen readers and have the stars be recognized as inputs. Well, not easily.</li>
+</ol>
+<p>In my opinion, background images are probably best-used complex star appearances where neither CSS not SVG suffice to get the exact styling down. Otherwise, using background images still presents a lot of compromises.</p>
+<div class="personal-star-rating">
+Accessibility: <span>★★★☆☆</span><br />
+Management: <span>★★★★☆</span><br />
+Performance: <span>★★☆☆☆</span><br />
+Maintenance: <span>★★★☆☆</span><br />
+Overall: <span>★★★☆☆</span></div>
+<h4>Method 3: Using SVG to draw the shape</h4>
+<p>SVG is great! It has a lot of the same custom drawing benefits as raster images but doesn’t require a server call if it’s inlined because, well, it&#8217;s simply code!</p>
+<p>We could inline five stars into HTML, but we can do better than that, right? <a href="https://css-tricks.com/svg-symbol-good-choice-icons/">Chris has shown us a nice approach</a> that allows us to provide the SVG markup for a single shape as a <code>&lt;symbol&gt;</code> and call it multiple times with with <code>&lt;use&gt;</code>.</p>
+<pre rel="HTML"><code class="language-html">&lt;!-- Draw the star as a symbol and remove it from view --&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" style="display: none;"&gt;
+  &lt;symbol id="star" viewBox="214.7 0 182.6 792"&gt;
+    &lt;!-- &lt;path&gt;s and whatever other shapes in here --&gt;  
+  &lt;/symbol&gt;
+&lt;/svg&gt;
+    
+&lt;!-- Then use anywhere and as many times as we want! --&gt;
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#star" /&gt;
+&lt;/svg&gt;
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#star" /&gt;
+&lt;/svg&gt;
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#star" /&gt;
+&lt;/svg&gt;
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#star" /&gt;
+&lt;/svg&gt;
+
+&lt;svg class="icon"&gt;
+  &lt;use xlink:href="#star" /&gt;
+&lt;/svg&gt;</code></pre>
+<p>What are the benefits? Well, we’re talking zero requests, cleaner HTML, no worries about pixelation, and accessible attributes right out of the box. Plus, we’ve got the flexibility to use the stars anywhere and the scale to use them as many times as we want with no additional penalties on performance. Score!</p>
+<p>The ultimate benefit is that this doesn’t require additional overhead, either. For example, we don’t <em>need</em> a build process to make this happen and there’s no reliance on additional image editing software to make further changes down the road (though, let’s be honest, it does help).</p>
+<div class="personal-star-rating">
+Accessibility: <span>★★★★★</span><br />
+Management: <span>★★☆☆☆</span><br />
+Performance: <span>★★★★★</span><br />
+Maintenance: <span>★★★★☆</span><br />
+Overall: <span>★★★★☆</span></div>
+<h4>Method 4: Using CSS to draw the shape</h4>
+<p>This method is very similar to <code>background-image</code> method, though improves on it by optimizing drawing the shape with CSS properties rather than making a call for an image. We might think of CSS as styling elements with borders, fonts and other stuff, but it’s capable of producing ome pretty complex artwork as well. Just look at <a href="http://diana-adrianne.com/purecss-francine/">Diana Smith’s now-famous “Francine&#8221; portrait</a>.</p>
+<figure id="post-292154" class="align-left media-292154"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/smith-francine.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Francine, a CSS replica of an oil painting done in CSS by Diana Smith (<a href="http://diana-adrianne.com/purecss-francine/">Source</a>)</figcaption></figure>
+<p>We’re not going to get that crazy, but you can see where we’re going with this. In fact, there’s already a <a href="https://css-tricks.com/the-shapes-of-css/">nice demo of a CSS star shape</a> right here on CSS-Tricks.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="geoffgraham" data-slug-hash="GbOdJa" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Five stars!">
+<span>See the Pen <a href="https://codepen.io/geoffgraham/pen/GbOdJa/"><br />
+Five stars!</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Or, hey, we can get a little more crafty by using the <code>clip-path</code> property to draw a five-point polygon. Even less CSS! But, buyer beware, because your <a href="https://caniuse.com/#feat=css-clip-path">cross-browser support mileage may vary</a>.</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="geoffgraham" data-slug-hash="MMOGjm" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="5 Clipped Stars!">
+<span>See the Pen <a href="https://codepen.io/geoffgraham/pen/MMOGjm/"><br />
+5 Clipped Stars!</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<div class="personal-star-rating">
+Accessibility: <span>★★★★★</span><br />
+Manangement: <span>★★☆☆☆</span><br />
+Performance: <span>★★★★★</span><br />
+Maintenance: <span>★★☆☆☆</span><br />
+Overall: <span>★★★☆☆</span></div>
+<h4>Method 5: Using Unicode symbols</h4>
+<p>This method is very nice, but very limited in terms of appearance. Why? Because the appearance of the star is set in stone as a Unicode character. But, hey, there are variations for a filled star (★) and an empty star (☆) which is exactly what we need!</p>
+<p>Unicode characters are something you can either copy and paste directly into the HTML:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="geoffgraham" data-slug-hash="jjaxLy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Unicode Stars!">
+<span>See the Pen <a href="https://codepen.io/geoffgraham/pen/jjaxLy/"><br />
+Unicode Stars!</a> by Geoff Graham (<a href="https://codepen.io/geoffgraham">@geoffgraham</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>We can use font, color, width, height, and other properties to size and style things up a bit, but not a whole lot of flexibility here. But this is perhaps the most basic HTML approach of the bunch that it almost seems too obvious.</p>
+<p>Instead, we can move the content into the CSS as a pseudo-element. That unleashes additional styling capabilities, including using custom properties to fill the stars fractionally:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="FredGenkin" data-slug-hash="eaXYGV" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Tiny but accessible 5 star rating">
+<span>See the Pen <a href="https://codepen.io/FredGenkin/pen/eaXYGV/"><br />
+Tiny but accessible 5 star rating</a> by Fred Genkin (<a href="https://codepen.io/FredGenkin">@FredGenkin</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Let’s break this last example down a bit more because it winds up taking the best benefits from other methods and splices them into a single solution with very little drawback while meeting all of our requirements.</p>
+<p>Let&#8217;s start with HTML. there’s a single element that makes no calls to the server while maintaining accessibility:</p>
+<pre rel="HTML"><code class="language-html">&lt;div class="stars" style="--rating: 2.3;" aria-label="Rating of this product is 2.3 out of 5."&gt;&lt;/div&gt;</code></pre>
+<p>As you may see, the rating value is passed as an inlined custom CSS property (<code>--rating</code>). This means there is no additional rendering logic required, except for displaying the same rating value in the label for better accessibility.</p>
+<p>Let’s take a look at that custom property. It’s actually a conversion from a value value to a percentage that’s handled in the CSS using the <code>calc()</code> function:</p>
+<pre rel="CSS"><code class="language-css">--percent: calc(var(--rating) / 5 * 100%);</code></pre>
+<p>I chose to go this route because CSS properties — like <code>width</code> and <code>linear-gradient</code> — do not accept <code>&lt;number&gt;</code> values. They accept <code>&lt;length&gt;</code> and <code>&lt;percentage&gt;</code> instead and have specific units in them, like <code>%</code> and <code>px</code>, <code>em</code>. Initially, the rating value is a float, which is a <code>&lt;number&gt;</code> type. Using this conversion helps ensure we can use the values in a number of ways.</p>
+<p>Filling the stars may sound tough, but turns out to be quite simple. We need a <code>linear-gradient</code> background to create hard color stops where the gold-colored fill should end:</p>
+<pre rel="CSS"><code class="language-css">background: linear-gradient(90deg,
+  var(--star-background) var(--percent), 
+  var(--star-color) var(--percent)
+);</code></pre>
+<p>Note that I am using custom variables for colors because I want the styles to be easily adjustable. Because custom properties are inherited from the parent elements styles, you can define them once on the <code>:root</code> element and then override in an element wrapper. Here’s what I put in the root:</p>
+<pre rel="CSS"><code class="language-css">:root {
+  --star-size: 60px;
+  --star-color: #fff;
+  --star-background: #fc0;
+}</code></pre>
+<p>The last thing I did was clip the background to the shape of the text so that the background gradient takes the shape of the stars. Think of the Unicode stars as stencils that we use to cut out the shape of stars from the background color. Or like a cookie cutters in the shape of stars that are mashed right into the dough:</p>
+<pre rel="CSS"><code class="language-css">-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;</code></pre>
+<p>The browser support for <a href="https://caniuse.com/#search=-webkit-background-clip97">background clipping</a> and <a href="https://caniuse.com/#search=-webkit-text-fill-color159">text fills</a> is pretty darn good. <abbr title="Internet Explorer 11">IE11</abbr> is the only holdout.</p>
+<div class="personal-star-rating">
+Accessibility: <span>★★★★★</span><br />
+Management: <span>★★☆☆☆</span><br />
+Performance: <span>★★★★★</span><br />
+Maintenance: <span>★★★★★</span><br />
+Overall: <span>★★★★★</span></div>
+<h3>Final thoughts</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Image Files</th>
+<th>Background Image</th>
+<th>SVG</th>
+<th>CSS Shapes</th>
+<th>Unicode Symbols</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★★☆☆</span></td>
+<td><span>★★★★★</span></td>
+<td><span>★★★★★</span></td>
+<td><span>★★★★★</span></td>
+</tr>
+<tr>
+<td><strong>Management</strong></td>
+<td><span>★★★★☆</span></td>
+<td><span>★★★★☆</span></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★☆☆☆</span></td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td><span>★☆☆☆☆</span></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★★★★</span></td>
+<td><span>★★★★★</span></td>
+<td><span>★★★★★</span></td>
+</tr>
+<tr>
+<td><strong>Maintenance</strong></td>
+<td><span>★★★★☆</span></td>
+<td><span>★★★☆☆</span></td>
+<td><span>★★★★☆</span></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★★★★</span></td>
+</tr>
+<tr>
+<td><strong>Overall</strong></td>
+<td><span>★★☆☆☆</span></td>
+<td><span>★★★☆☆</span></td>
+<td><span>★★★★☆</span></td>
+<td><span>★★★☆☆</span></td>
+<td><span>★★★★★</span></td>
+</tr>
+</tbody>
+</table>
+<p>Of the five methods we covered, two are my favorites: using SVG (Method 3) and using Unicode characters in pseudo-elements (Method 5). There are definitely use cases where a background image makes a lot of sense, but that seems best evaluated case-by-case as opposed to a go-to solution.</p>
+<p>You have to always consider all the benefits and downsides of a specific method. This is, in my opinion, is the beauty of front-end development! There are multiple ways to go, and proper experience is required to implement features efficiently.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/five-methods-for-five-star-ratings/">Five Methods for Five-Star Ratings</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/five-methods-for-five-star-ratings/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">292151</post-id>	</item>
+		<item>
+		<title>The Place of UX</title>
+		<link>https://m.signalvnoise.com/the-place-of-ux/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 07 May 2019 14:21:51 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=286953</guid>
+
+					<description><![CDATA[<p>Every time &#8220;<abbr title="User Experience">UX</abbr>&#8221; comes out of my mouth or is typed by my fingers, I think, &#8220;did I just use that term correctly?&#8221; It feels like such a big and loaded term these days, that perhaps the way I use it only contributes to the confusion. Ryan Singer frames that problem well:</p>
+<blockquote>
+<p>Debates continue to rage about the role of UX designers, user research, and how far knowledge about the user should permeate the organization. On one extreme, </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/the-place-of-ux/" class="read-more">Read article <span class="screen-reader-text"> &#8220;The Place of UX&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-place-of-ux/">The Place of UX</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Every time &#8220;<abbr title="User Experience">UX</abbr>&#8221; comes out of my mouth or is typed by my fingers, I think, &#8220;did I just use that term correctly?&#8221; It feels like such a big and loaded term these days, that perhaps the way I use it only contributes to the confusion. Ryan Singer frames that problem well:</p>
+<blockquote><p>Debates continue to rage about the role of UX designers, user research, and how far knowledge about the user should permeate the organization. On one extreme, UX is seen as a specialized pocket of knowledge that informs the definition of projects and sets requirements. On the other, UX is something for which the entire organization should somehow feel responsible.</p></blockquote>
+<p>It can feel so big, like <abbr title="User Experience">UX</abbr> is literally the only thing that matters in an entire project. It can also feel so small, like 2px of extra padding on a specific dropdown will make the options easier to tap.</p>
+<p><a href="https://m.signalvnoise.com/the-place-of-ux/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/the-place-of-ux/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/the-place-of-ux/">The Place of UX</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">286953</post-id>	</item>
+		<item>
+		<title>Writing Animations That Bring Your Site to Life</title>
+		<link>https://css-tricks.com/writing-animations-that-bring-your-site-to-life/</link>
+					<comments>https://css-tricks.com/writing-animations-that-bring-your-site-to-life/#comments</comments>
+		
+		<dc:creator><![CDATA[Prasanjit Singh]]></dc:creator>
+		<pubDate>Fri, 22 Feb 2019 17:36:41 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css animation]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=283132</guid>
+
+					<description><![CDATA[<p>Web animation is one of the factors that can strongly enhance your website’s look and feel. Sadly, unlike mobile apps, there aren’t as many websites using animation to their benefit as you would think. We don’t want to count yours among those, so this article is for you and anyone else looking for ways to use animation for a better user experience! Specifically, we’re going to learn how to make web interactions delightful using CSS animations. </p>
+</p>
+<p>Here’s what we’re going &#8230; <a href="https://css-tricks.com/writing-animations-that-bring-your-site-to-life/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Writing Animations That Bring Your Site to Life&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/writing-animations-that-bring-your-site-to-life/">Writing Animations That Bring Your Site to Life</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Web animation is one of the factors that can strongly enhance your website’s look and feel. Sadly, unlike mobile apps, there aren’t as many websites using animation to their benefit as you would think. We don’t want to count yours among those, so this article is for you and anyone else looking for ways to use animation for a better user experience! Specifically, we’re going to learn how to make web interactions delightful using CSS animations. </p>
+<p><span id="more-283132"></span></p>
+<p>Here’s what we’re going to build together:</p>
+<figure><video controls src="https://css-tricks.com/wp-content/uploads/2019/02/demo.mov"></video></figure>
+<div class="article-inline-buttons">
+<a class="button button-left" href="https://pb03.github.io/css-animations-demo/">Live Demo</a> <a class="button" href="https://github.com/pb03/css-animations-demo">GitHub Repo</a>
+</div>
+<div class="inline-button-group">
+</div>
+<hr />
+<p>Before we move ahead, it’s worth mentioning that I’m going to assume you have at least some familiarity with modern front-end frameworks and a basic understanding of CSS animations. If you don’t, then no fear! CSS-Tricks has a great guides on <a href="https://css-tricks.com/guides/react/">React</a> and <a href="https://css-tricks.com/guides/react/">Vue</a>, as well as a thorough almanac post on the <a href="https://css-tricks.com/almanac/properties/a/animation/">CSS</a> <a href="https://css-tricks.com/almanac/properties/a/animation/"><code>animation</code> property</a>.</p>
+<p>Good? OK, let’s talk about <em>why</em> we’d want to use animation in the first place and cover some baseline information about CSS animations.</p>
+<h3>Why would we to animate anything?</h3>
+<p>We could probably do an entire post on this topic alone. Oh, wait! <a href="https://css-tricks.com/the-importance-of-context-shifting-in-ux-patterns/">Sarah Drasner already did that</a> and her points are both poignant and compelling.</p>
+<p>But, to sum things up based on my own experiences:</p>
+<ul>
+<li>Animations enhance the way users interact with an interface. For example, smart animations can reduce cognitive load by giving users better context between page transitions.</li>
+<li>They can provide clear cues to users, like where we want them to focus attention.</li>
+<li>Animations serve as another design pattern in and of themselves, helping users to get emotionally attached to and engage with the interface.</li>
+<li>Another benefit of using animations is that they can create a perception that a site or app loads faster than it actually does.</li>
+</ul>
+<h3>A couple of house rules with animations</h3>
+<p>Have you ever bumped into a site that animates <strong>all the things</strong>? Wow, those can be jarring. So, here’s a couple of things to avoid when working with animations so our app doesn’t fall into the same boat:</p>
+<ul>
+<li>Avoid animating CSS properties other than <code>transform</code> and <code>opacity</code>. If other properties have to be animated, like width or height, then make sure there aren’t a lot of layout changes happening at the same time. There’s actually a cost to animations and you can see exactly how much by referring to <a href="https://csstriggers.com/">CSS Triggers</a>.</li>
+<li>Also, just because animations can create perceived performance gains, there’s actually a point of diminishing return when it comes to using them. Animating too many elements at the same time may result in decreased performance.</li>
+</ul>
+<p>Now we can get our hands dirty with some code!</p>
+<h3>Let’s build a music app</h3>
+<p>We’re going to build the music app we looked at earlier, which is inspired by <a href="https://dribbble.com/shots/5527602-Apple-Music-Smooth-floating">Aurélien Salomon’s Dribbble shot</a>. I chose this example so that we can focus on animations, not only within a component, but also between different routes. We’ll build this app using Vue and create animations using vanilla (i.e. no framework) CSS.</p>
+<p class="explanation">Animations should go hand-in-hand with UI development. Creating UI before defining their movement is likely to cost much more time. In this case, the Dribbble shot provides that scope for us.</p>
+<p>Let’s start with the development.</p>
+<h4>Step 1: Spin up the app locally</h4>
+<p>First things first. We need to set up a new Vue project. Again, we’re assuming some base-level understanding of Vue here, so please check out the <a href="https://css-tricks.com/guides/vue/">Learning Vue guide</a> for more info on setting up.</p>
+<p>We need a couple of dependencies for our work, notably <code>vue-router</code> for transitioning between views and <code>sass-loader</code> so we can write in Sass and compile to CSS. Here’s a detailed <a href="https://css-tricks.com/build-a-custom-vue-router/">tutorial on using routes</a> and Sass can be installed by pointing the command line at the project directory and using <code>npm install -D sass-loader node-sass</code>.</p>
+<p>We have what we need!</p>
+<h4>Step 2: Setting up routes</h4>
+<p>For creating routes, we’re first going to create two bare minimum components — <code>Artists.vue</code> and <code>Tracks.vue</code>. We’ll drop a new file in the <code>src</code> folder called <code>router.js</code> and add routes for these components as:</p>
+<pre rel="Javascript"><code class="language-javascript">import Vue from 'vue'
+import Router from 'vue-router'
+import Artists from './components/Artists.vue'
+import Tracks from './components/Tracks.vue'
+
+Vue.use(Router)
+export default new Router({
+	mode: 'history',
+	routes: [
+		{
+			path: '/',
+			name: 'artists',
+			component: Artists
+		},
+		{
+			path: '/:id',
+			name: 'tracks',
+			component: Tracks
+		}
+	]
+})</code></pre>
+<p>Import <code>router.js</code> into the <code>main.js</code> and inject it to the Vue instance. Lastly, replace the content of your <code>App.vue</code> by <code>&lt;router-view/&gt;</code>.</p>
+<h4>Step 3: Create the components and content for the music app</h4>
+<p>We need two components that we’ll transition between with animation. Those are going to be:</p>
+<ol>
+<li><code>Artists.vue</code>: a grid of artists</li>
+<li><code>Tracks.vue</code>: An artist image with a back button</li>
+</ol>
+<p>If you wanna jump ahead a bit, here are some assets to work with:</p>
+<ol>
+<li><a href="https://github.com/pb03/css-animations-demo/raw/reference-code/assets.zip">Images</a> and sample <a href="https://github.com/pb03/css-animations-demo/tree/reference-code/data">data</a> in JSON format.</li>
+<li><a href="https://github.com/pb03/css-animations-demo/tree/reference-code/components">Content</a> for the components</li>
+</ol>
+<p>When all is said and done, the two views will come out to something like this:</p>
+<figure id="post-283152" class="align-left media-283152"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/music-app-screens.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Artists.vue (left) and Tracks.vue (right)</figcaption></figure>
+<h4>Step 4: Animate!</h4>
+<p>Here we are, the part we’ve really wanted to get to all this time. The most important animation in the app is transitioning from Artists to Tracks when clicking on an artist. It should feel seamless where clicking on an artist image puts that image in focus while transitioning from one view into the next. This is exactly the type of animation that we rarely see in apps but can drastically reduce cognitive load for users.</p>
+<p>To make sure we’re all on the same page, we’re going to refer to the first image in the sequence as the “previous” image and the second one as the &#8220;current&#8221; image. Getting the effect down is relatively easy as long as we know the dimensions and position of the previous image in the transition. We can animate the current image by transforming it as per previous image.</p>
+<p>The formula that I’m using is <code>transform: translate(x, y) scale(n)</code>, where <code>n</code> is equal to the size of previous image divided by the size of current image. Note that we can use a static value of <code>n</code> since the dimensions are fixed for all the images. For example, the image size in the Artists view is <code>190x190</code> and <code>240x240</code> in the Tracks view. Thus, we can replace <code>n</code> by <code>190/240 = 0.791</code>. That means the transform value becomes <code>translate(x, y) scale(0.791)</code> in our equation.</p>
+<figure id="post-283153" class="align-left media-283153"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/music-app-animation-diagram.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Animating from Artists to Tracks</figcaption></figure>
+<p>Next thing is to find <code>x</code> and <code>y</code>. We can get these values though click event in the Artists view as:</p>
+<pre rel="JavaScript"><code class="language-javascript">const {x, y} = event.target.getBoundingClientRect()</code></pre>
+<p>&#8230;and then send these values to the Tracks view, all while switching the route. Since we aren’t using any state management library, the two components will communicate via their parent component, which is the top level component, <code>App.vue</code>. In <code>App.vue</code>, let’s create a method that switches the route and sends the image info as params.</p>
+<pre rel="JavaScript"><code class="language-javascript">gotoTracks(position, artistId) {
+	this.$router.push({
+		name: 'tracks',
+		params: {
+			id: artistId,
+			position: position
+		}
+	})
+}</code></pre>
+<p><a href="https://github.com/pb03/css-animations-demo/blob/reference-code/App.vue">Here’s the relevant code</a> from the repo to reference, in case you’re interested.</p>
+<p>Since we have received the position and ID of the image in Tracks, we have all the required data to show and animate it. We’ll first fetch artist information (specifically the name and image URL) using artist ID.</p>
+<p>To animate the image, we need to calculate the  <code>transform</code>  value from the image’s starting position. To set the <code>transform</code> value, I’m using CSS custom properties, which can be done with CSS-in-JS techniques as well. Note that the image’s position that we received through props will be relative to window. Therefore we’ll have to subtract some fixed offset caused by the padding of the container <code>&lt;div&gt;</code> to even out our math.</p>
+<pre rel="JavaScript"><code class="language-javascript">const { x, y } = this.$route.params.position
+// padding-left
+const offsetLeft = 100
+// padding-top
+const offsetTop = 30
+
+// Set CSS custom property value
+document.documentElement.style.setProperty(
+	'--translate', 
+	`translate(${x - offsetLeft}px, ${y - offsetTop}px) scale(0.792)`
+)</code></pre>
+<p>We’ll use this value to create a keyframe animation to move the image:</p>
+<pre rel="SCSS"><code class="language-scss">@keyframes move-image {
+	from {
+		transform: var(--translate);
+	}
+}</code></pre>
+<p>This gets assigned to the CSS animation:</p>
+<pre rel="SCSS"><code class="language-scss">.image {
+	animation: move-image 0.6s;
+}</code></pre>
+<p>&#8230;and it will animate the image from this transform value to its original position on component load.</p>
+<figure id="post-283154" class="align-left media-283154"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_D931AB62E1E68F47894D0A090E9501B59CC83182583371FA7209E5A460E13D9D_1548265695511_1.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Transitioning from Artists to Tracks</figcaption></figure>
+<p>We can use the same technique when going the opposite direction, Tracks to Artists. As we already have the clicked image’s position stored in the parent component, we can pass it to props for Artists as well.</p>
+<figure id="post-283155" class="align-left media-283155"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/02/s_D931AB62E1E68F47894D0A090E9501B59CC83182583371FA7209E5A460E13D9D_1548265710457_2.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Transitioning from Tracks to Artists</figcaption></figure>
+<h4>Step 5: Show the tracks!</h4>
+<p>It’s great that we can now move between our two views seamlessly, but the Tracks view is pretty sparse at the moment. So let’s add the track list for the selected artist.</p>
+<p>We’ll create an empty white box and a new keyframe to slide it upwards on page load. Then we’ll add three subsections to it: Recent Tracks, Popular Tracks, and Playlist. Again, if you want to jump ahead, feel free to either <a href="https://github.com/pb03/css-animations-demo/blob/reference-code/components/Tracks--full.vue">reference or copy the final code</a> from the repo.</p>
+<figure id="post-283156" class="align-left media-283156"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/music-app-tracks-content.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The Tracks view with content</figcaption></figure>
+<p>Recent Tracks is the row of thumbnails just below the artist image where each thumbnail includes the track name and track length below it. Since we’re covering animations here, we’ll create a scale-up animation, where the image starts invisible (<code>opacity: 0</code>) and a little smaller than it’s natural size (<code>scale(0.7)</code>), then is revealed (<code>opacity: 1</code> )and scales up to its natural size (<code>transform: none</code>).</p>
+<pre rel="SCSS"><code class="language-scss">.track {
+	opacity: 0;
+	transform: scale(0.7);
+	animation: scale-up 1s ease forwards;
+}
+
+@keyframes scale-up {
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}</code></pre>
+<p>The Popular Tracks list and Playlist sit side-by-side below the Recent Tracks, where Popular tracks takes up most of the space. We can slide them up a bit on initial view with another set of keyframes:</p>
+<pre rel="SCSS"><code class="language-scss">.track {
+	...
+	animation: slide-up 1.5s;
+}
+
+@keyframes slide-up {
+	from {
+		transform: translateY(140px);
+	}
+}</code></pre>
+<p>To make the animation feel more natural, we’ll create a stagger effect by adding an incremental animation delay to each item.</p>
+<pre rel="SCSS"><code class="language-scss">@for $i from 1 to 5 {
+	&amp;:nth-child(#{$i + 1}) {
+		animation-delay: #{$i * 0.05}s;
+	}
+}</code></pre>
+<p class=”explanation”>The code above is basically looking for each child element, then adding a 0.05 second delay to each element it finds. So, for example, the first child gets a 0.05 second delay, the second child gets a 0.10 second delay and so on.</p>
+<p>Check out how nice and natural this all looks:</p>
+<figure><video controls src="https://css-tricks.com/wp-content/uploads/2019/02/content.mov"></video></figure>
+<h3>Bonus: micro-interactions!</h3>
+<p>One of the fun things about working with animations is thinking through the small details because they’re what tie things together and add delight to the user experience. We call these micro-interactions and they serve a good purpose by providing visual feedback when an action is performed.</p>
+<p>Depending on the complexity of the animations, we might need a library like <a href="https://animejs.com/">anime.js</a> or <a href="https://greensock.com/gsap">GSAP</a>. This example is pretty straightforward, so we can accomplish everything we need by writing some CSS.</p>
+<h4>First micro-interaction: The volume icon</h4>
+<p>Let’s first get a volume icon in SVG format (<a href="https://thenounproject.com/search/?q=heart">Noun Project</a> and <a href="https://material.io/tools/icons/?icon=favorite&#038;style=baseline">Material Design</a> are good sources). On click, we’ll animate-in and out its <code>path</code> element to show the level of volume. For this, we’ll create a method which switches its CSS class according to the volume level.</p>
+<pre rel="HMTL"><code class="language-html">&lt;svg @click="changeVolume"&gt;
+	&lt;g :class="`level-${volumeLevel}`"&gt;
+		&lt;path d="..."/&gt; &lt;!-- volume level 1 --&gt;
+		&lt;path d="..."/&gt; &lt;!-- volume level 2 --&gt;
+		&lt;path d="..."/&gt; &lt;!-- volume level 3 --&gt;
+		&lt;polygon points="..."/&gt;
+	&lt;/g&gt;
+&lt;/svg&gt;</code></pre>
+<p>Based on this class, we can show and hide certain <code>path</code> elements as:</p>
+<pre rel="SCSS"><code class="language-scss">path {
+	opacity: 0;
+	transform-origin: left;
+	transform: translateX(-5px) scale(0.6);
+	transition: transform 0.25s, opacity 0.2s;
+}
+
+.level-1 path:first-child,
+.level-2 path:first-child,
+.level-2 path:nth-child(2),
+.level-3 path {
+	opacity: 1;
+	transform: none;
+}</code></pre>
+<figure id="post-283158" class="align-left media-283158"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/music-app-volume.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The animated volume control</figcaption></figure>
+<h4>Second micro-interaction: The favorite icon</h4>
+<p>Do you like it when you click on Twitter’s heart button? That’s because it feels unique and special by the way it animates on click. We’ll make something similar but real quick. For this, we first get an SVG heart icon and add it to the the markup. Then we’ll add a bouncy animation to it that’s triggered on click.</p>
+<pre rel="SCSS"><code class="language-scss">@keyframes bounce {
+	0%, 100% {
+		transform: none;
+	}
+	30% {
+		transform: scale(1.3);
+	}
+	60% {
+		transform: scale(0.9);
+	}
+}</code></pre>
+<p>Another fun thing we can do is add other small heart icons around it with random sizes and positions. Ideally, we’d add a few <code>absolute</code>-positioned HTML elements that a heart as the background. Let’s Arrange each of them as below by setting their <code>left</code>  and <code>bottom</code> values.</p>
+<p>We’ll also include a fade away effect so the icons appear to dissolve as they move upward by adding a keyframe animation on the same click event.</p>
+<pre rel="SCSS"><code class="language-scss">@keyframes float-upwards {
+	0%, 100% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.7;
+	}
+	50%, 100% {
+		transform: translate(-1px, -5px);
+	}
+}</code></pre>
+<figure id="post-283159" class="align-left media-283159"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/02/music-app-favorite.gif?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The animated favorite button</figcaption></figure>
+<h3>Summing up</h3>
+<p>That’s all! I hope you find all this motivating to try animations on your own websites and projects.</p>
+<p>While writing this, I also wanted to expand on the fundamental animation principles we glossed over earlier because I believe that they help choose animation durations, and avoid non-meaningful animations. That’s important to discuss because doing animations <strong>correctly</strong> is better than doing them at all. But this sounds like a whole another topic to be covered in a future article.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/writing-animations-that-bring-your-site-to-life/">Writing Animations That Bring Your Site to Life</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/writing-animations-that-bring-your-site-to-life/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/02/demo.mov" length="8624954" type="video/quicktime" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2019/02/content.mov" length="1940271" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">283132</post-id>	</item>
+		<item>
+		<title>Don&#8217;t Get Clever with Login Forms</title>
+		<link>http://bradfrost.com/blog/post/dont-get-clever-with-login-forms/</link>
+					<comments>https://css-tricks.com/dont-get-clever-with-login-forms/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 19 Feb 2019 15:18:13 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=283081</guid>
+
+					<description><![CDATA[<p>Brad points out some UX problems with a variety of apps that are doing things a little outside of the norm when it comes to their login forms. There is already a bunch of things to get right with forms to begin with (e.g. use the right input types, label your inputs, don&#8217;t have whack password requirements, use SSL, etc.)&#8230; OMG why complicate it even more?! </p>
+<p>A &#8220;password manager test&#8221; should be a development best practice here. Does it work &#8230; <a href="https://css-tricks.com/dont-get-clever-with-login-forms/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Don&#8217;t Get Clever with Login Forms&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dont-get-clever-with-login-forms/">Don&#8217;t Get Clever with Login Forms</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Brad points out some UX problems with a variety of apps that are doing things a little outside of the norm when it comes to their login forms. There is already a bunch of things to get right with forms to begin with (e.g. use the right input types, label your inputs, don&#8217;t have whack password requirements, use SSL, etc.)&#8230; OMG why complicate it even more?! </p>
+<p>A &#8220;password manager test&#8221; should be a development best practice here. Does it work cleanly with the built-in browser password manager? How about 1Password and LastPass? No? Give it some love, please and thank you.</p>
+<p><a href="http://bradfrost.com/blog/post/dont-get-clever-with-login-forms/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/dont-get-clever-with-login-forms/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/dont-get-clever-with-login-forms/">Don&#8217;t Get Clever with Login Forms</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/dont-get-clever-with-login-forms/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">283081</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,2251 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>gutenberg &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/gutenberg/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 15 Jun 2020 14:37:50 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Adding a Custom Welcome Guide to the WordPress Block Editor</title>
+		<link>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/</link>
+					<comments>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/#respond</comments>
+		
+		<dc:creator><![CDATA[Leonardo Losoviz]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 14:37:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312604</guid>
+
+					<description><![CDATA[<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using &#8230; <a href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Adding a Custom Welcome Guide to the WordPress Block Editor&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+
+
+
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using it. There’s no native feature for something like this in WordPress but we can make something because WordPress is super flexible like that.</p>
+
+
+
+<p>So here’s the idea. We’re going to bake documentation directly into the plugin and make it easily accessible in the block editor. This way, users get to use the plugin right away while having answers to common questions directly where they’re working.&nbsp;</p>
+
+
+
+<span id="more-312604"></span>
+
+
+
+<p>My plugin operates through several Custom Post Types (CPT). What we’re going to build is essentially a popup modal that users get when they go to these CPTs.&nbsp;</p>
+
+
+
+<p>The WordPress block editor is built in React, which utilizes components that can be customized to and reused for different situations. &nbsp;That is the case with what we’re making — let’s call it the <code>&lt;Guide&gt;</code> component — which behaves like a modal, but is composed of several pages that the user can paginate through.</p>
+
+
+
+<p>WordPress itself has a <code>&lt;Guide&gt;</code>&nbsp;component that displays a welcome guide when opening the block editor for the first time:</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?ssl=1" alt="Screenshot showing a modal on top of the WordPress block editor welcoming users to the editor for the first time." class="wp-image-312605" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>WordPress displays a modal with instructions for using the block editor when a user loads the editor for the first time.</figcaption></figure>
+
+
+
+<p>The guide is a container filled with content that’s broken up into individual pages. In other words, it’s pretty much what we want. That means we don’t have to re-invent the wheel with this project; we can reuse this same concept for our own plugin.</p>
+
+
+
+<p>Let’s do exactly that.&nbsp;</p>
+
+
+
+<h3>What we want to achieve</h3>
+
+
+
+<p>Before we get to the solution, let’s talk about the end goal.</p>
+
+
+
+<p>The design satisfies the requirements of the plugin, which is a GraphQL server for WordPress. The plugin offers a variety of CPTs that are edited through custom blocks which, in turn, are <a href="https://developer.wordpress.org/block-editor/developers/block-api/block-templates/">defined through templates</a>. There’s a grand total of two blocks: one called &#8220;GraphiQL client&#8221; to input the GraphQL query, and one called &#8220;Persisted query options&#8221; to customize the behavior of the execution.</p>
+
+
+
+<p>Since creating a query for GraphQL is not a trivial task, I decided to add the guide component to the editor screen for that CPT. It’s available in the Document settings as a panel called &#8220;Welcome Guide.&#8221;</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?ssl=1" alt="Screenshot showing the WordPress editor with the document settings panel open in the right column. a welcome guide tab is highlighted in the settings." class="wp-image-312607" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Crack that panel open and the user gets a link. That link is what will trigger the modal.</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=274%2C342&#038;ssl=1" alt="Close-up screenshot of the welcome guide tab opened, revealing a link that says &quot;Open Guide: Creating Persisted Queries.&quot;" class="wp-image-312609" width="274" height="342" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?w=274&amp;ssl=1 274w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=240%2C300&amp;ssl=1 240w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>For the modal itself, I decided to display a tutorial video on using the CPT on the first page, and then describe in detail all the options available in the CPT on subsequent pages.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?ssl=1" alt="Screenshot showing the custom modal open in the block editor and containing an embedded video on how to use the plugin." class="wp-image-312611" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>I believe this layout is an effective way to show documentation to the user. It is out of the way, but still conveniently close to the action. Sure, we can use a different design or even place the modal trigger somewhere else using a different component instead of repurposing <code>&lt;Guide&gt;</code>, but this is perfectly good.</p>
+
+
+
+<h3>Planning the implementation</h3>
+
+
+
+<p>The implementation comprises the following steps:</p>
+
+
+
+<ol><li>Scaffolding a new script to register the custom sidebar panel</li><li>Displaying the custom sidebar panel on the editor for our Custom Post Type only</li><li>Creating the guide</li><li>Adding content to the guide</li></ol>
+
+
+
+<p>Let&#8217;s start!</p>
+
+
+
+<h3>Step 1: Scaffolding the script</h3>
+
+
+
+<p>Starting in WordPress 5.4, we can use a component called <a href="https://developer.wordpress.org/block-editor/developers/slotfills/plugin-document-setting-panel/"><code>&lt;PluginDocumentSettingPanel&gt;</code></a> to add a <a href="https://developer.wordpress.org/block-editor/components/panel/">panel</a> on the editor&#8217;s Document settings like this:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost;
+ 
+const PluginDocumentSettingPanelDemo = () => (
+  &lt;PluginDocumentSettingPanel
+    name="custom-panel"
+    title="Custom Panel"
+    className="custom-panel"
+  >
+    Custom Panel Contents
+  &lt;/PluginDocumentSettingPanel>
+);
+registerPlugin( 'plugin-document-setting-panel-demo', {
+  render: PluginDocumentSettingPanelDemo,
+  icon: 'palmtree',
+} );</code></pre>
+
+
+
+<p>If you&#8217;re experienced with the block editor and already know how to execute this code, then you can skip ahead. I&#8217;ve been coding with the block editor for less than three months, and using React/npm/webpack is a new world for me — this plugin is my first project using them! I&#8217;ve found that the docs in the <a href="https://github.com/WordPress/gutenberg">Gutenberg repo</a> are not always adequate for beginners like me, and sometimes the documentation is missing altogether, so I&#8217;ve had to dig into the source code to find answers.</p>
+
+
+
+<p>When the documentation for the component indicates to use that piece of code above, I don&#8217;t know what to do next, because <code>&lt;PluginDocumentSettingPanel&gt;</code> is not a block and I am unable to scaffold a new block or add the code there. Plus, we’re working with JSX, which means we need to have a <a href="https://developer.wordpress.org/block-editor/tutorials/javascript/js-build-setup/">JavaScript build step</a> to compile the code.</p>
+
+
+
+<p>I did, however, find the <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">equivalent ES5 code</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var el = wp.element.createElement;
+var __ = wp.i18n.__;
+var registerPlugin = wp.plugins.registerPlugin;
+var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
+ 
+function MyDocumentSettingPlugin() {
+  return el(
+    PluginDocumentSettingPanel,
+    {
+      className: 'my-document-setting-plugin',
+      title: 'My Panel',
+    },
+    __( 'My Document Setting Panel' )
+  );
+}
+ 
+registerPlugin( 'my-document-setting-plugin', {
+  render: MyDocumentSettingPlugin
+} );</code></pre>
+
+
+
+<p>ES5 code does not need be compiled, so we can load it like any other script in WordPress. But I don&#8217;t want to use that. I want the full, modern experience of ESNext and JSX.</p>
+
+
+
+<p>So my thinking goes like this: I can&#8217;t use the <a href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">block scaffolding tools</a> since it&#8217;s not a block, and I don&#8217;t know how to compile the script (I&#8217;m certainly not going to set-up webpack all by myself). That means I&#8217;m stuck.</p>
+
+
+
+<p>But wait! The only difference between a block and a regular script is just how they are registered in WordPress. A block is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($blockScriptName, $blockScriptURL, $dependencies, $version);
+register_block_type('my-namespace/my-block', [
+  'editor_script' => $blockScriptName,
+]);</code></pre>
+
+
+
+<p>And a regular script is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($scriptName, $scriptURL, $dependencies, $version);
+wp_enqueue_script($scriptName);</code></pre>
+
+
+
+<p>We can use any of the block scaffolding tools to modify things then register a regular script instead of a block, which gains us access to the webpack configuration to compile the ESNext code. Those available tools are:</p>
+
+
+
+<ul><li>The <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">WP CLI</a> <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">‘scaffold’ command</a></li><li>Ahmad Awais&#8217;s <a href="https://github.com/ahmadawais/create-guten-block">create-guten-block</a> package</li><li>The official <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package</li></ul>
+
+
+
+<p>I chose to use the <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package because it is maintained by the team developing Gutenberg.</p>
+
+
+
+<p>To scaffold the block, <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/#usage">we execute this</a> in the command line:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm init @wordpress/block</code></pre>
+
+
+
+<p>After completing all the prompts for information — including the block’s name, title and description — the tool will generate a <a href="https://make.wordpress.org/meta/2019/03/08/the-block-directory-and-a-new-type-of-plugin/">single-block plugin</a>, with an entry PHP file containing code similar to this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/**
+ * Registers all block assets so that they can be enqueued through the block editor
+ * in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
+ */
+function my_namespace_my_block_block_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-namespace/my-block" block first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+ 
+  $editor_css = 'editor.css';
+  wp_register_style(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $editor_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$editor_css" )
+  );
+ 
+  $style_css = 'style.css';
+  wp_register_style(
+    'my-namespace-my-block-block',
+    plugins_url( $style_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$style_css" )
+  );
+ 
+  register_block_type( 'my-namespace/my-block', array(
+    'editor_script' => 'my-namespace-my-block-block-editor',
+    'editor_style'  => 'my-namespace-my-block-block-editor',
+    'style'         => 'my-namespace-my-block-block',
+  ) );
+}
+add_action( 'init', 'my_namespace_my_block_block_init' );</code></pre>
+
+
+
+<p>We can copy this code into the plugin, and modify it appropriately, converting the block into a regular script. (Note that I&#8217;m also removing the CSS files along the way, but could keep them, if needed.)</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function my_script_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-script" script first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-script',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+  wp_enqueue_script(
+    'my-script'
+  );
+}
+add_action( 'init', 'my_script_init' );</code></pre>
+
+
+
+<p>Let’s copy the <code>package.json</code> file over:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+  "name": "my-block",
+  "version": "0.1.0",
+  "description": "This is my block",
+  "author": "The WordPress Contributors",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^9.1.0"
+  }
+}</code></pre>
+
+
+
+<p>Now, we can replace the contents of file <code>src/index.js</code> with the ESNext code from above to register the <code>&lt;PluginDocumentSettingPanel&gt;</code> component. Upon running <code>npm start</code> (or <code>npm run build</code> for production) the code will be compiled into <code>build/index.js</code>.</p>
+
+
+
+<p>There is a last problem to solve: the <code>&lt;PluginDocumentSettingPanel&gt;</code> component is not statically imported, but instead obtained from <code>wp.editPost</code>, and since <code>wp</code> is a global variable loaded by WordPress on runtime, this dependency is not present in <code>index.asset.php</code> (which is auto-generated during build). We must manually add a dependency to the <code>wp-edit-post</code> script when registering the script to make sure it loads before ours:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">$dependencies = array_merge(
+  $script_asset['dependencies'],
+  [
+    'wp-edit-post',
+  ]
+);
+wp_register_script(
+  'my-script',
+  plugins_url( $index_js, __FILE__ ),
+  $dependencies,
+  $script_asset['version']
+);</code></pre>
+
+
+
+<p>Now the script setup is ready!</p>
+
+
+
+<p class="explanation">The plugin can be updated with Gutenberg&#8217;s relentless development cycles. Run <code>npm run packages-update</code> to update the npm dependencies (and, consequently, the <a href="https://github.com/WordPress/gutenberg/blob/master/packages/scripts/config/webpack.config.js">webpack configuration</a>, which is defined on package <code>"@wordpress/scripts"</code>) to their latest supported versions.</p>
+
+
+
+<p>At this point, you might be wondering how I knew to add a dependency to the <code>"wp-edit-post"</code> script before our script. Well, I had to dig into Gutenberg&#8217;s source code. The documentation for <code>&lt;PluginDocumentSettingPanel&gt;</code> is somewhat incomplete, which is a perfect example of how Gutenberg&#8217;s documentation is lacking in certain places.</p>
+
+
+
+<p>While digging in code and browsing documentation, I discovered a few enlightening things. For example, there are two ways to code our scripts: using either the ES5 or the ESNext syntax. ES5 doesn&#8217;t require a build process, and it references instances of code from the runtime environment, most likely through the global <code>wp</code> variable. For instance, the code to create an icon goes like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var moreIcon = wp.element.createElement( 'svg' );</code></pre>
+
+
+
+<p>ESNext relies on webpack to resolve all dependencies, which enables us to import static components. For instance, the code to create an icon would be:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import { more } from '@wordpress/icons';</code></pre>
+
+
+
+<p>This applies pretty much everywhere. However, that&#8217;s not the case for the <code>&lt;PluginDocumentSettingPanel&gt;</code> component, which <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">references the runtime environment for ESNext</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const { PluginDocumentSettingPanel } = wp.editPost;</code></pre>
+
+
+
+<p>That&#8217;s why we have to add a dependency to the &#8220;wp-edit-post&#8221; script. That’s where the wp.editPost variable is defined.</p>
+
+
+
+<p>If <code>&lt;PluginDocumentSettingPanel&gt;</code> could be directly imported, then the dependency to &#8220;wp-edit-post&#8221; would be automatically handled by the block editor through the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/dependency-extraction-webpack-plugin">Dependency Extraction Webpack Plugin</a>. This plugin builds the bridge from static to runtime by creating a <code>index.asset.php</code> file containing all the dependencies for the runtime environment scripts, which are obtained by <a href="https://github.com/WordPress/gutenberg/blob/dd9f4544330be4aa32beb96c13a9ad9268c7e573/packages/dependency-extraction-webpack-plugin/util.js#L72">replacing <code>"@wordpress/"</code> from the package name with <code>"wp-"</code></a>. Hence, the <code>"@wordpress/edit-post"</code> package &nbsp;becomes the <code>"wp-edit-post"</code> runtime script. That&#8217;s how I figured out which script to add the dependency.</p>
+
+
+
+<h3><strong>Step 2: Blacklisting the custom sidebar panel on all other CPTs&nbsp;</strong></h3>
+
+
+
+<p>The panel will display documentation for a specific CPT, so it must be registered only to that CPT. That means we need to blacklist it from appearing on any other post types.</p>
+
+
+
+<p>Ryan Welcher (who created the <code>&lt;PluginDocumentSettingPanel&gt;</code> component) <a href="https://ryanwelcher.com/2020/02/restricting-plugindocumentsettingpanel-by-post-type/">describes this process</a> when registering the panel:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost
+const { withSelect } = wp.data;
+ 
+const MyCustomSideBarPanel = ( { postType } ) => {
+ 
+  if ( 'post-type-name' !== postType ) {
+    return null;
+  }
+ 
+  return(
+    &lt;PluginDocumentSettingPanel
+      name="my-custom-panel"
+      title="My Custom Panel"
+    >
+      Hello, World!
+    &lt;/PluginDocumentSettingPanel>
+  );
+}
+ 
+const CustomSideBarPanelwithSelect = withSelect( select => {
+  return {
+    postType: select( 'core/editor' ).getCurrentPostType(),
+  };
+} )( MyCustomSideBarPanel);
+ 
+ 
+registerPlugin( 'my-custom-panel', { render: CustomSideBarPanelwithSelect } );</code></pre>
+
+
+
+<p>He also suggests an alternative solution, using <code>useSelect</code> instead of <code>withSelect</code>.</p>
+
+
+
+<p>That said, I&#8217;m not totally convinced by this solution, because the JavaScript file must still be loaded, even if it isn’t needed, forcing the website to take a performance hit. Doesn&#8217;t it make more sense to <em>not</em> register the JavaScript file than it does to run JavaScript just to disable JavaScript?</p>
+
+
+
+<p>I have created a PHP solution. I’ll admit that it feels a bit hacky, but it works well. First, we find out which post type is related to the object being created or edited:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function get_editing_post_type(): ?string
+{
+  if (!is_admin()) {
+    return null;
+  }
+ 
+  global $pagenow;
+  $typenow = '';
+  if ( 'post-new.php' === $pagenow ) {
+    if ( isset( $_REQUEST['post_type'] ) &amp;&amp; post_type_exists( $_REQUEST['post_type'] ) ) {
+      $typenow = $_REQUEST['post_type'];
+    };
+  } elseif ( 'post.php' === $pagenow ) {
+    if ( isset( $_GET['post'] ) &amp;&amp; isset( $_POST['post_ID'] ) &amp;&amp; (int) $_GET['post'] !== (int) $_POST['post_ID'] ) {
+      // Do nothing
+    } elseif ( isset( $_GET['post'] ) ) {
+      $post_id = (int) $_GET['post'];
+    } elseif ( isset( $_POST['post_ID'] ) ) {
+      $post_id = (int) $_POST['post_ID'];
+    }
+    if ( $post_id ) {
+      $post = get_post( $post_id );
+      $typenow = $post->post_type;
+    }
+  }
+  return $typenow;
+}</code></pre>
+
+
+
+<p>Then, ,we register the script only if it matches our CPT:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">add_action('init', 'maybe_register_script');
+function maybe_register_script()
+{
+  // Check if this is the intended custom post type
+  if (get_editing_post_type() != 'my-custom-post-type') {
+    return;
+  }
+ 
+  // Only then register the block
+  wp_register_script(...);
+  wp_enqueue_script(...);
+}</code></pre>
+
+
+
+<p class="explanation"><a href="https://www.designbombs.com/registering-gutenberg-blocks-for-custom-post-type/">Check out this post</a> for a deeper dive on how this works.</p>
+
+
+
+<h3>Step 3: Creating the custom guide</h3>
+
+
+
+<p>I designed the functionality for my plugin’s guide based on the WordPress <code>&lt;Guide&gt;</code> component. I didn’t realize I’d be doing that at first, so here’s how I was able to figure that out.</p>
+
+
+
+<ol><li>Search the <a href="https://github.com/WordPress/gutenberg">source code</a> to see how it was done there.</li><li>Explore the catalogue of all available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a>.</li></ol>
+
+
+
+<p>First, I copied content from the block editor modal and did a basic search. <a href="https://github.com/WordPress/gutenberg/search?q=%22In+the+WordPress+editor%22&amp;type=">The results</a> pointed me to <a href="https://github.com/WordPress/gutenberg/blob/7b63e877336bb8f156bcd25191066bad38ba6635/packages/edit-post/src/components/welcome-guide/index.js">this file</a>. From there I discovered the component is called <code>&lt;Guide&gt;</code> and could simply copy and paste its code to my plugin as a base for my own guide.</p>
+
+
+
+<p>Then I looked for the component&#8217;s documentation. I browsed the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/components">@wordpress/components</a> package (which, as you may have guessed, is where components are implemented) and found <a href="https://github.com/WordPress/gutenberg/blob/master/packages/components/src/guide/README.md">the component’s README file</a>. That gave me all the information I needed to implement my own custom guide component.</p>
+
+
+
+<p>I also explored the catalogue of all the available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a> (which actually shows that these components can be used outside the context of WordPress). Clicking on all of them, I finally discovered <a href="https://wordpress.github.io/gutenberg/?path=/story/components-guide--default"><code>&lt;Guide&gt;</code></a>. The storybook provides the source code for several examples (or stories). It’s a handy resource for understanding how to customize a component through props.</p>
+
+
+
+<p>At this point, I knew <code>&lt;Guide&gt;</code> would make a solid base for my component. There is one missing element, though: how to trigger the guide on click. I had to rack my brain for this one!</p>
+
+
+
+<p>This is a button with a listener that opens the modal on click:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import MyGuide from './guide';
+ 
+const MyGuideWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button onClick={ () => setOpen( true ) }>
+        { __('Open Guide: “Creating Persisted Queries”') }
+      &lt;/Button>
+      { isOpen &amp;&amp; (
+        &lt;MyGuide 
+          { ...props }
+          onFinish={ () => setOpen( false ) }
+        />
+      ) }
+    &lt;/>
+  );
+};
+export default MyGuideWithButton;</code></pre>
+
+
+
+<p>Even though the block editor tries to hide it, we are operating within React. Until now, we’ve been dealing with JSX and components. But now we need the <a href="https://reactjs.org/docs/hooks-state.html"><code>useState</code> hook</a>, which is specific to React.</p>
+
+
+
+<p>I&#8217;d say that having a good grasp of React is required if you want to master the WordPress block editor. There is no way around it.</p>
+
+
+
+<h3>Step 4: Adding content to the guide</h3>
+
+
+
+<p>We’re almost there! Let’s create the <code>&lt;Guide&gt;</code> component, containing a <code>&lt;GuidePage&gt;</code> component for each page of content.</p>
+
+
+
+<p>The content can use HTML, include other components, and whatnot. In this particular case, I have added three <code>&lt;GuidePage&gt;</code> instances for my CPT just using HTML. The first page includes a video tutorial and the next two pages contain detailed instructions.</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { Guide, GuidePage } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+ 
+const MyGuide = ( props ) => {
+  return (
+    &lt;Guide { ...props } >
+      &lt;GuidePage>
+        &lt;video width="640" height="400" controls>
+          &lt;source src="https://d1c2lqfn9an7pb.cloudfront.net/presentations/graphql-api/videos/graphql-api-creating-persisted-query.mov" type="video/mp4" />
+          { __('Your browser does not support the video tag.') }
+        &lt;/video>
+        // etc.
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+    &lt;/Guide>
+  )
+}
+export default MyGuide;</code></pre>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-1.gif?ssl=1" alt="imaged gif showing the mouse cursor clicking on the Open Guide link in the block editor's document settings, which opens the custom welcome guide containing a video with links to other pages in the modal." class="wp-image-312613" data-recalc-dims="1"/><figcaption>Hey look, we have our own guide now!</figcaption></figure>
+
+
+
+<p>Not bad! There are a few issues, though:</p>
+
+
+
+<ul><li>I couldn&#8217;t embed the video inside the <code>&lt;Guide&gt;</code> because clicking the play button closes the guide. I assume that’s because the <code>&lt;iframe&gt;</code> falls outside the boundaries of the guide. I wound up uploading the video file to S3 and serving with <code>&lt;video&gt;</code>.</li><li>The page transition in the guide is not very smooth. The block editor’s modal looks alright because all pages have a similar height, but the transition in this one is pretty abrupt.</li><li>The hover effect on buttons could be improved. Hopefully, the Gutenberg team needs to fix this for their own purposes, because my CSS aren’t there. It’s not that my skills are bad; they are nonexistent.</li></ul>
+
+
+
+<p>But I can live with these issues. Functionality-wise, I&#8217;ve achieved what I need the guide to do.</p>
+
+
+
+<h3>Bonus: Opening docs independently&nbsp;</h3>
+
+
+
+<p>For our <code>&lt;Guide&gt;</code>, we created the content of each <code>&lt;GuidePage&gt;</code> component directly using HTML. However, if this HTML code is instead added through an autonomous component, then it can be reused for other user interactions.</p>
+
+
+
+<p>For instance, the component <code>&lt;CacheControlDescription&gt;</code> displays a description concerning HTTP caching:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const CacheControlDescription = () => {
+  return (
+    &lt;p>The Cache-Control header will contain the minimum max-age value from all fields/directives involved in the request, or "no-store" if the max-age is 0&lt;/p>
+  )
+}
+export default CacheControlDescription;</code></pre>
+
+
+
+<p>This component can be added inside a <code>&lt;GuidePage&gt;</code> as we did before, but also within a <code>&lt;Modal&gt;</code> component:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import CacheControlDescription from './cache-control-desc';
+ 
+const CacheControlModalWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button 
+        icon="editor-help"
+        onClick={ () => setOpen( true ) }
+      />
+      { isOpen &amp;&amp; (
+        &lt;Modal 
+          { ...props }
+          onRequestClose={ () => setOpen( false ) }
+        >
+          &lt;CacheControlDescription />
+        &lt;/Modal>
+      ) }
+    &lt;/>
+  );
+};
+export default CacheControlModalWithButton;</code></pre>
+
+
+
+<p>To provide a good user experience, we can offer to show the documentation only when the user is interacting with the block. For that, we show or hide the button depending on the value of <code>isSelected</code>:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { __ } from '@wordpress/i18n';
+import CacheControlModalWithButton from './modal-with-btn';
+ 
+const CacheControlHeader = ( props ) => {
+  const { isSelected } = props;
+  return (
+    &lt;>
+      { __('Cache-Control max-age') }
+      { isSelected &amp;&amp; (
+        &lt;CacheControlModalWithButton />
+      ) }
+    &lt;/>
+  );
+}
+export default CacheControlHeader;</code></pre>
+
+
+
+<p>Finally, the <code>&lt;CacheControlHeader&gt;</code> component is added to the appropriate control.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.gif?ssl=1" alt="Animated gif showing the option to view a guide displaying when a block is selected in the editor." class="wp-image-312615" data-recalc-dims="1"/></figure>
+
+
+
+<h3>Tadaaaaaaaa &#x1f389;</h3>
+
+
+
+<p>The WordPress block editor is quite a piece of software! I was able to accomplish things with it that I would have been unable to without it. Providing documentation to the user may not be the shiniest of examples or use cases, but it&#8217;s a very practical one and something that’s relevant for many other plugins. Want to use it for your own plugin? Go for it!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312604</post-id>	</item>
+		<item>
+		<title>How to Use Block Variations in WordPress</title>
+		<link>https://css-tricks.com/how-to-use-block-variations-in-wordpress/</link>
+					<comments>https://css-tricks.com/how-to-use-block-variations-in-wordpress/#comments</comments>
+		
+		<dc:creator><![CDATA[Dmitry Mayorov]]></dc:creator>
+		<pubDate>Wed, 06 May 2020 14:43:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<category><![CDATA[WordPress blocks]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307800</guid>
+
+					<description><![CDATA[<p>WordPress 5.4 was released not so long ago and, along with other improvements and bug fixes, it introduced a feature called Block Variations. I had a chance to use it on one of my recent projects and am so pleasantly surprised with how smart this feature is. I actually think it hasn’t received the attention it deserves, which is why I decided to write this article.</p>
+<p>What is a Block Variation?</p>
+<p><em>Block Variations</em> allow developers to define instances of <em>existing </em>&#8230; <a href="https://css-tricks.com/how-to-use-block-variations-in-wordpress/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Use Block Variations in WordPress&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-use-block-variations-in-wordpress/">How to Use Block Variations in WordPress</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>WordPress 5.4 was released not so long ago and, along with other improvements and bug fixes, it introduced a feature called Block Variations. I had a chance to use it on one of my recent projects and am so pleasantly surprised with how smart this feature is. I actually think it hasn’t received the attention it deserves, which is why I decided to write this article.</p>
+
+
+
+<span id="more-307800"></span>
+
+
+
+<h3>What is a Block Variation?</h3>
+
+
+
+<p><em>Block Variations</em> allow developers to define instances of <em>existing blocks</em>. An example that you’ll see below is a quote block. Perhaps your site has three variations of how to display a quote on your site. A Block Variation can be created for each one so that they are all styled differently. This sounds awfully familiar with how Block Styles, but the concept of variations goes a bit further than that, as we’ll see.</p>
+
+
+
+<h3>How are Block Variations different from Block Styles?</h3>
+
+
+
+<p>Fair question. Block variations appear in the inserter as separate blocks with unique names and (optionally) icons and can have pre-filled custom attributes, and inner blocks.</p>
+
+
+
+<p><a href="https://developer.wordpress.org/block-editor/developers/filters/block-filters/#block-style-variations">Block Styles</a> are designed to alter the look of the block. In fact, a Block Style is a fancy way of adding a custom class to a block using the Block options in the post editor.</p>
+
+
+
+<p>The difference is clear when you consider how each one is used in the post editor. Let’s say we register a new Block Style called “Fancy Quote.” We do that by extending the core “Quote” block like this example from the <a href="https://developer.wordpress.org/block-editor/developers/filters/block-filters/">Block Editor Handbook</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockStyle(
+  'core/quote',
+  {
+    name: 'fancy-quote',
+    label: 'Fancy Quote'
+  },
+);</code></pre>
+
+
+
+<p>This adds a <code>.is-style-fancy-quote</code> class to the Quote block settings in the post editor.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?fit=1024%2C613&amp;ssl=1" alt="Screenshot of the Block options in the WordPress post editor highlighting the options for a quote block. A &quot;Fancy Quote&quot; option is listed under Styles and the custom class name is in an Additional CSS Classes field." class="wp-image-307803" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?w=2560&amp;ssl=1 2560w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=300%2C180&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=1024%2C613&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=768%2C460&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=1536%2C919&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=2048%2C1226&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/N4D-NO6m.jpeg?resize=1000%2C598&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>We now have a Fancy Quote option in the Block options under &#8220;Styles&#8221; and the class for it filled in for us.</figcaption></figure>
+
+
+
+<p>Even though it sort of sounds like it would do the same thing (which it technically can), a Block Variation can be used to pre-fill custom attributes (including custom classes) and inner blocks. They’re actually registered as separate blocks.</p>
+
+
+
+<p>Let’s take a closer look at the API and what block variations can do.</p>
+
+
+
+<h3>Creating a Block Variation</h3>
+
+
+
+<p>The API for registering Block Variations is very similar that of the Block Style we just looked at:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/quote',
+  {
+    name: 'fancy-quote',
+    title: 'Fancy Quote',
+  },
+);</code></pre>
+
+
+
+<p>The <code>registerBlockVariation</code> function accepts the name of the block (in our case it is core/quote) and an object (or an array of objects) describing the variation(s).</p>
+
+
+
+<p>The code above doesn’t do much by default, but it does add “Fancy Quote” to the list of available blocks.</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ORmgmFQA.jpeg?resize=436%2C313&#038;ssl=1" alt="Showing the Fancy Quote variation in the WordPress Block Inserter." class="wp-image-307804" width="436" height="313" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ORmgmFQA.jpeg?w=872&amp;ssl=1 872w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ORmgmFQA.jpeg?resize=300%2C215&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/ORmgmFQA.jpeg?resize=768%2C551&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>We now have two different&nbsp;“quote”&nbsp;blocks available to drop into the post.</figcaption></figure>
+
+
+
+<p>To take full advantage of the variation. we need to provide more details in the object describing it. The list is covered in the <a href="https://make.wordpress.org/core/2020/02/27/introduce-block-variations-api/">Make WordPress post</a>, but I’ll share it here and provide additional comments.</p>
+
+
+
+<ul><li><code><strong>name</strong></code> – The unique and machine-readable name of the variation. Following the examples on Github and Make post it’s safe to assume that the best practice is to use kebab-case for naming variations.</li><li><code><strong>title</strong></code> – A human-readable variation title. This is what appears under the icon in the Inserter.</li><li><strong><code>description</code></strong> – A detailed variation description. Appears in the Inserter as well. If empty, the default block description will be used. (Optional)</li><li><strong><code>icon</code></strong> – An icon for the variation. Can be a <a href="https://developer.wordpress.org/resource/dashicons/%23art">Dashicons</a> slug, an SVG or an object. Follows the same declaration pattern as in <a href="https://developer.wordpress.org/block-editor/developers/block-api/block-registration/%23icon-optional"><code>registerBlockType</code></a>. (Optional)</li><li><strong><code>isDefault</code></strong> – Indicates whether the current variation is the default one. Defaults to <code>false</code>. In case of our example, if we set it to <code>true</code>, the <em>Fancy Quote</em> block will be the only Quote block available in the inserter. (Optional)</li><li><strong><code>attributes</code></strong> – Values that override block attributes. These are block-specific. You can set the <code>level</code> for the <em>Heading</em> block or <code>height</code> for <em>Spacer, </em>for example.</li><li><strong><code>innerBlocks</code></strong> – Initial configuration of nested blocks. Only applies to blocks that allow inner blocks in the first place, like Columns, Cover, or Group. We’ll cover this in one of the examples. (Optional)</li><li><strong><code>example</code></strong> – Example provides structured data for the block preview. You can set it to <code>undefined</code> to disable the preview shown for the block type. This is the same as the example field in <code>registerBlockType</code>. (Optional) There&#8217;s <a href="https://developer.wordpress.org/block-editor/developers/block-api/block-registration/%23example-optional">more information</a> available on this parameter.</li><li><strong><code>scope</code></strong> – The list of scopes where the variation is applicable. When not provided, it assumes all available scopes. Available options are <code>block</code> and <code>inserter</code>. We’ll cover this in detail in one of the examples.</li></ul>
+
+
+
+<p>Many of you may wonder why we need this extra layer of abstraction. Let me try to answer that with a few use cases (one form my recent project).</p>
+
+
+
+<h3>Use case: Buttons with different widths</h3>
+
+
+
+<p>Let’s say you have a design system with two types of buttons: <em>Fill</em> and <em>Outline</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?fit=1024%2C256&amp;ssl=1" alt="Two buttons, one with a green fill and one with a green border. Both say Learn More." class="wp-image-307805" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?w=1400&amp;ssl=1 1400w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?resize=300%2C75&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?resize=1024%2C256&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?resize=768%2C192&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/3CplmPmh.jpeg?resize=1000%2C250&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Fill and Outline button styles in the design system</figcaption></figure>
+
+
+
+<p>Lucky you, because these are the default styles for buttons in WordPress. No need to register any new styles or hack the editor. All you have to do is write some CSS for each style and call it a day. Life is good and everybody’s happy.</p>
+
+
+
+<p>But then you look in the design spec again and notice that there is a little twist. The buttons come in three widths: <em>Regular</em>, <em>Wide</em>, and <em>Full</em>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?fit=1024%2C317&amp;ssl=1" alt="The same green buttons but with additional variations at two different widths for a totally of six buttons." class="wp-image-307807" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?w=2560&amp;ssl=1 2560w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=300%2C93&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=1024%2C317&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=768%2C238&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=1536%2C476&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=2048%2C634&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ojNU1TyS-scaled.jpeg?resize=1000%2C310&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Fill and Outline button styles with different width variations</figcaption></figure>
+
+
+
+<p>Dammit! You are a little upset because you now have two options:</p>
+
+
+
+<ol><li>Write two extra classes for the new button sizes (say, <code>.is-wide</code> and <code>.is-full</code>), then teach the client to use the <em>Advanced</em> panel in the editor to add those classes and write a manual where you explain what each class does. Or…</li><li>Register four(!) new styles that go in the Block options: <em>Fill Wide</em>, <em>Fill Full</em>, <em>Outline Wide</em>, and <em>Outline Full</em>.</li></ol>
+
+
+
+<p>Neither of those options are exactly elegant. (BTW, what is <em>Fill Full</em> exactly? Quite an unfortunate mouthful!)</p>
+
+
+
+<p>There are two more options that I didn’t include in the list:</p>
+
+
+
+<ul><li>Filter the button block and add a custom width control to it</li><li>Build a custom block from scratch.</li></ul>
+
+
+
+<p>These obviously feel like heavy lifts for such a simple task.</p>
+
+
+
+<p>Enter Block Variations! By adding just two variations, <em>Full</em> and <em>Wide</em>,<em> we can </em>keep things clean and simple:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/buttons',
+  [
+    {
+      name: 'wide',
+      title: 'Wide Buttons',
+      attributes: {
+        className: 'is-wide'
+      },
+  },
+  {
+      name: 'full',
+      title: 'Full Buttons',
+      attributes: {
+        className: 'is-full'
+      },
+    }
+  ]
+);</code></pre>
+
+
+
+<p>This is the same as adding a custom class to the Buttons block, but in a neat and elegant way that can be dropped directly into a post from the Block Inserter:</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/2Aa-Hu0g.jpeg?resize=436%2C313&#038;ssl=1" alt="Showing the Wide and Full button variations in the WordPress Block Inserter." class="wp-image-307808" width="436" height="313" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/2Aa-Hu0g.jpeg?w=872&amp;ssl=1 872w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/2Aa-Hu0g.jpeg?resize=300%2C215&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/2Aa-Hu0g.jpeg?resize=768%2C551&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Button variations in the inserter</figcaption></figure>
+
+
+
+<p>Life is good and everybody is happy again! <strong>So what did we learn from this example?</strong></p>
+
+
+
+<ul><li>It shows that Block Variations are not designed to replace Block Styles. In fact, they can work pretty well together even if the variation just adds a class to a block.</li><li>It demos how to register multiple variations in a single declaration.</li></ul>
+
+
+
+<h3>Use case: Repeating column layouts</h3>
+
+
+
+<p>Let’s say you are a designer and have a portfolio website with case studies. Each case study has an intro section with the name of the project, client information, and a description of  your role on the project. It might look something like this:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?fit=1024%2C256&amp;ssl=1" alt="Showing three columns, one that says Website Design, one that says Clients, and one says Role. Each one represents a column we want on the page." class="wp-image-307833" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?w=2248&amp;ssl=1 2248w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=300%2C75&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=1024%2C256&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=768%2C192&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=1536%2C384&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=2048%2C512&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/ZK0M_RN-.jpeg?resize=1000%2C250&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>The type of work (left), who it was for (center) and your role on it (right)</figcaption></figure>
+
+
+
+<p>The problem is that it’s a bit tedious to build this part of the layout every time you create a new portfolio case study — especially because the <em>Client</em> and <em>My Role</em> headings never change. You are only editing the main title and two paragraphs.</p>
+
+
+
+<p>With Block Variations, you can create a variation of a core <em>Columns </em>block called <em>Project Intro</em> that will have the columns, and inner blocks already defined. This example is a bit more involved, so we’ll build it out step-by-step.</p>
+
+
+
+<p>Let’s start with registering the variation:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/columns', {
+    name: 'project-intro',
+    title: 'Project Intro',
+    scope: ['inserter'],
+    innerBlocks: [
+      ['core/column'],
+      ['core/column'],
+      ['core/column'],
+    ],
+  }
+);</code></pre>
+
+
+
+<p>We are taking this example a bit further than the first one, so why not add a custom <a href="https://developer.wordpress.org/resource/dashicons/%23portfolio">portfolio icon</a> from the <a href="https://developer.wordpress.org/resource/dashicons/">Dashicons library</a> that’s baked right into WordPress? We do that with the <code>icon</code> property.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="5"><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/columns', {
+    name: 'project-intro',
+    title: 'Project Intro',
+    icon: 'portfolio',
+    scope: ['inserter'],
+    innerBlocks: [
+      ['core/column'],
+      ['core/column'],
+      ['core/column'],
+    ],
+  }
+);</code></pre>
+
+
+
+<p>This will make the block available in the block menu with our icon:</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/kxEOgefw.jpeg?resize=436%2C313&#038;ssl=1" alt="Variation with a custom icon in the Block Inserter." class="wp-image-307836" width="436" height="313" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/kxEOgefw.jpeg?w=872&amp;ssl=1 872w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/kxEOgefw.jpeg?resize=300%2C215&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/kxEOgefw.jpeg?resize=768%2C551&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>The next important thing happens on where we add inner blocks:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="7,8,9,10,11"><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/columns', {
+    name: 'project-intro',
+    title: 'Project Intro',
+    icon: 'portfolio',
+    scope: ['inserter'],
+    innerBlocks: [
+      ['core/column'],
+      ['core/column'],
+      ['core/column'],
+    ],
+  }
+);</code></pre>
+
+
+
+<p>But this only gives us three empty columns. Let’s add starter content and inner blocks to each of them. We can use the same pattern we use to declare a block template in the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/block-editor/src/components/inner-blocks%23template"><code>InnerBlocks</code> </a>component. We can add an object with block attributes as a second element in the array describing the block, and an array of inner blocks as the third element.</p>
+
+
+
+<p>The first column will look like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">['core/column', {}, [
+  ['core/heading', { level: 2, placeholder: 'Project Title'} ],
+]]</code></pre>
+
+
+
+<p>…and the complete block variation is like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockVariation (
+  'core/columns', {
+    name: 'project-intro',
+    title: 'Project Intro',
+    icon: 'portfolio',
+    scope: ['inserter'],
+    innerBlocks: [
+      ['core/column', {}, [
+        ['core/heading', { level: 2, placeholder: 'Project Title' }],
+      ]],
+      ['core/column', {}, [
+        ['core/heading', { level: 3, content: 'Client' }],
+        ['core/paragraph', { placeholder: 'Enter client info' }],
+      ]],
+      ['core/column', {}, [
+        ['core/heading', { level: 3, content: 'My Role' }],
+        ['core/paragraph', { placeholder: 'Describe your role' }],
+      ]],
+    ],
+  }
+);</code></pre>
+
+
+
+<p>Cool, now we can insert the whole section with just one click. Okay, it’s a few clicks, but still faster than without using the variations.</p>
+
+
+
+<p><strong>So what did we learn from this example?</strong></p>
+
+
+
+<ul><li>And demos how to use the inner blocks within the variation</li><li>It shows how to define a custom icon for a variation</li></ul>
+
+
+
+<h3>Use case: Four-column layout</h3>
+
+
+
+<p>You already know that columns are a default block type, and that there are a handful of options for different types of columns. A four-column layout isn’t one of them, so we can build that. But this introduces a new concept as well: <em>scoping</em> in context of block variations.</p>
+
+
+
+<p>Some core blocks, like <em>Columns, </em>already offer variations out of the box. You can choose one of them <em>after</em> you insert the block on the page:</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?fit=1024%2C390&amp;ssl=1" alt="Showing the columns block inserted with 5 different layout options to display up to 3 columns at varying widths." class="wp-image-307837" width="512" height="195" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?w=1160&amp;ssl=1 1160w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?resize=300%2C114&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?resize=1024%2C390&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?resize=768%2C293&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/DcKQfY58.jpeg?resize=1000%2C381&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Block-scoped variations</figcaption></figure>
+
+
+
+<p>Let’s say you use a four-column layout on your website as often as you use two-column one. That’s unfortunate, because there is no shortcut button to create four-column layout. Creating one is a bit annoying because it takes extra clicks to get to the Columns control after the block is inserted:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?fit=1024%2C500&amp;ssl=1" alt="Showing the slider control to change the number of columns in the Block settings." class="wp-image-307838" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?w=1973&amp;ssl=1 1973w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?resize=300%2C146&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?resize=1024%2C500&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?resize=768%2C375&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?resize=1536%2C750&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/t521R_YU.jpeg?resize=1000%2C488&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>So, what can you do to improve this workflow? Right, you can add a Block Variation that will create a four-column layout. The only difference this time, compared to previous examples, is that it makes much more sense to include this variation inside the block placeholder, next to all other column layouts.</p>
+
+
+
+<p>That is exactly what the scope option is for. If you set it to <code>[block]</code>, the variation will <em>not</em> appear in the Block Inserter but in the variations once the block has been inserted.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp.blocks.registerBlockVariation(
+  'core/columns', {
+    name: 'four-columns',
+    title: 'Four columns; equal split',
+    icon: &lt;svg ... />,
+    scope: ['block'], // Highlight
+    innerBlocks: [
+      ['core/column'],
+      ['core/column'],
+      ['core/column'],
+      ['core/column'],
+    ],
+  }
+);</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?fit=1024%2C390&amp;ssl=1" alt="Four-column layout variation scoped to the block." class="wp-image-307839" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?w=1160&amp;ssl=1 1160w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?resize=300%2C114&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?resize=1024%2C390&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?resize=768%2C293&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/RY3a2jOO.jpeg?resize=1000%2C381&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Hey, now we have a four-column option!</figcaption></figure>
+
+
+
+<p>Isn’t that sweet?!</p>
+
+
+
+<p class="explanation">I’ve omitted the full SVG code for the icon, but <a href="https://gist.github.com/dmtrmrv/4e6209ff761495db697b509ba045f801">it’s available</a> if you need it.</p>
+
+
+
+<p>To sum up <code>scope</code>: If it isn’t declared, the variation will appear in the Block Inserter <em>and </em>inside the block placeholder&nbsp;— specifically for blocks that support block-scoped variations.&nbsp;</p>
+
+
+
+<p>If we were to remove the scope parameter from the example above, here’s how the variation would appear in the inserter:</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/um55cKI2.jpeg?resize=431%2C501&#038;ssl=1" alt="Four-column block variation in the block inserter." class="wp-image-307840" width="431" height="501" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/um55cKI2.jpeg?w=861&amp;ssl=1 861w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/um55cKI2.jpeg?resize=258%2C300&amp;ssl=1 258w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/um55cKI2.jpeg?resize=768%2C893&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Keep in mind that the icon sizes for variations within the block and and the block icons size are different. The custom icon for columns was intended for the block scope, that’s why it looks a bit out-of-place in this example.</figcaption></figure>
+
+
+
+<p><strong>So what did we learn from this example?</strong></p>
+
+
+
+<ul><li>It explains the difference between the block and inserter scope for the variation.</li><li>We learned how to use SVG for variation icon.</li></ul>
+
+
+
+<h3><strong>That’</strong>s it!</h3>
+
+
+
+<p>As you can see, Block Variations are pretty powerful for building a lot of things, from different variations of buttons to complete page layouts.</p>
+
+
+
+<p>I’d like to wrap this up with a quick recap of different APIs for block customizations and when to use them:</p>
+
+
+
+<ul><li>Use <strong>Block Styles</strong> if you need to alter the appearance of the block and adding a CSS class is enough for that.</li><li>Use <strong>Block Variations</strong> if you need to specify the default attributes for the block and/or add inner blocks to it.</li><li>If that’s not enough and you need to change the markup of the block, you are probably looking into filtering the block or creating a new one from scratch.</li></ul>
+
+
+
+<p>If you’ve had a chance to play with Block Variation, let me know what you think of them in the comments!</p>
+
+
+
+<h4>Resources</h4>
+
+
+
+<ul><li><a href="https://make.wordpress.org/core/2020/02/27/introduce-block-variations-api/">Make WordPress Post</a></li><li><a href="https://github.com/WordPress/gutenberg/pull/20068">GitHub Pull Request #20068</a></li></ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-use-block-variations-in-wordpress/">How to Use Block Variations in WordPress</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-use-block-variations-in-wordpress/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">307800</post-id>	</item>
+		<item>
+		<title>How to Create Custom WordPress Editor Blocks in 2020</title>
+		<link>https://deliciousbrains.com/custom-gutenberg-block/</link>
+					<comments>https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 06 May 2020 14:43:24 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress blocks]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=307832</guid>
+
+					<description><![CDATA[<p><a href="https://deliciousbrains.com/custom-gutenberg-block/">Peter Tasker</a> on creating blocks right now:</p>
+<blockquote class="wp-block-quote">
+<p>It’s&#160;<em>fairly</em>&#160;straightforward these days to get set up with the&#160;<a rel="noreferrer noopener" href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block" target="_blank">WP CLI ‘scaffold’ command</a>. This command will set up a WordPress theme or plugin with a ‘blocks’ folder that contains the PHP and base CSS and JavaScript required to create a custom block. The only drawback that I noticed is that the JavaScript uses the old ES5 syntax rather than modern&#160;<a rel="noreferrer noopener" href="https://stackoverflow.com/questions/56521178/what-is-esnext" target="_blank">ESNext</a>. Modern JavaScript allows us to write more concise </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Create Custom WordPress Editor Blocks in 2020&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">How to Create Custom WordPress Editor Blocks in 2020</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://deliciousbrains.com/custom-gutenberg-block/">Peter Tasker</a> on creating blocks right now:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>It’s&nbsp;<em>fairly</em>&nbsp;straightforward these days to get set up with the&nbsp;<a rel="noreferrer noopener" href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block" target="_blank">WP CLI ‘scaffold’ command</a>. This command will set up a WordPress theme or plugin with a ‘blocks’ folder that contains the PHP and base CSS and JavaScript required to create a custom block. The only drawback that I noticed is that the JavaScript uses the old ES5 syntax rather than modern&nbsp;<a rel="noreferrer noopener" href="https://stackoverflow.com/questions/56521178/what-is-esnext" target="_blank">ESNext</a>. Modern JavaScript allows us to write more concise code and use&nbsp;<a rel="noreferrer noopener" href="https://reactjs.org/docs/introducing-jsx.html" target="_blank">JSX</a>&nbsp;in our custom block code.</p><p>You can also use the&nbsp;<a rel="noreferrer noopener" href="https://github.com/ahmadawais/create-guten-block" target="_blank">‘create-guten-block’</a>&nbsp;tool by&nbsp;<a rel="noreferrer noopener" href="https://twitter.com/mrahmadawais" target="_blank">Ahmad Awais</a>. It gives you a lot of the boilerplate stuff you need out of the box, like Webpack, ESNext support etc. Setting it up is fairly straightforward, and it’s similar to&nbsp;<a rel="noreferrer noopener" href="https://github.com/facebook/create-react-app" target="_blank">Create React App</a>.</p></blockquote>
+
+
+
+<span id="more-307832"></span>
+
+
+
+<p>I&#8217;ve used create-guten-block for the handful of custom blocks I&#8217;ve made so far, and have found it a pretty nice experience. </p>
+
+
+
+<p>But&#8230; I feel like I just sort of lucked into being comfortable with all this. I have one foot in WordPress development <em>and</em> just so happen to have one foot in React development. Building blocks with both technologies together feels decently natural to me. If blocks were Angular or something, I feel like I might not have even given it a shot. </p>
+
+
+
+<p>I&#8217;ll echo this sentiment:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>I also found it really annoying working on a block that’s actively changing in code. Every time you reload Gutenberg, you’ll get the “This block appears to have been modified externally…” message because the markup of the block has changed.</p><p>I get&nbsp;<a rel="noreferrer noopener" href="https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#validation" target="_blank">why it’s throwing the error</a>, but it slows you down.</p></blockquote>
+
+
+
+<p>At the end, Peter mentions the approach of building blocks <a href="https://www.advancedcustomfields.com/resources/blocks/">that Advanced Custom Fields has</a>. It almost feels like a weird bizarro-reverso world. The ACF approach seems more like what WordPress would have done in a normal world (building blocks with just PHP and templating) and third-parties would be the ones adding all the fancy React stuff.  </p>
+<p><a href="https://deliciousbrains.com/custom-gutenberg-block/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">How to Create Custom WordPress Editor Blocks in 2020</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">307832</post-id>	</item>
+		<item>
+		<title>Gutenberging</title>
+		<link>https://css-tricks.com/gutenberging/</link>
+					<comments>https://css-tricks.com/gutenberging/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 24 Feb 2020 14:41:16 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=302758</guid>
+
+					<description><![CDATA[<p>It&#8217;s been over a year since the big WordPress launch of <a href="https://wordpress.org/gutenberg/">Gutenberg</a>, the new editor. It seems to me most of the controversy around it has died down. There has been enough time that the UX and accessibility of it have improved, and people are seeing the potential a lot more clearly. There ain&#8217;t no turning back.</p>
+<p>I&#8217;m running across articles like Haris Zulfiqar saying he&#8217;s <a href="https://hariszulfiqar.com/why-am-i-betting-on-gutenberg/">betting on it</a> and Nick Hamze saying that blocks are <a href="https://block.garden/for-the-future/">for the next </a>&#8230; <a href="https://css-tricks.com/gutenberging/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Gutenberging&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/gutenberging/">Gutenberging</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>It&#8217;s been over a year since the big WordPress launch of <a href="https://wordpress.org/gutenberg/">Gutenberg</a>, the new editor. It seems to me most of the controversy around it has died down. There has been enough time that the UX and accessibility of it have improved, and people are seeing the potential a lot more clearly. There ain&#8217;t no turning back.</p>
+
+
+
+<p>I&#8217;m running across articles like Haris Zulfiqar saying he&#8217;s <a href="https://hariszulfiqar.com/why-am-i-betting-on-gutenberg/">betting on it</a> and Nick Hamze saying that blocks are <a href="https://block.garden/for-the-future/">for the next generation</a>. </p>
+
+
+
+<p>While I think there are still rough edges (like why can&#8217;t I put a list in a blockquote? Why can&#8217;t I add a class to a link? Why can&#8217;t I arrow-key through the block chooser?), I&#8217;m a big fan overall. And not just conceptually anymore. <a href="https://css-tricks.com/thank-you-2019-edition/#article-header-id-8">I made it one of my 2020 goals</a> to get CSS-Tricks onto Gutenberg, and so I hopped to that right away in January.</p>
+
+
+
+<span id="more-302758"></span>
+
+
+
+<h3>We already had one foot in the door</h3>
+
+
+
+<p>We had a smidge of experience Gutenberging since we had already <a href="https://css-tricks.com/a-gutenburg-powered-newsletter/">converted the newsletter authoring experience</a> over to the new editor. Our newsletters are a Custom Post Type here on CSS-Tricks, which are published here at public URLs, have a custom RSS feed, and sent out by MailChimp which fetches and reads that RSS feed.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/01/newsletter.png?resize=1024%2C607&#038;ssl=1" alt="" class="wp-image-302772" data-recalc-dims="1"/></figure>
+
+
+
+<p>We were able to just turn on Gutenberg for newsletters by way of the <a href="https://github.com/Automattic/gutenberg-ramp">Gutenberg Ramp</a> plugin. That works great for Custom Post Types and posts with individual IDs, but I wanted to turn on Gutenberg <em>only for new content</em>. I wound up monkey-patching the plugin. <a href="https://github.com/Automattic/gutenberg-ramp/pull/82/files">Here&#8217;s a pull request</a> in case anyone over there thinks it&#8217;s a good idea.  </p>
+
+
+
+<p>This was important to me, as we have tens of thousands of old posts created with the old editor, and even though Gutenberg doesn&#8217;t mangle them if we open them up for editing, the editor experience it provides for them isn&#8217;t as good as the &#8220;classic&#8221; editor (e.g. we have special buttons for our special code blocks and stuff like that). </p>
+
+
+
+<h3>Dealing with older content</h3>
+
+
+
+<p>What would really be great is if Gutenberg would convert old posts into proper blocks upon opening, but that feels like a dream at this point. Like, it would have to parse the HTML, identify what chunks look like blocks, identify <em>which</em> block makes the most sense, including our <em>custom</em> blocks which are the most important, and be <em>really correct</em> about it in a non-fragile way. </p>
+
+
+
+<p>For now, old content just uses the old editor. There isn&#8217;t even an easy way to flip on Gutenberg for an individual post from the editor. (I could hard-code values into the Gutenberg Ramp usage, but that&#8217;s a bit tedious.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/01/old-editor-1024x716.png?resize=1024%2C716&#038;ssl=1" alt="" class="wp-image-302797" data-recalc-dims="1"/></figure>
+
+
+
+<p>I worry a smidge that the old editor will really deteriorate. For example, one of the big reasons I got started with this is because, on this site, the old editor would just randomly scroll to the bottom of the page. I can&#8217;t for the life of me figure out why, but it makes authoring obnoxious for me. Just a little papercut bug that made me want to get on the editor experience that is being actively developed.</p>
+
+
+
+<p>But even if the old editor really gets bad, just flipping on Gutenberg for everything isn&#8217;t that bad. All the old content will just be in a big &#8220;classic&#8221; block and will be fine.</p>
+
+
+
+<h3>So anyway — it&#8217;s working! </h3>
+
+
+
+<p>Turning on Gutenberg for new posts was its own little challenge, but it&#8217;s turned on for us and we&#8217;re creating all new content in it. I&#8217;m just speaking for myself here but <strong>OMG I love it so much.</strong> It&#8217;s such a massive upgrade for writing content that I&#8217;m a little obsessed with it. The team is happy as well.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/01/turned-on.png?resize=1024%2C603&#038;ssl=1" alt="" class="wp-image-302780" data-recalc-dims="1"/></figure>
+
+
+
+<h3>Creating custom blocks</h3>
+
+
+
+<p>Check out this fancy text block we have:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/01/Screen-Shot-2020-01-27-at-1.06.56-PM.png?resize=1024%2C465&#038;ssl=1" alt="" class="wp-image-302781" data-recalc-dims="1"/><figcaption>A &#8220;callout&#8221; block on CSS-Tricks</figcaption></figure>
+
+
+
+<p>You might think, oh cool, an opportunity for a custom block. Heck, we even covered learning and <a href="https://css-tricks.com/guides/learning-gutenberg/">making Gutenberg blocks in a whole big series</a>. But this brings up a pretty relevant situation: <strong>when <em>not</em> to build a block</strong>. The only thing unique about <em>this</em> block is that is has a special class name that our CSS uses to style that block. That&#8217;s it. Adding a class name is <strong>a built-in feature</strong> of every block, so a custom block here really isn&#8217;t necessary. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/01/add-class-to-block.png?resize=1024%2C340&#038;ssl=1" alt="" class="wp-image-302788" data-recalc-dims="1"/></figure>
+
+
+
+<p>In fact, we can go a step further, and make a text block with this exact class a <strong>&#8220;reusable block&#8221;</strong> so we don&#8217;t even have to remember or type in that class name. After I&#8217;ve created a text block with this class, I select &#8220;Convert to Reusable Block&#8221; from the kebab menu and now it&#8217;s forever saved as a reusable block.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/01/reusable-blocks.png?resize=364%2C230&#038;ssl=1" alt="" class="wp-image-302790" width="364" height="230" data-recalc-dims="1" /></figure></div>
+
+
+
+<p>We&#8217;re already using it for a few other things now, like our &#8220;Article Series&#8221; block (an <code>&lt;h4&gt;</code> and <code>&lt;ol&gt;</code> with a special <code>&lt;div&gt;</code>-with-a-class wrapper) and footnote blocks and such.</p>
+
+
+
+<p>But we do actually need some custom blocks as well, and for that I used <a href="https://github.com/ahmadawais/create-guten-block">create-guten-block</a> to craft a special plugin<a href="#fn:1">¹</a> to create them. I see One that is mega important for us is code blocks. There is already a native block for code blocks. It essentially puts the code in a <code>&lt;pre&gt;</code> tag and the content from Gutenberg is already escaped by default.</p>
+
+
+
+<p>Our fancy code block allows us to pick which language it is, highlight certain lines, and provide custom labels. This was all possible in our old editor via HTML attributes, so this block is just nice UI on top of all that. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/01/code-block.png?resize=1024%2C377&#038;ssl=1" alt="" class="wp-image-302791" data-recalc-dims="1"/></figure>
+
+
+
+<p>That block is so specific to CSS-Tricks it doesn&#8217;t make much sense to open source it. But there is another block I created that is open source, and that&#8217;s the <a href="https://wordpress.org/plugins/codepen-embed-block/">CodePen Embed Block</a>. I <a href="https://blog.codepen.io/2020/01/22/a-gutenberg-block-for-codepen-embeds-on-wordpress/">wrote about it</a> over on the CodePen blog. </p>
+
+
+
+<p>It allows you to paste in a CodePen URL and it transforms into a CodePen Embed. oEmbed already does that by default, but with this plugin, you can control everything like the height, theme, and default tabs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/01/embed-admin.png?resize=1024%2C619&#038;ssl=1" alt="" class="wp-image-302792" data-recalc-dims="1"/></figure>
+
+
+
+<p>It&#8217;s pretty awesome to actually see the embedded Pens while authoring!</p>
+
+
+
+<h3>Unfaced challenges</h3>
+
+
+
+<p>The biggest challenge right now is handling images. In the old editor, we have integrated <a href="https://css-tricks.com/video-screencasts/155-responsive-images-wordpress-cloudinary/">a very very fancy setup</a> with <a href="https://cloudinary.com/">Cloudinary</a>. The images are automatically uploaded to Cloudinary, breakpoints are programmatically decided on, multiple sizes are created, a responsive images syntax is created, and what ends up in the HTML is a perfect responsive images syntax with the images hosted by Cloudinary. This has the provided us with the benefit of being on a CDN and serving the images in the best possible format as well.</p>
+
+
+
+<p>None of that is happening on posts created with Gutenberg. &#x1f62d;</p>
+
+
+
+<p>I need to find or develop a new system that does a great job with images everywhere on the site and ideally with a less bespoke system that is easier to maintain. It&#8217;s possible I figure that out with Cloudinary, I might try some other service, I might let WordPress deal with it directly backed by the <a href="https://jetpack.com/support/site-accelerator/">Jetpack Site Accelerator</a>. Not sure yet. Always something to do. </p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>I see WordPress themselves is getting in on the block scaffolding game. Their &#8220;create-wordpress-block&#8221; concept has made its way into <a href="https://github.com/wordpress/gutenberg/">the Gutenberg repo</a> itself, which you kick off with <code>npm init @wordpress/block [options] [slug]</code></li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/gutenberging/">Gutenberging</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/gutenberging/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">302758</post-id>	</item>
+		<item>
+		<title>Footnote Characters</title>
+		<link>https://css-tricks.com/footnote-characters/</link>
+					<comments>https://css-tricks.com/footnote-characters/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2020 00:47:26 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[footnotes]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303271</guid>
+
+					<description><![CDATA[<p>There are special superset number characters that are sometimes perfect for footnotes. Here they are:</p>
+<p>¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹</p>
+<p>I generally prefer to superscript the number myself, like:</p>
+<pre rel="HTML" class="language-markup" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&#60;pThis next word&#60;sup1&#60;/suphas a footnote.&#60;/p</code></pre>
+<p>That way I can select it in CSS or JavaScript in case I want to do something special with it. </p>
+<p>You&#8217;d probably add an anchor link around that as well to link to an ID elsewhere on the page &#8230; <a href="https://css-tricks.com/footnote-characters/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Footnote Characters&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/footnote-characters/">Footnote Characters</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>There are special superset number characters that are sometimes perfect for footnotes. Here they are:</p>
+
+
+
+<p>¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹</p>
+
+
+
+<p>I generally prefer to superscript the number myself, like:</p>
+
+
+
+<span id="more-303271"></span>
+
+
+
+<pre rel="HTML" class="language-markup" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;p>This next word&lt;sup>1&lt;/sup> has a footnote.&lt;/p></code></pre>
+
+
+
+<p>That way I can select it in CSS or JavaScript in case I want to do something special with it. </p>
+
+
+
+<p>You&#8217;d probably add an anchor link around that as well to link to an ID elsewhere on the page that explains the footnote. </p>
+
+
+
+<p>But sometimes it just isn&#8217;t practical or possible to use HTML as you author a bit of text. As I type, I&#8217;m writing in the WordPress Gutenberg editor. I can write in HTML block if I want, but it&#8217;s much more practical to use the default paragraph blocks, which have options for stuff like bold, italic, and strikethrough, but not for superscript. I don&#8217;t really wanna convert a block to HTML just to use a superscript number. So, a special Unicode character<a href="#fn:1">¹</a> it is. </p>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Another thing the Gutenberg editor can&#8217;t do is add an ID to a link, so it&#8217;s not really practical for me to offer a &#8220;jump back to the footnote&#8221; link down here. Sad face.</li></ol>
+</div></div>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/footnote-characters/">Footnote Characters</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/footnote-characters/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303271</post-id>	</item>
+		<item>
+		<title>Jetpack Slideshow Block</title>
+		<link>https://css-tricks.com/jetpack-slideshow-block/</link>
+					<comments>https://css-tricks.com/jetpack-slideshow-block/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 07 Jan 2020 15:50:31 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[jetpack]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=300618</guid>
+
+					<description><![CDATA[<p>One of the many (many) useful things that <a href="https://jetpack.com/?aff=8638">Jetpack</a> does is give you extra-fancy custom blocks in the WordPress block (<abbr>AKA</abbr> Gutenberg) editor: a slideshow, business hours, contact info, GIF, Mailchimp, Map, Markdown, Pinterest, Star Rating, Recurring Payments Button, Repeat Visitor, Simple Payments Button, Tiled Gallery. All of those sound useful to me, especially to use within totally arbitrary content wherever I want them.</p>
+</p>
+<p>I was just <a href="https://chriscoyier.net/2019/12/11/a-trip-to-tulum/">writing a blog post in the block editor the other day</a> about &#8230; <a href="https://css-tricks.com/jetpack-slideshow-block/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Jetpack Slideshow Block&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/jetpack-slideshow-block/">Jetpack Slideshow Block</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>One of the many (many) useful things that <a href="https://jetpack.com/?aff=8638">Jetpack</a> does is give you extra-fancy custom blocks in the WordPress block (<abbr>AKA</abbr> Gutenberg) editor: a slideshow, business hours, contact info, GIF, Mailchimp, Map, Markdown, Pinterest, Star Rating, Recurring Payments Button, Repeat Visitor, Simple Payments Button, Tiled Gallery. All of those sound useful to me, especially to use within totally arbitrary content wherever I want them.</p>
+<p><span id="more-300618"></span></p>
+<figure id="post-300619" class="align-none media-300619"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/12/jetpack-blocks.png?ssl=1" alt="" style="width: 500px" data-recalc-dims="1"></figure>
+<p>I was just <a href="https://chriscoyier.net/2019/12/11/a-trip-to-tulum/">writing a blog post in the block editor the other day</a> about a recent trip I took with my wife and friends to Tulum, Mexico. Being a travel blog post, of course it had images in it. Jetpack does a ton for me for those images:</p>
+<ul>
+<li>Hosts them on a CDN</li>
+<li>Optimizes them</li>
+<li>Generates responsive image syntax</li>
+<li>Lazy Loads them</li>
+</ul>
+<p>That&#8217;s&#8230; pretty awesome.</p>
+<p>But it can do more. In some spots of the blog post, I went for a slideshow approach to save a little room on the page. </p>
+<figure id="post-300621" class="align-none media-300621"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/12/slideshow.png?resize=1370%2C1528&#038;ssl=1" alt="" width="1370" height="1528"  data-recalc-dims="1"></figure>
+<p>Which is entirely controlled as a fancy Gutenberg block:</p>
+<figure id="post-300625" class="align-none media-300625"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/12/gutenberg-slideshow.png?resize=2896%2C2672&#038;ssl=1" alt="" width="2896" height="2672"  data-recalc-dims="1"></figure>
+<p>I could have gone for a tiled gallery as well, which is a fancier version of the built-in gallery block.</p>
+<figure id="post-300626" class="align-none media-300626"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/12/tiled-gallery.png?resize=1296%2C1688&#038;ssl=1" alt="" width="1296" height="1688"  data-recalc-dims="1"></figure>
+<p>That&#8217;s an awful lot of helping out for posting and dealing with images. </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/jetpack-slideshow-block/">Jetpack Slideshow Block</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/jetpack-slideshow-block/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">300618</post-id>	</item>
+		<item>
+		<title>More Flexible Online Stores WooCommerce and Gutenberg Blocks</title>
+		<link>https://css-tricks.com/more-flexible-online-stores-woocommerce-and-gutenberg-blocks/</link>
+		
+		<dc:creator><![CDATA[Geoff Graham]]></dc:creator>
+		<pubDate>Tue, 27 Aug 2019 14:43:26 +0000</pubDate>
+				<category><![CDATA[Sponsored]]></category>
+		<category><![CDATA[ecommerce]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[woocommerce]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=294933</guid>
+
+					<description><![CDATA[<p>Blocks have become an indispensable component for managing content in WordPress since the Gutenberg editor was officially released earlier this year. Not only does WordPress include some nifty blocks right out of the box, but we&#8217;re starting to see plugin developers take advantage of them and provide some interesting ones as well.</p>
+<p>One of those plugins is WooCommerce. That makes a lot of sense seeing since WooCommerce is part of the Automattic family of products.</p>
+<p>WooCommerce Blocks</p>
+<p>Blocks are not &#8230; <a href="https://css-tricks.com/more-flexible-online-stores-woocommerce-and-gutenberg-blocks/" class="read-more">Read article <span class="screen-reader-text"> &#8220;More Flexible Online Stores WooCommerce and Gutenberg Blocks&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/more-flexible-online-stores-woocommerce-and-gutenberg-blocks/">More Flexible Online Stores WooCommerce and Gutenberg Blocks</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Blocks have become an indispensable component for managing content in WordPress since the Gutenberg editor was officially released earlier this year. Not only does WordPress include some nifty blocks right out of the box, but we&#8217;re starting to see plugin developers take advantage of them and provide some interesting ones as well.</p>
+<p>One of those plugins is WooCommerce. That makes a lot of sense seeing since WooCommerce is part of the Automattic family of products.</p>
+<h3>WooCommerce Blocks</h3>
+<p>Blocks are not exactly <em>new</em> to WooCommerce. Well, blocks themselves are a relatively new concept, but WooCommerce was early on the bandwagon to leverage them as a plugin.</p>
+<p>For example, the Newest Products block makes it trivial to showcase the most recently added products to a WooCommerce store catalog. In the past, that would have required manually entering and linking up each product. Now, all it takes is dropping a block into place and then on to the next task.</p>
+<figure id="post-294936" class="align-left media-294936"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/08/Screen-Shot-2019-08-26-at-9.42.56-AM.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>There are a whole slew of blocks like this in WooCommerce. So many, in fact, that making an online store itself has also become somewhat trivial. Sure, sure, e-commerce isn&#8217;t easy. But at least the part about building a fully functional store that offers a great user experience is less of a worry.</p>
+<p>Here are all of the block currently offered by WooCommerce:</p>
+<ul>
+<li><strong>Newest Products:</strong> Show off the most recently added products.</li>
+<li><strong>Best-Selling Products:</strong> Display top-sellers.</li>
+<li><strong>Product Categories List:</strong> Embeds an unordered list of all available product categories that link to category pages.</li>
+<li><strong>Products by Category:</strong> Create a custom list of products by searching product categories.</li>
+<li><strong>Featured Product:</strong> You guessed it! Same as a featured category, but linked to a specific product page.</li>
+<li><strong>Hand-Picked Products:</strong> Create a custom matrix of products from the catalog.</li>
+<li><strong>On Sale Products:</strong> Highlights only products that are currently marked as on sale from the full retail price.</li>
+<li><strong>Products by Attribute:</strong> This lets you put items together by product characteristics. For example, you could make a page just showing large clothing sizes.</li>
+<li><strong>Top Rated Products:</strong> This one puts all of your products with the best reviews.</li>
+</ul>
+<p>Phew, that&#8217;s a lot considering this all comes with a standard WooCommerce installation! Seriously, this opens up a huge range of possibilities for building store pages and driving sales.</p>
+<h3>New WooCommerce Blocks</h3>
+<p>If 11 blocks were not enough for you to do some pretty awesome things already, WooCommerce is actively developing more and <a href="https://woocommerce.com/posts/new-blocks-woocommerce-3-7/?aff=8638">has recently shipped two new ones</a>.</p>
+<p>The first one is <strong<Featured Category</strong> which is an offshoot of Featured Product. Let&#8217;s say you have introduced a collection of products filed under the same category. This block is a perfect way to spotlight that new tag by dropping in a hero component. It takes the description and featured image of the category and places them into an attractive layout that would otherwise require time and development.</p>
+<figure><video src="https://css-tricks.com/wp-content/uploads/2019/08/Aug-26-2019-10-04-19.mp4" controls></figure>
+<p>The second new block is <strong>Products by Tag</strong> which is another useful way to group products together on a page or post, just like the Products by Category block. Choose one or multiple tags and those products will display together in a grid.</p>
+<figure id="post-294935" class="align-left media-294935"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/08/q5i3dhs.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<hr>
+<p>WooCommerce has really opened the floodgates, giving both developers and store owners new and interesting ways to build an online shopping experience. These are the types of features you might expect to see in some proprietary enterprise-level e-commerce software, but they are freely available in WooCommerce, which is freely available to install into WordPress, which is freely available to anyone who wants a website.</p>
+<p>Give <a href="https://woocommerce.com?aff=8638">WooCommerce a try</a> and see how it can up upgrade your online store.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/more-flexible-online-stores-woocommerce-and-gutenberg-blocks/">More Flexible Online Stores WooCommerce and Gutenberg Blocks</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2019/08/Aug-26-2019-10-04-19.mp4" length="5776080" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">294933</post-id>	</item>
+		<item>
+		<title>Bringing CSS Grid to WordPress Layouts</title>
+		<link>https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/</link>
+					<comments>https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/#comments</comments>
+		
+		<dc:creator><![CDATA[Andrea Gandino and Simone Maranzana]]></dc:creator>
+		<pubDate>Wed, 31 Jul 2019 14:26:05 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[CMS]]></category>
+		<category><![CDATA[grid]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=293283</guid>
+
+					<description><![CDATA[<p>December 6th, 2018 was a special date for WordPress: it marked <a href="https://wordpress.org/support/wordpress-version/version-5-0/">the release of version 5.0</a> of the software that, to this day, powers more than one-third of the web. In the past, people working on the platform pointed out that there has never been any special meaning to version numbers used in WordPress releases; as such, WordPress 5.0 was simply the follower to WordPress 4.9. Yet, 5.0 brought possibly the biggest innovation since <a href="https://wordpress.org/support/wordpress-version/version-3-0/">Custom Post Types were introduced in </a>&#8230; <a href="https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Bringing CSS Grid to WordPress Layouts&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/">Bringing CSS Grid to WordPress Layouts</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>December 6th, 2018 was a special date for WordPress: it marked <a href="https://wordpress.org/support/wordpress-version/version-5-0/">the release of version 5.0</a> of the software that, to this day, powers more than one-third of the web. In the past, people working on the platform pointed out that there has never been any special meaning to version numbers used in WordPress releases; as such, WordPress 5.0 was simply the follower to WordPress 4.9. Yet, 5.0 brought possibly the biggest innovation since <a href="https://wordpress.org/support/wordpress-version/version-3-0/">Custom Post Types were introduced in version 3.0</a> – that&#8217;s almost a decade, folks.</p>
+<p>The Block Editor — codename &#8220;Gutenberg&#8221; — is now the new default writing tool in WordPress. Before its adoption in Core, our beloved <abbr>CMS</abbr> has relied on what we now call the Classic Editor. And, by the way, the Classic Editor isn&#8217;t really gone: you can bring it back by <a href="https://wordpress.org/plugins/classic-editor/"></a>installing a plugin</a> that restores the default editing experience you&#8217;ve known all these years.</p>
+<p>So, why was the Classic Editor replaced? Essentially because it embodied an old concept of writing, a concept that was conceived when the only need of a text editor was to visually compose HTML code.</p>
+<p><span id="more-293283"></span></p>
+<p>Not to create layouts. Not to embed dynamic content form heterogeneous sources. Not to offer a representation of what your post or page would look like when you pressed that &#8220;Publish&#8221; button, and go live with your piece of content.</p>
+<p>In short, the Classic Editor delivered a very basic writing experience and, frankly, it always fell short at creating anything more than flowing text.</p>
+<p>The Block Editor is based on the idea of content &#8220;blocks&#8221; in the sense that everything we can add to a page — a text paragraph, an image, an embed — is technically a <em>block</em>, that is, an atomic entity that&#8217;s defined by a certain series of properties. The combination of these properties determines the <em>state</em> of that particular <em>block</em>. Combine several blocks one after the other, and you&#8217;ll get the content of your page.</p>
+<p>In this transition from unorganized text to rigorous content structure lies the biggest change introduced by the Block Editor.</p>
+<h3>Layouts pre-Block Editor</h3>
+<p>Before all of this bursted into existence, people who wanted to create a layout within WordPress had to choose between either of these options:</p>
+<ol>
+<li>Create a custom template from scratch, getting their hands dirty with code – a noble intent, yet not so appealing to the masses.</li>
+<li>Use a tool, better if a <em>visual</em> one, that helped them composing a page structure without having much code knowledge.</li>
+</ol>
+<p>That&#8217;s how <a href="https://wordpress.org/plugins/search/page+builder/">page builders</a> were born: page builders are plugins that provide a visual way to compose a layout, ideally without touching a single line of code, and they were created out of necessity to fill a gap between visual mockups and the actual, finished website.</p>
+<p>Page builders have always suffered from a bad reputation, for a variety of reasons:</p>
+<ol>
+<li>They tend to be slow and bulky.</li>
+<li>Some offer poor editing experiences.</li>
+<li>They end up locking users into a framework or ecosystem that&#8217;s tough to replace.</li>
+</ol>
+<p>The first point is as obvious as it is unavoidable: if you&#8217;re a page builder author (and, hopefully, aspire to sell copies of your product), you have to make it as appealing as possible; physiologically, builders started to slowly become big code soups with everything in them, at the detriment of performance.</p>
+<p>The second point may be subjective, at least to to some extent. The third point, however, is a fact. Sure, one could be perfectly fine using the same tool for every project, perfecting knowledge of the instrument as time goes by, but the more you stick to it, the harder it gets to potentially stop using it one day.</p>
+<p>The Block Editor aims to surpass this deadlock: from the user&#8217;s point of view, it aims at offering a better, richer writing experience, while, from the developer&#8217;s perspective, providing a unified, shared <abbr>API</abbr> from which to build upon.</p>
+<h3>A brief history of CSS layouts</h3>
+<p>If you&#8217;re old enough, you&#8217;ll probably know the story already. If not, it might be fun for you to hear what life was like for a front-end developer back in the day.</p>
+<p>The first version of the CSS specification dates back to 1996, and it allowed an embedded stylesheet to add font styling, pick colors for elements, change the alignments and spacing of objects in the page. The problem was that, in those days, the concept of semantic HTML wasn&#8217;t exactly widespread. In other words, there was no clear separation between content and form. The markup we&#8217;d write and the appearance we want were completely intertwined in the same document.</p>
+<p>This led to HTML elements to be used more for presentation purposes, than conveying meaning to their presence in the page. For example, on the layout side of things, this also led to to table elements being used to create layouts instead of actual tabular data.  To achieve even more complex layouts, tables began being nested into other tables, making the page become a nightmare from the semantic point of view, its size grow and grow, and resulting very hard to maintain over time. If you&#8217;ve ever coded an HTML email, then you have a good idea of what life was like. And, really, this still sort of happens in websites today, even if it&#8217;s for smaller elements rather than complete page layouts.</p>
+<p>Then the Web Standards movement came along with the goal to raise awareness among developers that we could be doing things differently and better; that style and content <em>should</em> be separated, that we need to use HTML elements for their meaning, and reinforcing the concept that a lighter page (in terms of code weight) is a fundamentally better option than an unmanageable ocean of nested tables.</p>
+<p>We then began (over)using div elements, and juxtaposed them using the <code>float</code> property. The presentation focus was shifted from the markup to the stylesheet. Floats became the most reliable layout tool available for years, yet they can be a bit problematic to handle, since they have to be <em>cleared</em> in order for the page to return to its standard flow. Also, in this age, page markups were still too redundant, even though using divs instead of tables helped make our content more accessible.</p>
+<p>The turnaround moment came in 2012, with the publication of the <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox</a> specification. Flexbox allowed developers to solve a whole series of long standing little layout problems, complete with an elegant syntax that requires a lot less markup to be implemented. Suddenly (well, not <em>that</em> suddenly, we still have to care about browser support, right?), reliably <a href="https://css-tricks.com/centering-css-complete-guide/">centering things</a> on both axises wasn&#8217;t an issue anymore. It was refreshing. Finally, tweaking a layout could be reduced to altering just one property in our stylesheet.</p>
+<p>As important as Flexbox is to this day, it is not the end of the story.</p>
+<h3>It&#8217;s 2019! Let&#8217;s use CSS Grid.</h3>
+<p>If you&#8217;ve come this far reading this piece, we think it&#8217;s safe to assume that two things are for sure:</p>
+<ol>
+<li>That we clearly aren&#8217;t in this industry to live peaceful, quiet professional lives.</li>
+<li>The things we use are going to change.</li>
+</ol>
+<p>In 2017, the <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS Grid</a> Layout Module specification was officially published, but, as it always happens with CSS specs, its draft and interim implementations had already been around for some time.</p>
+<p>CSS Grid is a bold leap into what CSS can and should do. What if we stopped micromanaging our pages styles, and started thinking more holistically? What if we had a system to reliably position elements on the screen that doesn&#8217;t depend at all on the markup being used, nor the order of elements, and that is, at the same time, programmatically applicable on smaller screens?</p>
+<p>No, this isn&#8217;t just a thought. This is more of a dream; one of those good ones you don&#8217;t want to wake up from. Except that, in 2019, this has become a reality.</p>
+<p>The main difference between Grid and Flexbox is more nuanced, of course, but basically comes down to Grid operating in two dimensions, while Flexbox is limited to one. Knowing what elements are going to be placed within the limits of a container, we can choose exactly where those elements are going to end up, entirely from directives written in the stylesheet.</p>
+<p>Do we want to tweak the layout down the road? Fine, that modification won&#8217;t affect the markup.</p>
+<p>The basic idea behind Grid is that elements are laid out in, well, a grid. By definition, a grid is composed by a certain amount of columns and rows, and the boundaries between columns and rows form a series of cells that can be filled with content.</p>
+<p>The savings of this approach in terms of quantity of code being used to achieve the desired result are extraordinary: we just need to identify a container element, apply the <code>display: grid</code> rule to it, and then pick elements within that container and tell CSS what column/row they begin/end in.</p>
+<pre rel="CSS"><code class="language-css">.my-container {
+  display: grid;
+  grid-template-columns: repeat( 3, 1fr );
+  grid-template-rows: repeat( 2, 1fr );
+}
+
+.element-1 {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}</code></pre>
+<p>The above example creates a 3&#215;2 grid associated to the <code>.my-container</code> element; <code>.element-1</code> is a 2&#215;2 block that is inscribed in the grid, with its upper left vortex being positioned in the second column of the first row of the grid.</p>
+<figure id="post-293289" class="align-left media-293289"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/07/grid-child-element.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Sounds pretty neat, right?</p>
+<p>The even neater thing about CSS Grid is the fact that you can create template areas, <a href="https://css-tricks.com/simple-named-grid-areas/">give those areas meaningful names</a> (e.g. &#8220;header&#8221; or &#8220;main&#8221;), and then use those identifiers to programmatically position elements in those areas.</p>
+<pre rel="CSS"><code class="language-css">.item-a {
+  grid-area: header;
+}
+.item-b {
+  grid-area: main;
+}
+.item-c {
+  grid-area: sidebar;
+}
+.item-d {
+  grid-area: footer;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+}</code></pre>
+<p>For those who have begun working in this business in the tables era, the code above is nothing short of science fiction.</p>
+<p>More good news, anyway: support for CSS Grid is pretty great, today.</p>
+<h3>Using CSS Grid in WordPress</h3>
+<p>So, this is great, and knowing that we can do so many more things today than we could compared to a few years ago probably makes you want to give Grid a try, at last.</p>
+<p>If you are working on a WordPress project, you&#8217;re back facing the two options mentioned above: do we start from scratch and manually coding a template, or is there something that can give us a little help? Luckily, there is a plugin that might interest you, one that we have created with a dual goal in mind:</p>
+<ol>
+<li>Create a bridge between the Block Editor and CSS Grid.</li>
+<li>Create a plugin that could perhaps make people move past the initial skepticism of adopting the Block Editor.</li>
+</ol>
+<p>It&#8217;s called <a href="https://wordpress.org/plugins/grids/">Grids</a>, and it&#8217;s a free download on the WordPress plugins repository.</p>
+<figure id="post-293290" class="align-left media-293290"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/07/s_3DB82A0F504023F598EFCB80513FD3BAFC405AEE1B74816D27B28102E6604A7B_1563910842889_grids-wp.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Grids only takes care of the layout structure. It puts a 12&#215;6 grid at your disposal (called Section), over which you can drag and draw the elements (</em>Areas</em>) that are going to be contained in that Section.</p>
+<p>The system allows you to manually specify dimensions, backgrounds, responsive behavior, all using visual controls in the Block Edito</em>r</em>, but by design, it doesn&#8217;t provide any content block. Sure, one could see this approach as a weak point, but we think it&#8217;s actually Grids&#8217; biggest strength because it enables the plugin to integrate with the myriad content blocks that other developers all around the world are creating. More so, in a way Grids helps bringing those blocks, and WordPress as a platform, in touch with CSS Grid itself.</p>
+<figure id="post-293342" class="align-left media-293342"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/07/advanced-grid-designer.png?resize=300%2C203&#038;ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Yet, even if the plugin doesn&#8217;t strictly produce content, it&#8217;s inevitable to put it in the same phrase with successful page builders, in fact comparing its functionality to that offered by those. If you care about concepts like separation of form and content, page weight, ease of maintenance, Grids offers a cleaner solution to the problem of creating visually appealing layouts in WordPress.</p>
+<figure id="post-293344" class="align-left media-293344"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/07/grids-advanced-animation.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>The generated markup is minimal. In its most basic form, a Section (that is, the element with the <code>display: grid</code> property) is only composed by its own element — of course, an internal wrapper (that couldn&#8217;t be avoided and that&#8217;s used for spacing purposes), and then one element per Area belonging to the Section. This is a huge step forward in terms of avoiding using unnecessary markup.</p>
+<p>For those of you who haven&#8217;t been afraid of <a href="https://css-tricks.com/guides/learning-gutenberg/">getting your hands dirty with the development of blocks for the Block Editor</a>, the rendering of the block is done server-side, which allows for custom classes to be added to Section and Area elements using filters.</p>
+<p>This choice also directly determines what happens in the eventuality that you disable Grids in your install.<br />
+​​<br />
+​​If you don’t re-save your page again, what’s left of Grids on the front end is actually exclusively the content you put inside the content Areas. Not any extra markup elements, not any weird-looking shortcode.<br />
+​​<br />
+​​On the back-end side of things, the Block Editor has a system in place that warns you if you&#8217;re editing a page that is supposed to use a particular block type, but that block type isn’t currently available: in that case, you could easily turn Grids back on temporarily, move your content in another place, and then get rid of the Section altogether.</p>
+<p>CSS generated to create the grid is also dynamically added to the page, as an inline style in the <code>&lt;head&gt;</code> portion of the document. We haven&#8217;t been exactly fans of styles written in the page directly, because ideally we&#8217;d like to delegate all of the styling to files that we could put under version control, yet this is a case where we found that approach to be very convenient.</p>
+<p>Another viable option would have been to identify all the possible combinations of column/row starting/ending points, and programmatically map those with classes that could then be used to actually position elements within the grid. On a 12&#215;6 grid, that would have lead to having a grand total of 36 class selectors, looking like this:</p>
+<pre rel="CSS"><code class="language-css">.grids-cs-1 {
+  grid-column-start: 1;
+}
+
+.grids-ce-2 {
+  grid-column-end: 2;
+}</code></pre>
+<p>What if we decide to offer more control over how a grid is composed and, say, give users access to options that determine how many columns or rows form the grid structure?</p>
+<p>We&#8217;d have to manually map the classes that we don&#8217;t yet have in the stylesheet (and release an update to the plugin just for that), or, again, generate them inline, and then add those classes to the grid elements.</p>
+<p>While perfectly fine, this approach kind of goes against the idea of having a leaner, more scannable markup, so we&#8217;ve decided not to follow this route, and pay the price of having style dynamically put in the <code>head</code> of the document, knowing that it could be easily cached.</p>
+<p>Because of the experimental nature of the plugin, the backend <abbr>UI</abbr> that&#8217;s being used to actually compose the grid is created with CSS Grid, and a set of CSS variables through which we control the properties of content Areas. Using variables has immensely sped up our work behind the grid creator prototype — had we chosen a different path there, things wouldn&#8217;t just be much longer in terms of development times, but also more complex and less clear to maintain down the road.</p>
+<h3>Feedback wanted!</h3>
+<p>To further foster the adoption of CSS Grid, we need tools that automate the process of creating layouts with it.</p>
+<p>While we have been seeing great examples of this technology out in the wild, it would be short-sighted to assume that every website that is published today has a team of front-end devs behind it, that can take care of the issue.</p>
+<p>We need tools that produce good markup, that don&#8217;t hinder the maintenance of the website stylesheets, and, most importantly in the WordPress world, that can be easily integrated with the existing themes that people love to use.</p>
+<p>We think Grids is a step forward in that direction, as it&#8217;s a tool that is built upon two standards — the <a href="https://developer.wordpress.org/block-editor/developers/block-api/">Block Editor API</a>, and CSS Grid — and, as such, suffers less risk of reinventing the proverbial wheel.</p>
+<p>While we&#8217;ve been recording general interest in the plugin at the recent WordCamp Europe in Berlin – with Matt Mullenweg himself displaying a brief demo of the plugin <a href="https://wordpress.tv/2019/07/04/matt-mullenweg-matt-on-wordpress/">during his keynote</a> — we know that it still needs a lot of feedback that can only be obtained with real-life scenarios. So, if you want to take <a href="https://wordpress.org/plugins/grids/">Grids</a> for a spin, please use it, test it and, why not, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfy5NAt3UmnygAJMaFcFB1bC0G4eOj9vRuDpTTS-ci5Mx8yWA/viewform">suggest new features</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/">Bringing CSS Grid to WordPress Layouts</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/bringing-css-grid-to-wordpress-layouts/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">293283</post-id>	</item>
+		<item>
+		<title>Managing WordPress Metadata in Gutenberg Using a Sidebar Plugin</title>
+		<link>https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/</link>
+					<comments>https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/#comments</comments>
+		
+		<dc:creator><![CDATA[Ali Alaa]]></dc:creator>
+		<pubDate>Thu, 20 Jun 2019 15:18:11 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[redux]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<category><![CDATA[wordpress plugins]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=291587</guid>
+
+					<description><![CDATA[<p>WordPress released their anticipated over to the post editor, nicknamed <a href="https://css-tricks.com/guides/learning-gutenberg/">Gutenberg</a>, which is also referred to as the block editor. It transforms a WordPress post into a collection of blocks that you can add, edit, remove and re-order in the layout. Before the official release, Gutenberg was <a href="https://wordpress.org/plugins/gutenberg/">available as a plugin</a> and, during that time, I was interested in learning how to create custom blocks for the editor. I was able to learn a lot about Gutenberg that I &#8230; <a href="https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Managing WordPress Metadata in Gutenberg Using a Sidebar Plugin&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/">Managing WordPress Metadata in Gutenberg Using a Sidebar Plugin</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>WordPress released their anticipated over to the post editor, nicknamed <a href="https://css-tricks.com/guides/learning-gutenberg/">Gutenberg</a>, which is also referred to as the block editor. It transforms a WordPress post into a collection of blocks that you can add, edit, remove and re-order in the layout. Before the official release, Gutenberg was <a href="https://wordpress.org/plugins/gutenberg/">available as a plugin</a> and, during that time, I was interested in learning how to create custom blocks for the editor. I was able to learn a lot about Gutenberg that I decided to <a href="https://www.udemy.com/gutenberg/?couponCode=CSSTRICKS">put together a course</a> that discusses almost everything you need to know to develop blocks for Gutenberg.</p>
+<p>In this article, we will discuss metaboxes and metafields in WordPress. Specifically, we’ll cover how to replace the old <abbr>PHP</abbr> metaboxes in Gutenberg and extend Gutenberg’s sidebar to add a React component that will be used to manipulate the metadata using the global JavaScript Redux-like stores. Note that metadata in Gutenberg can also be manipulated using blocks. And both ways are discussed in <a href="https://www.udemy.com/gutenberg/?couponCode=CSSTRICKS">my course</a>, however, in this article I am going to focus on managing metadata in the sidebar since I believe this method will be used more often.</p>
+<p><span id="more-291587"></span></p>
+<p class="explanation">This article assumes some familiarity with <a href="https://reactjs.org/">ReactJS</a> and <a href="https://redux.js.org/)">Redux</a>. Gutenberg relies heavily on these technologies to render <abbr>UI</abbr> and manage state. You can also check out the <a href="https://css-tricks.com/guides/learning-gutenberg/">CSS-Tricks guide to learning Gutenberg</a> for an intro to some of the concepts we’ll cover here.</p>
+<figure id="post-291595" class="align-left media-291595"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-01.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>The block editor interface</figcaption></figure>
+<h3>Gutenberg is a React application</h3>
+<p>At its core, Gutenberg is a <a href="https://reactjs.org/">ReactJS</a> application. Everything you see in the editor is rendered using a React component. The post title, the content area that contains the blocks, the toolbar at the top and the right sidebar are all React components. Data or application states in this React application are stored in centralized JavaScript objects, or &#8220;stores.&#8221; These stores are managed by <a href="https://developer.wordpress.org/block-editor/packages/packages-data/">WordPress’ data module</a>. This module shares a lot of core principles with <a href="https://redux.js.org/">Redux</a>. So, concepts like stores, reducers, actions, action creators, etc., also exist in this module. I will sometimes refer to these stores as &#8220;Redux-like&#8221; stores.</p>
+<p>These stores do not only store any data about the current post, like the post content (the blocks), the post title, and the selected categories, but it also stores global information about a WordPress website, like all the categories, tags, posts, attachments and so on. In addition to that, <abbr>UI</abbr> state information like,&#8221;is the sidebar opened or closed?&#8221; are also stored in these global stores. One of the jobs of the &#8220;data module&#8221; is to retrieve data from these stores and also change data in the stores. Since these stores are global and can be used by multiple React components changing data in any store will be reflected in any Gutenberg <abbr>UI</abbr> part (including blocks) that uses this piece of data.</p>
+<p>Once a post is saved, the <a href="https://developer.wordpress.org/rest-api/">WordPress REST <abbr>API</abbr></a> will be used to update the post using the data stored in these global stores. So the post title, the content, categories etc., that are stored in these global stores will be sent as payload in the WP REST <abbr>API</abbr> endpoint that updates the post. And thus if we are able to manipulate data in these stores, once the user clicks save, the data that we manipulated will be stored in the database by the <abbr>API</abbr> without us having to do anything. </p>
+<p>One of the things that is not managed by these global stores in Gutenberg is metadata. If you have some metafields that you used to manage using a <a href="https://developer.wordpress.org/plugins/metadata/custom-meta-boxes/">metabox</a> in the pre-Gutenberg &#8220;classic&#8221; editor, those will not be stored and manipulated using the global Redux-like stores by default. However, we can opt-in to manage metadata using JavaScript and the Redux-like stores. Although those old <abbr>PHP</abbr> metaboxes will still appear in Gutenberg, WordPress recommends porting these <abbr>PHP</abbr> metaboxes to another approach that uses the global stores and React components. And this will ensure a more unified and consistent experience. You can read more about <a href="https://developer.wordpress.org/block-editor/developers/backward-compatibility/meta-box/">problems that could occur by using <abbr>PHP</abbr> metaboxes in Gutenberg</a>.</p>
+<p>So before we start, let’s take a look at the Redux-like stores in Gutenberg and how to use them.</p>
+<h3>Retrieving and changing data in Gutenberg’s Redux-like stores</h3>
+<p>We now know that the Gutenberg page is managed using these Redux-like stores. We have some default &#8220;core&#8221; stores that are defined by WordPress. Additionally, we can also define our own stores if we have some data that we would like to share between multiple blocks or even between blocks and other <abbr>UI</abbr> elements in the Gutenberg page, like the sidebar. Creating your own stores is also discussed in <a href="https://www.udemy.com/gutenberg/?couponCode=CSSTRICKS">my course</a> and you can read about it in the <a href="https://developer.wordpress.org/block-editor/packages/packages-data/">official docs</a>. However, in this article we will focus on how to use the existing stores. Using the existing stores lets us manipulate metadata; therefore we will not need to create any custom stores.</p>
+<p>In order to access these stores, make sure you have the latest WordPress version with Gutenberg active and edit any post or page. Then, open your browser console an type the following statement:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/editor').getBlocks()</code></pre>
+<p>You should get something like this:</p>
+<figure id="post-291597" class="align-left media-291597"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-04.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Let’s break this down. First, we access the <code>wp.data</code> module which (as we discussed) is responsible for managing the Redux-like stores. This module will be available inside the global <code>wp</code> variable if you have Gutenberg in your WordPress installation. Then, inside this module, we call a function called <code>select</code>. This function receives a store name as an argument and returns all the selectors for this store. A selector is a term used by the data module and it simply means a function that gets some data from the store. So, in our example, we accessed the <a href="https://developer.wordpress.org/block-editor/data/data-core-block-editor/">core/editor</a> store, and this will return a bunch of functions that can be used to get data from this store. One of these functions is <code>getBlocks()</code> which we called above. This function will return an array of objects where each object represents a block in your current post. So depending on how many blocks you have in your post, this array will change.</p>
+<p>As we’ve seen, we accessed a store called <code>core/editor</code>. This store contains information about the current post that you are editing. We’ve also seen how to get the blocks in the current post but we can also get a lot of other stuff. We can get the title of the current post, the current post ID, the current post post type and pretty much everything else we might need.</p>
+<p>But in the example above, we were only able to retrieve data. What if we want to <em>change</em> data? Let’s take a look at another selector in the ‘core/editor’ store. Let’s run this selector in our browser console:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/editor').getEditedPostAttribute('title')</code></pre>
+<p>This should return the title of the post currently being edited:</p>
+<figure id="post-291607" class="align-left media-291607"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-13.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Great! Now what if we want to change the title using the data module? Instead of calling <code>select()</code>, we can call <code>dispatch()</code> which will also receive a store name and return some actions that you can dispatch. If you are familiar with Redux, terms like &#8220;actions&#8221; and &#8220;dispatch&#8221; will sound familiar to you. If this sounds new to you, all you need to know is that dispatching a certain action simply means changing some data in a store. In our case, we want to change the post title in the store, so we can call this function:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.dispatch('core/editor').editPost({title: 'My new title'})</code></pre>
+<p>Now take a look at the post title in the editor — it will be changed accordingly!</p>
+<figure id="post-291608" class="align-left media-291608"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-14.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>That’s how we can manipulate any piece of data in the Gutenberg interface. Wan retrieve the data using selectors and change that data using actions. Any change will be reflected in any part of the <abbr>UI</abbr> that uses this data.</p>
+<p>There are, of course, other stores in Gutenberg that you can checkout <a href="https://developer.wordpress.org/block-editor/data/">on this page</a>. So, let’s take a quick look at a couple of more stores before we move on.</p>
+<p>The stores that you will use the most are the <code>core/editor</code> which we just looked at, and the <code><a href="https://developer.wordpress.org/block-editor/data/data-core/">core</a></code> store. Unlike <code>core/editor</code>, the <code>core</code> store contains information, not only about the currently edited post, but also about the whole WordPress website in general. So, for instance, we can get all the authors on the website using:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core').getAuthors()</code></pre>
+<figure id="post-291609" class="align-left media-291609"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-15.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>We can also get some posts from the website like so:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core').getEntityRecords('postType','post',{per_page: 5})</code></pre>
+<p>Make sure to run this twice if the first result was <code>null</code>. Some selectors like this one will send an <abbr>API</abbr> call first to get your post. That means the the returned value will initially be <code>null</code> until the <abbr>API</abbr> request is fulfilled:</p>
+<figure id="post-291610" class="align-left media-291610"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-16.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Let’s look at one more store: <a href="https://developer.wordpress.org/block-editor/data/data-core-edit-post/"><code>edit-post</code></a>. This store is responsible for the <abbr>UI</abbr> information in the actual editor. For example, we can have selectors that check if the sidebar is currently open:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/edit-post').isEditorSidebarOpened()</code></pre>
+<p>This will return <code>true</code> if the sidebar is opened. But try closing the sidebar, run this function again, and it should return <code>false</code>.</p>
+<p>We can also open and close the sidebar by dispatching actions in this store. Having the sidebar open and running this action in the browser console, the sidebar should be closed:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.dispatch('core/edit-post').closeGeneralSidebar()</code></pre>
+<p>You will unlikely need to use this store, but it’s good to know that this is what Gutenberg does when you click on the sidebar icon to close it.</p>
+<p>There are some more stores that you might need to take a look at. The <a href="https://developer.wordpress.org/block-editor/data/data-core-notices/"><code>core/notices</a></code> store, for instance, could be useful. This can help you display error, warning and success messages in the Gutenberg page. You can also check all the <a href="https://developer.wordpress.org/block-editor/data/">other stores here</a>. </p>
+<p>Try to play around with these stores in your browser until you feel comfortable using them. After that, we can see how to use them in real code outside the browser.</p>
+<h3>Let’s setup a WordPress plugin to add a Gutenberg sidebar</h3>
+<p>Now that we know how to use the Redux-like stores in Gutenberg, the next step is to add a React sidebar component in the editor. This React component will be connected to the <code>core/editor</code> store and it will have some input that, when changed, will dispatch some action that will manipulate metadata — like the way we manipulated the post title earlier. But to do that, we need to create a WordPress plugin that holds our code.</p>
+<p class="explanation">You can follow along by <a href="https://github.com/alialaa/gutenberg-sidebar">cloning or downloading the repository</a> for this example on GitHub.</p>
+<p>Let’s create a new folder inside <code>wp-content/plugins</code> directory of the WordPress installation. I am going to call it <code>gutenberg-sidebar</code>. Inside this folder, let’s create the entry point for our plugin. The entry point is the <abbr>PHP</abbr> file that will be run when activating your plugin. It can be called <code>index.php</code> or <code>plugin.php</code>. We’re going to use <code>plugin.php</code> for this example and put some information about the plugin at the top as well as add some code that avoids direct access:</p>
+<pre rel="PHP"><code class="language-php">&lt;?php
+/**
+  * Plugin Name: gutenberg-sidebar
+  * Plugin URI: https://alialaa.com/
+  * Description: Sidebar for the block editor.
+  * Author: Ali Alaa
+  * Author URI: https://alialaa.com/
+  */
+if( ! defined( 'ABSPATH') ) {
+    exit;
+}</code></pre>
+<p>You should find your plugin on the Plugins screen in the WordPress admin. Click on &#8220;Activate&#8221; in order for the code to run.</p>
+<figure id="post-291611" class="align-left media-291611"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-17.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>As you might imagine, we will write a lot of JavaScript and React from this point, forward. And in order to code React components easily we will need to use <abbr>JSX</abbr>. And <abbr>JSX</abbr> is not valid JavaScript that can run in your browser, it needs to be converted into plain JavaScript. We might also need to use <abbr>ES</abbr>Next features and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import statements</a> for importing and exporting modules.</p>
+<p>And these features will not work on all browsers, so it’s better to transform our code into old <abbr>ES5</abbr> JavaScript. Thankfully, there are a lot of tools that can help us achieve that. A famous one is <a href="https://webpack.js.org/">webpack</a>. webpack, however, is a big topic in itself and it won’t fit the scope of this article. Therefore, we are going to use another tool that WordPress provides which is <a href="https://developer.wordpress.org/block-editor/packages/packages-scripts/">@wordpress/scripts</a>. By installing this package, we will get a recommended webpack configuration without having to do anything in webpack ourselves. Personally, I recommend that you <a href="https://css-tricks.com/introduction-webpack-entry-output-loaders-plugins/">learn webpack</a> and try to do the configuration yourself. This will help you understand what’s going on and give you more control. You can find a lot of resources online and it’s also discussed in <a href="https://www.udemy.com/gutenberg/?couponCode=CSSTRICKS">my course</a>. But for now, let’s install the WordPress webpack configuration tool. </p>
+<p>Change to your plugin folder in Terminal:</p>
+<pre rel="Terminal"><code class="language-markdown">cd path/to/your/theme/folder</code></pre>
+<p>Next, we need to initialize npm in that folder in order to install <code>@wordpress/scripts</code>. This can be done by running this command:</p>
+<pre rel="Terminal"><code class="language-markdown">npm init</code></pre>
+<p>This command will ask you some questions like the package name, version, license, etc. You can keep hitting <kbd>Enter</kbd> and leave the default values. You should have a <code>package.json</code> file in your folder and we can start installing npm packages. Let’s install <code>@wordpress/scripts</code> by running the following command:</p>
+<pre rel="Terminal"><code class="language-markdown">npm install @wordpress/scripts --save-dev</code></pre>
+<p>This package will expose a <abbr>CLI</abbr> called <code>wp-scripts</code> which you can use in your npm scripts. There are <a href="https://developer.wordpress.org/block-editor/packages/packages-scripts/#available-scripts">different commands</a> that you can run. We will focus on the <code>build</code> and <code>start</code> commands for now. The <code><a href="https://developer.wordpress.org/block-editor/packages/packages-scripts/#build">&lt;code&gt;build</a></code> script will transform your files so that they are minified and ready for production. Your source code’s entry point is configured in <code>src/index.js</code> and the transformed output will be at <code>build/index.js</code>. Similarly, the <code><a href="https://developer.wordpress.org/block-editor/packages/packages-scripts/#start">start</a></code> script will transform your code in <code>src/index.js</code> to <code>build/index.js</code>, however, this time, the code will not be minified to save time and memory — the command will also watch for changes in your files and re-build your files every time something is changed. The <code>start</code> command is suitable to be used for development while the <code>build</code> command is for production. To use these commands, we will replace the <code>scripts</code> key in the <code>package.json</code> file which will look something like this if you used the default options when we initialized npm.</p>
+<p>Change this:</p>
+<pre rel="JSON"><code class="language-javascript">"scripts": {
+  "test": "echo "Error: no test specified" &amp;&amp; exit 1"
+},</code></pre>
+<p>&#8230;to this:</p>
+<pre rel="JSON"><code class="language-javascript">"scripts": {
+  "start": "wp-scripts start",
+  "build": "wp-scripts build"
+},</code></pre>
+<p>Now we can run <code>npm start</code> and <code>npm run build</code> to start development or build files, respectively.</p>
+<p>Let’s create a new folder in the plugin’s root called <code>src</code>  and add an <code>index.js</code> file in it. We can see it things are working by sprinkling in a little JavaScript. We’ll try an alert.</p>
+<figure id="post-291612" class="align-left media-291612"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-18.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Now run <code>npm start</code> in Terminal. You should find the build folder created with the compiled <code>index.js</code> and also sourcemap files. In addition to that, you will notice that the <code>build/index.js</code> file is not minified and webpack will be watching for changes. Try changing the <code>src/index.js</code> file and save again. The <code>build/index.js</code> file will re-generated:</p>
+<figure id="post-291613" class="align-left media-291613"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-19.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>If you stop the watch (<kbd>Ctrl</kbd> + <kbd>C</kbd> ) in Terminal and run <code>npm run build</code>, the <code>build/index.js</code> file should now be minified.</p>
+<hr>
+<p>Now that we have our JavaScript bundle, we need to enqueue this file in the Gutenberg editor. To do that we can use the hoo <code>enqueue_block_editor_assets</code>  which will insure that the files are enqueued only in the Gutenberg page and not in other <code>wp-admin</code> pages where it isn’t needed.</p>
+<p>We can enqueue our file like so in <code>plugin.php</code>:</p>
+<pre rel="PHP"><code class="language-php">// Note that it’s a best practice to prefix function names (e.g. myprefix)
+function myprefix_enqueue_assets() {
+  wp_enqueue_script(
+    'myprefix-gutenberg-sidebar',
+    plugins_url( 'build/index.js', __FILE__ )
+  );
+}
+add_action( 'enqueue_block_editor_assets', 'myprefix_enqueue_assets' );</code></pre>
+<p>Visit the Gutenberg page. If all is well, you should get an alert, thanks to what we added to <code>src/index.js</code> earlier.</p>
+<figure id="post-291614" class="align-left media-291614"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-20.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Fantastic! We’re ready to write some JavaScript code, so let’s get started!</p>
+<h3>Importing WordPress JavaScript packages</h3>
+<p>In order to add some content to the existing Gutenberg sidebar or create a new blank sidebar, we need to register a Gutenberg JavaScript plugin — and in order to do that, we need to use some functions and components from packages provided by WordPress: <a href="https://developer.wordpress.org/block-editor/packages/packages-plugins/"><code>wp-plugins</code></a>, <a href="https://developer.wordpress.org/block-editor/packages/packages-edit-post/"><code>wp-edit-post</a></code> and <a href="https://developer.wordpress.org/block-editor/packages/packages-i18n/"><code>wp-i18n</a></code>. These packages will be available in the <code>wp</code> global variable in the browser as <code>wp.plugins</code>, <code>wp.editPost</code> and <code>wp.i18n</code>.</p>
+<p>We can import the functions that we need into <code>src/index.js</code>. Specifically, those functions are: <code>registerPlugin</code> and <code>PluginSidebar</code>.</p>
+<pre rel="JavaScript"><code class="language-javascript">const { registerPlugin } = wp.plugins;
+const { PluginSidebar } = wp.editPost;
+const { __ } = wp.i18n;</code></pre>
+<p>It’s worth noting that we need to make sure that we have these files as dependencies when we enqueue our JavaScript file in order to make sure that our <code>index.js</code> file will be loaded after the <code>wp-plugins</code>, <code>wp-edit-posts</code> and <code>wp-i18n</code> packages. Let’s add those to <code>plugin.php</code>:</p>
+<pre rel="PHP"><code class="language-php">function myprefix_enqueue_assets() {
+  wp_enqueue_script(
+    'myprefix-gutenberg-sidebar',
+    plugins_url( 'build/index.js', __FILE__ ),
+    array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' )
+  );
+}
+add_action( 'enqueue_block_editor_assets', 'myprefix_enqueue_assets' );</code></pre>
+<p class="explanation">Notice that I added <a href="https://developer.wordpress.org/block-editor/packages/packages-element/"><code>wp-element</a></code>  in there as a dependency. I did that because we will write some React components using <abbr>JSX</abbr>. Typically, we’d import the entire React library when making React components. However, <code>wp-element</code> is an abstraction layer atop React so we never have to install or import React directly. Instead, we use <code>wp-element</code> as a global variable.</p>
+<p>These packages are also available as npm packages. Instead of importing functions from the global <code>wp</code> variable (which will only be available in the browser that your code editor knows nothing about), we can simply install these packages using npm and import them in our file. These WordPress packages are usually prefixed with <code>@wordpress</code>.</p>
+<p>Let’s install the two packages that we need:</p>
+<pre rel="Terminal"><code class="language-markdown">npm install @wordpress/edit-post @wordpress/plugins @wordpress/i18n --save</code></pre>
+<p>Now we can import our packages in <code>index.js</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">import { registerPlugin } from "@wordpress/plugins";
+import { PluginSidebar } from "@wordpress/edit-post";
+import { __ } from "@wordpress/i18n";</code></pre>
+<p>The advantage of importing the packages this way is that your text editor knows what <code>@wordpress/edit-post</code> and <code>@wordpress/plugins</code> are and it can autocomplete functions and components for you — unlike importing from <code>wp.plugins</code> and <code>wp.editPost</code> which will only be available in the browser while the text editor has no clue what <code>wp</code> is.</p>
+<figure id="post-291615" class="align-left media-291615"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-21.png?ssl=1" alt="" data-recalc-dims="1" /><figcaption>Your text editor can autocomplete component names for you.</figcaption></figure>
+<p>You might also think that importing these packages in your bundle will increase your bundle size, but there’s no worries there. The webpack config file that comes with <code>@wordpress/scripts</code> is instructed to skip bundling these <code>@wordpress</code> packages and depend of the <code>wp</code> global variable instead. As a result, the final bundle will not actually contain the various packages, but reference them via the <code>wp</code> variable.</p>
+<figure id="post-291616" class="align-left media-291616"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-22.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Great! so I am going to stick to importing packages using npm in this article, but you are totally welcome to import from the global <code>wp</code> variable if you prefer. Let’s now use the functions that we imported!</p>
+<h3>Registering a Gutenberg Plugin</h3>
+<p>In order to add a new custom sidebar in Gutenberg, we first need to register a plugin — and that’s what the <code>registerPlugin</code> function that we imported will do. As a first argument, <code>registerPlugin</code> will receive a unique slug for this plugin. We can have an array of options as a second argument. Among these options, we can have an icon name (from the <a href="https://developer.wordpress.org/resource/dashicons">dashicons</a> library) and a render function. This render function can return some components from the <code>wp-edit-post</code> package. In our case. we imported the <code>PluginSidebar</code> component from <code>wp-edit-post</code> and created a sidebar in the Gutenberg editor by returning this component in the render function. I also added <code>PluginSidebar</code> inside a <a href="https://css-tricks.com/render-children-in-react-using-fragment-or-array-components/">React fragment</a> since we can add other components in the render function as well. Also, the <code>__</code> function imported from <code>wp-i18n</code> will be used so we can translate any string that we output:</p>
+<pre rel="JavaScript"><code class="language-javascript">registerPlugin( 'myprefix-sidebar', {
+  icon: 'smiley',
+  render: () =&gt; {
+    return (
+      &lt;&gt;
+        &lt;PluginSidebar
+          title={__('Meta Options', 'textdomain')}
+        &gt;
+          Some Content
+        &lt;/PluginSidebar&gt;
+      &lt;/&gt;
+    )
+  }
+})</code></pre>
+<p>You should now have a new icon beside the cog icon in the Gutenberg editor screen. This smiley icon will toggle our new sidebar which will have whatever content we have inside the <code>PluginSidebar</code> component:</p>
+<figure id="post-291598" class="align-left media-291598"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-02.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>If you were to click on that star icon beside the sidebar title, the sidebar <code>smiley</code> icon will be removed from the top toolbar. Therefore, we need to add another way to access our sidebar in case the user un-stars it from the top toolbar, and to do that, we can import a new component from <code>wp-edit-post</code> called <code>PluginSidebarMoreMenuItem</code>. So, let’s modify out import statement:</p>
+<pre rel="JavaScript"><code class="language-javascript">import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/edit-post";</code></pre>
+<p>The <code>PluginSidebarMoreMenuItem</code> will allow us to add an item in the Gutenberg menu that you can toggle using the three dots icon at the top-right of the page. We want to modify our plugin to include this component. We need to give <code>PluginSidebar</code> a name prop and give <code>PluginSidebarMoreMenuItem</code> a target prop with the same value:</p>
+<pre rel="JavaScript"><code class="language-javascript">registerPlugin( 'myprefix-sidebar', {
+  icon: 'smiley',
+  render: () =&gt; {
+    return (
+      &lt;&gt;
+        &lt;PluginSidebarMoreMenuItem
+          target="myprefix-sidebar"
+        &gt;
+          {__('Meta Options', 'textdomain')}
+        &lt;/PluginSidebarMoreMenuItem&gt;
+        &lt;PluginSidebar
+          name="myprefix-sidebar"
+          title={__('Meta Options', 'textdomain')}
+        &gt;
+          Some Content
+        &lt;/PluginSidebar&gt;
+      &lt;/&gt;
+    )
+  }
+})</code></pre>
+<p>In the menu now, we will have a &#8220;Meta Options&#8221; item with our smiley icon. This new item should toggle our custom sidebar since they are linked using the name and the target props:</p>
+<figure id="post-291599" class="align-left media-291599"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-05.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Great! Now we have a new space in our Gutenberg page. We can replace the &#8220;some content&#8221; text in <code>PluginSidebar</code> and add some React components of our own!</p>
+<p>Also, let’s make sure to check the <a href="https://developer.wordpress.org/block-editor/packages/packages-edit-post/">edit-post package documentation</a>. This package contains a lot of other components that you can add in your plugin. These components can allow you to extend the existing default sidebar and add your own components in it. Also, we can find components that allow us to add items in the Gutenberg top-right menu and also for the blocks menu.</p>
+<h3>Handling metadata in the classic editor</h3>
+<p>Let’s take a quick look at how we <em>used</em> to manage metadata in the classic editor using metaboxes. First, install and activate the <a href="https://wordpress.org/plugins/classic-editor/">classic editor</a> plugin in order to switch back to the classic editor. Then, add some code that will add a metabox in the editor page. This metabox will manage a custom field that we’ll call <code>_myprefix_text_metafield</code>. This metafield will just be a text field that accepts HTML markup. You can add this code in <code>plugin.php</code> or put it in a separate file and include it <code>plugin.php</code>:</p>
+<pre rel="PHP"><code class="language-php">&lt;?php
+function myprefix_add_meta_box() {
+  add_meta_box( 
+    'myprefix_post_options_metabox', 
+    'Post Options', 
+    'myprefix_post_options_metabox_html', 
+    'post', 
+    'normal', 
+    'default'
+  );
+}
+add_action( 'add_meta_boxes', 'myprefix_add_meta_box' );
+function myprefix_post_options_metabox_html($post) {
+  $field_value = get_post_meta($post-&gt;ID, '_myprefix_text_metafield', true);
+  wp_nonce_field( 'myprefix_update_post_metabox', 'myprefix_update_post_nonce' );
+  ?&gt;
+  &lt;p&gt;
+    &lt;label for="myprefix_text_metafield"&gt;&lt;?php esc_html_e( 'Text Custom Field', 'textdomain' ); ?&gt;&lt;/label&gt;
+    &lt;br /&gt;
+    &lt;input class="widefat" type="text" name="myprefix_text_metafield" id="myprefix_text_metafield" value="&lt;?php echo esc_attr( $field_value ); ?&gt;" /&gt;
+  &lt;/p&gt;
+  &lt;?php
+}
+function myprefix_save_post_metabox($post_id, $post) {
+  $edit_cap = get_post_type_object( $post-&gt;post_type )-&gt;cap-&gt;edit_post;
+  if( !current_user_can( $edit_cap, $post_id )) {
+    return;
+  }
+  if( !isset( $_POST['myprefix_update_post_nonce']) || !wp_verify_nonce( $_POST['myprefix_update_post_nonce'], 'myprefix_update_post_metabox' )) {
+    return;
+  }
+  if(array_key_exists('myprefix_text_metafield', $_POST)) {
+    update_post_meta( 
+      $post_id, 
+      '_myprefix_text_metafield', 
+      sanitize_text_field($_POST['myprefix_text_metafield'])
+    );
+  }
+}
+add_action( 'save_post', 'myprefix_save_post_metabox', 10, 2 );</code></pre>
+<p>I am not going to go into details in this code since this is out of the scope of the article, but what it’s essentially doing is:</p>
+<ul>
+<li>Making a metabox using the <a href="https://developer.wordpress.org/reference/functions/add_meta_box/"><code>add_meta_box</a></code> function</li>
+<li>Rendering an HTML input using the <code>myprefix_post_options_metabox_html</code> function</li>
+<li>Controlling the metafield, called <code>_myprefix_text_metafield</code></li>
+<li>Using the <code>save_post action</code> hook to get the HTML input value and update the field using <a href="https://developer.wordpress.org/reference/functions/update_post_meta/"><code>update_post_meta</a></code>.</li>
+</ul>
+<p>If you have the classic editor plugin installed, then you should see the metafield in the post editor:</p>
+<figure id="post-291600" class="align-left media-291600"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-06.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Note that the field is prefixed with an underscore (<code>_myprefix_text_metafield</code>) which prevents it from being edited using the custom fields metabox that comes standard in WordPress. We add this underscore because we intend to manage the field ourselves and because it allows us to hide it from the standard Custom Fields section of the editor.</p>
+<figure id="post-291601" class="align-left media-291601"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-07.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Now that we have a way to manage the field in the classic editor, let’s go ahead and deactivate the classic editor plugin and switch back to Gutenberg. The metabox will still appear in Gutenberg. However, as we discussed earlier, WordPress recommends porting this <abbr>PHP</abbr>-based metabox using a JavaScript approach.</p>
+<figure id="post-291602" class="align-left media-291602"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-08.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>That’s what we will do in the rest of the article. Now that we know how to use the Redux-like stores to manipulate data and how to add some React content in the sidebar, we can finally create a React component that will manipulate our metafield and add it in the sidebar of the Gutenberg editor.</p>
+<p>We don’t want to completely get rid of the <abbr>PHP</abbr>-based field because it’s still helpful in the event that we need to use the classic editor for some reason. So, we’re going to hide the field when Gutenberg is active and show it when the classic editor is active. We can do that by updating the <code>myprefix_add_meta_box</code> function to use the <code>__back_compat_meta_box</code> option:</p>
+<pre rel="PHP"><code class="language-php">function myprefix_add_meta_box() {
+  add_meta_box( 
+    'myprefix_post_options_metabox', 
+    'Post Options', 
+    'myprefix_post_options_metabox_html', 
+    'post', 
+    'normal', 
+    'default',
+    array('__back_compat_meta_box' =&gt; true)
+  );
+}</code></pre>
+<p>Let’s move on to creating the React component that manages the metadata.</p>
+<h3>Getting and setting metadata using JavaScript</h3>
+<p>We have seen how to get the post title and how to change it using the <code>wp-data</code> module. Let’s take a look at how to do the same for custom fields. To get metafields, we can call the save selector <code>getEditedPostAttribute</code>. But this time we will pass it a value of <code>meta</code> instead of <code>title</code>.</p>
+<p>Once that’s done, test it out in the browser console:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/editor').getEditedPostAttribute('meta')</code></pre>
+<p>As you will see, this function will return an empty array, although we are sure that we have a custom field called <code>_myprefix_text_metafield</code> that we are managing using the classic editor. To make custom fields manageable using the data module, we first have to register the field in the <code>plugin.php</code>.</p>
+<pre rel="PHP"><code class="language-php">function myprefix_register_meta() {
+  register_meta('post', '_myprefix_text_metafield', array(
+    'show_in_rest' =&gt; true,
+    'type' =&gt; 'string',
+    'single' =&gt; true,
+  ));
+}
+add_action('init', 'myprefix_register_meta');</code></pre>
+<p class="explanation">Make sure to set the <code>show_in_rest</code> option to <code>true</code>. WordPress will fetch the fields using the <abbr>WP</abbr> REST <abbr>API</abbr>. That means, we need to enable the <code>show_in_rest</code> option to expose it.</p>
+<p>Run the console test again and we will have an object with all of our custom fields returned.</p>
+<figure id="post-291603" class="align-left media-291603"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-09.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Amazing! We are able to get our custom field value, so now let’s take a look at how can we change the value in the store. We can dispatch the <code>editPost</code> action in the <code>core/editor</code> store and pass it an object with a <code>meta</code> key, which will be another object with the fields that we need to update:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.dispatch('core/editor').editPost({meta: {_myprefix_text_metafield: 'new value'}})</code></pre>
+<p>Now try running the <code>getEditedPostAttribute</code> selector again and the value should be updated to <code>new value</code>.</p>
+<figure id="post-291604" class="align-left media-291604"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-10.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>If you try saving a post after updating the field using Redux, you will get an error. And if you take a look at the Network tab in DevTools, you will find that the error is returned from the <code>wp-json/wp/v2/posts/{id}</code> REST endpoint that says that we are not allowed to update <code>_myprefix_text_metafield</code>.</p>
+<figure id="post-291605" class="align-left media-291605"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-11.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>This because WordPress treats any field that is prefixed with an underscore as a private value that cannot be updated using the REST <abbr>API</abbr>. We can, however, specify an <code>auth_callback</code> option that will allow updating this field using the REST API when it returns <code>true</code> as long as the editor is capable of editing posts. We can also add the <a href="https://developer.wordpress.org/reference/functions/sanitize_text_field/"><code>sanitize_text_field</a></code> function to sanitize the value before saving to the database:</p>
+<pre rel="PHP"><code class="language-php">function myprefix_register_meta() {
+  register_meta('post', '_myprefix_text_metafield', array(
+    'show_in_rest' =&gt; true,
+    'type' =&gt; 'string',
+    'single' =&gt; true,
+    'sanitize_callback' =&gt; 'sanitize_text_field',
+    'auth_callback' =&gt; function() { 
+      return current_user_can('edit_posts');
+    }
+  ));
+}
+add_action('init', 'myprefix_register_meta');</code></pre>
+<p>Now try the following:</p>
+<ul>
+<li>Open a new post in WordPress.</li>
+<li>Run this in the DevTools console see the current value of the field:</li>
+</ul>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/editor').getEditedPostAttribute('meta')</code></pre>
+<ul>
+<li>Run this in DevTools to update the value:</li>
+</ul>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.dispatch('core/editor').editPost({meta: {_myprefix_text_metafield: 'new value'}})</code></pre>
+<ul>
+<li>There will be errors, so save the post to clear them.</li>
+<li>Refresh the page and run this in the DevTools console:</li>
+</ul>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.select('core/editor').getEditedPostAttribute('meta')</code></pre>
+<p>Does the new value show up in the console? If so, great! Now we know how to get and set the meta field value using Redux and we are ready to create a react component in the sidebar to do that.</p>
+<h3>Creating a React component to manage the custom fields</h3>
+<p>What we need to do next is create a React component that contains a text field that is controlled by the value of the metafield in the Redux store. It should have the value of the meta field&#8230;and hey, we already know how to get that! We can create the component in a separate file and then import it <code>index.js</code>. However I am simply going to create directly in <code>index.js</code> since we’re dealing with a very small example.</p>
+<p>Again, we’re only working with a single text field, so let’s import a component provided by a WordPress package called <a href="https://developer.wordpress.org/block-editor/packages/packages-components/"><code>@wordpress/components</a></code>. This package contains a lot of reusable components that are Gutenberg-ready without us having to write them from scratch. It’s a good idea to use components from this package in order to be consistent with the rest of the Gutenberg <abbr>UI</abbr>.</p>
+<p>First, let’s install this package:</p>
+<pre rel="Terminal"><code class="language-markdown">npm install --save @wordpress/components</code></pre>
+<p>We’ll import <code>TextControl</code> and <code>PanelBody</code> at the top of <code>index.js</code> to fetch the two components we need from the package:</p>
+<pre rel="JavaScript"><code class="language-javascript">import { PanelBody, TextControl } from "@wordpress/components";</code></pre>
+<p>Now let’s create our component. I am going to create a React functional component and call it <code>PluginMetaFields</code>, but you can use a class component if you’d prefer that.</p>
+<pre rel="JavaScript"><code class="language-javascript">let PluginMetaFields = (props) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;PanelBody
+        title={__("Meta Fields Panel", "textdomain")}
+        icon="admin-post"
+        intialOpen={ true }
+      &gt;
+        &lt;TextControl 
+          value={wp.data.select('core/editor').getEditedPostAttribute('meta')['_myprefix_text_metafield']}
+          label={__("Text Meta", "textdomain")}
+        /&gt;
+      &lt;/PanelBody&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+<p><code>PanelBody</code> takes <code>title</code>, <code>icon</code> and <code>initialOpen</code> props. Title and icon are pretty self-explanatory. <code>initialOpen</code> puts the panel in an open/expanded state by default. Inside the panel, we have <code>TextControl</code>. which receives a label and a value for the input. As you can see in the snippet above, we get the value from the global store by accessing the <code>_myprefix_text_metafield</code> field from the object returned by <code>wp.data.select('core/editor').getEditedPostAttribute('meta')</code>.</p>
+<p>Notice that we are now depending on <code>@wordpress/components</code> and use <code>wp.data</code>. We must add these packages as dependencies when we enqueue our file in <code>plugin.php</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">function myprefix_enqueue_assets() {
+wp_enqueue_script(
+    'myprefix-gutenberg-sidebar',
+    plugins_url( 'build/index.js', __FILE__ ),
+    array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data' )
+  );
+}
+add_action( 'enqueue_block_editor_assets', 'myprefix_enqueue_assets' );</code></pre>
+<p>Let’s officially add the component to the sidebar instead of the dummy text we put in earlier as a quick example:</p>
+<pre rel="JavaScript"><code class="language-javascript">registerPlugin( 'myprefix-sidebar', {
+  icon: 'smiley',
+  render: () =&gt; {
+    return (
+      &lt;&gt;
+        &lt;PluginSidebarMoreMenuItem
+          target="myprefix-sidebar"
+        &gt;
+          {__('Meta Options', 'textdomain')}
+        &lt;/PluginSidebarMoreMenuItem&gt;
+        &lt;PluginSidebar
+          name="myprefix-sidebar"
+          title={__('Meta Options', 'textdomain')}
+        &gt;
+          &lt;PluginMetaFields /&gt;
+        &lt;/PluginSidebar&gt;
+      &lt;/&gt;
+    )
+  }
+})</code></pre>
+<p>This should should give you a &#8220;Meta Options&#8221; panel that contains a &#8220;Meta Fields&#8221; title, a pin icon, and a text input with a &#8220;Test Meta&#8221; label and default value of &#8220;new value.&#8221;</p>
+<figure id="post-291606" class="align-left media-291606"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-12.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Nothing will happen when you type into the text input because we are not yet handling updating the field. We’ll do that next, however, we first need to take care of another problem. Try to run <code>editPost</code> in the DevTools console again, but with a new value:</p>
+<pre rel="JavaScript"><code class="language-javascript">wp.data.dispatch('core/editor').editPost({meta: {_myprefix_text_metafield: 'a newer value'}})</code></pre>
+<p>You will notice that the value in the text field will not update to the new value. That’s the problem. We need the field to be controlled by the value in the Redux store, but we don’t see that reflected in the component. What’s up with that? </p>
+<p>If you have used Redux with React before, then you probably know that we need to use a higher order component called <a href="https://react-redux.js.org/api/connect">connect</a> in order to use Redux store values in a React component. The same goes for React components in Gutenberg — we have to use some higher order component to connect our component with the Redux-like store. Unfortunately, we are unable to simply call <code>wp.data.select</code> directly as we did before. This higher order component lives in the <code>wp.data</code> global variable which is also available as an npm package called <code>@wordpress.data</code>. So let’s install it to help us solve the issue.</p>
+<pre rel="Terminal"><code class="language-markdown">npm install --save @wordpress/data</code></pre>
+<p>The higher order component we need is called <code>withSelect</code>, so let’s import it in <code>index.js</code>.</p>
+<pre rel="JavaScript"><code class="language-javascript">import { withSelect } from "@wordpress/data";</code></pre>
+<p>Remember that we already added <code>wp-data</code> as a dependency in <code>wp_enqueue_script</code>, so we can just use it by wrapping our component with it, like so:</p>
+<pre rel="JavaScript"><code class="language-javascript">PluginMetaFields = withSelect(
+  (select) =&gt; {
+    return {
+      text_metafield: select('core/editor').getEditedPostAttribute('meta')['_myprefix_text_metafield']
+    }
+  }
+)(PluginMetaFields);</code></pre>
+<p>Here, we’re overriding our <code>PluginMetaFields</code> component and assigning it the same component, now wrapped with the <code>withSelect</code> higher order component. <code>withSelect</code> will receive a function as an argument. This function will receive the select function (which we used to access <code>wp.data.select</code>) and it should return an object. Each key in this object will be injected as a prop in the component (similar to connect in Redux). <code>withSelect</code> will return a function that we can pass it the component (<code>PluginMetaFields</code>) again as seen above. So, by having this higher order component, we now get <code>text_metafield</code> as a prop in the component, and whenever the meta value in the redux store is updated, the prop will also get updated — thus, the component will update since components update whenever a prop is changed.</p>
+<pre rel="JavaScript"><code class="language-javascript">let PluginMetaFields = (props) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;PanelBody
+        title={__("Meta Fields Panel", "textdomain")}
+        icon="admin-post"
+        intialOpen={ true }
+      &gt;
+      &lt;TextControl 
+          value={props.text_metafield}
+          label={__("Text Meta", "textdomain")}
+        /&gt;
+      &lt;/PanelBody&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+<p>If you now try and run <code>editPost</code> with a new meta value in your browser, the value of the text field in the sidebar should also be updated accordingly!</p>
+<p>So far, so good. Now we know how to connect our React components with our Redux-like stores. We are now left with updating the meta value in the store whenever we type in the text field.</p>
+<h3>Dispatching actions in React components</h3>
+<p>We now need to dispatch the <code>editPost</code> action whenever we type into the text field. Similar to <code>wp.data.select</code>, we also should not call <code>wp.data.dispatch</code> directly in our component like so:</p>
+<pre rel="JavaScript"><code class="language-javascript">// Do not do this
+&lt;TextControl 
+    value={props.text_metafield}
+    label={__("Text Meta", "textdomain")}
+    onChange={(value) =&gt; wp.data.dispatch('core/editor').editPost({meta: {_myprefix_text_metafield: value}})
+    }
+/&gt;</code></pre>
+<p>We will instead wrap our component with another higher order component from the <code>@wordpress.data</code>  package called <code>withDispatch</code>. We’ve gotta import that, again, in <code>plugin.js</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">import { withSelect, withDispatch } from "@wordpress/data";</code></pre>
+<p>In order to use it, we can wrap our component — which is already wrapped with <code>withSelect</code> and again with <code>withDispatch</code> — like so:</p>
+<pre rel="JavaScript"><code class="language-javascript">PluginMetaFields = withDispatch(
+  (dispatch) =&gt; {
+    return {
+      onMetaFieldChange: (value) =&gt; {
+        dispatch('core/editor').editPost({meta: {_myprefix_text_metafield: value}})
+      }
+    }
+  }
+)(PluginMetaFields);</code></pre>
+<p class="explanation">You can check out yet another WordPress package called <a href="https://developer.wordpress.org/block-editor/packages/packages-compose/"><code>@wordpress/compose</a></code>. It makes using multiple high order components a bit cleaner for use in a single component. But I will leave that to you to try out for the sake of keeping our example simple.</p>
+<p><code>withDispatch</code> is similar to <code>withSelect</code> in that it will receive a function that has the dispatch function as an argument. That allows us to return an object from this function that contains functions that will be available inside the component’s props. I went about this by creating a function with an arbitrary name (<code>onMetaFieldChange</code>) that will receive a value, dispatch the <code>editPost</code> action, and set the meta value in the Redux store to the value received in the function’s argument. We can call this function in the component and pass it the value of the text field inside the <code>onChange</code> callback:</p>
+<pre rel="JavaScript"><code class="language-javascript">&lt;TextControl 
+  value={props.text_metafield}
+  label={__("Text Meta", "textdomain")}
+  onChange={(value) =&gt; props.onMetaFieldChange(value)}
+/&gt;</code></pre>
+<p>Confirm everything is working fine by opening the custom sidebar in the WordPress post editor, updating the field, saving the post and then refreshing the page to make sure the value is saved in the database!</p>
+<h3>Let’s add a color picker</h3>
+<p>It should be clear now that can we update a meta field using JavaScript, but we’ve only looked at simple text field so far. The <code>@wordpress/components</code> library provides a lot of very useful components, including dropdowns, checkboxes, radio buttons, and so on. Let’s level up and conclude this tutorial by taking a look at how we can use the color picker component that’s included in the library.</p>
+<p>You probably know what to do. First, we, import this component in <code>index.js</code>:</p>
+<pre rel="JavaScript"><code class="language-javascript">import { PanelBody, TextControl, ColorPicker } from "@wordpress/components";</code></pre>
+<p>Now, instead of registering a new custom field, let’s aim for simplicity and assume that this color picker will be controlled by the same <code>_myprefix_text_metafield</code> field we worked with earlier. We can use the <code>ColorPicker</code> component inside our <code>PanelBody</code> and it will be very similar to what we saw with <code>TextControl</code>, but the prop names will be slightly different. We have a <code>color</code> prop instead of <code>value</code> and <code>onChangeComplete</code> instead on <code>onChange</code>. Also, <code>onChangeComplete</code> will receive a color object that contains some information about the chosen color. This object will have a <code>hex</code> property we can use to store the color value in the <code>_myprefix_text_metafield</code> field.</p>
+<p>Catch all that? It boils down to this:</p>
+<pre rel="JavaScript"><code class="language-javascript">&lt;ColorPicker
+  color={props.text_metafield}
+  label={__("Colour Meta", "textdomain")}
+  onChangeComplete={(color) =&gt; props.onMetaFieldChange(color.hex)}
+/&gt;</code></pre>
+<p>We should now have a color picker in our sidebar, and since it’s controlling the same meta field as the <code>TextControl</code> component, our old text field should update whenever we pick a new color.</p>
+<figure id="post-291596" class="align-left media-291596"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/06/wpmeta-03.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>That’s a wrap!</h3>
+<p>If you have reached this far in the article, then congratulations! I hope you enjoyed it. Make sure to check out <a href="https://www.udemy.com/gutenberg/?couponCode=CSSTRICKS">my course</a> if you want to learn more about Gutenberg and custom blocks. You can also find the <a href="https://github.com/alialaa/gutenberg-sidebar">final code for this article over at GitHub</a>.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/">Managing WordPress Metadata in Gutenberg Using a Sidebar Plugin</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/managing-wordpress-metadata-in-gutenberg-using-a-sidebar-plugin/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">291587</post-id>	</item>
+		<item>
+		<title>Jetpack Gutenberg Blocks</title>
+		<link>https://css-tricks.com/jetpack-gutenberg-blocks/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 28 Mar 2019 12:47:02 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[Sponsored]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[jetpack]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=285529</guid>
+
+					<description><![CDATA[<p>I remember when Gutenberg was released into core, because I was <a href="https://css-tricks.com/wordcamp-us-2018/">at WordCamp US that day</a>. A number of months have gone by now, so I imagine more and more of us on WordPress sites have dipped our toes into it. <a href="https://css-tricks.com/a-gutenburg-powered-newsletter/">I just wrote about</a> our first foray here on CSS-Tricks and using Gutenberg to power our newsletter. </p>
+<p>Jetpack, of course, was ahead of the game. Jetpack adds a bunch of special, powerful blocks to Gutenberg that it&#8217;s easy &#8230; <a href="https://css-tricks.com/jetpack-gutenberg-blocks/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Jetpack Gutenberg Blocks&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/jetpack-gutenberg-blocks/">Jetpack Gutenberg Blocks</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I remember when Gutenberg was released into core, because I was <a href="https://css-tricks.com/wordcamp-us-2018/">at WordCamp US that day</a>. A number of months have gone by now, so I imagine more and more of us on WordPress sites have dipped our toes into it. <a href="https://css-tricks.com/a-gutenburg-powered-newsletter/">I just wrote about</a> our first foray here on CSS-Tricks and using Gutenberg to power our newsletter. </p>
+<p>Jetpack, of course, was ahead of the game. Jetpack adds a bunch of special, powerful blocks to Gutenberg that it&#8217;s easy to see how useful they can be.</p>
+<p><span id="more-285529"></span></p>
+<p>Here they are, as of this writing:</p>
+<figure id="post-285532" class="align-none media-285532"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/03/jetpack-gutenberg-blocks.png?w=450&#038;ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>Maps! Subscriptions! GIFs! There are so many good ones. Here&#8217;s a look at a few more:</p>
+<h3>The form widget, I hear, is the most popular. </h3>
+<p>You get a pretty powerful form builder right within your editor:</p>
+<figure id="post-285533" class="align-none media-285533"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/03/jetpack-form-builder.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Instant Markdown Processing</h3>
+<p>Jetpack has always enabled Markdown support for WordPress, so it&#8217;s nice that there is a Markdown widget! </p>
+<figure id="post-285535" class="align-none media-285535"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/03/markdown-block.gif?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>PayPal Selling Blocks</h3>
+<p>There is even basic eCommerce blocks, which I just love as you can imagine how empowering that could be for some folks.</p>
+<figure id="post-285539" class="align-none media-285539"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/03/jetpack-ecommerce.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<p>You can read more about Jetpack-specific Gutenberg blocks in their releases that went out for <a href="https://jetpack.com/2018/11/27/jetpack-6-8-building-jetpack-for-the-new-wordpress-editor/">6.8</a> and <a href="https://jetpack.com/2019/01/10/jetpack-6-9-introducing-more-tools-for-the-new-block-editor/">6.9</a>. Here at CSS-Tricks, we use <a href="https://css-tricks.com/jetpack/">a bunch of Jetpack features</a>. </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/jetpack-gutenberg-blocks/">Jetpack Gutenberg Blocks</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">285529</post-id>	</item>
+	</channel>
+</rss>

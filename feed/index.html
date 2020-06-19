@@ -1,0 +1,2644 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Thu, 18 Jun 2020 15:02:26 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Stay DRY Using axios for API Requests</title>
+		<link>https://css-tricks.com/stay-dry-using-axios-for-api-requests/</link>
+					<comments>https://css-tricks.com/stay-dry-using-axios-for-api-requests/#comments</comments>
+		
+		<dc:creator><![CDATA[David Atanda]]></dc:creator>
+		<pubDate>Thu, 18 Jun 2020 15:02:25 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[axios]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312657</guid>
+
+					<description><![CDATA[<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like &#8230; <a href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Stay DRY Using axios for API Requests&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>HTTP requests are a crucial part of any web application that’s communicating with a back-end server. The front end needs some data, so it asks for it via a network HTTP request (or Ajax, as it tends to be called), and the server returns an answer. Almost every website these days does this in some fashion.</p>
+
+
+
+<p>With a larger site, we can expect to see more of this. More data, more APIs, and more special circumstances. As sites grow like this, it is important to stay organized. One classic concept is DRY (short for Don’t Repeat Yourself), which is the process of abstracting code to prevent repeating it over and over. This is ideal because it often allows us to write something once, use it in multiple places, and update in a single place rather than each instance.</p>
+
+
+
+<p>We might also reach for libraries to help us. For Ajax, <a href="https://github.com/axios/axios">axios</a> is a popular choice. You might already be familiar with it, and even use it for things like independent POST and GET requests while developing.&nbsp;</p>
+
+
+
+<h3>Installation and the basics</h3>
+
+
+
+<p>It can be installed using npm (or yarn):</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm install axios</code></pre>
+
+
+
+<p>An independent POST request using Axios looks like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">axios.post('https://axios-app.firebaseio.com/users.json', formData)
+  .then(res => console.log(res))
+  .catch(error => console.log(error))</code></pre>
+
+
+
+<p>Native JavaScript has multiple ways of doing JavaScript too. Notably, <a href="https://css-tricks.com/using-fetch/"><code>fetch()</code></a>. So why use a library at all? Well, for one, error handling in fetch is pretty wonky. You’ll have a better time with axios right out of the gate with that. If you’d like to see a comparison, we have <a href="https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/">an article that covers both</a> and <a href="https://css-tricks.com/importance-javascript-abstractions-working-remote-data/">an article that talks about the value of abstraction</a> with stuff like this.</p>
+
+
+
+<p>Another reason to reach for axios? It gives us more opportunities for DRYness, so let’s look into that.&nbsp;</p>
+
+
+
+<h3>Global config</h3>
+
+
+
+<p>We can set up a global configuration (e.g. in our <code>main.js</code> file) that handles all application requests using <strong>a standard configuration</strong> that is set through a default object that ships with axios.&nbsp;</p>
+
+
+
+<p>This object contains:</p>
+
+
+
+<ul><li><strong><code>baseURL:</code></strong> A relative URL that acts as a prefix to all requests, and each request can append the URL</li><li><strong><code>headers</code>:</strong> Custom headers that can be set based on the requests</li><li><strong><code>timeout:</code></strong> The point at which the request is aborted, usually measured in milliseconds. The default value is <code>0</code>, meaning it’s not applicable.</li><li><strong><code>withCredentials</code>:</strong> Indicates whether or not cross-site Access-Control requests should be made using credentials. The default is <code>false</code>.</li><li><strong><code>responseType</code>:</strong> Indicates the type of data that the server will return, with options including <code>json</code> (default), <code>arraybuffe</code>r, <code>document</code>, <code>text</code>, and <code>stream</code>.</li><li><strong><code>responseEncoding</code>:</strong>&nbsp;Indicates encoding to use for decoding responses. The default value is <code>utf8</code>.</li><li><strong><code>xsrfCookieName</code>:</strong> The name of the cookie to use as a value for XSRF token, the default value is <code>XSRF-TOKEN</code>.</li><li><strong><code>xsrfHeaderName</code>:</strong> The name of the HTTP header that carries the XSRF token value. The default value is <code>X-XSRF-TOKEN</code>.</li><li><strong><code>maxContentLength</code>: </strong>Defines the max size of the HTTP response content in bytes allowed</li><li><strong><code>maxBodyLength</code>:</strong> Defines the max size of the HTTP request content in bytes allowed</li></ul>
+
+
+
+<p>Most of time, you’ll only be using <code>baseURL</code>,&nbsp;<code>header</code>,&nbsp;and maybe <code>timeout</code>. The rest of them are less frequently needed as they have smart defaults, but it’s nice to know there are there in case you need to fix up requests.</p>
+
+
+
+<p>This is the DRYness at work. For each request, we don’t have to repeat the <code>baseURL</code> of our API or repeat important headers that we might need on every request.&nbsp;</p>
+
+
+
+<p>Here’s an example where our API has a base, but it also has multiple different endpoints. First, we set up some defaults:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/ main.js
+import axios from 'axios';
+ 
+axios.defaults.baseURL = 'https://axios-app.firebaseio.com' // the prefix of the URL
+axios.defaults.headers.get['Accept'] = 'application.json'   // default header for all get request
+axios.defaults.headers.post['Accept'] = 'application.json'  // default header for all POST request
+ 
+Then, in a component, we can use axios more succinctly, not needing to set those headers, but still having an opportunity to customize the final URL endpoint:
+ 
+// form.js component
+import axios from 'axios';
+ 
+export default {
+  methods : {
+    onSubmit () {
+      // The URL is now https://axios-app.firebaseio.com/users.json
+      axios.post('/users.json', formData)
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<p class="explanation"><strong>Note:</strong> This example is in Vue, but the concept extends to any JavaScript situation.</p>
+
+
+
+<h3>Custom instance</h3>
+
+
+
+<p>Setting up a “custom instance” is similar to a global config, but scoped to specified components. So, it’s still a DRY technique, but with hierarchy.&nbsp;</p>
+
+
+
+<p>We’ll set up our custom instance in a new file (let’s call it&nbsp;<code>authAxios.js</code>) and import it into the “concern” components.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// authAxios.js
+import axios from 'axios'
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com'
+})
+customInstance.defaults.headers.post['Accept'] = 'application.json'
+ 
+// Or like this...
+ 
+const customInstance = axios.create ({
+  baseURL : 'https://axios-app.firebaseio.com',
+  headers: {'Accept': 'application.json'}
+})</code></pre>
+
+
+
+<p>And then we import this file into the form components:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// form.js component
+ 
+// import from our custom instance
+import axios from './authAxios'
+ 
+export default {
+  methods : {
+    onSubmit () {
+      axios.post('/users.json', formData)
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
+    }
+  }
+}</code></pre>
+
+
+
+<h3>Interceptors</h3>
+
+
+
+<p>Interceptors helps with cases where the global config or custom instance might be too generic, in the sense that if you set up an header within their objects, it applies to the header of every request within the affected components. Interceptors have the ability to change any object properties on the fly. For instance, we can send a different header (even if we have set one up in the object) based on any condition&nbsp;we choose within the interceptor.</p>
+
+
+
+<p>Interceptors can be in the <code>main.js</code> file or a custom instance file. Requests are intercepted after they’ve been sent out and allow us to change how the response is handled.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') { 
+    config.timeout = 4000 
+  } else { 
+    return config
+  }
+  console.log (config)
+    return config;
+  }, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage') }
+  else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});</code></pre>
+
+
+
+<p>Interceptors, as the name implies, intercept both requests and responses to act differently based on whatever conditions are provided. For instance, in the request interceptor above, we inserted a conditional timeout only if the requests have a particular <code>baseURL</code>. For the response, we can intercept it and modify what we get back, like change the route or have an alert box, depending on the status code. We can even provide multiple conditions based on different error codes.</p>
+
+
+
+<p>Interceptors will prove useful as your project becomes larger and you start to have lots of routes and nested routes all communicating to servers based on different triggers. Beyond the conditions I set above, there are many other situations that can warrant the use of interceptors, based on your project.</p>
+
+
+
+<p>Interestingly, we can eject an interceptor to prevent it from having any effect at all. We’ll have to assign the interceptor to a variable and eject it using the appropriately named <code>eject</code> method.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const reqInterceptor = axios.interceptors.request.use(function (config) {
+  // Do something before request is sent, like we're inserting a timeout for only requests with a particular baseURL
+  if (config.baseURL === 'https://axios-app.firebaseio.com/users.json') {
+    config.timeout = 4000
+  } else {
+    return config
+  }
+  console.log (config)
+  return config;
+}, function (error) {    
+  // Do something with request error
+  return Promise.reject(error);
+});
+ 
+// Add a response interceptor
+const resInterceptor = axios.interceptors.response.use(function (response) {
+  // Do something with response data like console.log, change header, or as we did here just added a conditional behaviour, to change the route or pop up an alert box, based on the reponse status  
+  if (response.status === 200 || response.status 201) {
+    router.replace('homepage')
+  } else {
+    alert('Unusual behaviour')
+  }
+  console.log(response)
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});
+ 
+axios.interceptors.request.eject(reqInterceptor);
+axios.interceptors.request.eject(resInterceptor);</code></pre>
+
+
+
+<p>Although it’s less commonly used, it’s possible to put and interceptor into a conditional statement or remove one based on some event.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Hopefully this gives you a good idea about the way axios works as well as how it can be used to keep API requests DRY in an application. While we scratched the surface by calling out common use cases and configurations, axis has so many other advantages you can explore in the <a href="https://github.com/axios/axios">documentation</a>, including the ability to cancel requests and protect against cross-site request forgery , among other awesome possibilities.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/stay-dry-using-axios-for-api-requests/">Stay DRY Using axios for API Requests</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/stay-dry-using-axios-for-api-requests/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312657</post-id>	</item>
+		<item>
+		<title>Building a hexagonal grid using CSS grid</title>
+		<link>https://ninjarockstar.dev/css-hex-grids/</link>
+					<comments>https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Thu, 18 Jun 2020 14:42:21 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[grid]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=313064</guid>
+
+					<description><![CDATA[<p>I think of grids as arrangements of rectangles with vertical and horizontal lines running through. And they are, but that doesn&#8217;t mean we can&#8217;t still do clever things in how we place things on those grids and what we do with the elements afterwards. </p>
+<p>In this demo by Jesse Breneman, a grid of hexagons is created by setting up the grid columns with math such that each block can span over three columns and two rows so that the blocks &#8230; <a href="https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Building a hexagonal grid using CSS grid&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/">Building a hexagonal grid using CSS grid</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I think of grids as arrangements of rectangles with vertical and horizontal lines running through. And they are, but that doesn&#8217;t mean we can&#8217;t still do clever things in how we place things on those grids and what we do with the elements afterwards. </p>
+
+
+
+<p>In this demo by Jesse Breneman, a grid of hexagons is created by setting up the grid columns with math such that each block can span over three columns and two rows so that the blocks overlap in a way that allows a <code>clip-path</code> to be applied around them. This carves a block into a hexagon that is evenly spaced with the others. Very clever.</p>
+
+
+
+<span id="more-313064"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?fit=1024%2C727&amp;ssl=1" alt="" class="wp-image-313065" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?w=2210&amp;ssl=1 2210w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=300%2C213&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=1024%2C727&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=768%2C546&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=1536%2C1091&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=2048%2C1455&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-17-at-7.39.00-AM.png?resize=1000%2C710&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>And, <em>ha</em>, that&#8217;s a hell of a domain name Jesse. Personally, I don&#8217;t know anything about blogging about CSS at a super cheesy domain name.</p>
+<p><a href="https://ninjarockstar.dev/css-hex-grids/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/">Building a hexagonal grid using CSS grid</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/building-a-hexagonal-grid-using-css-grid/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">313064</post-id>	</item>
+		<item>
+		<title>Advice for Complex CSS Illustrations</title>
+		<link>https://css-tricks.com/advice-for-complex-css-illustrations/</link>
+					<comments>https://css-tricks.com/advice-for-complex-css-illustrations/#comments</comments>
+		
+		<dc:creator><![CDATA[Jhey Tompkins]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2020 19:14:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[art]]></category>
+		<category><![CDATA[css shapes]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312636</guid>
+
+					<description><![CDATA[<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I &#8230; <a href="https://css-tricks.com/advice-for-complex-css-illustrations/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Advice for Complex CSS Illustrations&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>If you were to ask me what question I hear most about front-end development, I’d say it’s<em>&#8220;How do I get better at CSS?&#8221;.</em> That question usually comes up after sharing a CSS illustration I have made. It&#8217;s something <a href="https://codepen.io/jh3y/pens/">I love to do over on CodePen</a>.</p>
+
+
+
+<p>To many, CSS is this mythical beast that can’t be tamed. <a href="https://twitter.com/chriscoyier/status/1248088743002677248">This tweet</a> from Chris made me chuckle because, although ironic, there’s a lot of truth to it. That said, what if I told you that you were only a few properties and techniques away from creating anything you wanted? The truth is that you are indeed that close.</p>
+
+
+
+<span id="more-312636"></span>
+
+
+
+<p>I&#8217;ve been wanting to compose an article like this for some time, but it&#8217;s a hard topic to cover because there are so many possibilities and so many techniques that there’s often more than one way to accomplish the same thing. The same is true with CSS illustrations. There&#8217;s no right or wrong way to do it. We&#8217;re all using the same canvas. There are simply so many different tools to get those pixels on the page.</p>
+
+
+
+<p>While there is no &#8220;one size fits all&#8221; approach to CSS illustration, what I can offer is a set of techniques that might help you on your journey.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mLaXRe" src="//codepen.io/anon/embed/mLaXRe?height=500&amp;theme-id=1&amp;slug-hash=mLaXRe&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mLaXRe" title="CodePen Embed mLaXRe" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Time and practice</h3>
+
+
+
+<p>CSS illustration takes lots of time and practice. The more accurate you want to be and the more complicated the illustration, the longer it&#8217;s going to take. The time-consuming part isn’t usually deciding on <em>which</em> properties to use and how, but the <em>tinkering</em> of getting things to look right. <strong>Be prepared to get very familiar with the <a href="https://developers.google.com/web/tools/chrome-devtools/css">styles inspector</a> in your browser dev tools!</strong> I also recommend trying out <a href="https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc?hl=en">VisBug</a> if you haven&#8217;t.</p>
+
+
+
+<p>Two fantastic CSS artists are Ben Evans and Diana Smith. Both have recently talked about time consumption when referring to CSS illustration.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?ssl=1" alt="Screenshot of a realistic looking woman gazing up with her hards across her chest." class="wp-image-312637" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?w=2050&amp;ssl=1 2050w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=300%2C278&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1024%2C950&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=768%2C713&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1536%2C1425&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=2048%2C1900&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-16.png?resize=1000%2C928&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>Diana’s PureCSS Gaze took her two long weekends to complete. She talks about some of her techniques here and here. &#8220;If you have the time, patience, and drive, it is certainly possible,&#8221; she <a href="https://www.vice.com/en_us/article/9kgx7p/painting-made-with-code-html-pure-css-browser-art-diana-smith">says</a>.</figcaption></figure>
+
+
+
+<p>I posted a meme-like picture about a cup and <a href="https://twitter.com/ivorjetski/status/1259893362129350658">Ben’s response</a> summed things up perfectly:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>I  was tempted to create this in CSS when I first saw the tweet but then thought my reply would take about a month.</p></blockquote>
+
+
+
+<p>It takes time!</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/jh3yy/status/1259487385554911233
+</div></figure>
+
+
+
+<h3>Tracing is perfectly acceptable</h3>
+
+
+
+<p>We often have an idea of what it is that we want to illustrate. This article isn&#8217;t about design, after all.; it&#8217;s about taking an image and rendering it with the DOM and CSS. I&#8217;m pretty sure this technique has been around since the dawn of time. But, it&#8217;s one I&#8217;ve been <a href="https://twitter.com/jh3yy/status/1258130582841757700">sharing</a> the last few months.</p>
+
+
+
+<ul><li>Find or create an image of what it is you want to illustrate.</li><li>Pull it into your HTML with an <code>&lt;img&gt;</code> tag.</li><li>Position it in a way that it will sit underneath your illustration.</li><li>Reduce the image opacity so that it&#8217;s still visible but not too overpowering.</li><li>Trace it with the DOM.</li></ul>
+
+
+
+<p>To my surprise, this technique <a href="https://twitter.com/therealpaulcook/status/1256283143587405824">isn&#8217;t common knowledge</a>. But it&#8217;s invaluable for creating accurate CSS illustrations.</p>
+
+
+
+<p>See this trick in action here:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#8217;s a timelapse of creating that CSS <a href="https://twitter.com/eggheadio?ref_src=twsrc%5Etfw">@eggheadio</a> &#x1f60e;<br><br>Tweaked the shadows with clip-path after &#x1f6e0;&#xfe0f;<br><br>&#x1f4bb; <a href="https://t.co/XhDRspwwFg">https://t.co/XhDRspwwFg</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/Timelapse?src=hash&amp;ref_src=twsrc%5Etfw">#Timelapse</a> <a href="https://t.co/ZQ1hyzcoSA">https://t.co/ZQ1hyzcoSA</a> <a href="https://t.co/iPf7ksYCGX">pic.twitter.com/iPf7ksYCGX</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1256281143244136448?ref_src=twsrc%5Etfw">May 1, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>And try it out here:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNVZR" src="//codepen.io/anon/embed/OJMNVZR?height=450&amp;theme-id=1&amp;slug-hash=OJMNVZR&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNVZR" title="CodePen Embed OJMNVZR" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Pay attention to responsiveness</h3>
+
+
+
+<p>If there are two takeaway techniques to take from this article, let it be the &#8220;Tracing&#8221; one above and this next one.&nbsp;</p>
+
+
+
+<p>There are some fantastic examples of CSS illustration out there. But the one unfortunate thing about some of them is that they aren&#8217;t styled — or even viewable — on small screens. We live in an age where first impressions with tech are important. Consider the example of a keyboard illustrated with CSS. Someone comes across your work, opens it up on their smartphone, and they&#8217;re greeted with only half the illustration or a small section of it. They probably missed the coolest parts of the demo!</p>
+
+
+
+<p>Here&#8217;s my trick: <strong>leverage viewport units for your illustrations and create your own scaled unit.&nbsp;</strong></p>
+
+
+
+<p>For sizing and positioning, you either have the option of using a scaled unit or percentage. This is particularly useful when you need to use a box shadow because the property accepts viewport units but not percentages.</p>
+
+
+
+<p>Consider the CSS egghead.io logo I created above. I found the image I wanted to use and popped it in the DOM with an img tag.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;image src='egghead.png'/></code></pre>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">img {
+  height: 50vmin;
+  left: 50%;
+  opacity: 0.25;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+
+
+<p>The height, 50vmin, is the desired size of the CSS illustration. The reduced opacity allows us to “trace” the illustration clearly as we progress.</p>
+
+
+
+<p>Then, we create our scaled unit.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/**
+  * image dimensions are 742 x 769
+  * width is 742
+  * height is 769
+  * my desired size is 50vmin
+*/
+:root {
+  --size: 50;
+  --unit: calc((var(--size) / 769) * 1vmin);
+}</code></pre>
+
+
+
+<p>With the image dimensions in place, we can create a uniform unit that’s going to scale with our image. We know the height is the largest unit, so we use that as a base to create a fractional unit.</p>
+
+
+
+<p>We get something like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">--unit: 0.06501950585vmin;</code></pre>
+
+
+
+<p>That looks awkward but, trust me, it’s fine. We can use this to size our illustration’s container using <code>calc()</code>.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.egg {
+  height: calc(769 * var(--unit));
+  position: relative;
+  width: calc(742 * var(--unit));
+  z-index: 2;
+}</code></pre>
+
+
+
+<p>If we use either percentages or our new <code>--unit</code> custom property to style elements within the container of our CSS illustration, we will get responsive CSS illustrations… and all it took was a few lines of math using CSS variables!</p>
+
+
+
+<p>Resize this demo and you’ll see that everything stay in proportion always using 50vmin as the sizing constraint.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_rNOzYJZ" src="//codepen.io/anon/embed/rNOzYJZ?height=450&amp;theme-id=1&amp;slug-hash=rNOzYJZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed rNOzYJZ" title="CodePen Embed rNOzYJZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Measure twice, cut once</h3>
+
+
+
+<p>Another tip is to measure things. Heck, you van even grab a tape measure if you’re working with a physical object!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_BaNGKPw" src="//codepen.io/anon/embed/BaNGKPw?height=450&amp;theme-id=1&amp;slug-hash=BaNGKPw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed BaNGKPw" title="CodePen Embed BaNGKPw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>This may look a little funky but I measured this scene. It&#8217;s the TV combo unit I have in my lounge. Those measurements equate to centimeters. I used those to get a responsive unit based on the actual height of the TV. We can give that number — and all others — a name that makes it easy to remember what it’s for, thanks to custom properties.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">:root {
+  --light-switch: 15;
+  --light-switch-border: 10;
+  --light-switch-top: 15;
+  --light-switch-bottom: 25;
+  --tv-bezel: 15;
+  --tv-unit-bezel: 4;
+  --desired-height: 25vmin;
+  --one-cm: calc(var(--desired-height) / var(--tv-height));
+  --tv-width: 158.1;
+  --tv-height: 89.4;
+  --unit-height: 42;
+  --unit-width: 180;
+  --unit-top: 78.7;
+  --tv-bottom: 114.3;
+  --scaled-tv-width: calc(var(--tv-width) * var(--one-cm));
+  --scaled-tv-height: calc(var(--tv-height) * var(--one-cm));
+  --scaled-unit-width: calc(var(--unit-width) * var(--one-cm));
+  --scaled-unit-height: calc(var(--unit-height) * var(--one-cm));
+}</code></pre>
+
+
+
+<p>As soon as we calculate a variable, we can use it everywhere. I know my TV is 158.1cm wide and 89.4cm tall. I checked the manual. But in my CSS illustration, it will always scale to 25vmin.</p>
+
+
+
+<h3>Use absolute positioning on all the things</h3>
+
+
+
+<p>This one will save you a few keystrokes. More often than not, you&#8217;ll be looking to absolutely position elements. Save yourself and put this rule somewhere.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Your class name may vary */
+.css-illustration *,
+.css-illustration *:after,
+.css-illustration *:before,
+.css-illustration:after,
+.css-illustration:before {
+  box-sizing: border-box;
+  position: absolute;
+}</code></pre>
+
+
+
+<p>Your keyboard will thank you!</p>
+
+
+
+<p class="explanation">Positioning is a tricky concept in CSS. You can <a href="https://css-tricks.com/almanac/properties/p/position/%23article-header-id-1">read up on it in the CSS Almanac</a> for more information on how to use it.</p>
+
+
+
+<p>Or, have a play with this little positioning playground:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_pogyJbw" src="//codepen.io/anon/embed/pogyJbw?height=450&amp;theme-id=1&amp;slug-hash=pogyJbw&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed pogyJbw" title="CodePen Embed pogyJbw" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Stick to an approach</h3>
+
+
+
+<p>This is by far the hardest thing to do. How do you approach a CSS illustration? Where do you even start? Should you start with the outermost part and work your way in? That doesn&#8217;t work so well.</p>
+
+
+
+<p>Odds are that you&#8217;ll try some approaches and find a better way to go about it. You’ll certainly do a little back-and-forth but, the more you practice, the better you&#8217;ll get at spotting patterns and developing an approach that works best for you.</p>
+
+
+
+<p>I tend to relate my approach to how you&#8217;d go about creating a vector image where illustrations are made up of layers. Split it up and sketch it on paper if you need to. But, start from the bottom and work your way up. This tends to mean larger shapes first, and finer details later. You can always tinker with the stacking index when you need to move elements around.</p>
+
+
+
+<h3>Maintain a solid structure for your styles</h3>
+
+
+
+<p>That leads us to the structure. Try to avoid a flat DOM structure for your illustration. Keeping things atomic makes it easier to move parts of your illustration. It will also makes it much easier to show and hide parts of the illustration or even animate them later. Consider the CSS Snorlax demo. The arms, feet, head, etc. are separate elements. That made animating the arm a lot easier than if I had tried to keep things together since I could simply apply the animation to the <code>.snorlax__arm-left</code> class.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLYXVJa" src="//codepen.io/anon/embed/yLYXVJa?height=450&amp;theme-id=1&amp;slug-hash=yLYXVJa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLYXVJa" title="CodePen Embed yLYXVJa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s a timelapse shot of me creating the demo:</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Attempted to put together a timelapse of the CSS Snorlax we built last night &#x1f605;<br><br>Amusing watching it back!<br><br>&#x1f4bb; <a href="https://t.co/vbVYmFUN5V">https://t.co/vbVYmFUN5V</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a><a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/creative?src=hash&amp;ref_src=twsrc%5Etfw">#creative</a> <a href="https://twitter.com/hashtag/design?src=hash&amp;ref_src=twsrc%5Etfw">#design</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://t.co/0mJtLPRQfP">pic.twitter.com/0mJtLPRQfP</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1255207715137339396?ref_src=twsrc%5Etfw">April 28, 2020</a></blockquote>
+
+
+
+<h3>Handling awkward shapes</h3>
+
+
+
+<p>There&#8217;s <a href="https://css-tricks.com/the-shapes-of-css/">a pretty good article</a> right here on CSS-Tricks for creating shapes with CSS. But what about more “awkward” shapes, like a long curve or even an outer curve? In these scenarios, we need to think outside the box. Properties such as <code>overflow</code>, <code>border-radius</code>, and <code>clip-path</code> are big helpers.</p>
+
+
+
+<p>Consider this CSS Jigglypuff demo. Toggle the checkbox.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOaVJMB" src="//codepen.io/anon/embed/gOaVJMB?height=450&amp;theme-id=1&amp;slug-hash=gOaVJMB&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOaVJMB" title="CodePen Embed gOaVJMB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>That’s the key for creating curved shapes! We have an element much larger than the body with a <code>border-radius</code> applied. We then apply <code>overflow: hidden</code> to the body to cut that part off.</p>
+
+
+
+<p>How might we create an outer curve? This one’s a little tricky. But a trick I like to use is a transparent element with a thick border. Then apply a <code>border-radius</code> and clip the excess, if required.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ZEbgNKO" src="//codepen.io/anon/embed/ZEbgNKO?height=450&amp;theme-id=1&amp;slug-hash=ZEbgNKO&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ZEbgNKO" title="CodePen Embed ZEbgNKO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you hit the toggle, it reveals the element we are using to go across that corner. Another trick might be to overlay a circle that matches the background color. This is fine until we need to change the background color. It&#8217;s OK if you have a variable or something in place for that color. But, it could make things a little harder to maintain.</p>
+
+
+
+<h3><code>clip-path</code> is your friend</h3>
+
+
+
+<p>You might have noticed a couple of interesting CSS properties in that last demo, including clip-path. You&#8217;ll most likely need <a href="https://css-tricks.com/almanac/properties/c/clip-path/"><code>clip-path</code></a> if you want to create complex CSS shapes. It&#8217;s especially handy for cutting off bits of elements when hiding parent box overflow doesn’t do.</p>
+
+
+
+<p>Here’s a little demo I built some time ago that showcases different <code>clip-path</code> possibilities.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XqVQqa" src="//codepen.io/anon/embed/XqVQqa?height=450&amp;theme-id=1&amp;slug-hash=XqVQqa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XqVQqa" title="CodePen Embed XqVQqa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s also this demo that takes ideas from the <a href="https://css-tricks.com/the-shapes-of-css/">“Shapes of CSS”</a> article and re-created with <code>clip-path</code>.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_gOpLBEa" src="//codepen.io/anon/embed/gOpLBEa?height=450&amp;theme-id=1&amp;slug-hash=gOpLBEa&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed gOpLBEa" title="CodePen Embed gOpLBEa" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3><code>border-radius</code> is your other friend</h3>
+
+
+
+<p>You&#8217;re going to need <a href="https://css-tricks.com/almanac/properties/b/border-radius/"><code>border-radius</code></a> to create curves. One uncommon trick is to use a &#8220;double&#8221; syntax. This allows you to create a horizontal and vertical radius for each corner.</p>
+
+
+
+<p>Play with this demo to really appreciate the power of <code>border-radius</code>. I advocate using percentages across the board in order keep things responsive.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_XWmvwYg" src="//codepen.io/anon/embed/XWmvwYg?height=450&amp;theme-id=1&amp;slug-hash=XWmvwYg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed XWmvwYg" title="CodePen Embed XWmvwYg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Shading techniques</h3>
+
+
+
+<p>You&#8217;ve got all the shapes, everything is nicely laid out, and all the right colors are in place… but something still looks off. Odds are that it’s a lack of shading.</p>
+
+
+
+<p>Shading adds depth and create a realistic feel. Consider this ecreation of a Gal Shir illustration. Gal is fantastic at using shades and gradients to make beautiful illustrations. I thought it would be fun to do a recreate it and include a switch that toggles the shading to see just what a difference it makes.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_OJMNyVg" src="//codepen.io/anon/embed/OJMNyVg?height=450&amp;theme-id=1&amp;slug-hash=OJMNyVg&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed OJMNyVg" title="CodePen Embed OJMNyVg" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Shading effects are often created with a <code>box-shadow</code> and <code>background-image</code> combination.</p>
+
+
+
+<p>The key thing with these properties is that we can stack them in a comma-separated list. For example, the cauldron in the demo has a list of gradients that are being used across the body.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron {
+  background:
+    radial-gradient(25% 25% at 25% 55%, var(--rim-color), transparent),
+    radial-gradient(100% 100% at -2% 50%, transparent, transparent 92%, var(--cauldron-color)),
+    radial-gradient(100% 100% at -5% 50%, transparent, transparent 80%, var(--darkness)),
+    linear-gradient(310deg, var(--inner-rim-color) 25%, transparent), var(--cauldron-color);
+}</code></pre>
+
+
+
+<p>Note that <code>radial-gradient()</code> and a <code>linear-gradient()</code> are being used here and not always with perfectly round numeric values. Again, those numbers are just fine. In fact, you’ll spend a lot of time tweaking and tinkering with things in the style inspector.</p>
+
+
+
+<p>It’s generally the same working with <a href="https://css-tricks.com/snippets/css/css-box-shadow/"><code>box-shadow</code></a>. However, with that, we can also use the inset value to create tricky borders and additional depth.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.cauldron__opening {
+  box-shadow:
+    0 0px calc(var(--size) * 0.05px) calc(var(--size) * 0.005px) var(--rim-color) inset,
+    0 calc(var(--size) * 0.025px) 0 calc(var(--size) * 0.025px) var(--inner-rim-color) inset,
+    0 10px 20px 0px var(--darkness), 0 10px 20px -10px var(--inner-rim-color);
+}</code></pre>
+
+
+
+<p>There are certainly times where it will make more sense to go with <a href="https://css-tricks.com/almanac/properties/f/filter/"><code>filter: drop-shadow()</code></a> instead to get the effect you want.</p>
+
+
+
+<p>Lynn Fisher’s <a href="https://a.singlediv.com">a.singlediv.com</a> is a brilliant example of these properties in action. Have a poke around on that site and inspect some of the illustrations for great ways to use <code>box-shadow</code> and <code>background-image</code> in illustrations.</p>
+
+
+
+<p><code>box-shadow</code> is so powerful that you could create your entire illustration with it. I once joked about creating a CSS illustration of a dollar.</p>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In CSS right? &#x1f605;<a href="https://twitter.com/hashtag/webdev?src=hash&amp;ref_src=twsrc%5Etfw">#webdev</a> <a href="https://twitter.com/hashtag/CSS?src=hash&amp;ref_src=twsrc%5Etfw">#CSS</a> <a href="https://twitter.com/hashtag/animation?src=hash&amp;ref_src=twsrc%5Etfw">#animation</a> <a href="https://twitter.com/hashtag/webdesign?src=hash&amp;ref_src=twsrc%5Etfw">#webdesign</a> <a href="https://twitter.com/hashtag/coding?src=hash&amp;ref_src=twsrc%5Etfw">#coding</a> <a href="https://twitter.com/hashtag/100DaysOfCode?src=hash&amp;ref_src=twsrc%5Etfw">#100DaysOfCode</a> <a href="https://twitter.com/hashtag/HTML?src=hash&amp;ref_src=twsrc%5Etfw">#HTML</a> <a href="https://t.co/VmyeySsK83">https://t.co/VmyeySsK83</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1252924614281486336?ref_src=twsrc%5Etfw">April 22, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<p>I used a generator to <a href="https://codepen.io/jh3y/details/eYpBwgN">create the illustration with a single div</a>. But Alvaro Montoro <a href="https://dev.to/alvaromontoro/drawing-a-single-element-dollar-bill-with-css-and-javascript-3mj4">took it a little further</a> and wrote a generator that does it with box-shadow instead.</p>
+
+
+
+<h3>Preprocessors are super helpful</h3>
+
+
+
+<p>While they aren’t required, using preprocessors can help keep your code neat and tidy. For example, Pug makes writing HTML faster, especially when it comes to using loops for dealing with a bunch of repeating elements. From there, <a href="https://css-tricks.com/the-power-and-fun-of-scope-with-css-custom-properties/">we can scope CSS custom properties</a> in a way that we only need to define styles once, then overwrite them where needed.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xJXvjP" src="//codepen.io/anon/embed/xJXvjP?height=500&amp;theme-id=1&amp;slug-hash=xJXvjP&amp;default-tab=result" height="500" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xJXvjP" title="CodePen Embed xJXvjP" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Here’s another example that demonstrates a DRY structure. The flowers are constructed with the same markup, but each has its own index class that is used to apply scoped CSS properties.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYpjXvj" src="//codepen.io/anon/embed/eYpjXvj?height=450&amp;theme-id=1&amp;slug-hash=eYpjXvj&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYpjXvj" title="CodePen Embed eYpjXvj" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The first flower has these properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--1 {
+  --hue: 190;
+  --x: 0;
+  --y: 0;
+  --size: 125;
+  --r: 0;
+}</code></pre>
+
+
+
+<p>It’s the first one, so all the others are based off it. Notice how the second flower is off to the right and up slightly. All that takes is assigning different values to the same custom properties:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.flower--2 {
+  --hue: 320;
+  --x: 140;
+  --y: -75;
+  --size: 75;
+  --r: 40;
+}</code></pre>
+
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Animated responsive CSS Leif features in the latest CodePen Spark! &#x2728;<br><br>For those who don&#8217;t know Animal Crossing, Leif is a green-thumbed Sloth who visits your island &#x1f33b;<br><br>Here&#8217;s a timelapse! &#x1f4f9;<br><br>&#x1f4bb; <a href="https://t.co/tkHX4nWXp7">https://t.co/tkHX4nWXp7</a> via <a href="https://twitter.com/CodePen?ref_src=twsrc%5Etfw">@CodePen</a> <a href="https://t.co/naJIrsSlYM">pic.twitter.com/naJIrsSlYM</a></p>— Jhey &#x1f6e0; (@jh3yy) <a href="https://twitter.com/jh3yy/status/1262856791873945601?ref_src=twsrc%5Etfw">May 19, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<h3>That’s it!</h3>
+
+
+
+<p>Go forth, use these tips, come up with your own, share them, and share your CSS masterpieces! And hey, if you have your own advice, please share that too! This is definitely the sort of thing that is learned through lots of trial and error — what works for me may look different from what works for you and we can learn from those different approaches</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-complex-css-illustrations/">Advice for Complex CSS Illustrations</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/advice-for-complex-css-illustrations/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312636</post-id>	</item>
+		<item>
+		<title>LingoJam</title>
+		<link>https://lingojam.com/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Wed, 17 Jun 2020 14:56:52 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=313028</guid>
+
+					<description><![CDATA[<p>I&#8217;ll sometimes search the web for something like &#8220;Small Text Generator&#8221; knowing there will be <a href="https://lingojam.com/SmallTextGenerator">some website</a> that will turn some dumb thing I want to type like:</p>
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">Uhm hi when is that meeting again?</code></pre>
+<p>into something fun like&#8230;</p>
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">ᵁʰᵐ ʰᶦ ʷʰᵉⁿ ᶦˢ ᵗʰᵃᵗ ᵐᵉᵉᵗᶦⁿᵍ ᵃᵍᵃᶦⁿˀ</code></pre>
+<p class="explanation"><strong>Important note about accessibility:</strong> This kind of altered text will read terribly with assistive technology like VoiceOver. Just &#8220;Uhm&#8221; will read as &#8220;modified letter U, modified letter h, modified letter m,&#8221; which doesn&#8217;t convey &#8230; <a href="https://css-tricks.com/lingojam/" class="read-more">Read article <span class="screen-reader-text"> &#8220;LingoJam&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/lingojam/">LingoJam</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I&#8217;ll sometimes search the web for something like &#8220;Small Text Generator&#8221; knowing there will be <a href="https://lingojam.com/SmallTextGenerator">some website</a> that will turn some dumb thing I want to type like:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">Uhm hi when is that meeting again?</code></pre>
+
+
+
+<p>into something fun like&#8230;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">ᵁʰᵐ ʰᶦ ʷʰᵉⁿ ᶦˢ ᵗʰᵃᵗ ᵐᵉᵉᵗᶦⁿᵍ ᵃᵍᵃᶦⁿˀ</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?fit=1024%2C669&amp;ssl=1" alt="" class="wp-image-313031" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?w=2512&amp;ssl=1 2512w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=300%2C196&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=1024%2C669&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=768%2C502&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=1536%2C1004&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=2048%2C1339&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.42.58-AM.png?resize=1000%2C654&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p class="explanation"><strong>Important note about accessibility:</strong> This kind of altered text will read terribly with assistive technology like VoiceOver. Just &#8220;Uhm&#8221; will read as &#8220;modified letter U, modified letter h, modified letter m,&#8221; which doesn&#8217;t convey what you want at all. I try not to avoid doing something like this on a public site, even as a joke on Twitter (now that I know this). I might use it with a friend or group where I know everyone and their capabilities.</p>
+
+
+
+<p>I had assumed that &#8220;generator&#8221; sites like this were typically hand-built by someone with an itch to scratch. Well, that second part is true, but I just noticed that the small text generator site was built on <a href="https://lingojam.com/">LingoJam</a>, which is designed to specifically help making generators like this easier. How cool!</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?fit=1024%2C935&amp;ssl=1" alt="" class="wp-image-313032" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?w=1990&amp;ssl=1 1990w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?resize=300%2C274&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?resize=1024%2C935&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?resize=768%2C702&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?resize=1536%2C1403&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-16-at-7.58.47-AM.png?resize=1000%2C914&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>lolz</figcaption></figure>
+
+
+
+<p>When you make a new generator, you get all this power to do straight word and phrase replacements, reordering, and regex stuff. </p>
+
+
+
+<p>I just think it&#8217;s a fun cool idea that&#8217;s all. &#x1f919;</p>
+<p><a href="https://lingojam.com/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/lingojam/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/lingojam/">LingoJam</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">313028</post-id>	</item>
+		<item>
+		<title>Web Engine Diversity and Ecosystem Health</title>
+		<link>https://bkardell.com/blog/EcosystemHealth.html</link>
+					<comments>https://css-tricks.com/web-engine-diversity-and-ecosystem-health/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2020 15:46:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[browser]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=313013</guid>
+
+					<description><![CDATA[<p>As front-end developers, our job is working with browsers. Knowing how many we have and the health of them is always of great interest. As far as numbers go, we have fewer recently than we have in the past. It&#8217;s only <a href="https://www.engadget.com/microsoft-edge-windows-update-163054502.html">this month</a> that Edge is starting to auto-update browsers to the Chromium version, yet another notable milestone in the shrinking number of browsers.</p>
+<p>A few years back, Rachel Nabors <a href="https://css-tricks.com/the-ecological-impact-of-browser-diversity/">likened</a> the situation to a biological ecosystem and how diversity &#8230; <a href="https://css-tricks.com/web-engine-diversity-and-ecosystem-health/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Web Engine Diversity and Ecosystem Health&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/web-engine-diversity-and-ecosystem-health/">Web Engine Diversity and Ecosystem Health</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>As front-end developers, our job is working with browsers. Knowing how many we have and the health of them is always of great interest. As far as numbers go, we have fewer recently than we have in the past. It&#8217;s only <a href="https://www.engadget.com/microsoft-edge-windows-update-163054502.html">this month</a> that Edge is starting to auto-update browsers to the Chromium version, yet another notable milestone in the shrinking number of browsers.</p>
+
+
+
+<span id="more-313013"></span>
+
+
+
+<p>A few years back, Rachel Nabors <a href="https://css-tricks.com/the-ecological-impact-of-browser-diversity/">likened</a> the situation to a biological ecosystem and how diversity means health:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>If we lose one of those browser engines, we lose its lineage, every permutation of that engine that would follow, and the unique takes on the Web it could allow for.</p><p>And it’s not likely to be replaced.</p></blockquote>
+
+
+
+<p>A huge consideration in all this is the open-source nature of what we have left. Remember that Microsoft&#8217;s browser technologies were <em>not</em> open-source. Brian Kardell:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>In important ways, we are a&nbsp;more&nbsp;diverse, efficient and healthier ecosystem with the three multi-os, open-source engines we have left (Blink, Gecko, and WebKit) than when we had had more and were dominated by projects that weren&#8217;t that at all.</p></blockquote>
+
+
+
+<p>As a followup Stuart Langridge <a href="https://www.kryogenix.org/days/2020/05/26/browsers-are-not-rendering-engines/">touches on</a> another kind of diversity:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>What’s really important is diversity of&nbsp;<em>influence</em>: who has the ability to make decisions which shape the web in particular ways, and do they make those decisions for good reasons or not so good?</p></blockquote>
+
+
+
+<p>Here&#8217;s hoping that the browsers we have left will continue to evolve, perhaps even fork, and find ways to compete on anything except standards. While the current situation isn&#8217;t as bad as perhaps some folks were worried about with the loss of Microsoft&#8217;s engines (and maybe it&#8217;s even a good thing), it would certainly be bad news if we lost even more browsers [nervously glancing at Firefox], both in shrinking numbers and shrinking diversity of influence.</p>
+<p><a href="https://bkardell.com/blog/EcosystemHealth.html" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/web-engine-diversity-and-ecosystem-health/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/web-engine-diversity-and-ecosystem-health/">Web Engine Diversity and Ecosystem Health</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/web-engine-diversity-and-ecosystem-health/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">313013</post-id>	</item>
+		<item>
+		<title>Everything You Need to Know About FLIP Animations in React</title>
+		<link>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/</link>
+					<comments>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/#respond</comments>
+		
+		<dc:creator><![CDATA[Kirill Vasiltsov]]></dc:creator>
+		<pubDate>Tue, 16 Jun 2020 14:40:04 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[flip]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[web animation api]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312119</guid>
+
+					<description><![CDATA[<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &#160;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+<p>One of &#8230; <a href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Everything You Need to Know About FLIP Animations in React&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>With a very recent Safari update, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">Web Animations API</a> (WAAPI) is <a href="https://caniuse.com/#feat=web-animation">now supported without a flag</a> in all modern browsers (except IE). &nbsp;Here’s <a href="https://codepen.io/danwilson/pen/xGBKVq">a handy Pen</a> where you can check which features your browser supports. The WAAPI is a nice way to do animation (that needs to be done in JavaScript) because it’s native — meaning it requires no additional libraries to work. If you’re completely new to WAAPI, here’s <a href="https://danielcwilson.com/blog/2015/07/animations-part-1/">a very good introduction by Dan Wilson</a>.</p>
+
+
+
+<p>One of the most efficient <em>approaches</em> to animation is <a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">FLIP</a>. FLIP requires a bit of JavaScript to do its thing.&nbsp;</p>
+
+
+
+<p>Let’s take a look at the intersection of using the WAAPI, FLIP, and integrating all that into React. But we’ll start without React first, then get to that.</p>
+
+
+
+<span id="more-312119"></span>
+
+
+
+<h3>FLIP and WAAPI</h3>
+
+
+
+<p><a href="https://aerotwist.com/blog/flip-your-animations/">FLIP animations</a> are made much easier by the WAAPI!</p>
+
+
+
+<p><strong>Quick refresher on FLIP:</strong> The big idea is that you position the element <em>where you want it to end up first</em>. Next, apply transforms to move it to the starting position. Then unapply those transforms.&nbsp;</p>
+
+
+
+<p>Animating transforms is super efficient, thus FLIP is super efficient. Before WAAPI, we had to directly manipulate element’s styles to set transforms and wait for the next frame to unset/invert it:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">// FLIP Before the WAAPI
+el.style.transform = `translateY(200px)`;
+ 
+requestAnimationFrame(() => {
+  el.style.transform = '';
+});</code></pre>
+
+
+
+<p>A lot of libraries are built upon this approach. &nbsp;However, there are several problems with this:</p>
+
+
+
+<ul><li>Everything feels like a huge hack.</li><li>It is extremely difficult to reverse the FLIP animation. While CSS transforms are reversed “for free” once a class is removed, this is not the case here. Starting a new FLIP while a previous one is running can cause glitches. Reversing requires parsing a transform matrix with <code>getComputedStyles</code> and using it to calculate the current dimensions before setting a new animation.</li><li>Advanced animations are close to impossible. For example, to prevent distorting a scaled parent’s children, we need to have access to current scale value each frame. This can only be done by parsing the transform matrix.</li><li>There’s lots of browser gotchas. For example, <a href="https://github.com/joshwcomeau/react-flip-move/blob/12f58727d38ac33cefb0fe20c91d5d7e19485a3c/src/FlipMove.js#L420">sometimes</a> getting a FLIP animation to work flawlessly in Firefox requires calling <code>requestAnimationFrame</code> twice:</li></ul>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    el.style.transform = '';
+  });
+});</code></pre>
+
+
+
+<p>We get none of these problems when WAAPI is used. Reversing can be painlessly done with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Animation/reverse">the <code>reverse</code>&nbsp;function</a>.The counter-scaling of children <a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">is also possible</a>. And when there is a bug, it is easy to pinpoint the exact culprit since we’re only working with simple functions, like <code>animate</code>&nbsp;and <code>reverse</code>, rather than combing through things like the <code>requestAnimationFrame</code> approach.&nbsp;</p>
+
+
+
+<p>Here’s the outline of the WAAPI version:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">el.classList.toggle('someclass');
+const keyframes = /* Calculate the size/position diff */;
+el.animate(keyframes, 2000);</code></pre>
+
+
+
+<h3>FLIP and React</h3>
+
+
+
+<p>To understand how FLIP animations work in React, it is important to know <em>how</em> and, most importantly, <em>why</em> they work in plain JavaScript. Recall the anatomy of a FLIP animation:</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=299%2C723&#038;ssl=1" alt="Diagram. Cache current site and position, make a style change, get new size and position, calculate the difference, set transforms, and cancel transforms. Each item has a purple background, except the last one, indicating they happen before paint." class="wp-image-312120" width="299" height="723" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?w=398&amp;ssl=1 398w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/JakPwnSa.png?resize=124%2C300&amp;ssl=1 124w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Everything that has a purple background needs to happen before the “paint” step of rendering. Otherwise, we would see a flash of new styles for a moment which is not good. Things get a little bit more complicated in React since all DOM updates are done for us.</p>
+
+
+
+<p>The magic of FLIP animations is that an element is transformed <em>before</em> the browser has a chance to paint. So how do we know the “before paint” moment in React?</p>
+
+
+
+<p>Meet <a href="https://reactjs.org/docs/hooks-reference.html%23uselayouteffect">the <code>useLayoutEffect</code> hook</a>. If you even wondered what is for… this is it! Anything we pass in this callback happens synchronously <em>after</em> DOM updates but <em>before</em> paint. In other words, this is a great place to set up a FLIP!</p>
+
+
+
+<p>Let us do something the FLIP technique is very good for: <strong>animating the DOM position.</strong> There’s nothing CSS can do if we want to animate how an element moves from one DOM position to another. (Imagine completing a task in a to-do list and moving it to the list of “completed” tasks like when you click on items in the Pen below.)</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_mdeYMdX" src="//codepen.io/anon/embed/mdeYMdX?height=450&amp;theme-id=1&amp;slug-hash=mdeYMdX&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed mdeYMdX" title="CodePen Embed mdeYMdX" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let&#8217;s look at the simplest example. Clicking on any of the two squares in the following Pen makes them swap positions. Without FLIP, it would happen instantly.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_oNjaMrK" src="//codepen.io/anon/embed/oNjaMrK?height=450&amp;theme-id=1&amp;slug-hash=oNjaMrK&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed oNjaMrK" title="CodePen Embed oNjaMrK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>There’s a lot going on there. Notice how all work happens inside lifecycle hook callbacks: <code>useEffect</code> and <code>useLayoutEffect</code>. What makes it a little bit confusing is that the timeline of our FLIP animation is not obvious from code alone since it happens across <strong>two</strong> React renders. Here’s the anatomy of a React FLIP animation to show the different order of operations:</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?fit=1024%2C1024&amp;ssl=1" alt="Diagram. Cache the size and position, retrieve previous size and position from cache, get new size and position, calculate the difference, and play the animation." class="wp-image-312122" width="768" height="767" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?w=1229&amp;ssl=1 1229w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=300%2C300&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1024%2C1024&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=150%2C150&amp;ssl=1 150w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=768%2C767&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=1000%2C999&amp;ssl=1 1000w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/kTkr-F7_.png?resize=100%2C100&amp;ssl=1 100w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Although <code>useEffect</code> always runs after <code>useLayoutEffect</code> and after browser paint, it is important that we cache the element&#8217;s position and size after the first render. We won’t get a chance to do it on second render because <code>useLayoutEffect</code> is run after all DOM updates. But the procedure is essentially the same as with vanilla FLIP animations.</p>
+
+
+
+<h3>Caveats</h3>
+
+
+
+<p>Like most things, there are some caveats to consider when working with FLIP in React.</p>
+
+
+
+<h4>Keep it under 100ms</h4>
+
+
+
+<p>A FLIP animation is calculation. Calculation takes time and before you can show that smooth 60fps transform you need to do quite some work. People won’t notice a delay if it is under 100ms, so make sure everything is below that. The Performance tab in DevTools is a good place to check that.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?fit=1024%2C275&amp;ssl=1" alt="" class="wp-image-312123" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?w=2129&amp;ssl=1 2129w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=300%2C81&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1024%2C275&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=768%2C206&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1536%2C413&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=2048%2C550&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/6LqLR8Jc.png?resize=1000%2C269&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h4>Unnecessary renders</h4>
+
+
+
+<p>We can’t use useState for caching size, positions and animation objects because every <code>setState</code> will cause an unnecessary render and slow down the app. It can even cause bugs in the worst of cases. Try using <code>useRef</code> instead and think of it as an object that can be mutated without rendering anything.</p>
+
+
+
+<h4>Layout thrashing</h4>
+
+
+
+<p>Avoid repeatedly triggering browser layout. In the context of FLIP animations, that means avoid looping through elements and reading their position with <code>getBoundingClientRect</code>, then immediately animating them with animate. Batch “reads” and “writes” whenever possible. This will allow for extremely smooth animations.</p>
+
+
+
+<h4>Animation canceling</h4>
+
+
+
+<p>Try randomly clicking on the squares in <a href="https://codepen.io/jlkiri/pen/oNjaMrK">the earlier demo</a> while they move, then again after they stop. You will see glitches. In real life, users will interact with elements while they move, so it’s worth making sure they are canceled, paused, and updated smoothly.&nbsp;</p>
+
+
+
+<p>However, not all animations can be reversed with <code>reverse</code>. Sometimes, we want them to stop and then move to a new position (like when randomly shuffling a list of elements). In this case, we need to:</p>
+
+
+
+<ul><li>obtain a size/position of a moving element</li><li>finish the current animation</li><li>calculate the new size and position differences</li><li>start a new animation</li></ul>
+
+
+
+<p>In React, this can be harder than it seems. I wasted a lot of time struggling with it. The current animation object must be cached. A good way to do it is to create a <code>Map</code> so to get the animation by an ID. Then, we need to obtain the size and position of the moving element. There are two ways to do it:</p>
+
+
+
+<ol><li><strong>Use a function component:</strong> Simply loop through every animated element right in the body of the function and cache the current positions.</li><li><strong>Use a class component:</strong> Use the <a href="https://reactjs.org/docs/react-component.html%23getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate</code></a> lifecycle method.</li></ol>
+
+
+
+<p>In fact, official React docs recommend using <code>getSnapshotBeforeUpdate</code> “because there may be delays between the “render” phase lifecycles (like <code>render</code>) and “commit” phase lifecycles (like <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>).” However, there is no hook counterpart of this method yet. I found that using the body of the function component is fine enough.</p>
+
+
+
+<h4>Don’t fight the browser</h4>
+
+
+
+<p>I’ve said it before, but avoid fighting the browser and try to make things happen the way the browser would do it. If we need to animate a simple size change, then consider whether CSS would suffice (e.g. &nbsp;<code>transform: scale()</code>) . I’ve found that FLIP animations are used best where browsers really can’t help:</p>
+
+
+
+<ul><li>Animating DOM position change (as we did above)</li><li>Sharing layout animations</li></ul>
+
+
+
+<p>The second is a more complicated version of the first. There are two DOM elements that act and look as one changing its position (while another is unmounted/hidden). This tricks enables some cool animations. For example, this animation is made with a library I built called <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a> that uses this approach:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_wvKbeqy" src="//codepen.io/anon/embed/wvKbeqy?height=450&amp;theme-id=1&amp;slug-hash=wvKbeqy&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed wvKbeqy" title="CodePen Embed wvKbeqy" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h4>Libraries</h4>
+
+
+
+<p>There are quite a few libraries that make FLIP animations in React easier and abstract the boilerplate. Ones that are currently maintained actively include: <a href="https://github.com/aholachek/react-flip-toolkit"><code>react-flip-toolkit</code></a> and mine, <a href="https://github.com/jlkiri/react-easy-flip"><code>react-easy-flip</code></a>.</p>
+
+
+
+<p>If you do not mind something heavier but capable of more general animations, <a href="https://www.framer.com/motion/">check out <code>framer-motion</code></a>. It also does cool shared layout animations! <a href="https://css-tricks.com/video-screencasts/176-working-with-framer-motion/">There is a video</a> digging into that library.</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<h3>Resources and references</h3>
+
+
+
+<ul><li><a href="https://joshwcomeau.com/react/animating-the-unanimatable/">Animating the Unanimatable</a> by Josh W. Comeau</li><li><a href="https://developers.google.com/web/updates/2017/03/performant-expand-and-collapse">Build performant expand &amp; collapse animation</a>s by Paul Lewis and Stephen McGruer</li><li><a href="https://inventingwithmonster.io/20200409-inside-magic-motion/">The Magic Inside Magic Motion</a> by Matt Perry</li><li><a href="https://twitter.com/keyframers/status/1255510937014018050">Using animate CSS variables from JavaScript</a>, tweeted by @keyframers</li><li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part3/#inner_workings_of_a_renderer_process">Inside look at modern web browser (part 3)</a> by Mariko Kosaka</li><li><a href="https://css-tricks.com/building-a-complex-ui-animation-in-react-simply/">Building a Complex UI Animation in React, Simply</a> by Alex Holachek</li><li><a href="https://css-tricks.com/animating-layouts-with-the-flip-technique/">Animating Layouts with the FLIP Technique</a> by David Khourshid</li><li><a href="https://dev.to/jlkiri/smooth-animations-with-react-hooks-again-51a4">Smooth animations with React Hooks, again</a> by Kirill Vasiltsov&nbsp;</li><li><a href="https://blog.jayantbhawal.in/shared-element-transitions-with-react-hooks/">Shared element transition with React Hooks</a> by Jayant Bhawal</li></ul>
+
+
+
+<p></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/">Everything You Need to Know About FLIP Animations in React</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/everything-you-need-to-know-about-flip-animations-in-react/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312119</post-id>	</item>
+		<item>
+		<title>What is Developer Experience (DX)?</title>
+		<link>https://css-tricks.com/what-is-developer-experience-dx/</link>
+					<comments>https://css-tricks.com/what-is-developer-experience-dx/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 23:31:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dx]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311245</guid>
+
+					<description><![CDATA[<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it &#8230; <a href="https://css-tricks.com/what-is-developer-experience-dx/" class="read-more">Read article <span class="screen-reader-text"> &#8220;What is Developer Experience (DX)?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Developer Experience<a href="#fn:1">¹</a> is a term<a href="#fn:1">²</a> with a self-declaring meaning — <em class="yellow-em">the experience of developers</em> — but it eludes definition in the sense that people invoke it at different times for different reasons referring to different things. For instance, our own Sarah Drasner&#8217;s current job title is &#8220;VP of Developer Experience&#8221; at Netlify, so it&#8217;s a very real thing. But a job title is just <em>one</em> way the term is used. Let&#8217;s dig in a bit and apply it to the different ways people think about and use the term.</p>
+
+
+
+<span id="more-311245"></span>
+
+
+
+<div class="wp-block-group ticss-c360ab1e"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-companies">specific companies.</span></h3>
+
+
+
+<p>I hear DX and <a href="https://stripe.com/">Stripe</a> together a lot. That makes sense. Stripe is a payment gateway company almost exclusively for developers. They are serious about providing a good experience for their customers (developers), hence &#8220;developer experience.&#8221; Just listen to Suz Hinton <a href="https://shoptalkshow.com/409/">talk about &#8220;friction journals&#8221;</a>, which is the idea of sitting down to use a product (like Stripe) and noting down every single little WTF moment, confusion, and frustration so that improvements can be made:</p>
+
+
+
+<figure class="wp-block-audio"><audio controls src="https://css-tricks.com/wp-content/uploads/2020/06/shoptalkshow-409-mp3cut.net_.mp3"></audio></figure>
+
+
+
+<p>Netlify is like Stripe in this way, as is Heroku, CodePen, and any number of companies where the <em>entire customer base</em> is developers. For companies like this, it&#8217;s almost like DX is what UX (User Experience) is for any other company. </p>
+</div></div>
+
+
+
+<div class="wp-block-group ticss-0c6f0b01"><div class="wp-block-group__inner-container">
+<h3>People think of <span id="specific-technologies">specific technologies.</span></h3>
+
+
+
+<p>It&#8217;s common to hear DX invoked when <em>comparing</em> technologies. For instance, some people will say that Vue offers a better developer experience than React. (I&#8217;m not trying to start anything, I don&#8217;t even have much of an opinion on this.) They are talking about things like APIs. Perhaps the <strong>state</strong> is more intuitive to manage in one vs. the other. Or they are talking about features. I know Vue and Svelte have animation helpers built-in while React does not. But React has hooks and people generally like those. These are aspects of the DX of these technologies.</p>
+
+
+
+<p>Or they might be speaking about the feeling around the tools <em>surrounding</em> the core technology. I know <a href="https://reactjs.org/docs/create-a-new-react-app.html">create-react-app</a> is widely beloved, but so is the <a href="https://cli.vuejs.org/">Vue CLI</a>. <a href="https://reacttraining.com/react-router/">React Router</a> is hugely popular, but Vue <a href="https://router.vuejs.org/">has a router</a> that is blessed (and maintained) by the core team which offers a certain feeling of trust.</p>
+
+
+
+<div class="wp-block-columns">
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> vue create hello-world</code></pre>
+</div>
+
+
+
+<div class="wp-block-column">
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">> npx create-react-app my-app</code></pre>
+</div>
+</div>
+
+
+
+<p>I&#8217;m not using JavaScript frameworks/libraries as just any random example. I hear people talk about DX as it relates to JavaScript more than anything else — which could be due to the people in my circles, but it feels notable.</p>
+</div></div>
+
+
+
+<h3>People think of the world <span id="around-tech">around</span> the technology.</h3>
+
+
+
+<p>Everybody thinks good docs are important. There is no such thing as a technology that is better than another but has much worse docs. The one with the better docs is better overall <em>because</em> it has better docs. That&#8217;s not the technology itself; that&#8217;s the world around it.</p>
+
+
+
+<p>Have you ever seen a developer product with an API, and when you view the docs for the API while logged in, it uses API keys and data and settings <em>from your own account</em> to demonstrate? That&#8217;s extraordinary to me. That feels like DX to me.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?fit=1024%2C673&amp;ssl=1" alt="" class="wp-image-312927" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?w=2424&amp;ssl=1 2424w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=300%2C197&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1024%2C673&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=768%2C505&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1536%2C1010&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=2048%2C1347&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.07.28-AM.png?resize=1000%2C658&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Airtable docs showing me API usage with my own data.</figcaption></figure>
+
+
+
+<p><a href="https://twitter.com/JakeDohm/status/1261799440622522374">&#8220;Make the right thing easy,&#8221;</a> notes Jake Dohm. </p>
+
+
+
+<p>That word, <em>easy</em>, feels highly related to DX. Technologies that make things easy are technologies with good DX. In usage as well as in understanding. How easily (and <a href="https://twitter.com/micahgodbolt/status/1261770428038524929">quickly</a>) can I understand what your technology does and what I can do with it? </p>
+
+
+
+<p>What the technology <em>does</em> is often only <em id="half-story">half of the story</em>. The happy path might be great, but what happens when it breaks or errors? How is the error reporting and logging? I think of <a href="https://www.apollographql.com/docs/">Apollo</a> and GraphQL here in my own experience. It&#8217;s such a great technology, but the error reporting feels horrendous in that it&#8217;s very difficult to track down even stuff like typos triggering errors in development. </p>
+
+
+
+<p>What is the debugging story like? Are there special tools for it? The same goes for testing. These things are fundamental DX issues.</p>
+
+
+
+<h3>People think of technology <span id="tech-offerings">offerings</span>.</h3>
+
+
+
+<p>For instance, a technology might be &#8220;good&#8221; already. Say it has an API that developers like. Then it starts offering a CLI. That&#8217;s (generally) a DX improvement, because it opens up doors for developers who prefer working in that world and who build processes around it.</p>
+
+
+
+<p>I think of things like <a href="https://www.netlify.com/products/dev/">Netlify Dev</a> here. They already have this great platform and then say, here, you can run it all on your own machine too. That&#8217;s taking DX seriously.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?fit=1024%2C799&amp;ssl=1" alt="" class="wp-image-312931" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?w=2448&amp;ssl=1 2448w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=300%2C234&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1024%2C799&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=768%2C599&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1536%2C1198&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=2048%2C1598&amp;ssl=1 2048w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.19.11-AM.png?resize=1000%2C780&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>One aspect of Netlify Dev that is nice: The terminal command to start my local dev environment across all my sites on Netlify, regardless of what technology powers them, is the same: <code>netlify dev</code></figcaption></figure>
+
+
+
+<p>Having a dedicated CLI is almost always a good DX step, assuming it is well done and maintained. I remember WordPress before <a href="https://wp-cli.org/">WP-CLI</a>, and now lots of documentation just assumes you&#8217;re using it. I wasn&#8217;t even aware <a href="https://cloudinary.com/documentation/cloudinary_cli">Cloudinary had a CLI</a> until the other day when I needed it and was pleasantly surprised that it was there. I remember when npm scripts started <a href="https://css-tricks.com/why-npm-scripts/">taking over the world</a>. (What would npm be without a CLI?) We used to have a variety of different task runners, but now it&#8217;s largely assumed a project has run commands built into the <code>package.json</code> that you use to do anything the project needs to do.</p>
+
+
+
+<p>Melanie Sumner <a href="https://twitter.com/melaniersumner/status/1261851049020854272">thinks of CLIs</a> immediately as core DX.</p>
+
+
+
+<div class="wp-block-group ticss-d7589fd7"><div class="wp-block-group__inner-container">
+<h3>People think of the literal experience of <span id="coding">coding</span>.</h3>
+
+
+
+<p>There is nothing more directly DX than the experience of typing code into code editing software and running it. That&#8217;s what &#8220;coding&#8221; is and that&#8217;s what developers do. It&#8217;s no wonder that developers take that experience seriously and are constantly trying to improve it for themselves and their teams. I think of things like <a href="https://code.visualstudio.com/">VS Code</a> in how it&#8217;s essentially the DX of it that has made it so dominant in the code editing space in such a short time. VS Code does all kinds of things that developers like, does them well, does them fast, and <a href="https://css-tricks.com/my-visual-studio-code-setup-extensions-and-themes/">allows for a very wide degree of customization</a>. </p>
+
+
+
+<p>TypeScript keeps <a href="https://visualstudiomagazine.com/articles/2020/03/04/redmonk-feb20.aspx">growing in popularity</a> no doubt in part due to the experience it offers within VS Code. TypeScript literally helps you code better by showing you, for example, what functions need as parameters, and making it hard to do the wrong thing.</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?fit=1024%2C387&amp;ssl=1" alt="" class="wp-image-312933" width="695" height="262" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?w=2616&amp;ssl=1 2616w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=300%2C113&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1024%2C387&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=768%2C290&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1536%2C580&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=2048%2C773&amp;ssl=1 2048w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/typescript-error.png?resize=1000%2C378&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Then there is the experience <em>outside</em> the editor, which in the browser itself. Years ago, I wrote <a href="https://css-tricks.com/style-injection-is-for-winners/">Style Injection is for&nbsp;Winners</a> where my point was, as a CSS developer, the experience of saving CSS code and seeing the changes instantly in the browser is a DX you definitely want to have. That concept continues to live on, growing up to JavaScript as well, where &#8220;hot reloading&#8221; <a href="https://twitter.com/TheLarkInn/status/1261784047006580736">is goosebump-worthy</a>. </p>
+
+
+
+<p>The difference between a poor developer environment (no IDE help, slow saves, manual refreshes, slow pipelines) and a great developer environment (fancy editor assistance, hot reloading, fast everything) is startling. A good developer environment, good DX, makes you a better and more productive programmer. </p>
+</div></div>
+
+
+
+<h3>People <span id="compare">compare</span> it to user experience (UX).</h3>
+
+
+
+<p>There is <strong>a strong negative connotation</strong> to DX sometimes. It happens when people <a href="https://twitter.com/ShaneHudson/status/1261782642346819588">blame it</a> for it existing <em><a href="https://twitter.com/Cennydd/status/1261797134447378433">at the cost of user experience</a></em>.</p>
+
+
+
+<p>I think of things like client-side developer-only libraries. Think of the classic library that everyone loves to dunk: <a href="https://momentjs.com/">Moment.js</a>. Moment allows you to manipulate dates in JavaScript, and is often used client-side to do that. Users don&#8217;t care if you have a fancy API available to manipulate dates. That is entirely a developer convenience. So, you ship this library for yourself (good DX) at the cost of slowing down the website (bad UX). <em>Most</em> client-side JavaScript is in this category. </p>
+
+
+
+<p>Equally as often, people<strong> <em>connect</em> developer experience and user experience</strong>. If developers are empowered and effective, that will &#8220;trickle down&#8221; to produce good software, the theory goes. </p>
+
+
+
+<p>Worst case, we&#8217;re in a situation where UX and DX are on a teeter totter. Pile on some DX and UX suffers on the other side. Best case, we find ways to disentangle DX and UX entirely, finding value in both and taking both seriously. Although if one has to win, certainly it should be the users. Like the <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">HTML spec says</a>:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?fit=1024%2C775&amp;ssl=1" alt="" class="wp-image-312934" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?w=1388&amp;ssl=1 1388w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=300%2C227&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1024%2C775&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=768%2C581&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-6.26.22-AM.png?resize=1000%2C756&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><em>In case of conflict, consider users over authors over implementors over specifiers over theoretical purity.</em></figcaption></figure>
+
+
+
+<div class="wp-block-group ticss-db118f54"><div class="wp-block-group__inner-container">
+<h3>People think about <span id="dx-time">time</span>.</h3>
+
+
+
+<p>How <em>long</em> does a technology take to adopt? Good DX considers this. Can I take advantage of it without rewriting everything? How quickly can I spin it up? How well does it play with other technologies I use?  What is my time investment?</p>
+
+
+
+<p>This kind of thing makes me think of some recent experience with <a href="https://workers.cloudflare.com/">Cloudflare Workers</a>. It&#8217;s really cool technology that we don&#8217;t have time to get all into right here, but suffice to say it gives you control over a website at a high level that we often don&#8217;t think about. Like what if you could manipulate a network request before it even gets to your web server? You don&#8217;t have to use it, but because of the level it operates on, new doors open up without caring about or interfering with whatever technologies you are using. </p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?fit=1024%2C718&amp;ssl=1" alt="" class="wp-image-312940" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?w=1405&amp;ssl=1 1405w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=300%2C210&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1024%2C718&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=768%2C538&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/wrangler-preview.png?resize=1000%2C701&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Not only does the technology itself position itself well, the DX of using it, while there are some rough edges, is at least well-considered, providing a browser-based testing environment. </p>
+
+
+
+<p>A powerful tool with a high investment cost, eh, that&#8217;s cool. But a powerful tool with <em>low</em> investment cost is good DX.</p>
+</div></div>
+
+
+
+<h3>People <span id="dont-think">don&#8217;t want to think</span> about it. </h3>
+
+
+
+<p>They say the best typography goes unnoticed because all you see is the what the words are telling you, not the typography itself. That can be true of developer experience. The best DX is that you never notice the tools or the technology because they just work. </p>
+
+
+
+<p>Good DX is just being able to <a href="https://twitter.com/jnowland/status/1261810491627696130">do your job</a> rather than fight with tools. The tools could be your developer environment, it could be build tooling, it could be hosting stuff, or it could even be whatever APIs you are interfacing with. Is the API <a href="https://twitter.com/wp_acf/status/1261787514173440000">intuitive</a> and helpful, or obtuse and tricky?</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>Feel free to keep going on this in the comments. What is DX to <em>you?</em></p>
+
+
+
+<div class="wp-block-group footnotes ticss-92e47876" id="fn:1"><div class="wp-block-group__inner-container">
+<ol><li>Are we capitalizing Developer Experience? I&#8217;m just gonna go for it.</li><li>Looks like Michael Mahemoff has <a href="https://twitter.com/mahemoff/status/1947230411948032">a decent claim</a> on coining the term.</li></ol>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-is-developer-experience-dx/">What is Developer Experience (DX)?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/what-is-developer-experience-dx/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311245</post-id>	</item>
+		<item>
+		<title>My Flywheel Landing Page</title>
+		<link>https://css-tricks.com/my-flywheel-landing-page/</link>
+					<comments>https://css-tricks.com/my-flywheel-landing-page/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 15:14:38 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312954</guid>
+
+					<description><![CDATA[<p><a href="https://share.getf.ly/k96n2f">Flywheel</a> is my WordPress hosting partner here. I <a href="https://css-tricks.com/local-by-flywheel/">use Local</a> every day for my WordPress local development environment and use their hosting for all my WordPress sites as part of my <a href="https://css-tricks.com/video-screencasts/177-local-wordpress-development-to-production-workflow/">whole flow</a>, so I&#8217;m glad they aren&#8217;t just a sponsor but a product I use and like.</p>
+<p>Last November some of their crew came out and shot some photos and video with me, which was cool and fun and made me feel famous lolll.</p>
+<p>They ultimately <a href="https://getflywheel.com/chris-coyier/">built a </a>&#8230; <a href="https://css-tricks.com/my-flywheel-landing-page/" class="read-more">Read article <span class="screen-reader-text"> &#8220;My Flywheel Landing Page&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/my-flywheel-landing-page/">My Flywheel Landing Page</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://share.getf.ly/k96n2f">Flywheel</a> is my WordPress hosting partner here. I <a href="https://css-tricks.com/local-by-flywheel/">use Local</a> every day for my WordPress local development environment and use their hosting for all my WordPress sites as part of my <a href="https://css-tricks.com/video-screencasts/177-local-wordpress-development-to-production-workflow/">whole flow</a>, so I&#8217;m glad they aren&#8217;t just a sponsor but a product I use and like.</p>
+
+
+
+<p>Last November some of their crew came out and shot some photos and video with me, which was cool and fun and made me feel famous lolll.</p>
+
+
+
+<p>They ultimately <a href="https://getflywheel.com/chris-coyier/">built a landing page from it,</a> which is super well done! </p>
+
+
+
+<span id="more-312954"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?fit=1024%2C843&amp;ssl=1" alt="" class="wp-image-312956" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?w=2674&amp;ssl=1 2674w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=1024%2C843&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=768%2C632&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=1536%2C1265&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=2048%2C1686&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/Screen-Shot-2020-06-15-at-8.02.36-AM.png?resize=1000%2C823&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Just look at me being all famous.</figcaption></figure>
+
+
+
+<p>Check out some photos that Kimberly Bailey took while the gang was here.</p>
+
+
+
+<div class="wp-block-jetpack-tiled-gallery aligncenter is-style-rectangular has-rounded-corners-4"><div class="tiled-gallery__gallery"><div class="tiled-gallery__row"><div class="tiled-gallery__col"><figure class="tiled-gallery__item"><img srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg?strip=info&#038;w=1365&#038;ssl=1 1365w" alt="" data-height="1365" style="height: 1365px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312957" data-link="https://css-tricks.com/?attachment_id=312957" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg" data-width="2048" src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7307.jpeg?ssl=1"/></figure></div><div class="tiled-gallery__col"><figure class="tiled-gallery__item"><img srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?strip=info&#038;w=1500&#038;ssl=1 1500w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?strip=info&#038;w=1707&#038;ssl=1 1707w" alt="" data-height="1707" style="height: 1707px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312958" data-link="https://css-tricks.com/?attachment_id=312958" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg" data-width="2560" src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7545-scaled.jpeg?ssl=1"/></figure><figure class="tiled-gallery__item"><img srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg?strip=info&#038;w=1365&#038;ssl=1 1365w" alt="" data-height="1365" style="height: 1365px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312960" data-link="https://css-tricks.com/?attachment_id=312960" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg" data-width="2048" src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7689.jpeg?ssl=1"/></figure></div></div><div class="tiled-gallery__row"><div class="tiled-gallery__col"><figure class="tiled-gallery__item"><img srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg?strip=info&#038;w=1365&#038;ssl=1 1365w" alt="" data-height="1365" style="height: 1365px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312961" data-link="https://css-tricks.com/?attachment_id=312961" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg" data-width="2048" src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7416-1.jpeg?ssl=1"/></figure><figure class="tiled-gallery__item"><img srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?strip=info&#038;w=1500&#038;ssl=1 1500w,https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?strip=info&#038;w=1707&#038;ssl=1 1707w" alt="" data-height="1707" style="height: 1707px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312962" data-link="https://css-tricks.com/?attachment_id=312962" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg" data-width="2560" src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7907-scaled.jpeg?ssl=1"/></figure></div><div class="tiled-gallery__col"><figure class="tiled-gallery__item"><img srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=600&#038;ssl=1 600w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=900&#038;ssl=1 900w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=1200&#038;ssl=1 1200w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=1500&#038;ssl=1 1500w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=1800&#038;ssl=1 1800w,https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?strip=info&#038;w=2000&#038;ssl=1 2000w" alt="" data-height="2048" style="height: 2048px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-id="312964" data-link="https://css-tricks.com/?attachment_id=312964" data-url="https://css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg" data-width="1365" src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/2019-11-22_Chris-Coyier_Testimonial-Video-Shoot_Stills-7822.jpeg?ssl=1"/></figure></div></div></div></div>
+
+
+
+<p>And the video!</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/HeyFlywheel/status/1263189100456218630
+</div></figure>
+
+
+
+<p>Anyway feel free to check out <a href="https://getflywheel.com/chris-coyier/">that landing page</a> and if your company is headed to make a WordPress hosting decision soon, might as well use <a href="https://share.getf.ly/k96n2f">my referral link</a> ;)</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/my-flywheel-landing-page/">My Flywheel Landing Page</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/my-flywheel-landing-page/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312954</post-id>	</item>
+		<item>
+		<title>Adding a Custom Welcome Guide to the WordPress Block Editor</title>
+		<link>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/</link>
+					<comments>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/#respond</comments>
+		
+		<dc:creator><![CDATA[Leonardo Losoviz]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 14:37:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[gutenberg]]></category>
+		<category><![CDATA[WordPress]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312604</guid>
+
+					<description><![CDATA[<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using &#8230; <a href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Adding a Custom Welcome Guide to the WordPress Block Editor&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I am creating a WordPress plugin and there is a slight learning curve when it comes to using it. I’d like to give users a primer on how to use the plugin, but I want to avoid diverting users to documentation on the plugin&#8217;s website since that takes them out of the experience.</p>
+
+
+
+<p>What would be great is for users to immediately start using the plugin once it’s installed but have access to helpful tips while they are actively using it. There’s no native feature for something like this in WordPress but we can make something because WordPress is super flexible like that.</p>
+
+
+
+<p>So here’s the idea. We’re going to bake documentation directly into the plugin and make it easily accessible in the block editor. This way, users get to use the plugin right away while having answers to common questions directly where they’re working.&nbsp;</p>
+
+
+
+<span id="more-312604"></span>
+
+
+
+<p>My plugin operates through several Custom Post Types (CPT). What we’re going to build is essentially a popup modal that users get when they go to these CPTs.&nbsp;</p>
+
+
+
+<p>The WordPress block editor is built in React, which utilizes components that can be customized to and reused for different situations. &nbsp;That is the case with what we’re making — let’s call it the <code>&lt;Guide&gt;</code> component — which behaves like a modal, but is composed of several pages that the user can paginate through.</p>
+
+
+
+<p>WordPress itself has a <code>&lt;Guide&gt;</code>&nbsp;component that displays a welcome guide when opening the block editor for the first time:</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?ssl=1" alt="Screenshot showing a modal on top of the WordPress block editor welcoming users to the editor for the first time." class="wp-image-312605" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-3.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>WordPress displays a modal with instructions for using the block editor when a user loads the editor for the first time.</figcaption></figure>
+
+
+
+<p>The guide is a container filled with content that’s broken up into individual pages. In other words, it’s pretty much what we want. That means we don’t have to re-invent the wheel with this project; we can reuse this same concept for our own plugin.</p>
+
+
+
+<p>Let’s do exactly that.&nbsp;</p>
+
+
+
+<h3>What we want to achieve</h3>
+
+
+
+<p>Before we get to the solution, let’s talk about the end goal.</p>
+
+
+
+<p>The design satisfies the requirements of the plugin, which is a GraphQL server for WordPress. The plugin offers a variety of CPTs that are edited through custom blocks which, in turn, are <a href="https://developer.wordpress.org/block-editor/developers/block-api/block-templates/">defined through templates</a>. There’s a grand total of two blocks: one called &#8220;GraphiQL client&#8221; to input the GraphQL query, and one called &#8220;Persisted query options&#8221; to customize the behavior of the execution.</p>
+
+
+
+<p>Since creating a query for GraphQL is not a trivial task, I decided to add the guide component to the editor screen for that CPT. It’s available in the Document settings as a panel called &#8220;Welcome Guide.&#8221;</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?ssl=1" alt="Screenshot showing the WordPress editor with the document settings panel open in the right column. a welcome guide tab is highlighted in the settings." class="wp-image-312607" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-4.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>Crack that panel open and the user gets a link. That link is what will trigger the modal.</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=274%2C342&#038;ssl=1" alt="Close-up screenshot of the welcome guide tab opened, revealing a link that says &quot;Open Guide: Creating Persisted Queries.&quot;" class="wp-image-312609" width="274" height="342" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?w=274&amp;ssl=1 274w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.jpeg?resize=240%2C300&amp;ssl=1 240w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>For the modal itself, I decided to display a tutorial video on using the CPT on the first page, and then describe in detail all the options available in the CPT on subsequent pages.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?ssl=1" alt="Screenshot showing the custom modal open in the block editor and containing an embedded video on how to use the plugin." class="wp-image-312611" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?w=1172&amp;ssl=1 1172w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=300%2C224&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1024%2C765&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=768%2C574&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-6.jpeg?resize=1000%2C747&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>I believe this layout is an effective way to show documentation to the user. It is out of the way, but still conveniently close to the action. Sure, we can use a different design or even place the modal trigger somewhere else using a different component instead of repurposing <code>&lt;Guide&gt;</code>, but this is perfectly good.</p>
+
+
+
+<h3>Planning the implementation</h3>
+
+
+
+<p>The implementation comprises the following steps:</p>
+
+
+
+<ol><li>Scaffolding a new script to register the custom sidebar panel</li><li>Displaying the custom sidebar panel on the editor for our Custom Post Type only</li><li>Creating the guide</li><li>Adding content to the guide</li></ol>
+
+
+
+<p>Let&#8217;s start!</p>
+
+
+
+<h3>Step 1: Scaffolding the script</h3>
+
+
+
+<p>Starting in WordPress 5.4, we can use a component called <a href="https://developer.wordpress.org/block-editor/developers/slotfills/plugin-document-setting-panel/"><code>&lt;PluginDocumentSettingPanel&gt;</code></a> to add a <a href="https://developer.wordpress.org/block-editor/components/panel/">panel</a> on the editor&#8217;s Document settings like this:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost;
+ 
+const PluginDocumentSettingPanelDemo = () => (
+  &lt;PluginDocumentSettingPanel
+    name="custom-panel"
+    title="Custom Panel"
+    className="custom-panel"
+  >
+    Custom Panel Contents
+  &lt;/PluginDocumentSettingPanel>
+);
+registerPlugin( 'plugin-document-setting-panel-demo', {
+  render: PluginDocumentSettingPanelDemo,
+  icon: 'palmtree',
+} );</code></pre>
+
+
+
+<p>If you&#8217;re experienced with the block editor and already know how to execute this code, then you can skip ahead. I&#8217;ve been coding with the block editor for less than three months, and using React/npm/webpack is a new world for me — this plugin is my first project using them! I&#8217;ve found that the docs in the <a href="https://github.com/WordPress/gutenberg">Gutenberg repo</a> are not always adequate for beginners like me, and sometimes the documentation is missing altogether, so I&#8217;ve had to dig into the source code to find answers.</p>
+
+
+
+<p>When the documentation for the component indicates to use that piece of code above, I don&#8217;t know what to do next, because <code>&lt;PluginDocumentSettingPanel&gt;</code> is not a block and I am unable to scaffold a new block or add the code there. Plus, we’re working with JSX, which means we need to have a <a href="https://developer.wordpress.org/block-editor/tutorials/javascript/js-build-setup/">JavaScript build step</a> to compile the code.</p>
+
+
+
+<p>I did, however, find the <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">equivalent ES5 code</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var el = wp.element.createElement;
+var __ = wp.i18n.__;
+var registerPlugin = wp.plugins.registerPlugin;
+var PluginDocumentSettingPanel = wp.editPost.PluginDocumentSettingPanel;
+ 
+function MyDocumentSettingPlugin() {
+  return el(
+    PluginDocumentSettingPanel,
+    {
+      className: 'my-document-setting-plugin',
+      title: 'My Panel',
+    },
+    __( 'My Document Setting Panel' )
+  );
+}
+ 
+registerPlugin( 'my-document-setting-plugin', {
+  render: MyDocumentSettingPlugin
+} );</code></pre>
+
+
+
+<p>ES5 code does not need be compiled, so we can load it like any other script in WordPress. But I don&#8217;t want to use that. I want the full, modern experience of ESNext and JSX.</p>
+
+
+
+<p>So my thinking goes like this: I can&#8217;t use the <a href="https://css-tricks.com/how-to-create-custom-wordpress-editor-blocks-in-2020/">block scaffolding tools</a> since it&#8217;s not a block, and I don&#8217;t know how to compile the script (I&#8217;m certainly not going to set-up webpack all by myself). That means I&#8217;m stuck.</p>
+
+
+
+<p>But wait! The only difference between a block and a regular script is just how they are registered in WordPress. A block is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($blockScriptName, $blockScriptURL, $dependencies, $version);
+register_block_type('my-namespace/my-block', [
+  'editor_script' => $blockScriptName,
+]);</code></pre>
+
+
+
+<p>And a regular script is registered like this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">wp_register_script($scriptName, $scriptURL, $dependencies, $version);
+wp_enqueue_script($scriptName);</code></pre>
+
+
+
+<p>We can use any of the block scaffolding tools to modify things then register a regular script instead of a block, which gains us access to the webpack configuration to compile the ESNext code. Those available tools are:</p>
+
+
+
+<ul><li>The <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">WP CLI</a> <a href="https://github.com/wp-cli/scaffold-command#wp-scaffold-block">‘scaffold’ command</a></li><li>Ahmad Awais&#8217;s <a href="https://github.com/ahmadawais/create-guten-block">create-guten-block</a> package</li><li>The official <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package</li></ul>
+
+
+
+<p>I chose to use the <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/">@wordpress/create-block</a> package because it is maintained by the team developing Gutenberg.</p>
+
+
+
+<p>To scaffold the block, <a href="https://developer.wordpress.org/block-editor/packages/packages-create-block/#usage">we execute this</a> in the command line:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">npm init @wordpress/block</code></pre>
+
+
+
+<p>After completing all the prompts for information — including the block’s name, title and description — the tool will generate a <a href="https://make.wordpress.org/meta/2019/03/08/the-block-directory-and-a-new-type-of-plugin/">single-block plugin</a>, with an entry PHP file containing code similar to this:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/**
+ * Registers all block assets so that they can be enqueued through the block editor
+ * in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
+ */
+function my_namespace_my_block_block_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-namespace/my-block" block first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+ 
+  $editor_css = 'editor.css';
+  wp_register_style(
+    'my-namespace-my-block-block-editor',
+    plugins_url( $editor_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$editor_css" )
+  );
+ 
+  $style_css = 'style.css';
+  wp_register_style(
+    'my-namespace-my-block-block',
+    plugins_url( $style_css, __FILE__ ),
+    array(),
+    filemtime( "$dir/$style_css" )
+  );
+ 
+  register_block_type( 'my-namespace/my-block', array(
+    'editor_script' => 'my-namespace-my-block-block-editor',
+    'editor_style'  => 'my-namespace-my-block-block-editor',
+    'style'         => 'my-namespace-my-block-block',
+  ) );
+}
+add_action( 'init', 'my_namespace_my_block_block_init' );</code></pre>
+
+
+
+<p>We can copy this code into the plugin, and modify it appropriately, converting the block into a regular script. (Note that I&#8217;m also removing the CSS files along the way, but could keep them, if needed.)</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function my_script_init() {
+  $dir = dirname( __FILE__ );
+ 
+  $script_asset_path = "$dir/build/index.asset.php";
+  if ( ! file_exists( $script_asset_path ) ) {
+    throw new Error(
+      'You need to run `npm start` or `npm run build` for the "my-script" script first.'
+    );
+  }
+  $index_js     = 'build/index.js';
+  $script_asset = require( $script_asset_path );
+  wp_register_script(
+    'my-script',
+    plugins_url( $index_js, __FILE__ ),
+    $script_asset['dependencies'],
+    $script_asset['version']
+  );
+  wp_enqueue_script(
+    'my-script'
+  );
+}
+add_action( 'init', 'my_script_init' );</code></pre>
+
+
+
+<p>Let’s copy the <code>package.json</code> file over:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+  "name": "my-block",
+  "version": "0.1.0",
+  "description": "This is my block",
+  "author": "The WordPress Contributors",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format:js": "wp-scripts format-js",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^9.1.0"
+  }
+}</code></pre>
+
+
+
+<p>Now, we can replace the contents of file <code>src/index.js</code> with the ESNext code from above to register the <code>&lt;PluginDocumentSettingPanel&gt;</code> component. Upon running <code>npm start</code> (or <code>npm run build</code> for production) the code will be compiled into <code>build/index.js</code>.</p>
+
+
+
+<p>There is a last problem to solve: the <code>&lt;PluginDocumentSettingPanel&gt;</code> component is not statically imported, but instead obtained from <code>wp.editPost</code>, and since <code>wp</code> is a global variable loaded by WordPress on runtime, this dependency is not present in <code>index.asset.php</code> (which is auto-generated during build). We must manually add a dependency to the <code>wp-edit-post</code> script when registering the script to make sure it loads before ours:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">$dependencies = array_merge(
+  $script_asset['dependencies'],
+  [
+    'wp-edit-post',
+  ]
+);
+wp_register_script(
+  'my-script',
+  plugins_url( $index_js, __FILE__ ),
+  $dependencies,
+  $script_asset['version']
+);</code></pre>
+
+
+
+<p>Now the script setup is ready!</p>
+
+
+
+<p class="explanation">The plugin can be updated with Gutenberg&#8217;s relentless development cycles. Run <code>npm run packages-update</code> to update the npm dependencies (and, consequently, the <a href="https://github.com/WordPress/gutenberg/blob/master/packages/scripts/config/webpack.config.js">webpack configuration</a>, which is defined on package <code>"@wordpress/scripts"</code>) to their latest supported versions.</p>
+
+
+
+<p>At this point, you might be wondering how I knew to add a dependency to the <code>"wp-edit-post"</code> script before our script. Well, I had to dig into Gutenberg&#8217;s source code. The documentation for <code>&lt;PluginDocumentSettingPanel&gt;</code> is somewhat incomplete, which is a perfect example of how Gutenberg&#8217;s documentation is lacking in certain places.</p>
+
+
+
+<p>While digging in code and browsing documentation, I discovered a few enlightening things. For example, there are two ways to code our scripts: using either the ES5 or the ESNext syntax. ES5 doesn&#8217;t require a build process, and it references instances of code from the runtime environment, most likely through the global <code>wp</code> variable. For instance, the code to create an icon goes like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">var moreIcon = wp.element.createElement( 'svg' );</code></pre>
+
+
+
+<p>ESNext relies on webpack to resolve all dependencies, which enables us to import static components. For instance, the code to create an icon would be:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">import { more } from '@wordpress/icons';</code></pre>
+
+
+
+<p>This applies pretty much everywhere. However, that&#8217;s not the case for the <code>&lt;PluginDocumentSettingPanel&gt;</code> component, which <a href="https://github.com/WordPress/gutenberg/blob/8efe9efa285ea3f76dda12700906b76ab14dc048/packages/edit-post/README.md#PluginDocumentSettingPanel">references the runtime environment for ESNext</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const { PluginDocumentSettingPanel } = wp.editPost;</code></pre>
+
+
+
+<p>That&#8217;s why we have to add a dependency to the &#8220;wp-edit-post&#8221; script. That’s where the wp.editPost variable is defined.</p>
+
+
+
+<p>If <code>&lt;PluginDocumentSettingPanel&gt;</code> could be directly imported, then the dependency to &#8220;wp-edit-post&#8221; would be automatically handled by the block editor through the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/dependency-extraction-webpack-plugin">Dependency Extraction Webpack Plugin</a>. This plugin builds the bridge from static to runtime by creating a <code>index.asset.php</code> file containing all the dependencies for the runtime environment scripts, which are obtained by <a href="https://github.com/WordPress/gutenberg/blob/dd9f4544330be4aa32beb96c13a9ad9268c7e573/packages/dependency-extraction-webpack-plugin/util.js#L72">replacing <code>"@wordpress/"</code> from the package name with <code>"wp-"</code></a>. Hence, the <code>"@wordpress/edit-post"</code> package &nbsp;becomes the <code>"wp-edit-post"</code> runtime script. That&#8217;s how I figured out which script to add the dependency.</p>
+
+
+
+<h3><strong>Step 2: Blacklisting the custom sidebar panel on all other CPTs&nbsp;</strong></h3>
+
+
+
+<p>The panel will display documentation for a specific CPT, so it must be registered only to that CPT. That means we need to blacklist it from appearing on any other post types.</p>
+
+
+
+<p>Ryan Welcher (who created the <code>&lt;PluginDocumentSettingPanel&gt;</code> component) <a href="https://ryanwelcher.com/2020/02/restricting-plugindocumentsettingpanel-by-post-type/">describes this process</a> when registering the panel:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const { registerPlugin } = wp.plugins;
+const { PluginDocumentSettingPanel } = wp.editPost
+const { withSelect } = wp.data;
+ 
+const MyCustomSideBarPanel = ( { postType } ) => {
+ 
+  if ( 'post-type-name' !== postType ) {
+    return null;
+  }
+ 
+  return(
+    &lt;PluginDocumentSettingPanel
+      name="my-custom-panel"
+      title="My Custom Panel"
+    >
+      Hello, World!
+    &lt;/PluginDocumentSettingPanel>
+  );
+}
+ 
+const CustomSideBarPanelwithSelect = withSelect( select => {
+  return {
+    postType: select( 'core/editor' ).getCurrentPostType(),
+  };
+} )( MyCustomSideBarPanel);
+ 
+ 
+registerPlugin( 'my-custom-panel', { render: CustomSideBarPanelwithSelect } );</code></pre>
+
+
+
+<p>He also suggests an alternative solution, using <code>useSelect</code> instead of <code>withSelect</code>.</p>
+
+
+
+<p>That said, I&#8217;m not totally convinced by this solution, because the JavaScript file must still be loaded, even if it isn’t needed, forcing the website to take a performance hit. Doesn&#8217;t it make more sense to <em>not</em> register the JavaScript file than it does to run JavaScript just to disable JavaScript?</p>
+
+
+
+<p>I have created a PHP solution. I’ll admit that it feels a bit hacky, but it works well. First, we find out which post type is related to the object being created or edited:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function get_editing_post_type(): ?string
+{
+  if (!is_admin()) {
+    return null;
+  }
+ 
+  global $pagenow;
+  $typenow = '';
+  if ( 'post-new.php' === $pagenow ) {
+    if ( isset( $_REQUEST['post_type'] ) &amp;&amp; post_type_exists( $_REQUEST['post_type'] ) ) {
+      $typenow = $_REQUEST['post_type'];
+    };
+  } elseif ( 'post.php' === $pagenow ) {
+    if ( isset( $_GET['post'] ) &amp;&amp; isset( $_POST['post_ID'] ) &amp;&amp; (int) $_GET['post'] !== (int) $_POST['post_ID'] ) {
+      // Do nothing
+    } elseif ( isset( $_GET['post'] ) ) {
+      $post_id = (int) $_GET['post'];
+    } elseif ( isset( $_POST['post_ID'] ) ) {
+      $post_id = (int) $_POST['post_ID'];
+    }
+    if ( $post_id ) {
+      $post = get_post( $post_id );
+      $typenow = $post->post_type;
+    }
+  }
+  return $typenow;
+}</code></pre>
+
+
+
+<p>Then, ,we register the script only if it matches our CPT:</p>
+
+
+
+<pre rel="PHP" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">add_action('init', 'maybe_register_script');
+function maybe_register_script()
+{
+  // Check if this is the intended custom post type
+  if (get_editing_post_type() != 'my-custom-post-type') {
+    return;
+  }
+ 
+  // Only then register the block
+  wp_register_script(...);
+  wp_enqueue_script(...);
+}</code></pre>
+
+
+
+<p class="explanation"><a href="https://www.designbombs.com/registering-gutenberg-blocks-for-custom-post-type/">Check out this post</a> for a deeper dive on how this works.</p>
+
+
+
+<h3>Step 3: Creating the custom guide</h3>
+
+
+
+<p>I designed the functionality for my plugin’s guide based on the WordPress <code>&lt;Guide&gt;</code> component. I didn’t realize I’d be doing that at first, so here’s how I was able to figure that out.</p>
+
+
+
+<ol><li>Search the <a href="https://github.com/WordPress/gutenberg">source code</a> to see how it was done there.</li><li>Explore the catalogue of all available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a>.</li></ol>
+
+
+
+<p>First, I copied content from the block editor modal and did a basic search. <a href="https://github.com/WordPress/gutenberg/search?q=%22In+the+WordPress+editor%22&amp;type=">The results</a> pointed me to <a href="https://github.com/WordPress/gutenberg/blob/7b63e877336bb8f156bcd25191066bad38ba6635/packages/edit-post/src/components/welcome-guide/index.js">this file</a>. From there I discovered the component is called <code>&lt;Guide&gt;</code> and could simply copy and paste its code to my plugin as a base for my own guide.</p>
+
+
+
+<p>Then I looked for the component&#8217;s documentation. I browsed the <a href="https://github.com/WordPress/gutenberg/tree/master/packages/components">@wordpress/components</a> package (which, as you may have guessed, is where components are implemented) and found <a href="https://github.com/WordPress/gutenberg/blob/master/packages/components/src/guide/README.md">the component’s README file</a>. That gave me all the information I needed to implement my own custom guide component.</p>
+
+
+
+<p>I also explored the catalogue of all the available components in <a href="https://wordpress.github.io/gutenberg">Gutenberg&#8217;s Storybook</a> (which actually shows that these components can be used outside the context of WordPress). Clicking on all of them, I finally discovered <a href="https://wordpress.github.io/gutenberg/?path=/story/components-guide--default"><code>&lt;Guide&gt;</code></a>. The storybook provides the source code for several examples (or stories). It’s a handy resource for understanding how to customize a component through props.</p>
+
+
+
+<p>At this point, I knew <code>&lt;Guide&gt;</code> would make a solid base for my component. There is one missing element, though: how to trigger the guide on click. I had to rack my brain for this one!</p>
+
+
+
+<p>This is a button with a listener that opens the modal on click:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import MyGuide from './guide';
+ 
+const MyGuideWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button onClick={ () => setOpen( true ) }>
+        { __('Open Guide: “Creating Persisted Queries”') }
+      &lt;/Button>
+      { isOpen &amp;&amp; (
+        &lt;MyGuide 
+          { ...props }
+          onFinish={ () => setOpen( false ) }
+        />
+      ) }
+    &lt;/>
+  );
+};
+export default MyGuideWithButton;</code></pre>
+
+
+
+<p>Even though the block editor tries to hide it, we are operating within React. Until now, we’ve been dealing with JSX and components. But now we need the <a href="https://reactjs.org/docs/hooks-state.html"><code>useState</code> hook</a>, which is specific to React.</p>
+
+
+
+<p>I&#8217;d say that having a good grasp of React is required if you want to master the WordPress block editor. There is no way around it.</p>
+
+
+
+<h3>Step 4: Adding content to the guide</h3>
+
+
+
+<p>We’re almost there! Let’s create the <code>&lt;Guide&gt;</code> component, containing a <code>&lt;GuidePage&gt;</code> component for each page of content.</p>
+
+
+
+<p>The content can use HTML, include other components, and whatnot. In this particular case, I have added three <code>&lt;GuidePage&gt;</code> instances for my CPT just using HTML. The first page includes a video tutorial and the next two pages contain detailed instructions.</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { Guide, GuidePage } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+ 
+const MyGuide = ( props ) => {
+  return (
+    &lt;Guide { ...props } >
+      &lt;GuidePage>
+        &lt;video width="640" height="400" controls>
+          &lt;source src="https://d1c2lqfn9an7pb.cloudfront.net/presentations/graphql-api/videos/graphql-api-creating-persisted-query.mov" type="video/mp4" />
+          { __('Your browser does not support the video tag.') }
+        &lt;/video>
+        // etc.
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+      &lt;GuidePage>
+        // ...
+      &lt;/GuidePage>
+    &lt;/Guide>
+  )
+}
+export default MyGuide;</code></pre>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-1.gif?ssl=1" alt="imaged gif showing the mouse cursor clicking on the Open Guide link in the block editor's document settings, which opens the custom welcome guide containing a video with links to other pages in the modal." class="wp-image-312613" data-recalc-dims="1"/><figcaption>Hey look, we have our own guide now!</figcaption></figure>
+
+
+
+<p>Not bad! There are a few issues, though:</p>
+
+
+
+<ul><li>I couldn&#8217;t embed the video inside the <code>&lt;Guide&gt;</code> because clicking the play button closes the guide. I assume that’s because the <code>&lt;iframe&gt;</code> falls outside the boundaries of the guide. I wound up uploading the video file to S3 and serving with <code>&lt;video&gt;</code>.</li><li>The page transition in the guide is not very smooth. The block editor’s modal looks alright because all pages have a similar height, but the transition in this one is pretty abrupt.</li><li>The hover effect on buttons could be improved. Hopefully, the Gutenberg team needs to fix this for their own purposes, because my CSS aren’t there. It’s not that my skills are bad; they are nonexistent.</li></ul>
+
+
+
+<p>But I can live with these issues. Functionality-wise, I&#8217;ve achieved what I need the guide to do.</p>
+
+
+
+<h3>Bonus: Opening docs independently&nbsp;</h3>
+
+
+
+<p>For our <code>&lt;Guide&gt;</code>, we created the content of each <code>&lt;GuidePage&gt;</code> component directly using HTML. However, if this HTML code is instead added through an autonomous component, then it can be reused for other user interactions.</p>
+
+
+
+<p>For instance, the component <code>&lt;CacheControlDescription&gt;</code> displays a description concerning HTTP caching:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">const CacheControlDescription = () => {
+  return (
+    &lt;p>The Cache-Control header will contain the minimum max-age value from all fields/directives involved in the request, or "no-store" if the max-age is 0&lt;/p>
+  )
+}
+export default CacheControlDescription;</code></pre>
+
+
+
+<p>This component can be added inside a <code>&lt;GuidePage&gt;</code> as we did before, but also within a <code>&lt;Modal&gt;</code> component:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { useState } from '@wordpress/element';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import CacheControlDescription from './cache-control-desc';
+ 
+const CacheControlModalWithButton = ( props ) => {
+  const [ isOpen, setOpen ] = useState( false );
+  return (
+    &lt;>
+      &lt;Button 
+        icon="editor-help"
+        onClick={ () => setOpen( true ) }
+      />
+      { isOpen &amp;&amp; (
+        &lt;Modal 
+          { ...props }
+          onRequestClose={ () => setOpen( false ) }
+        >
+          &lt;CacheControlDescription />
+        &lt;/Modal>
+      ) }
+    &lt;/>
+  );
+};
+export default CacheControlModalWithButton;</code></pre>
+
+
+
+<p>To provide a good user experience, we can offer to show the documentation only when the user is interacting with the block. For that, we show or hide the button depending on the value of <code>isSelected</code>:</p>
+
+
+
+<pre rel="JSX" class="wp-block-csstricks-code-block language-jsx" data-line=""><code markup="tt">import { __ } from '@wordpress/i18n';
+import CacheControlModalWithButton from './modal-with-btn';
+ 
+const CacheControlHeader = ( props ) => {
+  const { isSelected } = props;
+  return (
+    &lt;>
+      { __('Cache-Control max-age') }
+      { isSelected &amp;&amp; (
+        &lt;CacheControlModalWithButton />
+      ) }
+    &lt;/>
+  );
+}
+export default CacheControlHeader;</code></pre>
+
+
+
+<p>Finally, the <code>&lt;CacheControlHeader&gt;</code> component is added to the appropriate control.</p>
+
+
+
+<figure class="wp-block-image size-full"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.gif?ssl=1" alt="Animated gif showing the option to view a guide displaying when a block is selected in the editor." class="wp-image-312615" data-recalc-dims="1"/></figure>
+
+
+
+<h3>Tadaaaaaaaa &#x1f389;</h3>
+
+
+
+<p>The WordPress block editor is quite a piece of software! I was able to accomplish things with it that I would have been unable to without it. Providing documentation to the user may not be the shiniest of examples or use cases, but it&#8217;s a very practical one and something that’s relevant for many other plugins. Want to use it for your own plugin? Go for it!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/">Adding a Custom Welcome Guide to the WordPress Block Editor</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/adding-a-custom-welcome-guide-to-the-wordpress-block-editor/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312604</post-id>	</item>
+		<item>
+		<title>Striking a Balance Between Native and Custom Select Elements</title>
+		<link>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/</link>
+					<comments>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/#comments</comments>
+		
+		<dc:creator><![CDATA[Sandrina Pereira]]></dc:creator>
+		<pubDate>Fri, 12 Jun 2020 14:43:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[select]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=312544</guid>
+
+					<description><![CDATA[<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&#60;select&#62;</code> element. We’re going to literally use a <code>&#60;select&#62;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as &#8230; <a href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Striking a Balance Between Native and Custom Select Elements&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s the plan! We’re going to build a styled select element. Not just <a href="https://css-tricks.com/styling-a-select-like-its-2019/">the outside</a>, but the inside too. Total styling control. Plus we’re going to make it accessible. We’re not going to try to <em>replicate</em> everything that the browser does by default with a native <code>&lt;select&gt;</code> element. We’re going to literally use a <code>&lt;select&gt;</code> element when any assistive tech is used. But when a mouse is being used, we’ll show the styled version and make it function as a select element.</p>
+
+
+
+<p>That’s what I mean by “hybrid” selects: they are both a native <code>&lt;select&gt;</code> and a styled alternate select in one design pattern.</p>
+
+
+
+<span id="more-312544"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?fit=1024%2C509&amp;ssl=1" alt="" class="wp-image-312546" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?w=1784&amp;ssl=1 1784w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=300%2C149&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1024%2C509&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=768%2C382&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1536%2C764&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-5.png?resize=1000%2C497&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Custom selects (left) are often used in place of native selects (right) for aesthetics and design consistency.</figcaption></figure>
+
+
+
+<h3>Select, dropdown, navigation, menu… the name matters</h3>
+
+
+
+<p>While doing the research for this article, I thought about many names that get tossed around when talking about selects, the most common of which are “dropdown” and “menu.” There are two types of naming mistakes we could make: giving the <em>same</em> name to different things, or giving <em>different</em> names to the same thing. A select can suffer from both mistakes.</p>
+
+
+
+<p>Before we move ahead, let me try to add clarity around using “dropdown” as a term. Here’s how I define the meaning of dropdown:</p>
+
+
+
+<blockquote class="wp-block-quote"><p><strong>Dropdown: </strong>An interactive component that consists of a button that shows and hides a list of items, typically on mouse hover, click or tap. The list is not visible by default until the interaction starts. The list usually displays a block of content (i.e. options) on top of other content.</p></blockquote>
+
+
+
+<p>A lot of interfaces can look <em>like</em> a dropdown. But simply calling an element a “dropdown&#8221; is like using “fish” to describe an animal. What type of fish it is? A clownfish is not the same as a shark. The same goes for dropdowns.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?fit=1024%2C640&amp;ssl=1" alt="" class="wp-image-312549" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?w=1920&amp;ssl=1 1920w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=300%2C188&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1024%2C640&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=768%2C480&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1536%2C960&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-2.jpeg?resize=1000%2C625&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>Like there are different types of fish in the sea, there are different types of components that we might be talking about when we toss the word “dropdown” around:</p>
+
+
+
+<ul><li><strong>Menu: </strong>A list of commands or actions that the user can perform within the page content.</li><li><strong>Navigation:</strong> A list of links used for navigating through a website.</li><li><strong>Select: </strong>A form control (<code>&lt;select&gt;</code>) that displays a list of options for the user to select within a form.</li></ul>
+
+
+
+<p>Deciding what type of dropdown we’re talking about can be a foggy task. Here are some examples from around the web that match how I would classify those three different types. This is based on my research and sometimes, when I can’t find a proper answer, <em>intuition</em> based on my experience.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?fit=1024%2C638&amp;ssl=1" alt="" class="wp-image-312552" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?w=1864&amp;ssl=1 1864w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=300%2C187&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1024%2C638&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=768%2C479&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1536%2C958&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-9.png?resize=1000%2C623&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Dropdown-land: Five scenarios where different dropdowns are used across the internet. Read the table below for a detailed description.</figcaption></figure>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Diagram Label</th><th>Scenario</th><th>Dropdown Type</th></tr></thead><tbody><tr><td>1</td><td>The dropdown expects a selected option to be submitted within a form context (e.g. Select Age)</td><td>Select</td></tr><tr><td>2</td><td>The dropdown does not need an active option (e.g. A list of actions: copy, paste and cut)</td><td>Menu</td></tr><tr><td>3</td><td>The selected option influences the content. (e.g. sorting list)</td><td>Menu or Select (more about it later)</td></tr><tr><td>4</td><td>The dropdown contains links to other pages. (e.g. A “meganav” with websites links)</td><td><a href="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/disclosure-navigation.html">Disclosure Navigation</a></td></tr><tr><td>5</td><td>The dropdown has content that is not a list. (e.g. a date picker)</td><td>Something else that should not be called dropdown</td></tr></tbody></table></figure>
+
+
+
+<p>Not everyone perceives and interacts with the internet in the same way. Naming user interfaces and defining design patterns is a fundamental process, though one with a lot of room for personal interpretation. All of that variation is what drives the population of dropdown<em>-land.&nbsp;</em></p>
+
+
+
+<p>There is a dropdown type that is clearly a <strong>menu. </strong>Its usage is a hot topic in conversations about accessibility. I won’t talk much about it here, but let me just reinforce that the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu"><code>&lt;menu&gt;</code></a> element is deprecated and no longer recommended. And here’s a detailed explanation about <a href="https://inclusive-components.design/menus-menu-buttons/">inclusive menus and menus buttons</a>, including why <a href="https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html">ARIA menu role should not be used for site navigation</a>.</p>
+
+
+
+<p>We haven’t even touched on other elements that fall into a rather gray area that makes classifying dropdowns even murkier because of a lack of practical uses cases from the WCAG community.</p>
+
+
+
+<p>Uff… that was a lot. Let’s forget about this dropdown-land mess and focus exclusively on the dropdown type that is clearly a <code>&lt;select&gt;</code> element.</p>
+
+
+
+<h3>Let’s talk about <code>&lt;select&gt;</code></h3>
+
+
+
+<p>Styling form controls is an interesting journey. As MDN puts it, there’s <a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms#Why_is_styling_form_widgets_challenging"><em>the good, the bad, and the ugly</em></a>. Good is stuff like <code>&lt;form&gt;</code> which is just a block-level element to style. Bad is stuff like checkboxes, which <a href="https://css-tricks.com/custom-styling-form-inputs-with-modern-css-features/">can be done but is somewhat cumbersome</a>. <code>&lt;select&gt;</code> is definitely in ugly terrain.</p>
+
+
+
+<p>A lot of articles have been written about it and, even in 2020, <a href="https://css-tricks.com/making-a-better-custom-select-element/">it’s still a challenge to create custom selects</a> and <a href="https://www.24a11y.com/2019/select-your-poison-part-2/">some users still prefer the simple native ones</a>.&nbsp;</p>
+
+
+
+<p>Among developers, the <code>&lt;select&gt;</code> is the <a href="https://www.gwhitworth.com/blog/2019/07/form-controls-components/">most frustrating form control by far</a>, mainly because of <a href="https://www.gwhitworth.com/blog/2019/10/can-we-please-style-select/">its lack of styling support</a>. The UX struggle behind it is so big that we <a href="https://medium.com/@kollinz/dropdown-alternatives-for-better-mobile-forms-53e40d641b53">look for other alternatives</a>. Well, I guess the first rule of <code>&lt;select&gt;</code> is <a href="https://www.w3.org/TR/using-aria/%23firstrule">similar to ARIA</a>: <strong>avoid using it if you can.</strong></p>
+
+
+
+<p>I could finish the article right here with <em>“Don’t use <code>&lt;select&gt;</code>, period.&#8221;</em> But let’s face reality: a select is still our best solution in a number of circumstances. That might include scenarios where&nbsp;we’re working with a list that contains a lot of options, layouts that are tight on space, or simply a lack of time or budget to design and implement a great custom interactive component from scratch.</p>
+
+
+
+<h3>Custom <code>&lt;select&gt;</code> requirements</h3>
+
+
+
+<p>When we make the decision to create a custom select — even if it’s just a “simple” one — these are the requirements we generally have to work with:</p>
+
+
+
+<ul><li>There is a button that contains the current selected option.</li><li>Clicking the box toggles the visibility of the options list (also called listbox).</li><li>Clicking an option in the listbox updates the selected value. The button text changes and the listbox is closed.</li><li>Clicking outside the component closes the listbox.</li><li>The trigger contains a small triangle icon pointing downward to indicate there are options.</li></ul>
+
+
+
+<p>Something like this:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_dyYqmya" src="//codepen.io/anon/embed/dyYqmya?height=575&amp;theme-id=1&amp;slug-hash=dyYqmya&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed dyYqmya" title="CodePen Embed dyYqmya" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Some of you may be thinking this works and is good to go. But wait… does it work for <em>everyone</em>? &nbsp;Not everyone uses a mouse (or touch screen). Plus, a native <code>&lt;select&gt;</code> element comes with more features we get for free and aren&#8217;t included in those requirements, such as:</p>
+
+
+
+<ul><li>The checked option is perceivable for all users regardless of their visual abilities.</li><li>The component can interact with a keyboard in a predictable way across all browsers (e.g. using arrow keys to navigate, <code>Enter</code> to select, <code>Esc</code> to cancel, etc.).</li><li>Assistive technologies (e.g. screen readers) announce the element clearly to users, including its role, name and state.</li><li>The listbox position is adjusted. (i.e. does not get cut off of the screen).</li><li>The element respects the user’s operating system preferences (e.g high contrast, color scheme, motion, etc.).</li></ul>
+
+
+
+<p>This is where the majority of the custom selects fail in some way. Take a look at some of the major UI components libraries. I won’t mention any because the web is ephemeral, but go give it a try. You’ll likely notice that the select component in one framework behaves differently from another.&nbsp;</p>
+
+
+
+<p>Here are additional characteristics to watch for:</p>
+
+
+
+<ul><li>Is a listbox option immediately activated on focus when navigating with a keyboard?</li><li>Can you use <code>Enter</code> and/or <code>Space</code> to select an option?</li><li>Does the <code>Tab</code> key jump go to the next option in the listbox, or jump to the next form control?</li><li>What happens when you reach the last option in the listbox using arrow keys? Does it simply stay at the last item, does it go back to the first option, or worst of all, does focus move to the next form control?&nbsp;</li><li>Is it possible to jump directly to the last item in the listbox using the <code>Page Down</code> key?</li><li>Is it possible to scroll through the listbox items if there are more than what is currently in view?</li></ul>
+
+
+
+<p>This is a small sample of the features included in a native <code>&lt;select&gt;</code> element. </p>
+
+
+
+<blockquote class="wp-block-quote"><p>Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect.</p></blockquote>
+
+
+
+<p>But it gets worse. Even the native <code>&lt;select&gt;</code> <a href="https://www.24a11y.com/2019/select-your-poison/">behaves differently</a> across browsers and screen readers. Once we decide to create our own custom select, we are forcing people to use it in a certain way that may not be what they expect. That’s a dangerous decision and it’s in those details where the devil lives.</p>
+
+
+
+<h3>Building a “hybrid” select</h3>
+
+
+
+<p>When we build a simple custom select, we are making a trade-off without noticing it. Specifically, <strong>we sacrifice functionality to aesthetics. </strong>It should be the other way around.</p>
+
+
+
+<p>What if we instead deliver a native select by default and replace it with a more aesthetically pleasing one if possible? That’s where the “hybrid” select idea comes into action. It’s “hybrid” because it consists of two selects, showing the appropriate one at the right moment:</p>
+
+
+
+<ul><li>A native select, visible and accessible by default</li><li>A custom select, hidden until it’s safe to be interacted with a mouse</li></ul>
+
+
+
+<p>Let’s start with markup. First, we’ll add a native <code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> items <em>before</em> the custom selector for this to work. (I’ll explain why in just a bit.)</p>
+
+
+
+<p>Any form control must have a <a href="https://www.w3.org/WAI/tutorials/forms/labels/">descriptive label</a>. We could use <code>&lt;label&gt;</code>, but that would focus the native select when the label is clicked. To prevent that behavior, we’ll use a <code>&lt;span&gt;</code> and connect it to the select using <code>aria-labelledby</code>.</p>
+
+
+
+<p>Finally, we need to tell Assistive Technologies to ignore the custom select, using <code>aria-hidden="true"</code>. That way, only the native select is announced by them, no matter what.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line="3,4,5,6"><code markup="tt">&lt;span class="selectLabel" id="jobLabel">Main job role&lt;/span>
+&lt;div class="selectWrapper">
+  &lt;select class="selectNative js-selectNative" aria-labelledby="jobLabel">
+    &lt;!-- options -->
+    &lt;option>&lt;/option>
+  &lt;/select>
+  &lt;div class="selectCustom js-selectCustom" aria-hidden="true">
+     &lt;!-- The beautiful custom select -->
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>This takes us to styling, where we not only make things look pretty, but where we handle the switch from one select to the other. We need just a few new declarations to make all the magic happen.</p>
+
+
+
+<p>First, both native and custom selects must have the same width and height. This ensures people don’t see major differences in the layout when a switch happens.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectNative,
+.selectCustom {
+  position: relative;
+  width: 22rem;
+  height: 4rem;
+}</code></pre>
+
+
+
+<p>There are two selects, but only one can dictate the space that holds them. The other needs to be absolutely positioned to take it out of the document flow. Let’s do that to the custom select because it’s the “replacement” that’s used only if it can be. We’ll hide it by default so it can’t be reached by anyone just yet.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.selectCustom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}</code></pre>
+
+
+
+<p>Here comes the &#8220;funny” part. We need to detect if someone is using a device where hover is part of the primary input, like a computer with a mouse. While we typically think of media queries for responsive breakpoints or checking feature support, we can use it to detect hover support too using <code>@media query (hover :hover)</code>, which is supported by all major browsers. So, let&#8217;s use it to show the custom select only on devices that have hover:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectCustom {
+    display: block;
+  }
+}</code></pre>
+
+
+
+<p>Great, but what about people who use a keyboard to navigate even in devices that have hover? What we’ll do is hide the custom select when the native select is in focus. We can reach for an <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">adjacent Sibling combinatioron</a> (<code>+</code>). When the native select is in focus, hide the custom select next to it in the DOM order. (This is why the native select should be placed before the custom one.)</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">@media (hover: hover) {
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+}</code></pre>
+
+
+
+<p>That’s it! The trick to switch between both selects is done! There are other CSS ways to do it, of course, but this works nicely.</p>
+
+
+
+<p>Last, we need a sprinkle of JavaScript. Let’s add some event listeners:</p>
+
+
+
+<ul><li>One for click events that trigger the custom select to open and reveal the options</li><li>One to sync both selects values. When one select value is changed, the other select value updates as well</li><li>One for basic keyboard navigation controls, like navigation with <code>Up</code> and <code>Down</code> keys, selecting options with the <code>Enter</code> or <code>Space</code> keys, and closing the select with <code>Esc</code></li></ul>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzyOYRr" src="//codepen.io/anon/embed/YzyOYRr?height=575&amp;theme-id=1&amp;slug-hash=YzyOYRr&amp;default-tab=result" height="575" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzyOYRr" title="CodePen Embed YzyOYRr" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<h3>Usability testing</h3>
+
+
+
+<p>I conducted a very small usability test where I asked a few people with disabilities to try the hybrid select component. The following devices and tools were tested using the latest versions of Chrome (81), Firefox (76) and Safari (13):</p>
+
+
+
+<ul><li>Desktop device using mouse only</li><li>Desktop device using keyboard only</li><li>VoiceOver on MacOS using keyboard</li><li>NVDA on Windows using keyboard</li><li>VoiceOver on iPhone and iPad using Safari</li></ul>
+
+
+
+<p>All these tests worked as expected, but I believe <strong>this could have even more usability tests with more diverse people and tools</strong>. If you have access to other devices or tools — such as JAWS, Dragon, etc. — please tell me how the test goes.</p>
+
+
+
+<p>An issue was found during testing. Specifically, the issue was with the VoiceOver setting “Mouse pointers: Moves Voice Over cursor.” If the user opens the select with a mouse, the custom select will be opened (instead of the native) and the user won’t experience the native select.</p>
+
+
+
+<p>What I most like about this approach is how it uses the best of both worlds without compromising the core functionality:</p>
+
+
+
+<ul><li>Users on mobile and tablets get the native select, which generally offers a better user experience than a custom select, including performance benefits.</li><li>Keyboard users get to interact with the native select the way they would expect.</li><li>Assistive Technologies can interact with the native select like normal.</li><li>Mouse users get to interact with the enhanced custom select.</li></ul>
+
+
+
+<p>This approach<strong> provides essential native functionality for everyone </strong>without the extra huge code effort to implement all the native features.</p>
+
+
+
+<p>Don’t get me wrong. This technique is not a one-size-fits-all solution. It may work for simple selects but probably won’t work for cases that involve complex interactions. In those cases, we’d need to use ARIA and JavaScript to complement the gaps and create a <a href="https://24ways.org/2019/making-a-better-custom-select-element/">truly accessible custom select</a>.</p>
+
+
+
+<h3>A note about selects that look like menus</h3>
+
+
+
+<p>Let’s take a look back at the third Dropdown-land scenario. If you recall, it’s &nbsp;a dropdown that always has a checked option (e.g. sorting some content). I classified it in the gray area, as either a menu or a select.&nbsp;</p>
+
+
+
+<p>Here’s my line of thought: Years ago, this type of dropdown was implemented mostly using a native <code>&lt;select&gt;</code>. Nowadays, it is common to see it implemented from scratch with custom styles (accessible or not). What we end up with is a select element that looks like a menu.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?ssl=1" alt="Three similar dropdowns that always have a selected option." class="wp-image-312555" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?w=718&amp;ssl=1 718w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/06/image-11.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p><strong>A <code>&lt;select&gt;</code> &nbsp;is a type of menu.</strong> Both have similar semantics and behavior, especially in a scenario that involves a list of options where one is always checked. &nbsp;Now, let me mention the <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html">WCAG 3.2.2 On Input (Level A)</a> criterion:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Changing the setting of any user interface component should not automatically cause a change of context unless the user has been advised of the behavior before using the component.</p></blockquote>
+
+
+
+<p>Let’s put this in practice. Imagine a sortable list of students. Visually, it may be obvious that sorting is immediate, but that’s not necessarily true for everyone. So, when using <code>&lt;select&gt;</code>, we risk failing the WCAG guideline because the page content changed, and ignificantly re-arranging the content of a page is considered a <a href="https://www.w3.org/WAI/WCAG21/Understanding/on-input.html%23dfn-changes-of-context">change of context</a>.</p>
+
+
+
+<p>To ensure the criterion success, we must warn the user about the action before they interact with the element, or include a <code>&lt;button&gt;</code> immediately after the select to confirm the change.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;label for="sortStudents">
+  Sort students
+  &lt;!-- Warn the user about the change when a confirmation button is not present. -->
+  &lt;span class="visually-hidden">(Immediate effect upon selection)&lt;/span>
+&lt;/label>
+&lt;select id="sortStudents"> ... &lt;/select></code></pre>
+
+
+
+<p>That said, using a <code>&lt;select&gt;</code> or building a custom menu are both good approaches when it comes to simple menus that change the page content. Just remember that your decision will dictate the amount of work required to make the component fully accessible. This is a scenario where the hybrid select approach could be used.</p>
+
+
+
+<h3>Final words</h3>
+
+
+
+<p>This whole idea started as an innocent CSS trick but, after all of this research, I was reminded once more that creating unique experiences without compromising accessibility is not an easy task.</p>
+
+
+
+<p>Building truly accessible select components (or any kind of dropdown) is harder than it looks. WCAG provides excellent guidance and best practices, but without specific examples and diverse practical uses cases, the guidelines are mostly aspirational. That’s not to mention the fact that ARIA support is tepid and that native <code>&lt;select&gt;</code> elements look and behave differently across browsers.</p>
+
+
+
+<p>The “hybrid” select is just another attempt to create a good looking select while getting as many native features as possible. Don’t look at this <s>technique</s> experiment as an excuse to downplay accessibility, but rather as an attempt to serve both worlds. If you have the resources, time and the needed skills, <em>please do it right</em> and make sure to test it with different users before shipping your component to the world.</p>
+
+
+
+<p>P.S. Remember to <a href="https://adrianroselli.com/2020/03/stop-using-drop-down.html">use a proper name</a> when making a “dropdown” component. &#x1f609;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/">Striking a Balance Between Native and Custom Select Elements</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/striking-a-balance-between-native-and-custom-select-elements/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">312544</post-id>	</item>
+	</channel>
+</rss>

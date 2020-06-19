@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>carousel &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/carousel/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 27 Apr 2020 15:30:54 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>How to Make a CSS-Only Carousel</title>
+		<link>https://css-tricks.com/how-to-make-a-css-only-carousel/</link>
+					<comments>https://css-tricks.com/how-to-make-a-css-only-carousel/#comments</comments>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2020 19:29:00 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[carousel]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306971</guid>
+
+					<description><![CDATA[<p>We mentioned a way to make a CSS-only carousel in <a href="https://css-tricks.com/newsletters/">a recent issue of the  newsletter</a> and I thought that a more detailed write up would be interesting and capture some of my thoughts on making one.</p>
+<p>So, here’s what we’re making today:</p>
+<p>There’s no JavaScript here, whatsoever! No jQuery plugins. No trickiness. Just a couple of new-ish CSS properties that I’ve been experimenting with as well as some basic HTML.</p>
+<p>OK to start, we need to focus on the &#8230; <a href="https://css-tricks.com/how-to-make-a-css-only-carousel/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Make a CSS-Only Carousel&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-make-a-css-only-carousel/">How to Make a CSS-Only Carousel</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>We mentioned a way to make a CSS-only carousel in <a href="https://css-tricks.com/newsletters/">a recent issue of the  newsletter</a> and I thought that a more detailed write up would be interesting and capture some of my thoughts on making one.</p>
+
+
+
+<span id="more-306971"></span>
+
+
+
+<p>So, here’s what we’re making today:</p>
+
+
+
+<figure><video src="https://css-tricks.com/wp-content/uploads/2020/04/fancy-carousel-1.mp4" autoplay="true" autostart="true" loop="true" controls=""></video></figure>
+
+
+
+<p>There’s no JavaScript here, whatsoever! No jQuery plugins. No trickiness. Just a couple of new-ish CSS properties that I’ve been experimenting with as well as some basic HTML.</p>
+
+
+
+<p>OK to start, we need to focus on the markup. The design includes a left navigation made up of images and a large image gallery on the right that lets us scroll through each image individually. We’ll also need a wrapper to help us organize the layout:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="wrapper">
+  &lt;nav class="lil-nav">&lt;/nav>
+  &lt;div class="gallery">&lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>Next, we can add images! For this little example, I checked out our list of sites with <a href="https://css-tricks.com/sites-with-high-quality-photos-you-can-use-for-free/">high quality images that you can use for free</a> and went with <a href="https://unsplash.com/">Unsplash</a>.</p>
+
+
+
+<p>After saving images with the CodePen asset manager, I started adding the URLs to the <code>nav</code> element:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;nav class="lil-nav">
+  &lt;a href="#image-1">
+    &lt;img class="lil-nav__img" src="..." alt="Yosemite" />
+  &lt;/a>
+  &lt;a href="#image-2">
+    &lt;img class="lil-nav__img" src="..." alt="Basketball hoop" />
+  &lt;/a>
+  &lt;!-- more images go here --> 
+&lt;/nav></code></pre>
+
+
+
+<p>See that the <code>href</code> to each of these links is pointing to an ID? That’s because if we look at the demo again, we want to be able to click an image and then we want to it to hop to the larger version of that image in the gallery to the right.</p>
+
+
+
+<p>So, now we can start to add these images to the large gallery, too…</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="gallery">
+  &lt;img class="gallery__img" id="image-1" src="..." alt="Yosemite" />
+  &lt;img class="gallery__img" id="image-2" src="..." alt="Basketball hoop" />
+  &lt;!-- more images go here --> 
+&lt;/div></code></pre>
+
+
+
+<p>Nifty. Next is the fun part: styling this bad boy. We can use a grid layout the parent <code>.wrapper</code> and set some smart defaults for the <code>img</code> element:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">img {
+  display: block;
+  max-width: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-gap: 20px;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bGVpeeE" src="//codepen.io/anon/embed/bGVpeeE?height=600&amp;theme-id=1&amp;slug-hash=bGVpeeE&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bGVpeeE" title="CodePen Embed bGVpeeE" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>So far, we have our layout sorted and our links set up. Next, let&#8217;s account for overflow that might spill outside our wrapper and make sure that the nav and the gallery are scrollable:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="5, 6"><code markup="tt">.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-gap: 10px;
+  overflow: hidden;
+  height: 100vh; 
+}
+
+.gallery {
+  overflow: scroll;
+}
+
+.lil-nav {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_GRpZjVQ" src="//codepen.io/anon/embed/GRpZjVQ?height=600&amp;theme-id=1&amp;slug-hash=GRpZjVQ&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed GRpZjVQ" title="CodePen Embed GRpZjVQ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>We can scroll through each image in the gallery now, but if this was a production website we’d probably want to make sure that folks can scroll passed this carousel a bit more easily. <a href="https://trentwalton.com/2013/04/11/responsive-maps/">Trent Walton wrote about</a> this very problem several years ago and I think it’s always worth keeping in mind.</p>
+
+
+
+<p>Next up, let’s focus on the carousel snap of each image in the gallery. To do that we’ll need to use the <code>scroll-snap-type</code> and <code>scroll-snap-align</code> property like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.gallery {
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.gallery__img {
+  scroll-snap-align: start;
+  margin-bottom: 10px;
+}</code></pre>
+
+
+
+<p>Now try scrolling through the gallery on the right-hand side again:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_jObqVRW" src="//codepen.io/anon/embed/jObqVRW?height=600&amp;theme-id=1&amp;slug-hash=jObqVRW&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed jObqVRW" title="CodePen Embed jObqVRW" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you want to learn more about these properties I’d highly recommend this piece about <a href="https://css-tricks.com/practical-css-scroll-snapping/">practical CSS scroll snapping</a> which digs into the nitty-gritty of these properties.</p>
+
+
+
+<p>We have a pretty dang usable carousel! From here, all we have to do is tidy up the design because the gallery image isn’t the full height of the screen. To do that we can use <a href="https://css-tricks.com/almanac/properties/o/object-fit/"><code>object-fit</code></a> and give each image a <code>min-height</code> with the <a href="https://css-tricks.com/fun-viewport-units/"><code>vh</code></a> unit, just like this:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.gallery__img {
+  scroll-snap-align: start;
+  margin-bottom: 10px;
+  min-height: 100vh;
+  object-fit: cover;
+}</code></pre>
+
+
+
+<p>Now the big gallery images will always be the full size of the screen and will scale to take up the width and height. Let’s move on and tackle the style of the little navigation images:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.lil-nav {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.lil-nav a {
+  height: 200px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.lil-nav__img {
+  object-fit: cover;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bGVpgqp" src="//codepen.io/anon/embed/bGVpgqp?height=600&amp;theme-id=1&amp;slug-hash=bGVpgqp&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bGVpgqp" title="CodePen Embed bGVpgqp" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>At first, I made this little nav act like a carousel too, but it felt really weird. I’m just keeping the default <code>scroll</code> behavior for now. In that demo above, though, try clicking an image. Notice how it jumps to that image in the carousel immediately? It would be nice if we could animate that transition a bit — and we can!</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line="4"><code markup="tt">.gallery {
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}</code></pre>
+
+
+
+<p>That <a href="https://css-tricks.com/almanac/properties/s/scroll-behavior/"><code>scroll-behavior</code></a> CSS property is super handy for this and so now the whole thing will animate if you click one of the nav items:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_yLYOgPz" src="//codepen.io/anon/embed/yLYOgPz?height=600&amp;theme-id=1&amp;slug-hash=yLYOgPz&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed yLYOgPz" title="CodePen Embed yLYOgPz" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Nifty, eh? One more tiny thing we could do here is throw a filter on the nav items to make them black and white and then animate them on hover:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.lil-nav__img {
+  object-fit: cover;
+  filter: saturate(0);
+  transition: 0.3s ease all;
+}
+
+.lil-nav__img:hover {
+  transform: scale(1.05);
+  filter: saturate(1);
+}</code></pre>
+
+
+
+<p>I’m sure there’s a lot more we could do here but I think this works quite nicely!</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_eYpZgrM" src="//codepen.io/anon/embed/eYpZgrM?height=600&amp;theme-id=1&amp;slug-hash=eYpZgrM&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed eYpZgrM" title="CodePen Embed eYpZgrM" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>We could even throw a tiny bit of JavaScript into the mix to show which image is active, but I reckon that folks know that just from looking at the gallery.</p>
+
+
+
+<p>That’s it! We now have a carousel that’s pretty dang good for progressive enhancement and it means we don’t have to load a library of JavaScript or write a bunch more code than we really need to.</p>
+
+
+
+<h3>Making the carousel responsive…</h3>
+
+
+
+<p>Let’s go one step further though and make this chap responsive. What we want to do is reverse the order of our grid by moving all of our current styles into a media query that is only activated at larger screens.</p>
+
+
+
+<p>You might want to open up this demo in a new tab and decrease/increase the size of the browser to see the changes take place:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_YzyqNJK" src="//codepen.io/anon/embed/YzyqNJK?height=600&amp;theme-id=1&amp;slug-hash=YzyqNJK&amp;default-tab=result" height="600" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed YzyqNJK" title="CodePen Embed YzyqNJK" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>If you load this demo on a mobile device you should see how the layout switches between the two modes. This is done by using a single media query on the <code>.wrapper</code> element. Note that we’re using Sass:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">$large: 1200px;
+
+.wrapper {
+  overflow: hidden;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  grid-gap: 10px;
+
+  @media screen and (min-width: $large) {
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: auto;
+  }
+}</code></pre>
+
+
+
+<p>Let&#8217;s add one on the navigation, too. But this time, we need to tell the navigation to start on the second row so it moves to the bottom of the screen:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.lil-nav {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  grid-row-start: 2;
+
+  @media screen and (min-width: $large) {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: block;
+    grid-row-start: auto;
+  }
+}</code></pre>
+
+
+
+<p>With the gallery we need to switch around the <code>scroll-type</code> for larger screens and reverse the <code>overflow</code> property as well:</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">.gallery {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  display: flex;
+
+  @media screen and (min-width: $large) {
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+  }
+}</code></pre>
+
+
+
+<p>That’s the bulk of the changes we’ve had to make and I quite like it! If we wanted to make this production-ready, we would think about accessibility (e.g. we probably don’t want screen readers to read out all the images in both the nav <em>and</em> gallery). Then there&#8217;s performance — we might consider lazy-loading so the images are only rendered when they&#8217;re needed.</p>
+
+
+
+<p>Either way, this is a good start !</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-make-a-css-only-carousel/">How to Make a CSS-Only Carousel</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-make-a-css-only-carousel/feed/</wfw:commentRss>
+			<slash:comments>16</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/fancy-carousel-1.mp4" length="28355186" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306971</post-id>	</item>
+		<item>
+		<title>Creating a Modal Image Gallery With Bootstrap Components</title>
+		<link>https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/</link>
+					<comments>https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/#comments</comments>
+		
+		<dc:creator><![CDATA[Diego Vogel]]></dc:creator>
+		<pubDate>Fri, 06 Mar 2020 15:23:22 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[bootstrap]]></category>
+		<category><![CDATA[carousel]]></category>
+		<category><![CDATA[modal]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=304193</guid>
+
+					<description><![CDATA[<p>Have you ever clicked on an image on a webpage that opens up a larger version of the image with navigation to view other photos?</p>
+<p>Some folks call it a pop-up. Others call it a lightbox. <a href="https://getbootstrap.com/docs/4.4/components/modal/">Bootstrap calls it a modal.</a> I mention Bootstrap because I want to use it to make the same sort of thing. So, let’s call it a modal from here on out.</p>
+<p><em>Why Bootstrap?</em> you might ask. Well, a few reasons:</p>
+<ul>
+<li>I’m already using Bootstrap </li>
+</ul>
+<p>&#8230; <a href="https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating a Modal Image Gallery With Bootstrap Components&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/">Creating a Modal Image Gallery With Bootstrap Components</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Have you ever clicked on an image on a webpage that opens up a larger version of the image with navigation to view other photos?</p>
+
+
+
+<p>Some folks call it a pop-up. Others call it a lightbox. <a href="https://getbootstrap.com/docs/4.4/components/modal/">Bootstrap calls it a modal.</a> I mention Bootstrap because I want to use it to make the same sort of thing. So, let’s call it a modal from here on out.</p>
+
+
+
+<p><em>Why Bootstrap?</em> you might ask. Well, a few reasons:</p>
+
+
+
+<ul><li>I’m already using Bootstrap on the site where I want this effect, so there’s no additional overhead in terms of loading resources.</li><li>I want something where I have complete and easy control over aesthetics. Bootstrap is a clean slate compared to most modal plugins I’ve come across.</li><li>The functionality I need is fairly simple. There isn’t much to be gained by coding everything from scratch. I consider the time I save using the Bootstrap framework to be more beneficial than any potential drawbacks.</li></ul>
+
+
+
+<p>Here’s where we’ll end up:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bzddLv" src="//codepen.io/anon/embed/bzddLv?height=550&amp;theme-id=1&amp;slug-hash=bzddLv&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bzddLv" title="CodePen Embed bzddLv" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>Let’s go through that, bit by bit.</p>
+
+
+
+<h3><strong>Step 1: Create the image gallery grid</strong></h3>
+
+
+
+<p>Let’s start with the markup for a grid layout of images. We can use Bootstrap’s <a href="https://getbootstrap.com/docs/4.4/layout/grid/">grid system</a> for that.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="row" id="gallery">
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-1">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-2">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-3">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-4">
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>Now we need <a href="https://css-tricks.com/a-complete-guide-to-data-attributes/">data attributes</a> to make those images interactive. Bootstrap looks at data attributes to figure out which elements should be interactive and what they should do. In this case, we’ll be creating interactions that open the modal component and allow scrolling through the images using the <a href="https://getbootstrap.com/docs/4.4/components/carousel/">carousel component</a>. </p>
+
+
+
+<p>About those data attributes:</p>
+
+
+
+<ol><li>We’ll add <code>data-toggle="modal"</code> &nbsp;and <code>data-target="#exampleModal"</code> to the parent element <code>(#gallery</code>). This makes it so clicking anything in the gallery opens the modal. We should also add the data-target value (<code>#exampleModal</code>) as the ID of the modal itself, but we’ll do that once we get to the modal markup.</li><li>Let’s add <code>data-target="#carouselExample"</code> &nbsp;and a <code>data-slide-to</code> attribute to each image. We could add those to the image wrappers instead, but we’ll go with the images in this post. Later on, we’ll want to use the data-target value (<code>#carouselExample</code>) as the ID for the carousel, so note that for when we get there. The values for <code>data-slide-to</code> are based on the order of the images.</li></ol>
+
+
+
+<p>Here’s what we get when we put that together:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-1.jpg" data-target="#carouselExample" data-slide-to="0">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-2.jpg" data-target="#carouselExample" data-slide-to="1">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-3.jpg" data-target="#carouselExample" data-slide-to="2">
+  &lt;/div>
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-4.jpg" data-target="#carouselExample" data-slide-to="3">
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p class="explanation">Interested in knowing more about data attributes? <a href="https://css-tricks.com/a-complete-guide-to-data-attributes/">Check out the CSS-Tricks guide to them.</a></p>
+
+
+
+<h3><strong>Step 2: Make the modal work</strong></h3>
+
+
+
+<p>This is a carousel inside a modal, both of which are standard Bootstrap components. We’re just nesting one inside the other here. Pretty much a straight copy-and-paste job from the <a href="https://getbootstrap.com/docs/4.4/components/">Bootstrap documentation</a>.</p>
+
+
+
+<p>Here’s some important parts to watch for though:</p>
+
+
+
+<ol><li>The modal ID should match the <code>data-target</code> of the gallery element.</li><li>The carousel ID should match the <code>data-target</code> of the images in the gallery.</li><li>The carousel slides should match the gallery images and must be in the same order.</li></ol>
+
+
+
+<p>Here’s the markup for the modal with our attributes in place:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;!-- Modal markup: https://getbootstrap.com/docs/4.4/components/modal/ -->
+&lt;div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+  &lt;div class="modal-dialog" role="document">
+    &lt;div class="modal-content">
+      &lt;div class="modal-header">
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          &lt;span aria-hidden="true">&times;&lt;/span>
+        &lt;/button>
+      &lt;/div>
+      &lt;div class="modal-body">
+        
+      &lt;!-- Carousel markup goes here -->
+ 
+      &lt;div class="modal-footer">
+        &lt;button type="button" class="btn btn-secondary" data-dismiss="modal">Close&lt;/button>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>We can drop the carousel markup right in there, Voltron style!</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;!-- Modal markup: https://getbootstrap.com/docs/4.4/components/modal/ -->
+&lt;div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+  &lt;div class="modal-dialog" role="document">
+    &lt;div class="modal-content">
+      &lt;div class="modal-header">
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          &lt;span aria-hidden="true">&times;&lt;/span>
+        &lt;/button>
+      &lt;/div>
+      &lt;div class="modal-body">
+        
+      &lt;!-- Carousel markup: https://getbootstrap.com/docs/4.4/components/carousel/ -->
+      &lt;div id="carouselExample" class="carousel slide" data-ride="carousel">
+          &lt;div class="carousel-inner">
+            &lt;div class="carousel-item active">
+              &lt;img class="d-block w-100" src="/image-1.jpg">
+            &lt;/div>
+            &lt;div class="carousel-item">
+              &lt;img class="d-block w-100" src="/image-2.jpg">
+            &lt;/div>
+            &lt;div class="carousel-item">
+              &lt;img class="d-block w-100" src="/image-3.jpg">
+            &lt;/div>
+            &lt;div class="carousel-item">
+              &lt;img class="d-block w-100" src="/image-4.jpg">
+            &lt;/div>
+          &lt;/div>
+          &lt;a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            &lt;span class="carousel-control-prev-icon" aria-hidden="true">&lt;/span>
+            &lt;span class="sr-only">Previous&lt;/span>
+          &lt;/a>
+          &lt;a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            &lt;span class="carousel-control-next-icon" aria-hidden="true">&lt;/span>
+            &lt;span class="sr-only">Next&lt;/span>
+          &lt;/a>
+        &lt;/div>
+      &lt;/div>
+
+      &lt;div class="modal-footer">
+        &lt;button type="button" class="btn btn-secondary" data-dismiss="modal">Close&lt;/button>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div></code></pre>
+
+
+
+<p>Looks like a lot of code, right? Again, it’s basically straight from the Bootstrap docs, only with our attributes and images.</p>
+
+
+
+<h3><strong>Step 3: Deal with image sizes</strong></h3>
+
+
+
+<p>This isn’t necessary, but if the images in the carousel have different dimensions, we can crop them with CSS to keep things consistent.&nbsp;Note that we&#8217;re using Sass here.</p>
+
+
+
+<pre rel="SCSS" class="wp-block-csstricks-code-block language-scss" data-line=""><code markup="tt">// Use Bootstrap breakpoints for consistency.
+$bootstrap-sm: 576px;
+$bootstrap-md: 768px;
+$bootstrap-lg: 992px;
+$bootstrap-xl: 1200px;
+ 
+// Crop thumbnail images.
+#gallery {
+  img {
+    height: 75vw;
+    object-fit: cover;
+    
+    @media (min-width: $bootstrap-sm) {
+      height: 35vw;
+    }
+    
+    @media (min-width: $bootstrap-lg) {
+      height: 18vw;
+    }
+  }
+}
+ 
+// Crop images in the coursel
+.carousel-item {
+  img {
+    height: 60vw;
+    object-fit: cover;
+    
+    @media (min-width: $bootstrap-sm) {
+      height: 350px;
+    }
+  }
+}</code></pre>
+
+
+
+<h3><strong>Step 4: Optimize the images</strong></h3>
+
+
+
+<p>You may have noticed that the markup uses the same image files in the gallery as we do in the modal. That doesn’t need to be the case. In fact, it’s a better idea to use smaller, more performant versions of the images for the gallery. We’re going to be blowing up the images to their full size version anyway in the modal, so there’s no need to have the best quality up front.</p>
+
+
+
+<p>The good thing about Bootstrap’s approach here is that we can use different images in the gallery than we do in the modal. They’re not mutually exclusive where they have to point to the same file.</p>
+
+
+
+<p>So, for that, I’d suggest updating the gallery markup with lower-quality images:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;div class="row" id="gallery" data-toggle="modal" data-target="#exampleModal">
+  &lt;div class="col-12 col-sm-6 col-lg-3">
+    &lt;img class="w-100" src="/image-1-small.jpg" data-target="#carouselExample" data-slide-to="0">
+  
+  &lt;!-- and so on... -->
+&lt;/div></code></pre>
+
+
+
+<h3><strong>That’s it!</strong></h3>
+
+
+
+<p>The site where I’m using this has already <a href="https://getbootstrap.com/docs/4.4/getting-started/theming/">themed Bootstrap</a>. That means everything is already styled to spec. That said, even if you haven&#8217;t themed Bootstrap you can still easily add custom styles! With this approach (Bootstrap vs. plugins), customization is painless because you have complete control over the markup and Bootstrap styling is relatively sparse.</p>
+
+
+
+<p>Here’s the final demo:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bzddLv" src="//codepen.io/anon/embed/bzddLv?height=550&amp;theme-id=1&amp;slug-hash=bzddLv&amp;default-tab=result" height="550" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bzddLv" title="CodePen Embed bzddLv" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/">Creating a Modal Image Gallery With Bootstrap Components</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-a-modal-image-gallery-with-bootstrap-components/feed/</wfw:commentRss>
+			<slash:comments>14</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">304193</post-id>	</item>
+		<item>
+		<title>CSS-Only Carousel</title>
+		<link>https://css-tricks.com/css-only-carousel/</link>
+					<comments>https://css-tricks.com/css-only-carousel/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 10 Jan 2020 16:06:41 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[carousel]]></category>
+		<category><![CDATA[scroll-behavior]]></category>
+		<category><![CDATA[scroll-snap]]></category>
+		<category><![CDATA[slider]]></category>
+		<category><![CDATA[slideshow]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=300964</guid>
+
+					<description><![CDATA[<p>It&#8217;s kind of amazing <a href="https://css-tricks.com/can-get-pretty-far-making-slider-just-html-css/">how far HTML and CSS will take you</a> when building a carousel/slideshow. </p>
+<ol>
+<li>Setting some boxes in a horizontal row with flexbox is easy.</li>
+<li>Showing only one box at a time with <code>overflow</code> and making it swipable with <code>-webkit-overflow-scrolling</code> is easy.</li>
+<li>You can make the &#8220;slides&#8221; line up nicely with <code>scroll-snap-type</code>.</li>
+<li>A couple of <code>#jump-links</code> is all you need to make navigation for it, which you can make all nice and smooth with <code>scroll-behavior</code>.</li>
+</ol>
+<p class="codepen" data-height="565" style="height: 565px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="chriscoyier" data-slug-hash="XwbNwX" style="height: 565px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Real Simple Slider">
+  See &#8230; <a href="https://css-tricks.com/css-only-carousel/" class="read-more">Read article <span class="screen-reader-text"> &#8220;CSS-Only Carousel&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-only-carousel/">CSS-Only Carousel</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>It&#8217;s kind of amazing <a href="https://css-tricks.com/can-get-pretty-far-making-slider-just-html-css/">how far HTML and CSS will take you</a> when building a carousel/slideshow. </p>
+<ol>
+<li>Setting some boxes in a horizontal row with flexbox is easy.</li>
+<li>Showing only one box at a time with <code>overflow</code> and making it swipable with <code>-webkit-overflow-scrolling</code> is easy.</li>
+<li>You can make the &#8220;slides&#8221; line up nicely with <code>scroll-snap-type</code>.</li>
+<li>A couple of <code>#jump-links</code> is all you need to make navigation for it, which you can make all nice and smooth with <code>scroll-behavior</code>.</li>
+</ol>
+<p><span id="more-300964"></span></p>
+<p class="codepen" data-height="565" style="height: 565px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="chriscoyier" data-slug-hash="XwbNwX" style="height: 565px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Real Simple Slider">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/XwbNwX"><br />
+  Real Simple Slider</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Christian Schaefer has taken it a little further with next and previous buttons, plus an auto-play feature that stops playing once interaction starts.</li>
+</ol>
+<p class="codepen" data-height="760" style="height: 760px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="Schepp" data-slug-hash="WNbQByE" style="height: 760px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="A CSS-only Carousel Slider">
+  <span>See the Pen <a href="https://codepen.io/Schepp/pen/WNbQByE"><br />
+  A CSS-only Carousel Slider</a> by Christian Schaefer (<a href="https://codepen.io/Schepp">@Schepp</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>About that auto-play thing &mdash; it&#8217;s a bonafide CSS trick:</p>
+<blockquote>
+<ol>
+<li>First I slowly offset the scroll snap points to the right, making the scroll area follow along due to being snapped to them.</li>
+<li>After having scrolled the width of a whole slide, I deactivate the snapping. The scroll area is now untied from the scroll snap points.</li>
+<li>Now I let the scroll snap points jump back to their initial positions without them &#8220;snap-dragging&#8221; the scroll area back with them</li>
+<li>Then I re-engage the snapping which now lets the scroll area snap to a different snap point &#x1f92f;</li>
+</ol>
+</blockquote>
+<p>Cool.</p>
+<p>JavaScript-powered slideshows (e.g. with <a href="https://css-tricks.com/creating-responsive-touch-friendly-carousels-with-flickity/">Flickty</a>) can be real nice, too. There is just something neat about getting it done with so little code. </p>
+<p class="codepen" data-height="426" style="height: 426px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="desandro" data-slug-hash="emjrBm" style="height: 426px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Flickity - wrapAround">
+  <span>See the Pen <a href="https://codepen.io/desandro/pen/emjrBm"><br />
+  Flickity &#8211; wrapAround</a> by Dave DeSandro (<a href="https://codepen.io/desandro">@desandro</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/css-only-carousel/">CSS-Only Carousel</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/css-only-carousel/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">300964</post-id>	</item>
+		<item>
+		<title>Carousels Don’t Have to be Complicated</title>
+		<link>http://mediatemple.net/blog/tips/carousels-dont-have-to-be-complicated/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 28 Oct 2016 14:45:10 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[carousel]]></category>
+		<category><![CDATA[scroll-snap]]></category>
+		<category><![CDATA[slider]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=247145</guid>
+
+					<description><![CDATA[<p>Over on the MediaTemple blog, I show you how you can make a pretty decent little carousel with just a few lines of code. Here&#8217;s the entire premise:</p>
+<blockquote>
+<p>Every time a carousel is mentioned in a blog post, it’s a requirement to mention that… say it with me now:</p>
+<blockquote>
+<p>You probably shouldn’t use a carousel.</p>
+</blockquote>
+<p>Jared Smith made a microsite just for it, with research and rhetoric supporting the idea that you shouldn’t use them. Most of that information focuses </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/carousels-dont-complicated/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Carousels Don’t Have to be Complicated&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/carousels-dont-complicated/">Carousels Don’t Have to be Complicated</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Over on the MediaTemple blog, I show you how you can make a pretty decent little carousel with just a few lines of code. Here&#8217;s the entire premise:</p>
+<blockquote>
+<p>Every time a carousel is mentioned in a blog post, it’s a requirement to mention that… say it with me now:</p>
+<blockquote>
+<p>You probably shouldn’t use a carousel.</p>
+</blockquote>
+<p>Jared Smith made a microsite just for it, with research and rhetoric supporting the idea that you shouldn’t use them. Most of that information focuses on the fact that there is low engagement with the non-first-slide(s).</p>
+<p>I’m not here to argue with data, but I would argue with the dogmatism of “never user them, EVER.” Swiping on mobile is an extremely common action, and what is a swipe that reveals more content? Basically a carousel. What about a carousel that doesn’t demand much interaction? Perhaps just a way to swipe through an artist’s recent work. This seems like a perfectly nice way to do that, so long as the UI is clear and accessibility is implemented.</p>
+<p>What I am here to talk about is the situation where you do want a carousel and to resist the  temptation to reach for a wheelbarrow full of code to do so. I guarantee there are people who’ve picked an entire CMS because they thought they needed it to make a carousel. No shame. We’re all learning.</p>
+<p>I have good news: Carousels don’t have to be complicated. They don’t have to require a ton of code or do anything that you can’t wrap your head around with basic HTML, CSS, and JavaScript knowledge.</p>
+</blockquote>
+<p>It&#8217;s not just my idea, I link out to all the smart people who have tackled this subject before throughout the years and made similarly simple and awesome demos.</p>
+<p><a href="http://mediatemple.net/blog/tips/carousels-dont-have-to-be-complicated/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/carousels-dont-complicated/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/carousels-dont-complicated/">Carousels Don’t Have to be Complicated</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">247145</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,1546 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Sarah Drasner &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/author/sdrasner/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Wed, 27 May 2020 14:14:36 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Get Programmatic Control of your Builds with Netlify Build Plugins</title>
+		<link>https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/</link>
+					<comments>https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Wed, 27 May 2020 14:14:34 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[build tool]]></category>
+		<category><![CDATA[netlify]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311377</guid>
+
+					<description><![CDATA[<p>Today at <a href="https://jamstackconf.com/">Jamstack_Conf</a>, <a href="https://www.netlify.com/?utm_source=csstricks&#38;utm_medium=bp-announce-sd&#38;utm_campaign=devex">Netlify</a> announced <a href="https://www.netlify.com/blog/2020/05/27/netlify-build-plugins-are-here/?utm_source=csstricks&#38;utm_medium=csstrick-buildplugin-tzm&#38;utm_campaign=devex">Build Plugins</a>. What it does is allow you to have particular hooks for events within your build, like when the build starts or ends. What&#8217;s nice about them is that they&#8217;re just a plain &#8216;ol JavaScript object, so you can insert some logic or kick off a library just the way you typically would within your application.</p>
+<p>A &#8220;Build&#8221; is when you give your site to Netlify either via GitHub/GitLab/etc., or by literally &#8230; <a href="https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Get Programmatic Control of your Builds with Netlify Build Plugins&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/">Get Programmatic Control of your Builds with Netlify Build Plugins</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Today at <a href="https://jamstackconf.com/">Jamstack_Conf</a>, <a href="https://www.netlify.com/?utm_source=csstricks&amp;utm_medium=bp-announce-sd&amp;utm_campaign=devex">Netlify</a> announced <a href="https://www.netlify.com/blog/2020/05/27/netlify-build-plugins-are-here/?utm_source=csstricks&amp;utm_medium=csstrick-buildplugin-tzm&amp;utm_campaign=devex">Build Plugins</a>. What it does is allow you to have particular hooks for events within your build, like when the build starts or ends. What&#8217;s nice about them is that they&#8217;re just a plain &#8216;ol JavaScript object, so you can insert some logic or kick off a library just the way you typically would within your application.</p>
+
+
+
+<span id="more-311377"></span>
+
+
+
+<p>A &#8220;Build&#8221; is when you give your site to Netlify either via GitHub/GitLab/etc., or by literally just dropping the directory into the interface, Netlify will process all the assets, download and install packages, and generate a static version of the site to deploy to CDNs all around the world.</p>
+
+
+
+<p>What the Build Plugin does is give you access to key points in time during that process, for instance, <strong><code>onPreBuild</code></strong>, <strong><code>onPostBuild</code></strong>, <strong><code>onSuccess</code></strong>, and so forth. You can execute some logic at those specific points in time, like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">module.exports = {
+  onPreBuild: () => {
+    console.log('Hello world from onPreBuild event!')
+  },
+}</code></pre>
+
+
+
+<p>You don&#8217;t only have to build them yourself, either! You can use build plugins that have been made by the community. There are very interesting ones, such as <a href="https://github.com/sw-yx/netlify-plugin-a11y">a11y</a>, <a href="https://github.com/cypress-io/netlify-plugin-cypress">Cypress</a> for testing, <a href="https://github.com/Tom-Bonnike/netlify-plugin-inline-critical-css">Inline Critical CSS</a>, and my personal favorite, <a href="https://github.com/munter/netlify-plugin-subfont">Subfont</a>, which optimizes fonts for you in a really incredible way (you can <a href="https://vimeo.com/364391458">watch a video about that</a>).</p>
+
+
+
+<p>Enable them through the dashboard through a few button clicks:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?fit=1024%2C836&amp;ssl=1" alt="" class="wp-image-311383" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?w=1200&amp;ssl=1 1200w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?resize=300%2C245&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?resize=1024%2C836&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?resize=768%2C627&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/image-22.png?resize=1000%2C817&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>If you&#8217;d like to learn more, <a href="https://www.netlify.com/blog/2020/05/27/netlify-build-plugins-are-here/?utm_source=csstricks&amp;utm_medium=csstrick-buildplugin-tzm&amp;utm_campaign=devex">check out the announcement post here</a>! Happy building!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/">Get Programmatic Control of your Builds with Netlify Build Plugins</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/get-programmatic-control-of-your-builds-with-netlify-build-plugins/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311377</post-id>	</item>
+		<item>
+		<title>How to Convert a Date String into a Human-Readable Format</title>
+		<link>https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/</link>
+					<comments>https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Mon, 25 May 2020 14:13:20 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dates]]></category>
+		<category><![CDATA[formatting dates]]></category>
+		<category><![CDATA[locales]]></category>
+		<category><![CDATA[UTC format]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=311225</guid>
+
+					<description><![CDATA[<p>I&#8217;ll be the first to admit that I&#8217;m writing this article, in part, because it&#8217;s something I look up often and want to be able to find it next time. Formatting a date string that you get from an API in JavaScript can take many shapes — anything from loading all of <a href="https://momentjs.com/">Moment.js</a> to have very finite control, or just using a couple of lines to update it. This article is not meant to be comprehensive, but aims to show &#8230; <a href="https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Convert a Date String into a Human-Readable Format&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/">How to Convert a Date String into a Human-Readable Format</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I&#8217;ll be the first to admit that I&#8217;m writing this article, in part, because it&#8217;s something I look up often and want to be able to find it next time. Formatting a date string that you get from an API in JavaScript can take many shapes — anything from loading all of <a href="https://momentjs.com/">Moment.js</a> to have very finite control, or just using a couple of lines to update it. This article is not meant to be comprehensive, but aims to show the most common path of human legibility.</p>
+
+
+
+<span id="more-311225"></span>
+
+
+
+<p>ISO 8601 is an extremely common date format. The “Z” at the end means the time in ISO 8601 format is using the UTC standard, i.e. no timezone. Here&#8217;s an example: <code>2020-05-25T04:00:00Z</code>. When I bring data in from an API, it&#8217;s typically in ISO 8601 format.</p>
+
+
+
+<p>If I wanted to format the above string in a more readable format, say <strong>May 25, 2020</strong>, I would do this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const dateString = '2020-05-14T04:00:00Z'
+
+const formatDate = (dateString) => {
+  const options = { year: "numeric", month: "long", day: "numeric" }
+  return new Date(dateString).toLocaleDateString(undefined, options)
+}</code></pre>
+
+
+
+<p>Here&#8217;s what I&#8217;m doing&#8230;</p>
+
+
+
+<p>First, I&#8217;m passing in options for how I want the output to be formatted. There are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat">many, many other options</a> we could pass in there to format the date in different ways. I&#8217;m just showing a fairly common example.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const options = { year: "numeric", month: "long", day: "numeric" }</code></pre>
+
+
+
+<p>Next, I&#8217;m creating a new&nbsp;<code>Date</code>&nbsp;instance that represents a single moment in time in a platform-independent format.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">return new Date(dateString)</code></pre>
+
+
+
+<p>Finally, I&#8217;m using the <code>.toLocaleDateString()</code> method to apply the formatting options.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">return new Date(dateString).toLocaleDateString(undefined, options)</code></pre>
+
+
+
+<p>Note that I passed in <code>undefined</code>. Not defining the value in this case means the time will be represented by whatever the default locale is. You can also set it to be a certain area/language. Or, for apps and sites that are internationalized, you can pass in what the user has selected (e.g. <code>'en-US'</code> for the United States, <code>'de-DE'</code> for Germany, and so forth). There&#8217;s a nice <a href="https://www.npmjs.com/package/locale-codes">npm package that includes list of more locales</a> and their codes.</p>
+
+
+
+<p>Hope that helps you get started! And high fives to future Sarah for not having to look this up again in multiple places. &#x1f91a;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/">How to Convert a Date String into a Human-Readable Format</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">311225</post-id>	</item>
+		<item>
+		<title>How to Build a Chrome Extension</title>
+		<link>https://css-tricks.com/how-to-build-a-chrome-extension/</link>
+					<comments>https://css-tricks.com/how-to-build-a-chrome-extension/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Tue, 19 May 2020 14:38:42 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[browser extension]]></category>
+		<category><![CDATA[browser functionality]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[chrome store]]></category>
+		<category><![CDATA[manifest]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=308141</guid>
+
+					<description><![CDATA[<p>I made a Chrome extension this weekend because I found I was doing the same task over and over and wanted to automate it. Plus, I’m a nerd living through a pandemic, so I spend my pent-up energy building things. I&#8217;ve made a few Chrome Extensions over the years, hope this post helps you get going, too. Let’s get started!</p>
+<p>Create the manifest</p>
+<p>The first step is creating a <code>manifest.json</code> file in a project folder. This serves a similar purpose &#8230; <a href="https://css-tricks.com/how-to-build-a-chrome-extension/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Build a Chrome Extension&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-build-a-chrome-extension/">How to Build a Chrome Extension</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>I made a Chrome extension this weekend because I found I was doing the same task over and over and wanted to automate it. Plus, I’m a nerd living through a pandemic, so I spend my pent-up energy building things. I&#8217;ve made a few Chrome Extensions over the years, hope this post helps you get going, too. Let’s get started!</p>
+
+
+
+<span id="more-308141"></span>
+
+
+
+<h3>Create the manifest</h3>
+
+
+
+<p>The first step is creating a <code>manifest.json</code> file in a project folder. This serves a similar purpose to a <code>package.json</code>, it provides the Chrome Web Store with critical information about the project, including the name, version, the required permissions, and so forth. Here’s an example:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+ "manifest_version": 2,
+ "name": "Sample Name",
+ "version": "1.0.0",
+ "description": "This is a sample description",
+ "short_name": "Short Sample Name",
+ "permissions": ["activeTab", "declarativeContent", "storage", "&lt;all_urls>"],
+ "content_scripts": [
+   {
+     "matches": ["&lt;all_urls>"],
+     "css": ["background.css"],
+     "js": ["background.js"]
+   }
+ ],
+ "browser_action": {
+   "default_title": "Does a thing when you do a thing",
+   "default_popup": "popup.html",
+   "default_icon": {
+     "16": "icons/icon16.png",
+     "32": "icons/icon32.png"
+   }
+ }
+}</code></pre>
+
+
+
+<p>You might notice a few things- first: the <strong>names</strong> and <strong>descriptions</strong> can be anything you&#8217;d like.</p>
+
+
+
+<p>The <strong>permissions</strong> depend on what the extension needs to do. We have <code>["activeTab", "declarativeContent", "storage", "&lt;all_urls&gt;"]</code> in this example because this particular extension needs information about the active tab, needs to change the page content, needs to access <code>localStorage</code>, and needs to be active on all sites. If it only needs it to be active on one site at a time, we can remove the last index of that array.&nbsp;</p>
+
+
+
+<p>A list of all of the permissions and what they mean <a href="https://developer.chrome.com/extensions/declare_permissions#host-permissions">can be found in Chrome&#8217;s extension docs</a>.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">"content_scripts": [
+  {
+    "matches": ["&lt;all_urls>"],
+    "css": ["background.css"],
+    "js": ["background.js"]
+  }
+],</code></pre>
+
+
+
+<p>The <code>content_scripts</code> section sets the sites where the extension should be active. If you want a single site, like Twitter for example, you would say <code>["https://twitter.com/*"]</code>. The CSS and JavaScript files are everything needed for extensions. For instance, my <a href="https://github.com/sdras/productive-twitter/">productive Twitter extension</a> uses these files to override Twitter’s default appearance.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">"browser_action": {
+  "default_title": "Does a thing when you do a thing",
+  "default_popup": "popup.html",
+  "default_icon": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png"
+  }
+}</code></pre>
+
+
+
+<p>There are things in <code>browser_action</code> that are also optional. For example, if the extension doesn’t need a popup for its functionality, then both the <code>default_title</code> and <code>default_popup</code> can be removed. In that case, all that&#8217;s needed the icon for the extension. If the extension only works on some sites, then Chrome will grey out the icon when it’s inactive.</p>
+
+
+
+<h3>Debugging</h3>
+
+
+
+<p>Once the manifest, CSS and JavaScript files are ready, head over to <code>chrome://extensions/</code>from the browser&#8217;s address bar and enable developer mode. That activates the &#8220;Load unpacked&#8221; button to add the extension files. It&#8217;s also possible to toggle whether or not the developer version of the extension is active.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?fit=1024%2C354&amp;ssl=1" alt="" class="wp-image-308142" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?w=2032&amp;ssl=1 2032w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?resize=300%2C104&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?resize=1024%2C354&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?resize=768%2C265&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?resize=1536%2C531&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-7.47.31-PM.png?resize=1000%2C345&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>I would highly recommend starting a GitHub repository to version control the files at this point. It&#8217;s a good way to save the work.</p>
+
+
+
+<p>The extension needs to be reloaded from this interface when it is updated. A little refresh icon will display on the screen. Also, if the extension has any errors during development, it will show an error button with a stack trace and more info here as well.</p>
+
+
+
+<h3>Popup functionality</h3>
+
+
+
+<p>If the extension need to make use of a popup that comes off the extension icon, it’s thankfully fairly straightforward. After designating the name of the file with <code>browser_action</code> in the manifest file, a page can be built with whatever HTML and CSS you&#8217;ll like to include, including images (I tend to use inline SVG).</p>
+
+
+
+<p>We’ll probably want to add some functionality to a popup. That make take some JavaScript, so make sure the JavaScript file is designated in the manifest file and is linked up in your popup file as well, like this: <code>&lt;script src="background.js"&gt;&lt;/script&gt;</code></p>
+
+
+
+<p>In that file, start by creating functionality and we&#8217;ll have access to the popup DOM like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">document.addEventListener("DOMContentLoaded", () => {
+ var button = document.getElementById("submit")
+
+ button.addEventListener("click", (e) => {
+   console.log(e)
+ })
+})</code></pre>
+
+
+
+<p>If we create a button in the <code>popup.html</code> file, assign it an ID called <code>submit</code>, and then return a console log, you might notice that nothing is actually logged in the console. That’s because we’re in a different context, meaning we’ll need to right-click on the popup and open up a different set of DevTools.</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.02.45-PM.png?resize=360%2C351&#038;ssl=1" alt="Showing the &quot;Inspect&quot; option to open DevTools after right-clicking on an element on the page." class="wp-image-308143" width="360" height="351" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.02.45-PM.png?w=480&amp;ssl=1 480w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.02.45-PM.png?resize=300%2C293&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>We now have access to logging and debugging! Keep in mind, though, that if anything is set in <code>localStorage</code>, then it will only exist in the extension’s DevTools <code>localStorage</code>; not the user’s browser <code>localStorage</code>. (This bit me the first time I tried it!)</p>
+
+
+
+<h3>Running scripts outside the extension</h3>
+
+
+
+<p>This is all fine and good, but say we want to run a script that has access to information on the current tab? Here’s a couple of ways we would do this. I would typically call a separate function from inside the <code>DOMContentLoaded</code> event listener:</p>
+
+
+
+<h4><strong>Example 1: Activate a file</strong></h4>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function exampleFunction() {
+ chrome.tabs.executeScript(() => {
+   chrome.tabs.executeScript({ file: "content.js" })
+ })
+}</code></pre>
+
+
+
+<h4><strong>Example 2: Execute just a bit of code</strong></h4>
+
+
+
+<p>This way is great if there&#8217;s only a small bit of code to run. However, it quickly gets tough to work with since it requires passing everything as a string or template literal.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function exampleFunction() {
+ chrome.tabs.executeScript({
+   code: `console.log(‘hi there’)`
+  })
+}</code></pre>
+
+
+
+<h4><strong>Example 3: Activate a file and pass a parameter</strong></h4>
+
+
+
+<p>Remember, the extension and tab are operating in different contexts. That makes passing parameters between them a not-so-trivial task. What we’ll do here is nest the first two examples to pass a bit of code into the second file. I will store everything I need in a single option, but we’ll have to stringify the object for that to work properly.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">function exampleFunction(options) {
+ chrome.tabs.executeScript(
+   { code: "var options = " + JSON.stringify(options) },
+   function() {
+     chrome.tabs.executeScript({ file: "content.js" })
+   }
+ )
+}</code></pre>
+
+
+
+<h3>Icons</h3>
+
+
+
+<p>Even though the manifest file only defines two icons, we need two more to officially submit the extension to the Chrome Web Store: one that’s 128px square, and one that I call <code>icon128_proper.png</code>, which is also 128px, but has a little padding inside it between the edge of the image and the icon.</p>
+
+
+
+<p>Keep in mind that whatever icon is used needs to look good both in light mode and dark mode for the browser. I usually find my icons on <a href="https://thenounproject.com/">the Noun Project</a>.</p>
+
+
+
+<h3>Submitting to the Chrome Web Store</h3>
+
+
+
+<p>Now we get to head over to the <a href="https://chrome.google.com/webstore/devconsole">Chrome Web Store developer console</a> to submit the extension! Click the “New Item” button, the drag and drop the zipped project file into the uploader.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?fit=1024%2C540&amp;ssl=1" alt="" class="wp-image-308144" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?w=1262&amp;ssl=1 1262w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?resize=300%2C158&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?resize=1024%2C540&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?resize=768%2C405&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-02-at-8.22.43-PM.png?resize=1000%2C528&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>From there, Chrome will ask a few questions about the extension, request information about the permissions requested in the extension and why they&#8217;re needed. <strong>Fair warning:</strong> requesting <code>“activeTab”</code> or <code>“tabs”</code> permissions will require a longer review to make sure the code isn’t doing anything abusive.</p>
+
+
+
+<p>That’s it! This should get you all set up and on your way to building a Chrome browser extension! &#x1f389;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-build-a-chrome-extension/">How to Build a Chrome Extension</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-build-a-chrome-extension/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">308141</post-id>	</item>
+		<item>
+		<title>Advice for Writing a Technical Resume</title>
+		<link>https://css-tricks.com/advice-for-writing-a-technical-resume/</link>
+					<comments>https://css-tricks.com/advice-for-writing-a-technical-resume/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Mon, 27 Apr 2020 14:50:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[cover letters]]></category>
+		<category><![CDATA[job searching]]></category>
+		<category><![CDATA[resume]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306747</guid>
+
+					<description><![CDATA[<p>Marco Rogers asked a very good question on Twitter:</p>
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true">
+<p lang="en" dir="ltr">I talk to a lot of people new to tech from non-traditional backgrounds, e.g. bootcamps or self-taught. I&#39;m looking for good information for those people on how to build out a strong resume when they don&#39;t have work experience yet. Advice is fine, links to resources is better.</p>
+<p>&#8212; Marco Rogers (@polotek) <a href="https://twitter.com/polotek/status/1248680800305860608?ref_src=twsrc%5Etfw">April 10, 2020</a></p></blockquote>
+<p>I’ve been on both sides of the interview table for many years now, both searching for &#8230; <a href="https://css-tricks.com/advice-for-writing-a-technical-resume/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Advice for Writing a Technical Resume&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-writing-a-technical-resume/">Advice for Writing a Technical Resume</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Marco Rogers asked a very good question on Twitter:</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true"><p lang="en" dir="ltr">I talk to a lot of people new to tech from non-traditional backgrounds, e.g. bootcamps or self-taught. I&#39;m looking for good information for those people on how to build out a strong resume when they don&#39;t have work experience yet. Advice is fine, links to resources is better.</p>&mdash; Marco Rogers (@polotek) <a href="https://twitter.com/polotek/status/1248680800305860608?ref_src=twsrc%5Etfw">April 10, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div></figure>
+
+
+
+<p>I’ve been on both sides of the interview table for many years now, both searching for jobs and as a hiring manager. In my years of management, I&#8217;ve read though thousands of applications, this article is full of suggestions gleaned from that experience, should it be helpful to you.</p>
+
+
+
+<p>When it comes to writing a resume, It&#8217;s helpful to think about the human aspect first and foremost. Imagining a hiring manager&#8217;s perspective will give you an edge because it helps speak to them directly. Remember, a coveted position at a reputable company commonly requires the team to sift through anywhere between tens and thousands of applications. Their staff is materially impacted in the time and energy it takes to review every candidate and evaluate those who make it in to the interview stage. Attention to details will help your odds of standing out in the crowd.</p>
+
+
+
+<span id="more-306747"></span>
+
+
+
+<p>Here are my general suggestions to make the best possible resume.</p>
+
+
+
+<h3>Formatting is important</h3>
+
+
+
+<p>Spelling, grammar and formatting are all crucial to a well-written resume. Typos and errors are clear red flags, so please pay attention to what you write and how it is written. These types of mistakes give the impression that you either lack attention to detail or are unwilling to go the extra step. As trivial as this might seem, it will serve you well to use spell check and get a second set of eyes on your resume before submitting it.</p>
+
+
+
+<p>A few formatting tips to keep in mind:</p>
+
+
+
+<ul><li>Use headings to separate sections</li><li>Use lists to help summarize highlights and keep things scannable</li><li>Use a good font and font size that makes the content legible</li><li>Use line spacing that lets content breathe rather than packing it close together</li><li>Make good use of bold and italic for pertinent information, but don&#8217;t abuse them</li></ul>
+
+
+
+<p>I don’t have a strong opinion on charts that show off your skills or lists of hobbies — though, I <em>will</em> say I’ve noticed them more frequently on the applications of beginners. You might unintentionally communicate you have less experience by including it.</p>
+
+
+
+<h3>If you don’t have a lot of work history, it’s totally OK to throw in open source projects!</h3>
+
+
+
+<p>Or side projects! Or working on your own site! A few folks mentioned this in the Twitter thread and it&#8217;s solid advice. A good hiring manager should know that Senior-level candidates don’t grow on trees — they want to see work that shows you have promise.</p>
+
+
+
+<p>This is problematic advice in some ways, as not everyone has time on the side to devote to projects. Including these isn&#8217;t a hard requirement for a good resume, but if you&#8217;re otherwise lacking relevant work experience, including personal projects can show the kind of work you&#8217;re capable of doing as well as the <em>kind of work that excites you</em>. I&#8217;ve taken chances on folks with slim-to-no work experience but with a solid portfolio site, GitHub contributions, or even a few CodePen demos that show potential.</p>
+
+
+
+<h3>Call out your contributions in your work experience</h3>
+
+
+
+<p>Each time you list a work example, answer this: <strong>what did you accomplish?</strong> This is a good way to provide valuable information without unnecessary fluff. </p>
+
+
+
+<p>Here&#8217;s an example that would catch my attention:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Due to my team’s work refactoring the product page, we were able to meet the demands of our customers, which resulted in a 25% growth in sales. We also took the opportunity to upgrade the codebase from <code>React.createClass</code> to React Hooks for all of our components, ensuring a more flexible and maintainable system.</p></blockquote>
+
+
+
+<p>This tells me you can work on a team to deliver goals. It also tells me that you understand technical debt and your part in being proactive in maintenance. That&#8217;s the sort of person I want to hire. Write the outcomes from the point of view of what you provided for the team.</p>
+
+
+
+<h3>If so far your experience is limited to a code bootcamp, it&#8217;s great to talk through that. </h3>
+
+
+
+<p>Every job applicant is coming from a different background and from varying degrees of experience. It&#8217;s safe to assume you are not the most experienced person in the pool.</p>
+
+
+
+<p>And that&#8217;s OK!</p>
+
+
+
+<p>For example, let&#8217;s say your development experience is limited to online or in-person coding bootcamps rather than commercial projects. What did you learn there? What were you interested in? What was your final project? Is there a link to that work? When I&#8217;m hiring someone who&#8217;s coming in early in their career, I&#8217;m mostly looking for curiosity and enthusiasm. I&#8217;m probably not alone there.</p>
+
+
+
+<h3>Don’t be too long&#8230; or too short</h3>
+
+
+
+<p>We mentioned earlier that hiring is a time-consuming job. It&#8217;s good to keep this in mind as you&#8217;re writing by making your resume as brief as possible — ideally on a single page. Two pages is OK if you <em>really</em> need it.</p>
+
+
+
+<p>Keeping everything short is a balancing act when you&#8217;re also attempting to include as much useful information as possible. Treat that constraint as a challenge to focus on the most important details. It&#8217;s a good problem if you have more to say than what fits!</p>
+
+
+
+<p>At best, padding a resume into multiple pages conveys you&#8217;re unable to communicate in a succinct manner. At worst, it shows a lack of respect for a hiring manager&#8217;s time.</p>
+
+
+
+<h3>Make sure there&#8217;s a way to reach you</h3>
+
+
+
+<p>I cannot tell you how many resumes that lack the following essentials: <strong>name, email, and phone number</strong>. Seriously, it happens even on resumes that are otherwise very impressive.</p>
+
+
+
+<p>Your name and contact information are hard requirements. I don’t want to search around for your email if you’re applying. To be honest, I probably won’t search at all because I’m busy and there are many other candidates to choose from.</p>
+
+
+
+<h3>Preparation is your friend</h3>
+
+
+
+<p>Make sure your accompanying cover letter (yes, you should include one) communicates you&#8217;ve done at least a little research on the company, conveys you understand what they need in a candidate, and how you fit into that need.</p>
+
+
+
+<p>I will personally adjust my the descriptions (not the job titles, but the takeaways and outcomes) in my own resume so there is a direct connection between my skills and the position.</p>
+
+
+
+<h2>Your work and education details should be reverse-chronological</h2>
+
+
+
+<p>Your most recent work is more important than your oldest work. It&#8217;s a better reflection of what you&#8217;re capable of doing today and how fresh your skills are in a particular area. The same goes for your education: lead with your most recent experience.</p>
+
+
+
+<p>The person reviewing your resume can decide to continue reading further if they&#8217;re compelled by the most recent information.</p>
+
+
+
+<h2>Wrapping up</h2>
+
+
+
+<p>If you want to stand out in the crowd, make sure your resume is one that represents you well. Ask someone to help you proof and use spellcheck, and make sure you&#8217;ve put your best foot forward.</p>
+
+
+
+<p>And don&#8217;t be discouraged by rejections or unreturned messages. It&#8217;s less likely to be about you personally and more likely due to the number of people applying. So keep trying!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/advice-for-writing-a-technical-resume/">Advice for Writing a Technical Resume</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/advice-for-writing-a-technical-resume/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">306747</post-id>	</item>
+		<item>
+		<title>What makes a site Jamstack?</title>
+		<link>https://dev.to/shortdiv/what-makes-a-site-jamstack-ib1</link>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Tue, 21 Jan 2020 14:31:08 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[jamstack]]></category>
+		<category><![CDATA[serverless]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301741</guid>
+
+					<description><![CDATA[<p>I admit I didn’t know the ins and outs of what the Jamstack is until recently, despite having heard the term so frequently. I think I’m not alone in this. It’s an elusive term &#8212; how is it different from what came before, especially considering it shares so many similarities? Thankfully, <a href="https://twitter.com/shortdiv">Divya Sasidharan</a> is breaking down so many aspects of Jamstack every day of January in a series of posts called <a href="https://twitter.com/hashtag/JAMuary?src=hashtag_click">#JAMuary</a>.</p>
+<p>One of the posts in this series &#8230; <a href="https://css-tricks.com/what-makes-a-site-jamstack/" class="read-more">Read article <span class="screen-reader-text"> &#8220;What makes a site Jamstack?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-makes-a-site-jamstack/">What makes a site Jamstack?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I admit I didn’t know the ins and outs of what the Jamstack is until recently, despite having heard the term so frequently. I think I’m not alone in this. It’s an elusive term &mdash; how is it different from what came before, especially considering it shares so many similarities? Thankfully, <a href="https://twitter.com/shortdiv">Divya Sasidharan</a> is breaking down so many aspects of Jamstack every day of January in a series of posts called <a href="https://twitter.com/hashtag/JAMuary?src=hashtag_click">#JAMuary</a>.</p>
+<p>One of the posts in this series so far was called &#8220;What makes a site Jamstack&#8221;? Personally, this post was one of my favorites. In it, Divya dives into a really important question: if static sites and Jamstack are similar, then what is the distinction?</p>
+<p><span id="more-301741"></span></p>
+<blockquote><p>&#8220;You could say that a Jamstack site is a static site but a static site is not necessarily a Jamstack one.&#8221;</p></blockquote>
+<p>She talks a bit about Git workflows versus the old FTP methods, how to continuously update in small changes, and revert those changes.</p>
+<blockquote><p>Mutable deploys present a host of challenges. These include ever-changing and unpredictable server environments and issues with invalid caches. JAMstack sites do away with this by taking advantage of the ability for modern CDNs to invalidate your cache completely.</p></blockquote>
+<p>She then goes on to describe Jamstack’s generate-deploy cycle and how Jamstack is, in many ways, a response to the ever-growing complexity of the web. Jamstack moves away from using servers, which drops a lot of the complexity.</p>
+<p>You can read more of her work <a href="https://dev.to/shortdiv">and this series on dev.to</a>.</p>
+<p><a href="https://dev.to/shortdiv/what-makes-a-site-jamstack-ib1" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/what-makes-a-site-jamstack/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/what-makes-a-site-jamstack/">What makes a site Jamstack?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301741</post-id>	</item>
+		<item>
+		<title>How to Turn a Procreate Drawing into a Web Animation</title>
+		<link>https://css-tricks.com/how-to-turn-a-procreate-drawing-into-a-web-animation/</link>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Mon, 20 Jan 2020 21:30:36 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[drawing]]></category>
+		<category><![CDATA[handdrawn]]></category>
+		<category><![CDATA[procreate]]></category>
+		<category><![CDATA[web animation]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301043</guid>
+
+					<description><![CDATA[<p>I recently started drawing on my iPad using the <a href="https://apps.apple.com/us/app/procreate/id425073498">Procreate</a> app with Apple Pencil. I’m enjoying the flexibility of drawing this way. What usually keeps me from painting at home are basic things, like setup, cleaning brushes, proper ventilation, and other factors not really tied to the painting itself. Procreate does a pretty nice job of emulating painting and drawing processes, but adding digital features like undo/redo, layers, and layer effects.</p>
+</p>
+<p>Here’s a Procreate painting I made that I wound &#8230; <a href="https://css-tricks.com/how-to-turn-a-procreate-drawing-into-a-web-animation/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Turn a Procreate Drawing into a Web Animation&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-turn-a-procreate-drawing-into-a-web-animation/">How to Turn a Procreate Drawing into a Web Animation</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I recently started drawing on my iPad using the <a href="https://apps.apple.com/us/app/procreate/id425073498">Procreate</a> app with Apple Pencil. I’m enjoying the flexibility of drawing this way. What usually keeps me from painting at home are basic things, like setup, cleaning brushes, proper ventilation, and other factors not really tied to the painting itself. Procreate does a pretty nice job of emulating painting and drawing processes, but adding digital features like undo/redo, layers, and layer effects.</p>
+<p><span id="more-301043"></span></p>
+<p>Here’s a Procreate painting I made that I wound up exporting and animating on the web.</p>
+<p class="codepen" data-height="700" style="height: 700px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="VwYyXZV" style="height: 700px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Zebra Page- web animation from a Procreate drawing">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/VwYyXZV"><br />
+  Zebra Page- web animation from a Procreate drawing</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p><script async src="https://static.codepen.io/assets/embed/ei.js"></script></p>
+<p>You can do this too! There are two basic animation effects we’ll cover here: the parallax effect that takes place on hover (with the ability to turn it off <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/">for those with vestibular disorders</a>), and the small drawing effect when the page loads.</p>
+<h3>Parallax with drawing layers</h3>
+<p>I mentioned that part of the reason I enjoy drawing on the iPad is the ability to work in layers. When creating layers, I take care to keep certain “themes” on the same layer, for instance, the zebra stripes are on one layer and the dots are on own layer under beneath the stripes.</p>
+<p>I’ll extend the drawing beyond the boundaries of where the line from the layer above ends, mainly because you’ll be able to peek around it a bit as we move the drawing around in the parallax effect. If the lines are sharp at any point, this will look unnatural.</p>
+<figure id="post-301047" class="align-right media-301047"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/12/zebra2-glow-1.png?resize=1668%2C2388&#038;ssl=1" alt="" width="1668" height="2388"  data-recalc-dims="1"></figure>
+<p>Once I&#8217;m done creating my layers, I can export things as a Photoshop (<abbr>PSD</abbr>) file, thanks to Procreate&#8217;s exporting options.</p>
+<figure id="post-301048" class="align-right media-301048"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/12/Screen-Shot-2019-12-26-at-3.17.31-PM.png?resize=2040%2C2042&#038;ssl=1" alt="" width="2040" height="2042"  data-recalc-dims="1">The same drawing opened in Photoshop.</figure>
+<p>Then I’ll join together a few, so that I’m only working with about 8 layers at most. I use a photoshop plugin called <a href="https://tinypng.com/">tinyPNG</a> to export each layer individually. I’ve heard there are better compression tools, but I’ve been pretty happy with this one.</p>
+<p>Next, I&#8217;ll go into my code editor and create a div to house all the various images that are contained in the layers. I give that div relative positioning while all of the images inside it get absolute positioning. This places the images one on top the other.</p>
+<pre rel="HTML"><code class="language-markup">&lt;div id="zebra-ill" role="presentation"&gt;
+  &lt;img class="zebraimg" src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/zebraexport6.png' /&gt;
+  &lt;img class="zebraimg" src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/zebraexport5.png' /&gt;
+ …
+&lt;/div&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">#zebra-ill {
+  position: relative;
+  min-height: 650px;
+  max-width: 500px;
+}
+
+.zebraimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  perspective: 600px;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  width: 100%;
+  }</code></pre>
+<p>The 100% width on the image will confines all of the images to the size of the parent div. I do this so that I’m controlling them all at once with the same restrictions, which works well for responsive conditions. The <code>max-width</code> and <code>min-height</code> on the parent allow me to confine the way that the div shrinks and grows, especially as when it gets dropped into a CSS Grid layout. It will need to be flexible, but have some constraints as well and CSS Grid is great for that.</p>
+<p>Next, I add a <code>mousemove</code> event listener on the parent div with JavaScript. That lets me capture some information about the coordinates of the mouse using <code>e.clientX</code> and <code>e.clientY</code>.</p>
+<pre rel="JavaScript"><code class="language-javascript">const zebraIll = document.querySelector('#zebra-ill')
+
+// Hover
+zebraIll.addEventListener('mousemove', e =&gt; {
+  let x = e.clientX;
+  let y = e.clientY;
+})</code></pre>
+<p>Then, I’ll go through each of the drawings and use those coordinates to move the images around. I&#8217;ll even apply transform styles connected to those coordinates.</p>
+<pre rel="JavaScript"><code class="language-javascript">const zebraIll = document.querySelector('#zebra-ill')
+const zebraIllImg = document.querySelectorAll('.zebraimg')
+const rate = 0.05
+
+//hover
+zebraIll.addEventListener('mousemove', e =&gt; {
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  zebraIllImg.forEach((el, index) =&gt; {
+    el.style.transform = 
+      `rotateX(${x}deg) rotateY(${y}deg)`
+  })
+})</code></pre>
+<p class="codepen" data-height="560" style="height: 560px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="05dc2809e3bd62a532837121261aa019" style="height: 560px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="zebra page">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/05dc2809e3bd62a532837121261aa019"><br />
+  zebra page</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Woah, slow down there partner! That’s way too much movement, we want something a little more subtle. So I’ll need to slow it way down by multiplying it by a low rate, like 0.05. I also want to change it a just bit per layer, so I&#8217;ll use the layers index to speed up or slow down the movement.</p>
+<pre rel="JavaScript"><code class="language-javascript">const zebraIll = document.querySelector('#zebra-ill')
+const zebraIllImg = document.querySelectorAll('.zebraimg')
+const rate = 0.05
+
+// Hover
+zebraIll.addEventListener('mousemove', e =&gt; {
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  zebraIllImg.forEach((el, index) =&gt; {
+    let speed = index += 1
+    let xPos = speed + rate * x
+    let yPos = speed + rate * y
+    
+    el.style.transform = 
+      `rotateX(${xPos - 20}deg) rotateY(${yPos - 20}deg) translateZ(${index * 10}px)`
+  })
+})</code></pre>
+<p>Finally, I can create a checkbox that asks the user if want to turn off this effect.</p>
+<pre rel="HTML"><code class="language-markup">&lt;p&gt;
+  &lt;input type="checkbox" name="motiona11y" id="motiona11y" /&gt;
+  &lt;label for="motiona11y"&gt;If you have a vestibular disorder, check this to turn off some of the effects&lt;/label&gt;
+&lt;/p&gt;</code></pre>
+<pre rel="JavaScript"><code class="language-javascript">const zebraIll = document.querySelector('#zebra-ill')
+const zebraIllImg = document.querySelectorAll('.zebraimg')
+const rate = 0.05
+const motioncheck = document.getElementById('motiona11y')
+let isChecked = false
+
+// Check to see if someone checked the vestibular disorder part
+motioncheck.addEventListener('change', e =&gt; {
+  isChecked = e.target.checked;
+})
+
+// Hover
+zebraIll.addEventListener('mousemove', e =&gt; {
+  if (isChecked) return
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  // ...
+})</code></pre>
+<p>Now the user has the ability to look at the layered dimensionality of the drawing on hover, but can also turn the effect off if it is bothersome.</p>
+<h3>Drawing Effect</h3>
+<p>The ability to make something look like it’s been drawn on to the page has been around for a while and there are a lot of <a href="https://css-tricks.com/svg-line-animation-works/">articles on how it’s done</a>. I cover it as well in a <a href="https://frontendmasters.com/courses/svg-essentials-animation/drawsvg/">course I made for Frontend Masters</a>.</p>
+<p>The premise goes like this:</p>
+<ul>
+<li>Take an SVG path and make it dashed with <code>dashoffset</code>.</li>
+<li>Make the dash the entire length of the shape.</li>
+<li>Animate the <code>dashoffset</code> (the space between dashes).</li>
+</ul>
+<p>What you get in the end is a kind of “drawn-on” effect.</p>
+<p>But in this particular drawing you might have noticed that the parts I animated look like they were hand-drawn, which is a little more unique. You see, though that effect will work nicely for more mechanical drawings, the web doesn’t quite yet support the use of tapered lines (lines that vary in thickness, as is typical of a more hand-drawn feel).</p>
+<p>For this approach, I brought the file into Illustrator, traced the lines from that part of my drawing, and made those lines tapered by going into the Stroke panel, where I selected &#8220;More options&#8221; and clicked the tapered option from the dropdown.</p>
+<figure id="post-301050" class="align-right media-301050"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/12/Screen-Shot-2019-12-26-at-3.28.43-PM.png?resize=490%2C1126&#038;ssl=1" alt="Screenshot of the Illustrator Stroke menu." width="490" height="1126"  data-recalc-dims="1"></figure>
+<p>I duplicated those lines, and created fatter, uniform paths underneath. I then took those fat lines and animate them onto the page. Now my drawing shows through the shape:</p>
+<figure id="post-301049" class="align-right media-301049"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/12/Screen-Shot-2019-12-26-at-3.28.00-PM.png?resize=1258%2C1450&#038;ssl=1" alt="" width="1258" height="1450"  data-recalc-dims="1"></figure>
+<p>Here&#8217;s what I did:</p>
+<ul>
+<li>I traced with Pen tool and used tapered brush.</li>
+<li>I duplicated the layer and changed the lines to be uniform and thicker.</li>
+<li>I took the first layer and created a compound path.</li>
+<li>I simplified path points.</li>
+<li>I created clipping mask.</li>
+</ul>
+<p>From there, I can animate everything with <a href="greensock.com/drawSVG">drawSVG</a> and <a href="https://greensock.com">GreenSock</a>. Though you don’t need to, you could use CSS for this kind of animation. There’s a ton of path points so in this case, so it makes sense to use something more powerful. I wrote <a href="/how-to-animate-on-the-web-with-greensock">another post</a> that goes into depth on how to start off creating these kinds of animations. I would recommend you start there if you’re fresh to it.</p>
+<p>To use drawSVG, we need to do a few things:</p>
+<ul>
+<li>Load the plugin script.</li>
+<li>Register the plugin at the top of the JavaScript file.</li>
+<li>Make sure that paths are being used, and that there are strokes on those paths.</li>
+<li>Make sure that those paths are targeted rather than the groups that house them. The parent elements could be targeted instead.</li>
+</ul>
+<p>Here’s a very basic example of drawSVG (courtesy of GreenSock):</p>
+<p class="codepen" data-height="726" style="height: 726px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="GreenSock" data-slug-hash="bNdLyR" style="height: 726px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="DrawSVGPlugin Values">
+  <span>See the Pen <a href="https://codepen.io/GreenSock/pen/bNdLyR"><br />
+  DrawSVGPlugin Values</a> by GreenSock (<a href="https://codepen.io/GreenSock">@GreenSock</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>So, in the graphics editor, there is a clipping mask with more artful lines, that expose fat uniform lines underneath. From here, we’ll grab a hold of those thicker paths and use the drawSVG plugin to animate them onto the page.</p>
+<pre rel="JavaScript"><code class="language-javascript">//register the plugin
+gsap.registerPlugin(DrawSVGPlugin);
+
+const drawLines = () =&gt; {
+  gsap.set('.cls-15, #yellowunderline, .cls-13', {
+    visibility: 'visible'
+  })
+  
+  const timeline = gsap.timeline({ 
+    defaults: {
+      delay: 1,
+      ease: 'circ',
+      duration: 2
+    }		  
+  })
+  .add('start')
+  .fromTo('.cls-15 path', {
+    drawSVG: '0%'
+  }, {
+    drawSVG: '100%',
+    immediateRender: true
+  }, 'start')
+  .fromTo('#yellowunderline path', {
+    drawSVG: '50% 50%'
+  }, {
+    drawSVG: '100%',
+    immediateRender: true
+  }, 'start+=1')
+  .fromTo('.cls-13', {
+    drawSVG: '50% 50%'
+  }, {
+    drawSVG: '100%',
+    immediateRender: true
+  }, 'start+=1')
+}
+
+window.onload = () =&gt; {
+  drawLines()
+};</code></pre>
+<p>And there we have it! An initial illustration for our site that’s created from a layered drawing in the Procreate iPad app. I hope this gets you going making your web projects unique with wonderful hand-drawn illustrations. If you make anything cool, let us know in the comments below!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-turn-a-procreate-drawing-into-a-web-animation/">How to Turn a Procreate Drawing into a Web Animation</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301043</post-id>	</item>
+		<item>
+		<title>How to Animate on the Web With GreenSock</title>
+		<link>https://css-tricks.com/how-to-animate-on-the-web-with-greensock/</link>
+					<comments>https://css-tricks.com/how-to-animate-on-the-web-with-greensock/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Mon, 13 Jan 2020 16:46:41 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[Beginner]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[GreenSock]]></category>
+		<category><![CDATA[GSAP]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[web animation]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301006</guid>
+
+					<description><![CDATA[<p>There are truly thousands of ways to animate on the web. We’ve covered a <a href="https://css-tricks.com/comparison-animation-technologies/">comparison of different animation technologies</a> here before. Today, we’re going to dive into a step-by-step guide of one of my favorite ways to get it done: using GreenSock.</p>
+</p>
+<p>(They don’t pay me or anything, I just really enjoy using them.)</p>
+<p>Why do I prefer GreenSock to other methods? Technically speaking, it&#8217;s often the best tool for the job. Its usage is extremely straightforward, even for complex &#8230; <a href="https://css-tricks.com/how-to-animate-on-the-web-with-greensock/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Animate on the Web With GreenSock&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-animate-on-the-web-with-greensock/">How to Animate on the Web With GreenSock</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>There are truly thousands of ways to animate on the web. We’ve covered a <a href="https://css-tricks.com/comparison-animation-technologies/">comparison of different animation technologies</a> here before. Today, we’re going to dive into a step-by-step guide of one of my favorite ways to get it done: using GreenSock.</p>
+<p><span id="more-301006"></span></p>
+<p>(They don’t pay me or anything, I just really enjoy using them.)</p>
+<p>Why do I prefer GreenSock to other methods? Technically speaking, it&#8217;s often the best tool for the job. Its usage is extremely straightforward, even for complex movement. Here are a few more reasons why I prefer using it:</p>
+<ul>
+<li>You can use them on DOM elements as well as within WebGL/Canvas/Three.js contexts.</li>
+<li>The easing is very sophisticated. CSS animations are limited to two bezier handles for ease, meaning if you want, say, a bounce effect, you would have to make keyframes up and down and up and down for each pass. GreenSock allows multiple bezier handles to create advanced effects. A bounce is a single line of code. You can see what I mean by checking out their <a href="https://greensock.com/ease-visualizer">ease visualizer</a>.</li>
+<li>You can sequence movement on a timeline. CSS animations can get a little spaghetti when you have to coordinate several things at once. GreenSock remains very legible and allows you to control the timeline itself. You can even animate your animations! &#x1f92f;</li>
+<li>It will perform some calculations under the hood to prevent strange cross-browser behavior as well as things that the spec dictates should be true aren&#8217;t — like the way that stacking transforms work.</li>
+<li>It offers a lot of advanced functionality, in the form of plugins, that you can use if you’d like to take your work a step further — things like Morphing SVG shapes, drawing SVG paths, dragging and dropping, inertia, and more.</li>
+</ul>
+<p>People sometimes ask me why I&#8217;d use this particular library over all of the other choices. It’s further along than most others — they’ve been around since the Flash was still a thing. This demo reel is pretty inspiring, and also gets the point across that serious web animators do tend to reach for this tool:</p>
+<p><iframe src="https://www.youtube.com/embed/pFqBqgOv9E8" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>What follows is a breakdown of how to create movement on the web, distilled down to the smallest units I could make them. Let’s get started!</p>
+<h3>Animating a DOM element</h3>
+<p>Consider a ball that we make with a <code>&lt;div&gt;</code> that&#8217;s styled with a <code>border-radius</code> value of 50%. Here’s how we would scale and move it with GreenSock:</p>
+<pre rel="HTML"><code class="language-markup">&lt;div class="ball"&gt;&lt;/div&gt;</code></pre>
+<pre rel="JavaScript"><code class="language-javascript">gsap.to('.ball', {
+  duration: 1,
+  x: 200,
+  scale: 2
+})</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="5ce254bb4f4d2bb240081b0eb6d6554d" data-pen-title="Greensock Tutorial 1">See the Pen <a href="https://codepen.io/sdras/pen/5ce254bb4f4d2bb240081b0eb6d6554d"><br />
+Greensock Tutorial 1</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>In this case, we’re telling GreenSock (<code>gsap</code>) to take the element with the class of <code>.ball</code> move it <code>.to()</code> a few different properties. We’ve shortened the CSS properties of <code>transform: translateX(200px)</code> to a streamlined <code>x: 200</code> (note there&#8217;s no need for the units, but you can pass them as a string). We’re also not writing <code>transform: scale(2)</code>. Here&#8217;s a reference of the transforms you might want to use with animations, and their corresponding CSS syntax:</p>
+<pre><code class="language-javascript">x: 100 // transform: translateX(100px)
+y: 100 // transform: translateY(100px)
+z: 100 // transform: translateZ(100px)
+// you do not need the null transform hack or hardware acceleration, it comes baked in with
+// force3d:true. If you want to unset this, force3d:false
+scale: 2 // transform: scale(2)
+scaleX: 2 // transform: scaleX(2)
+scaleY: 2 // transform: scaleY(2)
+scaleZ: 2 // transform: scaleZ(2)
+skew: 15 // transform: skew(15deg)
+skewX: 15 // transform: skewX(15deg)
+skewY: 15 // transform: skewY(15deg)
+rotation: 180 // transform: rotate(180deg)
+rotationX: 180 // transform: rotateX(180deg)
+rotationY: 180 // transform: rotateY(180deg)
+rotationZ: 180 // transform: rotateZ(180deg)
+perspective: 1000 // transform: perspective(1000px)
+transformOrigin: '50% 50%' // transform-origin: 50% 50%</code></pre>
+<p>Duration is what you might think it is: it’s a one-second stretch of time.</p>
+<p>So, OK, how would we animate, say, an SVG? Let’s consider the same code above as an SVG:</p>
+<pre rel="HTML"><code class="language-markup">&lt;svg viewBox="0 0 500 400"&gt;
+  &lt;circle class="ball" cx="80" cy="80" r="80" /&gt;
+&lt;/svg&gt;</code></pre>
+<pre><code class="language-javascript">gsap.to('.ball', {
+  duration: 1,
+  x: 200,
+  scale: 2
+})</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="f8d8d77940f46fe2a23e13d01ad265d6" data-pen-title="Greensock Tutorial 2">See the Pen <a href="https://codepen.io/sdras/pen/f8d8d77940f46fe2a23e13d01ad265d6"><br />
+Greensock Tutorial 2</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>From an animation perspective, it’s actually <em>exactly the same</em>. It’s grabbing the element with the class <code>.ball</code> on it, and translating those properties. Since SVGs are literally DOM elements, we can slap a class on any one of them and animate them just the same way!</p>
+<p>Great! We’re cooking with gas.</p>
+<h3>Eases</h3>
+<p>I mentioned before that eases are one of my favorite features, let’s take a look at how we’d use them.</p>
+<p>Let’s take the original ball. Maybe we want to try one of those more unique bounce eases. It would go like this:</p>
+<pre><code class="language-javascript">gsap.to('.ball', {
+  duration: 1.5,
+  x: 200,
+  scale: 2,
+  ease: 'bounce'
+})</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="d58767cf1588be1d00c6e68c59ee3ca0" data-pen-title="Greensock Tutorial 3">See the Pen <a href="https://codepen.io/sdras/pen/d58767cf1588be1d00c6e68c59ee3ca0"><br />
+Greensock Tutorial 3</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>That’s it! This version of GreenSock assumes that you want to use <code>ease-out</code> timing (which is better for entrances), so it applies that as a default. All you have to do is specify &#8220;bounce&#8221; as a string and you’re off to the races.</p>
+<p>You might have noticed we also lengthened the duration a bit as well. That’s because the ball has to do more &#8220;work&#8221; in between the initial and end states. A one-second duration, though lovely for linear or sine easing, is a little too quick for a bounce or an elastic ease.</p>
+<h3>Delays and Timelines</h3>
+<p>I mentioned that the default <code>ease-out</code> timing function is good for entrances. What about an <code>ease-in</code> or ease-in-out exit? Let’s do that as well.</p>
+<pre><code class="language-javascript">gsap.to('.ball', {
+  duration: 1.5,
+  x: 200,
+  scale: 2,
+  ease: 'bounce'
+})
+
+gsap.to('.ball', {
+  duration: 1.5,
+  delay: 1.5,
+  x: 0,
+  scale: 1,
+  ease: 'back.inOut(3)'
+})</code></pre>
+<p>You might have noticed a few things happening. For example, we didn&#8217;t use <code>bounce.in</code> on the second-to-last line (<code>ease: 'back.inOut(3)'</code>). Instead, we used another ease called <code>back</code> for <code>ease-in-out</code>. We also passed in a configuration option because, as you can see with Greensock&#8217;s ease visualizer tool, we’re not limited to just the default configuration for that ease. We can adjust it to our needs. Neat!</p>
+<p>You may have also noticed that we chained the animations using a delay. We took the length of the duration of the first animation and made sure the next one has a delay that matches. Now, that works here, but that’s pretty brittle. What if we want to change the length of the first one? Well, now we’ve got to go back through and change the delay that follows. And what if we have another animation after that? And another one after that? Well, we’d have to go back through and calculate all the other delays down the line. That&#8217;s a lot of manual work.</p>
+<p>We can offload that work to the computer. Some of my more complex animations are hundreds of chained animations! If I finish my work and want to adjust something in the beginning, I don’t want to have to go back through everything. Enter timelines:</p>
+<pre><code class="language-javascript">gsap
+  .timeline()
+  .to(‘.ball’, {
+    duration: 1.5,
+    x: 200,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to(‘.ball’, {
+    duration: 1.5,
+    x: 0,
+    scale: 1,
+    ease: "back.inOut(3)"
+  });</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="657185aedbcddeccc2126a29b3203167" data-pen-title="Greensock Tutorial 4">See the Pen <a href="https://codepen.io/sdras/pen/657185aedbcddeccc2126a29b3203167"><br />
+Greensock Tutorial 4</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>This instantiates a timeline and then chains the two animations off of it.</p>
+<p>But we still have a bit of repetition where we keep using the same duration in each animation. Let’s create a default for that as an option passed to the timeline.</p>
+<pre><code class="language-javascript">gsap
+  .timeline({
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .to('.ball', {
+    x: 200,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball', {
+    x: 0,
+    scale: 1,
+    ease: "back.inOut(3)"
+  });</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="1904087b6b3ee7cf3a71180aaf21d45a" data-pen-title="Greensock Tutorial 4">See the Pen <a href="https://codepen.io/sdras/pen/1904087b6b3ee7cf3a71180aaf21d45a"><br />
+Greensock Tutorial 4</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>That’s pretty cool! Alright, you are probably starting to see how things are built this way. While it might not be a big deal in an animation this simple, defaults and timelines in really complex animations can truly keep code maintainable.</p>
+<p>Now, what if we want to mirror this motion in the other direction with the ball, and just&#8230; keep it going? In other words, what if we want a loop? That’s when we add <code>repeat: -1</code>, which can be applied either to a single animation or to the entire timeline.</p>
+<pre><code class="language-javascript">gsap
+  .timeline({
+    repeat: -1,
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .to('.ball', {
+    x: 200,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball', {
+    x: 0,
+    scale: 1,
+    ease: "back.inOut(3)"
+  })
+  .to('.ball', {
+    x: -200,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball', {
+    x: 0,
+    scale: 1,
+    ease: "back.inOut(3)"
+  });</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="e034b2995e3230cf7b22403286ce9b21" data-pen-title="Greensock Tutorial 5">See the Pen <a href="https://codepen.io/sdras/pen/e034b2995e3230cf7b22403286ce9b21"><br />
+Greensock Tutorial 5</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>We could also not only make it repeat but repeat and playback and forth, like a yoyo. That’s why we call this yoyo: true. To make the point clear, we’ll show this with just the first animation. You can see it plays forward, and then it plays in reverse.</p>
+<pre><code class="language-javascript">gsap
+  .timeline({
+    repeat: -1,
+    yoyo: true,
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .to('.ball', {
+    x: 200,
+    scale: 2,
+    ease: "bounce"
+  })</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="e001fbe750ab530cca09d7984556556c" data-pen-title="Greensock Tutorial 6">See the Pen <a href="https://codepen.io/sdras/pen/e001fbe750ab530cca09d7984556556c"><br />
+Greensock Tutorial 6</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<h3>Overlaps and Labels</h3>
+<p>It’s great that we can chain animations with ease, but real-life motion doesn’t exactly work this way. If you walk across the room to get a cup of water, you don’t walk. Then stop. Then pick up the water. Then drink it. You’re more likely to do things in one continuous movement. So let’s talk briefly about how to overlap movement and make things fire at once.</p>
+<p>If we want to be sure things fire a little before and after each other on a timeline, we can use an incrementer or decrementer. If we take the following example that shows three balls animating one after another, it feels a little stiff.</p>
+<pre><code class="language-javascript">gsap
+  .timeline({
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .to('.ball', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball2', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball3', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  })</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="9807332cd6d5ebfc70417ccedf574b21" data-pen-title="Greensock Tutorial 8">See the Pen <a href="https://codepen.io/sdras/pen/9807332cd6d5ebfc70417ccedf574b21"><br />
+Greensock Tutorial 8</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>Things get smoother if we overlap the movement just slightly using those decrementers passed as strings:</p>
+<pre><code class="language-javascript">gsap
+  .timeline({
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .to('.ball', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  })
+  .to('.ball2', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, '-=1')
+  .to('.ball3', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, '-=1')</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="2816aa314f6e0512550863ed8d4d5ae8" data-pen-title="Greensock Tutorial 9">See the Pen <a href="https://codepen.io/sdras/pen/2816aa314f6e0512550863ed8d4d5ae8"><br />
+Greensock Tutorial 9</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>Another way we can do this is to use something called a label. Labels make sure things fire off at a particular point in time in the playhead of the animation. It looks like this:<code>.add('labelName')</code></p>
+<pre data-line="7"><code class="language-javascript">gsap
+  .timeline({
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .add('start')
+  .to('.ball', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start')
+  .to('.ball2', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start')
+  .to('.ball3', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start')</code></pre>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="a2f562e899b0db07b6a44b3000e58927" data-pen-title="Greensock Tutorial 10">See the Pen <a href="https://codepen.io/sdras/pen/a2f562e899b0db07b6a44b3000e58927"><br />
+Greensock Tutorial 10</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>We can even increment and decrement from the label. I actually do this a lot in my animations. It looks like this:<br />
+<code>'start+=0.25'</code>.</p>
+<pre data-line="17,22"><code class="language-javascript">gsap
+  .timeline({
+    defaults: {
+      duration: 1.5
+    }
+  })
+  .add('start')
+  .to('.ball', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start')
+  .to('.ball2', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start+=0.25')
+  .to('.ball3', {
+    x: 300,
+    scale: 2,
+    ease: "bounce"
+  }, 'start+=0.5')</code></pre>
+<p>Whew! We’re able to do so much with this! Here’s an example of an animation that puts a lot of these premises together, with a bit of interaction using vanilla JavaScript. Be sure to click on the bell.</p>
+<p class="codepen" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-height="600" style="height: 600px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="LYELqPX" data-pen-title="phone interaction upgrade">See the Pen <a href="https://codepen.io/sdras/pen/LYELqPX"><br />
+phone interaction upgrade</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+on <a href="https://codepen.io">CodePen</a>.</p>
+<p>If you&#8217;re looking more for framework-based animation with GreenSock, here&#8217;s an <a href="https://css-tricks.com/intro-to-vue-5-animations/">article I wrote that covers this in Vue</a>, and a <a href="https://www.youtube.com/watch?v=W5AdUcJDHo0">talk I gave</a> that addresses React — it&#8217;s a couple of years old but the base premises still apply.</p>
+<p>But there’s still so much we haven’t cover, including staggers, morphing SVG, drawing SVG, throwing things around the screen, moving things along a path, animating text&#8230; you name it! I&#8217;d suggest heading over to <a href="https://greensock.com/">GreenSock’s documentation</a> for those details. I also have a <a href="https://frontendmasters.com/courses/svg-essentials-animation/">course on Frontend Masters</a> that covers all of these in much more depth and the materials are <a href="https://github.com/sdras/svg-workshop">open source on my GitHub</a>. I also have a lot of <a href="https://codepen.io/sdras/">Pens that are open source</a> for you to fork and play with.</p>
+<p>I hope this gets you started working with animation on the web! I can’t wait to see what you make!</p>
+</div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-animate-on-the-web-with-greensock/">How to Animate on the Web With GreenSock</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-animate-on-the-web-with-greensock/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301006</post-id>	</item>
+		<item>
+		<title>Understanding Async Await</title>
+		<link>https://css-tricks.com/understanding-async-await/</link>
+					<comments>https://css-tricks.com/understanding-async-await/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Thu, 09 Jan 2020 16:12:32 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[async]]></category>
+		<category><![CDATA[asynchronous]]></category>
+		<category><![CDATA[await]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[promises]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301107</guid>
+
+					<description><![CDATA[<p>When writing code for the web, eventually you&#8217;ll need to do some process that might take a few moments to complete. JavaScript can&#8217;t really multitask, so we&#8217;ll need a way to handle those long-running processes.</p>
+<p>Async/Await is a way to handle this type of time-based sequencing. It’s especially great for when you need to make some sort of network request and then work with the resulting data. Let&#8217;s dig in!</p>
+<p>Promise? Promise.</p>
+<p>Async/Await is a type of Promise. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">Promises</a> in &#8230; <a href="https://css-tricks.com/understanding-async-await/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Understanding Async Await&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/understanding-async-await/">Understanding Async Await</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>When writing code for the web, eventually you&#8217;ll need to do some process that might take a few moments to complete. JavaScript can&#8217;t really multitask, so we&#8217;ll need a way to handle those long-running processes.</p>
+<p>Async/Await is a way to handle this type of time-based sequencing. It’s especially great for when you need to make some sort of network request and then work with the resulting data. Let&#8217;s dig in!</p>
+<h3>Promise? Promise.</h3>
+<p>Async/Await is a type of Promise. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">Promises</a> in JavaScript are objects that can have multiple states (kind of like the real-life ones &#x263a;&#xfe0f;). Promises do this because sometimes what we ask for isn&#8217;t available immediately, and we&#8217;ll need to be able to detect what state it is in. </p>
+<p>Consider someone asks you to promise to do something for them, like help them move. There is the initial state, where they have asked. But you haven&#8217;t fulfilled your promise to them until you show up and help them move. If you cancel your plans, you rejected the promise.</p>
+<p>Similarly, the three possible states for a promise in JavaScript are: </p>
+<ul>
+<li><em>pending</em>: when you first call a promise and it’s unknown what it will return.</li>
+<li><em>fulfilled</em>: meaning that the operation completed successfully</li>
+<li><em>rejected</em>: the operation failed</li>
+</ul>
+<p>Here’s an example of a promise in these states:</p>
+<p>Here is the fulfilled state. We store a promise called <code>getSomeTacos</code>, passing in the resolve and reject parameters. We tell the promise it is resolved, and that allows us to then console log two more times.</p>
+<pre rel="JavaScript"><code class="language-javascript">const getSomeTacos = new Promise((resolve, reject) =&gt; {
+  console.log("Initial state: Excuse me can I have some tacos");
+
+  resolve();
+})
+  .then(() =&gt; {
+    console.log("Order some tacos");
+  })
+  .then(() =&gt; {
+    console.log("Here are your tacos");
+  })
+  .catch(err =&gt; {
+    console.error("Nope! No tacos for you.");
+  });</code></pre>
+<pre rel="console"><code class="language-javascript">&gt; Initial state: Excuse me can I have some tacos
+&gt; Order some tacos
+&gt; Here are your tacos</code></pre>
+<p class="codepen" data-height="700" style="height: 700px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="faca988359f13c8a98d2a6fe81ef43fa" style="height: 515px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Promise States">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/faca988359f13c8a98d2a6fe81ef43fa"><br />
+  Promise States</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p><script async src="https://static.codepen.io/assets/embed/ei.js"></script></p>
+<p>If we choose the rejected state, we&#8217;ll do the same function but reject it this time. Now what will be printed to the console is the Initial State and the catch error:</p>
+<pre rel="JavaScript"><code class="language-javascript" data-line="3">const getSomeTacos = new Promise((resolve, reject) =&gt; {
+  console.log("Initial state: Excuse me can I have some tacos");
+
+  reject();
+})
+  .then(() =&gt; {
+    console.log("Order some tacos");
+  })
+  .then(() =&gt; {
+    console.log("Here are your tacos");
+  })
+  .catch(err =&gt; {
+    console.error("Nope! No tacos for you.");
+  });</code></pre>
+<pre rel="console"><code class="language-javascript">&gt; Initial state: Excuse me can I have some tacos
+&gt; Nope! No tacos for you.</code></pre>
+<p>And when we select the pending state, we&#8217;ll simply <code>console.log</code> what we stored, <code>getSomeTacos</code>. This will print out a pending state because that&#8217;s the state the promise is in when we logged it!</p>
+<pre rel="JavaScript"><code class="language-javascript">console.log(getSomeTacos)</code></pre>
+<pre rel="console"><code class="language-javascript">&gt; Initial state: Excuse me can I have some &amp;#x1f32e;s
+&gt; Promise {&lt;pending&gt;}
+&gt; Order some &amp;#x1f32e;s
+&gt; Here are your &amp;#x1f32e;s</code></pre>
+<h3>What then?</h3>
+<p>But here’s a part that was confusing to me at first. To get a value out of a promise, you have to use <code>.then()</code> or something that <strong>returns the resolution of your promise</strong>. This makes sense if you think about it, because you need to capture what it will eventually be &mdash; rather than what it initially is &mdash; because it will be in that <em>pending</em> state initially. That&#8217;s why we saw it print out <code>Promise {&lt;pending&gt;}</code> when we logged the promise above. Nothing had resolved yet at that point in the execution.</p>
+<p>Async/Await is really syntactic sugar on top of those promises you just saw. Here&#8217;s a small example of how I might use it along with a promise to schedule multiple executions.</p>
+<pre rel="JavaScript"><code class="language-javascript">async function tacos() {
+  return await Promise.resolve("Now and then I get to eat delicious tacos!")
+};
+
+tacos().then(console.log)</code></pre>
+<p>Or a more in-depth example:</p>
+<pre rel="JavaScript"><code class="language-javascript">// this is the function we want to schedule. it's a promise.
+const addOne = (x) =&gt; {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; { 
+      console.log(`I added one! Now it's ${x + 1}.`)
+      resolve()
+    }, 2000);
+  })
+}
+
+// we will immediately log the first one, 
+// then the addOne promise will run, taking 2 seconds
+// then the final console.log will fire
+async function addAsync() {
+  console.log('I have 10')
+  await addOne(10)
+  console.log(`Now I'm done!`)
+}
+
+addAsync()</code></pre>
+<pre rel="console"><code class="language-javascript">&gt; I have 10
+&gt; I added one! Now it's 11.
+&gt; Now I'm done!</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="js" data-user="sdras" data-slug-hash="82036eab3291dde911d529fc2e11c95c" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Async Example 1">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/82036eab3291dde911d529fc2e11c95c"><br />
+  Async Example 1</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>One thing (a)waits for another</h3>
+<p>One common use of Async/Await is to use it to chain multiple asynchronous calls. Here, we&#8217;ll fetch some JSON that we&#8217;ll use to pass into our next fetch call to figure out what type of thing we want to fetch from the second <abbr>API</abbr>. In our case, we want to access some programming jokes, but we first need to find out from a different API what type of quote we want.</p>
+<p>The first JSON file looks like this- we want the type of quote to be random:</p>
+<pre rel="JSON"><code class="language-javascript">{
+  "type": "random"
+}</code></pre>
+<p>The second <abbr>API</abbr> will return something that looks like this, given that <code>random</code> query parameter we just got:</p>
+<pre rel="JavaScript"><code class="language-javascript">{
+  "_id":"5a933f6f8e7b510004cba4c2",
+  "en":"For all its power, the computer is a harsh taskmaster. Its programs must be correct, and what we wish to say must be said accurately in every detail.",
+  "author":"Alan Perlis",
+  "id":"5a933f6f8e7b510004cba4c2"
+}</code></pre>
+<p>We call the <code>async</code> function then let it wait to go retrieve the first <code>.json</code> file before it fetches data from the <abbr>API</abbr>. Once that happens, we can do something with that response, like add it to our page.</p>
+<pre rel="JavaScript"><code class="language-javascript">async function getQuote() {
+  // get the type of quote from one fetch call, everything else waits for this to finish
+  let quoteTypeResponse = await fetch(`https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/quotes.json`)
+  let quoteType = await quoteTypeResponse.json()
+
+    // use what we got from the first call in the second call to an API, everything else waits for this to finish
+  let quoteResponse = await fetch("https://programming-quotes-api.herokuapp.com/quotes/" + quoteType.type)
+  let quote = await quoteResponse.json()
+
+  // finish up
+  console.log('done')
+}</code></pre>
+<p>We can even simplify this using template literals and arrow functions:</p>
+<pre rel="JavaScript"><code class="language-javascript">async function getQuote() {
+  // get the type of quote from one fetch call, everything else waits for this to finish
+  let quoteType = await fetch(`quotes.json`).then(res =&gt; res.json())
+
+    // use what we got from the first call in the second call to an API, everything else waits for this to finish
+  let quote = await fetch(`programming-quotes.com/${quoteType.type}`).then(res =&gt; res.json())
+
+  // finish up
+  console.log('done')
+}
+
+getQuote()</code></pre>
+<p>Here is an animated explanation of this process.</p>
+<p class="codepen" data-height="700" style="height: 700px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="beda29c3add8da32650b758cdd05457c" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Animated Description of Async Await">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/beda29c3add8da32650b758cdd05457c"><br />
+  Animated Description of Async Await</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Try, Catch, Finally</h3>
+<p>Eventually we’ll want to add error states to this process. We have handy <code>try</code>, <code>catch</code>, and <code>finally</code> blocks for this.</p>
+<pre rel="JavaScript"><code class="language-javascript">try {
+  // I’ll try to execute some code for you
+}
+catch(error) {
+  // I’ll handle any errors in that process
+} 
+finally {
+  // I’ll fire either way
+}</code></pre>
+<p>Let’s restructure the code above to use this syntax and catch any errors.</p>
+<pre rel="JavaScript"><code class="language-javascript">async function getQuote() {
+  try {
+    // get the type of quote from one fetch call, everything else waits for this to finish
+    let quoteType = await fetch(`quotes.json`).then(res =&gt; res.json())
+
+      // use what we got from the first call in the second call to an API, everything else waits for this to finish
+    let quote = await fetch(`programming-quotes.com/${quoteType.type}`).then(res =&gt; res.json())
+
+    // finish up
+    console.log('done')
+  }
+
+  catch(error) {
+    console.warn(`We have an error here: ${error}`)
+  }
+}
+
+getQuote()</code></pre>
+<p>We didn’t use <code>finally</code> here because we don’t always need it. It is a block that will always fire whether it is successful or fails. Consider using <code>finally</code> any time you’re duplicating things in both <code>try</code> and <code>catch</code>. I usually use this for some cleanup. I wrote <a href="https://css-tricks.com/finally-a-post-on-finally-in-promises/">an article about this</a>, if you’re curious to know more.</p>
+<p>You might eventually want more sophisticated error handling, such as a way to cancel an async function. There is, unfortunately, no way to do this natively, but thankfully, Kyle Simpson created a <a href="https://github.com/getify/CAF">library called CAF that can help</a>.</p>
+<h3>Further Reading</h3>
+<p>It&#8217;s common for explanations of Async/Await to begin with callbacks, then promises, and use those explanations to frame Async/Await. Since Async/Await is well-supported these days, we didn’t walk through all of these steps. It’s still pretty good background, especially if you need to maintain older codebases. Here are some of my favorite resources out there:</p>
+<ul>
+<li><a href="https://tylermcginnis.com/async-javascript-from-callbacks-to-promises-to-async-await/">Async JavaScript: From Callbacks, to Promises, to Async/Await</a> (Tyler McGinnis)</li>
+<li><a href="https://egghead.io/courses/asynchronous-javascript-with-async-await">Asynchronous JavaScript with async/await</a> (Marius Schulz)</li>
+<li><a href="https://frontarm.com/courses/async-javascript/">Mastering Async JavaScript</a> (James K. Nelson)</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/understanding-async-await/">Understanding Async Await</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/understanding-async-await/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301107</post-id>	</item>
+		<item>
+		<title>How to Stack Elements in CSS</title>
+		<link>https://css-tricks.com/how-to-stack-elements-in-css/</link>
+					<comments>https://css-tricks.com/how-to-stack-elements-in-css/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Mon, 06 Jan 2020 15:05:47 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[absolute position]]></category>
+		<category><![CDATA[grid]]></category>
+		<category><![CDATA[overlay]]></category>
+		<category><![CDATA[relative position]]></category>
+		<category><![CDATA[stacking]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=301081</guid>
+
+					<description><![CDATA[<p>If you want to create fantastic and unique visual experiences on the web, you will eventually need two elements to overlap or exist in the same place. You may even just need them to be positioned near or next to each other. Let&#8217;s go over two different ways to accomplish this, one with the position property and one with CSS Grid.</p>
+</p>
+<p>Method 1: Using the Position Property</p>
+<p>You may already know that <code>position: absolute;</code> will place something absolutely on the &#8230; <a href="https://css-tricks.com/how-to-stack-elements-in-css/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Stack Elements in CSS&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-stack-elements-in-css/">How to Stack Elements in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>If you want to create fantastic and unique visual experiences on the web, you will eventually need two elements to overlap or exist in the same place. You may even just need them to be positioned near or next to each other. Let&#8217;s go over two different ways to accomplish this, one with the position property and one with CSS Grid.</p>
+<p><span id="more-301081"></span></p>
+<h3>Method 1: Using the Position Property</h3>
+<p>You may already know that <code>position: absolute;</code> will place something absolutely on the page wherever you want it to be. In this case, we’re absolutely positioning the child to the top-left of the page. No matter where the parent is, the child will be placed in that corner, absolutely.</p>
+<pre rel="CSS"><code class="language-css">.child {
+  ...
+  position: absolute;
+  top: 0;
+  left: 0;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="xxbLjOg" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Stacking, Absolute 1">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/xxbLjOg"><br />
+  CSS Stacking, Absolute 1</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>But this is very brittle! What if you were to place something on the page and then something else comes along after it? Maybe you have an icon within a navigation that you always want in the top-left corner, but a third party comes in and puts in a banner ad. (I’m not advocating for banner ads, but they do exist.) This pushes the navigation down and now the icon is out of place.</p>
+<p>Or, let’s say you want to make a self-contained component that you can use in multiple places. You need it to be reusable and work within its own context, no matter where you use it.</p>
+<p>If we put <code>position: relative;</code> on the parent element, anything inside of it with <code>position: absolute;</code> will be placed absolutely, relative to that containing unit!</p>
+<pre rel="CSS"><code class="language-css">.child {
+  /* ... */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.parent {
+  position: relative;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="xxbLjqd" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Stacking, Absolute 2">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/xxbLjqd"><br />
+  CSS Stacking, Absolute 2</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Nice.</p>
+<p>We can use this same premise if we wanted to stack two elements on top of each other. Here, we’ll have two child elements stacked on top of one another and set apart by 150 pixels. We&#8217;ll see that they&#8217;re now contained in that same parent and stay positioned inside it.</p>
+<pre rel="HTML"><code class="language-markup">&lt;div class="parent"&gt;
+  &lt;h2&gt;Parent&lt;/h2&gt;
+
+  &lt;div class="child child-1"&gt;
+    &lt;h2&gt;Child 1&lt;/h2&gt;
+  &lt;/div&gt;
+
+  &lt;div class="child child-2"&gt;
+    &lt;h2&gt;Child 2&lt;/h2&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<pre rel="CSS"><code class="language-css">.child {
+  position: absolute;
+  top: 0;
+}
+
+.child-1 {
+  left: 0;
+}
+
+.child-2 {
+  left: 150px;
+}
+
+.parent {
+  position: relative;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="rNazvmL" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Stacking, Absolute 3">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/rNazvmL"><br />
+  CSS Stacking, Absolute 3</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>This is a little old school, but I’ve been using it for years and I still reach for it. It works consistently across browsers and can help you achieve even the strangest and unique placements.</p>
+<h3>Method 2: Using CSS Grid</h3>
+<p>Another nice way of overlapping elements, stacking them, or modifying their placement is CSS Grid, depending on how far back you need to support (which you can <a href="https://caniuse.com/#feat=css-grid">check with caniuse</a>).</p>
+<p>We can place something where we need it in the container like this:</p>
+<pre rel="CSS"><code class="language-css">.parent {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 150px 1fr;
+}
+
+.child {
+  grid-area: 1 / 1 / 2 / 2;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="ZEYJovO" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Stacking, Grid 1">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/ZEYJovO"><br />
+  CSS Stacking, Grid 1</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>And if one element should stack on the other, we can put them in the exact same grid area. Let&#8217;s also offset them slightly by using a margin.</p>
+<pre rel="CSS"><code class="language-css">.parent {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 150px 1fr;
+}
+
+.child {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.child-2 {
+  margin-left: 200px;
+}</code></pre>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="result" data-user="sdras" data-slug-hash="MWYvGva" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Stacking, Grid 2">
+  <span>See the Pen <a href="https://codepen.io/sdras/pen/MWYvGva"><br />
+  CSS Stacking, Grid 2</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>If you find this technique difficult to visualize, I’ve created a <a href="https://cssgrid-generator.netlify.com/">CSS Grid Generator</a> that hopefully helps see things more clearly. </p>
+<hr>
+<p>There are so many places to use these techniques! You can stack, layer and offset elements. You can make navigations, footers. You can create just about any type of layout where you want to have more fine-grain control of how elements are placed on a page.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-stack-elements-in-css/">How to Stack Elements in CSS</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-stack-elements-in-css/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">301081</post-id>	</item>
+		<item>
+		<title>Create a Static Site Using Angular &#038; Scully</title>
+		<link>https://www.learnwithjason.dev/create-a-static-site-using-angular-scully</link>
+					<comments>https://css-tricks.com/create-a-static-site-using-angular-scully/#comments</comments>
+		
+		<dc:creator><![CDATA[Sarah Drasner]]></dc:creator>
+		<pubDate>Thu, 19 Dec 2019 23:32:14 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[angular]]></category>
+		<category><![CDATA[jamstack]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=300764</guid>
+
+					<description><![CDATA[<p>The team at HeroDevs has just released the <a href="https://github.com/scullyio/scully/tree/master/schematics/scully">alpha version of Scully</a>, a static site generator for Angular. That&#8217;s right, Angular didn&#8217;t have an intuitive way to create JAMstack applications before, but now it&#8217;s possible!</p>
+<p>Scully uses a node CLI application to run Angular schematics so you don’t have to learn any new language or syntax. You can see your static files in a new <code>dist</code> folder called <code>static</code> alongside your application folder.</p>
+<p>To watch the full setup, Tara &#8230; <a href="https://css-tricks.com/create-a-static-site-using-angular-scully/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Create a Static Site Using Angular &#038; Scully&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/create-a-static-site-using-angular-scully/">Create a Static Site Using Angular &#038; Scully</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>The team at HeroDevs has just released the <a href="https://github.com/scullyio/scully/tree/master/schematics/scully">alpha version of Scully</a>, a static site generator for Angular. That&#8217;s right, Angular didn&#8217;t have an intuitive way to create JAMstack applications before, but now it&#8217;s possible!</p>
+<p>Scully uses a node CLI application to run Angular schematics so you don’t have to learn any new language or syntax. You can see your static files in a new <code>dist</code> folder called <code>static</code> alongside your application folder.</p>
+<p>To watch the full setup, Tara Manicsic went through the process of setting it up on a Learn with Jason Twitch stream. You can <a href="https://www.learnwithjason.dev/create-a-static-site-using-angular-scully">check it out here</a> if you want to get started.</p>
+<p><a href="https://www.learnwithjason.dev/create-a-static-site-using-angular-scully" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/create-a-static-site-using-angular-scully/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/create-a-static-site-using-angular-scully/">Create a Static Site Using Angular &#038; Scully</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/create-a-static-site-using-angular-scully/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">300764</post-id>	</item>
+	</channel>
+</rss>

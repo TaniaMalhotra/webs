@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>autocomplete &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/autocomplete/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 27 Apr 2020 15:51:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>How to Add Lunr Search to your Gatsby Website</title>
+		<link>https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/</link>
+					<comments>https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/#comments</comments>
+		
+		<dc:creator><![CDATA[Paulina Hetman]]></dc:creator>
+		<pubDate>Wed, 22 Apr 2020 14:54:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[gatsby]]></category>
+		<category><![CDATA[graphql]]></category>
+		<category><![CDATA[search]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306624</guid>
+
+					<description><![CDATA[<p>The <a href="https://jamstack.org/">Jamstack way</a> of thinking and building websites is becoming more and more popular.</p>
+<p>Have you already tried <a href="https://www.gatsbyjs.org/">Gatsby,</a> <a href="https://nuxtjs.org/">Nuxt,</a> or <a href="https://gridsome.org/">Gridsome</a> (to cite only a few)? Chances are that your first contact was a “Wow!” moment — so many things are automatically set up and ready to use.&#160;</p>
+<p>There are some challenges, though, one of which is search functionality. If you’re working on any sort of content-driven site, you’ll likely run into search and how to handle it. Can &#8230; <a href="https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/" class="read-more">Read article <span class="screen-reader-text"> &#8220;How to Add Lunr Search to your Gatsby Website&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/">How to Add Lunr Search to your Gatsby Website</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://jamstack.org/">Jamstack way</a> of thinking and building websites is becoming more and more popular.</p>
+
+
+
+<p>Have you already tried <a href="https://www.gatsbyjs.org/">Gatsby,</a> <a href="https://nuxtjs.org/">Nuxt,</a> or <a href="https://gridsome.org/">Gridsome</a> (to cite only a few)? Chances are that your first contact was a “Wow!” moment — so many things are automatically set up and ready to use.&nbsp;</p>
+
+
+
+<p>There are some challenges, though, one of which is search functionality. If you’re working on any sort of content-driven site, you’ll likely run into search and how to handle it. Can it be done without any external server-side technology?&nbsp;</p>
+
+
+
+<p>Search is <em>not</em> one of those things that come out of the box with Jamstack. Some extra decisions and implementation are required.</p>
+
+
+
+<span id="more-306624"></span>
+
+
+
+<p>Fortunately, we have a bunch of options that might be more or less adapted to a project. We could use <a href="https://www.algolia.com/">Algolia’s</a> powerful search-as-service API. It comes with a free plan that is restricted to non-commercial projects with &nbsp;a limited capacity. If we were to use WordPress with <a href="https://www.wpgraphql.com">WPGraphQL</a> as a data source, we could take advantage of WordPress native search functionality and <a href="https://www.apollographql.com/docs/react/get-started/">Apollo Client.</a> Raymond Camden recently <a href="https://www.stackbit.com/blog/jamstack-search/">explored a few Jamstack search options</a>, including pointing a search form directly at Google.</p>
+
+
+
+<p>In this article, we will build a search index and add search functionality to a Gatsby website with <a href="https://lunrjs.com/">Lunr</a>, a lightweight JavaScript library providing an extensible and customizable search without the need for external, server-side services. We used it recently to add “Search by Tartan Name” to our Gatsby project <a href="https://tartanify.com/">tartanify.com</a>. We absolutely wanted persistent search as-you-type functionality, which brought some extra challenges. But that’s what makes it interesting, right? I’ll discuss some of the difficulties we faced and how we dealt with them in the second half of this article.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?fit=1024%2C581&amp;ssl=1" alt="" class="wp-image-306625" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?w=2584&amp;ssl=1 2584w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=300%2C170&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=1024%2C581&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=768%2C436&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=1536%2C871&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=2048%2C1162&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/7_e-KVoM.png?resize=1000%2C567&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h3>Getting started</h3>
+
+
+
+<p>For the sake of simplicity, let’s use the <a href="https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-blog/">official Gatsby blog starter</a>. Using a generic starter lets us abstract many aspects of building a static website. If you’re following along, make sure to install and run it:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">gatsby new gatsby-starter-blog https://github.com/gatsbyjs/gatsby-starter-blog
+cd gatsby-starter-blog
+gatsby develop</code></pre>
+
+
+
+<p>It’s a tiny blog with three posts we can view by opening up <code>http://localhost:8000/___graphql</code> in the browser.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?fit=1024%2C596&amp;ssl=1" alt="Showing the GraphQL page on the localhost installation in the browser." class="wp-image-306626" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?w=2754&amp;ssl=1 2754w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=300%2C175&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=1024%2C596&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=768%2C447&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=1536%2C893&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=2048%2C1191&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/fu5eAu70.png?resize=1000%2C582&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<h2>Inverting index with Lunr.js &#x1f643;</h2>
+
+
+
+<p>Lunr uses a <a href="https://www.geeksforgeeks.org/inverted-index/">record-level inverted index</a> as its data structure. The inverted index stores the mapping for each word found within a website to its location (basically a set of page paths). It’s on us to decide which fields (e.g. title, content, description, etc.) provide the keys (words) for the index.</p>
+
+
+
+<p>For our blog example, I decided to include all titles and the content of each article. Dealing with titles is straightforward since they are composed uniquely of words. Indexing <em>content</em> is a little more complex. My first try was to use the <code>rawMarkdownBody</code> field. Unfortunately, <code>rawMarkdownBody</code> introduces some unwanted keys resulting from the markdown syntax.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?fit=1024%2C556&amp;ssl=1" alt="Showing an attempt at using markdown syntax for links." class="wp-image-306627" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?w=1264&amp;ssl=1 1264w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?resize=300%2C163&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?resize=1024%2C556&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?resize=768%2C417&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/IDYB2CtA.png?resize=1000%2C543&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>I obtained a “clean” index using the html field in conjunction with the <a href="https://www.npmjs.com/package/striptags">striptags</a> package (which, as the name suggests, strips out the HTML tags). Before we get into the details, let’s look into the <a href="https://lunrjs.com/guides/getting_started.html">Lunr documentation.</a></p>
+
+
+
+<p>Here’s how we create and populate the Lunr index. We will use this snippet in a moment, specifically in our <code>gatsby-node.js</code> file.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">const index = lunr(function () {
+  this.ref('slug')
+  this.field('title')
+  this.field('content')
+  for (const doc of documents) {
+    this.add(doc)
+  }
+})</code></pre>
+
+
+
+<p>&nbsp;<code>documents</code> is an array of objects, each with a <code>slug</code>, <code>title</code> and <code>content</code> property:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">{
+  slug: '/post-slug/',
+  title: 'Post Title',
+  content: 'Post content with all HTML tags stripped out.'
+}</code></pre>
+
+
+
+<p>We will define a unique document key (the <code>slug</code>) and two fields (the <code>title</code> and <code>content</code>, or the key providers). Finally, we will add all of the documents, one by one.</p>
+
+
+
+<p>Let’s get started.</p>
+
+
+
+<h3>Creating an index in gatsby-node.js&nbsp;</h3>
+
+
+
+<p>Let’s start by installing the libraries that we are going to use.</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">yarn add lunr graphql-type-json striptags</code></pre>
+
+
+
+<p>Next, we need to edit the <code>gatsby-node.js</code> file. The code from this file runs once in the process of building a site, and our aim is to add index creation to the tasks that Gatsby executes on build.&nbsp;</p>
+
+
+
+<p><code><a href="https://www.gatsbyjs.org/docs/node-apis/#createResolvers">CreateResolvers</a></code> is one of the Gatsby APIs controlling the GraphQL data layer. In this particular case, we will use it to create a new root field; Let&#8217;s call it <code>LunrIndex</code>.&nbsp;</p>
+
+
+
+<p>Gatsby’s internal data store and query capabilities are exposed to GraphQL field resolvers on <a href="https://www.gatsbyjs.org/docs/node-model/"><code>context.nodeModel</code></a>. With <a href="https://www.gatsbyjs.org/docs/node-model/#getAllNodes"><code>getAllNodes</code></a>, we can get all nodes of a specified type:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="12, 13, 14"><code markup="tt">/* gatsby-node.js */
+const { GraphQLJSONObject } = require(`graphql-type-json`)
+const striptags = require(`striptags`)
+const lunr = require(`lunr`)
+
+exports.createResolvers = ({ cache, createResolvers }) => {
+  createResolvers({
+    Query: {
+      LunrIndex: {
+        type: GraphQLJSONObject,
+        resolve: (source, args, context, info) => {
+          const blogNodes = context.nodeModel.getAllNodes({
+            type: `MarkdownRemark`,
+          })
+          const type = info.schema.getType(`MarkdownRemark`)
+          return createIndex(blogNodes, type, cache)
+        },
+      },
+    },
+  })
+}</code></pre>
+
+
+
+<p>Now let’s focus on the <code>createIndex</code> function. That’s where we will use the Lunr snippet we mentioned in the last section.&nbsp;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* gatsby-node.js */
+const createIndex = async (blogNodes, type, cache) => {
+  const documents = []
+  // Iterate over all posts 
+  for (const node of blogNodes) {
+    const html = await type.getFields().html.resolve(node)
+    // Once html is resolved, add a slug-title-content object to the documents array
+    documents.push({
+      slug: node.fields.slug,
+      title: node.frontmatter.title,
+      content: striptags(html),
+    })
+  }
+  const index = lunr(function() {
+    this.ref(`slug`)
+    this.field(`title`)
+    this.field(`content`)
+    for (const doc of documents) {
+      this.add(doc)
+    }
+  })
+  return index.toJSON()
+}</code></pre>
+
+
+
+<p>Have you noticed that instead of accessing the HTML element directly with &nbsp;<code>const html = node.html</code>, we’re using an &nbsp;<code>await</code> expression? That’s because <code>node.html</code> isn’t available yet. The <a href="https://www.gatsbyjs.org/packages/gatsby-transformer-remark/">gatsby-transformer-remark</a>&nbsp;plugin (used by our starter to parse Markdown files) does not generate HTML from markdown immediately when creating the <code>MarkdownRemark</code> nodes. Instead, &nbsp;<code>html</code> is generated lazily when the html field resolver is called in a query. The same actually applies to the <code>excerpt</code> that we will need in just a bit.</p>
+
+
+
+<p>Let’s look ahead and think about how we are going to display search results. Users expect to obtain a link to the matching post, with its title as the anchor text. Very likely, they wouldn’t mind a short excerpt as well.</p>
+
+
+
+<p>Lunr’s search returns an array of objects representing matching documents by the <code>ref</code> property (which is the unique document key <code>slug</code> in our example). This array does not contain the document title nor the content. Therefore, we need to store somewhere the post title and excerpt corresponding to each slug. We can do that within our <code>LunrIndex</code> as below:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* gatsby-node.js */
+const createIndex = async (blogNodes, type, cache) => {
+  const documents = []
+  const store = {}
+  for (const node of blogNodes) {
+    const {slug} = node.fields
+    const title = node.frontmatter.title
+    const [html, excerpt] = await Promise.all([
+      type.getFields().html.resolve(node),
+      type.getFields().excerpt.resolve(node, { pruneLength: 40 }),
+    ])
+    documents.push({
+      // unchanged
+    })
+    store[slug] = {
+      title,
+      excerpt,
+    }
+  }
+  const index = lunr(function() {
+    // unchanged
+  })
+  return { index: index.toJSON(), store }
+}</code></pre>
+
+
+
+<p>Our search index changes only if one of the posts is modified or a new post is added. We don’t need to rebuild the index each time we run <code>gatsby develop</code>. To avoid unnecessary builds, let’s take advantage of the <a href="https://www.gatsbyjs.org/docs/build-caching/">cache API</a>:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* gatsby-node.js */
+const createIndex = async (blogNodes, type, cache) => {
+  const cacheKey = `IndexLunr`
+  const cached = await cache.get(cacheKey)
+  if (cached) {
+    return cached
+  }
+  // unchanged
+  const json = { index: index.toJSON(), store }
+  await cache.set(cacheKey, json)
+  return json
+}</code></pre>
+
+
+
+<h2>Enhancing pages with the search form component</h2>
+
+
+
+<p>We can now move on to the front end of our implementation. Let’s start by building a search form component.</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">touch src/components/search-form.js </code></pre>
+
+
+
+<p>I opt for a straightforward solution: an input of <code>type="search"</code>, coupled with a label and accompanied by a submit button, all wrapped within a form tag with the <code>search</code> landmark role.</p>
+
+
+
+<p>We will add two event handlers, <code>handleSubmit</code> on form submit and <code>handleChange</code> on changes to the search input.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/search-form.js */
+import React, { useState, useRef } from "react"
+import { navigate } from "@reach/router"
+const SearchForm = ({ initialQuery = "" }) => {
+  // Create a piece of state, and initialize it to initialQuery
+  // query will hold the current value of the state,
+  // and setQuery will let us change it
+  const [query, setQuery] = useState(initialQuery)
+  
+  // We need to get reference to the search input element
+  const inputEl = useRef(null)
+
+  // On input change use the current value of the input field (e.target.value)
+  // to update the state's query value
+  const handleChange = e => {
+    setQuery(e.target.value)
+  }
+  
+  // When the form is submitted navigate to /search
+  // with a query q paramenter equal to the value within the input search
+  const handleSubmit = e => {
+    e.preventDefault()
+    // `inputEl.current` points to the mounted search input element
+    const q = inputEl.current.value
+    navigate(`/search?q=${q}`)
+  }
+  return (
+    &lt;form role="search" onSubmit={handleSubmit}>
+      &lt;label htmlFor="search-input" style={{ display: "block" }}>
+        Search for:
+      &lt;/label>
+      &lt;input
+        ref={inputEl}
+        id="search-input"
+        type="search"
+        value={query}
+        placeholder="e.g. duck"
+        onChange={handleChange}
+      />
+      &lt;button type="submit">Go&lt;/button>
+    &lt;/form>
+  )
+}
+export default SearchForm</code></pre>
+
+
+
+<p>Have you noticed that we’re importing <code>navigate</code> from the <code>@reach/router</code> package? That is necessary since neither Gatsby’s <code>&lt;Link/&gt;</code> nor <code>navigate</code> provide in-route navigation with a query parameter. Instead, we can import <code>@reach/router</code> — there’s no need to install it since Gatsby already includes it — and use its <code>navigate</code> function.</p>
+
+
+
+<p>Now that we’ve built our component, let’s add it to our home page (as below) and 404 page.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="3,10"><code markup="tt">/* src/pages/index.js */
+// unchanged
+import SearchForm from "../components/search-form"
+const BlogIndex = ({ data, location }) => {
+  // unchanged
+  return (
+    &lt;Layout location={location} title={siteTitle}>
+      &lt;SEO title="All posts" />
+      &lt;Bio />
+      &lt;SearchForm />
+      // unchanged</code></pre>
+
+
+
+<h3>Search results page</h3>
+
+
+
+<p>Our <code>SearchForm</code> component navigates to the <code>/search</code> route when the form is submitted, but for the moment, there is nothing behing this URL. That means we need to add a new page:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">touch src/pages/search.js </code></pre>
+
+
+
+<p>I proceeded by copying and adapting the content of the the <code>index.js</code> page. One of the essential modifications concerns the <a href="https://www.gatsbyjs.org/docs/page-query/">page query</a> (see the very bottom of the file). We will replace <code>allMarkdownRemark</code> with the <code>LunrIndex</code> field.&nbsp;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line="49"><code markup="tt">/* src/pages/search.js */
+import React from "react"
+import { Link, graphql } from "gatsby"
+import { Index } from "lunr"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import SearchForm from "../components/search-form"
+ 
+// We can access the results of the page GraphQL query via the data props
+const SearchPage = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata.title
+  
+  // We can read what follows the ?q= here
+  // URLSearchParams provides a native way to get URL params
+  // location.search.slice(1) gets rid of the "?" 
+  const params = new URLSearchParams(location.search.slice(1))
+  const q = params.get("q") || ""
+ 
+  // LunrIndex is available via page query
+  const { store } = data.LunrIndex
+  // Lunr in action here
+  const index = Index.load(data.LunrIndex.index)
+  let results = []
+  try {
+    // Search is a lunr method
+    results = index.search(q).map(({ ref }) => {
+      // Map search results to an array of {slug, title, excerpt} objects
+      return {
+        slug: ref,
+        ...store[ref],
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+  return (
+    // We will take care of this part in a moment
+  )
+}
+export default SearchPage
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    LunrIndex
+  }
+`</code></pre>
+
+
+
+<p>Now that we know how to retrieve the query value and the matching posts, let’s display the content of the page. Notice that on the search page we pass the query value to the&nbsp;<code>&lt;SearchForm /&gt;</code> component via the <code>initialQuery</code> props. When the user arrives to the search results page, their search query should remain in the input field.&nbsp;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">return (
+  &lt;Layout location={location} title={siteTitle}>
+    &lt;SEO title="Search results" />
+    {q ? &lt;h1>Search results&lt;/h1> : &lt;h1>What are you looking for?&lt;/h1>}
+    &lt;SearchForm initialQuery={q} />
+    {results.length ? (
+      results.map(result => {
+        return (
+          &lt;article key={result.slug}>
+            &lt;h2>
+              &lt;Link to={result.slug}>
+                {result.title || result.slug}
+              &lt;/Link>
+            &lt;/h2>
+            &lt;p>{result.excerpt}&lt;/p>
+          &lt;/article>
+        )
+      })
+    ) : (
+      &lt;p>Nothing found.&lt;/p>
+    )}
+  &lt;/Layout>
+)</code></pre>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/gatsby-starter-blog-search.mp4"></video></figure>
+
+
+
+<p>You can find the complete code in this <a href="https://github.com/pehaa/gatsby-starter-blog">gatsby-starter-blog fork</a> and the <a href="https://gatsby-starter-blog-lunr.netlify.com/">live demo deployed on Netlify</a>.</p>
+
+
+
+<h3><strong>Instant search widget</strong></h3>
+
+
+
+<p>Finding the most “logical” and user-friendly way of implementing search may be a challenge in and of itself. Let’s now switch to the real-life example of <a href="https://tartanify.com/">tartanify.com</a> — a Gatsby-powered website gathering 5,000+ tartan patterns. Since tartans are often associated with clans or organizations, the possibility to search a tartan by <em>name </em>seems to make sense.&nbsp;</p>
+
+
+
+<p>We built tartanify.com as a side project where we feel absolutely free to experiment with things. We didn’t want a classic search results page but an <strong><em>instant search </em></strong>“widget.” Often, a given search keyword corresponds with a number of results — for example, “Ramsay” comes in six variations. &nbsp;We imagined the search widget would be persistent, meaning it should stay in place when a user navigates from one matching tartan to another.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/ramsay1.mp4"></video></figure>
+
+
+
+<p>Let me show you how we made it work with Lunr.&nbsp; The first step of building the index is very similar to the gatsby-starter-blog example, only simpler:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* gatsby-node.js */
+exports.createResolvers = ({ cache, createResolvers }) => {
+  createResolvers({
+    Query: {
+      LunrIndex: {
+        type: GraphQLJSONObject,
+        resolve(source, args, context) {
+          const siteNodes = context.nodeModel.getAllNodes({
+            type: `TartansCsv`,
+          })
+          return createIndex(siteNodes, cache)
+        },
+      },
+    },
+  })
+}
+const createIndex = async (nodes, cache) => {
+  const cacheKey = `LunrIndex`
+  const cached = await cache.get(cacheKey)
+  if (cached) {
+    return cached
+  }
+  const store = {}
+  const index = lunr(function() {
+    this.ref(`slug`)
+    this.field(`title`)
+    for (node of nodes) {
+      const { slug } = node.fields
+      const doc = {
+        slug,
+        title: node.fields.Unique_Name,
+      }
+      store[slug] = {
+        title: doc.title,
+      }
+      this.add(doc)
+    }
+  })
+  const json = { index: index.toJSON(), store }
+  cache.set(cacheKey, json)
+  return json
+}</code></pre>
+
+
+
+<p>We opted for instant search, which means that search is triggered by any change in the search input instead of a form submission.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchwidget.js */
+import React, { useState } from "react"
+import lunr, { Index } from "lunr"
+import { graphql, useStaticQuery } from "gatsby"
+import SearchResults from "./searchresults"
+ 
+const SearchWidget = () => {
+  const [value, setValue] = useState("")
+  // results is now a state variable 
+  const [results, setResults] = useState([])
+ 
+  // Since it's not a page component, useStaticQuery for quering data
+  // https://www.gatsbyjs.org/docs/use-static-query/
+  const { LunrIndex } = useStaticQuery(graphql`
+    query {
+      LunrIndex
+    }
+  `)
+  const index = Index.load(LunrIndex.index)
+  const { store } = LunrIndex
+  const handleChange = e => {
+    const query = e.target.value
+    setValue(query)
+    try {
+      const search = index.search(query).map(({ ref }) => {
+        return {
+          slug: ref,
+          ...store[ref],
+        }
+      })
+      setResults(search)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  return (
+    &lt;div className="search-wrapper">
+      // You can use a form tag as well, as long as we prevent the default submit behavior
+      &lt;div role="search">
+        &lt;label htmlFor="search-input" className="visually-hidden">
+          Search Tartans by Name
+        &lt;/label>
+        &lt;input
+          id="search-input"
+          type="search"
+          value={value}
+          onChange={handleChange}
+          placeholder="Search Tartans by Name"
+        />
+      &lt;/div>
+      &lt;SearchResults results={results} />
+    &lt;/div>
+  )
+}
+export default SearchWidget</code></pre>
+
+
+
+<p>The <code>SearchResults</code> are structured like this:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchresults.js */
+import React from "react"
+import { Link } from "gatsby"
+const SearchResults = ({ results }) => (
+  &lt;div>
+    {results.length ? (
+      &lt;>
+        &lt;h2>{results.length} tartan(s) matched your query&lt;/h2>
+        &lt;ul>
+          {results.map(result => (
+            &lt;li key={result.slug}>
+              &lt;Link to={`/tartan/${result.slug}`}>{result.title}&lt;/Link>
+            &lt;/li>
+          ))}
+        &lt;/ul>
+      &lt;/>
+    ) : (
+      &lt;p>Sorry, no matches found.&lt;/p>
+    )}
+  &lt;/div>
+)
+export default SearchResults</code></pre>
+
+
+
+<h3>Making it persistent</h3>
+
+
+
+<p>Where should we use this component? We could add it to the <code>Layout</code> component. The problem is that our search form will get unmounted on page changes that way. If a user wants to browser all tartans associated with the “Ramsay” clan, they will have to retype their query several times. That’s not ideal.</p>
+
+
+
+<p><a href="https://twitter.com/weibenfalk">Thomas Weibenfalk</a> has written a great article on <a href="https://levelup.gitconnected.com/keeping-state-between-pages-with-local-state-in-gatsby-js-96f8583e0db2">keeping state between pages with local state in Gatsby.js</a>. We will use the same technique, where the <a href="https://www.gatsbyjs.org/docs/browser-apis/%23wrapPageElement"><code>wrapPageElement</code></a> browser API sets persistent UI elements around pages.&nbsp;</p>
+
+
+
+<p>Let’s add the following code to the <code>gatsby-browser.js</code>. You <em>might</em> need to add this file to the root of your project.</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* gatsby-browser.js */
+import React from "react"
+import SearchWrapper from "./src/components/searchwrapper"
+export const wrapPageElement = ({ element, props }) => (
+  &lt;SearchWrapper {...props}>{element}&lt;/SearchWrapper>
+)</code></pre>
+
+
+
+<p>Now let’s add a new component file:</p>
+
+
+
+<pre rel="Terminal" class="wp-block-csstricks-code-block language-none" data-line=""><code markup="tt">touch src/components/searchwrapper.js</code></pre>
+
+
+
+<p>Instead of adding <code>SearchWidget</code> component to the <code>Layout</code>, we will add it to the <code>SearchWrapper</code> and the magic happens. &#x2728;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchwrapper.js */
+import React from "react"
+import SearchWidget from "./searchwidget"
+ 
+const SearchWrapper = ({ children }) => (
+  &lt;>
+    {children}
+    &lt;SearchWidget />
+  &lt;/>
+)
+export default SearchWrapper</code></pre>
+
+
+
+<h3><strong>Creating a custom search query</strong></h3>
+
+
+
+<p>At this point, I started to try different keywords but very quickly realized that Lunr’s default search query might not be the best solution when used for instant search.</p>
+
+
+
+<p>Why? Imagine that we are looking for tartans associated with the name <em>MacCallum. </em>While typing “MacCallum” letter-by-letter, this is the evolution of the results:</p>
+
+
+
+<ul><li><code>m</code> &#8211; 2 matches (Lyon, Jeffrey M, Lyon, Jeffrey M (Hunting))</li><li><code>ma</code> &#8211; no matches</li><li><code>mac</code> &#8211; 1 match (Brighton Mac Dermotte)</li><li><code>macc</code> &#8211; no matches</li><li><code>macca</code> &#8211; no matches</li><li><code>maccal</code> &#8211; 1 match (MacCall)</li><li><code>maccall</code> &#8211; 1 match (MacCall)</li><li><code>maccallu</code> &#8211; no matches</li><li><code>maccallum</code> &#8211; 3 matches (MacCallum, MacCallum #2, MacCallum of Berwick)</li></ul>
+
+
+
+<p>Users will probably type the full name and hit the button if we make a button available. But with instant search, a user is likely to abandon early because they may expect that the results can only narrow down letters are added to the keyword query.</p>
+
+
+
+<p>&nbsp;That’s not the only problem. Here’s what we get with “Callum”:</p>
+
+
+
+<ul><li><code>c</code> &#8211; 3 unrelated matches</li><li><code>ca</code> &#8211; no matches</li><li><code>cal</code> &#8211; no matches</li><li><code>call</code> &#8211; no matches</li><li><code>callu</code> &#8211; no matches</li><li><code>callum</code> &#8211; one match&nbsp;</li></ul>
+
+
+
+<p>You can see the trouble if someone gives up halfway into typing the full query.</p>
+
+
+
+<p>Fortunately, <a href="https://lunrjs.com/guides/searching.html">Lunr supports more complex queries,</a> including fuzzy matches, wildcards and boolean logic (e.g. AND, OR, NOT) for multiple terms. All of these are available either via a special query syntax, for example:&nbsp;</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">index.search("+*callum mac*")</code></pre>
+
+
+
+<p>We could also reach for the <a href="https://lunrjs.com/docs/lunr.Index.html%23query">index <code>query</code> method</a> to handle it programatically.</p>
+
+
+
+<p>The first solution is not satisfying since it requires more effort from the user. I used the <code>index.query</code> method instead:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchwidget.js */
+const search = index
+  .query(function(q) {
+    // full term matching
+    q.term(el)
+    // OR (default)
+    // trailing or leading wildcard
+    q.term(el, {
+      wildcard:
+        lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
+    })
+  })
+  .map(({ ref }) => {
+    return {
+      slug: ref,
+      ...store[ref],
+    }
+  })</code></pre>
+
+
+
+<p>Why use full term matching with wildcard matching? That’s necessary for all keywords that “benefit” from <a href="https://lunrjs.com/guides/core_concepts.html%23stemming">the stemming process.</a> For example, the stem of &#8220;different&#8221; is &#8220;differ.&#8221; &nbsp;As a consequence, queries with wildcards — such as <code>differe*</code>, <code>differen*</code> or &nbsp;<code>different*</code> — all result in no matches, while the full term queries <code>differe</code>, <code>differen</code> and <code>different</code> return matches.</p>
+
+
+
+<p>Fuzzy matches can be used as well. In our case, they are allowed uniquely for terms of five or more characters:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">q.term(el, { editDistance: el.length > 5 ? 1 : 0 })
+q.term(el, {
+  wildcard:
+    lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
+})</code></pre>
+
+
+
+<p>The <code>handleChange</code> function also “cleans up” user inputs and ignores single-character terms:</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchwidget.js */  
+const handleChange = e => {
+  const query = e.target.value || ""
+  setValue(query)
+  if (!query.length) {
+    setResults([])
+  }
+  const keywords = query
+    .trim() // remove trailing and leading spaces
+    .replace(/\*/g, "") // remove user's wildcards
+    .toLowerCase()
+    .split(/\s+/) // split by whitespaces
+  // do nothing if the last typed keyword is shorter than 2
+  if (keywords[keywords.length - 1].length &lt; 2) {
+    return
+  }
+  try {
+    const search = index
+      .query(function(q) {
+        keywords
+          // filter out keywords shorter than 2
+          .filter(el => el.length > 1)
+          // loop over keywords
+          .forEach(el => {
+            q.term(el, { editDistance: el.length > 5 ? 1 : 0 })
+            q.term(el, {
+              wildcard:
+                lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
+            })
+          })
+      })
+      .map(({ ref }) => {
+        return {
+          slug: ref,
+          ...store[ref],
+        }
+      })
+    setResults(search)
+  } catch (error) {
+    console.log(error)
+  }
+}</code></pre>
+
+
+
+<p>Let’s check it in action:</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/searchmaccallum.mp4"></video></figure>
+
+
+
+<ul><li><code>m</code> &#8211; pending</li><li><code>ma</code> &#8211; 861 matches</li><li><code>mac</code> &#8211; 600 matches</li><li><code>macc</code> &#8211; 35 matches</li><li><code>macca</code> &#8211; 12 matches</li><li><code>maccal</code> &#8211; 9 matches</li><li><code>maccall</code> &#8211; 9 matches</li><li><code>maccallu</code> &#8211; 3 matches</li><li><code>maccallum</code> &#8211; 3 matches</li></ul>
+
+
+
+<p>Searching for &#8220;Callum&#8221; works as well, resulting in four matches: Callum, MacCallum, MacCallum #2, and MacCallum of Berwick.</p>
+
+
+
+<p>There is one more problem, though: multi-terms queries. Say, you’re looking for “Loch Ness<em>.”</em> There are two tartans associated with &nbsp;that term, but with the default OR logic, you get a grand total of 96 results. (There are plenty of other lakes in Scotland.)</p>
+
+
+
+<p>I wound up deciding that an AND search would work better for this project. Unfortunately, Lunr does not support nested queries, and what we actually need is (<code>keyword1 OR *keyword*) AND (keyword2 OR *keyword2*</code>).&nbsp;</p>
+
+
+
+<p>To overcome this, I ended up moving the terms loop outside the <code>query</code> method and intersecting the results per term. (By intersecting, I mean finding all slugs that appear in all of the per-single-keyword results.)</p>
+
+
+
+<pre rel="JavaScript" class="wp-block-csstricks-code-block language-javascript" data-line=""><code markup="tt">/* src/components/searchwidget.js */
+try {
+  // andSearch stores the intersection of all per-term results
+  let andSearch = []
+  keywords
+    .filter(el => el.length > 1)
+    // loop over keywords
+    .forEach((el, i) => {
+      // per-single-keyword results
+      const keywordSearch = index
+        .query(function(q) {
+          q.term(el, { editDistance: el.length > 5 ? 1 : 0 })
+          q.term(el, {
+            wildcard:
+              lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
+          })
+        })
+        .map(({ ref }) => {
+          return {
+            slug: ref,
+            ...store[ref],
+          }
+        })
+      // intersect current keywordSearch with andSearch
+      andSearch =
+        i > 0
+          ? andSearch.filter(x => keywordSearch.some(el => el.slug === x.slug))
+          : keywordSearch
+    })
+  setResults(andSearch)
+} catch (error) {
+  console.log(error)
+}</code></pre>
+
+
+
+<p>The source code for <a href="https://github.com/pehaa/tartanify.com">tartanify.com is published on GitHub</a>. You can see the complete implementation of the Lunr search there.</p>
+
+
+
+<h3>Final thoughts</h3>
+
+
+
+<p>Search is often a non-negotiable feature for finding content on a site. How important the search functionality actually is may vary from one project to another. Nevertheless, there is no reason to abandon it under the pretext that it does not tally with the static character of Jamstack websites. There are many possibilities. We’ve just discussed one of them.</p>
+
+
+
+<p>And, paradoxically in this specific example, the result was a better all-around user experience, thanks to the fact that implementing search was not an obvious task but instead required a lot of deliberation. We may not have been able to say the same with an over-the-counter solution.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/">How to Add Lunr Search to your Gatsby Website</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/how-to-add-lunr-search-to-your-gatsby-website/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/gatsby-starter-blog-search.mp4" length="212727" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/ramsay1.mp4" length="1589769" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/searchmaccallum.mp4" length="659344" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306624</post-id>	</item>
+		<item>
+		<title>Better Form Inputs for Better Mobile User Experiences</title>
+		<link>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/</link>
+					<comments>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2020 15:08:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306387</guid>
+
+					<description><![CDATA[<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&#160;</p>
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can &#8230; <a href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Better Form Inputs for Better Mobile User Experiences&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&nbsp;</p>
+
+
+
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can ensure that the data entry process is as seamless as possible for our users. Let’s take a look at some examples and best practices we can use to create better user experiences on mobile devices.</p>
+
+
+
+<span id="more-306387"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?fit=1024%2C842&amp;ssl=1" alt="" class="wp-image-306391" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?w=2408&amp;ssl=1 2408w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1024%2C842&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=768%2C631&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1536%2C1263&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=2048%2C1684&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1000%2C822&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://better-mobile-inputs.netlify.com/" class="ek-link">Use this demo</a> to experiment on your own, if you’d like.</figcaption></figure>
+
+
+
+<h3>Using the correct input type</h3>
+
+
+
+<p>This is the easiest thing to get right. Input types, like <code>email</code>, <code>tel</code>, and <code>url</code>, are well-supported across browsers. While the benefit of using a type, like <code>tel</code> over the more generic <code>text</code>, might be hard to see on desktop browsers, it’s immediately apparent on mobile. </p>
+
+
+
+<p>Choosing the appropriate type changes the keyboard that pops up on Android and iOS devices when a user focuses the field. For very little effort, just by using the right type, we will show custom keyboards for <a href="https://better-mobile-inputs.netlify.com/?type=email" class="ek-link">email</a>, <a href="https://better-mobile-inputs.netlify.com/?type=tel" class="ek-link">telephone numbers</a>, <a href="https://better-mobile-inputs.netlify.com/?type=url" class="ek-link">URLs</a>, and even <a href="https://better-mobile-inputs.netlify.com/?type=search" class="ek-link">search inputs</a>.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306392" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Text input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306393" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Email input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306394" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>URL input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306395" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Search input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One thing to note is that both <code>input type="email"</code> and <code>input type="url"</code> come with validation functionality, and modern browsers will show an error tooltip if their values do not match the expected formats when the user submits the form. If you&#8217;d rather turn this functionality off, you <a href="https://codepen.io/aholachek/pen/poJMXpj" class="ek-link">can simply add the <code>novalidate</code> attribute to the containing <code>form</code></a>.</p>
+
+
+
+<h3>A quick detour into date types</h3>
+
+
+
+<p>HTML inputs comprise far more than specialized text inputs — you also have radio buttons, checkboxes, and so on. For the purposes of this discussion, though, I’m mostly talking about the more <strong>text-based inputs</strong>.&nbsp;</p>
+
+
+
+<p>There is a type of input that sits in the liminal space between the more free-form text inputs and input widgets like radio buttons: <strong><code>date</code></strong>. The <code>date</code> input type comes in a variety of flavors that are well-supported on mobile, including <a href="https://better-mobile-inputs.netlify.com/?type=date" class="ek-link"><code>date</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=time" class="ek-link"><code>time</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=datetime-local" class="ek-link"><code>datetime-local</code></a>, and <a href="https://better-mobile-inputs.netlify.com/?type=month" class="ek-link"><code>month</code></a>. These pop up custom widgets in iOS and Android when they are focused. Instead of triggering a specialized keyboard, they show a select-like interface in iOS, and various different types of widgets on Android (where the <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=date" class="ek-link"><code>date</code></a> and <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=time" class="ek-link"><code>time</code></a> selectors are particularly slick).&nbsp;</p>
+
+
+
+<p>I was excited to start using native defaults on mobile, until I looked around and realized that most major apps and mobile websites use custom date pickers rather than native date input types.&nbsp;There could be a couple reasons for this. First, I find the native iOS date selector to be less intuitive than a calendar-type widget. Second, even the beautifully-designed Android implementation is fairly limited compared to custom components — there’s no easy way to input a date range rather than a single date, for instance.&nbsp;</p>
+
+
+
+<p>Still, the date input types are worth checking out if the custom datepicker you’re using doesn’t perform well on mobile. If you’d like to try out the native input widgets on iOS and Android while making sure that desktop users see a custom widget instead of the default dropdown, this snippet of CSS <a href="https://codepen.io/aholachek/pen/RwPXjWJ?editors=1100" class="ek-link">will hide the calendar dropdown</a> for desktop browsers that implement it:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">::-webkit-calendar-picker-indicator {
+  display: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?fit=1024%2C521&amp;ssl=1" alt="" class="wp-image-306396" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?w=1315&amp;ssl=1 1315w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1024%2C521&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1000%2C509&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Date input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?fit=1024%2C486&amp;ssl=1" alt="" class="wp-image-306397" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?w=1411&amp;ssl=1 1411w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=300%2C142&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1024%2C486&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=768%2C364&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1000%2C474&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Time input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One final thing to note is that <code>date</code> types cannot be overridden by the <code>inputmode</code> attribute, which we&#8217;ll discuss next.</p>
+
+
+
+<h3>Why should I care about inputmode?</h3>
+
+
+
+<p>The <code>inputmode</code> attribute allows you to override the mobile keyboard specified by the input’s type and directly declare the type of keyboard shown to the user. When I first learned about this attribute, I wasn’t impressed — why not just use the correct <code>type</code> in the first place? But while <code>inputmode</code> is often unnecessary, there are a few places where the attribute can be extremely helpful. The most notable use case that I’ve found for <code>inputmode</code> is building a better number input.</p>
+
+
+
+<p>While some HTML5 input types, like <code>url</code> and <code>email</code>, are straightforward, <code>input type="number"</code> is a different matter. It has some <a href="https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/">accessibility concerns </a>as well as a somewhat awkward UI. For example, desktop browsers, like Chrome, show tiny increment arrows that are easy to trigger accidentally by scrolling.</p>
+
+
+
+<p>So here’s a pattern to memorize and use going forwards. For most numeric inputs, instead of using this:&nbsp;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="number" /></code></pre>
+
+
+
+<p>…you actually want to use this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<p>Why not <code>inputmode="numeric"</code> instead of <code>inputmode="decimal"</code> ?&nbsp;</p>
+
+
+
+<p>The <code>numeric</code> and <code>decimal</code> attribute values produce identical keyboards on Android. On iOS, however, <code>numeric</code> displays a keyboard that shows both numbers and punctuation, while <code>decimal</code> shows a focused grid of numbers that almost looks exactly like the <code>tel</code> input type, only without extraneous telephone-number focused options. That’s why it’s my preference for most types of number inputs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?fit=1024%2C424&amp;ssl=1" alt="" class="wp-image-306398" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?w=1615&amp;ssl=1 1615w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=300%2C124&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1024%2C424&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=768%2C318&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1536%2C636&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1000%2C414&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>iOS&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?fit=1024%2C315&amp;ssl=1" alt="" class="wp-image-306399" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?w=1615&amp;ssl=1 1615w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=300%2C92&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1024%2C315&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=768%2C236&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1536%2C473&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1000%2C308&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Android&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<p class="explanation">Christian Oliff has written&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">an excellent article</a>&nbsp;dedicated solely to the&nbsp;inputmode&nbsp;attribute.</p>
+
+
+
+<h3>Don’t forget autocomplete</h3>
+
+
+
+<p>Even more important than showing the correct mobile keyboard is showing helpful autocomplete suggestions. That can go a long way towards creating a faster and less frustrating user experience on mobile.</p>
+
+
+
+<p>While browsers have heuristics for showing autocomplete fields, you cannot rely on them, and should still be sure to add the correct <code>autocomplete</code> attribute. For instance, in iOS Safari, I found that an <code>input type="tel"</code> would only show autocomplete options if I <a href="https://better-mobile-inputs.netlify.com/?autocomplete=tel&amp;type=tel" class="ek-link">explicitly added a <code>autocomplete="tel"</code> attribute</a>.</p>
+
+
+
+<p>You may think that you are familiar with the basic <code>autocomplete</code> options, such as those that help the user fill in credit card numbers or address form fields, but I’d urge you to <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html%23inappropriate-for-the-control" class="ek-link">review them</a> to make sure that you are aware of all of the options. The spec lists over 50 values! Did you know that <code>autocomplete="one-time-code"</code> can make a phone verification user flow super smooth?</p>
+
+
+
+<figure class="wp-block-video"><video controls muted src="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" playsinline></video></figure>
+
+
+
+<h3>Speaking of autocomplete…</h3>
+
+
+
+<p>I’d like to mention one final element that allows you to create your own custom autocomplete functionality: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" class="ek-link"><code>datalist</code></a>. While it creates a serviceable — if somewhat basic — autocomplete experience on desktop Chrome and Safari, it shines on iOS by surfacing suggestions in a convenient row right above the keyboard, where the system autocomplete functionality usually lives. Further, it allows the user to toggle between text and select-style inputs.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4"></video></figure>
+
+
+
+<p>On Android, on the other hand, <code>datalist</code> creates a more typical autocomplete dropdown, with the area above the keyboard reserved for the system&#8217;s own typeahead functionality. One possible advantage to this style is that the dropdown list is easily scrollable, creating immediate access to all possible options as soon as the field is focused. (In iOS, in order to view more than the top three matches, the user would have to trigger the select picker by pressing the down arrow icon.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?fit=576%2C1024&amp;ssl=1" width="320" alt="" class="wp-image-306402" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?w=1080&amp;ssl=1 1080w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=169%2C300&amp;ssl=1 169w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=576%2C1024&amp;ssl=1 576w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=768%2C1365&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=864%2C1536&amp;ssl=1 864w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=1000%2C1778&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>You can use this demo to play around with&nbsp;<code>datalist</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqoxaZ" src="//codepen.io/anon/embed/NWqoxaZ?height=450&amp;theme-id=1&amp;slug-hash=NWqoxaZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqoxaZ" title="CodePen Embed NWqoxaZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>And you can explore all the autocomplete options, as well as input&nbsp;<code>type</code>&nbsp;and&nbsp;<code>inputmode</code>&nbsp;values, <a class="ek-link ek-link" href="https://better-mobile-inputs.netlify.com/">using&nbsp;this tool I made</a> to help you quickly preview various input configurations on mobile.</p>
+
+
+
+<h3>In summary</h3>
+
+
+
+<p>When I&#8217;m building a form, I&#8217;m often tempted to focus on perfecting the desktop experience while treating the mobile web as an afterthought. But while it does take a little extra work to ensure forms work well on mobile, it doesn&#8217;t have to be too difficult. Hopefully, this article has shown that with a few easy steps, you can make forms much more convenient for your users on mobile devices.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" length="703199" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4" length="1903465" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306387</post-id>	</item>
+		<item>
+		<title>Building an accessible autocomplete control</title>
+		<link>https://adamsilver.io/articles/building-an-accessible-autocomplete-control/</link>
+		
+		<dc:creator><![CDATA[Robin Rendle]]></dc:creator>
+		<pubDate>Thu, 06 Feb 2020 15:13:47 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[accessibility]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303121</guid>
+
+					<description><![CDATA[<p>Here’s a great in-depth post from Adam Silver about his journey to create an autocomplete field that’s as accessible as possible. There are so many edge cases to consider! There are old browsers and their peculiar quirks, there are accessibility best practices for screen readers, and not to mention dealing with the component design when there’s no JavaScript, etc. </p>
+<p>Adam offers a warning before he begins:</p>
+<blockquote class="wp-block-quote">
+<p>[&#8230;] I&#8217;ve been looking at ways to let users enter a destination country. Unfortunately, </p>
+</blockquote>
+<p>&#8230; <a href="https://css-tricks.com/building-an-accessible-autocomplete-control/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Building an accessible autocomplete control&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/building-an-accessible-autocomplete-control/">Building an accessible autocomplete control</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s a great in-depth post from Adam Silver about his journey to create an autocomplete field that’s as accessible as possible. There are so many edge cases to consider! There are old browsers and their peculiar quirks, there are accessibility best practices for screen readers, and not to mention dealing with the component design when there’s no JavaScript, etc. </p>
+
+
+
+<p>Adam offers a warning before he begins:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>[&#8230;] I&#8217;ve been looking at ways to let users enter a destination country. Unfortunately, native HTML form controls just aren&#8217;t good enough for this type of interaction. And so we need to build a custom autocomplete control from scratch. A word of warning though: this is one of the hardest UI components I’ve ever had to make—they’re just way harder than they look.</p></blockquote>
+
+
+
+<p>I also just bought Adam’s book, <em><a href="https://www.smashingmagazine.com/printed-books/form-design-patterns/">Form Design Patterns</a></em>, and this post now makes me extra excited to read it.</p>
+<p><a href="https://adamsilver.io/articles/building-an-accessible-autocomplete-control/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/building-an-accessible-autocomplete-control/">Permalink</a></p><p>The post <a rel="nofollow" href="https://css-tricks.com/building-an-accessible-autocomplete-control/">Building an accessible autocomplete control</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303121</post-id>	</item>
+	</channel>
+</rss>

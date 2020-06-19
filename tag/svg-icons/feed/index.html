@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>svg icons &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/svg-icons/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Fri, 24 Apr 2020 14:58:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>SVG, Favicons, and All the Fun Things We Can Do With Them</title>
+		<link>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/</link>
+					<comments>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/#comments</comments>
+		
+		<dc:creator><![CDATA[Eric Bailey]]></dc:creator>
+		<pubDate>Fri, 24 Apr 2020 14:58:29 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[dark mode]]></category>
+		<category><![CDATA[favicon]]></category>
+		<category><![CDATA[media queries]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306644</guid>
+
+					<description><![CDATA[<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+<p>Here’s the code for how to add favicons &#8230; <a href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/" class="read-more">Read article <span class="screen-reader-text"> &#8220;SVG, Favicons, and All the Fun Things We Can Do With Them&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Favicons are the little icons you see in your browser tab. They help you understand which site is which when you’re scanning through your browser’s bookmarks and open tabs. They’re a neat part of internet history that are capable of <a href="https://css-tricks.com/different-favicon-for-development/">performing some cool tricks</a>.</p>
+
+
+
+<p>One very new trick is the ability to use SVG as a favicon. It’s something that <a href="https://caniuse.com/#feat=link-icon-svg">most modern browsers support</a>, with more support on the way.</p>
+
+
+
+<span id="more-306644"></span>
+
+
+
+<p>Here’s the code for how to add favicons to your site:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg">
+&lt;link rel="alternate icon" href="/favicon.ico">
+&lt;link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"></code></pre>
+
+
+
+<p>If a browser doesn’t support a SVG favicon, it will ignore the first link element declaration and continue on to the second. This ensures that all browsers that support favicons can enjoy the experience.&nbsp;</p>
+
+
+
+<p>You may also notice the alternate attribute value for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel">our <code>rel</code> declaration</a> in the second line. This programmatically communicates to the browser that the favicon with a file format that uses <code>.ico</code> is specifically used as an alternate presentation.</p>
+
+
+
+<p>Following the favicons is a line of code that loads another SVG image, one called <code>safari-pinned-tab.svg</code>. This is to support <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html">Safari’s pinned tab functionality</a>, which existed before other browsers had SVG favicon support. There’s additional files you can add here to enhance your site for different apps and services, but more on that in a bit.</p>
+
+
+
+<p>Here’s more detail on the current level of SVG favicon support:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”link-icon-svg”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">80</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">41</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">80</span></td><td class="a yep-nope yep-nope-partial" title="Safari - "><span class="caniuse-agents-version version">TP</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="n nope" title="Android - "><span class="caniuse-agents-version version">No</span></td><td class="a yep-nope yep-nope-partial" title="iOS Safari - "><span class="caniuse-agents-version version">13.4-13.5</span></td></tr></table></div></div>
+
+
+
+<h3>Why SVG?</h3>
+
+
+
+<p>You may be questioning why this is needed. The <code>.ico</code> file format has been around forever and can support images up to 256×256 pixels in size. Here are three answers for you.</p>
+
+
+
+<h4>Ease of authoring</h4>
+
+
+
+<p>It’s a pain to make <code>.ico</code> files. The file is a <a href="https://en.m.wikipedia.org/wiki/ICO_(file_format)">proprietary format</a> used by Microsoft, meaning you’ll need <a href="https://www.kodlian.com/apps/icon-slate">specialized tools</a> to make them. <a href="https://www.w3.org/TR/SVG2/">SVG is an open standard</a>, meaning you can use them without any further tooling or platform lock-in.</p>
+
+
+
+<h4>Future-proofing</h4>
+
+
+
+<p>Retina? 5k? 6k? When we use a resolution-agnostic SVG file for a favicon, we guarantee that our favicons look crisp on future devices, regardless of <a href="https://www.apple.com/pro-display-xdr/">how large their displays get</a>.&nbsp;</p>
+
+
+
+<h4>Performance</h4>
+
+
+
+<p>SVGs are usually very small files, especially when compared to their raster image counterparts — even more-so if you <a href="https://css-tricks.com/tools-for-optimizing-svg/">optimize them beforehand</a>. By only using a 16×16 pixel favicon as a fallback for browsers that don’t support SVG, we provide a combination that enjoys a high degree of support with a smaller file size to boot.&nbsp;</p>
+
+
+
+<p>This might seem a bit extreme, but when it comes to web performance, every byte counts!</p>
+
+
+
+<h3>Tricks</h3>
+
+
+
+<p>Another cool thing about SVG is we can <a href="https://css-tricks.com/svg-properties-and-css/">embed CSS directly in it</a>. This means we can do fun things like dynamically adjust them with JavaScript, provided the SVG is declared inline and not embedded using an <code>img</code> element.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line=""><code markup="tt">&lt;svg  version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  &lt;style>
+    path { fill: #272019; }
+  &lt;/style>
+  &lt;!-- etc. -->
+&lt;/svg></code></pre>
+
+
+
+<p>Since SVG favicons are embedded using the <code>link</code> element, they can’t really be modified using JavaScript. We can, however, use things like emoji and media queries.</p>
+
+
+
+<h4>Emoji</h4>
+
+
+
+<p><a href="https://twitter.com/leaverou/">Lea Verou</a> had a genius idea about using emoji inside of <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text">SVG’s <code>text</code> element</a> to make a quick favicon with a transparent background that holds up at small sizes.</p>
+
+
+
+<figure class="wp-block-embed-twitter wp-block-embed is-type-rich is-provider-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/LeaVerou/status/1241619866475474946
+</div></figure>
+
+
+
+<p>In response, <a href="https://css-tricks.com/emojis-as-favicons/">Chris Coyier whipped up a neat little demo</a> that lets you play around with the concept.</p>
+
+
+
+<h4>Dark Mode support</h4>
+
+
+
+<p>Both <a href="https://blog.tomayac.com/2019/09/21/prefers-color-scheme-in-svg-favicons-for-dark-mode-icons/">Thomas Steiner</a> and <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=294179#c72">Mathias Bynens</a> independently stumbled across the idea that you can use the <code>prefers-color-scheme</code> media query to provide support for dark mode. This work is built off of <a href="https://jakearchibald.com/2016/svg-media-queries/">Jake Archibald’s exploration of SVG and media queries</a>.</p>
+
+
+
+<pre rel="SVG" class="wp-block-csstricks-code-block language-svg" data-line="4-6"><code markup="tt">&lt;svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  &lt;style>
+    path { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #ffffff; }
+    }
+  &lt;/style>
+  &lt;path d="M111.904 52.937a1.95 1.95 0 00-1.555-1.314l-30.835-4.502-13.786-28.136c-.653-1.313-2.803-1.313-3.456 0L48.486 47.121l-30.835 4.502a1.95 1.95 0 00-1.555 1.314 1.952 1.952 0 00.48 1.99l22.33 21.894-5.28 30.918c-.115.715.173 1.45.768 1.894a1.904 1.904 0 002.016.135L64 95.178l27.59 14.59c.269.155.576.232.883.232a1.98 1.98 0 001.133-.367 1.974 1.974 0 00.768-1.894l-5.28-30.918 22.33-21.893c.518-.522.71-1.276.48-1.99z" fill-rule="nonzero"/>
+&lt;/svg></code></pre>
+
+
+
+<p>For supporting browsers, this code means our star-shaped SVG favicon will change its fill color from black to white when <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">dark mode</a> is activated. Pretty neat!</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov"></video></figure>
+
+
+
+<h4>Other media queries</h4>
+
+
+
+<p>Dark mode support got me thinking: if SVGs can support <code>prefers-color-scheme</code>, what other things can we do with them? While the support for <a href="https://www.w3.org/TR/mediaqueries-5/">Level 5 Media Queries</a> may not be there yet, here’s some ideas to consider:</p>
+
+
+
+<ul><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#light-level"><code>light-level</code></a> to desaturate favicon colors in a low-light environment.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#inverted"><code>inverted-colors</code></a> to “flip” inverted colors to preserve branding, or to ensure a photorealistic favicon looks as intended.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion"><code>prefers-reduced-motion</code></a> to remove <a href="https://css-tricks.com/the-making-of-an-animated-favicon/">favicon animation</a>. Ideally, we&#8217;d <a href="https://css-tricks.com/revisiting-prefers-reduced-motion-the-reduced-motion-media-query/">avoid animating favicons in the first place</a>, as they can be a trigger for ADHD and other related disabilities.</li><li>Use <a href="https://www.w3.org/TR/mediaqueries-5/#forced-colors"><code>forced-colors</code></a> and/or a <a href="https://css-tricks.com/accessible-svgs-high-contrast-mode/">Windows High Contrast Mode media query</a> to make sure the favicon holds up visually in a high contrast color context. Remember to <a href="https://www.gwhitworth.com/blog/2017/04/how-to-use-ms-high-contrast/">use color keywords</a> to keep the favicon’s colors dynamic!</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?fit=1024%2C427&amp;ssl=1" alt="Mockup of four SVG favicon treatments. The first treatment is a pink star with a tab title of, “SVG Favicon.” The second treatment is a hot pink star with a tab title of, “Light Level SVG Favicon.” The third treatment is a light pink star with a tab title of, “Inverted Colors SVG Favicon.” The fourth treatment is a black pink star with a tab title of, “High Contrast Mode SVG Favicon.” The tabs are screen captures from Microsoft Edge, with the browser chrome updating to match each specialized mode." class="wp-image-306647" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?w=1608&amp;ssl=1 1608w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=300%2C125&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1024%2C427&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=768%2C320&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1536%2C640&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/EeH-tuAJ.png?resize=1000%2C417&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>A mockup of how these media query-based adjustments could work.</figcaption></figure>
+
+
+
+<h3>Keep it crisp</h3>
+
+
+
+<p>Another important aspect of good favicon design is making sure they look good in the small browser tab area. The secret to this is making the paths of the vector image <a href="https://icons8.com/articles/make-pixel-perfect-icons/">line up to the pixel grid</a>, the guide a computer uses to turn SVG math into the bitmap we see on a screen.&nbsp;</p>
+
+
+
+<p>Here’s a simplified example using a square shape:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?ssl=1" alt="A crisp orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306649" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?w=895&amp;ssl=1 895w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=300%2C257&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/1BTkjpFp.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>When the vector points of the square align to the pixel grid of the artboard, the antialiasing effect a computer uses to smooth out the shapes isn&#8217;t needed. When the vector points aren’t aligned, we get a “smearing” effect:</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?ssl=1" alt="A blurred orange square on a white background. There is also a faint grid of gray horizontal and vertical lines that represent the pixel grid. Screenshot from Figma." class="wp-image-306650" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?w=895&amp;ssl=1 895w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=300%2C257&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/YIpL6HtQ.png?resize=768%2C658&amp;ssl=1 768w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /></figure>
+
+
+
+<p>A vector point’s position can be adjusted on the pixel grid by using a vector editing program such as <a href="https://www.figma.com/">Figma</a>, <a href="https://www.sketch.com/">Sketch</a>, <a href="https://inkscape.org/">Inkscape</a>, or <a href="https://www.adobe.com/products/illustrator.html">Illustrator</a>. These programs export SVGs as well. To adjust a vector point’s location, select each node with a precision selection tool and drag it into position.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov"></video></figure>
+
+
+
+<p>Some more complicated icons may need to be simplified, in order to look good at such a small size. If you’re looking for a good primer on this, <a href="https://www.viget.com/articles/responsive-logos-part-1-tips-for-adapting-logos-for-small-screens/">Jeremy Frank wrote a really good two-part article over at Vidget</a>.</p>
+
+
+
+<h3>Go the extra mile</h3>
+
+
+
+<p>In addition to favicons, there are a bunch of different (and unfortunately proprietary) ways to use icons to enhance its experience. These include things like the aforementioned pinned tab icon for Safari<a href="#fn:1">¹</a>, <a href="https://medium.com/slack-developer-blog/everything-you-ever-wanted-to-know-about-unfurling-but-were-afraid-to-ask-or-how-to-make-your-e64b4bb9254">chat app unfurls</a>, a <a href="https://webdesign.tutsplus.com/tutorials/how-to-add-windows-tiles-to-your-website--cms-23099">pinned Windows start menu tile</a>, social media previews, and homescreen launchers.</p>
+
+
+
+<p>If you’re looking for a great place to get started with these kinds of enhancements, I really like <a href="https://realfavicongenerator.net/">realfavicongenerator.net</a>.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?ssl=1" alt="Icon output from realfavicongenerator.net arranged in a grid using CSS-Trick’s logo. There are two rows of five icons: android-chrome-192x192.png, android-chrome-384x384.png, apple-touch-icon.png, favicon-16x16.png, favicon-32x32.png, mstile-150x150.png, safari-pinned-tab.svg, favicon.ico, browserconfig.xml, and site.webmanifest." class="wp-image-306652" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?w=715&amp;ssl=1 715w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/vzCkODbQ.png?resize=300%2C119&amp;ssl=1 300w" sizes="(min-width: 735px) 864px, 96vw" data-recalc-dims="1" /><figcaption>It’s a lot, but it guarantees robust support.</figcaption></figure>
+
+
+
+<p>A funny thing about the history of the favicon: Internet Explorer was the first browser to support them and <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">they were snuck in at the 11th hour</a> by a developer named Bharat Shyam:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>As the story goes, late one night, Shyam was working on his new favicon feature. He called over junior project manager Ray Sun to take a look.</p><p>Shyam commented, “This is good, right? Check it in?”, requesting permission to check the code into the Internet Explorer codebase so it could be released in the next version. Sun didn’t think too much of it, the feature was cool and would clearly give IE an edge. So he told Shyam to go ahead and add it. And just like that, the favicon made its way into Internet Explorer 5, which would go on to become one of the largest browser releases the web has ever seen.</p><p>The next day, Sun was reprimanded by his manager for letting the feature get by so quickly. As it turns out, Shyam had specifically waited until later in the day, knowing that a less experienced Program Manager would give him a pass. But by then, the code had been merged in. Incidentally, you’d be surprised just how many relatively major browser features have snuck their way into releases like this.</p><cite>From <a href="https://thehistoryoftheweb.com/how-we-got-the-favicon/">How We Got the Favicon</a> by <a href="https://twitter.com/jay_hoffmann">Jay Hoffmann</a></cite></blockquote>
+
+
+
+<p>I’m happy to see the platform throw a little love at favicons. They’ve long been one of my favorite little design details, and I’m excited that they’re becoming more reactive to user’s needs. If you have a moment, why not sneak a SVG favicon into your project the same way Bharat Shyam did way back in 1999.&nbsp;</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<div class="wp-block-group footnotes" id="fn:1"><div class="wp-block-group__inner-container">
+<p><a href="#fn1">¹</a> I haven’t been able to determine if Safari is going to implement SVG favicon support, but I hope they do. Has anyone heard anything?</p>
+</div></div>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/">SVG, Favicons, and All the Fun Things We Can Do With Them</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/dark-mode-favicon-switch.mov" length="889060" type="video/quicktime" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/vector-cleanup.mov" length="6707087" type="video/quicktime" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306644</post-id>	</item>
+		<item>
+		<title>Add Background Colors to SVGs Using the “rect” Element</title>
+		<link>https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/</link>
+					<comments>https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/#comments</comments>
+		
+		<dc:creator><![CDATA[Kate Holterhoff]]></dc:creator>
+		<pubDate>Thu, 20 Feb 2020 14:43:48 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[css for svg]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=303339</guid>
+
+					<description><![CDATA[<p>The advantages of using SVGs in web development are <a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/using-svg/">well known</a>. SVGs are small in size, can be made quite accessible, are scalable while maintaining their quality, and can be animated. Still, there is a learning curve. Things, like the syntax of SVG, can be a little tricky and having to hand-alter SVG code sometimes isn’t out of the question.</p>
+<p>Most SVG assets allow styling to be applied in predictable ways. For instance, this circle has a hover state &#8230; <a href="https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Add Background Colors to SVGs Using the “rect” Element&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/">Add Background Colors to SVGs Using the “rect” Element</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The advantages of using SVGs in web development are <a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/using-svg/">well known</a>. SVGs are small in size, can be made quite accessible, are scalable while maintaining their quality, and can be animated. Still, there is a learning curve. Things, like the syntax of SVG, can be a little tricky and having to hand-alter SVG code sometimes isn’t out of the question.</p>
+
+
+
+<p>Most SVG assets allow styling to be applied in predictable ways. For instance, this circle has a hover state that functions much like any other element in the DOM.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_ExaMJYL" src="//codepen.io/anon/embed/ExaMJYL?height=250&amp;theme-id=1&amp;slug-hash=ExaMJYL&amp;default-tab=result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed ExaMJYL" title="CodePen Embed ExaMJYL" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>However, a problem I&#8217;ve encountered on several front-end projects is&nbsp;being provided&nbsp;a&nbsp;<strong>sub-optimal</strong>&nbsp;SVG asset by a client, designer, or brand resources site. There isn’t anything&nbsp;“wrong”&nbsp;with these files,&nbsp;but&nbsp;the SVG code requires manual&nbsp;revision to achieve necessary functionality. Instead of requesting new files,&nbsp;it is often easier to tweak them myself.&nbsp;</p>
+
+
+
+<span id="more-303339"></span>
+
+
+
+<p>Styling SVGs is complicated by the fact that, as XML-based files, they act like HTML in some respects, but not in others. Let’s work with an example provided by <a rel="noreferrer noopener" target="_blank" href="https://en.instagram-brand.com/assets/icons">Instagram</a> themselves (which is also <a rel="noreferrer noopener" target="_blank" href="https://commons.wikimedia.org/wiki/File:Instagram_font_awesome.svg">easily findable on Wikipedia</a>). Because the spaces in between paths act as a sort of transparency this image displays whatever background has been applied behind it. </p>
+
+
+
+<p>Why isn’t there a background&nbsp;color on the SVG&nbsp;so we can apply a color change on hover&nbsp;(e.g.&nbsp;<code>svg:hover { background: #888; }</code>)?&nbsp;It’s because the paths fill the reverse of the space you would think they would. The negative space renders whatever sits behind this element&nbsp;(<code>&lt;body&gt;</code>&nbsp;in the CodePen examples below). Often this is not a problem&nbsp;and&nbsp;may even be desirable&nbsp;for large background designs to ensure organic transitions between content areas. However, because I am using this SVG as a link,&nbsp;I will need to alter the file so that I can style the space behind it.&nbsp;</p>
+
+
+
+<pre rel="SVG" class="language-svg" data-line="" class="wp-block-csstricks-code-block"><code markup="tt">&lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  &lt;title>Instagram&lt;/title>
+  &lt;path d="..." transform="translate(0 0)" fill="#fff"/>
+  &lt;path d="..." transform="translate(0 0)" fill="#fff"/>
+  &lt;path d="..." transform="translate(0 0)" fill="#fff"/>
+&lt;/svg></code></pre>
+
+
+
+<p>The Instagram logo is a perfect example of an awkward SVG file&nbsp;that&nbsp;requires more CSS finesse than most. Again, there is nothing&nbsp;<em>wrong</em>&nbsp;with this SVG, but it presents some challenges for styling. In order to add a hover state that alters the background,&nbsp;we&nbsp;will need to change the code above.</p>
+
+
+
+<p>There are several ways to go about this, but the easiest fix is to add&nbsp;another element&nbsp;behind the image. Because the Instagram icon is rectangular,&nbsp;we&nbsp;can add a&nbsp;<code>&lt;rect</code>&gt;&nbsp;element behind the three foreground paths that comprise this SVG. If the logo was circular or oval,&nbsp;I would have used the&nbsp;<code>&lt;circle&gt;</code>&nbsp;or <code>&lt;ellipse&gt;</code>&nbsp;element.&nbsp;Be sure to set a height and width to match the&nbsp;<code>viewBox</code>&nbsp;when adding this type of element, and&nbsp;use the&nbsp;<code>rx</code>&nbsp;value to round the corners as needed. Rather than adding a&nbsp;class&nbsp;or&nbsp;fill&nbsp;to every path in the&nbsp;SVG element,&nbsp;we can&nbsp;target the&nbsp;<code>&lt;rect&gt;</code>&nbsp;and&nbsp;<code>&lt;path&gt;</code>&nbsp;elements in&nbsp;the&nbsp;CSS file.&nbsp;</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_xxbRoxL" src="//codepen.io/anon/embed/xxbRoxL?height=250&amp;theme-id=1&amp;slug-hash=xxbRoxL&amp;default-tab=html,result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed xxbRoxL" title="CodePen Embed xxbRoxL" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>The advantage of this approach is its simplicity. Instead of having to alter multiple files or use JavaScript&nbsp;or third-party JavaScript&nbsp;libraries,&nbsp;we&nbsp;can add one line of code to the SVG code block and style it.&nbsp;</p>
+
+
+
+<p>If,&nbsp;for some reason,&nbsp;you need or just prefer to leave the SVG file alone, you can revise the CSS to achieve similar functionality.&nbsp;</p>
+
+
+
+<p>We could add a <code>background</code> property on the <code>social-link</code> class but, for this tutorial, I will instead use the slightly more complicated, but equally effective, strategy of revising an SVG by applying a pseudo-element to it. In the example below, I have used the <code>::before</code> pseudo-class to add a shape and the <code>opacity</code> property to make it visible on hover. To avoid having this shape leave a border around the icon, I have made it slightly smaller than the SVG using the <code>height</code> and <code>width</code> properties (<code>calc(100% - 2px)</code>). Then I center the pseudo-element behind the SVG and match the transition property for both element and pseudo-element.</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">/* Sets the link's dimensions */
+.social-link {
+  display: block;
+  height: 24px;
+  position: relative;
+  width: 24px;
+}
+
+/* Targets the pseudo-element to create a new layer */
+.social-link::before {
+  background: #fff;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  height: calc(100% - 2px);
+  opacity: 0;
+  position: absolute;
+  transition: all 0.2s ease-in-out;
+  width: calc(100% - 2px);
+}
+
+/* Changes the background color of the pseudo-element on hover and focus */
+.social-link::before:hover, .social-link::before:focus {
+  background: #000;
+}
+
+/* Makes sure the actual SVG element is layered on top of the pseudo-element */
+.social-link svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Makes the background-color transition smooth */
+.social-link svg path {
+  transition: all 0.2s ease-in-out;
+}
+
+/* SVG paths are initially white */
+.social-link path {
+  fill: #fff;
+}
+
+/* The pseudo-elememt comes into full view on hover and focus */
+.social-link:hover::before, .social-link:focus::before {
+  opacity: 1;
+}
+
+/* Fills the SVG paths to black on hover and focus  */
+.social-link:hover svg path, .social-link:focus svg path {
+  fill: #000;
+}</code></pre>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_MWYPPxO" src="//codepen.io/anon/embed/MWYPPxO?height=250&amp;theme-id=1&amp;slug-hash=MWYPPxO&amp;default-tab=css,result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed MWYPPxO" title="CodePen Embed MWYPPxO" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I recommend the above strategies for a quick fix because using vanilla JavaScript or a JavaScript library like <a rel="noreferrer noopener" target="_blank" href="https://maxwellito.github.io/vivus/">vivus.js</a>&nbsp;or&nbsp;<a rel="noreferrer noopener" target="_blank" href="http://raphaeljs.com/">raphaeljs</a> is overkill for adding a hover state to an SVG in most cases. However, there are times when modifying an SVG using JavaScript is preferable. Because JavaScript is undoubtedly the most flexible method to change styles, let’s examine what this might look like.</p>
+
+
+
+<p>My example separates the JavaScript&nbsp;file,&nbsp;but if you want to add JavaScript&nbsp;inside the SVG element itself,&nbsp;you will need to add a&nbsp;<code>&lt;script&gt;</code>&nbsp;element, just like an HTML file. Be sure to add a CDATA marker to your&nbsp;<code>&lt;script&gt;</code>&nbsp;element to ensure it is parsed as XML.</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_bGNmmJB" src="//codepen.io/anon/embed/bGNmmJB?height=250&amp;theme-id=1&amp;slug-hash=bGNmmJB&amp;default-tab=js,result" height="250" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed bGNmmJB" title="CodePen Embed bGNmmJB" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>I’m using jQuery to simplify things a bit and keep CSS as minimal as possible, although for clarity sake, I have added a <code>background</code> property on the <code>social-link</code> class in the CSS file rather than adding it via JavaScript. Notice that this solution targets <code>svg path</code> when altering the&nbsp;CSS&nbsp;method rather than assigning a class to these paths because,&nbsp;in this case, each path should be treated the same.</p>
+
+
+
+<p>There are many many ways to style SVGs, but the examples collected in this article are useful and extensible. Strategies for altering SVG files need to be&nbsp;evaluated&nbsp;by&nbsp;an app’s full functionality, but I suspect most front-end developers will find that the&nbsp;<code>&lt;rect&gt;</code>&nbsp;element offers the simplest and most readable solution.</p>
+
+
+
+<h1>Acknowledgements</h1>
+
+
+
+<p>Many thanks to&nbsp;<a rel="noreferrer noopener" target="_blank" href="http://joeessey.com/">Joe Essey</a>&nbsp;and my front-end pals at Nebo Agency&nbsp;<a rel="noreferrer noopener" target="_blank" href="http://allisonllewis.com/">Allison Lewis</a>&nbsp;and&nbsp;<a rel="noreferrer noopener" target="_blank" href="http://helloimnile.com/">Nile Livingston</a>&nbsp;(check&nbsp;out Nile’s article,&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://www.neboagency.com/labs/svgs-for-the-web/">“SVGs&nbsp;for the Web”</a>).&nbsp;</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/">Add Background Colors to SVGs Using the “rect” Element</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/add-background-colors-to-svgs-using-the-rect-element/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">303339</post-id>	</item>
+		<item>
+		<title>Creating a Maintainable Icon System with Sass</title>
+		<link>https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/</link>
+					<comments>https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/#comments</comments>
+		
+		<dc:creator><![CDATA[Tracy Rotton]]></dc:creator>
+		<pubDate>Wed, 28 Aug 2019 14:05:56 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[background-image]]></category>
+		<category><![CDATA[icons]]></category>
+		<category><![CDATA[Sass]]></category>
+		<category><![CDATA[sass maps]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=294949</guid>
+
+					<description><![CDATA[<p>One of my favorite ways of adding icons to a site is by including them as <a href="https://css-tricks.com/data-uris/">data URL</a> background images to pseudo-elements (e.g. <code>::after</code>) in my CSS. This technique offers several advantages:</p>
+<ul>
+<li>They don&#8217;t require any additional HTTP requests other than the CSS file.</li>
+<li>Using the <code>background-size</code> property, you can set your pseudo-element to any size you need without worrying that they will overflow the boundaries (or get chopped off).</li>
+<li>They are ignored by screen readers (at least in </li>
+</ul>
+<p>&#8230; <a href="https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Creating a Maintainable Icon System with Sass&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/">Creating a Maintainable Icon System with Sass</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>One of my favorite ways of adding icons to a site is by including them as <a href="https://css-tricks.com/data-uris/">data URL</a> background images to pseudo-elements (e.g. <code>::after</code>) in my CSS. This technique offers several advantages:</p>
+<ul>
+<li>They don&#8217;t require any additional HTTP requests other than the CSS file.</li>
+<li>Using the <code>background-size</code> property, you can set your pseudo-element to any size you need without worrying that they will overflow the boundaries (or get chopped off).</li>
+<li>They are ignored by screen readers (at least in my tests using VoiceOver on the Mac) so which is good for decorative-only icons.</li>
+</ul>
+<p>But there are some drawbacks to this technique as well:</p>
+<ul>
+<li>When used as a <code>background-image</code> data URL, you lose the ability to change the SVG&#8217;s colors using the &#8220;fill&#8221; or &#8220;stroke&#8221; CSS properties (same as if you used the filename reference, e.g. <code>url( 'some-icon-file.svg' )</code>). We can <a href="https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/">use <code>filter()</code> as an alternative</a>, but that might not always be a feasible solution.</li>
+<li>SVG markup can look big and ugly when used as data URLs, making them difficult to maintain when you need to use the icons in multiple locations and/or have to change them.</li>
+</ul>
+<p>We&#8217;re going to address both of these drawbacks in this article.</p>
+<p><span id="more-294949"></span></p>
+<h3>The situation</h3>
+<p>Let&#8217;s build a site that uses a robust iconography system, and let&#8217;s say that it has several different button icons which all indicate different actions:</p>
+<ul>
+<li>A &#8220;download&#8221; icon for downloadable content</li>
+<li>An &#8220;external link&#8221; icon for buttons that take us to another website</li>
+<li>A &#8220;right caret&#8221; icon for taking us to the next step in a process</li>
+</ul>
+<p>Right off the bat, that gives us three icons. And while that may not seem like much, already I&#8217;m getting nervous about how maintainable this is going to be when we scale it out to more icons like social media networks and the like. For the sake of this article, we&#8217;re going to stop at these three, but you can imagine how in a sophisticated icon system this could get very unwieldy, very quickly.</p>
+<p>It&#8217;s time to go to the code. First, we&#8217;ll set up a basic button, and then by using a BEM naming convention, we&#8217;ll assign the proper icon to its corresponding button. (At this point, it&#8217;s fair to warn you that we&#8217;ll be writing everything out in Sass, or more specifically, SCSS. And for the sake of argument, assume I&#8217;m running <a href="https://css-tricks.com/autoprefixer/">Autoprefixer</a> to deal with things like the <code>appearance</code> property.)</p>
+<pre rel="SCSS"><code class="language-scss">.button {
+  appearance: none;
+  background: #d95a2b;
+  border: 0;
+  border-radius: 100em;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1em calc( 1.5em + 32px ) 0.9em 1.5em;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 200ms ease-in-out;
+
+  &amp;:hover,
+  &amp;:focus,
+  &amp;:active {
+    background: #8c3c2a;
+  }
+}</code></pre>
+<p>This gives us a simple, attractive, orange button that turns to a darker orange on the hover, focused, and active states. It even gives us a little room for the icons we want to add, so let&#8217;s add them in now using pseudo-elements:</p>
+<pre rel="SCSS"><code class="language-scss">.button {
+
+  /* everything from before, plus... */
+
+  &amp;::after {
+    background: center / 24px 24px no-repeat; // Shorthand for: background-position, background-size, background-repeat
+    border-radius: 100em;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 48px;
+  }
+
+  &amp;--download {
+
+    &amp;::after {
+      background-image: url( 'data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23fff" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;' );
+      }
+    }
+
+  &amp;--external {
+
+    &amp;::after {
+      background-image: url( 'data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="31.408" height="33.919" viewBox="0 0 31.408 33.919"&gt;&lt;g transform="translate(-1008.919 -965.628)"&gt;&lt;g transform="translate(1046.174 2398.574) rotate(-135)"&gt;&lt;path d="M0,0,7.879,7.879,0,15.759" transform="translate(1025.259 990.17) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;line y2="16.032" transform="translate(1017.516 980.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;path d="M10683.643,5322.808v10.24h-20.386v-21.215h7.446" transform="translate(-9652.838 -4335)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;' );
+    }
+  }
+
+  &amp;--caret-right {
+
+    &amp;::after {
+      background-image: url( 'data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.129 34.016"&gt;&lt;path d="M1454.5,1298.922l15.947,15.947-15.947,15.947" transform="translate(-1453.439 -1297.861)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/svg&gt;' );
+    }
+  }
+}</code></pre>
+<p>Let&#8217;s pause here. While we&#8217;re keeping our SCSS as tidy as possible by declaring the properties common to <em>all</em> buttons, and then only specifying the background SVGs on a per-class basis, it&#8217;s already starting to look a bit unwieldy. That&#8217;s that second downside to SVGs I mentioned before: having to use big, ugly markup in our CSS code.</p>
+<p>Also, note how we&#8217;re defining our fill and stroke colors inside the SVGs. At some point, browsers decided that the octothorpe (&#8220;#&#8221;) that we all know and love in our hex colors was a security risk, and declared that <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/_g_HnAHkMPo">they would no longer support data URLs that contained them</a>. This leaves us with three options:</p>
+<ol>
+<li>Convert our data URLs from markup (like we have here) to base-64 encoded strings, but that makes them even <em>less</em> maintainable than before by completely obfuscating them; or</li>
+<li>Use <code>rgba()</code> or <code>hsla()</code> notation, not always intuitive as many developers have been using hex for years; or</li>
+<li>Convert our octothorpes to their URL-encoded equivalents, &#8220;%23&#8221;.</li>
+</ol>
+<p>We&#8217;re going to go with option number three, and work around that browser limitation. (I will mention here, however, that this technique <em>will</em> work with <code>rgb()</code>, <code>hsla()</code>, or any other valid color format, even <a href="https://css-tricks.com/snippets/css/named-colors-and-hex-equivalents/">CSS named colors</a>. But please don&#8217;t use CSS named colors in production code.)</p>
+<h3>Moving to maps</h3>
+<p>At this point, we only have three buttons fully declared. But I don&#8217;t like them just dumped in the code like this. If we needed to use those same icons elsewhere, we&#8217;d have to copy and paste the SVG markup, or else we could assign them to variables (either Sass or CSS custom properties), and reuse them that way. But I&#8217;m going to go for <a href="https://en.wikipedia.org/wiki/Let%27s_Make_a_Deal">what&#8217;s behind door number three</a>, and switch to using one of Sass&#8217; greatest features: maps.</p>
+<p>If you&#8217;re not familiar with <a href="https://sass-lang.com/documentation/values/maps">Sass maps</a>, they are, in essence, the Sass version of an associative array. Instead of a numerically-indexed array of items, we can assign a name (a key, if you will) so that we can retrieve them by something logical and easily remembered. So let&#8217;s build a Sass map of our three icons:</p>
+<pre rel="SCSS"><code class="language-scss">$icons: (
+  'download':    '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23fff" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  'external':    '&lt;svg xmlns="http://www.w3.org/2000/svg" width="31.408" height="33.919" viewBox="0 0 31.408 33.919"&gt;&lt;g transform="translate(-1008.919 -965.628)"&gt;&lt;g transform="translate(1046.174 2398.574) rotate(-135)"&gt;&lt;path d="M0,0,7.879,7.879,0,15.759" transform="translate(1025.259 990.17) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;line y2="16.032" transform="translate(1017.516 980.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;path d="M10683.643,5322.808v10.24h-20.386v-21.215h7.446" transform="translate(-9652.838 -4335)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  'caret-right': '&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.129 34.016"&gt;&lt;path d="M1454.5,1298.922l15.947,15.947-15.947,15.947" transform="translate(-1453.439 -1297.861)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/svg&gt;',
+);</code></pre>
+<p>There are two things to note here: We didn&#8217;t include the <code>data:image/svg+xml;utf-8,</code> string in any of those icons, only the SVG markup itself. That string is going to be the same <em>every single time</em> we need to use these icons, so why repeat ourselves and run the risk of making a mistake? Let&#8217;s instead define it as its own string and prepend it to the icon markup when needed:</p>
+<pre rel="SCSS"><code class="language-scss">$data-svg-prefix: 'data:image/svg+xml;utf-8,';</code></pre>
+<p>The other thing to note is that we aren&#8217;t <em>actually</em> making our SVG any prettier; there&#8217;s no way to do that. What we <em>are</em> doing is pulling all that ugliness out of the code we&#8217;re working on a day-to-day basis so we don&#8217;t have to look at all that visual clutter as much. Heck, we could even put it in its own partial that we only have to touch when we need to add more icons. Out of sight, out of mind!</p>
+<p>So now, let&#8217;s use our map. Going back to our button code, we can now replace those icon literals with pulling them from the icon map instead:</p>
+<pre rel="SCSS"><code class="language-scss">&amp;--download {
+
+  &amp;::after {
+    background-image: url( $data-svg-prefix + map-get( $icons, 'download' ) );
+  }
+}
+
+&amp;--external {
+
+  &amp;::after {
+    background-image: url( $data-svg-prefix + map-get( $icons, 'external' ) );
+  }
+}
+
+&amp;--next {
+
+  &amp;::after {
+    background-image: url( $data-svg-prefix + map-get( $icons, 'caret-right' ) );
+  }
+}</code></pre>
+<p>Already, that&#8217;s looking much better. We&#8217;ve started abstracting out our icons in a way that keeps our code readable and maintainable. And if that were the only challenge, we&#8217;d be done. But in the real-world project that inspired this article, we had another wrinkle: different colors.</p>
+<p>Our buttons are a solid color which turn to a darker version of that color on their hover state. But what if we want &#8220;ghost&#8221; buttons instead, that turn into solid colors on hover? In this case, white icons would be invisible for buttons that appear on white backgrounds (and probably look wrong on non-white backgrounds). What we&#8217;re going to need are <em>two</em> variations of each icon: the white one for the hover state, and one that matches button&#8217;s border and text color for the non-hover state.</p>
+<p>Let&#8217;s update our button&#8217;s base CSS to turn it in from a solid button to a ghost button that turns solid on hover. And we&#8217;ll need to adjust the pseudo-elements for our icons, too, so we can swap them out on hover as well.</p>
+<pre rel="SCSS"><code class="language-scss">.button {
+  appearance: none;
+  background: none;
+  border: 3px solid #d95a2b;
+  border-radius: 100em;
+  color: #d95a2b;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 1em calc( 1.5em + 32px ) 0.9em 1.5em;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 200ms ease-in-out;
+  transition-property: background-color, color;
+
+  &amp;:hover,
+  &amp;:focus,
+  &amp;:active {
+    background: #d95a2b;
+    color: #fff;
+  }
+}</code></pre>
+<p>Now we need to create our different-colored icons. One <em>possible</em> solution is to add the color variations directly to our map&#8230; somehow. We can either add new different-colored icons as additional items in our one-dimensional map, or make our map two-dimensional.</p>
+<p><strong>One-Dimensional Map:</strong></p>
+<pre rel="SCSS"><code class="language-scss">$icons: (
+  'download-white':  '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23fff" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  'download-orange': '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23d95a2b" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+);</code></pre>
+<p><strong>Two-Dimensional Map:</strong></p>
+<pre rel="SCSS"><code class="language-scss">$icons: (
+  'download': (
+    'white':  '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23fff" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+    'orange': '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23d95a2b" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  ),
+);</code></pre>
+<p>Either way, this is problematic. By just adding one additional color, we&#8217;re going to double our maintenance efforts. Need to change the existing download icon with a different one? We need to manually create each color variation to add it to the map. Need a third color? Now you&#8217;ve just <em>tripled</em> your maintenance costs. I&#8217;m not even going to get into the code to retrieve values from a multi-dimensional Sass map because that&#8217;s not going to serve our ultimate goal here. Instead, we&#8217;re just going to move on.</p>
+<h3>Enter string replacement</h3>
+<p>Aside from maps, the utility of Sass in this article comes from how we can use it to make CSS behave more like a programming language. Sass has built-in functions (like <code>map-get()</code>, which we&#8217;ve already seen), and it allows us to write our own.</p>
+<p>Sass also has a <a href="https://sass-lang.com/documentation/functions/string">bunch of string functions built-in</a>, but inexplicably, a string replacement function isn&#8217;t one of them. That&#8217;s too bad, as its usefulness is obvious. But all is not lost.</p>
+<p><a href="https://css-tricks.com/snippets/sass/str-replace-function/">Hugo Giradel gave us a Sass version of <code>str-replace()</code> here on CSS-Tricks in 2014.</a> We can use that here to create <em>one</em> version of our icons in our Sass map, using a placeholder for our color values. Let&#8217;s add that function to our own code:</p>
+<pre rel="SCSS"><code class="language-scss">@function str-replace( $string, $search, $replace: '' ) {
+
+  $index: str-index( $string, $search );
+
+  @if $index {
+    @return str-slice( $string, 1, $index - 1 ) + $replace + str-replace( str-slice( $string, $index + str-length( $search ) ), $search, $replace);
+  }
+
+  @return $string;
+}</code></pre>
+<p>Next, we&#8217;ll update our <em>original</em> Sass icon map (the one with only the white versions of our icons) to replace the white with a placeholder (<code>%%COLOR%%</code>) that we can swap out with whatever color we call for, on demand.</p>
+<pre rel="SCSS"><code class="language-scss">$icons: (
+  'download':    '&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%%COLOR%%" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  'external':    '&lt;svg xmlns="http://www.w3.org/2000/svg" width="31.408" height="33.919" viewBox="0 0 31.408 33.919"&gt;&lt;g transform="translate(-1008.919 -965.628)"&gt;&lt;g transform="translate(1046.174 2398.574) rotate(-135)"&gt;&lt;path d="M0,0,7.879,7.879,0,15.759" transform="translate(1025.259 990.17) rotate(90)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;line y2="16.032" transform="translate(1017.516 980.5)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;/g&gt;&lt;path d="M10683.643,5322.808v10.24h-20.386v-21.215h7.446" transform="translate(-9652.838 -4335)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;',
+  'caret-right': '&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.129 34.016"&gt;&lt;path d="M1454.5,1298.922l15.947,15.947-15.947,15.947" transform="translate(-1453.439 -1297.861)" fill="none" stroke="%%COLOR%%" stroke-width="3"/&gt;&lt;/svg&gt;',
+);</code></pre>
+<p>But if we were going to try and fetch these icons using just our new <code>str-replace()</code> function and Sass&#8217; built-in <code>map-get()</code> function, we&#8217;d end with something big and ugly. I&#8217;d rather tie these two together with one more function that makes calling the icon we want in the <em>color</em> we want as simple as one function with two parameters (and because I&#8217;m particularly lazy, we&#8217;ll even make the color default to white, so we can omit that parameter if that&#8217;s the color icon we want).</p>
+<p>Because we&#8217;re <em>getting</em> an icon, it&#8217;s a &#8220;getter&#8221; function, and so we&#8217;ll call it <code>get-icon()</code>:</p>
+<pre rel="SCSS"><code class="language-scss">@function get-icon( $icon, $color: #fff ) {
+
+  $icon:        map-get( $icons, $icon );
+  $placeholder: '%%COLOR%%';
+
+  $data-uri: str-replace( url( $data-svg-prefix + $icon ), $placeholder, $color );
+
+  @return str-replace( $data-uri, '#', '%23' );
+}</code></pre>
+<p>Remember where we said that browsers won&#8217;t render data URLs that have octothorpes in them? Yeah, we&#8217;re <code>str-replace()</code>ing that too so we don&#8217;t have to remember to pass along &#8220;%23&#8221; in our color hex codes.</p>
+<p class="explanation">Side note: I have a <a href="https://gist.github.com/taupecat/8bf6adc0fd104d3a8f734534ef20703f">Sass function for abstracting colors</a> too, but since that&#8217;s outside the scope of this article, I&#8217;ll refer you to my <code>get-color()</code> gist to peruse at your leisure.</p>
+<h3>The result</h3>
+<p>Now that we have our <code>get-icon()</code> function, let&#8217;s put it to use. Going back to our button code, we can replace our <code>map-get()</code> function with our new icon getter:</p>
+<pre rel="SCSS"><code class="language-scss">&amp;--download {
+
+  &amp;::before {
+    background-image: get-icon( 'download', #d95a2b );
+  }
+
+  &amp;::after {
+    background-image: get-icon( 'download', #fff ); // The ", #fff" isn't strictly necessary, because white is already our default
+  }
+}
+
+&amp;--external {
+
+  &amp;::before {
+    background-image: get-icon( 'external', #d95a2b );
+  }
+
+  &amp;::after {
+    background-image: get-icon( 'external' );
+  }
+}
+
+&amp;--next {
+
+  &amp;::before {
+    background-image: get-icon( 'arrow-right', #d95a2b );
+  }
+
+  &amp;::after {
+    background-image: get-icon( 'arrow-right' );
+  }
+}</code></pre>
+<p>So much easier, isn&#8217;t it? Now we can call any icon we&#8217;ve defined, with any color we need. All with simple, clean, logical code.</p>
+<ul>
+<li>We only ever have to declare an SVG in one place.</li>
+<li>We have a function that gets that icon in whatever color we give it.</li>
+<li>Everything is abstracted out to a logical function that does exactly what it looks like it will do: get X icon in Y color.</li>
+</ul>
+<h3>Making it fool-proof</h3>
+<p>The one thing we&#8217;re lacking is error-checking. I&#8217;m a <em>huge</em> believer in failing silently&#8230; or at the very least, failing in a way that is invisible to the user yet clearly tells the developer what is wrong and how to fix it. (For that reason, I <em>should</em> be using unit tests way more than I do, but that&#8217;s a topic for another day.)</p>
+<p>One way we have already reduced our function&#8217;s propensity for errors is by setting a default color (in this case, white). So if the developer using <code>get-icon()</code> forgets to add a color, no worries; the icon will be white, and if that&#8217;s not what the developer wanted, it&#8217;s obvious and easily fixed.</p>
+<p>But wait, what if that second parameter isn&#8217;t a color? As if, the developer entered a color incorrectly, so that it was no longer being recognized <em>as</em> a color by the Sass processor?</p>
+<p>Fortunately we can check for what type of value the <code>$color</code> variable is:</p>
+<pre rel="SCSS"><code class="language-scss">@function get-icon( $icon, $color: #fff ) {
+
+  @if 'color' != type-of( $color ) {
+
+    @warn 'The requested color - "' + $color + '" - was not recognized as a Sass color value.';
+    @return null;
+  }
+
+  $icon:        map-get( $icons, $icon );
+  $placeholder: '%%COLOR%%';
+  $data-uri:    str-replace( url( $data-svg-prefix + $icon ), $placeholder, $color );
+
+  @return str-replace( $data-uri, '#', '%23' );
+}</code></pre>
+<p>Now if we tried to enter a nonsensical color value:</p>
+<pre rel="SCSS"><code class="language-scss">&amp;--download {
+
+  &amp;::before {
+    background-image: get-icon( 'download', ce-nest-pas-un-couleur );
+  }
+}</code></pre>
+<p>&#8230;we get output explaining our error:</p>
+<pre rel="Terminal"><code class="language-markdown">Line 25 CSS: The requested color - "ce-nest-pas-un-couleur" - was not recognized as a Sass color value.</code></pre>
+<p>&#8230;and the processing stops.</p>
+<p>But what if the developer doesn&#8217;t declare the icon? Or, more likely, declares an icon that doesn&#8217;t exist in the Sass map? Serving a <em>default</em> icon doesn&#8217;t really make sense in this scenario, which is why the icon is a mandatory parameter in the first place. But just to make <em>sure</em> we are calling an icon, and it is valid, we&#8217;re going to add another check:</p>
+<pre rel="SCSS"><code class="language-scss">@function get-icon( $icon, $color: #fff ) {
+
+  @if 'color' != type-of( $color ) {
+
+    @warn 'The requested color - "' + $color + '" - was not recognized as a Sass color value.';
+    @return null;
+  }
+
+  @if map-has-key( $icons, $icon ) {
+
+    $icon:        map-get( $icons, $icon );
+    $placeholder: '%%COLOR%%';
+    $data-uri:    str-replace( url( $data-svg-prefix + $icon ), $placeholder, $color );
+
+    @return str-replace( $data-uri, '#', '%23' );
+  }
+
+  @warn 'The requested icon - "' + $icon + '" - is not defined in the $icons map.';
+  @return null;
+}</code></pre>
+<p>We&#8217;ve wrapped the meat of the function inside an <code>@if</code> statement that checks if the map has the key provided. If so (which is the situation we&#8217;re hoping for), the processed data URL is returned. The function stops right then and there — at the <code>@return</code> — which is why we don&#8217;t need an <code>@else</code> statement.</p>
+<p>But if our icon <em>isn&#8217;t</em> found, then <code>null</code> is returned, along with a <code>@warn</code>ing in the console output identifying the problem request, plus the partial filename and line number. Now we know <em>exactly</em> what&#8217;s wrong, and when and what needs fixing.</p>
+<p>So if we were to accidentally enter:</p>
+<pre rel="SCSS"><code class="language-scss">&amp;--download {
+
+  &amp;::before {
+    background-image: get-icon( 'ce-nest-pas-une-icône', #d95a2b );
+  }
+}</code></pre>
+<p>&#8230;we would see the output in our console, where our Sass process was watching and running:</p>
+<pre rel="Terminal"><code class="language-markdown">Line 32 CSS: The requested icon - "ce-nest-pas-une-icône" - is not defined in the $icons map.</code></pre>
+<p>As for the button itself, the area where the icon would be will be blank. Not as good as having our desired icon there, but <em>soooo</em> much better than a broken image graphic or some such.</p>
+<h3>Conclusion</h3>
+<p>After all of that, let&#8217;s take a look at our final, <em>processed</em> CSS:</p>
+<pre rel="CSS"><code class="language-css">.button {
+  -webkit-appearance: none;
+      -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 3px solid #d95a2b;
+  border-radius: 100em;
+  color: #d95a2b;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1em calc( 1.5em + 32px ) 0.9em 1.5em;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 200ms ease-in-out;
+  transition-property: background-color, color;
+}
+.button:hover, .button:active, .button:focus {
+  background: #d95a2b;
+  color: #fff;
+}
+.button::before, .button::after {
+  background: center / 24px 24px no-repeat;
+  border-radius: 100em;
+  bottom: 0;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 48px;
+}
+.button::after {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+.button:hover::after, .button:focus::after, .button:active::after {
+  opacity: 1;
+}
+.button--download::before {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23d95a2b" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;');
+}
+.button--download::after {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="30.544" height="25.294" viewBox="0 0 30.544 25.294"&gt;&lt;g transform="translate(-991.366 -1287.5)"&gt;&lt;path d="M1454.5,1298.922l6.881,6.881-6.881,6.881" transform="translate(2312.404 -157.556) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;path d="M8853.866,5633.57v9.724h27.544v-9.724" transform="translate(-7861 -4332)" fill="none" stroke="%23fff" stroke-linejoin="round" stroke-width="3"/&gt;&lt;line y2="14" transform="translate(1006.5 1287.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;');
+}
+.button--external::before {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="31.408" height="33.919" viewBox="0 0 31.408 33.919"&gt;&lt;g transform="translate(-1008.919 -965.628)"&gt;&lt;g transform="translate(1046.174 2398.574) rotate(-135)"&gt;&lt;path d="M0,0,7.879,7.879,0,15.759" transform="translate(1025.259 990.17) rotate(90)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;line y2="16.032" transform="translate(1017.516 980.5)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/g&gt;&lt;path d="M10683.643,5322.808v10.24h-20.386v-21.215h7.446" transform="translate(-9652.838 -4335)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;');
+}
+.button--external::after {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" width="31.408" height="33.919" viewBox="0 0 31.408 33.919"&gt;&lt;g transform="translate(-1008.919 -965.628)"&gt;&lt;g transform="translate(1046.174 2398.574) rotate(-135)"&gt;&lt;path d="M0,0,7.879,7.879,0,15.759" transform="translate(1025.259 990.17) rotate(90)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;line y2="16.032" transform="translate(1017.516 980.5)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;path d="M10683.643,5322.808v10.24h-20.386v-21.215h7.446" transform="translate(-9652.838 -4335)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/g&gt;&lt;/svg&gt;');
+}
+.button--next::before {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.129 34.016"&gt;&lt;path d="M1454.5,1298.922l15.947,15.947-15.947,15.947" transform="translate(-1453.439 -1297.861)" fill="none" stroke="%23d95a2b" stroke-width="3"/&gt;&lt;/svg&gt;');
+}
+.button--next::after {
+  background-image: url('data:image/svg+xml;utf-8,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.129 34.016"&gt;&lt;path d="M1454.5,1298.922l15.947,15.947-15.947,15.947" transform="translate(-1453.439 -1297.861)" fill="none" stroke="%23fff" stroke-width="3"/&gt;&lt;/svg&gt;');
+}</code></pre>
+<p>Yikes, still ugly, but it&#8217;s ugliness that becomes the browser&#8217;s problem, not ours.</p>
+<p>I&#8217;ve put all this together in <a href="https://codepen.io/taupecat/pen/ZgazEb?editors=1100">CodePen for you to fork and experiment</a>. The long goal for this mini-project is to create a PostCSS plugin to do all of this. This would increase the availability of this technique to <em>everyone</em> regardless of whether they were using a CSS preprocessor or not, or <em>which</em> preprocessor they&#8217;re using.</p>
+<blockquote><p>&#8220;If I have seen further it is by standing on the shoulders of Giants.&#8221;<br />
+<small>– Isaac Newton, 1675</small></p></blockquote>
+<p>Of course we can&#8217;t talk about Sass and string replacement and (especially) SVGs without gratefully acknowledging the contributions of the others who&#8217;ve inspired this technique.</p>
+<ul>
+<li><a href="https://css-tricks.com/snippets/sass/str-replace-function/">Str-replace Function</a> by Hugo Giraudel</li>
+<li><a href="https://css-tricks.com/pretty-good-svg-icon-system/">A Pretty Good SVG Icon System</a> by Chris Coyier</li>
+<li><a href="https://www.sitepoint.com/real-world-use-of-css-with-svg/">Real World Use of CSS with SVG</a> by Craig Buckler</li>
+</ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/">Creating a Maintainable Icon System with Sass</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/creating-a-maintainable-icon-system-with-sass/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">294949</post-id>	</item>
+		<item>
+		<title>Change Color of SVG on Hover</title>
+		<link>https://css-tricks.com/change-color-of-svg-on-hover/</link>
+					<comments>https://css-tricks.com/change-color-of-svg-on-hover/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Mon, 13 May 2019 14:44:21 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg filters]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=287092</guid>
+
+					<description><![CDATA[<p>There are a lot of different ways to <a href="https://css-tricks.com/using-svg/">use SVG</a>. Depending on which way, the tactic for recoloring that SVG in different states or conditions &#8212; <code>:hover</code>, <code>:active</code>, <code>:focus</code>, class name change, etc. &#8212; is different. </p>
+<p>Let&#8217;s look at the ways.</p>
+</p>
+<p>Inline SVG</p>
+<p>Inline SVG is <a href="https://css-tricks.com/pretty-good-svg-icon-system/">my favorite way to use SVG anyway</a>, in part because of how easy it is to access and style the SVG. </p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="bJXNyy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="bJXNyy">
+  See the Pen <a href="https://codepen.io/chriscoyier/pen/bJXNyy/"><br />
+  bJXNyy</a> by Chris Coyier  (&#8230; <a href="https://css-tricks.com/change-color-of-svg-on-hover/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Change Color of SVG on Hover&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/change-color-of-svg-on-hover/">Change Color of SVG on Hover</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>There are a lot of different ways to <a href="https://css-tricks.com/using-svg/">use SVG</a>. Depending on which way, the tactic for recoloring that SVG in different states or conditions &mdash; <code>:hover</code>, <code>:active</code>, <code>:focus</code>, class name change, etc. &mdash; is different. </p>
+<p>Let&#8217;s look at the ways.</p>
+<p><span id="more-287092"></span></p>
+<h3>Inline SVG</h3>
+<p>Inline SVG is <a href="https://css-tricks.com/pretty-good-svg-icon-system/">my favorite way to use SVG anyway</a>, in part because of how easy it is to access and style the SVG. </p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="bJXNyy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="bJXNyy">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/bJXNyy/"><br />
+  bJXNyy</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>If you&#8217;re used to working with icon fonts, one thing you might enjoy about them is how easy it is to change the color. You&#8217;re largely limited to a single color with icon fonts in a way that SVG isn&#8217;t, but still, it is appealingly easy to change that single color with <code>color</code>. Using inline SVG allows you to set the <code>fill</code>, which cascades to all the elements within the SVG, or you can fill each element separately if needed.</p>
+<h3>SVG Symbol / Use</h3>
+<p>There is such thing as <a href="https://css-tricks.com/svg-sprites-use-better-icon-fonts/">an SVG sprite</a>, which is a group of SVGs turned into <code>&lt;symbol&gt;</code> elements such that any given icon can be referenced easily with a <code>&lt;use&gt;</code> element. </p>
+<p class="codepen" data-height="331" style="height: 331px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="html,result" data-user="chriscoyier" data-slug-hash="WWVQbj" style="height: 331px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Use SVG Hovers">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/WWVQbj/"><br />
+  Use SVG Hovers</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>You can still set the fill color from outside CSS rather easily this way, but there are caveats. </p>
+<ul>
+<li>The internal SVG elements (like the <code>&lt;path&gt;</code>) can have no fill themselves. This allows the fill set from the parent SVG to cascade into the Shadow DOM created by <code>&lt;use&gt;</code>. As soon as you have something like <code>&lt;path fill="blue" ... /&gt;</code> in the <code>&lt;symbol&gt;</code>, you&#8217;ve lost outside CSS control.</li>
+<li>Likewise, the <code>fill</code> of individual elements cannot be controlled within the SVG like you could with inline SVG. This means you&#8217;re pretty firmly in single-color territory. That covers most use cases anyway, but still, a limitation nonetheless.</li>
+</ul>
+<h3>SVG background images</h3>
+<p>SVG can be set as a background image just like PNG, JPG, or whatever other graphics format. At this point, you&#8217;ve sort of given up on being able to change the <code>fill</code>. One possibility, which I&#8217;d argue isn&#8217;t a particularly good one, is to have two versions of every icon, in the respective colors, and swap between them:</p>
+<p class="codepen" data-height="468" style="height: 468px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="qwemXY" style="height: 468px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Background SVG Hovers">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/qwemXY/"><br />
+  Background SVG Hovers</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>I don&#8217;t blame you if you&#8217;d rather not swap sources, so another possibility is to <a href="https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/">get gnarly with filters</a>. </p>
+<p class="codepen" data-height="507" style="height: 507px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="jRgmJy" style="height: 507px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Background SVG Hovers with Filters">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/jRgmJy/"><br />
+  Background SVG Hovers with Filters</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>Trying to finagle the right filters to get the color right is tricky stuff. Fortunately, Barrett Sonntag <a href="https://codepen.io/sosuke/pen/Pjoqqp">made a tool</a> to calculate the filters for you! Turning black to red ends up a whacky combination like this: <code>invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);</code>.</p>
+<p>SVG also has <code>object</code>, which is kinda neat in that it had a built-in fallback back in the day &mdash; although browser support is so good these days, I honestly have never used it. But if you&#8217;re using it, you would probably have to use this <code>filter</code> technique to swap color on hover.</p>
+<p class="codepen" data-height="371" style="height: 371px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="html,result" data-user="chriscoyier" data-slug-hash="YMmEvw" style="height: 371px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Background SVG Object Hovers">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/YMmEvw/"><br />
+  Background SVG Object Hovers</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>Use a mask instead of a background image</h3>
+<p>This way, the SVG is still in charge of essentially drawing the shape, but the color comes from the <code>background-color</code> (or image! or gradient!) behind it rather than the SVG itself. </p>
+<p class="codepen" data-height="370" style="height: 370px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="bJXRwq" style="height: 370px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Background SVG Hovers with Mask">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/bJXRwq/"><br />
+  Background SVG Hovers with Mask</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3>SVG background images as data URLs</h3>
+<p>This doesn&#8217;t change that much from above, but it does open up one interesting possibility: Using a variable for the internal fills. Here that is with Sass keeping the URLs as variables:</p>
+<p class="codepen" data-height="300" style="height: 300px; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1rem 0; padding: 1rem; overflow: auto;" data-theme-id="1" data-default-tab="css,result" data-user="chriscoyier" data-slug-hash="qwejYW" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Background SVG Hovers with Data URL variables">
+  <span>See the Pen <a href="https://codepen.io/chriscoyier/pen/qwejYW/"><br />
+  Background SVG Hovers with Data URL variables</a> by Chris Coyier  (<a href="https://codepen.io/chriscoyier">@chriscoyier</a>)<br />
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>You can also do this with <a href="https://adactio.com/journal/15075">native CSS custom properties</a>! </p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/change-color-of-svg-on-hover/">Change Color of SVG on Hover</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/change-color-of-svg-on-hover/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">287092</post-id>	</item>
+		<item>
+		<title>Inline SVG&#8230; Cached</title>
+		<link>https://css-tricks.com/inline-svg-cached/</link>
+					<comments>https://css-tricks.com/inline-svg-cached/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 12 Apr 2019 14:28:38 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[cache]]></category>
+		<category><![CDATA[service workers]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=285846</guid>
+
+					<description><![CDATA[<p>I wrote that using inline <code>&#60;svg&#62;</code> icons makes for <a href="https://css-tricks.com/pretty-good-svg-icon-system/">the best icon system</a>. I still think that&#8217;s true. It&#8217;s the easiest possible way to drop an icon onto a page. No network request, perfectly styleable. </p>
+<p>But inlining code has some drawbacks, one of which is that it doesn&#8217;t take advantage of caching. You&#8217;re making the browser read and process the same code over and over as you browse around. Not that big of a deal. There are much bigger &#8230; <a href="https://css-tricks.com/inline-svg-cached/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Inline SVG&#8230; Cached&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/inline-svg-cached/">Inline SVG&#8230; Cached</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I wrote that using inline <code>&lt;svg&gt;</code> icons makes for <a href="https://css-tricks.com/pretty-good-svg-icon-system/">the best icon system</a>. I still think that&#8217;s true. It&#8217;s the easiest possible way to drop an icon onto a page. No network request, perfectly styleable. </p>
+<p>But inlining code has some drawbacks, one of which is that it doesn&#8217;t take advantage of caching. You&#8217;re making the browser read and process the same code over and over as you browse around. Not that big of a deal. There are much bigger performance fish to fry, right? But it&#8217;s still fun to think about more efficient patterns. </p>
+<p>Scott Jehl wrote that <a href="https://www.filamentgroup.com/lab/inlining-cache.html">just because you inline something doesn&#8217;t mean you can&#8217;t cache it</a>. Let&#8217;s see if Scott&#8217;s idea can extend to SVG icons.</p>
+<p><span id="more-285846"></span></p>
+<h3>Starting with inline SVG</h3>
+<p>Like this&#8230;</p>
+<pre rel="HTML"><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+  &lt;title&gt;Inline SVG&lt;/title&gt;
+  &lt;link rel="stylesheet" href="/styles/style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  ...
+ 
+  &lt;svg width="24" height="24" viewBox="0 0 24 24" class="icon icon-alarm" xmlns="http://www.w3.org/2000/svg"&gt;
+    &lt;path id="icon-alarm" d="M11.5,22C11.64,22 11.77,22 11.9,21.96C12.55,21.82 13.09,21.38 13.34,20.78C13.44,20.54 13.5,20.27 13.5,20H9.5A2,2 0 0,0 11.5,22M18,10.5C18,7.43 15.86,4.86 13,4.18V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V4.18C7.13,4.86 5,7.43 5,10.5V16L3,18V19H20V18L18,16M19.97,10H21.97C21.82,6.79 20.24,3.97 17.85,2.15L16.42,3.58C18.46,5 19.82,7.35 19.97,10M6.58,3.58L5.15,2.15C2.76,3.97 1.18,6.79 1,10H3C3.18,7.35 4.54,5 6.58,3.58Z"&gt;&lt;/path&gt;
+  &lt;/svg&gt;</code></pre>
+<h3>It&#8217;s weirdly easy to toss text into browser cache as a file</h3>
+<p>In the above HTML, the selector <code>.icon-alarm</code> will fetch us the entire chunk of <code>&lt;svg&gt;</code> for that icon. </p>
+<pre rel="JavaScript"><code class="language-javascript">const iconHTML = document.querySelector(".icon-alarm").outerHTML;</code></pre>
+<p>Then we can plunk it into the browser&#8217;s cache like this:</p>
+<pre rel="JavaScript"><code class="language-javascript">if ("caches" in window) {
+  caches.open('static').then(function(cache) {
+    cache.put("/icons/icon-wheelchair.svg", new Response(
+      iconHTML,
+      { headers: {'Content-Type': 'image/svg+xml'} }
+    ));
+  }
+}</code></pre>
+<p>See the file path <code>/icons/icon-wheelchair.svg</code>? That&#8217;s kinda just made up. But it really will be put in the cache at that location.</p>
+<figure id="post-285948" class="align-none media-285948"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/04/in-cache.png?ssl=1" alt="" data-recalc-dims="1" /></figure>
+<h3>Let&#8217;s make sure the browser grabs that file out of the cache when it&#8217;s requested</h3>
+<p>We&#8217;ll register a Service Worker on our pages:</p>
+<pre rel="JavaScript"><code class="language-javascript">if (navigator.serviceWorker) {   
+  navigator.serviceWorker.register('/sw.js', {
+    scope: '/'
+  });
+}</code></pre>
+<p>The service worker itself will be quite small, just a cache matcher:</p>
+<pre rel="JavaScript"><code class="language-javascript">self.addEventListener("fetch", event =&gt; {
+  let request = event.request;
+
+  event.respondWith(
+    caches.match(request).then(response =&gt; {
+      return response || fetch(request);
+    })
+  );
+});</code></pre>
+<h3>But&#8230; we never request that file, because our icons are inline. </h3>
+<p>True. But what if <em>other</em> pages benefitted from that cache? For example, an SVG icon could be placed on the page like this:</p>
+<pre rel="HTML"><code class="language-markup">&lt;svg class="icon"&gt;
+  &lt;use xlink:href="/icons/icon-alarm.svg#icon-alarm" /&gt; 
+&lt;/svg&gt;</code></pre>
+<p>Since <code>/icons/icon-alarm.svg</code> is sitting there ready in cache, the browser will happily pluck it out of cache and display it.</p>
+<p>(I was kind of amazed this works. Edge doesn&#8217;t like <code>&lt;use&gt;</code> elements that link to files, but that&#8217;ll be over soon enough.)</p>
+<p>And even if the file <em>isn&#8217;t</em> in the cache, assuming we actually chuck this file on the file system likely the result of some kind of &#8220;include&#8221; (I used Nunjucks on the demo). </p>
+<h3>But&#8230; <code>&lt;use&gt;</code> and inline SVG aren&#8217;t quite the same</h3>
+<p>True. What I like about the above is that it&#8217;s making use of the cache and the icons should render close to immediately. And there are some things you can style this way &mdash; for example, setting the fill on the parent icon should go through the shadow DOM that the <code>&lt;use&gt;</code> creates and colorize the SVG elements within. </p>
+<p>Still, it&#8217;s not the same. The shadow DOM is a big barrier compared to inline SVG. </p>
+<p>So, enhance them! We could asynchronously load a script that finds each SVG icon, Ajaxs for the SVG it needs, and replaces the <code>&lt;use&gt;</code> stuff&#8230;</p>
+<pre rel="JavaScript"><code class="language-javascript">const icons = document.querySelectorAll("svg.icon");
+
+icons.forEach(icon =&gt; {
+  const url = icon.querySelector("use").getAttribute("xlink:href"); // Might wanna look for href also
+  fetch(url)
+    .then(response =&gt; response.text())
+    .then(data =&gt; {
+      // This is probably a bit layout-thrashy. Someone smarter than me could probably fix that up.
+
+      // Replace the &lt;svg&gt;&lt;use&gt;&lt;/svg&gt; with inline SVG
+      const newEl = document.createElement("span");
+      newEl.innerHTML = data;
+      icon.parentNode.replaceChild(newEl, icon);
+
+      // Remove the &lt;span&gt;s
+      const parent = newEl.parentNode;
+      while (newEl.firstChild) parent.insertBefore(newEl.firstChild, newEl);
+      parent.removeChild(newEl);
+    });
+});</code></pre>
+<p>Now, assuming this JavaScript executes correctly, this page has inline SVG available just like the original page did. </p>
+<h3>Demo &#038; Repo</h3>
+<ul>
+<li><a href="https://serene-sinoussi-3d0c1f.netlify.com/">Demo on Netlify</a></li>
+<li><a href="https://github.com/chriscoyier/inline-or-cache-svg---both">Repo on GitHub</a></li>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/inline-svg-cached/">Inline SVG&#8230; Cached</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/inline-svg-cached/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">285846</post-id>	</item>
+		<item>
+		<title>Making SVG icon libraries for React apps</title>
+		<link>http://nicolasgallagher.com/making-svg-icon-libraries-for-react-apps/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 14 Dec 2018 15:20:56 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[react]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=266365</guid>
+
+					<description><![CDATA[<p>Nicolas Gallagher:</p>
+<blockquote>
+<p>At Twitter I used the approach described here to publish the company’s SVG icon library in several different formats: optimized SVGs, plain JavaScript modules, React DOM components, and React Native components.</p>
+</blockquote>
+<p>There is no One True Way<sup>&#169;</sup> to make an SVG icon system. The only thing that SVG icon systems have in common is that, somehow, some way, SVG is used to show that icon. I gotta find some time to write up a post that goes &#8230; <a href="https://css-tricks.com/making-svg-icon-libraries-for-react-apps/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Making SVG icon libraries for React apps&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/making-svg-icon-libraries-for-react-apps/">Making SVG icon libraries for React apps</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Nicolas Gallagher:</p>
+<blockquote><p>At Twitter I used the approach described here to publish the company’s SVG icon library in several different formats: optimized SVGs, plain JavaScript modules, React DOM components, and React Native components.</p></blockquote>
+<p>There is no One True Way<sup>&copy;</sup> to make an SVG icon system. The only thing that SVG icon systems have in common is that, somehow, some way, SVG is used to show that icon. I gotta find some time to write up a post that goes into all the possibilities there. </p>
+<p>One thing different systems tend to share is some kind of build process to turn a folder full of SVG files into a more programmatically digestible format. For example, <a href="https://github.com/jkphl/gulp-svg-sprite">gulp-svg-sprite</a> takes your folder of SVGs and creates a SVG sprite (chunk of <code>&lt;symbol&gt;</code>s) to use in that type of SVG icon system. <a href="https://github.com/filamentgroup/grunticon">Grunticon</a> processes your folder of SVGs into a CSS file, and is capable of enhancing them into inline SVG. Gallagher&#8217;s script creates React components out of them, and like he said, that&#8217;s great for delivery to different targets as well as performance optimization, like code splitting.</p>
+<p>This speaks to the versatility of SVG. It&#8217;s just markup, so it&#8217;s easy to work with.</p>
+<p><a href="http://nicolasgallagher.com/making-svg-icon-libraries-for-react-apps/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/making-svg-icon-libraries-for-react-apps/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/making-svg-icon-libraries-for-react-apps/">Making SVG icon libraries for React apps</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">266365</post-id>	</item>
+		<item>
+		<title>Accessible SVG Icons With Inline Sprites</title>
+		<link>https://www.24a11y.com/2018/accessible-svg-icons-with-inline-sprites/</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 07 Dec 2018 15:20:18 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[icon system]]></category>
+		<category><![CDATA[icons]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=279882</guid>
+
+					<description><![CDATA[<p>This is a great look at accessible SVG markup patterns by Marco Hengstenberg. Here&#8217;s the ideal example:</p>
+<pre rel="HTML"><code class="language-markup">&#60;button type="button"&#62;
+  Menu
+  &#60;svg class="svg-icon"
+     role="img"
+     height="10"
+     width="10"
+     viewBox="0 0 10 10"
+     aria-hidden="true"
+     focusable="false"&#62;
+     &#60;path d="m1 7h8v2h-8zm0-3h8v2h-8zm0-3h8v2h-8z"/&#62;
+    &#60;/svg&#62;
+&#60;/button&#62;</code></pre>
+</p>
+<p>Notes:</p>
+<ul>
+<li>It&#8217;s not the <code>&#60;svg&#62;</code> itself that is interactive &#8212; it&#8217;s wrapped in a <code>&#60;button&#62;</code> for that.</li>
+<li>The <code>.svg-icon</code> class has some nice trickery, like em-based sizing to match the size of the text it&#8217;s next to, and <code>currentColor</code> to match the color.</li>
+<li>Since </li>
+</ul>
+<p>&#8230; <a href="https://css-tricks.com/accessible-svg-icons-with-inline-sprites/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Accessible SVG Icons With Inline Sprites&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-svg-icons-with-inline-sprites/">Accessible SVG Icons With Inline Sprites</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>This is a great look at accessible SVG markup patterns by Marco Hengstenberg. Here&#8217;s the ideal example:</p>
+<pre rel="HTML"><code class="language-markup">&lt;button type="button"&gt;
+  Menu
+  &lt;svg class="svg-icon"
+     role="img"
+     height="10"
+     width="10"
+     viewBox="0 0 10 10"
+     aria-hidden="true"
+     focusable="false"&gt;
+     &lt;path d="m1 7h8v2h-8zm0-3h8v2h-8zm0-3h8v2h-8z"/&gt;
+    &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+<p><span id="more-279882"></span></p>
+<p>Notes:</p>
+<ul>
+<li>It&#8217;s not the <code>&lt;svg&gt;</code> itself that is interactive &mdash; it&#8217;s wrapped in a <code>&lt;button&gt;</code> for that.</li>
+<li>The <code>.svg-icon</code> class has some nice trickery, like em-based sizing to match the size of the text it&#8217;s next to, and <code>currentColor</code> to match the color.</li>
+<li>Since real text is next to it, the icon can be safely ignored via <code>aria-hidden="true"</code>. If you need an icon-only button, you can wrap that text in an accessibily-friendly <code>.visually-hidden</code> class.</li>
+<li>The <code>focusable="false"</code> attribute solves an IE 11 bug.</li>
+</ul>
+<p>Plus <a href="https://codepen.io/Nice2MeatU/pen/dqmypX">a handy Pen</a> to reference all the patterns.</p>
+<p><a href="https://www.24a11y.com/2018/accessible-svg-icons-with-inline-sprites/" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/accessible-svg-icons-with-inline-sprites/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/accessible-svg-icons-with-inline-sprites/">Accessible SVG Icons With Inline Sprites</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">279882</post-id>	</item>
+		<item>
+		<title>Solved with CSS! Colorizing SVG Backgrounds</title>
+		<link>https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/</link>
+					<comments>https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/#comments</comments>
+		
+		<dc:creator><![CDATA[Una Kravets]]></dc:creator>
+		<pubDate>Fri, 30 Mar 2018 13:41:03 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[filter]]></category>
+		<category><![CDATA[svg filters]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=268607</guid>
+
+					<description><![CDATA[<p>This post is the first in a series about the power of CSS.</p>
+<h4>Article Series:</h4>
+<ol>
+<li>Colorizing SVG Backgrounds (this post)</li>
+<li><a href="https://css-tricks.com/solved-with-css-dropdown-menus/">Dropdown Menus</a></li>
+<li><a href="https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/">Logical Styling Based On the Number of Given Elements</a></li>
+</ol>
+<p>CSS is getting increasingly powerful, and with features like CSS grid and custom properties (also known as CSS variables), we’re seeing some really creative solutions emerging. The possibilities are still being explored on what CSS can do to make writing UI’s simpler, and that’s exciting!</p>
+<p>One of those is &#8230; <a href="https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Solved with CSS! Colorizing SVG Backgrounds&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/">Solved with CSS! Colorizing SVG Backgrounds</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>This post is the first in a series about the power of CSS.</p>
+
+
+
+<div class="wp-block-group article-series"><div class="wp-block-group__inner-container">
+<h4>Article Series:</h4>
+
+
+
+<ol><li>Colorizing SVG Backgrounds (this post)</li><li><a href="https://css-tricks.com/solved-with-css-dropdown-menus/">Dropdown Menus</a></li><li><a href="https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/">Logical Styling Based On the Number of Given Elements</a></li></ol>
+</div></div>
+
+
+
+<p>CSS is getting increasingly powerful, and with features like CSS grid and custom properties (also known as CSS variables), we’re seeing some really creative solutions emerging. The possibilities are still being explored on what CSS can do to make writing UI’s simpler, and that’s exciting!</p>
+
+
+
+<p>One of those is now one of my favorite CSS features: <a href="https://css-tricks.com/almanac/properties/f/filter/">filters</a>. Let’s look at how we can use filters to solve a problem you may have encountered when working with SVG as a background image on an element.</p>
+
+
+
+<span id="more-268607"></span>
+
+
+
+<h3>CSS Filters</h3>
+
+
+
+<p>First, let’s start by with an overview of filters. They include the following functions:</p>
+
+
+
+<ul><li><code>blur()</code></li><li><code>brightness()</code></li><li><code>contrast()</code></li><li><code>drop-shadow()</code></li><li><code>grayscale()</code></li><li><code>hue-rotate()</code></li><li><code>invert()</code></li><li><code>opacity()</code></li><li><code>saturate()</code></li><li><code>sepia()</code></li></ul>
+
+
+
+<p>These effects can also be achieved with SVG filters or WebGL shaders, but CSS filters are the easiest way to implement basic transformations in the most browser-efficient manner. Because they are shortcuts of SVG filter effects, you can also use <code>filter: url()</code> and specify a filter effect ID onto any element. If you want to play around with custom filters, I recommend checking out <a href="https://www.cssfilters.co/">cssfilters.co</a>.</p>
+
+
+
+<h3>The Problem: Editing SVG Backgrounds</h3>
+
+
+
+<p>I love using the SVG (scalable vector graphics) format for web design. SVG is a great image format for the web, and since it’s based on code, it allows for high-quality responsive and interactive content. When you inject SVG onto the page, you have access to each of its internal elements and their properties, allowing you to animate them, update values (such as color), and dynamically inject additional information. SVG is also a great icon format, especially <a href="https://cloudfour.com/thinks/seriously-dont-use-icon-fonts/">instead of icon fonts</a>, and in smaller UI elements due to its high quality (think: retina screens) and small image size (think: performance).</p>
+
+
+
+<p>I find that often, when SVG is used for these smaller elements, or as a large area of illustration, it’s included as a background image for simplicity. The drawback to this is that the SVG is no longer under your control as a developer. You can’t adjust individual properties, like fill color, of an SVG background because it is treated just like any image. This color conundrum can be solved with CSS! <em>Filters to the rescue!</em></p>
+
+
+
+<h4>Adjusting Brightness</h4>
+
+
+
+<p>The first time I discovered the SVG background challenge was when I was working on a website that had white SVG icons for social share icons that lived on a background determined to match that application. When these icons were moved onto a white background, they were no longer visible. Instead of creating a new icon, or changing the markup to inject inline SVG, you can use <code>filter: brightness()</code>. </p>
+
+
+
+<p>With the <code>brightness</code> filter, any value <em>greater</em> than <code>1</code> makes the element <em>brighter</em>, and any value <em>less</em> than <code>1</code> makes it <em>darker</em>. So, we can make those light SVG’s dark, and vice versa!</p>
+
+
+
+<figure><iframe width="100%" height="300" src="https://000145458.codepen.website/"></iframe></figure>
+
+
+
+<p>What I did above was create a <code>dark</code> class with <code>filter: brightness(0.1)</code>. You can also do the opposite for darker icons. You can lighten icons by creating a <code>light</code> class with something like <code>filter: brightness(100)</code> or whatever is suitable to your needs. </p>
+
+
+
+<p class="”explanation”">Icons with a fill color of <code>#000</code>, or <code>rgb(0,0,0)</code> will not brighten. You need to have a value greater than <code>0</code> in any of the <code>rgb</code> channels. <code>fill: rgb(1,1,1)</code> works great with a high brightness value such as <code>brightness(1000)</code>,  but even <code>brightness(1000)</code> will not work on pure black. This is not an issue with light colors and white.</p>
+
+
+
+<h4>Adjusting Color</h4>
+
+
+
+<p>We’ve now seen how to adjust light and dark values with a <code>brightness()</code> filter, but that doesn’t always get us the desired effect. What if we want to inject some color into those icons? With CSS filters, we can do that. One little hack is to use the <code>sepia</code> filter along with <code>hue-rotate</code>, <code>brightness</code>, and <code>saturation</code> to create any color we want.</p>
+
+
+
+<figure><iframe width="100%" height="300" src="https://000145458.codepen.website/index2.html"></iframe></figure>
+
+
+
+<p>From white, you can use the following mixtures to get the navy, blue, and pink colors above:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">.colorize-pink {
+  filter: brightness(0.5) sepia(1) hue-rotate(-70deg) saturate(5);
+}
+
+.colorize-navy {
+  filter: brightness(0.2) sepia(1) hue-rotate(180deg) saturate(5);
+}
+
+.colorize-blue {
+  filter: brightness(0.5) sepia(1) hue-rotate(140deg) saturate(6);
+}</code></pre>
+
+
+
+<p>The world is your oyster here. SVG is just one use case for multiple filters. You can apply this to any media type—images, gifs, video, iframes, etc., and support is pretty good, too:</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=”css-filters”">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">18*</span></td><td class="y yep" title="Firefox - "><span class="caniuse-agents-version version">35</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">79</span></td><td class="y yep" title="Safari - "><span class="caniuse-agents-version version">6*</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="Android Firefox - "><span class="caniuse-agents-version version">68</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">4.4*</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">6.0-6.1*</span></td></tr></table></div></div>
+
+
+
+<p>One final note here is to remember your user! Filters will not work in Internet Explorer, so please send a visible image to all of your users (i.e. don’t use a white SVG with an applied filter on a white background, because your IE users will not see anything). Also, remember to use alternative text for icon accessibility, and you’ll be golden to use this technique in your own applications!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/">Solved with CSS! Colorizing SVG Backgrounds</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/solved-with-css-colorizing-svg-backgrounds/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">268607</post-id>	</item>
+		<item>
+		<title>Discover The Fatwigoo</title>
+		<link>http://www.otsukare.info/2017/11/02/fatwigoo</link>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Sun, 12 Nov 2017 16:08:54 +0000</pubDate>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=262462</guid>
+
+					<description><![CDATA[<p>When you use a bit of inline <code>&#60;svg&#62;</code> and you don&#8217;t set <code>height</code> and <code>width</code>, but you do set a <code>viewBox</code>, that&#8217;s a <strong>fitwigoo</strong>. I love the name.</p>
+<p>The problem with fatwigoo&#8217;s is that the <code>&#60;svg&#62;</code> will size itself like a block-level element, rendering enormously until the CSS comes in and (likely) has sizing rules to size it into place. </p>
+<p>It&#8217;s one of those things where if you develop with pretty fast internet, you might not ever &#8230; <a href="https://css-tricks.com/discover-the-fatwigoo/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Discover The Fatwigoo&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/discover-the-fatwigoo/">Discover The Fatwigoo</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>When you use a bit of inline <code>&lt;svg&gt;</code> and you don&#8217;t set <code>height</code> and <code>width</code>, but you do set a <code>viewBox</code>, that&#8217;s a <strong>fitwigoo</strong>. I love the name.</p>
+<p>The problem with fatwigoo&#8217;s is that the <code>&lt;svg&gt;</code> will size itself like a block-level element, rendering enormously until the CSS comes in and (likely) has sizing rules to size it into place. </p>
+<p>It&#8217;s one of those things where if you develop with pretty fast internet, you might not ever see it. But if you&#8217;re somewhere where the internet is slow or has high latency (or if you&#8217;re Karl Dubost and literally block CSS), you&#8217;ll probably see it all the time.</p>
+<p>I was an offender before I learned how obnoxious this is. At first, it felt weird to size things in HTML rather than CSS. My solution now is generally to leave sensible defaults on inline SVG (probably icons) like <code>height="20" width="20"</code> and still do my actual sizing in CSS. </p>
+<p><a href="http://www.otsukare.info/2017/11/02/fatwigoo" title="Direct link to featured article">Direct Link to Article</a> &#8212; <a href="https://css-tricks.com/discover-the-fatwigoo/">Permalink</a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/discover-the-fatwigoo/">Discover The Fatwigoo</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">262462</post-id>	</item>
+		<item>
+		<title>If You&#8217;re Inlining SVG Icons, How Do You Deal With Unique Titles and IDs?</title>
+		<link>https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/</link>
+					<comments>https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Coyier]]></dc:creator>
+		<pubDate>Fri, 07 Jul 2017 13:01:44 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[SVG]]></category>
+		<category><![CDATA[svg icons]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=256606</guid>
+
+					<description><![CDATA[<p><a href="https://css-tricks.com/pretty-good-svg-icon-system/">Just inlining SVG</a> seems to be the easiest and most flexible icon system. But that chunk of <code>&#60;svg&#62;</code> might have a  <code>&#60;title&#62;</code>, and you might be appying IDs to both of those elements for various reasons.</p>
+</p>
+<p>One of those reasons might be because you just want an ID on the icon to uniquely identify it for JavaScript or styling purposes.</p>
+<p>Another of those reasons is that for accessibility, it&#8217;s recommended you use <code>aria-labelledby</code> to connect the id and title, &#8230; <a href="https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/" class="read-more">Read article <span class="screen-reader-text"> &#8220;If You&#8217;re Inlining SVG Icons, How Do You Deal With Unique Titles and IDs?&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/">If You&#8217;re Inlining SVG Icons, How Do You Deal With Unique Titles and IDs?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://css-tricks.com/pretty-good-svg-icon-system/">Just inlining SVG</a> seems to be the easiest and most flexible icon system. But that chunk of <code>&lt;svg&gt;</code> might have a  <code>&lt;title&gt;</code>, and you might be appying IDs to both of those elements for various reasons.</p>
+<p><span id="more-256606"></span></p>
+<p>One of those reasons might be because you just want an ID on the icon to uniquely identify it for JavaScript or styling purposes.</p>
+<p>Another of those reasons is that for accessibility, it&#8217;s recommended you use <code>aria-labelledby</code> to connect the id and title, like:</p>
+<pre rel="SVG"><code class="language-markup">&lt;!-- aria-labelledby pointing to ID's of title and desc because some browsers incorrectly don't use them unless we do --&gt;
+&lt;svg role="img" viewBox="0 0 100 100" aria-labelledby="unique-title-id unique-desc-id"&gt;
+
+  &lt;!-- title becomes the tooltip as well as what is read to assistive technology --&gt;
+  &lt;!-- must be the first child! --&gt;
+  &lt;title id="unique-title-id"&gt;Short Title (e.g. Add to Cart)&lt;/title&gt;
+
+  &lt;!-- longer description if needed --&gt;
+  &lt;desc id="unique-desc-id"&gt;A friendly looking cartoon cart icon with blinking eyes.&lt;/desc&gt;
+
+  &lt;!-- all the SVG drawing stuff --&gt;
+  &lt;path d="..." /&gt;
+&lt;/svg&gt;</code></pre>
+<p>But now you include that SVG somewhere twice. Say you&#8217;re in Rails&#8230;</p>
+<pre rel="ERB"><code class="language-markup">&lt;%= render "/icons/icon.svg.erb" %&gt;
+
+&lt;p&gt;yadda yadda yadda&lt;/p&gt;
+
+&lt;%= render "/icons/icon.svg.erb" %&gt;</code></pre>
+<p>Now you&#8217;ll have two elements on the page with the exact same ID, which is&#8230; bad?</p>
+<p>It&#8217;s definitely bad if you&#8217;re relying on that ID for anything JavaScript related, because JavaScript will only find the first one and that might be confusing and weird.</p>
+<p><strong>I&#8217;m not entirely sure if it&#8217;s bad for accessibility.</strong> Perhaps someone else can weigh in there. Assuming the titles are the same, my guess is that it won&#8217;t matter much. </p>
+<p>It&#8217;s bad for HTML semantics, I suppose, but I&#8217;m always kinda <em>meh</em> on that if there are no repercussions. </p>
+<p>If you&#8217;re really interested in fixing this issue, my go-to would be to pass in the ID&#8217;s to be used manually.</p>
+<p>Again if you were in Rails, you could pass locals:</p>
+<pre rel="ERB"><code class="language-javascript">&lt;%=
+  render(
+    partial: "parts/modules/search",
+    locals: {
+      svg_id: "my-icon",
+      title_id: "my-icon-title",
+      desc_id: "my-icon-desc"
+    }
+  )
+%&gt;</code></pre>
+<p>And then design the icons to use those locals, like</p>
+<pre rel="SVG"><code class="language-markup">&lt;svg title="&lt;%= svg_id %&gt; aria-labelledby="&lt;%= title_id %&gt;" ... &gt;
+ 
+   &lt;title id="&lt;%= title_id %&gt;&gt;
+  
+   ...
+
+&lt;/svg&gt;</code></pre>
+<p>You could port that concept to any language. A React app could have:</p>
+<pre rel="JSX"><code class="language-markup">&lt;SVGIcon svg_id="..." title_id="..." /&gt;</code></pre>
+<p>A PHP app could set variables before an include:</p>
+<pre rel="PHP"><code class="language-javascript">$svg_id = "...";
+$title_id = "...";
+include("/icons/icon.svg.php");</code></pre>
+<p>Now it&#8217;s just on you to manage IDs to make them unique like we&#8217;ve always done with IDs.</p>
+<p>This little post was inspired by Austin Wolf, who had this problem and <a href="https://medium.com/@indiesquidge/great-article-david-gilbertson-c69c63595ca2">thought through some solutions</a>. This also included auto-generating unique IDs:</p>
+<pre rel="SVG"><code class="language-markup">&lt;svg aria-labelledby="star-6c84fb90-12c4-11e1-840d-7b25c5ee775a"&gt;
+  &lt;title id="star-6c84fb90-12c4-11e1-840d-7b25c5ee775a"&gt;star icon&lt;/title&gt;
+  // ...
+&lt;/svg&gt; </code></pre>
+<p>That also seems like a good solution to me.</p>
+<p>I&#8217;d be interested to hear more thoughts!</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/">If You&#8217;re Inlining SVG Icons, How Do You Deal With Unique Titles and IDs?</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/youre-inlining-svg-icons-deal-unique-titles-ids/feed/</wfw:commentRss>
+			<slash:comments>17</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">256606</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>inputmode &#8211; CSS-Tricks</title>
+	<atom:link href="https://css-tricks.com/tag/inputmode/feed/" rel="self" type="application/rss+xml" />
+	<link>https://css-tricks.com</link>
+	<description>Tips, Tricks, and Techniques on using Cascading Style Sheets.</description>
+	<lastBuildDate>Mon, 27 Apr 2020 15:51:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4.2</generator>
+<site xmlns="com-wordpress:feed-additions:1">45537868</site>	<item>
+		<title>Better Form Inputs for Better Mobile User Experiences</title>
+		<link>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/</link>
+					<comments>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/#comments</comments>
+		
+		<dc:creator><![CDATA[Alex Holachek]]></dc:creator>
+		<pubDate>Fri, 17 Apr 2020 15:08:17 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[autocomplete]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<category><![CDATA[ux]]></category>
+		<guid isPermaLink="false">https://css-tricks.com/?p=306387</guid>
+
+					<description><![CDATA[<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&#160;</p>
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can &#8230; <a href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Better Form Inputs for Better Mobile User Experiences&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Here’s one simple, practical way to make apps perform better on mobile devices: always configure HTML input fields with the correct <code>type</code>, <code>inputmode</code>, and <code>autocomplete</code> attributes. While these three attributes are often discussed in isolation, they make the most sense in the context of mobile user experience when you think of them as a team.&nbsp;</p>
+
+
+
+<p>There’s no question that forms on mobile devices can be time-consuming and tedious to fill in, but by properly configuring inputs, we can ensure that the data entry process is as seamless as possible for our users. Let’s take a look at some examples and best practices we can use to create better user experiences on mobile devices.</p>
+
+
+
+<span id="more-306387"></span>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?fit=1024%2C842&amp;ssl=1" alt="" class="wp-image-306391" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?w=2408&amp;ssl=1 2408w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=300%2C247&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1024%2C842&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=768%2C631&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1536%2C1263&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=2048%2C1684&amp;ssl=1 2048w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/qyjE-kzw.png?resize=1000%2C822&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption><a href="https://better-mobile-inputs.netlify.com/" class="ek-link">Use this demo</a> to experiment on your own, if you’d like.</figcaption></figure>
+
+
+
+<h3>Using the correct input type</h3>
+
+
+
+<p>This is the easiest thing to get right. Input types, like <code>email</code>, <code>tel</code>, and <code>url</code>, are well-supported across browsers. While the benefit of using a type, like <code>tel</code> over the more generic <code>text</code>, might be hard to see on desktop browsers, it’s immediately apparent on mobile. </p>
+
+
+
+<p>Choosing the appropriate type changes the keyboard that pops up on Android and iOS devices when a user focuses the field. For very little effort, just by using the right type, we will show custom keyboards for <a href="https://better-mobile-inputs.netlify.com/?type=email" class="ek-link">email</a>, <a href="https://better-mobile-inputs.netlify.com/?type=tel" class="ek-link">telephone numbers</a>, <a href="https://better-mobile-inputs.netlify.com/?type=url" class="ek-link">URLs</a>, and even <a href="https://better-mobile-inputs.netlify.com/?type=search" class="ek-link">search inputs</a>.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306392" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-text.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Text input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306393" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-email.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Email input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306394" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?w=1749&amp;ssl=1 1749w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=300%2C119&amp;ssl=1 300w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1024%2C405&amp;ssl=1 1024w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=768%2C303&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1536%2C607&amp;ssl=1 1536w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-url.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>URL input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?fit=1024%2C405&amp;ssl=1" alt="" class="wp-image-306395" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?w=1749&amp;ssl=1 1749w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=300%2C119&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1024%2C405&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=768%2C303&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1536%2C607&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-search.png?resize=1000%2C395&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Search input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One thing to note is that both <code>input type="email"</code> and <code>input type="url"</code> come with validation functionality, and modern browsers will show an error tooltip if their values do not match the expected formats when the user submits the form. If you&#8217;d rather turn this functionality off, you <a href="https://codepen.io/aholachek/pen/poJMXpj" class="ek-link">can simply add the <code>novalidate</code> attribute to the containing <code>form</code></a>.</p>
+
+
+
+<h3>A quick detour into date types</h3>
+
+
+
+<p>HTML inputs comprise far more than specialized text inputs — you also have radio buttons, checkboxes, and so on. For the purposes of this discussion, though, I’m mostly talking about the more <strong>text-based inputs</strong>.&nbsp;</p>
+
+
+
+<p>There is a type of input that sits in the liminal space between the more free-form text inputs and input widgets like radio buttons: <strong><code>date</code></strong>. The <code>date</code> input type comes in a variety of flavors that are well-supported on mobile, including <a href="https://better-mobile-inputs.netlify.com/?type=date" class="ek-link"><code>date</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=time" class="ek-link"><code>time</code></a>, <a href="https://better-mobile-inputs.netlify.com/?type=datetime-local" class="ek-link"><code>datetime-local</code></a>, and <a href="https://better-mobile-inputs.netlify.com/?type=month" class="ek-link"><code>month</code></a>. These pop up custom widgets in iOS and Android when they are focused. Instead of triggering a specialized keyboard, they show a select-like interface in iOS, and various different types of widgets on Android (where the <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=date" class="ek-link"><code>date</code></a> and <a href="https://better-mobile-inputs.netlify.com/?android=true&amp;autocomplete&amp;inputmode&amp;type=time" class="ek-link"><code>time</code></a> selectors are particularly slick).&nbsp;</p>
+
+
+
+<p>I was excited to start using native defaults on mobile, until I looked around and realized that most major apps and mobile websites use custom date pickers rather than native date input types.&nbsp;There could be a couple reasons for this. First, I find the native iOS date selector to be less intuitive than a calendar-type widget. Second, even the beautifully-designed Android implementation is fairly limited compared to custom components — there’s no easy way to input a date range rather than a single date, for instance.&nbsp;</p>
+
+
+
+<p>Still, the date input types are worth checking out if the custom datepicker you’re using doesn’t perform well on mobile. If you’d like to try out the native input widgets on iOS and Android while making sure that desktop users see a custom widget instead of the default dropdown, this snippet of CSS <a href="https://codepen.io/aholachek/pen/RwPXjWJ?editors=1100" class="ek-link">will hide the calendar dropdown</a> for desktop browsers that implement it:</p>
+
+
+
+<pre rel="CSS" class="wp-block-csstricks-code-block language-css" data-line=""><code markup="tt">::-webkit-calendar-picker-indicator {
+  display: none;
+}</code></pre>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?fit=1024%2C521&amp;ssl=1" alt="" class="wp-image-306396" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?w=1315&amp;ssl=1 1315w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=300%2C153&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1024%2C521&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=768%2C391&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-date.png?resize=1000%2C509&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Date input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?fit=1024%2C486&amp;ssl=1" alt="" class="wp-image-306397" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?w=1411&amp;ssl=1 1411w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=300%2C142&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1024%2C486&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=768%2C364&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-time.png?resize=1000%2C474&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Time input type on iOS&nbsp;(left)&nbsp;and Android&nbsp;(right)</figcaption></figure>
+
+
+
+<p>One final thing to note is that <code>date</code> types cannot be overridden by the <code>inputmode</code> attribute, which we&#8217;ll discuss next.</p>
+
+
+
+<h3>Why should I care about inputmode?</h3>
+
+
+
+<p>The <code>inputmode</code> attribute allows you to override the mobile keyboard specified by the input’s type and directly declare the type of keyboard shown to the user. When I first learned about this attribute, I wasn’t impressed — why not just use the correct <code>type</code> in the first place? But while <code>inputmode</code> is often unnecessary, there are a few places where the attribute can be extremely helpful. The most notable use case that I’ve found for <code>inputmode</code> is building a better number input.</p>
+
+
+
+<p>While some HTML5 input types, like <code>url</code> and <code>email</code>, are straightforward, <code>input type="number"</code> is a different matter. It has some <a href="https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/">accessibility concerns </a>as well as a somewhat awkward UI. For example, desktop browsers, like Chrome, show tiny increment arrows that are easy to trigger accidentally by scrolling.</p>
+
+
+
+<p>So here’s a pattern to memorize and use going forwards. For most numeric inputs, instead of using this:&nbsp;</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="number" /></code></pre>
+
+
+
+<p>…you actually want to use this:</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<p>Why not <code>inputmode="numeric"</code> instead of <code>inputmode="decimal"</code> ?&nbsp;</p>
+
+
+
+<p>The <code>numeric</code> and <code>decimal</code> attribute values produce identical keyboards on Android. On iOS, however, <code>numeric</code> displays a keyboard that shows both numbers and punctuation, while <code>decimal</code> shows a focused grid of numbers that almost looks exactly like the <code>tel</code> input type, only without extraneous telephone-number focused options. That’s why it’s my preference for most types of number inputs.</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?fit=1024%2C424&amp;ssl=1" alt="" class="wp-image-306398" srcset="https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?w=1615&amp;ssl=1 1615w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=300%2C124&amp;ssl=1 300w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1024%2C424&amp;ssl=1 1024w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=768%2C318&amp;ssl=1 768w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1536%2C636&amp;ssl=1 1536w, https://i2.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-ios.png?resize=1000%2C414&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>iOS&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?fit=1024%2C315&amp;ssl=1" alt="" class="wp-image-306399" srcset="https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?w=1615&amp;ssl=1 1615w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=300%2C92&amp;ssl=1 300w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1024%2C315&amp;ssl=1 1024w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=768%2C236&amp;ssl=1 768w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1536%2C473&amp;ssl=1 1536w, https://i1.wp.com/css-tricks.com/wp-content/uploads/2020/04/input-numeric-android.png?resize=1000%2C308&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /><figcaption>Android&nbsp;<code>numeric</code>&nbsp;input&nbsp;(left)&nbsp;and&nbsp;<code>decimal</code>&nbsp;input&nbsp;(right)</figcaption></figure>
+
+
+
+<p class="explanation">Christian Oliff has written&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">an excellent article</a>&nbsp;dedicated solely to the&nbsp;inputmode&nbsp;attribute.</p>
+
+
+
+<h3>Don’t forget autocomplete</h3>
+
+
+
+<p>Even more important than showing the correct mobile keyboard is showing helpful autocomplete suggestions. That can go a long way towards creating a faster and less frustrating user experience on mobile.</p>
+
+
+
+<p>While browsers have heuristics for showing autocomplete fields, you cannot rely on them, and should still be sure to add the correct <code>autocomplete</code> attribute. For instance, in iOS Safari, I found that an <code>input type="tel"</code> would only show autocomplete options if I <a href="https://better-mobile-inputs.netlify.com/?autocomplete=tel&amp;type=tel" class="ek-link">explicitly added a <code>autocomplete="tel"</code> attribute</a>.</p>
+
+
+
+<p>You may think that you are familiar with the basic <code>autocomplete</code> options, such as those that help the user fill in credit card numbers or address form fields, but I’d urge you to <a href="https://html.spec.whatwg.org/multipage/form-control-infrastructure.html%23inappropriate-for-the-control" class="ek-link">review them</a> to make sure that you are aware of all of the options. The spec lists over 50 values! Did you know that <code>autocomplete="one-time-code"</code> can make a phone verification user flow super smooth?</p>
+
+
+
+<figure class="wp-block-video"><video controls muted src="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" playsinline></video></figure>
+
+
+
+<h3>Speaking of autocomplete…</h3>
+
+
+
+<p>I’d like to mention one final element that allows you to create your own custom autocomplete functionality: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist" class="ek-link"><code>datalist</code></a>. While it creates a serviceable — if somewhat basic — autocomplete experience on desktop Chrome and Safari, it shines on iOS by surfacing suggestions in a convenient row right above the keyboard, where the system autocomplete functionality usually lives. Further, it allows the user to toggle between text and select-style inputs.</p>
+
+
+
+<figure class="wp-block-video"><video controls src="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4"></video></figure>
+
+
+
+<p>On Android, on the other hand, <code>datalist</code> creates a more typical autocomplete dropdown, with the area above the keyboard reserved for the system&#8217;s own typeahead functionality. One possible advantage to this style is that the dropdown list is easily scrollable, creating immediate access to all possible options as soon as the field is focused. (In iOS, in order to view more than the top three matches, the user would have to trigger the select picker by pressing the down arrow icon.)</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?fit=576%2C1024&amp;ssl=1" width="320" alt="" class="wp-image-306402" srcset="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?w=1080&amp;ssl=1 1080w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=169%2C300&amp;ssl=1 169w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=576%2C1024&amp;ssl=1 576w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=768%2C1365&amp;ssl=1 768w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=864%2C1536&amp;ssl=1 864w, https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/04/EyP4s7cA.png?resize=1000%2C1778&amp;ssl=1 1000w" sizes="(min-width: 735px) 864px, 96vw" /></figure>
+
+
+
+<p>You can use this demo to play around with&nbsp;<code>datalist</code>:</p>
+
+
+
+<div class="wp-block-cp-codepen-gutenberg-embed-block cp_embed_wrapper"><iframe id="cp_embed_NWqoxaZ" src="//codepen.io/anon/embed/NWqoxaZ?height=450&amp;theme-id=1&amp;slug-hash=NWqoxaZ&amp;default-tab=result" height="450" scrolling="no" frameborder="0" allowfullscreen allowpaymentrequest name="CodePen Embed NWqoxaZ" title="CodePen Embed NWqoxaZ" class="cp_embed_iframe" style="width:100%;overflow:hidden">CodePen Embed Fallback</iframe></div>
+
+
+
+<p>And you can explore all the autocomplete options, as well as input&nbsp;<code>type</code>&nbsp;and&nbsp;<code>inputmode</code>&nbsp;values, <a class="ek-link ek-link" href="https://better-mobile-inputs.netlify.com/">using&nbsp;this tool I made</a> to help you quickly preview various input configurations on mobile.</p>
+
+
+
+<h3>In summary</h3>
+
+
+
+<p>When I&#8217;m building a form, I&#8217;m often tempted to focus on perfecting the desktop experience while treating the mobile web as an afterthought. But while it does take a little extra work to ensure forms work well on mobile, it doesn&#8217;t have to be too difficult. Hopefully, this article has shown that with a few easy steps, you can make forms much more convenient for your users on mobile devices.</p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/">Better Form Inputs for Better Mobile User Experiences</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/better-form-inputs-for-better-mobile-user-experiences/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/take-2.mp4" length="703199" type="video/mp4" />
+<enclosure url="https://css-tricks.com/wp-content/uploads/2020/04/RPReplay_Final1585510573.mp4" length="1903465" type="video/mp4" />
+
+		<post-id xmlns="com-wordpress:feed-additions:1">306387</post-id>	</item>
+		<item>
+		<title>Everything You Ever Wanted to Know About inputmode</title>
+		<link>https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/</link>
+					<comments>https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/#comments</comments>
+		
+		<dc:creator><![CDATA[Christian Oliff]]></dc:creator>
+		<pubDate>Fri, 17 May 2019 16:40:11 +0000</pubDate>
+				<category><![CDATA[Article]]></category>
+		<category><![CDATA[forms]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[inputmode]]></category>
+		<category><![CDATA[inputs]]></category>
+		<guid isPermaLink="false">http://css-tricks.com/?p=287475</guid>
+
+					<description><![CDATA[<p>The <code>inputmode</code> global attribute provides a hint to browsers for devices with onscreen keyboards to help them decide which keyboard to display when a user has selected any <code>input</code> or <code>textarea</code> element.</p>
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&#60;input type="text" inputmode="" /&#60;textarea inputmode="" /</code></pre>
+<p>Unlike changing the&#160;<code>type</code>&#160;of the form,&#160;<code>inputmode</code>&#160;doesn’t change the way the browser interprets the input — it instructs the browser&#160;<strong>which keyboard to display</strong>.</p>
+<p>The&#160;<code>inputmode</code>&#160;attribute has a long history but has only very recently been adopted &#8230; <a href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/" class="read-more">Read article <span class="screen-reader-text"> &#8220;Everything You Ever Wanted to Know About inputmode&#8221;</span></a></p>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">Everything You Ever Wanted to Know About inputmode</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <code>inputmode</code> global attribute provides a hint to browsers for devices with onscreen keyboards to help them decide which keyboard to display when a user has selected any <code>input</code> or <code>textarea</code> element.</p>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="" />
+&lt;textarea inputmode="" /></code></pre>
+
+
+
+<p>Unlike changing the&nbsp;<code>type</code>&nbsp;of the form,&nbsp;<code>inputmode</code>&nbsp;doesn’t change the way the browser interprets the input — it instructs the browser&nbsp;<strong>which keyboard to display</strong>.</p>
+
+
+
+<p>The&nbsp;<code>inputmode</code>&nbsp;attribute has a long history but has only very recently been adopted by the two major mobile browsers: Safari for iOS and Chrome for Android. Before that, it was implemented in Firefox for Android way back in 2012, and then subsequently removed several months later (though it is still available via a flag).</p>
+
+
+
+<p>Almost six years later, Chrome for Android implemented the feature — and with the recent release of iOS 12.2, Safari now supports it too.</p>
+
+
+<div class="caniuse"><div class="caniuse-header"><p>This browser support data is from <a href="http://caniuse.com/#feat=input-inputmode">Caniuse</a>, which has more detail. A number indicates that browser supports the feature at that version and up.</p></div><div class="caniuse-section"><h4>Desktop</h4><table class="browser-support-table"><thead><tr><th class="chrome"><span>Chrome</span></th><th class="firefox"><span>Firefox</span></th><th class="ie"><span>IE</span></th><th class="edge"><span>Edge</span></th><th class="safari"><span>Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Chrome - "><span class="caniuse-agents-version version">66</span></td><td class="a yep-nope yep-nope-partial" title="Firefox - "><span class="caniuse-agents-version version">20</span></td><td class="n nope" title="IE - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Edge - "><span class="caniuse-agents-version version">79</span></td><td class="n nope" title="Safari - "><span class="caniuse-agents-version version">No</span></td></tr></table></div><div class="caniuse-section"><h4>Mobile / Tablet</h4><table class="browser-support-table"><thead><tr><th class="and_chr"><span>Android Chrome</span></th><th class="and_ff"><span>Android Firefox</span></th><th class="android"><span>Android</span></th><th class="ios_saf"><span>iOS Safari</span></th></tr></thead><tbody><tr><td class="y yep" title="Android Chrome - "><span class="caniuse-agents-version version">81</span></td><td class="n nope" title="Android Firefox - "><span class="caniuse-agents-version version">No</span></td><td class="y yep" title="Android - "><span class="caniuse-agents-version version">81</span></td><td class="y yep" title="iOS Safari - "><span class="caniuse-agents-version version">12.2-12.4</span></td></tr></table></div></div>
+
+
+
+<p class="explanation">Based on my tests, <code>inputmode</code> is indeed supported in Opera Mini and Opera Mobile, which contradicts the Caniuse data above. I&#8217;ve reached out to see if we can sync up our findings.</p>
+
+
+
+<p>But before we go deep into the ins and outs of the attribute, consider that the <a href="https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode">WHATWG living standard</a> provides <code>inputmode</code> documentation while the <a href="https://www.w3.org/TR/html52/index.html">W3C 5.2 spec</a> no longer lists it in its contents, which suggests they consider it obsolete. Given that WHATWG has documented it and browsers have worked toward supporting it, we’re going to go assume WHATWG specifications are the standard.</p>
+
+
+
+<p><code>inputmode</code> accepts a number of values. Let’s go through them, one by one.</p>
+
+
+
+<h3>None</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="none" /></code></pre>
+
+
+
+<p>We’re starting here because it’s very possible we don’t want any type of keyboard on an input. Using <code>inputmode=none</code> will not show a keyboard at all on Chrome for Android. iOS 12.2 will still show its default alphanumeric keyboard, so specifying <code>none</code> could be sort of a reset for iOS in that regard. Regardless, <code>none</code> is intended for content that renders its own keyboard control.</p>
+
+
+
+<h3>Numeric</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="numeric" /></code></pre>
+
+
+
+<p>This one is probably the one of the more common <code>inputmode</code> values out in the wild because it’s ideal for inputs that require numbers but no letters — things like PIN entry, zip codes, credit card numbers, etc. Using the <code>numeric</code> value with an input of <code>type="text"</code> may actually make more sense than setting the input to <code>type="number"</code> alone because, unlike a , <code>inputmode="numeric"</code> can be used with <code>maxlength</code>, <code>minlength</code> and <code>pattern</code> attributes, making it more versatile for different use cases.</p>
+
+
+
+<figure class="wp-block-image"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-01.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>numeric</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>I’ve often seen sites using <code>type=tel</code> on an input to display a numeric keyboard, and that checks out as a workaround, but isn’t semantically correct. If that bums you out, remember that <code>inputmode</code> supports patterns, we can add <code>pattern="\d*"</code> to the input for the same effect. That said, only use this if you are certain the input should only allow numeric input because Android (unlike iOS) doesn’t allow the user to change to the keyboard to use letters, which might inadvertently prevent users from submitting valid data.</p>
+
+
+
+<h3>Tel</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="tel" /></code></pre>
+
+
+
+<p>Entering a telephone number using a standard alphanumeric keyboard can be a pain. For one, each number on a telephone keyboard (except 1 and 0) represents three letters (e.g. 2 represents A, B and C) which are displayed with the number. The alphanumeric keyboard does not reference those letters, so decoding a telephone number containing letters (e.g. <kbd>1-800-COLLECT</kbd>) takes more mental power.</p>
+
+
+
+<figure class="wp-block-image"><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-02.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>tel</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>Using <code>inputmode</code> set to <code>tel</code> will produce a standard-looking telephone keyboard, including keys for digits 0 to 9, the pound (<kbd>#</kbd>) character, and the asterisk (<kbd>*</kbd>) character. Plus, we get those alphabetic mnemonic labels (e.g. ABC).</p>
+
+
+
+<h3>Decimal</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="decimal" /></code></pre>
+
+
+
+<figure class="wp-block-image"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-03.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>decimal</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>An <code>inputmode</code> set to the <code>decimal</code> value results in a subtle change in iOS where the keyboard appears to be exactly the same as the <code>tel</code> value, but replaces the <kbd>+*#</kbd> key with a simple decimal (<kbd>.</kbd>). On the flip side, this has no effect on Android, which will simply use the <code>numeric</code> keyboard.</p>
+
+
+
+<h3>Email</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="email" /></code></pre>
+
+
+
+<p>I’m sure you (and at least someone you know) has filled out a form that asks for an email address, only to make you swap keyboards to access the <code>@</code> character. It’s not life-threatening or anything, but certainly not a great user experience either.</p>
+
+
+
+<p>That’s where the <code>email</code> value comes in. It brings the <kbd>@</kbd> character into the fray, as well as the dot (<kbd>.</kbd>) character.</p>
+
+
+
+<figure class="wp-block-image"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-04.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>email</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>This could also be a useful keyboard to show users who need to enter a Twitter username, given that<kbd>@</kbd> is a core Twitter character for identifying users. However, the email address suggestions that iOS display above the keyboard may cause confusion.</p>
+
+
+
+<p>Another use case could be if you have your own email validation script and don&#8217;t want to use the browsers built-in email validation.</p>
+
+
+
+<h3>URL</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="url" /></code></pre>
+
+
+
+<figure class="wp-block-image"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-05.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>url</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>The <code>url</code> value provides a handy shortcut for users to append TLDs (e.g. <code>.com</code> or <code>.co.uk</code>) with a single key, as well keys typically used in web addresses, like the dot (<kbd>.</kbd>) and forward slash (<kbd>/</kbd>) characters. The exact TLD displayed on the keyboard is tied to the user’s locale.</p>
+
+
+
+<p>This could also be a useful keyboard to show users if your input accepts domain names (e.g. <code>css-tricks.com</code>) as well as full URIs (e.g. <code>https://css-tricks.com</code>). Use <code>type="url"</code> instead if your input requires validating the input.</p>
+
+
+
+<h3>Search</h3>
+
+
+
+<pre rel="HTML" class="wp-block-csstricks-code-block language-markup" data-line=""><code markup="tt">&lt;input type="text" inputmode="search" /></code></pre>
+
+
+
+<figure class="wp-block-image"><img src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-06a.png?ssl=1" alt="" data-recalc-dims="1"/><figcaption>The <code>search</code> value on Chrome Android (left) and iOS 12.2 (right)</figcaption></figure>
+
+
+
+<p>This displays a blue <kbd>Go</kbd> key on iOS and a green <kbd>Enter</kbd> key on Android, both in place of where <kbd>Return</kbd>. As you may have guessed by the value’s name, <code>search</code> is useful for search forms, providing that submission key to make a query.</p>
+
+
+
+<p>If you&#8217;d like to show<kbd>Search</kbd> instead of <kbd>Enter</kbd> on iOS and a magnifying glass icon on Android in place of the green arrow, use <code>type=search</code> instead.</p>
+
+
+
+<h3>Other things you oughta know</h3>
+
+
+
+<ul><li>Chromium-based browsers on Android — such as Microsoft Edge, Brave and Opera — share the same <code>inputmode</code> behavior as Chrome.</li><li>I haven’t included details of keyboards on iPad for the sake of brevity. It’s mostly the same as iPhone but includes more keys. Same is true for Android tablets, save for third-party keyboards, which might be another topic worth covering.</li><li>The original proposed spec had the values <code>kana</code> and <code>katakana</code> for Japanese input but they were never implemented by any browser and have since been removed from the spec.</li><li><code>latin-name</code> was also one of the values of the original spec and has since been removed. Interestingly, if it’s used now on Safari for iOS, it will display the user’s name as a suggestion above the keyboard. </li></ul>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2019/05/inputmode-07.png?resize=347%2C240&#038;ssl=1" alt="" width="347" height="240" data-recalc-dims="1" /><figcaption>The <code>latin-name</code> value displays my name as an auto-fill suggestion<br></figcaption></figure></div>
+
+
+
+<h3>Demo</h3>
+
+
+
+<p>Oh, you want to see how all of these input modes work for yourself? <a href="https://inputmodes.com/">Here’s a demo</a> you can use on a device with a touchscreen keyboard to see the differences.</p>
+
+
+
+<figure><iframe src="https://inputmodes.com/" width="100%" height="1000"></iframe></figure>
+
+
+
+<h3>References</h3>
+
+
+
+<ul><li><a href="https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute)">WHATWG specification</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">MDN</a> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode">documentation</a></li><li><a href="https://caniuse.com/#feat=input-inputmode">Caniuse</a></li><li><a href="https://www.chromestatus.com/feature/6225984592281600">Chrome Platform Status</a> (<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=244688">Chromium Ticket #244688</a>)</li></ul>
+<p>The post <a rel="nofollow" href="https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/">Everything You Ever Wanted to Know About inputmode</a> appeared first on <a rel="nofollow" href="https://css-tricks.com">CSS-Tricks</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://css-tricks.com/everything-you-ever-wanted-to-know-about-inputmode/feed/</wfw:commentRss>
+			<slash:comments>17</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">287475</post-id>	</item>
+	</channel>
+</rss>
